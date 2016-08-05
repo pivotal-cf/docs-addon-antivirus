@@ -1,0 +1,125 @@
+---
+title: Installing the Pivotal Cloud Foundry&reg; ClamAV Add-On
+owner: Security Engineering
+---
+
+<strong><%= modified_date %></strong>
+
+This topic describes how to add ClamAV to your deployment so that you can detect any viruses and satisfy PCI requirement. 
+
+##<a id="prereqs"></a>Prerequisites
+
+To complete the ClamAV installation, satisfy the following prerequisites before you begin: 
+
+* PCF operator administration rights
+
+* Ops Manager 1.7 or higher
+
+##<a id="create-mfest"></a>Create the ClamAV manifest
+
+Follow these steps to create the ClamAV manifest for your deployment:
+
+1. Create an ClamAV manifest file `clamav.yml` starting with the code below as a template. 
+  <pre>releases:
+  \- name: clamav, version: 1.0.0<br>
+  addons:
+  \- name: clamav
+      jobs:
+      \- name: clamav
+        release: clamav
+      properties:
+        clamav:
+          database\_mirror:</pre>
+
+2. Optionally, you can provide the hostname or IP address of a private ClamAV update mirror. Environments that cannot connect to the internet normally use an update mirror. If you do not specify a value, ClamAV defaults to `db.local.clamav.net` for udpates. See the [Private Local Mirrors](https://www.clamav.net/documents/private-local-mirrors) topic of the ClamAV documentation for instructions on how to set up a local mirror.
+
+##<a id="download-deploy"></a>Download and Deploy the ClamAV Add-on  
+
+1. Download the ClamAV add-on software binary from the [Pivotal Network](https://network.pivotal.io/products/p-clamav-addon) to your local machine. 
+1. Copy the software binary to your Ops Manager instance.
+  <pre class="terminal">$ scp -i PATH/TO/PRIVATE/KEY clamav-release.tar.gz ubuntu@YOUR-OPS-MANAGER-VM-IP:</pre>
+
+1. Copy the ClamAV manifest file to your Ops Manager instance.
+  <pre class="terminal">$ scp -i PATH/TO/PRIVATE/KEY clamav.yml ubuntu@YOUR-OPS-MANAGER-VM-IP:</pre>
+
+1. SSH into Ops Manager.
+  <pre class="terminal">$ ssh -i PATH-TO-PRIVATE-KEY ubuntu@YOUR-OPS-MANAGER-VM-IP</pre>
+
+1. On the Ops Manager VM, navigate to the software binary location.
+  <pre class="terminal">$ cd PATH-TO-BINARY</pre>
+
+1. On the Ops Manager VM, target your BOSH director instance.
+  <pre class="terminal">
+  $ bosh target YOUR-OPS-MANAGER-DIRECTOR-IP
+  Target set to 'Ops Manager'
+  Your username: director
+  Enter password: ******************
+  Logged in as 'director'
+  </pre>
+
+1. Upload your release.
+  <pre class="terminal">$ bosh upload release PATH-TO-BINARY/BINARY-NAME.tar</pre>
+
+1. From the command line, confirm that the upload of the ClamAV
+software binary completed. You should see the ClamAV release.
+  <pre class="terminal">$ bosh releases</pre>
+
+1. Update your runtime configuration to include the ClamAV add-on.
+  <p class="note"><strong>Note</strong>: If you installed other BOSH add-ons you must merge the ClamAV runtime config into your existing runtime config. Append the contents of `clamav.yml` to your existing add-on `yml` file.</p>
+
+    <pre class="terminal">$ bosh update runtime-config PATH/YOUR-ADD-ON-YML.yml</pre>
+
+1. Verify your runtime configuration changes match what you specified in the
+ClamAV runtime config.
+  <pre class="terminal">
+  $ bosh runtime-config
+  Acting as user 'admin' on 'micro'
+  releases:
+  <span>-</span> name: clamav
+      version: 1.0.0
+  <br>
+  addons:
+    name: clamav
+      jobs:
+        <span>-</span> name: clamav
+          release: clamav
+  ...
+  </pre>
+
+1. Navigate to your Installation Dashboard in Ops Manager.
+
+1. Click **Apply Changes**.
+
+##<a id="alerts"></a> Configure Forwarding for ClamAV Alerts
+
+The ClamAV BOSH release writes all alerts to the syslogs of the VMs in your deployment. You can use syslog forwarding to forward the alerts to a syslog aggregator.
+
+* **Using the Elastic Runtime tile**: Follow the steps to [Configure System Logging](http://docs.pivotal.io/pivotalcf/customizing/cloudform-er-config.html#sys-logging) in the Elastic Runtime tile. The syslog aggregator that you specify receives all File Integrity Monitoring (FIM) alerts generated on Elastic Runtime VMs.
+* **Using the BOSH syslog release**: You can use the syslog BOSH release to forward system logs. See the [syslog-release](https://github.com/cloudfoundry/syslog-release) for instructions. 
+
+## <a id="verify"></a>Verify your ClamAV Installation
+
+1. [BOSH ssh](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#bosh-ssh) into one of the VMs in your deployment.
+
+1. Run `monit summary`. Look for the following processes in the output:
+
+    <pre class="terminal">The Monit daemon 5.2.4 uptime: 3d 0h 56m
+    Process 'clamd'                     running
+    Process 'freshclam'                 running</pre>
+
+1. If `monit summary` does not list `freshclamd` and `clamd`, perform the following steps:
+  1. Try to start the ClamAV processes by running the following commands:
+  <pre class="terminal">
+  $ monit start clamd
+  $ monit start freshclam
+  </pre>
+  1. Run `monit summary` again. If you do not see the processes mentioned above, check `/var/vcap/syslog/clamav` logs for errors. 
+
+1. If `monit summary` does list `freshclamd` and `clamd`, then a create a file on the VM with the following contents:
+
+    ```
+    X5O!P%@AP[4\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*
+    ```
+
+    This is a virus signature that is used to test anti-virus software. It may take up to an hour for ClamAV to locate the signature. Check your syslog aggregator for the notification. If the notification does not appear, check `/var/log/syslog` on the VM. If virus notifications appear in the VM syslog but not in the
+    aggregator, then verify your syslog forwarding settings.
