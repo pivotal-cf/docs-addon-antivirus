@@ -5,11 +5,11 @@ owner: Security Engineering
 
 <strong><%= modified_date %></strong>
 
-This topic describes how to add ClamAV to your deployment so that you can detect any viruses and satisfy PCI requirement. 
+This topic describes how to add ClamAV to your PCF deployment.  This Add-On may be necessary if your auditor requires the use of antivirus protection within the PCF environment.  For example, auditors will sometimes expect that antivirus protection be present in an environment that must comply with the requirements of PCI DSS.
 
 ##<a id="prereqs"></a>Prerequisites
 
-To complete the ClamAV installation, satisfy the following prerequisites before you begin: 
+To complete the ClamAV installation, satisfy the following prerequisites before you begin:
 
 * PCF operator administration rights
 
@@ -19,7 +19,7 @@ To complete the ClamAV installation, satisfy the following prerequisites before 
 
 Follow these steps to create the ClamAV manifest for your deployment:
 
-1. Create an ClamAV manifest file `clamav.yml` starting with the code below as a template. 
+1. Create an ClamAV manifest file `clamav.yml` starting with the code below as a template.
   <pre>releases:
   \- name: clamav, version: 1.0.0<br>
   addons:
@@ -31,11 +31,11 @@ Follow these steps to create the ClamAV manifest for your deployment:
         clamav:
           database\_mirror:</pre>
 
-2. Optionally, you can provide the hostname or IP address of a private ClamAV update mirror. Environments that cannot connect to the internet normally use an update mirror. If you do not specify a value, ClamAV defaults to `db.local.clamav.net` for udpates. See the [Private Local Mirrors](https://www.clamav.net/documents/private-local-mirrors) topic of the ClamAV documentation for instructions on how to set up a local mirror.
+2. Optionally, you can provide the hostname or IP address of a private ClamAV update mirror. Environments that cannot connect to the internet normally use an update mirror. If you do not specify a value, ClamAV defaults to `db.local.clamav.net` for updates. See the [Private Local Mirrors](https://www.clamav.net/documents/private-local-mirrors) topic of the ClamAV documentation for instructions on how to set up a local mirror.
 
 ##<a id="download-deploy"></a>Download and Deploy the ClamAV Add-on  
 
-1. Download the ClamAV add-on software binary from the [Pivotal Network](https://network.pivotal.io/products/p-clamav-addon) to your local machine. 
+1. Download the ClamAV add-on software binary from the [Pivotal Network](https://network.pivotal.io/products/p-clamav-addon) to your local machine.
 1. Copy the software binary to your Ops Manager instance.
   <pre class="terminal">$ scp -i PATH/TO/PRIVATE/KEY clamav-release.tar.gz ubuntu@YOUR-OPS-MANAGER-VM-IP:</pre>
 
@@ -94,8 +94,8 @@ ClamAV runtime config.
 
 The ClamAV BOSH release writes all alerts to the syslogs of the VMs in your deployment. You can use syslog forwarding to forward the alerts to a syslog aggregator.
 
-* **Using the Elastic Runtime tile**: Follow the steps to [Configure System Logging](http://docs.pivotal.io/pivotalcf/customizing/cloudform-er-config.html#sys-logging) in the Elastic Runtime tile. The syslog aggregator that you specify receives all File Integrity Monitoring (FIM) alerts generated on Elastic Runtime VMs.
-* **Using the BOSH syslog release**: You can use the syslog BOSH release to forward system logs. See the [syslog-release](https://github.com/cloudfoundry/syslog-release) for instructions. 
+* **Using the Elastic Runtime tile**: Follow the steps to [Configure System Logging](http://docs.pivotal.io/pivotalcf/customizing/cloudform-er-config.html#sys-logging) in the Elastic Runtime tile. The syslog aggregator that you specify will receive all alerts generated on Elastic Runtime VMs, including the ClamAV alerts.
+* **Using the BOSH syslog release**: You can use the syslog BOSH release to forward system logs. See the [syslog-release](https://github.com/cloudfoundry/syslog-release) for instructions.
 
 ## <a id="verify"></a>Verify your ClamAV Installation
 
@@ -113,7 +113,7 @@ The ClamAV BOSH release writes all alerts to the syslogs of the VMs in your depl
   $ monit start clamd
   $ monit start freshclam
   </pre>
-  1. Run `monit summary` again. If you do not see the processes mentioned above, check `/var/vcap/syslog/clamav` logs for errors. 
+  1. Run `monit summary` again. If you do not see the processes mentioned above, check `/var/vcap/sys/log/clamav` logs for errors.
 
 1. If `monit summary` does list `freshclamd` and `clamd`, then a create a file on the VM with the following contents:
 
