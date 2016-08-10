@@ -1,11 +1,13 @@
 ---
-title: Installing the Pivotal Cloud Foundry&reg; ClamAV Add-On
+title: Installing the Pivotal Cloud Foundry ClamAV Add-on
 owner: Security Engineering
 ---
 
 <strong><%= modified_date %></strong>
 
-This topic describes how to add ClamAV to your PCF deployment.  This Add-On may be necessary if your auditor requires the use of antivirus protection within the PCF environment.  For example, auditors will sometimes expect that antivirus protection be present in an environment that must comply with the requirements of PCI DSS.
+This topic describes how to add ClamAV to your Pivotal Cloud Foundry (PCF) deployment.  
+This add-on may be necessary if your auditor requires antivirus protection within the PCF environment.  
+For example, auditors sometimes expect that antivirus protection be present in an environment that must comply with the requirements of PCI DSS.
 
 ##<a id="prereqs"></a>Prerequisites
 
@@ -31,7 +33,10 @@ Follow these steps to create the ClamAV manifest for your deployment:
         clamav:
           database\_mirror:</pre>
 
-2. Optionally, you can provide the hostname or IP address of a private ClamAV update mirror. Environments that cannot connect to the internet normally use an update mirror. If you do not specify a value, ClamAV defaults to `db.local.clamav.net` for updates. See the [Private Local Mirrors](https://www.clamav.net/documents/private-local-mirrors) topic of the ClamAV documentation for instructions on how to set up a local mirror.
+2. Optionally, you can provide the hostname or IP address of a private ClamAV update mirror. 
+Environments that cannot connect to the internet normally use an update mirror. 
+If you do not specify a value, ClamAV defaults to `db.local.clamav.net` for updates. 
+See the [Private Local Mirrors](https://www.clamav.net/documents/private-local-mirrors) topic of the ClamAV documentation for instructions on how to set up a local mirror.
 
 ##<a id="download-deploy"></a>Download and Deploy the ClamAV Add-on  
 
@@ -65,7 +70,8 @@ software binary completed. You should see the ClamAV release.
   <pre class="terminal">$ bosh releases</pre>
 
 1. Update your runtime configuration to include the ClamAV add-on.
-  <p class="note"><strong>Note</strong>: If you installed other BOSH add-ons you must merge the ClamAV runtime config into your existing runtime config. Append the contents of `clamav.yml` to your existing add-on `yml` file.</p>
+  <p class="note"><strong>Note</strong>: If you installed other BOSH add-ons you must merge the ClamAV runtime config into your existing runtime config. 
+Append the contents of `clamav.yml` to your existing add-on `yml` file.</p>
 
     <pre class="terminal">$ bosh update runtime-config PATH/YOUR-ADD-ON-YML.yml</pre>
 
