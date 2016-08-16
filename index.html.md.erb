@@ -122,11 +122,14 @@ The ClamAV BOSH release writes all alerts to the syslogs of the VMs in your depl
   </pre>
   1. Run `monit summary` again. If you do not see the processes mentioned above, check `/var/vcap/sys/log/clamav` logs for errors.
 
-1. If `monit summary` does list `freshclamd` and `clamd`, a create a file on the VM with the following contents:
+1. If `monit summary` does list `freshclamd` and `clamd`, create a file on the VM with the following contents:
 
     ```
     X5O!P%@AP[4\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*
     ```
 
-    This is a virus signature used to test anti-virus software. It may take up to an hour for ClamAV to locate the signature. Check your syslog aggregator for the notification. If the notification does not appear, check `/var/log/syslog` on the VM. If virus notifications appear in the VM syslog but not in the
-    aggregator, verify your syslog forwarding settings.
+    This is a virus signature used to test anti-virus software. 
+    It may take up to an hour for ClamAV to locate the signature. 
+    Check your syslog aggregator for the notification. 
+    If the notification does not appear, check `/var/log/syslog` on the VM. 
+    If virus notifications appear in the VM syslog but not in the aggregator, verify your syslog forwarding settings.
