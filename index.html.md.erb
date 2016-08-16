@@ -5,23 +5,23 @@ owner: Security Engineering
 
 <strong><%= modified_date %></strong>
 
-This topic describes how to add ClamAV to your Pivotal Cloud Foundry (PCF) deployment.  
-This add-on may be necessary if your auditor requires antivirus protection within the PCF environment.  
-For example, auditors sometimes expect that antivirus protection be present in an environment that must comply with the requirements of PCI DSS.
+This topic describes how to add ClamAV to your Pivotal Cloud Foundry (PCF) deployment.
 
+This add-on may be necessary for regulatory purposes if your compliance auditor requires antivirus protection within the PCF environment. For example, auditors sometimes expect that antivirus protection be present in an environment that must comply with standards such as Payment Card Industry Data Security Standard (PCI DSS) or Health Insurance Portability and Accountability Act (HIPAA).
+2
 ##<a id="prereqs"></a>Prerequisites
 
-To complete the ClamAV installation, satisfy the following prerequisites before you begin:
+To complete the ClamAV installation:
 
-* PCF operator administration rights
+* You must be a PCF operator with admin rights. See the [Understanding Pivotal Cloud Foundry User Types](https://docs.pivotal.io/pivotalcf/customizing/user-types.html#operator) topic for more information.
 
-* Ops Manager 1.7 or higher
+* You must have Ops Manager 1.7 or higher
 
 ##<a id="create-mfest"></a>Create the ClamAV manifest
 
-Follow these steps to create the ClamAV manifest for your deployment:
+Follow the steps below to create the ClamAV manifest for your deployment:
 
-1. Create an ClamAV manifest file `clamav.yml` starting with the code below as a template.
+1. Create a ClamAV manifest file named `clamav.yml`, using the following code as a template.
   <pre>releases:
   \- name: clamav, version: 1.0.0<br>
   addons:
@@ -31,17 +31,18 @@ Follow these steps to create the ClamAV manifest for your deployment:
         release: clamav
       properties:
         clamav:
-          database\_mirror:</pre>
+          database\_mirror:
+            <%= vars.example_ip_1 %></pre>
 
 2. Optionally, you can provide the hostname or IP address of a private ClamAV update mirror. 
-Environments that cannot connect to the internet normally use an update mirror. 
+Environments that cannot connect to the Internet normally use an update mirror. 
 If you do not specify a value, ClamAV defaults to `db.local.clamav.net` for updates. 
 See the [Private Local Mirrors](https://www.clamav.net/documents/private-local-mirrors) topic of the ClamAV documentation for instructions on how to set up a local mirror.
 
 ##<a id="download-deploy"></a>Download and Deploy the ClamAV Add-on  
 
 1. Download the ClamAV add-on software binary from the [Pivotal Network](https://network.pivotal.io/products/p-clamav-addon) to your local machine.
-1. Copy the software binary to your Ops Manager instance.
+1. Copy the software binary to your Ops Manager virtual machine (VM).
   <pre class="terminal">$ scp -i PATH/TO/PRIVATE/KEY clamav-release.tar.gz ubuntu@YOUR-OPS-MANAGER-VM-IP:</pre>
 
 1. Copy the ClamAV manifest file to your Ops Manager instance.
@@ -70,7 +71,7 @@ software binary completed. You should see the ClamAV release.
   <pre class="terminal">$ bosh releases</pre>
 
 1. Update your runtime configuration to include the ClamAV add-on.
-  <p class="note"><strong>Note</strong>: If you installed other BOSH add-ons you must merge the ClamAV runtime config into your existing runtime config. 
+  <p class="note"><strong>Note</strong>: If you installed other BOSH add-ons, you must merge the ClamAV manifest into your existing add-on manifest. 
 Append the contents of `clamav.yml` to your existing add-on `yml` file.</p>
 
     <pre class="terminal">$ bosh update runtime-config PATH/YOUR-ADD-ON-YML.yml</pre>
@@ -100,7 +101,7 @@ ClamAV runtime config.
 
 The ClamAV BOSH release writes all alerts to the syslogs of the VMs in your deployment. You can use syslog forwarding to forward the alerts to a syslog aggregator.
 
-* **Using the Elastic Runtime tile**: Follow the steps to [Configure System Logging](http://docs.pivotal.io/pivotalcf/customizing/cloudform-er-config.html#sys-logging) in the Elastic Runtime tile. The syslog aggregator that you specify will receive all alerts generated on Elastic Runtime VMs, including the ClamAV alerts.
+* **Using the Elastic Runtime tile**: Follow the steps to [Configure System Logging](http://docs.pivotal.io/pivotalcf/customizing/cloudform-er-config.html#sys-logging) in the Elastic Runtime tile. The syslog aggregator that you specify receives all alerts generated on Elastic Runtime VMs, including the ClamAV alerts.
 * **Using the BOSH syslog release**: You can use the syslog BOSH release to forward system logs. See the [syslog-release](https://github.com/cloudfoundry/syslog-release) for instructions.
 
 ## <a id="verify"></a>Verify your ClamAV Installation
@@ -121,11 +122,11 @@ The ClamAV BOSH release writes all alerts to the syslogs of the VMs in your depl
   </pre>
   1. Run `monit summary` again. If you do not see the processes mentioned above, check `/var/vcap/sys/log/clamav` logs for errors.
 
-1. If `monit summary` does list `freshclamd` and `clamd`, then a create a file on the VM with the following contents:
+1. If `monit summary` does list `freshclamd` and `clamd`, a create a file on the VM with the following contents:
 
     ```
     X5O!P%@AP[4\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*
     ```
 
-    This is a virus signature that is used to test anti-virus software. It may take up to an hour for ClamAV to locate the signature. Check your syslog aggregator for the notification. If the notification does not appear, check `/var/log/syslog` on the VM. If virus notifications appear in the VM syslog but not in the
-    aggregator, then verify your syslog forwarding settings.
+    This is a virus signature used to test anti-virus software. It may take up to an hour for ClamAV to locate the signature. Check your syslog aggregator for the notification. If the notification does not appear, check `/var/log/syslog` on the VM. If virus notifications appear in the VM syslog but not in the
+    aggregator, verify your syslog forwarding settings.
