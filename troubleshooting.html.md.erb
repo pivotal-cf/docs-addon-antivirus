@@ -5,34 +5,41 @@ owner: Security Engineering
 
 <strong><%= modified_date %></strong>
 
-This topic provides instructions to verify that ClamAV-based antivirus Add-on works with your Pivotal Cloud Foundry® (PCF) 
+This topic provides instructions to verify that the ClamAV-based antivirus add-on works with your Pivotal Cloud Foundry (PCF) 
 deployment and general recommendations for troubleshooting.
 
 
-## <a id='troubleshoot-clamav'></a>Troubleshoot ClamAV
+## <a id='about-troubleshoot-clamav'></a>About Troubleshooting ClamAV
 
-There are basically two types of issues that could occur with the ClamAV Add-on for PCF.  Either the installation of the add-on
-is not successful, or the installation succeeds, but at runtime a detection is not successful.  This troubleshooting guide will
-provide information on how to ensure your installation is successful, and how to overcome any add-on deployment and configuration 
-problems.
+There are basically two types of issues that can occur with the ClamAV Add-on for PCF:  
 
-This guide also provides help for troubleshooting the runtime behavior, to ensure that the deployment is being protected in the way
-you expect, e.g. through on-access scans, or through scheduled scans, or both. For example, if a customer believes that the ClamAV 
-daemon is properly configured, but it still failed to identify a malware sample, then it is possible that the signatures are 
-not up to date. In this case, one would ensure that the local mirror server has been correctly configured, and that it is 
++ The installation of the add-on is not successful.
+
++ Or, the installation succeeds, but at runtime a detection is not successful. 
+
+This troubleshooting topic provides information on how to ensure your installation is successful and 
+how to overcome add-on deployment and configuration problems.
+
+This topic also provides help for troubleshooting the runtime behavior, to ensure that the deployment is being protected in the way
+you expect, e.g. through on-access scans, or through scheduled scans, or both. 
+For example, if you believe that the ClamAV daemon is properly configured, 
+but it still failed to identify a malware sample, then it is possible that the signatures are not up-to-date. 
+In this case, you need to ensure that the local mirror server has been correctly configured, and that it is 
 operating normally.
 
-If you still have an issue with ClamAV detection, such that you have encountered a new malware sample, and would like to help with 
-improving ClamAV detection by contributing a new signature, Pivotal recommends that customers pursue this activity through the 
+If you still have an issue with ClamAV detection, for example, you encounter a new malware sample and want to help with 
+improving ClamAV detection by contributing a new signature, Pivotal recommends that you pursue this through the 
 existing ClamAV community channels. Pivotal does not provide support for ClamAV detection failures, mirror coordination, or 
 threat tracking activity.
+
+## <a id='troubleshoot-clamav'></a>Troubleshoot ClamAV
 
 ### <a id="clamav-installation-issues"></a> ClamAV Installation Issues
 
 #### Symptom
 Error in BOSH deployment...
 
-#### Explanation: Typo in Manifest file.
+#### Explanation: Typo in Manifest File.
 
 #### Solution
 Review the manifest file, and verify that the syntax is correct.
@@ -53,14 +60,14 @@ The solution to this problem...
 #### Symptom
 Malware signature not detected.
 
-#### Explanation: Virus signatures not up to date.
+#### Explanation: Virus Signatures Not Up-to-Date.
 
 #### Solution
-First, ensure that the above configuration checks have been done, and that the mirror server is correctly configured, and is 
-available on the network, from within the PCF private subnet.
+First, ensure that the above configuration checks have been done, and that the mirror server is correctly configured and is 
+available on the network from within the PCF private subnet.
 
-If the local mirror is up-to-date, and ClamAV is still failing to detect a malware sample, you may have encountered 
-a new threat. Pivotal suggests alerting the community via existing channels, and report the suspicious file directly
+If the local mirror is up-to-date and ClamAV is still failing to detect a malware sample, you might have encountered 
+a new threat. Pivotal suggests alerting the community via existing channels and reporting the suspicious file directly
 to the ClamAV team.
 
 
