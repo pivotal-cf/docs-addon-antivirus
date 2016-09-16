@@ -21,9 +21,10 @@ To complete the ClamAV installation:
 
 Follow the steps below to create the ClamAV manifest for your deployment:
 
-1. Create a ClamAV manifest file named `clamav.yml`, using the following code as a template.
+1. Create a ClamAV runtime config portion of the manifest file named `clamav.yml`, using the following code as a template.
   <pre>releases:
-  \- name: clamav, version: 1.0.0<br>
+  \- name: clamav 
+    version: 1.0.0
   addons:
   \- name: clamav
       jobs:
@@ -45,7 +46,7 @@ See the [Private Local Mirrors](https://www.clamav.net/documents/private-local-m
 1. Copy the software binary to your Ops Manager virtual machine (VM).
   <pre class="terminal">$ scp -i PATH/TO/PRIVATE/KEY clamav-release.tar.gz ubuntu@YOUR-OPS-MANAGER-VM-IP:</pre>
 
-1. Copy the ClamAV manifest file to your Ops Manager instance.
+1. Copy the ClamAV runtime manifest file to your Ops Manager instance.
   <pre class="terminal">$ scp -i PATH/TO/PRIVATE/KEY clamav.yml ubuntu@YOUR-OPS-MANAGER-VM-IP:</pre>
 
 1. SSH into Ops Manager.
