@@ -18,13 +18,14 @@ To complete the ClamAV installation:
 * You must be a PCF operator with admin rights. 
 See the [Understanding Pivotal Cloud Foundry User Types](https://docs.pivotal.io/pivotalcf/customizing/user-types.html#operator) topic for more information.
 
-* You must have Ops Manager 1.7 or higher.
+* You must have Pivotal Operations Manager (Ops Manager) v1.7 or later.
 
 ##<a id="create-mfest"></a>Create the ClamAV Manifest
 
+The ClamAV manifest is a YML file that contains runtime configuration information for the ClamAV add-on.
 Follow the steps below to create the ClamAV manifest for your deployment:
 
-1. Create a ClamAV runtime config portion of the manifest file named `clamav.yml`, using the following code as a template.
+1. Create a file named `clamav.yml`, using the following code as a template.
   <pre>releases:
   \- name: clamav 
       version: 1.0.0
@@ -50,7 +51,7 @@ See the [Private Local Mirrors](https://www.clamav.net/documents/private-local-m
 1. Copy the software binary to your Ops Manager virtual machine (VM).
   <pre class="terminal">$ scp -i PATH/TO/PRIVATE/KEY clamav-release.tar.gz ubuntu@YOUR-OPS-MANAGER-VM-IP:</pre>
 
-1. Copy the ClamAV runtime manifest file to your Ops Manager instance.
+1. Copy the ClamAV manifest, `clamav.yml` file, to your Ops Manager instance.
   <pre class="terminal">$ scp -i PATH/TO/PRIVATE/KEY clamav.yml ubuntu@YOUR-OPS-MANAGER-VM-IP:</pre>
 
 1. SSH into Ops Manager.
@@ -81,8 +82,7 @@ Append the contents of `clamav.yml` to your existing add-on YML file.</p>
 
     <pre class="terminal">$ bosh update runtime-config PATH/YOUR-ADD-ON-YML.yml</pre>
 
-1. Verify your runtime configuration changes match what you specified in the
-ClamAV runtime config.
+1. Verify your runtime configuration changes match what you specified in the ClamAV manifest.
   <pre class="terminal">
   $ bosh runtime-config
   Acting as user 'admin' on 'micro'
