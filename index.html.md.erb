@@ -141,3 +141,29 @@ See the [syslog-release](https://github.com/cloudfoundry/syslog-release) for ins
     Check your syslog aggregator for the notification. 
     If the notification does not appear, check `/var/log/syslog` on the VM. 
     If virus notifications appear in the VM syslog but not in the aggregator, verify your syslog forwarding settings.
+
+##<a id="setup-on-access"></a>[EXPERIMENTAL] Enable On-Access Scan
+
+ClamAV offers immediate file scan on file modification. Enabling this feature may reduce the time it takes to detect and report malware. This option can be enabled through a runtime config property.
+
+1. Add the <strong>on_access</strong> property under 
+  <pre class="terminal">
+  releases:
+  <span>-</span> name: clamav
+      version: 1.0.0
+  <br>
+  addons:
+    name: clamav
+      jobs:
+        <span>-</span> name: clamav
+          release: clamav
+      properties:
+        clamav:
+          on\_access: yes
+          scheduled: yes
+  ...
+  </pre>
+
+1. Apply the configuration change by following the instructions from the <a href="#download-deploy">Download and Deploy the ClamAV Add-on</a> section, steps 9-12.
+
+The `scheduled` property is responsible for running ClamAV from cron and is set to <strong>yes</strong> by default. Setting it to <strong>no</strong> and applying the changes will disable cron runs.
