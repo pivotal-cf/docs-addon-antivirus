@@ -48,19 +48,19 @@ See the [Private Local Mirrors](https://www.clamav.net/documents/private-local-m
 
 1. Download the ClamAV add-on software binary from the [Pivotal Network](https://network.pivotal.io/products/p-clamav-addon) to your local machine.
 
-1. Copy the software binary to your Ops Manager virtual machine (VM).
+2. Copy the software binary to your Ops Manager virtual machine (VM).
   <pre class="terminal">$ scp -i PATH/TO/PRIVATE/KEY clamav-release.tar.gz ubuntu@YOUR-OPS-MANAGER-VM-IP:</pre>
 
-1. Copy the ClamAV manifest, `clamav.yml` file, to your Ops Manager instance.
+3. Copy the ClamAV manifest, `clamav.yml` file, to your Ops Manager instance.
   <pre class="terminal">$ scp -i PATH/TO/PRIVATE/KEY clamav.yml ubuntu@YOUR-OPS-MANAGER-VM-IP:</pre>
 
-1. SSH into Ops Manager.
+4. SSH into Ops Manager.
   <pre class="terminal">$ ssh -i PATH-TO-PRIVATE-KEY ubuntu@YOUR-OPS-MANAGER-VM-IP</pre>
 
-1. On the Ops Manager VM, navigate to the software binary location.
+5. On the Ops Manager VM, navigate to the software binary location.
   <pre class="terminal">$ cd PATH-TO-BINARY</pre>
 
-1. On the Ops Manager VM, target your BOSH director instance.
+6. On the Ops Manager VM, target your BOSH director instance.
   <pre class="terminal">
   $ bosh target YOUR-OPS-MANAGER-DIRECTOR-IP
   Target set to 'Ops Manager'
@@ -69,20 +69,20 @@ See the [Private Local Mirrors](https://www.clamav.net/documents/private-local-m
   Logged in as 'director'
   </pre>
 
-1. Upload your release.
+7. Upload your release.
   <pre class="terminal">$ bosh upload release PATH-TO-BINARY/BINARY-NAME.tar</pre>
 
-1. From the command line, confirm that the upload of the ClamAV
+8. From the command line, confirm that the upload of the ClamAV
 software binary completed. You should see the ClamAV release.
   <pre class="terminal">$ bosh releases</pre>
 
-1. Update your runtime configuration to include the ClamAV add-on.
+9. <a name="update"></a>Update your runtime configuration to include the ClamAV add-on.
   <p class="note"><strong>Note</strong>: If you installed other BOSH add-ons, you must merge the ClamAV manifest into your existing add-on manifest. 
 Append the contents of `clamav.yml` to your existing add-on YML file.</p>
 
     <pre class="terminal">$ bosh update runtime-config PATH/YOUR-ADD-ON-YML.yml</pre>
 
-1. Verify your runtime configuration changes match what you specified in the ClamAV manifest.
+10. Verify your runtime configuration changes match what you specified in the ClamAV manifest.
   <pre class="terminal">
   $ bosh runtime-config
   Acting as user 'admin' on 'micro'
@@ -98,9 +98,9 @@ Append the contents of `clamav.yml` to your existing add-on YML file.</p>
   ...
   </pre>
 
-1. Navigate to your Installation Dashboard in Ops Manager.
+11. Navigate to your Installation Dashboard in Ops Manager.
 
-1. Click **Apply Changes**.
+12. Click **Apply Changes**.
 
 ##<a id="alerts"></a> Configure Forwarding for ClamAV Alerts
 
@@ -142,11 +142,12 @@ See the [syslog-release](https://github.com/cloudfoundry/syslog-release) for ins
     If the notification does not appear, check `/var/log/syslog` on the VM. 
     If virus notifications appear in the VM syslog but not in the aggregator, verify your syslog forwarding settings.
 
-##<a id="setup-on-access"></a>[EXPERIMENTAL] Enable On-Access Scan
+##<a id="setup-on-access"></a>Enable On-Access Scan (Experimental)
 
-ClamAV offers immediate file scan on file modification. Enabling this feature may reduce the time it takes to detect and report malware. This option can be enabled through a runtime config property.
+ClamAV offers immediate file scanning upon file modification. This experimental feature might reduce the time it takes to detect and report malware. 
+Enable the feature through the `on_access` runtime config property, as follows.
 
-1. Add the <strong>on_access</strong> property under 
+1. In the `clamav.yml` file, add the `on_access` property under the `clamav` property: 
   <pre class="terminal">
   releases:
   <span>-</span> name: clamav
@@ -164,6 +165,7 @@ ClamAV offers immediate file scan on file modification. Enabling this feature ma
   ...
   </pre>
 
-1. Apply the configuration change by following the instructions from the <a href="#download-deploy">Download and Deploy the ClamAV Add-on</a> section, steps 9-12.
+1. Apply this configuration change by following the instructions from step 9, [Update your&#8230;](#update), in the [Download and Deploy the ClamAV Add-on](#download-deploy) section above.
 
-The `scheduled` property is responsible for running ClamAV from cron and is set to <strong>yes</strong> by default. Setting it to <strong>no</strong> and applying the changes will disable cron runs.
+<p class="note"><strong>Note</strong>: The <code>scheduled</code> property is responsible for running ClamAV from cron and is set to <code>yes</code> by default.
+Setting it to <code>no</code> and applying the changes disables cron runs.</p>
