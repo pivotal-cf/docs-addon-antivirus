@@ -37,34 +37,36 @@ threat tracking activity.
 ### <a id="clamav-installation-issues"></a> ClamAV Installation Issues
 
 #### Symptom
-Error in BOSH deployment...
+Applying changes in Ops Manager fails. The bottom of the changelog contains a similar error message: 
 
-#### Explanation: Typo in Manifest File.
+```
+...
+Started updating job nats > nats/0 (12bfae02-b4af-4104-b2bd-227ff07b2d92) (canary). Done (00:02:31)
+  Failed updating job etcd_server > etcd_server/0 (f8e492bf-db09-4d38-8a73-5cf69d7b8a11) (canary): 'etcd_server/0 (f8e492bf-db09-4d38-8a73-5cf69d7b8a11)' is not running after update. Review logs for failed jobs: clamd (00:05:53)
+
+
+Error 400007: 'etcd_server/0 (f8e492bf-db09-4d38-8a73-5cf69d7b8a11)' is not running after update. Review logs for failed jobs: clamd
+```
+
+#### Explanation
+The ClamAV mirror server was unavailable during initial deployment.
 
 #### Solution
-Review the manifest file, and verify that the syntax is correct.
+Review the manifest file, and replace the `database_mirror` key with an address of a stable mirror server.
 
 <hr>
-
-#### Symptom
-Another symptom...
-
-#### Explanation: Detail for this symptom
-A detailed explanation of the symptom...
-
-#### Solution
-The solution to this problem...
 
 ### <a id="clamav-runtime-issues"></a>ClamAV Runtime Issues
 
 #### Symptom
 Malware signature not detected.
 
-#### Explanation: Virus Signatures Not Up-to-Date.
+#### Explanation:
+Virus Signatures Not Up-to-Date.
 
 #### Solution
-First, ensure that the above configuration checks have been done, and that the mirror server is correctly configured and is 
-available on the network from within the PCF private subnet.
+First, ensure that the above configuration checks have been done, that the mirror server is correctly configured and is 
+available on the network from within the PCF private subnet and that at least 1 hour (default scan schedule interval) has elapsed.
 
 If the local mirror is up-to-date and ClamAV is still failing to detect a malware sample, you might have encountered 
 a new threat. Pivotal suggests alerting the community via existing channels and reporting the suspicious file directly
