@@ -6,38 +6,20 @@ owner: Security Engineering
 <strong><%= modified_date %></strong>
 
 This topic provides instructions to verify that the ClamAV-based antivirus add-on works with your Pivotal Cloud Foundry (PCF) 
-deployment and general recommendations for troubleshooting.
+deployment and provides general recommendations for troubleshooting and ensuring that the deployment is being protected as you expect.
 
-
-## <a id='about-troubleshoot-clamav'></a>About Troubleshooting ClamAV
-
-There are basically two types of issues that can occur with the ClamAV Add-on for PCF:  
+There are two common types of issues that can occur with the ClamAV Add-on for PCF:  
 
 + The installation of the add-on is not successful.
 
-+ Or, the installation succeeds, but at runtime a detection is not successful. 
-
-This troubleshooting topic provides information on how to ensure your installation is successful and 
-how to overcome add-on deployment and configuration problems.
-
-This topic also provides help for troubleshooting the runtime behavior, to ensure that the deployment is being protected in the way
-you expect, e.g. through on-access scans, or through scheduled scans, or both. 
-For example, if you believe that the ClamAV daemon is properly configured, 
-but it still failed to identify a malware sample, then it is possible that the signatures are not up-to-date. 
-In this case, you need to ensure that the local mirror server has been correctly configured, and that it is 
-operating normally.
-
-If you still have an issue with ClamAV detection, for example, you encounter a new malware sample and want to help with 
-improving ClamAV detection by contributing a new signature, Pivotal recommends that you pursue this through the 
-existing ClamAV community channels. Pivotal does not provide support for ClamAV detection failures, mirror coordination, or 
-threat tracking activity.
++ The installation succeeds, but at runtime a detection is not successful. 
 
 ## <a id='troubleshoot-clamav'></a>Troubleshoot ClamAV
 
 ### <a id="clamav-installation-issues"></a> ClamAV Installation Issues
 
 #### Symptom
-Applying changes in Ops Manager fails. The bottom of the changelog contains a similar error message: 
+Applying changes in Ops Manager fails. The bottom of the changelog contains an error message similiar to the following:
 
 ```
 ...
@@ -52,27 +34,28 @@ Error 400007: 'etcd_server/0 (f8e492bf-db09-4d38-8a73-5cf69d7b8a11)' is not runn
 The ClamAV mirror server was unavailable during initial deployment.
 
 #### Solution
-Review the manifest file, and replace the `database_mirror` key with an address of a stable mirror server.
+Review the manifest file, and replace the `database_mirror` key with the address of a stable mirror server.
 
 <hr>
 
 ### <a id="clamav-runtime-issues"></a>ClamAV Runtime Issues
 
 #### Symptom
-Malware signature not detected.
+Malware signature or sample malware is not detected, even though the ClamAV daemon is properly configured.
 
-#### Explanation:
-Virus Signatures Not Up-to-Date.
+#### Explanation
+Virus signatures are not up-to-date.
 
 #### Solution
 First, ensure that the above configuration checks have been done, that the mirror server is correctly configured and is 
-available on the network from within the PCF private subnet and that at least 1 hour (default scan schedule interval) has elapsed.
+available on the network from within the PCF private subnet, and that at least 1 hour has elapsed. 
+One hour is the default scan schedule interval.
 
 If the local mirror is up-to-date and ClamAV is still failing to detect a malware sample, you might have encountered 
-a new threat. Pivotal suggests alerting the community via existing channels and reporting the suspicious file directly
+a new threat. Pivotal recommends alerting the community via existing channels and reporting the suspicious file directly
 to the ClamAV team.
 
+<p class="note"><strong>Note</strong>: Pivotal does not provide support for ClamAV detection failures, 
+mirror coordination, or threat tracking activity.</p>
 
 <hr>
-
-#### Symptom

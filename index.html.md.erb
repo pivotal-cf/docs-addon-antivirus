@@ -7,9 +7,13 @@ owner: Security Engineering
 
 This topic describes how to add ClamAV to your Pivotal Cloud Foundry (PCF) deployment.
 
+## <a id="about-clamav"></a>About the ClamAV Add-on for PCF
+
 This add-on may be necessary for regulatory purposes if your compliance auditor requires antivirus protection within the PCF environment. 
 For example, auditors sometimes expect that antivirus protection be present in an environment that must comply with standards such as 
 Payment Card Industry Data Security Standard (PCI DSS) or Health Insurance Portability and Accountability Act (HIPAA).
+
+ClamAV can be configured to scan on-access, on schedule, or both.
 
 ##<a id="prereqs"></a>Prerequisites
 
@@ -112,7 +116,7 @@ The syslog aggregator that you specify receives all alerts generated on Elastic 
 * **Using the BOSH syslog release**: You can use the syslog BOSH release to forward system logs. 
 See the [syslog-release](https://github.com/cloudfoundry/syslog-release) for instructions.
 
-## <a id="verify"></a>Verify your ClamAV Installation
+## <a id="verify"></a>Verify Your ClamAV Installation
 
 1. [BOSH ssh](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#bosh-ssh) into one of the VMs in your deployment.
 
