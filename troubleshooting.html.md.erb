@@ -34,7 +34,7 @@ Error 400007: 'etcd_server/0 (f8e492bf-db09-4d38-8a73-5cf69d7b8a11)' is not runn
 The ClamAV mirror server was unavailable during initial deployment.
 
 #### Solution
-Review the manifest file, and replace the `database_mirror` key with the address of a stable mirror server. If you don't have a stable mirror server for purposes of reliable initial deployment use the S3-based mirror: `clamav-mirror.s3.amazonaws.com`.
+Review the manifest file, and replace the `database_mirror` key with the address of a stable mirror server. If you do not have a stable mirror server for reliable initial deployment use the S3-based mirror: `clamav-mirror.s3.amazonaws.com`.
 <hr>
 
 ### <a id="clamav-runtime-issues"></a>ClamAV Runtime Issues
