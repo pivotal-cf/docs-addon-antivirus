@@ -120,6 +120,14 @@ The syslog aggregator that you specify receives all alerts generated on Elastic 
 * **Using the BOSH syslog release**: You can use the syslog BOSH release to forward system logs. 
 See the [syslog-release](https://github.com/cloudfoundry/syslog-release) for instructions.
 
+<p class="note"><strong>Note</strong>: When configuring syslog forwarding,
+ensure that there is enough space on disk for these logs. The amount of disk
+space required for these logs is small but depends on the number of scans your
+perform. Make sure to set up log rotation at a sufficient frequency that the
+disks does not become full. When in doubt, try rotating hourly or when the logs
+reach a certain size. We recommend that logs are forwarded into a remote syslog
+aggregation system so that these concerns may be centralized.</p>
+
 ## <a id="verify"></a>Verify Your ClamAV Installation
 
 1. [BOSH ssh](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#bosh-ssh) into one of the VMs in your deployment.
@@ -147,7 +155,7 @@ See the [syslog-release](https://github.com/cloudfoundry/syslog-release) for ins
     This is a virus signature used to test anti-virus software. 
     It may take up to an hour for ClamAV to locate the signature. 
     Check your syslog aggregator for the notification. 
-    If the notification does not appear, check `/var/log/syslog` on the VM. 
+    If the notification does not appear, check `/var/log/messages` on the VM. 
     If virus notifications appear in the VM syslog but not in the aggregator, verify your syslog forwarding settings.
 
 ##<a id="setup-on-access"></a>Enable On-Access Scan (Experimental)
