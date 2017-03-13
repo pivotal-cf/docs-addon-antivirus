@@ -163,7 +163,7 @@ Enable the feature through the `on_access` runtime config property, as follows.
   <pre class="terminal">
   releases:
   <span>-</span> name: clamav
-      version: 1.0.0
+      version: 1.1.1
   <br>
   addons:
     name: clamav
@@ -181,3 +181,33 @@ Enable the feature through the `on_access` runtime config property, as follows.
 
 <p class="note"><strong>Note</strong>: The <code>scheduled</code> property is responsible for running ClamAV from cron and is set to <code>yes</code> by default.
 Setting it to <code>no</code> and applying the changes disables cron runs.</p>
+
+##<a id="proxy"></a>Download virus definitions trough a proxy
+
+<p class="note"><strong>Note</strong>: New in ClamAV addon release 1.1.1
+
+Enable proxy configuration the following runtime config properties:
+
+1. In order to download the virus definitions database through a proxy server, add the `proxy_host`, `proxy_port` properties to the `clamav.yml`. Optionally, if the proxy server requires authentication, add `proxy_user` and `proxy_password` properties.
+  <pre class="terminal">
+  releases:
+  <span>-</span> name: clamav
+      version: 1.1.1
+  <br/>
+  addons:
+    name: clamav
+      jobs:
+        <span>-</span> name: clamav
+          release: clamav
+      properties:
+        clamav:
+          on\_access: no
+          scheduled: yes
+          proxy\_host: proxy.localdomain
+          proxy\_port: 3128
+          proxy\_user: clamav
+          proxy\_password: secret
+  ...
+  </pre>
+
+1. Apply this configuration change by following the instructions from step 9, [Update your&#8230;](#update), in the [Download and Deploy ClamAV Add-on](#download-deploy) section above.
