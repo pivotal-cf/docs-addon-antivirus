@@ -52,6 +52,31 @@ Environments that cannot connect to the Internet normally use an update mirror.
 If you do not specify a value, ClamAV defaults to `db.local.clamav.net` for updates. Mirror servers behind this address might be unreachable which may lead to a failed ClamAV Add-on deployment.
 See the [Private Local Mirrors](https://www.clamav.net/documents/private-local-mirrors) topic of the ClamAV documentation for instructions on how to set up a local mirror.
 
+3. (Optional) If you want to download the virus definitions database through a proxy server, do the following:
+    + Add the `proxy_host` and `proxy_port` properties.
+    + If the proxy server needs authentication, add `proxy_user` and `proxy_password` properties.
+
+    Replace the example text shown in bold:  
+  <pre>
+  releases:
+  <span>-</span> name: clamav
+      version: 1.1.1
+  addons:
+    name: clamav
+      jobs:
+        <span>-</span> name: clamav
+          release: clamav
+      properties:
+        clamav:
+          on\_access: no
+          scheduled: yes
+          proxy\_host: <strong>proxy.localdomain</strong>
+          proxy\_port: <strong>3128</strong>
+          proxy\_user: <strong>clamav</strong>
+          proxy\_password: <strong>secret</strong>
+  ...
+  </pre>
+
 ##<a id="download-deploy"></a>Download and Deploy ClamAV Add-on  
 
 1. Download ClamAV Add-on software binary from the [Pivotal Network](https://network.pivotal.io/products/p-clamav-addon) to your local machine.
@@ -182,32 +207,3 @@ Enable the feature through the `on_access` runtime config property, as follows.
 <p class="note"><strong>Note</strong>: The <code>scheduled</code> property is responsible for running ClamAV from cron and is set to <code>yes</code> by default.
 Setting it to <code>no</code> and applying the changes disables cron runs.</p>
 
-##<a id="proxy"></a>Download virus definitions trough a proxy
-
-<p class="note"><strong>Note</strong>: New in ClamAV addon release 1.1.1
-
-Enable proxy configuration the following runtime config properties:
-
-1. In order to download the virus definitions database through a proxy server, add the `proxy_host`, `proxy_port` properties to the `clamav.yml`. Optionally, if the proxy server requires authentication, add `proxy_user` and `proxy_password` properties.
-  <pre class="terminal">
-  releases:
-  <span>-</span> name: clamav
-      version: 1.1.1
-  <br/>
-  addons:
-    name: clamav
-      jobs:
-        <span>-</span> name: clamav
-          release: clamav
-      properties:
-        clamav:
-          on\_access: no
-          scheduled: yes
-          proxy\_host: proxy.localdomain
-          proxy\_port: 3128
-          proxy\_user: clamav
-          proxy\_password: secret
-  ...
-  </pre>
-
-1. Apply this configuration change by following the instructions from step 9, [Update your&#8230;](#update), in the [Download and Deploy ClamAV Add-on](#download-deploy) section above.
