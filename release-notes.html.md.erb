@@ -7,6 +7,23 @@ owner: Security Engineering
 
 This topic contains release notes for ClamAV Add-on for PCF.
 
+## v1.1.6 (Beta)
+
+**Release Date:** March 23, 2017
+
+ClamAV Add-on for PCF:
+
+* Improved implementation of cgroups to work with diego
+* Cgroup memory and cpu limits are configurable
+
+  ```
+  properties:
+    clamav.memory_limit: <Memory limit in bytes>
+    clamav.cpu_limit: <CPU limit (percentage)>
+  ```
+
+<p class="note"><strong>Note</strong>: when upgrading from v1.1.1, run "bosh deploy --recreate"</p>
+
 ## v1.1.1 (Beta)
 
 **Release Date:** March 13, 2017
