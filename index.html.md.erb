@@ -207,10 +207,10 @@ Enable the feature through the `on_access` runtime config property, as follows.
 <p class="note"><strong>Note</strong>: The <code>scheduled</code> property is responsible for running ClamAV from cron and is set to <code>yes</code> by default.
 Setting it to <code>no</code> and applying the changes disables cron runs.</p>
 
-##<a id="quarantine"></a>Isolate infected files
+##<a id="quarantine"></a>Isolate Infected Files
 
 It is possible to configure ClamAV to remove or isolate files identified as infected. 
-Possible values for the `clamav.action` configuration property are:
+Allowed values for the `clamav.action` configuration property are:
 
 * `notify` - the default, only send a notification to syslog
 * `remove` - delete the infected file from the filesystem
