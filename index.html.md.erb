@@ -209,13 +209,14 @@ Setting it to <code>no</code> and applying the changes disables cron runs.</p>
 
 ##<a id="quarantine"></a>Isolate Infected Files
 
-It is possible to configure ClamAV to remove or isolate files identified as infected. 
+You can configure ClamAV to remove or isolate files identified as infected. 
+
 Allowed values for the `clamav.action` configuration property are:
 
-* `notify` - the default, only send a notification to syslog
-* `remove` - delete the infected file from the filesystem
-* `move` - move the infected file to the directory location specified by `action_destination`
-* `copy` - copy the infected file to the directory location specified by `action_destination`
+* `notify` — The default, only send a notification to syslog
+* `remove` — Delete the infected file from the filesystem
+* `move` — Move the infected file to the directory location specified by `action_destination`
+* `copy` — Copy the infected file to the directory location specified by `action_destination`
 
 Example configuration:
   <pre class="terminal">
