@@ -179,9 +179,9 @@ Pivotal recommends forwarding logs to a remote syslog aggregation system. </p>
     If the notification does not appear, check `/var/log/messages` on the VM. 
     If virus notifications appear in the VM syslog but not in the aggregator, verify your syslog forwarding settings.
 
-##<a id="setup-on-access"></a>Enable On-Access Scan (Experimental)
+##<a id="setup-on-access"></a>Enable On-Access Scan
 
-ClamAV offers immediate file scanning upon file modification. This experimental feature might reduce the time it takes to detect and report malware. 
+ClamAV offers immediate file scanning upon file modification. This feature might reduce the time it takes to detect and report malware. 
 Enable the feature through the `on_access` runtime config property, as follows.
 
 1. In the `clamav.yml` file, add the `on_access` property under the `clamav` property: 
