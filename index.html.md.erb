@@ -185,7 +185,7 @@ ClamAV offers immediate file scanning upon file modification. This feature might
 Enable the feature through the `on_access` runtime config property, as follows.
 
 1. In the `clamav.yml` file, add the `on_access` property under the `clamav` property: 
-  <pre class="terminal">
+  <pre>
   releases:
   <span>-</span> name: clamav
       version: 1.1.1
@@ -197,7 +197,7 @@ Enable the feature through the `on_access` runtime config property, as follows.
           release: clamav
       properties:
         clamav:
-          on\_access: yes
+          <strong>on\_access: yes</strong>
           scheduled: yes
   ...
   </pre>
@@ -211,12 +211,31 @@ Setting it to <code>no</code> and applying the changes disables cron runs.</p>
 
 You can configure ClamAV to remove or isolate files identified as infected. 
 
-Allowed values for the `clamav.action` configuration property are:
+1. In the `clamav.yml` file, add the `action` property under the `clamav` property and, optionally, the `action_destination` property:
+  <pre>
+  releases:
+  <span>-</span> name: clamav
+      version: 1.1.7
+  <br>
+  addons:
+    name: clamav
+      jobs:
+        <span>-</span> name: clamav
+          release: clamav
+      properties:
+        clamav:
+          action: <strong>ACTION</strong>
+          action_destination: <strong>PATH</strong>
+  ...
+  </pre>
 
-* `notify` — The default, only send a notification to syslog
-* `remove` — Delete the infected file from the filesystem
-* `move` — Move the infected file to the directory location specified by `action_destination`
-* `copy` — Copy the infected file to the directory location specified by `action_destination`
+2. Replace `ACTION` with one of the following values:
+  * `notify` — The default, only send a notification to syslog
+  * `remove` — Delete the infected file from the filesystem
+  * `move` — Move the infected file to the directory location specified by `action_destination`
+  * `copy` — Copy the infected file to the directory location specified by `action_destination`
+
+3. Replace `PATH` with the directory location where you want the infected files moved or copied to.
 
 Example configuration:
   <pre class="terminal">
