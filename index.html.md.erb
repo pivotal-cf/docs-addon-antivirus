@@ -207,9 +207,13 @@ Enable the feature through the `on_access` runtime config property, as follows.
 <p class="note"><strong>Note</strong>: The <code>scheduled</code> property is responsible for running ClamAV from cron and is set to <code>yes</code> by default.
 Setting it to <code>no</code> and applying the changes disables cron runs.</p>
 
-##<a id="quarantine"></a>Isolate Infected Files
+##<a id="quarantine"></a>Choose the Action on Infected Files
 
-You can configure ClamAV to remove or isolate files identified as infected. 
+You can configure ClamAV to Notify, Remove, Move or Copy files that are flagged. 
+
+The default setting is Notify. You must select and configure one of the above actions or the ClamAV Add-on will fail.
+If you choose Move or Copy, you must supply a valid path or the function will fail.
+They system will not scan the Moved-to or Copied-to location.
 
 1. In the `clamav.yml` file, add the `action` property under the `clamav` property and, optionally, the `action_destination` property:
   <pre>
