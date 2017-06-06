@@ -204,8 +204,13 @@ Enable the feature through the `on_access` runtime config property, as follows.
 
 1. Apply this configuration change by following the instructions from step 9, [Update your&#8230;](#update), in the [Download and Deploy ClamAV Add-on](#download-deploy) section above.
 
-<p class="note"><strong>Note</strong>: The <code>scheduled</code> property is responsible for running ClamAV from cron and is set to <code>yes</code> by default.
-Setting it to <code>no</code> and applying the changes disables cron runs.</p>
+##<a id="setup-on-access"></a>Scheduled Scan
+
+By default ClamAV runs a virus scan every hour.
+
+To disable the periodic scan, set the property `scheduled` to <code>no</code> in the runtime-config and apply the changes.
+
+Changing the periodic interval is not supported at this time.
 
 ##<a id="quarantine"></a>Choose the Action on Infected Files
 
