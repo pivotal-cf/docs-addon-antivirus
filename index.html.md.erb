@@ -206,11 +206,13 @@ Enable the feature through the `on_access` runtime config property, as follows.
 
 ##<a id="setup-on-access"></a>Scheduled Scan
 
-By default ClamAV runs a virus scan every hour.
+By default, ClamAV runs a virus scan every hour. You can disable the scan, but you cannot change the frequency.
 
-To disable the periodic scan, set the property `scheduled` to <code>no</code> in the runtime-config and apply the changes.
+To disable the periodic scan, follow the steps below.
 
-Changing the periodic interval is not supported at this time.
+1. In the `runtime-config`, set the property `scheduled` to <code>no</code>
+
+2. Apply the changes.
 
 ##<a id="quarantine"></a>Choose the Action on Infected Files
 
