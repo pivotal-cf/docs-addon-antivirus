@@ -44,8 +44,8 @@ Follow the steps below to create the ClamAV manifest for your deployment:
         release: clamav
       properties:
         clamav:
-          database\_mirror:
-            <%= vars.example_ip_1 %></pre>
+          database\_mirror: <%= vars.example_ip_1 %>
+</pre>
 
 2. (Optional) Provide the hostname or IP address of a private ClamAV update mirror.
 Environments that cannot connect to the Internet normally use an update mirror. 
