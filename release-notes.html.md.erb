@@ -24,6 +24,8 @@ ClamAV Add-on for PCF:
 * Allows downloading of the ClamAV database through an HTTP proxy server
 * 
 <p class="note"><strong>Note</strong>: when upgrading from previous release, run "bosh deploy --recreate"</p>
+* 
+<p class="note"><strong>Note</strong>: There is a discovered, intermittent issue with files being locked and not released when On-access scanning and Scheduled scanning are both enabled. Pick one of these to enable, and there will be no issue. </p>
 
 ## v1.0.29 (Beta)
 
