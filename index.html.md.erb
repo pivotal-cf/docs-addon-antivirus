@@ -186,6 +186,8 @@ Pivotal recommends forwarding logs to a remote syslog aggregation system. </p>
 ClamAV offers immediate file scanning upon file modification. This feature might reduce the time it takes to detect and report malware. 
 Enable the feature through the `on_access` runtime config property, as follows.
 
+<p class="note"><strong>Note</strong>: <code>on_access</code> and <code>scheduled</code> properties cannot be set to <code>yes</code> at the same time.</p>
+
 1. In the `clamav.yml` file, add the `on_access` property under the `clamav` property: 
   <pre>
   releases:
@@ -200,7 +202,7 @@ Enable the feature through the `on_access` runtime config property, as follows.
       properties:
         clamav:
           <strong>on\_access: yes</strong>
-          scheduled: yes
+          scheduled: no
   ...
   </pre>
 
