@@ -22,13 +22,14 @@ ClamAV can be configured to scan on-access, on schedule, or both.
 To complete the ClamAV Add-on installation:
 
 * You must be a PCF operator with admin rights. 
-See the [Understanding Pivotal Cloud Foundry User Types](https://docs.pivotal.io/pivotalcf/customizing/user-types.html#operator) topic for more information.
+For more information, see [Understanding Pivotal Cloud Foundry User Types](https://docs.pivotal.io/pivotalcf/customizing/user-types.html#operator).
 
 * You must have Pivotal Operations Manager (Ops Manager) v1.7 or later.
 
 * ClamAV Add-on uses 610&nbsp;MB of memory. Ensure you have at least 1&nbsp;GB of memory free on each VM before deploying ClamAV Add-on.
 
-* For performance reasons, you must set up a local mirror to get ClamAV virus updates. See the [Private Local Mirrors](https://www.clamav.net/documents/private-local-mirrors) topic of the ClamAV documentation for instructions on how to set up a local mirror.
+* For performance reasons, you must set up a local mirror to get ClamAV virus updates.
+For instructions on how to set up a local mirror, see [Private Local Mirrors](https://www.clamav.net/documents/private-local-mirrors) in the ClamAV documentation.
 
 ##<a id="create-mfest"></a>Create the ClamAV Manifest
 
@@ -186,7 +187,7 @@ Pivotal recommends forwarding logs to a remote syslog aggregation system. </p>
 ClamAV offers immediate file scanning upon file modification. This feature might reduce the time it takes to detect and report malware. 
 Enable the feature through the `on_access` runtime config property, as follows.
 
-<p class="note"><strong>Note</strong>: <code>on_access</code> and <code>scheduled</code> properties cannot be set to <code>yes</code> at the same time.</p>
+<p class="note"><strong>Note</strong>: <code>on_access</code> and <code>scheduled</code> properties cannot both be <code>yes</code>.</p>
 
 1. In the `clamav.yml` file, add the `on_access` property under the `clamav` property: 
   <pre>
