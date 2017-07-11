@@ -201,7 +201,7 @@ This feature might reduce the time it takes to detect and report malware.
 Enable the feature through the `on_access` runtime config property, as follows.
 
 1. In the `clamav.yml` file, add the `on_access` property under the `clamav` property,
-   set `on_access` to `yes` and `scheduled` to `no`: 
+   set `on_access` to `yes`: 
   <pre>
   releases:
   <span>-</span> name: clamav
@@ -215,7 +215,7 @@ Enable the feature through the `on_access` runtime config property, as follows.
       properties:
         clamav:
           <strong>on\_access: yes</strong>
-          <strong>scheduled: no</strong>
+          scheduled: yes
   ...
   </pre>
 
