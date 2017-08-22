@@ -141,7 +141,7 @@ software binary completed. You should see the ClamAV release.
    * Copy the clamav-lib tarball to your Ops Manager VM
      <pre class="terminal">$ scp -i PATH/TO/PRIVATE/KEY clamav-lib.tar.gz ubuntu@YOUR-OPS-MANAGER-VM-IP:</pre>
    * Upload the clamav-lib release
-     <pre class="terminal">$ bosh upload release PATH-TO-BINARY/BINARY-NAME.tar</pre>
+     <pre class="terminal">$ bosh upload release clamav-lib.tar.gz</pre>
 
 10. <a name="update"></a>Update your runtime configuration to include ClamAV.
   <p class="note"><strong>Note</strong>: If you installed other BOSH add-ons, you must merge the ClamAV manifest into your existing add-on manifest. 
