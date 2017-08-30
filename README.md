@@ -1,5 +1,14 @@
 # docs-addon-antivirus
 
+## About Branches
+
+As of August 30, 2017:
+
+| Branch name… | Documents version… | Publishes to… |
+|-------------|----------------|----------------|----------------|
+| master      | v1.2.x         | docs.pivotal.io and docs-pcf-staging.cfapps.io |
+| v1.3        | v1.3.x         | _nowhere_ |
+
 ## Style Guide
 _These are a handful of style issues I noticed with the original version of this documentation._
 
