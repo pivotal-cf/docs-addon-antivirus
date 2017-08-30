@@ -15,6 +15,8 @@ Payment Card Industry Data Security Standard (PCI DSS) or Health Insurance Porta
 
 ##<a id="prereqs"></a>Prerequisites
 
+<p class="note"><strong>Note</strong>: ClamAV Add-on for PCF does not work on Windows.</p>
+
 To complete the ClamAV Add-on installation:
 
 * You must be a PCF operator with admin rights. 
@@ -33,43 +35,17 @@ The ClamAV manifest is a YML file that contains runtime configuration informatio
 Follow the steps below to create the ClamAV manifest for your deployment:
 
 1. Create a file named `clamav.yml`, using the following code as a template.
-
-For Linux:
-<pre>
-  releases:
-  \- name: clamav
-    version: 1.0.0
-  addons:
-  \- name: clamav
-    jobs:
-    \- name: clamav
-      release: clamav
-      properties:
-        clamav:
-          database\_mirror: <%= vars.example_ip_1 %>
-    include:
-      stemcell:
-      \- os: ubuntu-trusty
-</pre>
-For Windows:
   <pre>releases:
-  \- name: clamav
-    version: 1.0.0
-  \- name: clamav-lib
-    version: 1.0.0
+  \- name: clamav 
+      version: 1.0.0
   addons:
-  \- name: clamav-windows
-    jobs:
-    \- name: clamav-windows
-      release: clamav
+  \- name: clamav
+      jobs:
+      \- name: clamav
+        release: clamav
       properties:
         clamav:
           database\_mirror: <%= vars.example_ip_1 %>
-    \- name: clamav-lib-windows
-      release: clamav-lib
-    include:
-      stemcell:
-      \- os: windows2012R2
 </pre>
 
 2. (Required) Provide the hostname or IP address of a private ClamAV update mirror.
@@ -135,56 +111,26 @@ For how to set up a local mirror, see [Private Local Mirrors](https://www.clamav
 8. From the command line, confirm that the upload of the ClamAV
 software binary completed. You should see the ClamAV release.
   <pre class="terminal">$ bosh releases</pre>
-9. For Windows:
-   * Follow the instructions in https://github.com/pivotal-cf/clamav-lib-release/blob/master/README.md to create a clamav-lib release tarball.
-   * Copy the clamav-lib tarball to your Ops Manager VM
-     <pre class="terminal">$ scp -i PATH/TO/PRIVATE/KEY clamav-lib.tar.gz ubuntu@YOUR-OPS-MANAGER-VM-IP:</pre>
-   * Upload the clamav-lib release
-     <pre class="terminal">$ bosh upload release clamav-lib.tar.gz</pre>
 
-10. <a name="update"></a>Update your runtime configuration to include ClamAV.
+9. <a name="update"></a>Update your runtime configuration to include ClamAV.
   <p class="note"><strong>Note</strong>: If you installed other BOSH add-ons, you must merge the ClamAV manifest into your existing add-on manifest. 
 Append the contents of `clamav.yml` to your existing add-on YML file.</p>
 
     <pre class="terminal">$ bosh update runtime-config PATH/YOUR-ADD-ON-YML.yml</pre>
 
-11. Verify your runtime configuration changes match what you specified in the ClamAV manifest.
-  For Linux:
+10. Verify your runtime configuration changes match what you specified in the ClamAV manifest.
   <pre class="terminal">
   $ bosh runtime-config
   Acting as user 'admin' on 'micro'
   releases:
   <span>-</span> name: clamav
       version: 1.0.0
+  <br>
   addons:
-      name: clamav
+    name: clamav
       jobs:
-       <span>-</span> name: clamav
-         release: clamav
-      include:
-        stemcell:
-        <span>-</span> os: ubuntu-trusty
-  ...
-  </pre>
-  For Windows:
-  <pre class="terminal">
-  $ bosh runtime-config
-  Acting as user 'admin' on 'micro'
-  releases:
-  <span>-</span> name: clamav
-      version: 1.0.0
-  <span>-</span> name: clamav-lib
-      version: 1.0.0
-  addons:
-      name: clamav-windows
-      jobs:
-      <span>-</span> name: clamav-windows
-        release: clamav
-      <span>-</span> name: clamav-lib-windows
-        release: clamav-lib
-      include:
-        stemcell:
-        <span>-</span> os: windows2012R2
+        <span>-</span> name: clamav
+          release: clamav
   ...
   </pre>
 
@@ -249,7 +195,7 @@ clamd[PID]: <infected-file-path>: <virus name> FOUND
 ```
 
 ##<a id="setup-on-access"></a>Enable On-Access Scan
-<p class="note"><strong>Note</strong>: On-Access Scan is not supported on Windows.</p>
+
 ClamAV offers immediate file scanning upon file modification.
 This feature might reduce the time it takes to detect and report malware. 
 Enable the feature through the `on_access` runtime config property, as follows.
@@ -273,7 +219,7 @@ Enable the feature through the `on_access` runtime config property, as follows.
   ...
   </pre>
 
-1. Apply this configuration change by following the instructions from step 10, [Update your&#8230;](#update), in the [Download and Deploy ClamAV Add-on](#download-deploy) section above.
+1. Apply this configuration change by following the instructions from step 9, [Update your&#8230;](#update), in the [Download and Deploy ClamAV Add-on](#download-deploy) section above.
 
 ##<a id="setup-on-access"></a>Disable Scheduled Scan
 
