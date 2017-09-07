@@ -9,6 +9,13 @@ As of September 7, 2017:
 | v1.2      | v1.2.x         | docs.pivotal.io and docs-pcf-staging.cfapps.io |
 | master        | next unreleased version         | _nowhere_ |
 
+## Which Book Repos to Use
+
+There are two book repos to use with this content:
+
+* pivotal-cf/docs-book-antivirus builds the **edge** version (next unreleased version).
+* pivotal-cf/docs-book-pcfservices builds the **production** version of the content.
+
 ## Style Guide
 _These are a handful of style issues I noticed with the original version of this documentation._
 
