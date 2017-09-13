@@ -24,8 +24,6 @@ For more information, see [Understanding Pivotal Cloud Foundry User Types](https
 
 * ClamAV Add-on uses 610&nbsp;MB of memory. Ensure you have at least 1&nbsp;GB of memory free on each VM before deploying ClamAV Add-on.
 
-* If you have Windows VMs in your cluster, you need to create the [ClamAV Lib release](https://github.com/pivotal-cf/clamav-lib-release/blob/master/README.md). See Step 9 below.
-
 * You must set up a local mirror to get ClamAV virus updates.
 For instructions on how to set up a local mirror, see [Private Local Mirrors](https://www.clamav.net/documents/private-local-mirrors) in the ClamAV documentation.
 
@@ -40,7 +38,7 @@ To create the ClamAV manifest for your deployment, do the following:
     <pre>
       releases:
       \- name: clamav
-        version: 1.0.0
+        version: x.x.x
       addons:
       \- name: clamav
         jobs:
@@ -88,7 +86,7 @@ For how to set up a local mirror, see [Private Local Mirrors](https://www.clamav
   <pre>
   releases:
   <span>-</span> name: clamav
-      version: 1.1.1
+      version: x.x.x
   addons:
     name: clamav
       jobs:
@@ -113,11 +111,11 @@ For how to set up a local mirror, see [Private Local Mirrors](https://www.clamav
 
      <code>scp -i PATH-TO-PRIVATE-KEY clamav-release.tar.gz ubuntu@YOUR-OPS-MANAGER-VM-IP:</code>
 
-3. Copy the ClamAV manifest, `clamav.yml` file, to your Ops Manager instance.
+3. Copy the ClamAV manifest, `clamav.yml` file, to the Ops Manager VM.
 
      <code>scp -i PATH-TO-PRIVATE-KEY clamav.yml ubuntu@YOUR-OPS-MANAGER-VM-IP:</code>
 
-4. SSH into Ops Manager.
+4. SSH into the Ops Manager VM.
 
      <code>ssh -i PATH-TO-PRIVATE-KEY ubuntu@YOUR-OPS-MANAGER-VM-IP</code>
 
@@ -144,8 +142,8 @@ software binary completed. You should see the ClamAV release.
 
      <code>bosh releases</code>
 
-9. For Windows, do the following:
-   1. Follow the instructions in https://github.com/pivotal-cf/clamav-lib-release/blob/master/README.md to create a clamav-lib release tarball.
+9. If you're using Windows, do the following:
+   1. Follow the instructions in the [ClamAV for PCF README](https://github.com/pivotal-cf/clamav-lib-release/blob/master/README.md) to create a clamav-lib release tarball.
    2. Copy the clamav-lib tarball to your Ops Manager VM, with the following command:
      <code>scp -i PATH-TO-PRIVATE-KEY clamav-lib.tar.gz ubuntu@OPS-MANAGER-VM-IP:/DIRECTORY</code>
    3. Upload the clamav-lib release, with the following command:
@@ -157,6 +155,8 @@ Append the contents of `clamav.yml` to your existing add-on YML file.</p>
 
     <code>bosh update runtime-config PATH/YOUR-ADD-ON-YML.yml</code>
 
+When you run this command, the manifest displays.
+
 11. Verify your runtime configuration changes match what you specified in the ClamAV manifest.
 
     For Linux:
@@ -165,7 +165,7 @@ Append the contents of `clamav.yml` to your existing add-on YML file.</p>
      Acting as user 'admin' on 'micro'
      releases:
      <span>-</span> name: clamav
-         version: 1.0.0
+         version: x.x.x
      addons:
          name: clamav
          jobs:
@@ -182,9 +182,9 @@ Append the contents of `clamav.yml` to your existing add-on YML file.</p>
      Acting as user 'admin' on 'micro'
      releases:
      <span>-</span> name: clamav
-         version: 1.0.0
+         version: x.x.x
      <span>-</span> name: clamav-lib
-         version: 1.0.0
+         version: x.x.x
      addons:
          name: clamav-windows
          jobs:
@@ -269,7 +269,7 @@ Enable the feature through the `on_access` runtime config property, as follows:
   <pre>
   releases:
   <span>-</span> name: clamav
-      version: 1.1.1
+      version: x.x.x
   <br>
   addons:
     name: clamav
