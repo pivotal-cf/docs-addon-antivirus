@@ -54,9 +54,9 @@ To create the ClamAV manifest for your deployment, do the following:
     For Windows:
       <pre>releases:
       \- name: clamav
-        version: 1.0.0
+        version: x.x.x
       \- name: clamav-lib
-        version: 1.0.0
+        version: y.y.y
       addons:
       \- name: clamav-windows
         jobs:
@@ -149,19 +149,18 @@ software binary completed. You should see the ClamAV release.
    3. Upload the clamav-lib release, with the following command:
      <code>bosh upload release clamav-lib.tar.gz</code>
 
-10. <a name="update"></a>Update your runtime configuration to include ClamAV.
-  <p class="note"><strong>Note</strong>: If you installed other BOSH add-ons, you must merge the ClamAV manifest into your existing add-on manifest. 
-Append the contents of `clamav.yml` to your existing add-on YML file.</p>
+10. <a name="update"></a>Update your Runtime Configuration to include the ClamAV Add-on.
+  <p class="note"><strong>Note</strong>: If you have installed other BOSH add-ons, you must merge the ClamAV manifest `clamav.yml` into your existing Runtime Configuration manifest and use the merged manifest.</p>
 
-    <code>bosh update runtime-config PATH/YOUR-ADD-ON-YML.yml</code>
+    <code>bosh update runtime-config PATH/clamav.yml</code>
 
-When you run this command, the manifest displays.
 
 11. Verify your runtime configuration changes match what you specified in the ClamAV manifest.
 
-    For Linux:
+	<code>bosh runtime-config</code>
+ 
+   For Linux:
     <pre>
-     bosh runtime-config
      Acting as user 'admin' on 'micro'
      releases:
      <span>-</span> name: clamav
@@ -178,13 +177,12 @@ When you run this command, the manifest displays.
     </pre>
     For Windows:
     <pre>
-     bosh runtime-config
      Acting as user 'admin' on 'micro'
      releases:
      <span>-</span> name: clamav
          version: x.x.x
      <span>-</span> name: clamav-lib
-         version: x.x.x
+         version: y.y.y
      addons:
          name: clamav-windows
          jobs:
