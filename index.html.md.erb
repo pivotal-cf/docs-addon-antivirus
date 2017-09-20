@@ -9,33 +9,36 @@ This topic describes how to add ClamAV to your Pivotal Cloud Foundry (PCF) deplo
 
 ## <a id="about-clamav"></a>About ClamAV Add-on for PCF
 
-This add-on may be necessary for regulatory purposes if your compliance auditor requires antivirus protection within the PCF environment. 
-For example, auditors sometimes expect that antivirus protection be present in an environment that must comply with standards such as 
-Payment Card Industry Data Security Standard (PCI DSS) or Health Insurance Portability and Accountability Act (HIPAA).
+This add-on may be necessary for regulatory purposes if your compliance auditor requires antivirus protection within the PCF environment.
+
+For example, auditors sometimes expect that antivirus protection be present in an environment that must comply with standards such as Payment Card Industry Data Security Standard (PCI DSS) or Health Insurance Portability and Accountability Act (HIPAA).
 
 ##<a id="prereqs"></a>Prerequisites
 
-To complete the ClamAV Add-on installation:
+To install ClamAV Add-on, you need the following things:
 
-* You must be a PCF operator with admin rights. 
-For more information, see [Understanding Pivotal Cloud Foundry User Types](https://docs.pivotal.io/pivotalcf/customizing/user-types.html#operator).
+* A PCF operator with admin rights. For more information, see [Understanding Pivotal Cloud Foundry User Types](https://docs.pivotal.io/pivotalcf/customizing/user-types.html#operator).
 
-* You must have Pivotal Operations Manager (Ops Manager) v1.7 or later.
+* Operations Manager (Ops Manager) v1.7 or later.
 
-* ClamAV Add-on uses 610&nbsp;MB of memory. Ensure you have at least 1&nbsp;GB of memory free on each VM before deploying ClamAV Add-on.
+<<<<<<< HEAD
+* At least 1 GB of memory free on each VM before deploying ClamAV Add-on. ClamAV Add-on uses 610 MB of memory. 
 
+* A local mirror to get ClamAV virus updates. For instructions on how to set up a local mirror, see [Private Local Mirrors](https://www.clamav.net/documents/private-local-mirrors) in the ClamAV documentation.
+=======
 * You must set up a local mirror to get ClamAV virus updates.
 For instructions on how to set up a local mirror, see [Private Local Mirrors](https://www.clamav.net/documents/private-local-mirrors) in the ClamAV documentation.
+>>>>>>> 5ec793cfdf848439566ced7d2096f31ab3fe590d
 
 ##<a id="create-mfest"></a>Create the ClamAV Manifest
 
 The ClamAV manifest is a YML file that contains runtime configuration information for ClamAV Add-on.
 To create the ClamAV manifest for your deployment, do the following:
-
-1. Create a file named `clamav.yml`, using the following code as a template.
+<ol>
+<li>Create a file named `clamav.yml`, using the following code as a template.</li>br>
 
     For Linux:
-    <pre>
+    <pre class="terminal">
       releases:
       \- name: clamav
         version: x.x.x
@@ -52,11 +55,15 @@ To create the ClamAV manifest for your deployment, do the following:
           \- os: ubuntu-trusty
     </pre>
     For Windows:
-      <pre>releases:
+      <pre class="terminal">releases:
       \- name: clamav
         version: x.x.x
       \- name: clamav-lib
+<<<<<<< HEAD
+        version: x.x.x
+=======
         version: y.y.y
+>>>>>>> 5ec793cfdf848439566ced7d2096f31ab3fe590d
       addons:
       \- name: clamav-windows
         jobs:
@@ -71,19 +78,18 @@ To create the ClamAV manifest for your deployment, do the following:
           stemcell:
           \- os: windows2012R2
     </pre>
+</li>
+<li>(Required) Provide the hostname or IP address of a private ClamAV update mirror. Environments that cannot connect to the internet normally use an update mirror. If you do not specify a value, ClamAV defaults to an S3-based mirror for updates. For compliance reasons, only use the S3-based mirror in non-production environments.
+For how to set up a local mirror, see <a href="https://www.clamav.net/documents/private-local-mirrors">Private Local Mirrors</a> in the ClamAV documentation.</li>
 
-2. (Required) Provide the hostname or IP address of a private ClamAV update mirror.
-Environments that cannot connect to the internet normally use an update mirror. 
-If you do not specify a value, ClamAV defaults to an S3-based mirror for updates.
-For compliance reasons, only use the S3-based mirror in non-production environments.
-For how to set up a local mirror, see [Private Local Mirrors](https://www.clamav.net/documents/private-local-mirrors) in the ClamAV documentation.
+<li>(Optional) If you have to use a proxy server to connect to the internet, do the following:
+<ul>
+<li>Add the <code>proxy_host</code> and <code>proxy_port</code> properties.</li>
+<li>If the proxy server needs authentication, add <code>proxy_user</code> and <code>proxy_password</code> properties.</li>
+</ul>
 
-3. (Optional) If you have to use a proxy server to connect to the internet, do the following:
-    + Add the `proxy_host` and `proxy_port` properties.
-    + If the proxy server needs authentication, add `proxy_user` and `proxy_password` properties.
-
-    Replace the example text shown in bold:  
-  <pre>
+    Replace the example text, indicated below in bold:  
+  <pre class="terminal">
   releases:
   <span>-</span> name: clamav
       version: x.x.x
@@ -96,14 +102,56 @@ For how to set up a local mirror, see [Private Local Mirrors](https://www.clamav
         clamav:
           on\_access: no
           scheduled: yes
-          proxy\_host: <strong>proxy.localdomain</strong>
+          proxy\_host: <strong>PROXY.LOCALDOMAIN</strong>
           proxy\_port: <strong>3128</strong>
-          proxy\_user: <strong>clamav</strong>
-          proxy\_password: <strong>secret</strong>
+          proxy\_user: <strong>CLAMAV</strong>
+          proxy\_password: <strong>SECRET</strong>
   ...
   </pre>
+  </li>
+</ol>
 
 ##<a id="download-deploy"></a>Download and Deploy ClamAV Add-on
+<<<<<<< HEAD
+<ol>
+<li>Download the ClamAV Add-on software binary from the <a href="https://network.pivotal.io/products/p-clamav-addon">Pivotal Network</a>.</li>
+<li>Copy the software binary to your Ops Manager VM.
+<p class="terminal">scp -i PATH-TO-PRIVATE-KEY clamav-release.tar.gz ubuntu@YOUR-OPS-MANAGER-VM-IP:</p></li>
+<li>Copy the ClamAV manifest <code>clamav.yml</code> file to the Ops Manager VM.
+<p class="terminal">scp -i PATH-TO-PRIVATE-KEY clamav.yml ubuntu@YOUR-OPS-MANAGER-VM-IP:</p></li>
+<li>SSH into the Ops Manager VM.
+<p class="terminal">ssh -i PATH-TO-PRIVATE-KEY ubuntu@YOUR-OPS-MANAGER-VM-IP</p></li>
+<li>On the Ops Manager VM, navigate to the software binary location.
+<p class="terminal">cd PATH-TO-BINARY</p></li>
+<li>On the Ops Manager VM, target your BOSH Director instance.
+<p class="terminal">bosh target YOUR-OPS-MANAGER-DIRECTOR-IP<br/>
+Target set to 'Ops Manager'<br/>
+Your username: director<br/>
+Enter password: ******************<br/>
+Logged in as 'director'<br/>
+</p></li>
+<li>Upload your release.
+<p class="terminal">bosh upload release PATH-TO-BINARY/BINARY-NAME.tar</p></li>
+<li>From the command line, confirm that the upload of the ClamAV software binary completed. You should see the ClamAV release.
+<p class="terminal">bosh releases</p></li>
+<li>If you're using Windows, do the following:
+   <ol>
+   <li>Follow the instructions in the <a href="https://github.com/pivotal-cf/clamav-lib-release/blob/master/README.md">ClamAV for PCF README</a> to create a clamav-lib release tarball.</li>
+   <li>Copy the clamav-lib tarball to your Ops Manager VM using the following command:
+     <p class="terminal">scp -i PATH-TO-PRIVATE-KEY clamav-lib.tar.gz ubuntu@OPS-MANAGER-VM-IP:/DIRECTORY</p></li>
+   <li>Upload the clamav-lib release with the following command:
+     <p class="terminal">bosh upload release clamav-lib.tar.gz</p></li>
+    </ol></li>
+<li><a name="update"></a>Update your runtime configuration to include ClamAV.
+  <p class="note"><strong>Note</strong>: If you installed other BOSH add-ons, you must merge the ClamAV manifest into your existing add-on manifest. </p></li>
+<li>Append the contents of <code>clamav.yml</code> to your existing add-on YML file.
+<p class="terminal">bosh update runtime-config PATH/YOUR-ADD-ON-YML.yml</p>
+When you run this command, the manifest displays.</li>
+<li>Verify the runtime configuration changes match what you specified in the ClamAV manifest.<br/>
+    For Linux:
+    <pre class="terminal">
+     bosh runtime-config
+=======
 
 1. Download ClamAV Add-on software binary from the [Pivotal Network](https://network.pivotal.io/products/p-clamav-addon) to your local machine.
 
@@ -161,6 +209,7 @@ software binary completed. You should see the ClamAV release.
  
    For Linux:
     <pre>
+>>>>>>> 5ec793cfdf848439566ced7d2096f31ab3fe590d
      Acting as user 'admin' on 'micro'
      releases:
      <span>-</span> name: clamav
@@ -176,13 +225,22 @@ software binary completed. You should see the ClamAV release.
      ...
     </pre>
     For Windows:
+<<<<<<< HEAD
+    <pre class="terminal">
+     bosh runtime-config
+=======
     <pre>
+>>>>>>> 5ec793cfdf848439566ced7d2096f31ab3fe590d
      Acting as user 'admin' on 'micro'
      releases:
      <span>-</span> name: clamav
          version: x.x.x
      <span>-</span> name: clamav-lib
+<<<<<<< HEAD
+         version: x.x.x
+=======
          version: y.y.y
+>>>>>>> 5ec793cfdf848439566ced7d2096f31ab3fe590d
      addons:
          name: clamav-windows
          jobs:
@@ -194,77 +252,77 @@ software binary completed. You should see the ClamAV release.
            stemcell:
            <span>-</span> os: windows2012R2
      ...
-    </pre>
+    </pre></li>
 
-11. Navigate to your Installation Dashboard in Ops Manager.
-
-12. Click **Apply Changes**.
+<li>Navigate to your Installation Dashboard in Ops Manager.</li>
+<li>Click <strong>Apply Changes</strong>.</li>
+</ol>
 
 ##<a id="alerts"></a> Configure Forwarding for ClamAV Alerts
 
 The ClamAV BOSH release writes all alerts to the syslogs of the VMs in your deployment. You can use syslog forwarding to forward the alerts to a syslog aggregator.
 
-* **Using the Elastic Runtime tile**: Follow the steps to [Configure System Logging](http://docs.pivotal.io/pivotalcf/customizing/cloudform-er-config.html#sys-logging) 
-in the Elastic Runtime tile. 
+* **Using the Elastic Runtime tile**: Follow the steps to [Configure System Logging](http://docs.pivotal.io/pivotalcf/customizing/cloudform-er-config.html#sys-logging) in the Elastic Runtime tile. 
+
 The syslog aggregator that you specify receives all alerts generated on Elastic Runtime VMs, including the ClamAV alerts.
+
 * **Using the BOSH syslog release**: You can use the syslog BOSH release to forward system logs. 
 For instructions, see the [syslog-release](https://github.com/cloudfoundry/syslog-release).
 
-<p class="note"><strong>Note</strong>: When you configure syslog forwarding, ensure enough disk space for the logs. 
+<p class="note"><strong>Note</strong>: When you configure syslog forwarding, ensure there is enough disk space for the logs. 
+
 Make sure that log rotation is frequent enough. If in doubt, rotate the logs hourly or when they reach a certain size. 
-Pivotal recommends forwarding logs to a remote syslog aggregation system. </p>
+
+Pivotal recommends forwarding logs to a remote syslog aggregation system.</p>
 
 ## <a id="verify"></a>Verify Your ClamAV Add-on Installation
-
-1. [BOSH ssh](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#bosh-ssh) into one of the VMs in your deployment.
-
-1. Run `monit summary`. Look for the following processes in the output:
-
-    <pre class="terminal">The Monit daemon 5.2.4 uptime: 3d 0h 56m
-    Process 'clamd'                     running
-    Process 'freshclam'                 running</pre>
-
-1. If `monit summary` does not list `clamd` and `freshclamd`, do the following:
-  1. Try to start the ClamAV processes by running the following commands:
-  <code>
+<ol>
+<li><a href="https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#bosh-ssh">BOSH ssh</a> into one of the VMs in your deployment.</li>
+<li>Run <code>monit summary</code>. Look for the following processes in the output:
+<pre class="terminal">The Monit daemon 5.2.4 uptime: 3d 0h 56m
+Process 'clamd'                     running<br/>
+Process 'freshclam'                 running</pre></li>
+<li>If <code>monit summary</code> does not list <code>clamd</code> and <code>freshclamd</code>, do the following:
+  <ol>
+  <li>Try to start the ClamAV processes by running the following commands:
+  <pre class="terminal">
   monit start clamd<br>
   monit start freshclam
-  </code>
-  1. Run `monit summary` again. If you do not see the processes mentioned above, check `/var/vcap/sys/log/clamav` logs for errors.
-
-1. If `monit summary` does list `freshclamd` and `clamd`, create a file on the VM with the following contents:
-
-    <code>
-    X5O!P%@AP[4\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*
-    </code>
-
-    This is a virus signature used to test anti-virus software.
-    After `clamdscan` completes, a notification should appear in `/var/log/messages`.
+  </pre></li>
+  <li>Run <code>monit summary</code> again. If you do not see the processes mentioned above, check <code>/var/vcap/sys/log/clamav</code> logs for errors.</li>
+  </ol>
+<li>If <code>monit summary</code> does list <code>freshclamd</code> and <code>clamd</code>, create a file on the VM with the following contents:
+<pre class="terminal">
+X5O!P%@AP[4\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*
+</pre>
+This is a virus signature used to test anti-virus software.</li>
+<li>After <code>clamdscan</code> completes, a notification should appear in <code>/var/log/messages</code>.</li>
+</ol>
 
 ###<a id="format"></a>ClamAV Log Format
 
-ClamAV log format is unstructured. On virus detection, the following text is sent to syslog:
+ClamAV log format is unstructured. If a virus is detected, the following text is sent to syslog:
 
-```
+<pre class="terminal">
 Jul 11 17:36:35 k2lam76scmb clamd[3022]: SelfCheck: Database status OK
 Jul 11 17:42:34 k2lam76scmb clamd[3022]: /bin/infected-file: Eicar-Test-Signature FOUND
-```
+</pre>
 
-The logline can be generalized as follows:
+A generalized format for the logline is:
 
-```
+<pre class="terminal">
 clamd[PID]: INFECTED-FILE-PATH: VIRUS-NAME FOUND
-```
+</pre>
 
 ##<a id="setup-on-access"></a>Enable On-Access Scan
 <p class="note"><strong>Note</strong>: On-Access Scan is not supported on Windows.</p>
-ClamAV offers immediate file scanning upon file modification.
-This feature might reduce the time it takes to detect and report malware. 
-Enable the feature through the `on_access` runtime config property, as follows:
 
-1. In the `clamav.yml` file, add the `on_access` property under the `clamav` property,
-   set `on_access` to `yes`, shown in bold: 
-  <pre>
+ClamAV offers immediate file scanning upon file modification. This feature may reduce the time it takes to detect and report malware. 
+
+Enable the feature with the <code>on_access</code> runtime config property:
+<ol>
+<li>In the <code>clamav.yml</code> file, add the <code>on_access</code> property under the <code>clamav</code> property, set <code>on_access</code> to <code>yes</code>, shown in bold: 
+  <pre class="terminal">
   releases:
   <span>-</span> name: clamav
       version: x.x.x
@@ -280,30 +338,31 @@ Enable the feature through the `on_access` runtime config property, as follows:
           scheduled: yes
   ...
   </pre>
-
-1. Apply this configuration change by following the instructions from step 10, [Update your&#8230;](#update), in the [Download and Deploy ClamAV Add-on](#download-deploy) section above.
+</li>
+<li>Apply this configuration change by following the instructions in [Update your&#8230;](#update).</li>
+</ol>
 
 ##<a id="setup-on-access"></a>Disable Scheduled Scan
 
-By default, ClamAV runs a virus scan every hour. You can disable the scan, but you cannot change the frequency.
+By default, ClamAV runs a virus scan every hour. The scan frequency is not configurable, but you can disable the scan completely if necessary.
 
 To disable the scheduled scan, do the following:
-
-1. In the `runtime-config`, set the property `scheduled` to <code>no</code>.
-
-2. Apply the changes.
+<ol>
+<li>In the `runtime-config`, set the property `scheduled` to <code>no</code>.</li>
+<li>Apply the changes.</li>
+</ol>
 
 ##<a id="quarantine"></a>Choose the Action on Infected Files
 
 You can configure ClamAV to take action when infected files are found. 
 By default, a notification is sent to the syslog when an infected file is found. 
 However, you can specify other actions, as listed in [step 2](#step2) below.
-
-1. In the `clamav.yml` file, add the `action` property under the `clamav` property and, optionally, the `action_destination` property, shown in bold:
-  <pre>
+<ol>
+<li>In the <code>clamav.yml</code> file, add the <code>action</code> property under the <code>clamav</code> property and, optionally, the <code>action_destination</code> property, shown in bold:
+  <pre class="terminal">
   releases:
   <span>-</span> name: clamav
-      version: 1.1.7
+      version: x.x.x
   <br>
   addons:
     name: clamav
@@ -315,25 +374,24 @@ However, you can specify other actions, as listed in [step 2](#step2) below.
           action: <strong>ACTION</strong>
           action_destination: <strong>PATH</strong>
   ...
-  </pre>
+  </pre></li>
 
-2. Replace `ACTION` with one of the following values:<a id="step2"></a>
-    * `notify`: The default, only send a notification to syslog
-    * `remove`: Delete the infected file from the filesystem
-    * `move`: Move the infected file to the directory location specified by `action_destination`
-    * `copy`: Copy the infected file to the directory location specified by `action_destination`
+<li>Replace <code>ACTION</code> with one of the following values:<a id="step2"></a>
+<ul>
+<li><code>notify</code>: The default, only send a notification to syslog</li>
+<li><code>remove</code>: Delete the infected file from the filesystem</li>
+<li><code>move</code>: Move the infected file to the directory location specified by <code>action_destination</code></li>
+<li><code>copy</code>: Copy the infected file to the directory location specified by <code>action_destination</code></li>
+</ul>
+If you don't supply an action, the function fails.</li>
 
-    If you don't supply an action, the function fails.
-
-3. Replace `PATH` with the directory location where you want the infected files moved or copied to.
-   The system does not scan the moved-to or copied-to location.
-   If the directory path is not valid, the function fails.
+<li>Replace <code>PATH</code> with the directory location where you want the infected files moved or copied to. The system does not scan the moved-to or copied-to location. If the directory path is not valid, the function fails.<br/>
 
 Example configuration:
-  <pre>
+  <pre class="terminal">
   releases:
   <span>-</span> name: clamav
-      version: 1.1.7
+      version: x.x.x
   <br>
   addons:
     name: clamav
@@ -346,3 +404,5 @@ Example configuration:
           action_destination: /var/vcap/data/clamav/found
   ...
   </pre>
+</li>
+</ol>
