@@ -35,46 +35,48 @@ To create the ClamAV manifest for your deployment, do the following:
 <ol>
 <li>Create a file named `clamav.yml`, using the following code as a template.<br/>
 
-    For Linux:
+For Linux:
     <pre class="terminal">
       releases:
-      \- name: clamav
+      - name: clamav
         version: x.x.x
       addons:
-      \- name: clamav
+      - name: clamav
         jobs:
-        \- name: clamav
+        - name: clamav
           release: clamav
           properties:
             clamav:
-              database\_mirror: <%= vars.example_ip_1 %>
+              database_mirror: <%= vars.example_ip_1 %>
         include:
           stemcell:
-          \- os: ubuntu-trusty
+          - os: ubuntu-trusty
     </pre>
-    For Windows:
+
+For Windows:
       <pre class="terminal">releases:
-      \- name: clamav
+      - name: clamav
         version: x.x.x
-      \- name: clamav-lib
+      - name: clamav-lib
         version: x.x.x
         version: y.y.y
       addons:
-      \- name: clamav-windows
+      - name: clamav-windows
         jobs:
-        \- name: clamav-windows
+        - name: clamav-windows
           release: clamav
           properties:
             clamav:
-              database\_mirror: <%= vars.example_ip_1 %>
-        \- name: clamav-lib-windows
+              database_mirror: <%= vars.example_ip_1 %>
+        - name: clamav-lib-windows
           release: clamav-lib
         include:
           stemcell:
-          \- os: windows2012R2
+          - os: windows2012R2
     </pre>
 </li>
-<li>(Required) Provide the hostname or IP address of a private ClamAV update mirror. Environments that cannot connect to the internet normally use an update mirror. If you do not specify a value, ClamAV defaults to an S3-based mirror for updates. For compliance reasons, only use the S3-based mirror in non-production environments.
+<li>Provide the hostname or IP address of a private ClamAV update mirror. Environments that cannot connect to the internet normally use an update mirror. If you do not specify a value, ClamAV defaults to an S3-based mirror for updates. For compliance reasons, only use the S3-based mirror in non-production environments.<br />
+
 For how to set up a local mirror, see <a href="https://www.clamav.net/documents/private-local-mirrors">Private Local Mirrors</a> in the ClamAV documentation.</li>
 
 <li>(Optional) If you have to use a proxy server to connect to the internet, do the following:
@@ -109,24 +111,24 @@ Replace the example text, indicated below in bold:
 <ol>
 <li>Download the ClamAV Add-on software binary from the <a href="https://network.pivotal.io/products/p-clamav-addon">Pivotal Network</a>.</li>
 <li>Copy the software binary to your Ops Manager VM.
-<p class="terminal">scp -i PATH-TO-PRIVATE-KEY clamav-release.tar.gz ubuntu@YOUR-OPS-MANAGER-VM-IP:</p></li>
+<pre class="terminal">scp -i PATH-TO-PRIVATE-KEY clamav-release.tar.gz ubuntu@YOUR-OPS-MANAGER-VM-IP:</p></li>
 <li>Copy the ClamAV manifest <code>clamav.yml</code> file to the Ops Manager VM.
-<p class="terminal">scp -i PATH-TO-PRIVATE-KEY clamav.yml ubuntu@YOUR-OPS-MANAGER-VM-IP:</p></li>
+<pre class="terminal">scp -i PATH-TO-PRIVATE-KEY clamav.yml ubuntu@YOUR-OPS-MANAGER-VM-IP:</p></li>
 <li>SSH into the Ops Manager VM.
-<p class="terminal">ssh -i PATH-TO-PRIVATE-KEY ubuntu@YOUR-OPS-MANAGER-VM-IP</p></li>
+<pre class="terminal">ssh -i PATH-TO-PRIVATE-KEY ubuntu@YOUR-OPS-MANAGER-VM-IP</p></li>
 <li>On the Ops Manager VM, navigate to the software binary location.
-<p class="terminal">cd PATH-TO-BINARY</p></li>
+<pre class="terminal">cd PATH-TO-BINARY</p></li>
 <li>On the Ops Manager VM, target your BOSH Director instance.
-<p class="terminal">bosh target YOUR-OPS-MANAGER-DIRECTOR-IP<br/>
+<pre class="terminal">bosh target YOUR-OPS-MANAGER-DIRECTOR-IP<br/>
 Target set to 'Ops Manager'<br/>
 Your username: director<br/>
 Enter password: ******************<br/>
 Logged in as 'director'<br/>
 </p></li>
 <li>Upload your release.
-<p class="terminal">bosh upload release PATH-TO-BINARY/BINARY-NAME.tar</p></li>
+<pre class="terminal">bosh upload release PATH-TO-BINARY/BINARY-NAME.tar</p></li>
 <li>From the command line, confirm that the upload of the ClamAV software binary completed. You should see the ClamAV release.
-<p class="terminal">bosh releases</p></li>
+<pre class="terminal">bosh releases</p></li>
 <li>If you're using Windows, do the following:
    <ol>
    <li>Follow the instructions in the <a href="https://github.com/pivotal-cf/clamav-lib-release/blob/master/README.md">ClamAV for PCF README</a> to create a clamav-lib release tarball.</li>
@@ -141,9 +143,10 @@ Logged in as 'director'<br/>
 <p class="terminal">bosh update runtime-config PATH/YOUR-ADD-ON-YML.yml</p>
 When you run this command, the manifest displays.</li>
 <li>Verify the runtime configuration changes match what you specified in the ClamAV manifest.<br/>
-    For Linux:
+For Linux:
     <pre class="terminal">
      bosh runtime-config
+     </pre>
 
 1. Download ClamAV Add-on software binary from the [Pivotal Network](https://network.pivotal.io/products/p-clamav-addon) to your local machine.
 
