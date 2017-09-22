@@ -463,7 +463,7 @@ For how to set up a local mirror, see <a href="https://www.clamav.net/documents/
 <ol>
 <li>Download the ClamAV Add-on software binary from the <a href="https://network.pivotal.io/products/p-clamav-addon">Pivotal Network</a>.</li>
 <li>Copy the software binary to your Ops Manager VM.
-<pre class="terminal">scp -i PATH-TO-PRIVATE-KEY clamav-release.tar.gz ubuntu@YOUR-OPS-MANAGER-VM-IP:</pre ></li>
+<pre class="terminal">scp -i PATH-TO-PRIVATE-KEY clamav-release.tar.gz ubuntu@YOUR-OPS-MANAGER-VM-IP:</pre></li>
 <li>Copy the ClamAV manifest <code>clamav.yml</code> file to the Ops Manager VM.
 <pre class="terminal">scp -i PATH-TO-PRIVATE-KEY clamav.yml ubuntu@YOUR-OPS-MANAGER-VM-IP:</pre></li>
 <li>SSH into the Ops Manager VM.
@@ -492,13 +492,13 @@ Logged in as 'director'<br/>
 <li><a name="update"></a>Update your runtime configuration to include ClamAV.
   <p class="note"><strong>Note</strong>: If you installed other BOSH add-ons, you must merge the ClamAV manifest into your existing add-on manifest. </p></li>
 <li>Append the contents of <code>clamav.yml</code> to your existing add-on YML file.
-<p class="terminal">bosh update runtime-config PATH/YOUR-ADD-ON-YML.yml</p>
+<pre class="terminal">bosh update runtime-config PATH/YOUR-ADD-ON-YML.yml</p>
 When you run this command, the manifest displays.</li>
 <li>Verify the runtime configuration changes match what you specified in the ClamAV manifest.<br/>
 For Linux:
     <pre class="terminal">bosh runtime-config</pre>
 <ol>
-<li>Download ClamAV Add-on software binary from the < Pivotal Network](https://network.pivotal.io/products/p-clamav-addon) to your local machine.</li>
+<li>Download ClamAV Add-on software binary from the <a href="https://network.pivotal.io/products/p-clamav-addon">Pivotal Network</a> to your local machine.</li>
 <li>Copy the software binary to your Ops Manager VM.<br/>
      <pre class="terminal">scp -i PATH-TO-PRIVATE-KEY clamav-release.tar.gz ubuntu@YOUR-OPS-MANAGER-VM-IP:</pre></li>
 <li>Copy the ClamAV manifest, `clamav.yml` file, to the Ops Manager VM.<br/>
