@@ -7,13 +7,13 @@ owner: Security Engineering
 
 This topic describes how to add ClamAV to your Pivotal Cloud Foundry (PCF) deployment.
 
-## <a id="about-clamav"></a>About ClamAV Add-on for PCF
+<h2><a id="about-clamav"></a>About ClamAV Add-on for PCF</h2>
 
 This add-on may be necessary for regulatory purposes if your compliance auditor requires antivirus protection within the PCF environment.
 
 For example, auditors sometimes expect that antivirus protection is present in an environment that must comply with standards such as Payment Card Industry Data Security Standard (PCI DSS) or Health Insurance Portability and Accountability Act (HIPAA).
 
-##<a id="prereqs"></a>Prerequisites
+<h2><a id="prereqs"></a>Prerequisites</h2>
 
 To install ClamAV Add-on, you need the following things:
 
@@ -28,12 +28,12 @@ To install ClamAV Add-on, you need the following things:
 * You must set up a local mirror to get ClamAV virus updates.
 For instructions on how to set up a local mirror, see [Private Local Mirrors](https://www.clamav.net/documents/private-local-mirrors) in the ClamAV documentation.
 
-##<a id="create-mfest"></a>Create the ClamAV Manifest
+<h2><a id="create-mfest"></a>Create the ClamAV Manifest</h2>
 
 The ClamAV manifest is a YML file that contains runtime configuration information for ClamAV Add-on.
 To create the ClamAV manifest for your deployment, follow the instructions below.
 
-### clamav.yml template for Linux
+<h3>clamav.yml template for Linux</h3>
 
 Create a file name <code>clamav.yml</code> using the following code as a template.
 
@@ -115,7 +115,7 @@ Replace the example text, indicated below in bold:
 </li>
 </ol>
 
-##<a id="download-deploy"></a>Download and Deploy ClamAV Add-on
+<h2><a id="download-deploy"></a>Download and Deploy ClamAV Add-on</h2>
 <ol>
 <li>Download the ClamAV Add-on software binary from the <a href="https://network.pivotal.io/products/p-clamav-addon">Pivotal Network</a>.</li>
 <li>Copy the software binary to your Ops Manager VM.
@@ -242,7 +242,7 @@ software binary completed. You should see the ClamAV release.<br/>
 <li>Click <strong>Apply Changes</strong>.</li>
 </ol>
 
-##<a id="alerts"></a> Configure Forwarding for ClamAV Alerts
+<h2><a id="alerts"></a> Configure Forwarding for ClamAV Alerts</h2>
 
 The ClamAV BOSH release writes all alerts to the syslogs of the VMs in your deployment. You can use syslog forwarding to forward the alerts to a syslog aggregator.
 
@@ -255,7 +255,7 @@ For instructions, see the [syslog-release](https://github.com/cloudfoundry/syslo
 
 <p class="note"><strong>Note</strong>: When you configure syslog forwarding, ensure there is enough disk space for the logs. Make sure that log rotation is frequent enough. If in doubt, rotate the logs hourly or when they reach a certain size. Pivotal recommends forwarding logs to a remote syslog aggregation system.</p>
 
-## <a id="verify"></a>Verify Your ClamAV Add-on Installation
+<h2><a id="verify"></a>Verify Your ClamAV Add-on Installation</h2>
 <ol>
 <li><a href="https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#bosh-ssh">BOSH ssh</a> into one of the VMs in your deployment.</li>
 <li>Run <code>monit summary</code>. Look for the following processes in the output:
@@ -293,7 +293,7 @@ A generalized format for the logline is:
 clamd[PID]: INFECTED-FILE-PATH: VIRUS-NAME FOUND
 </pre>
 
-##<a id="setup-on-access"></a>Enable On-Access Scan
+<h2><a id="setup-on-access"></a>Enable On-Access Scan</h2>
 <p class="note"><strong>Note</strong>: On-Access Scan is not supported on Windows.</p>
 
 ClamAV offers immediate file scanning upon file modification. This feature may reduce the time it takes to detect and report malware. 
@@ -321,7 +321,7 @@ Enable the feature with the <code>on_access</code> runtime config property:
 <li>Apply this configuration change by following the instructions [below](#update).</li>
 </ol>
 
-##<a id="setup-on-access"></a>Disable Scheduled Scan
+<h2><a id="setup-on-access"></a>Disable Scheduled Scan</h2>
 
 By default, ClamAV runs a virus scan every hour. The scan frequency is not configurable, but you can disable the scan completely if necessary.
 
@@ -331,7 +331,7 @@ To disable the scheduled scan, do the following:
 <li>Apply the changes.</li>
 </ol>
 
-##<a id="quarantine"></a>Choose the Action on Infected Files
+<h2><a id="quarantine"></a>Choose the Action on Infected Files</h2>
 
 You can configure ClamAV to take action when infected files are found. 
 By default, a notification is sent to the syslog when an infected file is found. 
