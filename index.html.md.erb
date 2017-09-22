@@ -31,11 +31,12 @@ For instructions on how to set up a local mirror, see [Private Local Mirrors](ht
 ##<a id="create-mfest"></a>Create the ClamAV Manifest
 
 The ClamAV manifest is a YML file that contains runtime configuration information for ClamAV Add-on.
-To create the ClamAV manifest for your deployment, do the following:
-<ol>
-<li>Create a file named `clamav.yml`, using the following code as a template.<br/>
+To create the ClamAV manifest for your deployment, follow the instructions below.
 
-For Linux:
+### clamav.yml template for Linux
+
+Create a file name <code>clamav.yml</code> using the following code as a template.
+
     <pre class="terminal">
       releases:
       - name: clamav
@@ -53,7 +54,10 @@ For Linux:
           - os: ubuntu-trusty
     </pre>
 
-For Windows:
+### clamav.yml template for Windows
+
+Create a file name <code>clamav.yml</code> using the following code as a template.
+
       <pre class="terminal">releases:
       - name: clamav
         version: x.x.x
@@ -74,8 +78,11 @@ For Windows:
           stemcell:
           - os: windows2012R2
     </pre>
-</li>
-<li>Provide the hostname or IP address of a private ClamAV update mirror. Environments that cannot connect to the internet normally use an update mirror. If you do not specify a value, ClamAV defaults to an S3-based mirror for updates. For compliance reasons, only use the S3-based mirror in non-production environments.<br />
+
+### General clamav.yml template configuration
+
+<ol>
+<li>In the <code>database_mirror</code> field of the template, provide the hostname or IP address of a private ClamAV update mirror. Environments that cannot connect to the internet normally use an update mirror. If you do not specify a value, ClamAV defaults to an S3-based mirror for updates. For compliance reasons, only use the S3-based mirror in non-production environments.<br />
 
 For how to set up a local mirror, see <a href="https://www.clamav.net/documents/private-local-mirrors">Private Local Mirrors</a> in the ClamAV documentation.</li>
 
@@ -245,11 +252,7 @@ The syslog aggregator that you specify receives all alerts generated on Elastic 
 * **Using the BOSH syslog release**: You can use the syslog BOSH release to forward system logs. 
 For instructions, see the [syslog-release](https://github.com/cloudfoundry/syslog-release).
 
-<p class="note"><strong>Note</strong>: When you configure syslog forwarding, ensure there is enough disk space for the logs. <br />
-
-Make sure that log rotation is frequent enough. If in doubt, rotate the logs hourly or when they reach a certain size. <br />
-
-Pivotal recommends forwarding logs to a remote syslog aggregation system.</p>
+<p class="note"><strong>Note</strong>: When you configure syslog forwarding, ensure there is enough disk space for the logs. Make sure that log rotation is frequent enough. If in doubt, rotate the logs hourly or when they reach a certain size. Pivotal recommends forwarding logs to a remote syslog aggregation system.</p>
 
 ## <a id="verify"></a>Verify Your ClamAV Add-on Installation
 <ol>
