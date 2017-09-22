@@ -460,35 +460,34 @@ For how to set up a local mirror, see <a href="https://www.clamav.net/documents/
 </ol>
 
 ##<a id="download-deploy"></a>Download and Deploy ClamAV Add-on
-<<<<<<< HEAD
 <ol>
 <li>Download the ClamAV Add-on software binary from the <a href="https://network.pivotal.io/products/p-clamav-addon">Pivotal Network</a>.</li>
 <li>Copy the software binary to your Ops Manager VM.
-<p class="terminal">scp -i PATH-TO-PRIVATE-KEY clamav-release.tar.gz ubuntu@YOUR-OPS-MANAGER-VM-IP:</p></li>
+<pre class="terminal">scp -i PATH-TO-PRIVATE-KEY clamav-release.tar.gz ubuntu@YOUR-OPS-MANAGER-VM-IP:</pre ></li>
 <li>Copy the ClamAV manifest <code>clamav.yml</code> file to the Ops Manager VM.
-<p class="terminal">scp -i PATH-TO-PRIVATE-KEY clamav.yml ubuntu@YOUR-OPS-MANAGER-VM-IP:</p></li>
+<pre class="terminal">scp -i PATH-TO-PRIVATE-KEY clamav.yml ubuntu@YOUR-OPS-MANAGER-VM-IP:</pre></li>
 <li>SSH into the Ops Manager VM.
-<p class="terminal">ssh -i PATH-TO-PRIVATE-KEY ubuntu@YOUR-OPS-MANAGER-VM-IP</p></li>
+<pre class="terminal">ssh -i PATH-TO-PRIVATE-KEY ubuntu@YOUR-OPS-MANAGER-VM-IP</pre></li>
 <li>On the Ops Manager VM, navigate to the software binary location.
-<p class="terminal">cd PATH-TO-BINARY</p></li>
+<pre class="terminal">cd PATH-TO-BINARY</pre></li>
 <li>On the Ops Manager VM, target your BOSH Director instance.
-<p class="terminal">bosh target YOUR-OPS-MANAGER-DIRECTOR-IP<br/>
+<pre class="terminal">bosh target YOUR-OPS-MANAGER-DIRECTOR-IP<br/>
 Target set to 'Ops Manager'<br/>
 Your username: director<br/>
 Enter password: ******************<br/>
 Logged in as 'director'<br/>
-</p></li>
+</pre></li>
 <li>Upload your release.
-<p class="terminal">bosh upload release PATH-TO-BINARY/BINARY-NAME.tar</p></li>
+<pre class="terminal">bosh upload release PATH-TO-BINARY/BINARY-NAME.tar</pre></li>
 <li>From the command line, confirm that the upload of the ClamAV software binary completed. You should see the ClamAV release.
-<p class="terminal">bosh releases</p></li>
+<pre class="terminal">bosh releases</pre></li>
 <li>If you're using Windows, do the following:
    <ol>
    <li>Follow the instructions in the <a href="https://github.com/pivotal-cf/clamav-lib-release/blob/master/README.md">ClamAV for PCF README</a> to create a clamav-lib release tarball.</li>
    <li>Copy the clamav-lib tarball to your Ops Manager VM using the following command:
-     <p class="terminal">scp -i PATH-TO-PRIVATE-KEY clamav-lib.tar.gz ubuntu@OPS-MANAGER-VM-IP:/DIRECTORY</p></li>
+     <pre class="terminal">scp -i PATH-TO-PRIVATE-KEY clamav-lib.tar.gz ubuntu@OPS-MANAGER-VM-IP:/DIRECTORY</pre></li>
    <li>Upload the clamav-lib release with the following command:
-     <p class="terminal">bosh upload release clamav-lib.tar.gz</p></li>
+     <pre class="terminal">bosh upload release clamav-lib.tar.gz</pre></li>
     </ol></li>
 <li><a name="update"></a>Update your runtime configuration to include ClamAV.
   <p class="note"><strong>Note</strong>: If you installed other BOSH add-ons, you must merge the ClamAV manifest into your existing add-on manifest. </p></li>
