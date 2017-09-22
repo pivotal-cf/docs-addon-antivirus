@@ -195,12 +195,11 @@ software binary completed. You should see the ClamAV release.
 10. <a name="update"></a>Update your Runtime Configuration to include the ClamAV Add-on.
   <p class="note"><strong>Note</strong>: If you have installed other BOSH add-ons, you must merge the ClamAV manifest `clamav.yml` into your existing Runtime Configuration manifest and use the merged manifest.</p>
 
-    <code>bosh update runtime-config PATH/clamav.yml</code>
-
+<pre class="terminal">bosh update runtime-config PATH/clamav.yml</pre>
 
 11. Verify your runtime configuration changes match what you specified in the ClamAV manifest.
 
-	<code>bosh runtime-config</code>
+	<pre class="terminal">bosh runtime-config</pre>
  
 For Linux:
     <pre class="terminal">
@@ -547,61 +546,54 @@ software binary completed. You should see the ClamAV release.
      <code>bosh upload release clamav-lib.tar.gz</code>
 
 10. <a name="update"></a>Update your Runtime Configuration to include the ClamAV Add-on.
-  <p class="note"><strong>Note</strong>: If you have installed other BOSH add-ons, you must merge the ClamAV manifest `clamav.yml` into your existing Runtime Configuration manifest and use the merged manifest.</p>
+  <p class="note"><strong>Note</strong>: If you have installed other BOSH add-ons, you must merge the ClamAV manifest <code>clamav.yml</code> into your existing Runtime Configuration manifest and use the merged manifest.</p>
 
     <code>bosh update runtime-config PATH/clamav.yml</code>
 
 
 11. Verify your runtime configuration changes match what you specified in the ClamAV manifest.
 
-	<code>bosh runtime-config</code>
+	<pre class="terminal">bosh runtime-config</pre>
  
-   For Linux:
+For Linux:
     <pre>
->>>>>>> 5ec793cfdf848439566ced7d2096f31ab3fe590d
      Acting as user 'admin' on 'micro'
      releases:
-     <span>-</span> name: clamav
+     - name: clamav
          version: x.x.x
      addons:
          name: clamav
          jobs:
-          <span>-</span> name: clamav
+          - name: clamav
             release: clamav
          include:
            stemcell:
-           <span>-</span> os: ubuntu-trusty
-     ...
-    </pre>
-    For Windows:
-<<<<<<< HEAD
-    <pre class="terminal">
-     bosh runtime-config
-=======
+           - os: ubuntu-trusty
+     ...</pre>
+
+For Windows:
+    <pre class="terminal">bosh runtime-config </pre>
+
     <pre>
->>>>>>> 5ec793cfdf848439566ced7d2096f31ab3fe590d
      Acting as user 'admin' on 'micro'
      releases:
-     <span>-</span> name: clamav
+     - name: clamav
          version: x.x.x
-     <span>-</span> name: clamav-lib
-<<<<<<< HEAD
+     - name: clamav-lib
          version: x.x.x
-=======
          version: y.y.y
->>>>>>> 5ec793cfdf848439566ced7d2096f31ab3fe590d
+
      addons:
          name: clamav-windows
          jobs:
-         <span>-</span> name: clamav-windows
+         - name: clamav-windows
            release: clamav
-         <span>-</span> name: clamav-lib-windows
+         - name: clamav-lib-windows
            release: clamav-lib
          include:
            stemcell:
-           <span>-</span> os: windows2012R2
-     ...
-    </pre></li>
+           - os: windows2012R2
+     ...</pre></li>
 
 <li>Navigate to your Installation Dashboard in Ops Manager.</li>
 <li>Click <strong>Apply Changes</strong>.</li>
@@ -618,9 +610,9 @@ The syslog aggregator that you specify receives all alerts generated on Elastic 
 * **Using the BOSH syslog release**: You can use the syslog BOSH release to forward system logs. 
 For instructions, see the [syslog-release](https://github.com/cloudfoundry/syslog-release).
 
-<p class="note"><strong>Note</strong>: When you configure syslog forwarding, ensure there is enough disk space for the logs. 
+<p class="note"><strong>Note</strong>: When you configure syslog forwarding, ensure there is enough disk space for the logs. <br />
 
-Make sure that log rotation is frequent enough. If in doubt, rotate the logs hourly or when they reach a certain size. 
+Make sure that log rotation is frequent enough. If in doubt, rotate the logs hourly or when they reach a certain size. <br />
 
 Pivotal recommends forwarding logs to a remote syslog aggregation system.</p>
 
@@ -636,8 +628,7 @@ Process 'freshclam'                 running</pre></li>
   <li>Try to start the ClamAV processes by running the following commands:
   <pre class="terminal">
   monit start clamd<br>
-  monit start freshclam
-  </pre></li>
+  monit start freshclam</pre></li>
   <li>Run <code>monit summary</code> again. If you do not see the processes mentioned above, check <code>/var/vcap/sys/log/clamav</code> logs for errors.</li>
   </ol>
 <li>If <code>monit summary</code> does list <code>freshclamd</code> and <code>clamd</code>, create a file on the VM with the following contents:
@@ -688,7 +679,7 @@ Enable the feature with the <code>on_access</code> runtime config property:
   ...
   </pre>
 </li>
-<li>Apply this configuration change by following the instructions in [Update your&#8230;](#update).</li>
+<li>Apply this configuration change by following the instructions [below](#update).</li>
 </ol>
 
 ##<a id="setup-on-access"></a>Disable Scheduled Scan
@@ -697,7 +688,7 @@ By default, ClamAV runs a virus scan every hour. The scan frequency is not confi
 
 To disable the scheduled scan, do the following:
 <ol>
-<li>In the `runtime-config`, set the property `scheduled` to <code>no</code>.</li>
+<li>In the <code>runtime-config</code>, set the property <code>scheduled</code> to <code>no</code>.</li>
 <li>Apply the changes.</li>
 </ol>
 
@@ -705,25 +696,25 @@ To disable the scheduled scan, do the following:
 
 You can configure ClamAV to take action when infected files are found. 
 By default, a notification is sent to the syslog when an infected file is found. 
-However, you can specify other actions, as listed in [step 2](#step2) below.
+However, you can specify other actions, as described [below](#step2).
 <ol>
 <li>In the <code>clamav.yml</code> file, add the <code>action</code> property under the <code>clamav</code> property and, optionally, the <code>action_destination</code> property, shown in bold:
   <pre class="terminal">
   releases:
-  <span>-</span> name: clamav
+  - name: clamav
       version: x.x.x
-  <br>
+
   addons:
     name: clamav
       jobs:
-        <span>-</span> name: clamav
+        - name: clamav
           release: clamav
       properties:
         clamav:
           action: <strong>ACTION</strong>
           action_destination: <strong>PATH</strong>
-  ...
-  </pre></li>
+  ...</pre>
+  </li>
 
 <li>Replace <code>ACTION</code> with one of the following values:<a id="step2"></a>
 <ul>
@@ -737,21 +728,21 @@ If you don't supply an action, the function fails.</li>
 <li>Replace <code>PATH</code> with the directory location where you want the infected files moved or copied to. The system does not scan the moved-to or copied-to location. If the directory path is not valid, the function fails.<br/>
 
 Example configuration:
+
   <pre class="terminal">
   releases:
-  <span>-</span> name: clamav
+  -name: clamav
       version: x.x.x
-  <br>
+
   addons:
     name: clamav
       jobs:
-        <span>-</span> name: clamav
+        - name: clamav
           release: clamav
       properties:
         clamav:
           action: move
           action_destination: /var/vcap/data/clamav/found
-  ...
-  </pre>
+  ...</pre>
 </li>
 </ol>
