@@ -133,7 +133,7 @@ Logged in as 'director'<br/>
    <ol>
    <li>Follow the instructions in the <a href="https://github.com/pivotal-cf/clamav-lib-release/blob/master/README.md">ClamAV for PCF README</a> to create a clamav-lib release tarball.</li>
    <li>Copy the clamav-lib tarball to your Ops Manager VM using the following command:
-     <pre class="terminal">scp -i PATH-TO-PRIVATE-KEY clamav-lib.tar.gz ubuntu@OPS-MANAGER-VM-IP:/DIRECTORY</pre></li>
+   <pre class="terminal">scp -i PATH-TO-PRIVATE-KEY clamav-lib.tar.gz ubuntu@OPS-MANAGER-VM-IP:/DIRECTORY</pre></li>
    <li>Upload the clamav-lib release with the following command:
      <pre class="terminal">bosh upload release clamav-lib.tar.gz</pre></li>
     </ol></li>
@@ -171,6 +171,26 @@ Logged in as 'director'
 <li>From the command line, confirm that the upload of the ClamAV
 software binary completed. You should see the ClamAV release.<br/>
 <pre class="terminal">bosh releases</pre></li>
+<li>Verify your runtime configuration changes match what you specified in the ClamAV manifest.
+<pre class="terminal">bosh runtime-config</pre>
+
+    <pre class="terminal">
+     Acting as user 'admin' on 'micro'
+     releases:
+     - name: clamav
+         version: x.x.x
+     addons:
+         name: clamav
+         jobs:
+          - name: clamav
+            release: clamav
+         include:
+           stemcell:
+           - os: ubuntu-trusty
+     ...</pre>
+</li>
+<li>Navigate to your Installation Dashboard in Ops Manager.</li>
+<li>Click <strong>Apply Changes</strong>.</li>
 </ol>
 
 ### <a id="win"></a>Configuration changes for Windows hosts
@@ -187,24 +207,7 @@ software binary completed. You should see the ClamAV release.<br/>
 <li>Verify your runtime configuration changes match what you specified in the ClamAV manifest.<br/>
 
 <pre class="terminal">bosh runtime-config</pre>
- 
-For Linux:
-    <pre>
-     Acting as user 'admin' on 'micro'
-     releases:
-     - name: clamav
-         version: x.x.x
-     addons:
-         name: clamav
-         jobs:
-          - name: clamav
-            release: clamav
-         include:
-           stemcell:
-           - os: ubuntu-trusty
-     ...</pre>
 
-For Windows:
     <pre class="terminal">bosh runtime-config
 
      Acting as user 'admin' on 'micro'
