@@ -54,7 +54,7 @@ Create a file name <code>clamav.yml</code> using the following code as a templat
           - os: ubuntu-trusty
     </pre>
 
-### clamav.yml template for Windows
+<h3>clamav.yml template for Windows</h3>
 
 Create a file name <code>clamav.yml</code> using the following code as a template.
 
@@ -80,7 +80,7 @@ Create a file name <code>clamav.yml</code> using the following code as a templat
           - os: windows2012R2
     </pre>
 
-### General clamav.yml template configuration
+<h3>General clamav.yml template configuration</h3>
 
 <ol>
 <li>In the <code>database_mirror</code> field of the template, provide the hostname or IP address of a private ClamAV update mirror. Environments that cannot connect to the internet normally use an update mirror. If you do not specify a value, ClamAV defaults to an S3-based mirror for updates. For compliance reasons, only use the S3-based mirror in non-production environments.<br />
