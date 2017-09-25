@@ -34,9 +34,9 @@ To install ClamAV Add-on, you need the following things:
 The ClamAV manifest is a YML file that contains runtime configuration information for ClamAV Add-on.
 To create the ClamAV manifest for your deployment, follow the instructions below.
 
-<h3>clamav.yml template for Linux</h3>
+<h3><a id="linux-template"></a>clamav.yml Template for Linux</h3>
 
-Create a file name <code>clamav.yml</code> using the following code as a template.
+Create a file named <code>clamav.yml</code> using the following code as a template.
 
 <pre class="terminal">
       releases:
@@ -55,9 +55,9 @@ Create a file name <code>clamav.yml</code> using the following code as a templat
           - os: ubuntu-trusty
     </pre>
 
-<h3>clamav.yml template for Windows</h3>
+<h3><a id="windows-template"></a>clamav.yml Template for Windows</h3>
 
-Create a file name <code>clamav.yml</code> using the following code as a template.
+Create a file named <code>clamav.yml</code> using the following code as a template.
 
 <pre class="terminal">
       releases:
@@ -81,12 +81,15 @@ Create a file name <code>clamav.yml</code> using the following code as a templat
           - os: windows2012R2
     </pre>
 
-<h3>General clamav.yml template configuration</h3>
+<h3><a id="general-config"></a>General clamav.yml Template Configuration</h3>
 
 <ol>
-<li>In the <code>database_mirror</code> field of the template, provide the hostname or IP address of a private ClamAV update mirror. Environments that cannot connect to the internet normally use an update mirror. If you do not specify a value, ClamAV defaults to an S3-based mirror for updates. For compliance reasons, only use the S3-based mirror in non-production environments.<br />
+<li>In the <code>database_mirror</code> field of the template, provide the hostname or IP address of a private ClamAV update mirror.
+    Environments that cannot connect to the internet normally use an update mirror.
+    If you do not specify a value, ClamAV defaults to an S3-based mirror for updates.
+    For compliance reasons, only use the S3-based mirror in non-production environments.<br />
 
-For how to set up a local mirror, see <a href="https://www.clamav.net/documents/private-local-mirrors">Private Local Mirrors</a> in the ClamAV documentation.</li>
+    For how to set up a local mirror, see <a href="https://www.clamav.net/documents/private-local-mirrors">Private Local Mirrors</a> in the ClamAV documentation.</li>
 
 <li>(Optional) If you have to use a proxy server to connect to the internet, do the following:
   <ul>
@@ -107,10 +110,10 @@ Replace the example text, indicated below in bold:
         clamav:
           on\_access: no
           scheduled: yes
-          proxy\_host: <strong>PROXY.LOCALDOMAIN</strong>
-          proxy\_port: <strong>3128</strong>
-          proxy\_user: <strong>CLAMAV</strong>
-          proxy\_password: <strong>SECRET</strong>
+          proxy_host: <strong>PROXY.LOCALDOMAIN</strong>
+          proxy_port: <strong>3128</strong>
+          proxy_user: <strong>CLAMAV</strong>
+          proxy_password: <strong>SECRET</strong>
   ...
   </pre>
 </li>
@@ -136,7 +139,8 @@ Logged in as 'director'<br/>
 </pre></li>
 <li>Upload your release.
 <pre class="terminal">bosh upload release PATH-TO-BINARY/BINARY-NAME.tar</pre></li>
-<li>From the command line, confirm that the upload of the ClamAV software binary completed. You should see the ClamAV release.
+<li>From the command line, confirm that the upload of the ClamAV software binary completed.
+    You should see the ClamAV release.
 <pre class="terminal">bosh releases</pre></li>
 <li>If you're using Windows, do the following:
    <ol>
@@ -151,10 +155,11 @@ Logged in as 'director'<br/>
 <li>Append the contents of <code>clamav.yml</code> to your existing add-on YML file.
 <pre class="terminal">bosh update runtime-config PATH/YOUR-ADD-ON-YML.yml</pre>
 When you run this command, the manifest displays.</li>
-<li>Verify the runtime configuration changes match what you specified in the ClamAV manifest. These changes will look different on <a href="#linux">Linux</a> and <a href="#win">Windows</a> hosts.</li>
+<li>Verify the runtime configuration changes match what you specified in the ClamAV manifest.
+    These changes will look different on <a href="#linux">Linux</a> and <a href="#win">Windows</a> hosts.</li>
 </ol>
 
-<h3><a id="linux"></a>Configuration changes for Linux hosts</h3>
+<h3><a id="linux"></a>Configuration Changes for Linux Hosts</h3>
 <ol>
 <li>Enter the following command in your terminal.<br />   
 <pre class="terminal">bosh runtime-config</pre></li>
@@ -202,7 +207,7 @@ software binary completed. You should see the ClamAV release.<br/>
 <li>Click <strong>Apply Changes</strong>.</li>
 </ol>
 
-<h3><a id="win"></a>Configuration changes for Windows hosts</h3>
+<h3><a id="win"></a>Configuration Changes for Windows Hosts</h3>
 <ol>
 <li>Follow the instructions in the <a href="https://github.com/pivotal-cf/clamav-lib-release/blob/master/README.md">ClamAV for PCF README</a> to create a clamav-lib release tarball.</li>
 <li>Copy the clamav-lib tarball to your Ops Manager VM, with the following command:
@@ -211,7 +216,8 @@ software binary completed. You should see the ClamAV release.<br/>
 <pre class="terminal">bosh upload release clamav-lib.tar.gz</pre></li>
 <li><a name="update"></a>Update your Runtime Configuration to include the ClamAV Add-on.
 <pre class="terminal">bosh update runtime-config PATH/clamav.yml</pre>
-<p class="note"><strong>Note</strong>: If you have installed other BOSH add-ons, you must merge the ClamAV manifest <code>clamav.yml</code> into your existing Runtime Configuration manifest and use the merged manifest.</p></li>
+<p class="note"><strong>Note</strong>: If you have installed other BOSH add-ons,
+   you must merge the ClamAV manifest <code>clamav.yml</code> into your existing Runtime Configuration manifest and use the merged manifest.</p></li>
 
 <li>Verify your runtime configuration changes match what you specified in the ClamAV manifest.<br/>
 
@@ -245,16 +251,23 @@ software binary completed. You should see the ClamAV release.<br/>
 
 <h2><a id="alerts"></a> Configure Forwarding for ClamAV Alerts</h2>
 
-The ClamAV BOSH release writes all alerts to the syslogs of the VMs in your deployment. You can use syslog forwarding to forward the alerts to a syslog aggregator.
+The ClamAV BOSH release writes all alerts to the syslogs of the VMs in your deployment.
+You can use syslog forwarding to forward the alerts to a syslog aggregator.
 
-* **Using the Elastic Runtime tile**: Follow the steps to [Configure System Logging](http://docs.pivotal.io/pivotalcf/customizing/cloudform-er-config.html#sys-logging) in the Elastic Runtime tile. 
+<ul>
+  <li><strong>Using the Elastic Runtime tile</strong>: Follow the steps to <a href="http://docs.pivotal.io/pivotalcf/customizing/cloudform-er-config.html#sys-logging">
+    Configure System Logging</a> in the Elastic Runtime tile. 
+    The syslog aggregator that you specify receives all alerts generated on Elastic Runtime VMs, including the ClamAV alerts.
+  </li>
+  <li><strong>Using the syslog BOSH release</strong>: Use the syslog BOSH release to forward system logs.
+    See the <a href="https://github.com/cloudfoundry/syslog-release"></a>syslog-release</a>.
+  </li>
+  </ul>
 
-The syslog aggregator that you specify receives all alerts generated on Elastic Runtime VMs, including the ClamAV alerts.
-
-* **Using the BOSH syslog release**: You can use the syslog BOSH release to forward system logs. 
-For instructions, see the [syslog-release](https://github.com/cloudfoundry/syslog-release).
-
-<p class="note"><strong>Note</strong>: When you configure syslog forwarding, ensure there is enough disk space for the logs. Make sure that log rotation is frequent enough. If in doubt, rotate the logs hourly or when they reach a certain size. Pivotal recommends forwarding logs to a remote syslog aggregation system.</p>
+<p class="note"><strong>Note</strong>: When you configure syslog forwarding, ensure there is enough disk space for the logs.
+   Make sure that log rotation is frequent enough.
+   If in doubt, rotate the logs hourly or when they reach a certain size.
+   Pivotal recommends forwarding logs to a remote syslog aggregation system.</p>
 
 <h2><a id="verify"></a>Verify Your ClamAV Add-on Installation</h2>
 <ol>
@@ -324,7 +337,8 @@ Enable the feature with the <code>on_access</code> runtime config property:
 
 <h2><a id="setup-on-access"></a>Disable Scheduled Scan</h2>
 
-By default, ClamAV runs a virus scan every hour. The scan frequency is not configurable, but you can disable the scan completely if necessary.
+By default, ClamAV runs a virus scan every hour.
+The scan frequency is not configurable, but you can disable the scan completely if necessary.
 
 To disable the scheduled scan, do the following:
 <ol>
@@ -338,7 +352,8 @@ You can configure ClamAV to take action when infected files are found.
 By default, a notification is sent to the syslog when an infected file is found. 
 However, you can specify other actions, as described [below](#step2).
 <ol>
-<li>In the <code>clamav.yml</code> file, add the <code>action</code> property under the <code>clamav</code> property and, optionally, the <code>action_destination</code> property, shown in bold:
+<li>In the <code>clamav.yml</code> file, add the <code>action</code> property under the <code>clamav</code> property and,
+    optionally, the <code>action_destination</code> property, shown in bold:
   <pre class="terminal">
   releases:
   - name: clamav
@@ -365,7 +380,9 @@ However, you can specify other actions, as described [below](#step2).
 </ul>
 If you don't supply an action, the function fails.</li>
 
-<li>Replace <code>PATH</code> with the directory location where you want the infected files moved or copied to. The system does not scan the moved-to or copied-to location. If the directory path is not valid, the function fails.<br/>
+<li>Replace <code>PATH</code> with the directory location where you want the infected files moved or copied to.
+    The system does not scan the moved-to or copied-to location.
+    If the directory path is not valid, the function fails.<br/>
 
 Example configuration:
 
