@@ -209,9 +209,9 @@ clamd[PID]: INFECTED-FILE-PATH: VIRUS-NAME FOUND
 
 ClamAV offers immediate file scanning upon file modification. This feature may reduce the time it takes to detect and report malware. 
 
-Enable the feature with the <code>on_access</code> runtime config property:
+Enable the feature with the `on_access` runtime config property:
 <ol>
-<li>In the <code>clamav.yml</code> file, add the <code>on_access</code> property under the <code>clamav</code> property, set <code>on_access</code> to <code>yes</code>, shown in bold: 
+<li>In the <code>clamav.yml</code> file, add the `on_access` property under the <code>clamav</code> property, set `on_access` to <code>yes</code>, shown in bold: 
   <pre class="terminal">
   releases:
   <span>-</span> name: clamav
@@ -272,8 +272,8 @@ However, you can specify other actions, as described [below](#step2).
 <ul>
 <li><code>notify</code>: The default, only send a notification to syslog</li>
 <li><code>remove</code>: Delete the infected file from the filesystem</li>
-<li><code>move</code>: Move the infected file to the directory location specified by <code>action_destination</code></li>
-<li><code>copy</code>: Copy the infected file to the directory location specified by <code>action_destination</code></li>
+<li><code>move</code>: Move the infected file to the directory location specified by `action_destination`</li>
+<li><code>copy</code>: Copy the infected file to the directory location specified by `action_destination`</li>
 </ul>
 If you don't supply an action, the function fails.</li>
 
