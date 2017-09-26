@@ -31,7 +31,7 @@ To install ClamAV Add-on, you need the following things:
 
 <h2><a id="create-mfest"></a>Create the ClamAV Manifest</h2>
 
-The ClamAV manifest is a YML file that contains runtime configuration information for ClamAV Add-on.
+The ClamAV manifest is a YML file that contains runtime config information for ClamAV Add-on.
 To create the ClamAV manifest for your deployment, follow the instructions below.
 
 <h3><a id="linux-template"></a>clamav.yml Template for Linux</h3>
@@ -63,9 +63,6 @@ Create a file named <code>clamav.yml</code> using the following code as a templa
       releases:
       - name: clamav
         version: x.x.x
-      - name: clamav-lib
-        version: x.x.x
-        version: y.y.y
       addons:
       - name: clamav-windows
         jobs:
@@ -74,8 +71,6 @@ Create a file named <code>clamav.yml</code> using the following code as a templa
           properties:
             clamav:
               database_mirror: <%= vars.example_ip_1 %>
-        - name: clamav-lib-windows
-          release: clamav-lib
         include:
           stemcell:
           - os: windows2012R2
@@ -85,11 +80,11 @@ Create a file named <code>clamav.yml</code> using the following code as a templa
 
 <ol>
 <li>In the <code>database_mirror</code> field of the template, provide the hostname or IP address of a private ClamAV update mirror.
-    Environments that cannot connect to the internet normally use an update mirror.
+    Environments that cannot connect to the internet should use an update mirror.
     If you do not specify a value, ClamAV defaults to an S3-based mirror for updates.
     For compliance reasons, only use the S3-based mirror in non-production environments.<br />
 
-    For how to set up a local mirror, see <a href="https://www.clamav.net/documents/private-local-mirrors">Private Local Mirrors</a> in the ClamAV documentation.</li>
+    For instructions on how to set up a local mirror, see <a href="https://www.clamav.net/documents/private-local-mirrors">Private Local Mirrors</a> in the ClamAV documentation.</li>
 
 <li>(Optional) If you have to use a proxy server to connect to the internet, do the following:
   <ul>
@@ -108,7 +103,7 @@ Replace the example text, indicated below in bold:
           release: clamav
       properties:
         clamav:
-          on\_access: no
+          on_access: no
           scheduled: yes
           proxy_host: <strong>PROXY.LOCALDOMAIN</strong>
           proxy_port: <strong>3128</strong>
@@ -131,120 +126,25 @@ Replace the example text, indicated below in bold:
 <li>On the Ops Manager VM, navigate to the software binary location.
 <pre class="terminal">cd PATH-TO-BINARY</pre></li>
 <li>On the Ops Manager VM, target your BOSH Director instance.
-<pre class="terminal">bosh target YOUR-OPS-MANAGER-DIRECTOR-IP<br/>
-Target set to 'Ops Manager'<br/>
-Your username: director<br/>
-Enter password: ******************<br/>
-Logged in as 'director'<br/>
+<pre class="terminal">bosh target YOUR-OPS-MANAGER-DIRECTOR-IP
+Target set to 'Ops Manager'
+Your username: director
+Enter password: ******************
+Logged in as 'director'
 </pre></li>
 <li>Upload your release.
 <pre class="terminal">bosh upload release PATH-TO-BINARY/BINARY-NAME.tar</pre></li>
 <li>From the command line, confirm that the upload of the ClamAV software binary completed.
     You should see the ClamAV release.
 <pre class="terminal">bosh releases</pre></li>
-<li>If you're using Windows, do the following:
-   <ol>
-   <li>Follow the instructions in the <a href="https://github.com/pivotal-cf/clamav-lib-release/blob/master/README.md">ClamAV for PCF README</a> to create a clamav-lib release tarball.</li>
-   <li>Copy the clamav-lib tarball to your Ops Manager VM using the following command:
-   <pre class="terminal">scp -i PATH-TO-PRIVATE-KEY clamav-lib.tar.gz ubuntu@OPS-MANAGER-VM-IP:/DIRECTORY</pre></li>
-   <li>Upload the clamav-lib release with the following command:
-     <pre class="terminal">bosh upload release clamav-lib.tar.gz</pre></li>
-    </ol></li>
-<li><a name="update"></a>Update your runtime configuration to include ClamAV.
-  <p class="note"><strong>Note</strong>: If you installed other BOSH add-ons, you must merge the ClamAV manifest into your existing add-on manifest. </p></li>
-<li>Append the contents of <code>clamav.yml</code> to your existing add-on YML file.
-<pre class="terminal">bosh update runtime-config PATH/YOUR-ADD-ON-YML.yml</pre>
-When you run this command, the manifest displays.</li>
-<li>Verify the runtime configuration changes match what you specified in the ClamAV manifest.
-    These changes will look different on <a href="#linux">Linux</a> and <a href="#win">Windows</a> hosts.</li>
-</ol>
 
-<h3><a id="linux"></a>Configuration Changes for Linux Hosts</h3>
-<ol>
-<li>Enter the following command in your terminal.<br />   
-<pre class="terminal">bosh runtime-config</pre></li>
-<li>Download ClamAV Add-on software binary from the <a href="https://network.pivotal.io/products/p-clamav-addon">Pivotal Network</a> to your local machine.</li>
-<li>Copy the software binary to your Ops Manager VM.<br/>
-<pre class="terminal">scp -i PATH-TO-PRIVATE-KEY clamav-release.tar.gz ubuntu@YOUR-OPS-MANAGER-VM-IP:</pre></li>
-<li>Copy the ClamAV manifest, <code>clamav.yml</code> file, to the Ops Manager VM.<br/>
-<pre class="terminal">scp -i PATH-TO-PRIVATE-KEY clamav.yml ubuntu@YOUR-OPS-MANAGER-VM-IP:</pre></li>
-<li>SSH into the Ops Manager VM.<br/>
-<pre class="terminal">ssh -i PATH-TO-PRIVATE-KEY ubuntu@YOUR-OPS-MANAGER-VM-IP</pre></li>
-<li>On the Ops Manager VM, navigate to the software binary location.<br/>
-<pre class="terminal">cd PATH-TO-BINARY</pre></li>
-<li>On the Ops Manager VM, target your BOSH director instance.<br/>
-<pre class="terminal">
-bosh target YOUR-OPS-MANAGER-DIRECTOR-IP
-Target set to 'Ops Manager'
-Your username: director
-Enter password: ******************
-Logged in as 'director'
-</pre></li>
-<li>Upload your release.<br/>
-<pre class="terminal">bosh upload release PATH-TO-BINARY/BINARY-NAME.tar</pre></li>
-<li>From the command line, confirm that the upload of the ClamAV
-software binary completed. You should see the ClamAV release.<br/>
-<pre class="terminal">bosh releases</pre></li>
-<li>Verify your runtime configuration changes match what you specified in the ClamAV manifest.
-<pre class="terminal">bosh runtime-config</pre>
-
-    <pre class="terminal">
-     Acting as user 'admin' on 'micro'
-     releases:
-     - name: clamav
-         version: x.x.x
-     addons:
-         name: clamav
-         jobs:
-          - name: clamav
-            release: clamav
-         include:
-           stemcell:
-           - os: ubuntu-trusty
-     ...</pre>
+<li><a name="update"></a>Update your runtime config to include the ClamAV Add-on.
+  <p class="note"><strong>Note</strong>: If you have installed other BOSH add-ons, you must merge the ClamAV manifest <code>clamav.yml</code> into your existing runtime config manifest and use the merged manifest.
+  <pre class="terminal">bosh update runtime-config PATH/clamav.yml</pre></li>
+<li>Verify the runtime config changes match what you specified in the ClamAV manifest.
+    These changes will look different on <a href="#linux">Linux</a> and <a href="#win">Windows</a> hosts.
+    <pre class="terminal">bosh runtime-config</pre>
 </li>
-<li>Navigate to your Installation Dashboard in Ops Manager.</li>
-<li>Click <strong>Apply Changes</strong>.</li>
-</ol>
-
-<h3><a id="win"></a>Configuration Changes for Windows Hosts</h3>
-<ol>
-<li>Follow the instructions in the <a href="https://github.com/pivotal-cf/clamav-lib-release/blob/master/README.md">ClamAV for PCF README</a> to create a clamav-lib release tarball.</li>
-<li>Copy the clamav-lib tarball to your Ops Manager VM, with the following command:
-<pre class="terminal">scp -i PATH-TO-PRIVATE-KEY clamav-lib.tar.gz ubuntu@OPS-MANAGER-VM-IP:/DIRECTORY</pre></li>
-<li>Upload the clamav-lib release, with the following command:
-<pre class="terminal">bosh upload release clamav-lib.tar.gz</pre></li>
-<li><a name="update"></a>Update your Runtime Configuration to include the ClamAV Add-on.
-<pre class="terminal">bosh update runtime-config PATH/clamav.yml</pre>
-<p class="note"><strong>Note</strong>: If you have installed other BOSH add-ons,
-   you must merge the ClamAV manifest <code>clamav.yml</code> into your existing Runtime Configuration manifest and use the merged manifest.</p></li>
-
-<li>Verify your runtime configuration changes match what you specified in the ClamAV manifest.<br/>
-
-<pre class="terminal">bosh runtime-config</pre>
-
-    <pre class="terminal">bosh runtime-config
-
-     Acting as user 'admin' on 'micro'
-     releases:
-     - name: clamav
-         version: x.x.x
-     - name: clamav-lib
-         version: x.x.x
-         version: y.y.y
-
-     addons:
-         name: clamav-windows
-         jobs:
-         - name: clamav-windows
-           release: clamav
-         - name: clamav-lib-windows
-           release: clamav-lib
-         include:
-           stemcell:
-           - os: windows2012R2
-     ...</pre></li>
-
 <li>Navigate to your Installation Dashboard in Ops Manager.</li>
 <li>Click <strong>Apply Changes</strong>.</li>
 </ol>
@@ -258,9 +158,6 @@ You can use syslog forwarding to forward the alerts to a syslog aggregator.
   <li><strong>Using the Elastic Runtime tile</strong>: Follow the steps to <a href="http://docs.pivotal.io/pivotalcf/customizing/cloudform-er-config.html#sys-logging">
     Configure System Logging</a> in the Elastic Runtime tile. 
     The syslog aggregator that you specify receives all alerts generated on Elastic Runtime VMs, including the ClamAV alerts.
-  </li>
-  <li><strong>Using the syslog BOSH release</strong>: Use the syslog BOSH release to forward system logs.
-    See the <a href="https://github.com/cloudfoundry/syslog-release"></a>syslog-release</a>.
   </li>
   </ul>
 
@@ -312,9 +209,9 @@ clamd[PID]: INFECTED-FILE-PATH: VIRUS-NAME FOUND
 
 ClamAV offers immediate file scanning upon file modification. This feature may reduce the time it takes to detect and report malware. 
 
-Enable the feature with the <code>on_access</code> runtime config property:
+Enable the feature with the `on_access` runtime config property:
 <ol>
-<li>In the <code>clamav.yml</code> file, add the <code>on_access</code> property under the <code>clamav</code> property, set <code>on_access</code> to <code>yes</code>, shown in bold: 
+<li>In the <code>clamav.yml</code> file, add the `on_access` property under the <code>clamav</code> property, set `on_access` to <code>yes</code>, shown in bold: 
   <pre class="terminal">
   releases:
   <span>-</span> name: clamav
@@ -327,7 +224,7 @@ Enable the feature with the <code>on_access</code> runtime config property:
           release: clamav
       properties:
         clamav:
-          <strong>on\_access: yes</strong>
+          <strong>on_access: yes</strong>
           scheduled: yes
   ...
   </pre>
@@ -375,8 +272,8 @@ However, you can specify other actions, as described [below](#step2).
 <ul>
 <li><code>notify</code>: The default, only send a notification to syslog</li>
 <li><code>remove</code>: Delete the infected file from the filesystem</li>
-<li><code>move</code>: Move the infected file to the directory location specified by <code>action_destination</code></li>
-<li><code>copy</code>: Copy the infected file to the directory location specified by <code>action_destination</code></li>
+<li><code>move</code>: Move the infected file to the directory location specified by `action_destination`</li>
+<li><code>copy</code>: Copy the infected file to the directory location specified by `action_destination`</li>
 </ul>
 If you don't supply an action, the function fails.</li>
 
