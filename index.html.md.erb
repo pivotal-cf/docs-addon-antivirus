@@ -137,12 +137,12 @@ Logged in as 'director'
 <li>From the command line, confirm that the upload of the ClamAV software binary completed.
     You should see the ClamAV release.
 <pre class="terminal">bosh releases</pre></li>
-<li>Update your runtime config as described in <a href="update">Update the Runtime Config for ClamAV</a>.</li>
+<li>Update your runtime config as described in <a href="#update">Update the Runtime Config for ClamAV</a>.</li>
 </ol>
 
-<h2><a id="update"></a>Update the Runtime Config for ClamAV</h2>
+<h2><a id="update"></a>Update the Runtime Config for ClamAV</h2> 
 <ol>
-<li><a name="update"></a>Update your runtime config to include configuration changes for the ClamAV Add-on for PCF.
+<li>Update your runtime config to include configuration changes for the ClamAV Add-on for PCF.
   <p class="note"><strong>Note</strong>: If you have installed other BOSH add-ons, you must merge the ClamAV manifest <code>clamav.yml</code> into your existing runtime config manifest and use the merged manifest.
   <pre class="terminal">bosh update runtime-config PATH/clamav.yml</pre></li>
 <li>Verify the runtime config changes match what you specified in the ClamAV manifest.
@@ -233,7 +233,7 @@ Enable the feature with the `on_access` runtime config property:
   ...
   </pre>
 </li>
-<li>Apply changes by updating your runtime config as described in <a href="update">Update the Runtime Config for ClamAV</a>.</li>
+<li>Apply changes by updating your runtime config as described in <a href="#update">Update the Runtime Config for ClamAV</a>.</li>
 </ol>
 
 <h2><a id="setup-on-access"></a>Disable Scheduled Scan</h2>
@@ -244,7 +244,7 @@ The scan frequency is not configurable, but you can disable the scan completely 
 To disable the scheduled scan, do the following:
 <ol>
 <li>In the <code>clamav.yml</code> file, set the property <code>scheduled</code> to <code>no</code>.</li>
-<li>Apply changes by updating your runtime config as described in <a href="update">Update the Runtime Config for ClamAV</a>.</li>
+<li>Apply changes by updating your runtime config as described in <a href="#update">Update the Runtime Config for ClamAV</a>.</li>
 </ol>
 
 <h2><a id="quarantine"></a>Choose the Action on Infected Files</h2>
