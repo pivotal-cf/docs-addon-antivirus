@@ -137,12 +137,16 @@ Logged in as 'director'
 <li>From the command line, confirm that the upload of the ClamAV software binary completed.
     You should see the ClamAV release.
 <pre class="terminal">bosh releases</pre></li>
+<li>Update your runtime config as described in <a href="update">Update the Runtime Config for ClamAV</a>.</li>
+</ol>
 
-<li><a name="update"></a>Update your runtime config to include the ClamAV Add-on.
+<h2><a id="update"></a>Update the Runtime Config for ClamAV</h2>
+<ol>
+<li><a name="update"></a>Update your runtime config to include configuration changes for the ClamAV Add-on for PCF.
   <p class="note"><strong>Note</strong>: If you have installed other BOSH add-ons, you must merge the ClamAV manifest <code>clamav.yml</code> into your existing runtime config manifest and use the merged manifest.
   <pre class="terminal">bosh update runtime-config PATH/clamav.yml</pre></li>
 <li>Verify the runtime config changes match what you specified in the ClamAV manifest.
-    These changes will look different on <a href="#linux">Linux</a> and <a href="#win">Windows</a> hosts.
+    These changes appear differently on <a href="#linux-template">Linux</a> and <a href="#windows-template">Windows</a> hosts.
     <pre class="terminal">bosh runtime-config</pre>
 </li>
 <li>Navigate to your Installation Dashboard in Ops Manager.</li>
@@ -229,7 +233,7 @@ Enable the feature with the `on_access` runtime config property:
   ...
   </pre>
 </li>
-<li>Apply this configuration change by following the instructions [below](#update).</li>
+<li>Apply changes by updating your runtime config as described in <a href="update">Update the Runtime Config for ClamAV</a>.</li>
 </ol>
 
 <h2><a id="setup-on-access"></a>Disable Scheduled Scan</h2>
@@ -239,15 +243,15 @@ The scan frequency is not configurable, but you can disable the scan completely 
 
 To disable the scheduled scan, do the following:
 <ol>
-<li>In the <code>runtime-config</code>, set the property <code>scheduled</code> to <code>no</code>.</li>
-<li>Apply the changes.</li>
+<li>In the <code>clamav.yml</code> file, set the property <code>scheduled</code> to <code>no</code>.</li>
+<li>Apply changes by updating your runtime config as described in <a href="update">Update the Runtime Config for ClamAV</a>.</li>
 </ol>
 
 <h2><a id="quarantine"></a>Choose the Action on Infected Files</h2>
 
 You can configure ClamAV to take action when infected files are found. 
 By default, a notification is sent to the syslog when an infected file is found. 
-However, you can specify other actions, as described [below](#step2).
+However, you can specify other actions, as described [in step 2 below](#step2).
 <ol>
 <li>In the <code>clamav.yml</code> file, add the <code>action</code> property under the <code>clamav</code> property and,
     optionally, the <code>action_destination</code> property, shown in bold:
