@@ -2,19 +2,18 @@
 
 ## (NEW) Which Branches to Use
 
-As of September 7, 2017:
+As of September 27, 2017:
 
 | Branch name… | Documents version… | Publishes to… |
 |-------------|----------------|----------------|
-| v1.2      | v1.2.x         | docs.pivotal.io and docs-pcf-staging.cfapps.io |
-| master        | next unreleased version         | http://docs-pcf-staging.cfapps.io/addon-antivirus/index.html |
+| v1.2      | v1.2.x         | https://docs.pivotal.io/addon-antivirus/1-2/index.html and httpdocs-pcf-staging.cfapps.io |
+| master        | next unreleased version         | https://docs-pcf-staging.cfapps.io/addon-antivirus/1-3/index.html |
 
-## Which Book Repos to Use
+## Book Repo
 
-There are two book repos to use with this content:
+pivotal-cf/docs-book-antivirus builds both the **edge** version (next unreleased version) and the **production** version. Edge is currently publishing to the 1-3 subdirectory. If we want to start building a later version for edge (for example, 1-4), we need to update the edge pipeline and its publication routes.
 
-* pivotal-cf/docs-book-antivirus builds the **edge** version (next unreleased version).
-* pivotal-cf/docs-book-pcfservices builds the **production** version of the content.
+**production** is currently publishing 1-2, but will be updated to publish 1-3 as soon as it is released.
 
 ## Style Guide
 _These are a handful of style issues I noticed with the original version of this documentation._
