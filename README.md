@@ -6,7 +6,7 @@ As of September 27, 2017:
 
 | Branch name… | Documents version… | Publishes to… |
 |-------------|----------------|----------------|
-| v1.2      | v1.2.x         | https://docs.pivotal.io/addon-antivirus/1-2/index.html and httpdocs-pcf-staging.cfapps.io |
+| v1.2      | v1.2.x         | https://docs.pivotal.io/addon-antivirus/1-2/index.html and https://docs-pcf-staging.cfapps.io/1-2/index.html |
 | master        | next unreleased version         | https://docs-pcf-staging.cfapps.io/addon-antivirus/1-3/index.html |
 
 ## Book Repo
