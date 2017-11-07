@@ -111,6 +111,107 @@ Replace the example text, indicated below in bold:
           proxy_password: <strong>SECRET</strong>
   ...
   </pre>
+
+##<a id="download-deploy"></a>Download and Deploy ClamAV Add-on
+
+1. Download ClamAV Add-on software binary from the [Pivotal Network](https://network.pivotal.io/products/p-clamav-addon) to your local machine.
+
+2. Copy the software binary to your Ops Manager virtual machine (VM).
+  <pre class="terminal">$ scp -i PATH/TO/PRIVATE/KEY clamav-release.tar.gz ubuntu@YOUR-OPS-MANAGER-VM-IP:</pre>
+
+3. Copy the ClamAV manifest, `clamav.yml` file, to your Ops Manager instance.
+  <pre class="terminal">$ scp -i PATH/TO/PRIVATE/KEY clamav.yml ubuntu@YOUR-OPS-MANAGER-VM-IP:</pre>
+
+4. SSH into Ops Manager.
+  <pre class="terminal">$ ssh -i PATH-TO-PRIVATE-KEY ubuntu@YOUR-OPS-MANAGER-VM-IP</pre>
+
+5. On the Ops Manager VM, navigate to the software binary location.
+  <pre class="terminal">$ cd PATH-TO-BINARY</pre>
+
+If you are using PCF v1.11 or later, follow the <a href="#bosh-cli-v2">BOSH CLI v2</a> procedures to deploy the ClamAV Add-on.
+
+If you are using PCF v1.10 or earlier, follow the <a href="#bosh-cli-v1">BOSH CLI v1</a> procedures to deploy the ClamAV Add-on.
+
+###<a id='bosh-cli-v2'></a>Deploy the ClamAV Add-on with the BOSH CLI v2
+
+1. On the Ops Manager VM, create an alias in the BOSH CLI for your Ops Manager Director IP address. For example:
+  <pre class="terminal">
+  $ bosh2 alias-env my-env -e 10.0.0.3
+  </pre>
+1. Log in to the BOSH Director, specifying the newly created alias. For example:
+  <pre class="terminal">
+  $ bosh2 -e my-env log-in
+  </pre>
+1. Upload your release, specifying the path to the tarballed ClamAV binary. For example:
+  <pre class="terminal">
+  $ bosh2 -e my-env clamav-release.tar.gz
+  </pre>
+1. List the releases and confirm that ClamAV appears. For example:
+  <pre class="terminal">
+  $ bosh2 -e my-env releases
+  </pre> 
+1. Update your runtime configuration to include ClamAV, specifying the path to the `clamav.yml` file you created above. For example:
+  <p class="note"><strong>Note</strong>: If you installed other BOSH add-ons, you must merge the ClamAV manifest into your existing add-on manifest. 
+  Append the contents of `clamav.yml` to your existing add-on YML file.</p>
+    <pre class="terminal">$ bosh2 -e my-env update-runtime-config clamav.yml</pre>
+1. Verify that your runtime configuration changes match what you specified in the ClamAV manifest. For example:
+    <pre class="terminal">
+    $ bosh2 -my-env runtime-config
+    Acting as user 'admin' on 'micro'
+    releases:
+    <span>-</span> name: clamav
+        version: 1.0.0
+    <br>
+    addons:
+      name: clamav
+        jobs:
+          <span>-</span> name: clamav
+            release: clamav
+    ...
+    </pre>
+1. Navigate to your Installation Dashboard in Ops Manager.
+1. Click **Apply Changes**.
+
+###<a id='bosh-cli-v1'></a>Deploy the ClamAV Add-on with the BOSH CLI v1
+
+6. On the Ops Manager VM, target your BOSH director instance.
+  <pre class="terminal">
+  $ bosh target YOUR-OPS-MANAGER-DIRECTOR-IP
+  Target set to 'Ops Manager'
+  Your username: director
+  Enter password: ******************
+  Logged in as 'director'
+  </pre>
+
+7. Upload your release.
+  <pre class="terminal">$ bosh upload release PATH-TO-BINARY/BINARY-NAME.tar</pre>
+
+8. From the command line, confirm that the upload of the ClamAV
+software binary completed. You should see the ClamAV release.
+  <pre class="terminal">$ bosh releases</pre>
+
+9. <a name="update"></a>Update your runtime configuration to include ClamAV.
+  <p class="note"><strong>Note</strong>: If you installed other BOSH add-ons, you must merge the ClamAV manifest into your existing add-on manifest. 
+Append the contents of `clamav.yml` to your existing add-on YML file.</p>
+
+    <pre class="terminal">$ bosh update runtime-config PATH/YOUR-ADD-ON-YML.yml</pre>
+
+10. Verify your runtime configuration changes match what you specified in the ClamAV manifest.
+  <pre class="terminal">
+  $ bosh runtime-config
+  Acting as user 'admin' on 'micro'
+  releases:
+  <span>-</span> name: clamav
+      version: 1.0.0
+  <br>
+  addons:
+    name: clamav
+      jobs:
+        <span>-</span> name: clamav
+          release: clamav
+>>>>>>> 314c756... update bosh cli v2 commands for clamav addon[#152200873]
+  ...
+  </pre>
 </li>
 </ol>
 
