@@ -29,6 +29,7 @@ To install ClamAV Add-on, you need the following things:
   For instructions on how to set up a local mirror,
   see [Private Local Mirrors](https://www.clamav.net/documents/private-local-mirrors) in the ClamAV documentation.
 
+  <p class="note"><strong>Note</strong>: Release version <code>x.x.x</code> in the <code>clamav.yml</code> samples below is arbitrary. Replace it with the version of ClamAV release downloaded from PivNet.</p>
 ##<a id="create-mfest"></a>Create the ClamAV Manifest
 
 The ClamAV manifest is a YML file that contains runtime config information for ClamAV Add-on.
@@ -295,10 +296,33 @@ Enable the feature with the `on_access` runtime config property:
 <li>Apply changes by updating your runtime config as described in <a href="#download-deploy">Download and Deploy ClamAV Add-on</a>.</li>
 </ol>
 
-##<a id="setup-on-access"></a>Disable Scheduled Scan
+##<a id="condigure-scheduled-scan"></a>Configure Scheduled Scan
 
-By default, ClamAV runs a virus scan every hour.
-The scan frequency is not configurable, but you can disable the scan completely if necessary.
+ClamAV can be configured to run a virus scan hourly or daily, with hourly scan being the default.
+
+To change the scheduled scan to daily, follow the steps below.
+
+1. In the <code>clamav.yml</code> file, add the property `schedule_interval` property under the the <code>clamav</code> property, set the property `schedule_interval` to <code>daily</code>, shown in bold:
+
+  <pre>
+  releases:
+  <span>-</span> name: clamav
+      version: x.x.x
+  <br>
+  addons:
+    name: clamav
+      jobs:
+        <span>-</span> name: clamav
+          release: clamav
+      properties:
+        clamav:
+          <strong>schedule\_interval: daily</strong>
+          scheduled: yes
+  ...
+  </pre>
+2. Apply changes by updating your runtime config as described in <a href="#download-deploy">Download and Deploy ClamAV Add-on</a>.
+
+##<a id="disable-scheduled-scan"></a>Disable Scheduled Scan
 
 To disable the scheduled scan, do the following:
 <ol>
