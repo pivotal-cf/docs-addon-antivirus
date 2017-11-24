@@ -5,29 +5,30 @@ owner: Security Engineering
 
 <strong><%= modified_date %></strong>
 
-This topic provides instructions to uninstall ClamAV and to verify the uninstallation.
+This topic describes how to uninstall ClamAV and how to verify the uninstallation.
 
 ## <a id='uninstall-clamav'></a>Uninstall ClamAV Add-On
 
-1. Retrieve the latest runtime config.
-  <pre class="terminal">
-    $ bosh runtime-config > PATH\_TO\_SAVE\_THE\_RUNTIME\_CONFIG
+1. Open the `clamav.yml` file to retrieve the latest runtime config information.
+ <pre class="terminal">
+    $ bosh runtime-config > PATH/clamav.yml
   </pre>
+  <p class="note"><strong>Note: </strong>If you have installed other BOSH add-ons, your runtime config information will be in your add-on YML file. You will need to open this file instead of `clamav.yml`.</p>
 
-2. Remove all clamav properties under `releases:` and `addons:` sections in the runtime config.
+2. In the `clamav.yml` file, remove all properties under `releases:` and `addons:`.
 
-3. Update the runtime config.
+3. Update the runtime config information.
   <pre class="terminal">
-    $ bosh update runtime-config PATH\_TO\_SAVE\_THE\_RUNTIME\_CONFIG
+    $ bosh update runtime-config PATH/clamav.yml
   </pre>
 
 4. Navigate to your **Installation Dashboard** in Ops Manager.
 5. Click **Apply Changes**.
-6. Wait for the installation to complete.
+6. Wait for the uninstallation to complete.
 
 ## <a id='verify-uninstall'></a>Verify the Uninstallation
 
 <ol>
 <li><a href="https://docs.pivotal.io/pivotalcf/customizing/1-11/trouble-advanced.html#bosh-ssh">BOSH SSH</a> into one of the VMs in your deployment. If you are using PCF v1.11 or later, use the BOSH CLI v1. If you are using PCF v1.10 or earlier, use the BOSH CLI v2.</li>
-<li>Run <code>monit summary</code>. It should not show <code>clamd</code> or <code>freshclam</code> processes.
+<li>Run <code>monit summary</code>. If ClamAV has uninstalled sucessfully, monit summary should not list the <code>clamd</code> or <code>freshclam</code> processes.
 </ol>
