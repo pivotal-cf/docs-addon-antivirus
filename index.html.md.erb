@@ -245,19 +245,18 @@ Process 'freshclam'                 running</pre></li>
   <li>Run <code>monit summary</code> again. If you do not see the processes mentioned above, check <code>/var/vcap/sys/log/clamav</code> logs for errors.</li>
   </ol>
   <li>If <code>monit summary</code> does list <code>freshclamd</code> and <code>clamd</code>, create a file in <code>/var/vcap</code> on the VM with the following contents:
-<pre class="terminal">
+<pre>
 X5O!P%@AP[4\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*
 </pre>
 This is a virus signature used to test anti-virus software.</li>
-<li>After <code>clamdscan</code> completes, a notification should appear in <code>/var/log/syslog</code>.
-    This scan can take up to an hour.</li>
 </ol>
+After `clamdscan` completes, a notification should appear in `/var/log/syslog`. This scan can take up to an hour.
 
 ###<a id="format"></a>ClamAV Log Format
 
 ClamAV log format is unstructured. If a virus is detected, the following text is sent to syslog:
 
-<pre class="terminal">
+<pre>
 Jul 11 17:36:35 k2lam76scmb clamd[3022]: SelfCheck: Database status OK
 Jul 11 17:42:34 k2lam76scmb clamd[3022]: /bin/infected-file: Eicar-Test-Signature FOUND
 </pre>
