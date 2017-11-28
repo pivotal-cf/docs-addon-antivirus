@@ -8,13 +8,13 @@ owner: Security Engineering
 ## <a id='false-positive-clamav'></a>How do I report false positives found by ClamAV?
 
 ####Symptom
-ClamAV reports a non-malicious file to be a virus.
+ClamAV reports a false postive result; a non-malicious file is reported to be a virus.
 
 ####Explanation
-ClamAV compares files to its known database of malicious patterns. ClavAV may detect a non-malicious file as a virus due to similarities to those patterns.
+ClamAV compares files to its database of known malicious patterns. ClavAV may detect a non-malicious file as a virus due to a coincidental similarity to those patterns.
 
 ####Solution
-Submit false positive reports to <a href="https://www.clamav.net/reports/fp">ClamAV</a>. You can also be subscribe to their email list to be up-to-date with ClamAV database changes.
+Submit false positive reports to <a href="https://www.clamav.net/reports/fp">ClamAV</a>. You can also be subscribe to the ClamAV email list to be kept up-to-date with ClamAV database changes.
 
 ## <a id='cpu-spikes-clamav'></a>Why am I getting CPU spikes while using ClamAV?
 
@@ -22,7 +22,8 @@ Submit false positive reports to <a href="https://www.clamav.net/reports/fp">Cla
 ClamAV is taking more CPU resources than assigned in its configuration.
 
 ####Explanation
-ClamAV is restricted on resources using CGroups. CGroups allows ClamAV to occupy more CPU recources when other processes are idle as it is not deteriating their performance.
+ClamAV resource consumption is restricted using CGroups. ClamAV will be resource-limited whenever other processes are active.  However, CGroups 
+will still allow ClamAV to occupy more CPU recources when all other processes are idle, as it would not impact their performance.
 
 ####Solution
 This is expected behavior from CGroups.
