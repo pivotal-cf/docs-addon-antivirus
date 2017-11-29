@@ -7,15 +7,9 @@ owner: Security Engineering
 
 This topic provides instructions to verify that the ClamAV-based antivirus add-on works with your Pivotal Cloud Foundry (PCF) deployment, and provides general recommendations for troubleshooting and ensuring that the deployment is being protected as you expect.
 
-There are two common types of issues that can occur with the ClamAV Add-on for PCF:  
+## <a id="clamav-installation-issues"></a> ClamAV Installation Issues
 
-+ The installation of the add-on is not successful.
-
-+ The installation succeeds, but at runtime a detection is not successful. 
-
-## <a id='troubleshoot-clamav'></a>Troubleshoot ClamAV
-
-### <a id="clamav-installation-issues"></a> ClamAV Installation Issues
+### <a id=""></a> Ops Manager Fails to Apply Changes
 
 #### Symptom
 Applying changes in Ops Manager fails. The bottom of the changelog contains an error message similar to the following:
@@ -37,7 +31,9 @@ Review the manifest file, and replace the `database_mirror` key with the address
 
 <hr>
 
-### <a id="clamav-runtime-issues"></a>ClamAV Runtime Issues
+## <a id="clamav-runtime-issues"></a> ClamAV Runtime Issues
+
+### <a id="clamav-malware-detection"></a> ClamAV Is Not Detecting Malware
 
 #### Symptom
 Malware signature or sample malware is not detected, even though the ClamAV daemon is properly configured.
@@ -55,26 +51,26 @@ Pivotal recommends alerting the community via existing channels and reporting th
 
 <hr>
 
-### <a id='false-positive-clamav'></a>Reporting false positives found by ClamAV
+### <a id='false-positive-clamav'></a> ClamAV Reports False Positives
 
 ####Symptom
-ClamAV reports a non-malicious file to be a virus.
+ClamAV reports a false postive result; a non-malicious file is reported to be a virus.
 
 ####Explanation
-ClamAV compares files to its database of known malicious patterns. ClavAV may detect a non-malicious file as a virus due to similarities to those patterns.
+ClamAV compares files to its database of known malicious patterns. ClavAV may detect a non-malicious file as a virus due to a coincidental similarity to those patterns.
 
 ####Solution
-Submit false positive reports to <a href="https://www.clamav.net/reports/fp">ClamAV</a>. You can also subscribe to the ClamAV email list to be kept up-to-date with ClamAV database changes.
+Submit false positive reports to <a href="https://www.clamav.net/reports/fp">ClamAV</a>. You can also be subscribe to the ClamAV email list to be kept up-to-date with ClamAV database changes.
 
 <hr>
 
-### <a id='cpu-spikes-clamav'></a>CPU spikes while using ClamAV
+### <a id='cpu-spikes-clamav'></a> Getting CPU Spikes While Using ClamAV
 
 ####Symptom
 ClamAV is taking more CPU resources than assigned in its configuration.
 
 ####Explanation
-ClamAV resources are restricted using CGroups. CGroups allows ClamAV to occupy more CPU resources when other processes are idle, as would not affect their performance.
+ClamAV resource consumption is restricted using CGroups. ClamAV is resource-limited whenever other processes are active.  However, CGroups allows ClamAV to occupy more CPU resources when all other processes are idle, as it would not impact their performance.
 
 ####Solution
 This is expected behavior from CGroups.
