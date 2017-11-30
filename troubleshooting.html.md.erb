@@ -5,7 +5,8 @@ owner: Security Engineering
 
 <strong><%= modified_date %></strong>
 
-This topic provides instructions to verify that the ClamAV-based antivirus add-on works with your Pivotal Cloud Foundry (PCF) deployment, and provides general recommendations for troubleshooting and ensuring that the deployment is being protected as you expect.
+This topic provides instructions to verify that the ClamAV-based antivirus add-on works with your Pivotal Cloud Foundry (PCF) deployment
+and provides general recommendations for troubleshooting and ensuring that the deployment is being protected as you expect.
 
 ## <a id="clamav-installation-issues"></a> ClamAV Installation Issues
 
@@ -27,7 +28,10 @@ Error 400007: 'etcd_server/0 (f8e492bf-db09-4d38-8a73-5cf69d7b8a11)' is not runn
 The ClamAV mirror server was unavailable during initial deployment.
 
 #### Solution
-Review the manifest file, and replace the `database_mirror` key with the address of a stable mirror server. If you do not have a stable mirror server for reliable initial deployment, use the S3-based mirror: `pivotal-clamav-mirror.s3.amazonaws.com`
+
+Review the manifest file, and replace the `database_mirror` key with the address of a stable mirror server.
+If you do not have a stable mirror server for reliable initial deployment,
+use the S3-based mirror: `pivotal-clamav-mirror.s3.amazonaws.com`
 
 <hr>
 
@@ -42,7 +46,10 @@ Malware signature or sample malware is not detected, even though the ClamAV daem
 Virus signatures are not up-to-date.
 
 #### Solution
-First, ensure that the [configuration checks](./index.html#verify) have been done, that the mirror server is correctly configured and is available on the network from within the PCF private subnet, and that at least one hour has elapsed. One hour is the default scan schedule interval.
+First, ensure that the [configuration checks](./index.html#verify) have been done,
+that the mirror server is correctly configured and is available on the network from within the PCF private subnet,
+and that at least one hour has elapsed.
+One hour is the default scan schedule interval.
 
 If the local mirror is up-to-date and ClamAV is still failing to detect a malware sample, you might have encountered a new threat. 
 Pivotal recommends alerting the community via existing channels and reporting the suspicious file directly to the ClamAV team.
@@ -57,10 +64,12 @@ Pivotal recommends alerting the community via existing channels and reporting th
 ClamAV reports a false postive result; a non-malicious file is reported to be a virus.
 
 ####Explanation
-ClamAV compares files to its database of known malicious patterns. ClavAV may detect a non-malicious file as a virus due to a coincidental similarity to those patterns.
+ClamAV compares files to its database of known malicious patterns.
+ClavAV may detect a non-malicious file as a virus due to a coincidental similarity to those patterns.
 
 ####Solution
-Submit false positive reports to <a href="https://www.clamav.net/reports/fp">ClamAV</a>. You can also be subscribe to the ClamAV email list to be kept up-to-date with ClamAV database changes.
+Submit false positive reports to <a href="https://www.clamav.net/reports/fp">ClamAV</a>.
+You can also subscribe to the ClamAV email list to be kept up-to-date with ClamAV database changes.
 
 <hr>
 
@@ -70,7 +79,10 @@ Submit false positive reports to <a href="https://www.clamav.net/reports/fp">Cla
 ClamAV is taking more CPU resources than assigned in its configuration.
 
 ####Explanation
-ClamAV resource consumption is restricted using CGroups. ClamAV is resource-limited whenever other processes are active.  However, CGroups allows ClamAV to occupy more CPU resources when all other processes are idle, as it would not impact their performance.
+ClamAV resource consumption is restricted using CGroups.
+ClamAV is resource-limited whenever other processes are active.
+However, CGroups allows ClamAV to occupy more CPU resources when all other processes are idle,
+because it does not impact their performance.
 
 ####Solution
 This is expected behavior from CGroups.
