@@ -28,7 +28,10 @@ This topic describes how to uninstall ClamAV from your deployment, and how to ve
 ## <a id='verify-uninstall'></a>Verify the Uninstallation
 
 <ol>
-<li><a href="https://docs.pivotal.io/pivotalcf/customizing/1-11/trouble-advanced.html#bosh-ssh">BOSH SSH</a> into one of the VMs in your deployment. If you are using PCF v1.11 or later, use the BOSH CLI v1. If you are using PCF v1.10 or earlier, use the BOSH CLI v2.</li>
-
-<li>Run <code>monit summary</code>. If ClamAV has uninstalled successfully, it should not show <code>clamd</code> or <code>freshclam</code> processes.
+<li><a href="https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#bosh-ssh">BOSH SSH</a> into one of the VMs in your deployment.
+    If you are using PCF v1.11 or later, use the BOSH CLI v2.
+    If you are using PCF v1.10 or earlier, use the BOSH CLI v1.</li>
+<li>Run <code>monit summary</code>.<br>
+    If ClamAV has uninstalled successfully,
+    it should not show <code>clamd</code> or <code>freshclam</code> processes.</li>
 </ol>
