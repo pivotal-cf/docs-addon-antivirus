@@ -187,9 +187,9 @@ Append the contents of `clamav.yml` to your existing add-on YML file.</p>
 
 The ClamAV BOSH release writes all alerts to the syslogs of the VMs in your deployment. You can use syslog forwarding to forward the alerts to a syslog aggregator.
 
-* **Using the Elastic Runtime tile**: Follow the steps to [Configure System Logging](http://docs.pivotal.io/pivotalcf/customizing/cloudform-er-config.html#sys-logging) 
-in the Elastic Runtime tile. 
-The syslog aggregator that you specify receives all alerts generated on Elastic Runtime VMs, including the ClamAV alerts.
+* **Using the Pivotal Application Service (PAS) or Elastic Runtime tile**: Follow the steps to [Configure System Logging](http://docs.pivotal.io/pivotalcf/customizing/cloudform-er-config.html#sys-logging) 
+in the PAS (or Elastic Runtime) tile. 
+The syslog aggregator that you specify receives all alerts generated on PAS (or Elastic Runtime) VMs, including the ClamAV alerts.
 * **Using the BOSH syslog release**: You can use the syslog BOSH release to forward system logs. 
 For instructions, see the [syslog-release](https://github.com/cloudfoundry/syslog-release).
 
