@@ -9,16 +9,26 @@ This topic describes how to uninstall ClamAV from your deployment, and how to ve
 
 ## <a id='uninstall-clamav'></a>Uninstall ClamAV Add-on
 
-1. Retrieve the latest runtime config.
+1. Retrieve the latest runtime config by running one of the following commands:
+  * **For Ops Manager v1.10 or earlier:** 
   <pre class="terminal">
     $ bosh runtime-config > PATH\_TO\_SAVE\_THE\_RUNTIME\_CONFIG
+  </pre>
+  * **For Ops Manager v1.11 or later:**
+  <pre class="terminal">
+    $ bosh2 -e my-env runtime-config > PATH\_TO\_SAVE\_THE\_RUNTIME\_CONFIG
   </pre>
 
 2. In the runtime config, remove all ClamAV properties under the `releases:` and `addons:` sections.
 
 3. Update the runtime config.
+  * **For Ops Manager v1.10 or earlier:** 
   <pre class="terminal">
     $ bosh update runtime-config PATH\_TO\_SAVE\_THE\_RUNTIME\_CONFIG
+  </pre>
+  * **For Ops Manager v1.11 or later:**
+  <pre class="terminal">
+    $ bosh2 -e my-env update-runtime-config PATH\_TO\_SAVE\_THE\_RUNTIME\_CONFIG
   </pre>
 
 4. Navigate to your **Installation Dashboard** in Ops Manager.
