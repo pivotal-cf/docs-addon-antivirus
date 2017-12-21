@@ -6,12 +6,14 @@ As of September 27, 2017:
 
 | Branch name… | Documents version… | Publishes to… |
 |-------------|----------------|----------------|
-| v1.2      | v1.2.x         | https://docs.pivotal.io/addon-antivirus/1-2/index.html and https://docs-pcf-staging.cfapps.io/1-2/index.html |
-| master        | next unreleased version         | https://docs-pcf-staging.cfapps.io/addon-antivirus/1-3/index.html |
+| v1.2      | v1.2.x         | https://docs.pivotal.io/addon-antivirus/1-2/index.html and https://docs-pcf-staging.cfapps.io/addon-antivirus/1-2/index.html |
+| v1.3   | v1.3.x     | https://docs.pivotal.io/addon-antivirus/1-3/index.html and https://docs-pcf-staging.cfapps.io/addon-antivirus/1-3/index.html |
+| v1.4   | v1.4.x (unreleased)    | https://docs-pcf-staging.cfapps.io/addon-antivirus/1-4/index.html |
+| v2.0        | v2.0.x (unreleased)    | https://docs-pcf-staging.cfapps.io/addon-antivirus/2-0/index.html |
 
 ## Book Repo
 
-pivotal-cf/docs-book-antivirus builds both the **edge** version (next unreleased version) and the **production** version. Edge is currently publishing to the 1-3 subdirectory. If we want to start building a later version for edge (for example, 1-4), we need to update the edge pipeline and its publication routes.
+pivotal-cf/docs-book-antivirus builds both the **edge** version (next unreleased version) and the **production** version. Edge is currently publishing the 1-4 and 2-0 branches. 
 
 **production** is currently publishing 1-2, but will be updated to publish 1-3 as soon as it is released.
 
