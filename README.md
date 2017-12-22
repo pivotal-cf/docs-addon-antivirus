@@ -15,9 +15,10 @@ As of December 21, 2017:
 
 ## Book Repo
 
-pivotal-cf/docs-book-antivirus builds both the **edge** version (next unreleased version) and the **production** version. Edge is currently publishing the 1-4 and 2-0 branches. 
+pivotal-cf/docs-book-antivirus builds both the **edge** version (next unreleased versions) and the **production** versions.
+Edge is currently publishing the 1-4 and 2-0 branches. 
 
-**production** is currently publishing 1-2, but will be updated to publish 1-3 as soon as it is released.
+**production** is currently publishing 1-2 and 1-3.
 
 ## Style Guide
 _These are a handful of style issues I noticed with the original version of this documentation._
