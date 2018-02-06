@@ -2,12 +2,12 @@
 
 ## (NEW) Which Branches to Use
 
-As of December 21, 2017:
+As of February 6, 2018:
 
 | Branch name… | Documents version… | Publishes to… |
 |-------------|----------------|----------------|
 | v2.0        | v2.0.x (unreleased)    | https://docs-pcf-staging.cfapps.io/addon-antivirus/2-0/index.html |
-| v1.4   | v1.4.x (unreleased)    | https://docs-pcf-staging.cfapps.io/addon-antivirus/1-4/index.html |
+| v1.4   | v1.4.x   | https://docs.pivotal.io/addon-antivirus/1-4/index.html and https://docs-pcf-staging.cfapps.io/addon-antivirus/1-4/index.html |
 | v1.3   | v1.3.x     | https://docs.pivotal.io/addon-antivirus/1-3/index.html and https://docs-pcf-staging.cfapps.io/addon-antivirus/1-3/index.html |
 | v1.2      | v1.2.x         | https://docs.pivotal.io/addon-antivirus/1-2/index.html and https://docs-pcf-staging.cfapps.io/addon-antivirus/1-2/index.html |
 
@@ -15,10 +15,10 @@ As of December 21, 2017:
 
 ## Book Repo
 
-pivotal-cf/docs-book-antivirus builds both the **edge** version (next unreleased versions) and the **production** versions.
-Edge is currently publishing the 1-4 and 2-0 branches. 
+pivotal-cf/docs-book-antivirus builds both the **edge** branch (next unreleased version) and the **production** (master branch) versions.
+Edge is currently publishing the 2-0 branch. 
 
-**production** is currently publishing 1-2 and 1-3.
+**production** is currently publishing 1-2, 1-3, and 1-4.
 
 ## Style Guide
 _These are a handful of style issues I noticed with the original version of this documentation._
