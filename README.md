@@ -17,9 +17,9 @@ As of February 8, 2018:
 
 pivotal-cf/docs-book-antivirus builds both the **edge** version (next unreleased version) and the **production** versions.
 
-**edge** is currently publishing the 1-5 branch. 
++ **Edge** is currently publishing the 1-5 branch.
 
-**production** is currently publishing 1-2, 1-3 and 1-4.
++ **Production** is currently publishing 1-2, 1-3 and 1-4.
 
 ## Style Guide
 _These are a handful of style issues I noticed with the original version of this documentation._
