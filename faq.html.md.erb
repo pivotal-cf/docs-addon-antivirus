@@ -1,0 +1,28 @@
+---
+title: Frequently Asked Questions for ClamAV Add-on for PCF
+owner: Security Engineering
+---
+
+<strong><%= modified_date %></strong>
+
+## <a id='false-positive-clamav'></a>How do I report false positives found by ClamAV?
+
+####Symptom
+ClamAV reports a non-malicious file to be a virus.
+
+####Explanation
+ClamAV compares files to its known database of malicious patterns. ClavAV may detect a non-malicious file as a virus due to similarities to those patterns.
+
+####Solution
+Submit false positive reports to <a href="https://www.clamav.net/reports/fp">ClamAV</a>. You can also be subscribe to their email list to be up-to-date with ClamAV database changes.
+
+## <a id='cpu-spikes-clamav'></a>Why am I getting CPU spikes while using ClamAV?
+
+####Symptom
+ClamAV is taking more CPU resources than assigned in its configuration.
+
+####Explanation
+ClamAV is restricted on resources using CGroups. CGroups allows ClamAV to occupy more CPU recources when other processes are idle as it is not deteriating their performance.
+
+####Solution
+This is expected behavior from CGroups.

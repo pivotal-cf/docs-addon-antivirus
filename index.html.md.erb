@@ -178,7 +178,7 @@ Perform the following steps to deploy the ClamAV Add-on:
   * **For Ops Manager 1.10 or earlier:**
     <pre class="terminal">$ bosh update runtime-config PATH-TO-YOUR-ADD-ON-YML.yml</pre>
   * **For Ops Manager 1.11 or later:**
-    <pre class="terminal">$ bosh2 -e my-env update-runtime-config PATH-TO-YOUR-ADD-ON-YML.yml</pre>
+    <pre class="terminal">$ bosh2 -e my-env update-runtime-config --name=clamav PATH-TO-YOUR-ADD-ON-YML.yml</pre>
 
 1. Verify that your runtime configuration changes match what you specified in the ClamAV manifest by running one of the following commands:
   * **For Ops Manager 1.10 or earlier:**
