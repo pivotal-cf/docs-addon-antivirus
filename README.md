@@ -1,6 +1,6 @@
 # docs-addon-antivirus
 
-## (NEW) Which Branches to Use
+## Which Branches to Use
 
 As of February 8, 2018:
 
