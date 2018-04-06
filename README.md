@@ -9,7 +9,7 @@ As of February 8, 2018:
 | master       | v1.5.x (unreleased)    | https://docs-pcf-staging.cfapps.io/addon-antivirus/1-5/index.html |
 | v1.4   | v1.4.x     | https://docs.pivotal.io/addon-antivirus/1-4/index.html and https://docs-pcf-staging.cfapps.io/addon-antivirus/1-4/index.html |
 | v1.3   | v1.3.x     | https://docs.pivotal.io/addon-antivirus/1-3/index.html and https://docs-pcf-staging.cfapps.io/addon-antivirus/1-3/index.html |
-| v1.2      | v1.2.x         | https://docs.pivotal.io/addon-antivirus/1-2/index.html and https://docs-pcf-staging.cfapps.io/addon-antivirus/1-2/index.html |
+| v1.2      | v1.2.x         | NOT IN USE (PDF available at https://docs-pcf-staging.cfapps.io/archives/addon-antivirus-1.2.pdf) |
 
 **IMPORTANT**: When you add new text to one branch, if it is appropriate, copy it to the other branches. 
 
