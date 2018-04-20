@@ -30,6 +30,7 @@ To install ClamAV Add-on, you need the following things:
   see [Private Local Mirrors](https://www.clamav.net/documents/private-local-mirrors) in the ClamAV documentation.
 
   <p class="note"><strong>Note</strong>: Release version <code>x.x.x</code> in the <code>clamav.yml</code> samples below is arbitrary. Replace it with the version of ClamAV release downloaded from PivNet.</p>
+
 ##<a id="create-mfest"></a>Create the ClamAV Manifest
 
 The ClamAV manifest is a YML file that contains runtime config information for ClamAV Add-on.
@@ -86,10 +87,10 @@ addons:
 
     For instructions on how to set up a local mirror, see <a href="https://www.clamav.net/documents/private-local-mirrors">Private Local Mirrors</a> in the ClamAV documentation.
 
-1. (Optional) If you have to use a proxy server to connect to the internet, do the following:
-  1. Add the <code>proxy_host</code> and <code>proxy_port</code> properties.
-  1. If the proxy server needs authentication, add <code>proxy_user</code> and <code>proxy_password</code> properties.
-  <br><br>
+1. (Optional) If you have to use a proxy server to connect to the internet, 
+  add the <code>proxy_host</code> and <code>proxy_port</code> properties. 
+
+1. If the proxy server needs authentication, add <code>proxy_user</code> and <code>proxy_password</code> properties. <br><br>
   Replace the example text, indicated below in bold: 
 
   ```
@@ -97,12 +98,12 @@ addons:
   - name: clamav
       version: x.x.x
   addons:
-    - name: clamav
+     - name: clamav
       jobs:
-       - name: clamav
+      - name: clamav
           release: clamav
-      properties:
-        clamav:
+     properties:
+       clamav:
           on_access: no
           scheduled: yes
           proxy_host: PROXY.LOCALDOMAIN
@@ -146,7 +147,12 @@ Perform the following steps to deploy the ClamAV Add-on:
       </pre>
     </li>
   </ol>
+<<<<<<< HEAD
   * **For Ops Manager 1.11 or later:**
+=======
+  <br><br>
+  **For Ops Manager 1.11:**
+>>>>>>> b4ac62e... cleaining up formatting
   <ol type="i">
     <li>
       On the Ops Manager VM, create an alias in the BOSH CLI for your Ops Manager Director IP address. For example:
@@ -158,18 +164,52 @@ Perform the following steps to deploy the ClamAV Add-on:
       <pre class="terminal">$ bosh2 -e my-env log-in</pre>
     </li>
   </ol>
+<<<<<<< HEAD
+=======
+  <br><br>
+  **For Ops Manager 1.12 or later:**
+  <ol type="i">
+    <li>
+      On the Ops Manager VM, create an alias in the BOSH CLI for your BOSH Director IP address. For example:
+      <pre class="terminal">$ bosh alias-env my-env -e 10.0.0.3</pre>
+    </li>
+    <li>
+      Log in to the BOSH Director, specifying the newly created alias. 
+      For example:
+      <pre class="terminal">$ bosh -e my-env log-in</pre>
+    </li>
+  </ol>
+>>>>>>> b4ac62e... cleaining up formatting
 
 1. Upload your release, specifying the path to the tarballed ClamAV binary, by running one of the following commands:
   * **For Ops Manager 1.10 or earlier:**
     <pre class="terminal">$ bosh upload release PATH-TO-BINARY/clamav-release.tar.gz</pre>
+<<<<<<< HEAD
   * **For Ops Manager 1.11 or later:**
     <pre class="terminal">$ bosh2 -e my-env upload-release PATH-TO-BINARY/clamav-release.tar.gz</pre>
+=======
+    <br><br>
+  **For Ops Manager 1.11:**
+    <pre class="terminal">$ bosh2 -e my-env upload-release PATH-TO-BINARY/clamav-release.tar.gz</pre>
+    <br><br>
+  **For Ops Manager 1.12 or later:**
+    <pre class="terminal">$ bosh -e my-env upload-release PATH-TO-BINARY/clamav-release.tar.gz</pre>
+>>>>>>> b4ac62e... cleaining up formatting
 
 1. List the releases by running one of the following commands, and confirm that ClamAV appears:
   * **For Ops Manager 1.10 or earlier:**
     <pre class="terminal">$ bosh releases</pre>
+<<<<<<< HEAD
   * **For Ops Manager 1.11 or later:**
     <pre class="terminal">$ bosh2 -e my-env releases</pre>
+=======
+    <br><br>
+  **For Ops Manager 1.11:**
+    <pre class="terminal">$ bosh2 -e my-env releases</pre>
+    <br><br>
+  **For Ops Manager 1.12 or later:**
+    <pre class="terminal">$ bosh -e my-env releases</pre>
+>>>>>>> b4ac62e... cleaining up formatting
 
 1. <a name="update"></a>Update your runtime configuration to include the ClamAV Add-on, specifying the path to the `clamav.yml` file you created above, by running one of the following commands:
   <p class="note"><strong>Note</strong>: If you installed other BOSH add-ons,
@@ -177,14 +217,32 @@ Perform the following steps to deploy the ClamAV Add-on:
     Append the contents of `clamav.yml` to your existing add-on YML file.</p>
   * **For Ops Manager 1.10 or earlier:**
     <pre class="terminal">$ bosh update runtime-config PATH-TO-YOUR-ADD-ON-YML.yml</pre>
+<<<<<<< HEAD
   * **For Ops Manager 1.11 or later:**
     <pre class="terminal">$ bosh2 -e my-env update-runtime-config --name=clamav PATH-TO-YOUR-ADD-ON-YML.yml</pre>
+=======
+    <br><br>
+  **For Ops Manager 1.11:**
+    <pre class="terminal">$ bosh2 -e my-env update-runtime-config --name=clamav PATH-TO-YOUR-ADD-ON-YML.yml</pre>
+    <br><br>
+  **For Ops Manager 1.12 or later:**
+    <pre class="terminal">$ bosh -e my-env update-runtime-config --name=clamav PATH-TO-YOUR-ADD-ON-YML.yml</pre>
+>>>>>>> b4ac62e... cleaining up formatting
 
 1. Verify that your runtime configuration changes match what you specified in the ClamAV manifest by running one of the following commands:
   * **For Ops Manager 1.10 or earlier:**
     <pre class="terminal">$ bosh runtime-config</pre>
+<<<<<<< HEAD
   * **For Ops Manager 1.11 or later:**
     <pre class="terminal">$ bosh2 -e my-env runtime-config</pre>
+=======
+    <br><br>
+  **For Ops Manager 1.11:**
+    <pre class="terminal">$ bosh2 -e my-env runtime-config</pre>
+    <br><br>
+  **For Ops Manager 1.12 or later:**
+    <pre class="terminal">$ bosh -e my-env runtime-config</pre>
+>>>>>>> b4ac62e... cleaining up formatting
 
     For Example:
     <pre class="terminal">
@@ -291,25 +349,25 @@ Enable the feature with the `on_access` runtime config property:
 
 ClamAV can be configured to run a virus scan hourly or daily, with hourly scan being the default.
 
-To change the scheduled scan to run daily, do the following steps:
+To change the scheduled scan to run daily:
 
 1. In the `clamav.yml` file, add the property `schedule_interval` under the `clamav` property, and set it to `daily`, as shown below:
 
-  <pre>
-  releases:
-  <span>-</span> name: clamav
-      version: x.x.x
-  <br>
-  addons:
-    name: clamav
-      jobs:
-        <span>-</span> name: clamav
-          release: clamav
-      properties:
-        clamav:
-          <strong>schedule\_interval: daily</strong>
-          scheduled: yes
-  ...
+   <pre>
+   releases:
+   <span>-</span> name: clamav
+       version: x.x.x
+   <br>
+   addons:
+     name: clamav
+        jobs:
+          <span>-</span> name: clamav
+            release: clamav
+       properties:
+         clamav:
+            <strong>schedule\_interval: daily</strong>
+            scheduled: yes
+   ...
   </pre>
 2. Apply changes by updating your runtime config as described in <a href="#download-deploy">Download and Deploy ClamAV Add-on</a>.
 
