@@ -166,6 +166,7 @@ addons:
 Perform the following steps to deploy the ClamAV Add-on:
 
 1. Log in to the BOSH Director.
+<br><br>
   **For Ops Manager 1.10 or earlier:**
   <ol  type="i">
     <li>
@@ -180,9 +181,13 @@ Perform the following steps to deploy the ClamAV Add-on:
     </li>
   </ol>
 <<<<<<< HEAD
+<<<<<<< HEAD
   * **For Ops Manager 1.11:**
 =======
   <br><br>
+=======
+  <br>
+>>>>>>> c3b3644... messing with spacing [#156819346]
   **For Ops Manager 1.11 or later:**
 >>>>>>> 5c21adc... removed some wonky formatting [#156819346]
   <ol type="i">
@@ -197,9 +202,13 @@ Perform the following steps to deploy the ClamAV Add-on:
     </li>
   </ol>
 <<<<<<< HEAD
+<<<<<<< HEAD
   * **For Ops Manager 1.12 or later:**
 =======
   <br><br>
+=======
+  <br>
+>>>>>>> c3b3644... messing with spacing [#156819346]
   **For Ops Manager 1.12 or later:**
 >>>>>>> 5c21adc... removed some wonky formatting [#156819346]
   <ol type="i">
@@ -213,10 +222,13 @@ Perform the following steps to deploy the ClamAV Add-on:
       <pre class="terminal">$ bosh -e my-env log-in</pre>
     </li>
   </ol>
-
+<br>
 1. Upload your release, specifying the path to the tarballed ClamAV binary, by running one of the following commands:
+ <br>
+ <br>
  **For Ops Manager 1.10 or earlier:**
     <pre class="terminal">$ bosh upload release PATH-TO-BINARY/clamav-release.tar.gz</pre>
+<<<<<<< HEAD
 <<<<<<< HEAD
   * **For Ops Manager 1.11:**
     <pre class="terminal">$ bosh2 -e my-env upload-release PATH-TO-BINARY/clamav-release.tar.gz</pre>
@@ -224,69 +236,102 @@ Perform the following steps to deploy the ClamAV Add-on:
   <pre class="terminal">$ bosh -e my-env upload-release PATH-TO-BINARY/clamav-release.tar.gz</pre>
 =======
     <br><br>
+=======
+    <br>
+>>>>>>> c3b3644... messing with spacing [#156819346]
  **For Ops Manager 1.11 or later:**
     <pre class="terminal">$ bosh2 -e my-env upload-release PATH-TO-BINARY/clamav-release.tar.gz</pre>
-    <br><br>
+    <br>
  **For Ops Manager 1.11:**
     <pre class="terminal">$ bosh2 -e my-env upload-release PATH-TO-BINARY/clamav-release.tar.gz</pre>
-    <br><br>
+    <br>
  **For Ops Manager 1.12 or later:**
     <pre class="terminal">$ bosh -e my-env upload-release PATH-TO-BINARY/clamav-release.tar.gz</pre>
+<<<<<<< HEAD
 >>>>>>> 5c21adc... removed some wonky formatting [#156819346]
 
+=======
+<br>
+>>>>>>> c3b3644... messing with spacing [#156819346]
 1. List the releases by running one of the following commands, and confirm that ClamAV appears:
+<br>
+<br>
   **For Ops Manager 1.10 or earlier:**
     <pre class="terminal">$ bosh releases</pre>
+<<<<<<< HEAD
 <<<<<<< HEAD
   * **For Ops Manager 1.11:**
 =======
     <br><br>
+=======
+    <br>
+>>>>>>> c3b3644... messing with spacing [#156819346]
   **For Ops Manager 1.11 or later:**
     <pre class="terminal">$ bosh2 -e my-env releases</pre>
-    <br><br>
+    <br>
   **For Ops Manager 1.11:**
 >>>>>>> 5c21adc... removed some wonky formatting [#156819346]
     <pre class="terminal">$ bosh2 -e my-env releases</pre>
+<<<<<<< HEAD
   * **For Ops Manager 1.12 or later:**
+=======
+    <br>
+  **For Ops Manager 1.12 or later:**
+>>>>>>> c3b3644... messing with spacing [#156819346]
     <pre class="terminal">$ bosh -e my-env releases</pre>
-
+<br>
 1. <a name="update"></a>Update your runtime configuration to include the ClamAV Add-on, specifying the path to the `clamav.yml` file you created above, by running one of the following commands:
   <p class="note"><strong>Note</strong>: If you installed other BOSH add-ons,
     you must merge the ClamAV manifest into your existing add-on manifest. 
     Append the contents of `clamav.yml` to your existing add-on YML file.</p>
+  <br>
   **For Ops Manager 1.10 or earlier:**
     <pre class="terminal">$ bosh update runtime-config PATH-TO-YOUR-ADD-ON-YML.yml</pre>
 <<<<<<< HEAD
+<<<<<<< HEAD
   * **For Ops Manager 1.11:**
     <pre class="terminal">$ bosh2 -e my-env update-runtime-config --name=clamav PATH-TO-YOUR-ADD-ON-YML.yml</pre>
   * **For Ops Manager 1.12 or later:**
 =======
     <br><br>
+=======
+    <br>
+>>>>>>> c3b3644... messing with spacing [#156819346]
   **For Ops Manager 1.11 or later:**
     <pre class="terminal">$ bosh2 -e my-env update-runtime-config --name=clamav PATH-TO-YOUR-ADD-ON-YML.yml</pre>
-    <br><br>
+    <br>
   **For Ops Manager 1.11:**
     <pre class="terminal">$ bosh2 -e my-env update-runtime-config --name=clamav PATH-TO-YOUR-ADD-ON-YML.yml</pre>
-    <br><br>
+    <br>
   **For Ops Manager 1.12 or later:**
 >>>>>>> 5c21adc... removed some wonky formatting [#156819346]
     <pre class="terminal">$ bosh -e my-env update-runtime-config --name=clamav PATH-TO-YOUR-ADD-ON-YML.yml</pre>
-
+<br>
 1. Verify that your runtime configuration changes match what you specified in the ClamAV manifest by running one of the following commands:
+  <br><br>
   **For Ops Manager 1.10 or earlier:**
     <pre class="terminal">$ bosh runtime-config</pre>
 <<<<<<< HEAD
+<<<<<<< HEAD
   * **For Ops Manager 1.11:**
 =======
+=======
+  <br>
+>>>>>>> c3b3644... messing with spacing [#156819346]
   **For Ops Manager 1.11 or later:**
     <pre class="terminal">$ bosh2 -e my-env runtime-config</pre>
-    <br><br>
+    <br>
   **For Ops Manager 1.11:**
 >>>>>>> 5c21adc... removed some wonky formatting [#156819346]
     <pre class="terminal">$ bosh2 -e my-env runtime-config</pre>
+<<<<<<< HEAD
   * **For Ops Manager 1.12 or later:**
+=======
+    <br>
+  **For Ops Manager 1.12 or later:**
+>>>>>>> c3b3644... messing with spacing [#156819346]
     <pre class="terminal">$ bosh -e my-env runtime-config</pre>
-
+<br>
     For Example:
     <pre class="terminal">
     $ bosh -e my-env runtime-config
@@ -302,7 +347,7 @@ Perform the following steps to deploy the ClamAV Add-on:
             release: clamav
     ...
     </pre>
-
+<br>
 1. Navigate to your Installation Dashboard in Ops Manager.
 
 1. Click **Apply Changes**.
