@@ -181,9 +181,6 @@ Perform the following steps to deploy the ClamAV Add-on:
  **For Ops Manager 1.10 or earlier:**
     <pre class="terminal">$ bosh upload release PATH-TO-BINARY/clamav-release.tar.gz</pre>
     <br>
- **For Ops Manager 1.11 or later:**
-    <pre class="terminal">$ bosh2 -e my-env upload-release PATH-TO-BINARY/clamav-release.tar.gz</pre>
-    <br>
  **For Ops Manager 1.11:**
     <pre class="terminal">$ bosh2 -e my-env upload-release PATH-TO-BINARY/clamav-release.tar.gz</pre>
     <br>
@@ -195,9 +192,6 @@ Perform the following steps to deploy the ClamAV Add-on:
 <br>
   **For Ops Manager 1.10 or earlier:**
     <pre class="terminal">$ bosh releases</pre>
-    <br>
-  **For Ops Manager 1.11 or later:**
-    <pre class="terminal">$ bosh2 -e my-env releases</pre>
     <br>
   **For Ops Manager 1.11:**
     <pre class="terminal">$ bosh2 -e my-env releases</pre>
@@ -213,9 +207,6 @@ Perform the following steps to deploy the ClamAV Add-on:
   **For Ops Manager 1.10 or earlier:**
     <pre class="terminal">$ bosh update runtime-config PATH-TO-YOUR-ADD-ON-YML.yml</pre>
     <br>
-  **For Ops Manager 1.11 or later:**
-    <pre class="terminal">$ bosh2 -e my-env update-runtime-config --name=clamav PATH-TO-YOUR-ADD-ON-YML.yml</pre>
-    <br>
   **For Ops Manager 1.11:**
     <pre class="terminal">$ bosh2 -e my-env update-runtime-config --name=clamav PATH-TO-YOUR-ADD-ON-YML.yml</pre>
     <br>
@@ -226,7 +217,7 @@ Perform the following steps to deploy the ClamAV Add-on:
   <br><br>
   **For Ops Manager 1.10 or earlier:**
     <pre class="terminal">$ bosh runtime-config</pre>
-  <br>
+    <br>
   **For Ops Manager 1.11 or later:**
     <pre class="terminal">$ bosh2 -e my-env runtime-config</pre>
     <br>
