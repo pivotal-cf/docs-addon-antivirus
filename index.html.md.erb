@@ -50,6 +50,13 @@ The following table provides version and version-support information about the C
 
 To install ClamAV Add-on, you need:
 
+* Named runtime configs (for PCF v1.11 or later).
+
+    If you have not already split your runtime config into multiple named files,
+    do so before installing or upgrading the ClamAV Add-on for PCF.
+    For general information about named runtime config files,
+    see <a href="https://bosh.io/docs/configs.html">Configs</a>.
+
 * A PCF operator with admin rights.
   For more information, see [Understanding Pivotal Cloud Foundry User Types](https://docs.pivotal.io/pivotalcf/customizing/user-types.html#operator).
 
@@ -148,13 +155,34 @@ addons:
 
 ##<a id="download"></a> Download ClamAV Add-on
 
-1. Download ClamAV Add-on software binary from the [Pivotal Network](https://network.pivotal.io/products/p-clamav-addon) to your local machine.
+To download the ClamAV Add-on software binary and move it to the Ops Manager VM, 
+do the following: 
 
-2. Copy the software binary to your Ops Manager virtual machine (VM).
-  <pre class="terminal">$ scp -i PATH/TO/PRIVATE/KEY clamav-release.tar.gz ubuntu@YOUR-OPS-MANAGER-VM-IP:</pre>
+<p class="note warning"><strong>WARNING! </strong> If you are using PCF v1.11 or later,
+   ensure that you are using named runtime configs.
+   For more information, see <a href="#prereqs">Prerequisites</a>.</p>
 
-3. Copy the ClamAV manifest, `clamav.yml` file, to your Ops Manager instance.
-  <pre class="terminal">$ scp -i PATH/TO/PRIVATE/KEY clamav.yml ubuntu@YOUR-OPS-MANAGER-VM-IP:</pre>
+1. Download the ClamAV Add-on software binary from the [Pivotal Network](https://network.pivotal.io/products/p-clamav-addon) to your local machine.
+
+2. To copy the binary to your Ops Manager VM, run the following command:
+
+    ```
+    scp -i PATH-TO-PRIVATE-KEY clamav-release.tar.gz ubuntu@YOUR-OPS-MANAGER-VM-IP:
+    ```
+
+    For example:
+
+    <pre class="terminal">$ $ scp -i ~/.ssh/my-key.pem clamav-1.3.28.tar.gz ubuntu@192.168.0.2:  </pre> 
+
+2. To copy the ClamAV manifest, `clamav.yml` file, to your Ops Manager instance, run the following command:
+
+    ```
+    scp -i PATH-TO-PRIVATE-KEY clamav.yml ubuntu@YOUR-OPS-MANAGER-VM-IP:
+    ```
+
+    For example:
+
+    <pre class="terminal">$ scp -i ~/.ssh/my-key.pem clamav.yml ubuntu@192.168.0.2:  </pre> 
 
 4. SSH into Ops Manager.
   <pre class="terminal">$ ssh -i PATH-TO-PRIVATE-KEY ubuntu@YOUR-OPS-MANAGER-VM-IP</pre>
@@ -168,7 +196,7 @@ Perform the following steps to deploy the ClamAV Add-on:
 
 1. Log in to the BOSH Director.
 <br><br>
-  **For Ops Manager 1.10 or earlier:**
+  **For Ops Manager v1.10 or earlier:**
 
       On the Ops Manager VM, target your BOSH Director instance. For example:
       <pre class="terminal">
@@ -179,7 +207,7 @@ Perform the following steps to deploy the ClamAV Add-on:
       Logged in as 'director'
       </pre>
   <br>
-  **For Ops Manager 1.11:**
+  **For Ops Manager v1.11:**
   <ol type="i">
     <li>
       On the Ops Manager VM, create an alias in the BOSH CLI for your BOSH Director IP address. For example:
@@ -192,7 +220,7 @@ Perform the following steps to deploy the ClamAV Add-on:
     </li>
   </ol>
   <br>
-  **For Ops Manager 1.12 or later:**
+  **For Ops Manager v1.12 or later:**
   <ol type="i">
     <li>
       On the Ops Manager VM, create an alias in the BOSH CLI for your BOSH Director IP address. For example:
@@ -207,24 +235,24 @@ Perform the following steps to deploy the ClamAV Add-on:
   <br> 
 1. Upload your release, specifying the path to the tarballed ClamAV binary, by running one of the following commands:
  <br><br>
- **For Ops Manager 1.10 or earlier:**
+ **For Ops Manager v1.10 or earlier:**
     <pre class="terminal">$ bosh upload release PATH-TO-BINARY/clamav-release.tar.gz</pre>
  <br>
- **For Ops Manager 1.11:**
+ **For Ops Manager v1.11:**
     <pre class="terminal">$ bosh2 -e my-env upload-release PATH-TO-BINARY/clamav-release.tar.gz</pre>
  <br>
- **For Ops Manager 1.12 or later:**
+ **For Ops Manager v1.12 or later:**
   <pre class="terminal">$ bosh -e my-env upload-release PATH-TO-BINARY/clamav-release.tar.gz</pre>
     <br>
 1. List the releases by running one of the following commands, and confirm that ClamAV appears:
    <br><br>
-  **For Ops Manager 1.10 or earlier:**
+  **For Ops Manager v1.10 or earlier:**
     <pre class="terminal">$ bosh releases</pre>
    <br> 
-    **For Ops Manager 1.11:**
+    **For Ops Manager v1.11:**
     <pre class="terminal">$ bosh2 -e my-env releases</pre>
    <br> 
-    **For Ops Manager 1.12 or later:**
+    **For Ops Manager v1.12 or later:**
     <pre class="terminal">$ bosh -e my-env releases</pre>
   <br>
 
@@ -233,24 +261,24 @@ Perform the following steps to deploy the ClamAV Add-on:
     you must merge the ClamAV manifest into your existing add-on manifest. 
     Append the contents of `clamav.yml` to your existing add-on YML file.</p>
   <br>
-  **For Ops Manager 1.10 or earlier:**
+  **For Ops Manager v1.10 or earlier:**
     <pre class="terminal">$ bosh update runtime-config PATH-TO-YOUR-ADD-ON-YML.yml</pre>
   <br>
-  **For Ops Manager 1.11:**
+  **For Ops Manager v1.11:**
     <pre class="terminal">$ bosh2 -e my-env update-runtime-config --name=clamav PATH-TO-YOUR-ADD-ON-YML.yml</pre>
   <br>
-  **For Ops Manager 1.12 or later:**
+  **For Ops Manager v1.12 or later:**
     <pre class="terminal">$ bosh -e my-env update-runtime-config --name=clamav PATH-TO-YOUR-ADD-ON-YML.yml</pre>
   <br>
 1. Verify that your runtime configuration changes match what you specified in the ClamAV manifest by running one of the following commands:
     <br><br>
-    **For Ops Manager 1.10 or earlier:**
+    **For Ops Manager v1.10 or earlier:**
       <pre class="terminal">$ bosh runtime-config</pre>
     <br>
-    **For Ops Manager 1.11:**
+    **For Ops Manager v1.11:**
      <pre class="terminal">$ bosh2 -e my-env runtime-config</pre>
     <br>
-    **For Ops Manager 1.12 or later:**
+    **For Ops Manager v1.12 or later:**
     <pre class="terminal">$ bosh -e my-env runtime-config</pre>
     <br>
     For Example:
