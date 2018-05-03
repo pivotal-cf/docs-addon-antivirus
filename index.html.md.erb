@@ -97,6 +97,29 @@ addons:
     - os: ubuntu-trusty
 ```
 
+####<a id="linux-optional-properties"></a>Optional Linux Properties
+
+To use these properties, place under clamav subsection of `clamav.yml`
+
+```
+  ...
+    properties:
+      clamav:
+        OPTIONAL_PROPERTIES_HERE
+  ...
+```
+
+* <code><strong>cpu\_limit</strong></code>: <a name="cpu_limit"></a>
+        Limit ClamAV to a percentage of available CPU resources when other tasks are running. Usage may exceed the limit if there are enough idle CPU cycles available.
+        Set to a whole number < 100. E.g. set to 50 to limit ClamAV to 50% CPU usage when other tasks are running.
+        Default value is `10`.
+
+* <code><strong>enforce\_cpu\_limit</strong></code>: <a name="enforce_cpu_limit"></a>
+        Set this value to `true` to always enforce an upper limit on CPU usage.
+        This property is `false` by default. While `false`, ClamAV will backoff to `cpu_limit` when other processes require CPU resources.
+        <p class="note warning"><strong>WARNING</strong>: If `enforce_cpu_limit` is set `true`, ensure `cpu_limit` is set high enough so ClamAV can execute normally. If the limit is too strict, ClamAV will fail to start. (Eg. An n1-standard on GCP requires `cpu_limit` to be > `45`)
+
+
 ###<a id="windows-template"></a>clamav.yml Template for Windows
 
 Create a file named <code>clamav.yml</code> using the following code as a template.
