@@ -97,27 +97,38 @@ addons:
     - os: ubuntu-trusty
 ```
 
-####<a id="linux-optional-properties"></a>Optional Linux Properties
+###<a id="linux-optional-properties"></a>Optional Linux Properties
 
-To use these properties, place under clamav subsection of `clamav.yml`
+To use optional properties, place them under the clamav subsection of `clamav.yml`, as shown below.
 
 ```
   ...
     properties:
       clamav:
-        OPTIONAL_PROPERTIES_HERE
+        OPTIONAL-PROPERTIES-HERE
   ...
 ```
 
-* <code><strong>cpu\_limit</strong></code>: <a name="cpu_limit"></a>
-        Limit ClamAV to a percentage of available CPU resources when other tasks are running. Usage may exceed the limit if there are enough idle CPU cycles available.
-        Set to a whole number < 100. E.g. set to 50 to limit ClamAV to 50% CPU usage when other tasks are running.
-        Default value is `10`.
+#### <a name="cpu_limit"></a> cpu\_limit 
 
-* <code><strong>enforce\_cpu\_limit</strong></code>: <a name="enforce_cpu_limit"></a>
-        Set this value to `true` to always enforce an upper limit on CPU usage.
-        This property is `false` by default. While `false`, ClamAV will backoff to `cpu_limit` when other processes require CPU resources.
-        <p class="note warning"><strong>WARNING</strong>: If `enforce_cpu_limit` is set `true`, ensure `cpu_limit` is set high enough so ClamAV can execute normally. If the limit is too strict, ClamAV will fail to start. (Eg. An n1-standard on GCP requires `cpu_limit` to be > `45`)
+Limits ClamAV to a percentage of available CPU resources when other tasks are running. 
+Usage may exceed the limit if there are enough idle CPU cycles available.
+
+Set to a whole number less than 100. 
+For example, set to 50 to limit ClamAV to 50% CPU usage when other tasks are running.
+The default value is `10`.
+
+#### <a name="enforce_cpu_limit"></a> enforce\_cpu\_limit 
+
+Set to `true` to always enforce an upper limit on CPU usage.
+While `false`, ClamAV is limited to the value of `cpu_limit` when other processes require CPU resources.
+This property is `false` by default. 
+
+<p class="note warning"><strong>WARNING</strong>: 
+  If <code>enforce_cpu_limit</code> is set <code>true</code>, ensure <code>cpu_limit</code> 
+  is set high enough for ClamAV to execute normally. 
+  If the limit is too strict, ClamAV fails to start. 
+  For example, an n1-standard VM on GCP requires <code>cpu_limit</code> to be > 45.</p>
 
 
 ###<a id="windows-template"></a>clamav.yml Template for Windows
