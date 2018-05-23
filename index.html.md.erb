@@ -74,62 +74,65 @@ To install ClamAV Add-on, you need:
 ##<a id="create-mfest"></a>Create the ClamAV Manifest
 
 The ClamAV manifest is a YML file that contains runtime config information for ClamAV Add-on.
-To create the ClamAV manifest for your deployment, follow the instructions below.
+To create the ClamAV manifest for your deployment, follow the steps below:
 
 ###<a id="linux-template"></a> clamav.yml Template for Linux
 
-Create a file named <code>clamav.yml</code> using the following code as a template.
+1. Create a file named `clamav.yml`, using the following code as a template.
 
-```
-releases:
-- name: clamav
-  version: x.x.x
-addons:
-- name: clamav
-  jobs:
-  - name: clamav
-    release: clamav
+    ```
+    releases:
+    - name: clamav
+      version: x.x.x
+    addons:
+    - name: clamav
+      jobs:
+      - name: clamav
+        release: clamav
+        properties:
+          clamav:
+            database_mirror: <%= vars.example_ip_1 %>
+      include:
+        stemcell:
+        - os: ubuntu-trusty
+    ```
+
+2. (Optional) Set the properties `cpu_limit` and `enforce_cpu_limit`.
+To use these properties, place the following text under the `clamav` subsection of 
+`clamav.yml`, as shown below:
+  
+    ```
+    ...
     properties:
       clamav:
-        database_mirror: <%= vars.example_ip_1 %>
-  include:
-    stemcell:
-    - os: ubuntu-trusty
-```
+        cpu_limit: VALUE-OF-CPU-LIMIT
+        enforce_cpu_limit: TRUE|FALSE
+    ...
+    ```
+  <code><strong>cpu\_limit</strong></code>: <a name="cpu_limit"></a>
+    <ul>
+      <li>Limits ClamAV to a percentage of available CPU resources when other processes are using CPU resources. 
+        Usage may exceed the limit if enough idle CPU cycles are available.</li>
+      <li>Set to a whole number less than 100. 
+        For example, set to <code>50</code> to limit ClamAV to 50% CPU usage when other 
+        tasks are running.</li>
+        <li>The default value is <code>10</code>.</li>
+    </ul>
 
-###<a id="linux-optional-properties"></a>Optional Linux Properties
-
-To use optional properties, place them under the clamav subsection of `clamav.yml`, as shown below.
-
-```
-  ...
-    properties:
-      clamav:
-        OPTIONAL-PROPERTIES-HERE
-  ...
-```
-
-#### <a name="cpu_limit"></a> cpu\_limit 
-
-Limits ClamAV to a percentage of available CPU resources when other tasks are running. 
-Usage may exceed the limit if there are enough idle CPU cycles available.
-
-Set to a whole number less than 100. 
-For example, set to 50 to limit ClamAV to 50% CPU usage when other tasks are running.
-The default value is `10`.
-
-#### <a name="enforce_cpu_limit"></a> enforce\_cpu\_limit 
-
-Set to `true` to always enforce an upper limit on CPU usage.
-When `false`, ClamAV is limited to the value of `cpu_limit` when other processes require CPU resources.
-This property is `false` by default. 
-
-<p class="note warning"><strong>WARNING</strong>: 
-  If <code>enforce_cpu_limit</code> is set <code>true</code>, ensure <code>cpu_limit</code> 
-  is set high enough for ClamAV to execute normally. 
-  If the limit is too strict, ClamAV fails to start. 
-  For example, an n1-standard VM on GCP requires <code>cpu_limit</code> to be > 45.</p>
-
+    <code><strong>enforce\_cpu\_limit</strong></code>: <a name="enforce_cpu_limit"></a>
+    <ul>
+      <li>When <code>true</code>, the limit set by <code>cpu\_limit</code> is always enforced.</li>
+      <li>When <code>false</code>, the limit set by <code>cpu\_limit</code> is 
+        only enforced when other processes are using CPU resources. 
+        Usage may exceed the limit if enough idle CPU cycles are available.</li>
+        <li>This property is <code>false</code> by default.</li>
+    </ul>
+    
+    <p class="note warning"><strong>WARNING</strong>: 
+      If <code>enforce_cpu_limit</code> is set <code>true</code>, ensure <code>cpu_limit</code> 
+      is set high enough for ClamAV to execute normally. 
+      If the limit is too strict, ClamAV fails to start. 
+      For example, an n1-standard VM on GCP requires <code>cpu_limit</code> to be > 45.</p>
 
 ###<a id="windows-template"></a>clamav.yml Template for Windows
 
@@ -167,25 +170,25 @@ addons:
 1. If the proxy server needs authentication, add <code>proxy_user</code> and <code>proxy_password</code> properties. <br><br>
   Replace the example text, indicated below in bold: 
 
-  ```
-  releases:
-  - name: clamav
-      version: x.x.x
-  addons:
-     - name: clamav
-      jobs:
+      ```
+      releases:
       - name: clamav
-          release: clamav
-     properties:
-       clamav:
-          on_access: no
-          scheduled: yes
-          proxy_host: PROXY.LOCALDOMAIN
-          proxy_port: 3128
-          proxy_user: CLAMAV
-          proxy_password: SECRET
-  ...
-  ```
+          version: x.x.x
+      addons:
+         - name: clamav
+          jobs:
+          - name: clamav
+              release: clamav
+         properties:
+           clamav:
+              on_access: no
+              scheduled: yes
+              proxy_host: PROXY.LOCALDOMAIN
+              proxy_port: 3128
+              proxy_user: CLAMAV
+              proxy_password: SECRET
+      ...
+      ```
 
 ##<a id="download"></a> Download ClamAV Add-on
 
