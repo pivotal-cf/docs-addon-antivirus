@@ -80,7 +80,8 @@ addons:
 
 ###<a id="general-config"></a> General clamav.yml Template Configuration
 
-1. In the <code>database_mirror</code> field of the template, provide the hostname or IP address of a private ClamAV update mirror.
+1. In the <code>database_mirror</code> field of the template, provide the hostname 
+or IP address of a private ClamAV update mirror.
     Environments that cannot connect to the internet should use an update mirror.
     If you do not specify a value, ClamAV defaults to an S3-based mirror for updates.
     For compliance reasons, only use the S3-based mirror in non-production environments.<br />
@@ -88,31 +89,29 @@ addons:
     For instructions on how to set up a local mirror, see <a href="https://www.clamav.net/documents/private-local-mirrors">Private Local Mirrors</a> in the ClamAV documentation.
 
 1. (Optional) If you have to use a proxy server to connect to the internet, 
-  add the <code>proxy_host</code> and <code>proxy_port</code> properties. 
+add the <code>proxy\_host</code> and <code>proxy\_port</code> properties to your manifest.
+<br><br>
+If the proxy server needs authentication, add the <code>proxy\_user</code> and 
+<code>proxy\_password</code> properties, as shown below:
 
-1. If the proxy server needs authentication, add <code>proxy_user</code> and <code>proxy_password</code> properties. <br><br>
-  Replace the example text, indicated below in bold: 
-
-  ```
-  releases:
-  - name: clamav
-      version: x.x.x
-  addons:
-     - name: clamav
-      jobs:
-      - name: clamav
-          release: clamav
-     properties:
-       clamav:
-          on_access: no
-          scheduled: yes
-          proxy_host: PROXY.LOCALDOMAIN
-          proxy_port: 3128
-          proxy_user: CLAMAV
-          proxy_password: SECRET
-  ...
-  ```
-
+    ```
+    releases:
+    - name: clamav
+        version: x.x.x
+    addons:
+       - name: clamav
+        jobs:
+        - name: clamav
+            release: clamav
+       properties:
+         clamav:
+            proxy_host: PROXY.LOCALDOMAIN
+            proxy_port: PROXY-PORT
+            proxy_user: PROXY-USERNAME
+            proxy_password: PROXY-SECRET
+    ...
+    ```
+    
 ##<a id="download"></a> Download ClamAV Add-on
 
 1. Download ClamAV Add-on software binary from the [Pivotal Network](https://network.pivotal.io/products/p-clamav-addon) to your local machine.
