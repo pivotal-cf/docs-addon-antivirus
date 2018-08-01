@@ -22,7 +22,7 @@ The following table provides version and version-support information about the C
     <th>Details</th>
     <tr>
         <td>Version</td>
-        <td>v1.4.5</td>
+        <td>v1.5.0</td>
     </tr>
     <tr>
         <td>Release date</td>
@@ -30,15 +30,15 @@ The following table provides version and version-support information about the C
     </tr>
     <tr>
         <td>Compatible Ops Manager version(s)</td>
-        <td>v1.7 or later</td>
+        <td>v1.12 or later</td>
     </tr>
     <tr>
         <td>Compatible Elastic Runtime version(s)</td>
-        <td>v1.7 or later</td>
+        <td>v1.12 or later</td>
     </tr>
     <tr>
         <td>Compatible Pivotal Application Service (PAS)<sup>*</sup> version(s)</td>
-        <td>v1.7 or later</td>
+        <td>v1.12 or later</td>
     </tr>
     <tr>
         <td>IaaS support</td>
@@ -46,11 +46,13 @@ The following table provides version and version-support information about the C
     </tr>
 </table>
 
+<sup>*</sup> As of PCF v2.0, Elastic Runtime is renamed Pivotal Application Service (PAS).
+
 ##<a id="prereqs"></a>Prerequisites
 
 To install ClamAV Add-on, you need:
 
-* Named runtime configs (for PCF v1.11 or later).
+* Named runtime configs
 
     If you have not already split your runtime config into multiple named files,
     do so before installing or upgrading the ClamAV Add-on for PCF.
@@ -60,7 +62,7 @@ To install ClamAV Add-on, you need:
 * A PCF operator with admin rights.
   For more information, see [Understanding Pivotal Cloud Foundry User Types](https://docs.pivotal.io/pivotalcf/customizing/user-types.html#operator).
 
-* Operations Manager (Ops Manager) v1.7 or later.
+* Operations Manager (Ops Manager) 
 
 * At least 1 GB of memory free on each VM before deploying ClamAV Add-on.
   ClamAV Add-on uses 610 MB of memory. 
@@ -194,8 +196,8 @@ If the proxy server needs authentication, add the <code>proxy\_user</code> and
 To download the ClamAV Add-on software binary and move it to the Ops Manager VM, 
 do the following: 
 
-<p class="note warning"><strong>WARNING! </strong> If you are using PCF v1.11 or later,
-   ensure that you are using named runtime configs.
+<p class="note warning"><strong>WARNING! </strong>
+   Ensure that you are using named runtime configs.
    For more information, see <a href="#prereqs">Prerequisites</a>.</p>
 
 1. Download the ClamAV Add-on software binary from the [Pivotal Network](https://network.pivotal.io/products/p-clamav-addon) to your local machine.
@@ -238,93 +240,23 @@ do the following:
 Perform the following steps to deploy the ClamAV Add-on:
 
 1. Log in to the BOSH Director.
-<br><br>
-  **For Ops Manager v1.10 or earlier:**
-
-      On the Ops Manager VM, target your BOSH Director instance. For example:
-      <pre class="terminal">
-      $ bosh target 10.0.0.3
-      Target set to 'Ops Manager'
-      Your username: director
-      Enter password: ******************
-      Logged in as 'director'
-      </pre>
-  <br>
-  **For Ops Manager v1.11:**
-  <ol type="i">
-    <li>
-      On the Ops Manager VM, create an alias in the BOSH CLI for your BOSH Director IP address. For example:
-      <pre class="terminal">$ bosh2 alias-env my-env -e 10.0.0.3</pre>
-    </li>
-    <li>
-      Log in to the BOSH Director, specifying the newly created alias. 
-      For example:
-      <pre class="terminal">$ bosh2 -e my-env log-in</pre>
-    </li>
-  </ol>
-  <br>
-  **For Ops Manager v1.12 or later:**
-  <ol type="i">
-    <li>
-      On the Ops Manager VM, create an alias in the BOSH CLI for your BOSH Director IP address. For example:
-      <pre class="terminal">$ bosh alias-env my-env -e 10.0.0.3</pre>
-    </li>
-    <li>
-      Log in to the BOSH Director, specifying the newly created alias. 
-      For example:
-      <pre class="terminal">$ bosh -e my-env log-in</pre>
-    </li>
-  </ol>
-  <br> 
-1. Upload your release, specifying the path to the tarballed ClamAV binary, by running one of the following commands:
- <br><br>
- **For Ops Manager v1.10 or earlier:**
-    <pre class="terminal">$ bosh upload release ~/clamav-1.3.28.tar.gz</pre>
- <br>
- **For Ops Manager v1.11:**
-    <pre class="terminal">$ bosh2 -e my-env upload-release ~/clamav-1.3.28.tar.gz</pre>
- <br>
- **For Ops Manager v1.12 or later:**
+    1. On the Ops Manager VM, create an alias in the BOSH CLI for your BOSH Director IP address. For example:
+    <pre class="terminal">$ bosh alias-env my-env -e 10.0.0.3</pre>
+    1. Log in to the BOSH Director, specifying the newly created alias. 
+    For example:
+    <pre class="terminal">$ bosh -e my-env log-in</pre>
+1. Upload your release, specifying the path to the tarballed ClamAV binary, by running the following command:
   <pre class="terminal">$ bosh -e my-env upload-release ~/clamav-1.3.28.tar.gz</pre>
-    <br>
-1. List the releases by running one of the following commands, and confirm that ClamAV appears:
-   <br><br>
-  **For Ops Manager v1.10 or earlier:**
-    <pre class="terminal">$ bosh releases</pre>
-   <br> 
-    **For Ops Manager v1.11:**
-    <pre class="terminal">$ bosh2 -e my-env releases</pre>
-   <br> 
-    **For Ops Manager v1.12 or later:**
-    <pre class="terminal">$ bosh -e my-env releases</pre>
-  <br>
-
-1. <a name="update"></a>Update your runtime configuration to include the ClamAV Add-on, specifying the path to the `clamav.yml` file you created above, by running one of the following commands:
+1. List the releases by running the following command, and confirm that ClamAV appears:
+  <pre class="terminal">$ bosh -e my-env releases</pre>
+1. <a name="update"></a>Update your runtime configuration to include the ClamAV Add-on, specifying the path to the `clamav.yml` file you created above, by running the following command:
   <p class="note"><strong>Note</strong>: If you installed other BOSH add-ons,
     you must merge the ClamAV manifest into your existing add-on manifest. 
     Append the contents of `clamav.yml` to your existing add-on YML file.</p>
-  <br>
-  **For Ops Manager v1.10 or earlier:**
-    <pre class="terminal">$ bosh update runtime-config ~/clamav.yml</pre>
-  <br>
-  **For Ops Manager v1.11:**
-    <pre class="terminal">$ bosh2 -e my-env update-runtime-config --name=clamav ~/clamav.yml</pre>
-  <br>
-  **For Ops Manager v1.12 or later:**
     <pre class="terminal">$ bosh -e my-env update-runtime-config --name=clamav ~/clamav.yml</pre>
-  <br>
-1. Verify that your runtime configuration changes match what you specified in the ClamAV manifest by running one of the following commands:
-    <br><br>
-    **For Ops Manager v1.10 or earlier:**
-      <pre class="terminal">$ bosh runtime-config</pre>
-    <br>
-    **For Ops Manager v1.11:**
-     <pre class="terminal">$ bosh2 -e my-env runtime-config</pre>
-    <br>
-    **For Ops Manager v1.12 or later:**
+1. Verify that your runtime configuration changes match what you specified in the ClamAV manifest by running the following command:
     <pre class="terminal">$ bosh -e my-env runtime-config</pre>
-    <br>
-    For example:
+    For Example:
     <pre class="terminal">
     $ bosh -e my-env runtime-config
     Acting as user 'admin' on 'micro'
@@ -339,7 +271,6 @@ Perform the following steps to deploy the ClamAV Add-on:
             release: clamav
     ...
     </pre>
-
 1. Navigate to your Installation Dashboard in Ops Manager.
 
 1. Click **Apply Changes**.
@@ -361,7 +292,8 @@ Follow the steps to <a href="http://docs.pivotal.io/pivotalcf/customizing/cloudf
 ##<a id="verify"></a>Verify Your ClamAV Add-on Installation
 
 <ol>
-<li><a href="https://docs.pivotal.io/pivotalcf/customizing/1-11/trouble-advanced.html#bosh-ssh">BOSH SSH</a> into one of the VMs in your deployment. If you are using PCF v1.11 or later, use the BOSH CLI v1. If you are using PCF v1.10 or earlier, use the BOSH CLI v2.</li>
+<li><a href="https://docs.pivotal.io/pivotalcf/customizing/1-11/trouble-advanced.html#bosh-ssh">BOSH SSH</a> into one of the VMs in your deployment. 
+</li>
 <li>Run <code>monit summary</code>. Look for the following processes in the output:
 <pre class="terminal">The Monit daemon 5.2.4 uptime: 3d 0h 56m
 Process 'clamd'                     running<br/>

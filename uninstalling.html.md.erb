@@ -9,42 +9,16 @@ This topic describes how to uninstall ClamAV from your deployment, and how to ve
 
 ## <a id='uninstall-clamav'></a>Uninstall ClamAV Add-on
 
-1. Retrieve the latest runtime config by running one of the following commands:
-<br>  
-  **For Ops Manager v1.10 or earlier:** 
-  <pre class="terminal">
-    $ bosh runtime-config > PATH\_TO\_SAVE\_THE\_RUNTIME\_CONFIG
-  </pre>
-<br>
-  **For Ops Manager v1.11:**
-  <pre class="terminal">
-    $ bosh2 -e my-env runtime-config > PATH\_TO\_SAVE\_THE\_RUNTIME\_CONFIG
-  </pre>
-<br>
-  **For Ops Manager v1.12 or later:**
+1. Retrieve the latest runtime config by running the following command:
   <pre class="terminal">
     $ bosh -e my-env runtime-config > PATH\_TO\_SAVE\_THE\_RUNTIME\_CONFIG
   </pre>
-<br><br>
 2. In the runtime config, remove all ClamAV properties under the `releases:` and `addons:` sections.
 
 3. Update the runtime config.
-<br>
-  **For Ops Manager v1.10 or earlier:** 
-  <pre class="terminal">
-    $ bosh update runtime-config PATH\_TO\_SAVE\_THE\_RUNTIME\_CONFIG
-  </pre>
-<br>
-  **For Ops Manager v1.11:**
-  <pre class="terminal">
-    $ bosh2 -e my-env update-runtime-config --name=clamav PATH\_TO\_SAVE\_THE\_RUNTIME\_CONFIG
-  </pre>
-<br>
-  **For Ops Manager v1.12 or later:**
   <pre class="terminal">
     $ bosh -e my-env update-runtime-config --name=clamav PATH\_TO\_SAVE\_THE\_RUNTIME\_CONFIG
   </pre>
-<br><br>
 4. Navigate to your **Installation Dashboard** in Ops Manager.
 5. Click **Apply Changes**.
 6. Wait for the installation to complete.
@@ -53,8 +27,6 @@ This topic describes how to uninstall ClamAV from your deployment, and how to ve
 
 <ol>
 <li><a href="https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#bosh-ssh">BOSH SSH</a> into one of the VMs in your deployment.
-    If you are using PCF v1.11 or later, use the BOSH CLI v2.
-    If you are using PCF v1.10 or earlier, use the BOSH CLI v1.</li>
 <li>Run <code>monit summary</code>.<br>
     If ClamAV has uninstalled successfully,
     it should not show <code>clamd</code> or <code>freshclam</code> processes.</li>
