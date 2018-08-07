@@ -9,7 +9,7 @@ This topic describes how to add ClamAV to your Pivotal Cloud Foundry (PCF) deplo
 
 ## <a id="about-clamav"></a>About ClamAV Add-on for PCF
 
-This add-on may be necessary for regulatory purposes if your compliance auditor requires antivirus protection within the PCF environment.
+The ClamAV Add-on may be necessary for regulatory purposes if your compliance auditor requires antivirus protection within your PCF environment.
 
 For example, auditors sometimes expect that antivirus protection is present in an environment that must comply with standards such as Payment Card Industry Data Security Standard (PCI DSS) or Health Insurance Portability and Accountability Act (HIPAA).
 
@@ -29,20 +29,20 @@ The following table provides version and version-support information about the C
         <td>July 30, 2018</td>
     </tr>
     <tr>
-        <td>Compatible Ops Manager version(s)</td>
+        <td>Compatible Ops Manager versions</td>
         <td>v1.12 or later</td>
     </tr>
     <tr>
-        <td>Compatible Elastic Runtime version(s)</td>
+        <td>Compatible Elastic Runtime versions</td>
         <td>v1.12 </td>
     </tr>
     <tr>
-        <td>Compatible Pivotal Application Service (PAS)<sup>*</sup> version(s)</td>
+        <td>Compatible Pivotal Application Service (PAS)<sup>*</sup> versions</td>
         <td>v2.0 or later</td>
     </tr>
     <tr>
         <td>IaaS support</td>
-        <td>vSphere, GCP, AWS, Azure, and Openstack</td>
+        <td>vSphere, GCP, AWS, Azure, and OpenStack</td>
     </tr>
 </table>
 
@@ -77,7 +77,7 @@ To install ClamAV Add-on, you need:
 
 ##<a id="create-mfest"></a>Create the ClamAV Manifest
 
-The ClamAV manifest is a YML file that contains runtime config information for ClamAV Add-on.
+The ClamAV manifest is a YAML file that contains runtime config information for ClamAV Add-on.
 To create the ClamAV manifest for your deployment, follow the steps below:
 
 ###<a id="linux-template"></a> clamav.yml Template for Linux
