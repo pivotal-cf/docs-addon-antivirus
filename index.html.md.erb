@@ -378,7 +378,6 @@ ClamAV can be configured to run a virus scan hourly or daily, with hourly scan b
 To change the scheduled scan to run daily:
 
 1. In the `clamav.yml` file, add the property `schedule_interval` under the `clamav` property, and set it to `daily`, as shown below:
-
    <pre>
    releases:
    <span>-</span> name: clamav
@@ -396,6 +395,26 @@ To change the scheduled scan to run daily:
    ...
   </pre>
 2. Apply changes by updating your runtime config as described in <a href="#download-deploy">Download and Deploy ClamAV Add-on</a>.
+
+3. (Optional) Restrict the timeframe when the scheduled scan can run by specifying a time range in 24h format using the properties `first_scheduled_scan_time` and `last_scheduled_scan_time`, as shown below:
+   <pre>
+   releases:
+   <span>-</span> name: clamav
+       version: x.x.x
+   <br>
+   addons:
+     name: clamav
+        jobs:
+          <span>-</span> name: clamav
+            release: clamav
+       properties:
+         clamav:
+            schedule\_interval: daily
+            scheduled: yes
+            <strong>first\_scheduled\_scan\_time: "2:00"
+            last\_scheduled\_scan\_time: "4:30"</strong>
+   ...
+  </pre>
 
 ##<a id="disable-scheduled-scan"></a>Disable Scheduled Scan
 
