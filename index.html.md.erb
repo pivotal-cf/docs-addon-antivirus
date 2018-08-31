@@ -276,8 +276,7 @@ Perform the following steps to deploy the ClamAV Add-on:
     Acting as user 'admin' on 'micro'
     releases:
     <span>-</span> name: clamav
-       version: 1.0.0
-    <br>
+       version: 1.3.28
     addons:
       name: clamav
         jobs:
@@ -306,7 +305,7 @@ Follow the steps to <a href="http://docs.pivotal.io/pivotalcf/customizing/cloudf
 ##<a id="verify"></a>Verify Your ClamAV Add-on Installation
 
 <ol>
-<li><a href="https://docs.pivotal.io/pivotalcf/customizing/1-11/trouble-advanced.html#bosh-ssh">BOSH SSH</a> into one of the VMs in your deployment. 
+<li><a href="https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#bosh-ssh">BOSH SSH</a> into one of the VMs in your deployment. 
 </li>
 <li>Run <code>monit summary</code>. Look for the following processes in the output:
 <pre class="terminal">The Monit daemon 5.2.4 uptime: 3d 0h 56m
@@ -354,7 +353,6 @@ To enable on-access file scanning with the <code>on\_access</code> runtime confi
 <pre><code>releases:
 <span>-</span> name: clamav
   version: x.x.x
-  <br>
 addons:
   name: clamav
   jobs:
@@ -380,7 +378,6 @@ To change the scheduled scan to run daily:
 <pre><code>releases:
 <span>-</span> name: clamav
   version: x.x.x
-  <br>
 addons:
   name: clamav
   jobs:
@@ -392,13 +389,10 @@ addons:
         scheduled: yes
 ...</code></pre>
 </li>
-<li> Apply changes by updating your runtime config as described in <a href="#deploy">Deploy the ClamAV Add-on</a>.
- </li>
 <li> (Optional) Restrict the timeframe when the scheduled scan can run by specifying a time range in 24-hour format in the properties <code>first_scheduled_scan_time</code> and <code>last_scheduled_scan_time</code>, as shown below:
 <pre><code>releases:
 <span>-</span> name: clamav
   version: x.x.x
-  <br>
 addons:
   name: clamav
   jobs:
@@ -412,6 +406,8 @@ addons:
         last_scheduled_scan_time: "4:30"</strong>
 ...</code></pre>
 </li>
+<li> Apply changes by updating your runtime config as described in <a href="#deploy">Deploy the ClamAV Add-on</a>.
+ </li>
 </ol>
 
 ##<a id="disable-scheduled-scan"></a>Disable Scheduled Scan
@@ -434,7 +430,6 @@ optionally, the <code>action\_destination</code> property, shown in bold:
 <pre><code>releases:
 <span>-</span> name: clamav
   version: x.x.x
-  <br>
 addons:
   name: clamav
   jobs:
@@ -464,7 +459,6 @@ If you don't supply an action, the function fails.
 <pre><code>releases:
 <span>-</span> name: clamav
   version: x.x.x
-  <br>
 addons:
   name: clamav
     jobs:
