@@ -348,27 +348,25 @@ clamd[PID]: INFECTED-FILE-PATH: VIRUS-NAME FOUND
 
 ClamAV offers immediate file scanning upon file modification. This feature may reduce the time it takes to detect and report malware. 
 
-Enable the feature with the `on_access` runtime config property:
+To enable on-access file scanning with the <code>on\_access</code> runtime config property:
 <ol>
-<li>In the <code>clamav.yml</code> file, add the `on_access` property under the <code>clamav</code> property, set `on_access` to <code>yes</code>, shown in bold: 
-  <pre><code>
-  releases:
-  <span>-</span> name: clamav
-      version: x.x.x
+<li>In the <code>clamav.yml</code> file, add the <code>on\_access</code> property under the <code>clamav</code> property, and set <code>on\_access</code> to <code>yes</code>, as shown in bold: 
+<pre><code>releases:
+<span>-</span> name: clamav
+  version: x.x.x
   <br>
-  addons:
-    name: clamav
-      jobs:
-        <span>-</span> name: clamav
-          release: clamav
-      properties:
-        clamav:
-          <strong>on_access: yes</strong>
-          scheduled: yes
-  ...
-  </code></pre>
+addons:
+  name: clamav
+  jobs:
+  <span>-</span> name: clamav
+    release: clamav
+    properties:
+      clamav:
+        <strong>on_access: yes</strong>
+        scheduled: yes
+...</code></pre>
 </li>
-<li>Apply changes by updating your runtime config as described in <a href="#download-deploy">Download and Deploy ClamAV Add-on</a>.</li>
+<li>Apply changes by updating your runtime config as described in <a href="#deploy">Deploy ClamAV Add-on</a>.</li>
 </ol>
 
 ##<a id="configure-scheduled-scan"></a>Configure Scheduled Scan
@@ -377,51 +375,51 @@ ClamAV can be configured to run a virus scan hourly or daily, with hourly scan b
 
 To change the scheduled scan to run daily:
 
-1. In the `clamav.yml` file, add the property `schedule_interval` under the `clamav` property, and set it to `daily`, as shown below:
-   <pre>
-   releases:
-   <span>-</span> name: clamav
-       version: x.x.x
-   <br>
-   addons:
-     name: clamav
-        jobs:
-          <span>-</span> name: clamav
-            release: clamav
-       properties:
-         clamav:
-            <strong>schedule\_interval: daily</strong>
-            scheduled: yes
-   ...
-  </pre>
-2. Apply changes by updating your runtime config as described in <a href="#download-deploy">Download and Deploy ClamAV Add-on</a>.
-
-3. (Optional) Restrict the timeframe when the scheduled scan can run by specifying a time range in 24h format using the properties `first_scheduled_scan_time` and `last_scheduled_scan_time`, as shown below:
-   <pre>
-   releases:
-   <span>-</span> name: clamav
-       version: x.x.x
-   <br>
-   addons:
-     name: clamav
-        jobs:
-          <span>-</span> name: clamav
-            release: clamav
-       properties:
-         clamav:
-            schedule\_interval: daily
-            scheduled: yes
-            <strong>first\_scheduled\_scan\_time: "2:00"
-            last\_scheduled\_scan\_time: "4:30"</strong>
-   ...
-  </pre>
+<ol>
+<li>In the <code>clamav.yml</code> file, add the property <code>schedule_interval</code> under the <code>clamav</code> property, and set it to <code>daily</code>, as shown below:
+<pre><code>releases:
+<span>-</span> name: clamav
+  version: x.x.x
+  <br>
+addons:
+  name: clamav
+  jobs:
+  <span>-</span> name: clamav
+    release: clamav
+    properties:
+      clamav:
+        <strong>schedule_interval: daily</strong>
+        scheduled: yes
+...</code></pre>
+</li>
+<li> Apply changes by updating your runtime config as described in <a href="#deploy">Deploy the ClamAV Add-on</a>.
+ </li>
+<li> (Optional) Restrict the timeframe when the scheduled scan can run by specifying a time range in 24-hour format in the properties <code>first_scheduled_scan_time</code> and <code>last_scheduled_scan_time</code>, as shown below:
+<pre><code>releases:
+<span>-</span> name: clamav
+  version: x.x.x
+  <br>
+addons:
+  name: clamav
+  jobs:
+  <span>-</span> name: clamav
+    release: clamav
+    properties:
+      clamav:
+        schedule_interval: daily
+        scheduled: yes
+        <strong>first_scheduled_scan_time: "2:00"
+        last_scheduled_scan_time: "4:30"</strong>
+...</code></pre>
+</li>
+</ol>
 
 ##<a id="disable-scheduled-scan"></a>Disable Scheduled Scan
 
 To disable the scheduled scan, do the following:
 <ol>
 <li>In the <code>clamav.yml</code> file, set the property <code>scheduled</code> to <code>no</code>.</li>
-<li>Apply changes by updating your runtime config as described in <a href="#download-deploy">Download and Deploy ClamAV Add-on</a>.</li>
+<li>Apply changes by updating your runtime config as described in <a href="#deploy">Deploy the ClamAV Add-on</a>.</li>
 </ol>
 
 ##<a id="quarantine"></a>Choose the Action on Infected Files
@@ -430,53 +428,52 @@ You can configure ClamAV to take action when infected files are found.
 By default, a notification is sent to the syslog when an infected file is found. 
 However, you can specify other actions, as described [in step 2 below](#step2).
 
-1. In the <code>clamav.yml</code> file, add the <code>action</code> property under the <code>clamav</code> property and,
-    optionally, the <code>action_destination</code> property, shown in bold:
-        
-        
-        releases:
-        - name: clamav
-            version: x.x.x
-
-        addons:
-          name: clamav
-            jobs:
-              - name: clamav
-                release: clamav
-            properties:
-              clamav:
-                action: <strong>ACTION</strong>
-                action_destination: <strong>PATH</strong>
-        ...
-        
-
-1. Replace <code>ACTION</code> with one of the following values:<a id="step2"></a>
-  * <code>notify</code>: The default, only send a notification to syslog
-  * <code>remove</code>: Delete the infected file from the filesystem
-  * <code>move</code>: Move the infected file to the directory location specified by `action_destination`
-  * <code>copy</code>: Copy the infected file to the directory location specified by `action_destination`
-
-    If you don't supply an action, the function fails.
-
-1. Replace <code>PATH</code> with the directory location where you want the infected files moved or copied to.
+<ol>
+<li>In the <code>clamav.yml</code> file, add the <code>action</code> property under the <code>clamav</code> property and,
+optionally, the <code>action\_destination</code> property, shown in bold:
+<pre><code>releases:
+<span>-</span> name: clamav
+  version: x.x.x
+  <br>
+addons:
+  name: clamav
+  jobs:
+  <span>-</span> name: clamav
+    release: clamav
+    properties:
+      clamav:
+        action: <strong>ACTION</strong>
+        action_destination: <strong>PATH</strong>
+...</code></pre>
+</li>
+<li>
+  <ul>Replace <code>ACTION</code> with one of the following values:<a id="step2"></a>
+  <li> <code>notify</code>: The default, only send a notification to syslog</li>
+  <li> <code>remove</code>: Delete the infected file from the filesystem</li>
+  <li> <code>move</code>: Move the infected file to the directory location specified by <code>action_destination</code></li>
+  <li> <code>copy</code>: Copy the infected file to the directory location specified by <code>action_destination</code></li>
+</ul>
+If you don't supply an action, the function fails.
+</li>
+<li> Replace <code>PATH</code> with the directory location where you want the infected files moved or copied to.
     The system does not scan the moved-to or copied-to location.
     If the directory path is not valid, the function fails.<br/>
     <br>
     Example configuration:
 
-    ```
-    releases:
-    - name: clamav
-        version: x.x.x
-
-    addons:
-      name: clamav
-        jobs:
-          - name: clamav
-            release: clamav
-        properties:
-          clamav:
-            action: move
-            action_destination: /var/vcap/data/clamav/found
-      ...
-    ```  
+<pre><code>releases:
+<span>-</span> name: clamav
+  version: x.x.x
+  <br>
+addons:
+  name: clamav
+    jobs:
+    <span>-</span> name: clamav
+      release: clamav
+      properties:
+        clamav:
+          action: move
+          action_destination: /var/vcap/data/clamav/found
+...</code></pre>
+  </li>
+</ol>
