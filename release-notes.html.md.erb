@@ -7,6 +7,44 @@ owner: Security Engineering
 
 This topic contains release notes for ClamAV Add-on for PCF.
 
+## v1.4.34 GA
+
+**Release Date:** September 4, 2018
+
+### Features
+
+New features in this release:
+
+* Added the ability to specify a schedule for scan start times for daily scans.
+
+### Known Issues
+
+There are no known issues for this release.
+
+## v1.4.29 GA
+
+**Release Date:** July 30, 2018
+
+### Features
+
+Change in this release:
+
+* The bundled ClamAV open source distribution is now v0.100.1.
+  This new version of ClamAV includes the following security fixes:
+
+    + [CVE-2017-16932](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-16932):
+      parser.c in libxml2 before 2.9.5 does not prevent infinite recursion in parameter entities.
+    + [CVE-2018-0360](https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=CVE-2018-0360):
+      ClamAV before 0.100.1 has an HWP integer overflow with a resultant infinite loop via a crafted Hangul Word Processor file.
+    + [CVE-2018-0361](https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=CVE-2018-0361):
+      ClamAV before 0.100.1 lacks a PDF object length check, resulting in an unreasonably long time to parse a relatively small file.
+
+For the ClamAV v0.100.1 release notes, see the [ClamAV blog](https://blog.clamav.net/2018/07/clamav-01001-has-been-released.html).
+
+### Known Issues
+
+There are no known issues for this release.
+
 ## v1.4.28 GA
 
 **Release Date:** June 28, 2018
