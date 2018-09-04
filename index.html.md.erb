@@ -30,11 +30,11 @@ The following table provides version and version-support information about the C
     </tr>
     <tr>
         <td>Compatible Ops Manager versions</td>
-        <td>v1.12 or later</td>
+        <td>v2.0 or later</td>
     </tr>
     <tr>
         <td>Compatible Elastic Runtime versions</td>
-        <td>v1.12 or later</td>
+        <td>v2.0 or later</td>
     </tr>
     <tr>
         <td>Compatible Pivotal Application Service (PAS)<sup>*</sup> versions</td>
@@ -184,18 +184,18 @@ If the proxy server needs authentication, add the <code>proxy\_user</code> and
     ```
     releases:
     - name: clamav
-        version: x.x.x
+      version: x.x.x
     addons:
-       - name: clamav
-        jobs:
-        - name: clamav
-            release: clamav
-       properties:
-         clamav:
-            proxy_host: PROXY.LOCALDOMAIN
-            proxy_port: PROXY-PORT
-            proxy_user: PROXY-USERNAME
-            proxy_password: PROXY-SECRET
+    - name: clamav
+      jobs:
+      - name: clamav
+        release: clamav
+      properties:
+        clamav:
+          proxy_host: PROXY.LOCALDOMAIN
+          proxy_port: PROXY-PORT
+          proxy_user: PROXY-USERNAME
+          proxy_password: PROXY-SECRET
     ...
     ```
 
