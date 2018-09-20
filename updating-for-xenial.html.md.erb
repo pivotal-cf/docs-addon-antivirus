@@ -69,7 +69,9 @@ see [Tiles Using Xenial Stemcells in PCF](https://docs.pivotal.io/pivotalcf/stem
 
 If you use ClamAV Add-on v1.4.28 or later  without the `ubuntu-xenial` 
 property in the runtime config, then you must add it to your
-existing `clamav.yml` and redeploy.  Follow these steps:
+existing `clamav.yml` and redeploy.
+
+Follow these steps:
 
 1. SSH into the Ops Manager VM.
    For how to do this, see [SSH into Ops Manager](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#ssh).
@@ -103,6 +105,9 @@ existing `clamav.yml` and redeploy.  Follow these steps:
         - os: ubuntu-trusty
         - os: ubuntu-xenial
     ```
+
+4. (Optional) If you use PAS for Windows v2.2 or earlier, do Step 3 of [Add the windows1803 Stemcell
+   to the ClamAV Add-on](./updating-for-pasw.html#add).
 
 4. To update the runtime config, run the following command:
 

@@ -1,21 +1,30 @@
 ---
-title: Updating ClamAV Add-on for PCF to Run with PAS for Windows
+title: Updating ClamAV Add-on for PCF to Run with PAS for Windows v2.3
 owner: Security Engineering
 ---
 
 <strong><%= modified_date %></strong>
 
-This topic describes how to update your runtime config to add the new windows1803 stemcell. 
+This topic describes how to update your runtime config to add the new Windows stemcell version. 
 
-If you are upgrading to PAS for Windows v2.3, you must add the windows1803 stemcell to your runtime config
-before upgrading to PAS for Windows v2.3. 
+If you are upgrading to PASW v2.3,
+you must add the `windows1803` stemcell to your runtime config before upgrading to PASW v2.3. 
 
-<p class="note warning"><strong> WARNING</strong>: If you upgrade to PAS for Windows v2.3 without first updating runtime config, 
-then the PAS for Windows VMs will not be protected by ClamAV.</p>
+In Pivotal Application Service for Windows (PASW) v2.2 and earlier,
+the Windows 2016 stemcell is versioned 1709 and named `windows2016`.
+However, in PASW v2.3, the Windows 2016 stemcell is versioned 1803
+and named `windows1803`. 
+The new stemcell name indicates the _stemcell_ version instead of the _Windows Server_ version.
 
-##<a id="add"></a> Add the windows1803 Stemcell Property to the ClamAV Add-on
+<p class="note breaking"><strong> Breaking Change:</strong> If you upgrade to PASW v2.3 without first updating the runtime config, 
+then the PASW VMs will not be protected by ClamAV.</p>
 
-To add the `windows1803` stemcell property to the runtime config, do the following:
+For general information about stemcells and PASW, see [PAS for Windows v2.3 Release
+Notes](https://docs.pivotal.io/pivotalcf/2-3/pcf-release-notes/windows-rn.html#known-issues).
+
+##<a id="add"></a> Add the windows1803 Stemcell to the ClamAV Add-on
+
+To add the `windows1803` stemcell property to the runtime config, do the following.
 
 1. SSH into the Ops Manager VM.
    For how to do this, see [SSH into Ops Manager](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#ssh).
@@ -34,7 +43,7 @@ To add the `windows1803` stemcell property to the runtime config, do the followi
 
 
 3. Edit the `clamav.yml` file to add `- os: windows1803` under 
-    `stemcell` as shown below:
+    `stemcell` in the `clamav-windows` section, as shown below:
 
     ```
     addons:
