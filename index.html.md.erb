@@ -466,3 +466,26 @@ addons:
 ...</code></pre>
   </li>
 </ol>
+
+##<a id="exclude"></a>Exclude Files and Directories
+
+You can configure ClamAV to exclude files and directories from being scanned.
+By default, <code>/proc</code> and <code>/sys</code> directories are excluded.
+Append regex matching filepaths into the <code>exclude_paths</code> list.
+
+<p class="note"><strong>Note</strong>: We recommend continuing to exclude the defaults listed below. </p>
+<pre><code>releases:
+<span>-</span> name: clamav
+  version: x.x.x
+addons:
+  name: clamav
+    jobs:
+    <span>-</span> name: clamav
+      release: clamav
+      properties:
+        clamav:
+          exclude_paths:
+          - ^/proc/
+          - ^/sys/
+          - <strong>ADDITONAL_EXCLUSIONS</strong>
+...</code></pre>
