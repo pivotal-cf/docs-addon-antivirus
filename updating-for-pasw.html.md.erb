@@ -5,19 +5,38 @@ owner: Security Engineering
 
 <strong><%= modified_date %></strong>
 
+Read this topic if you use Pivotal Application Service for Windows (PAWS).
+
 This topic describes how to update your runtime config to add the new Windows stemcell version. 
 
-If you are upgrading to PASW v2.3,
-you must add the `windows1803` stemcell to your runtime config before upgrading to PASW v2.3. 
+<p class="note breaking"><strong>Breaking Change:</strong> If you upgrade to PASW v2.3,
+you must update your runtime config to include the new Windows stemcell.
+Otherwise, the PASW VMs will not be protected by ClamAV.</p>
 
-In Pivotal Application Service for Windows (PASW) v2.2 and earlier,
-the Windows 2016 stemcell is versioned 1709 and named `windows2016`.
-However, in PASW v2.3, the Windows 2016 stemcell is versioned 1803
-and named `windows1803`. 
-The new stemcell name indicates the _stemcell_ version instead of the _Windows Server_ version.
+##<a id="renamed"></a>Windows Stemcell Renamed
 
-<p class="note breaking"><strong> Breaking Change:</strong> If you upgrade to PASW v2.3 without first updating the runtime config, 
-then the PASW VMs will not be protected by ClamAV.</p>
+The new Windows stemcell name indicates the _stemcell_ version instead of the _Windows Server_ version.
+
+<table>
+  <tr>
+    <th>PASW version</th>
+    <th>Stemcell name</th>
+    <th>Stemcell version</th>
+    <th>Windows Server version</th>
+  </tr>
+  <tr>
+    <td>2.2 and earlier</td>
+    <td><code>windows2016</code></td>
+    <td>1709</td>
+    <td>2016</td>
+  </tr>
+  <tr>
+    <td>2.3 and later</td>
+    <td><code>windows1803</code></td>
+    <td>1803</td>
+    <td>2016</td>
+  </tr>
+</table>
 
 For general information about stemcells and PASW, see [PAS for Windows v2.3 Release
 Notes](https://docs.pivotal.io/pivotalcf/2-3/pcf-release-notes/windows-rn.html#known-issues).
