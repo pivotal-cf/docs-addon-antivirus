@@ -464,24 +464,30 @@ addons:
 You can configure ClamAV to exclude files and directories from being scanned.
 By default, the scan excludes <code>/proc</code> and <code>/sys</code> directories.
 
-To exclude files and directories from the scan, append regex matching filepaths
-to the <code>exclude_paths</code> list as shown below:
+To exclude files and directories from the scan, do the following:
 
+1. Add the `exclude_paths` property and append regex matching file paths to the list,
+as shown below:
 <p class="note"><strong>Note</strong>:
-  Pivotal recommends that <code>/proc</code> and <code>/sys</code> directories remain excluded.</p>
+  Pivotal recommends that you include the <code>/proc</code> and <code>/sys</code>
+  directories on the `exclude_paths` list.
+  This is because they must be on the list to remain excluded.</p>
 
-<pre><code>releases:
-<span>-</span> name: clamav
-  version: x.x.x
-addons:
-  name: clamav
-    jobs:
+    <pre><code>releases:
     <span>-</span> name: clamav
-      release: clamav
-      properties:
-        clamav:
-          exclude_paths:
-          - ^/proc/
-          - ^/sys/
-          - <strong>ADDITONAL-EXCLUSIONS</strong>
-...</code></pre>
+      version: x.x.x
+    addons:
+      name: clamav
+        jobs:
+        <span>-</span> name: clamav
+          release: clamav
+          properties:
+            clamav:
+              exclude_paths:
+              - ^/proc/
+              - ^/sys/
+              - ADDITONAL-EXCLUSIONS
+    ...</code></pre>
+
+1. Apply changes by updating your runtime config.
+For how to do this, see steps 4 to 7 of <a href="#deploy">Deploy the ClamAV Add-on</a> above.
