@@ -428,7 +428,7 @@ However, you can specify other actions, as described [in step 2 below](#step2).
 
 <ol>
 <li>In the <code>clamav.yml</code> file, add the <code>action</code> property under the <code>clamav</code> property and,
-optionally, the <code>action_destination</code> property, shown in bold:
+optionally, the <code>action_destination</code> property, as shown below:
 <pre><code>releases:
 <span>-</span> name: clamav
   version: x.x.x
@@ -439,8 +439,8 @@ addons:
     release: clamav
     properties:
       clamav:
-        action: <strong>ACTION</strong>
-        action_destination: <strong>PATH</strong>
+        action: ACTION
+        action_destination: PATH
 ...</code></pre>
 </li>
 <li>Replace <code>ACTION</code> with one of the following values:<a id="step2"></a>
