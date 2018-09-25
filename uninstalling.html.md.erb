@@ -20,8 +20,14 @@ This topic describes how to uninstall ClamAV from your deployment, and how to ve
     $ bosh -e my-env update-runtime-config --name=clamav PATH\_TO\_SAVE\_THE\_RUNTIME\_CONFIG
   </pre>
 4. Navigate to your **Installation Dashboard** in Ops Manager.
-5. Click **Apply Changes**.
-6. Wait for the installation to complete.
+
+5. If you are using Ops Manager v2.3 or later, click **Review Pending Changes**.
+   For more information about this Ops Manager page,
+   see [Reviewing Pending Product Changes](https://docs.pivotal.io/pivotalcf/customizing/review-pending-changes.html).
+
+6. Click **Apply Changes**.
+
+7. Wait for the installation to complete.
 
 ## <a id='verify-uninstall'></a>Verify the Uninstallation
 
