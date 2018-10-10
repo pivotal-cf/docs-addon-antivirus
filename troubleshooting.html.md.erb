@@ -13,7 +13,7 @@ and provides general recommendations for troubleshooting and ensuring that the d
 ### <a id=""></a> Ops Manager Fails to Apply Changes
 
 #### Symptom
-Applying changes in Ops Manager fails. The bottom of the changelog contains an error message similiar to the following:
+Applying changes in Ops Manager fails. The bottom of the changelog contains an error message similar to the following:
 
 ```
 ...
@@ -43,7 +43,11 @@ Malware signature or sample malware is not detected, even though the ClamAV daem
 Virus signatures are not up-to-date.
 
 #### Solution
+<<<<<<< HEAD
 First, ensure that the [configuration checks](./installing.html#verify) have been done,
+=======
+First, ensure that the [configuration checks](./install.html#verify) have been done,
+>>>>>>> v1.4
 that the mirror server is correctly configured and is available on the network from within the PCF private subnet,
 and that at least one hour has elapsed.
 One hour is the default scan schedule interval.
@@ -82,6 +86,10 @@ However, CGroups allows ClamAV to occupy more CPU resources when all other proce
 because it does not impact their performance.
 
 ####Solution
+<<<<<<< HEAD
 This is expected behavior from CGroups.
 If a hard limit is required, set the [`enforce_cpu_limit`](./installing.html#enforce_cpu_limit) Linux property.
 
+=======
+This is expected behavior from CGroups. If a hard limit is required, set the [`enforce_cpu_limit`](./install.html#linux-template) Linux property.
+>>>>>>> v1.4
