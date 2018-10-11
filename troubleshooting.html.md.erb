@@ -16,7 +16,7 @@ and provides general recommendations for troubleshooting and ensuring that the d
 Applying changes in Ops Manager fails. The bottom of the changelog contains an error message similar to the following:
 
 ```
-...
+... 
 Started updating job nats > nats/0 (12bfae02-b4af-4104-b2bd-227ff07b2d92) (canary). Done (00:02:31)
   Failed updating job etcd_server > etcd_server/0 (f8e492bf-db09-4d38-8a73-5cf69d7b8a11) (canary): 'etcd_server/0 (f8e492bf-db09-4d38-8a73-5cf69d7b8a11)' is not running after update. Review logs for failed jobs: clamd (00:05:53)
 
@@ -43,11 +43,8 @@ Malware signature or sample malware is not detected, even though the ClamAV daem
 Virus signatures are not up-to-date.
 
 #### Solution
-<<<<<<< HEAD
 First, ensure that the [configuration checks](./installing.html#verify) have been done,
-=======
-First, ensure that the [configuration checks](./install.html#verify) have been done,
->>>>>>> v1.4
+
 that the mirror server is correctly configured and is available on the network from within the PCF private subnet,
 and that at least one hour has elapsed.
 One hour is the default scan schedule interval.
@@ -86,10 +83,5 @@ However, CGroups allows ClamAV to occupy more CPU resources when all other proce
 because it does not impact their performance.
 
 ####Solution
-<<<<<<< HEAD
 This is expected behavior from CGroups.
 If a hard limit is required, set the [`enforce_cpu_limit`](./installing.html#enforce_cpu_limit) Linux property.
-
-=======
-This is expected behavior from CGroups. If a hard limit is required, set the [`enforce_cpu_limit`](./install.html#linux-template) Linux property.
->>>>>>> v1.4
