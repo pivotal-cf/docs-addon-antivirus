@@ -304,6 +304,34 @@ A generalized format for the logline is:
 clamd[PID]: INFECTED-FILE-PATH: VIRUS-NAME FOUND
 </pre>
 
+##<a id="setup-whitelist"></a>Whitelisting False Positives
+
+If a scan is reporting false positives, please report the issue to <a href="troubleshooting.html#false-positive-clamav">ClamAV directly</a>
+
+It will take about a week for ClamAV to verify and publish a new database. If a week is too long, the ClamAV release provides an option to whitelist signature names.
+
+1) Add the `whitelist` property and append the false positive signature names, as an example shown below:
+
+<pre><code>releases:
+<span>-</span> name: clamav
+  version: x.x.x
+addons:
+  name: clamav
+  jobs:
+  <span>-</span> name: clamav
+    release: clamav
+    properties:
+      clamav:
+        <strong>whitelist:</strong>
+        <strong>  - Eicar-Test-Signature</strong>
+        <strong>  - Clamav.Test.File-7</strong>
+        <strong>  - Win.Test.EICAR_NDB-1</strong>
+        <strong>  - Eicar-Signature</strong>
+...</code></pre>
+
+2) Apply changes by updating your runtime config.
+For how to do this, see steps 4 to 7 of <a href="#deploy">Deploy the ClamAV Add-on</a> above.
+
 ##<a id="setup-on-access"></a>Enable On-Access Scan
 <p class="note"><strong>Note</strong>: On-Access Scan is not supported on Windows.</p>
 
