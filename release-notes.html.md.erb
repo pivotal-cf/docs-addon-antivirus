@@ -6,6 +6,34 @@ owner: Security Engineering
 <strong><%= modified_date %></strong>
 
 This topic contains release notes for ClamAV Add-on for PCF.
+ 
+## v1.4.38
+
+**Release Date:** October 29, 2018
+
+### Features
+
+Changes in this release:
+
+* The bundled ClamAV open source distribution is now v0.100.2.
+  This new version of ClamAV includes the following security fixes:
+
+    + [CVE-2018-15378](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-15378):
+    A vulnerability in ClamAV's MEW unpacking feature in v0.100.1 and earlier
+    could allow a denial-of-service (DoS) condition.
+
+    + [CVE-2018-14680](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-14680):
+    An issue in mspack/chmd.c in libmspack before 0.7alpha prevented it rejecting blank CHM filenames.
+
+    + [CVE-2018-14681](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-14681):
+    Bad KWAJ file header extensions could cause a one- or two-byte overwrite.
+
+    + [CVE-2018-14682](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-14682):
+    An off-by-one error in the TOLOWER() macro for CHM decompression.
+    Additionally, version 0.100.2 reverted 0.100.1's patch for [CVE-2018-14679](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-14679)
+    and applied this newer fix instead.
+
+For the ClamAV v0.100.2 release notes, see the [ClamAV blog](https://blog.clamav.net/2018/10/clamav-01002-has-been-released.html).
 
 ## 1.4.36
 
