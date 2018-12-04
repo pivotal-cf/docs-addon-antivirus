@@ -291,18 +291,7 @@ After `clamdscan` completes, a notification should appear in `/var/log/syslog`. 
 
 ###<a id="format"></a>ClamAV Log Format
 
-ClamAV log format is unstructured. If a virus is detected, the following text is sent to syslog:
-
-<pre>
-Jul 11 17:36:35 k2lam76scmb clamd[3022]: SelfCheck: Database status OK
-Jul 11 17:42:34 k2lam76scmb clamd[3022]: /bin/infected-file: Eicar-Test-Signature FOUND
-</pre>
-
-A generalized format for the logline is:
-
-<pre class="terminal">
-clamd[PID]: INFECTED-FILE-PATH: VIRUS-NAME FOUND
-</pre>
+See [Monitoring ClamAV Logs](./monitoring-logs.html)
 
 ## <a id="setup-whitelist"></a>Whitelist False Positives  
 

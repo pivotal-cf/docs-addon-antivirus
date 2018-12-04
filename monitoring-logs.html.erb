@@ -1,0 +1,125 @@
+---
+title: Monitoring ClamAV Logs
+owner: Security Engineering
+---
+
+<strong><%= modified_date %></strong>
+
+###<a id="format"></a>ClamAV Log Format
+
+ClamAV log format is unstructured.
+
+With syslog-forwarder syslog format is
+
+```
+<$PRI>$VERSION $TIMESTAMP $HOST $APP_NAME $PROC_ID $MSG_ID [instance@47450 director="$DIRECTOR" deployment="$DEPLOYMENT" group="$INSTANCE_GROUP" az="$AVAILABILITY_ZONE" id="$ID"] $MESSAGE
+```
+where $APP_NAME would be one of freshclam,clamdscan,clamd
+
+Error output: syslog's LOG_ERR level.
+syslog-forwarder output will start with "<3>"
+
+####<a id="freshclam-check"></a>Freshclam checking for updates
+Sample:
+```
+ClamAV update process started at Wed Nov 28 15:58:23 2018
+``
+
+####<a id="freshclam-update"></a>Freshclam updating the virus database
+Sample:
+```
+Downloading main.cvd [100%]
+main.cvd updated (version: 58, sigs: 4566249, f-level: 60, builder: sigmgr)
+Downloading daily.cvd [100%]
+daily.cvd updated (version: 25135, sigs: 2155329, f-level: 63, builder: neo)
+Downloading bytecode.cvd [100%]
+bytecode.cvd updated (version: 327, sigs: 91, f-level: 63, builder: neo)
+Database updated (6721669 signatures) from pivotal-clamav-mirror.s3.amazonaws.com (IP: 52.216.169.19)
+
+####<a id="freshclam-up-to-date"></a>Freshclam virus database up to date
+Sample:
+```
+main.cvd is up to date (version: 58, sigs: 4566249, f-level: 60, builder: sigmgr)
+daily.cvd is up to date (version: 25135, sigs: 2155329, f-level: 63, builder: neo)
+bytecode.cvd is up to date (version: 327, sigs: 91, f-level: 63, builder: neo)
+```
+
+####<a id="freshclam-old"></a>Freshclam virus database older than 7 days
+Sample:
+```
+[LibClamAV] **************************************************
+[LibClamAV] ***  The virus database is older than 7 days!  ***
+[LibClamAV] ***   Please update it as soon as possible.    ***
+[LibClamAV] **************************************************
+```
+
+####<a id="freshclam-terminated"></a>Freshclam terminated
+Sample:
+```
+Update process terminated
+```
+
+####<a id="clamd-start"></a>Clamd starting
+Sample:
+```
+Wed Nov 28 15:58:47 2018 -> +++ Started at Wed Nov 28 15:58:47 2018
+Wed Nov 28 15:59:02 2018 -> Self checking every 600 seconds.
+```
+
+####<a id="clamd-update-database"></a>Clamd checking for updated virus signatures
+Samples:
+```
+SelfCheck: Database status OK.
+```
+```
+SelfCheck: Database modification detected. Forcing reload
+```
+```
+No stats for Database check - forcing reload
+```
+
+####<a id="clamd-start-scan"></a>Clamd scan starting (available on version 1.4.39 and above)
+Sample:
+```
+Starting scheduled scan
+```
+
+####<a id="clamd-virus-detected"></a>Clamd virus detected
+Sample:
+```
+/var/vcap/data/test.txt: Eicar-Test-Signature FOUND
+```
+
+####<a id="clamd-virus-removed"></a>Clamd virus removed
+Sample:
+```
+/var/vcap/data/test.txt: Removed.
+```
+
+####<a id="clamd-virus-moved"></a>Clamd virus moved
+Sample:
+```
+/var/vcap/data/test.txt: moved to '/var/vcap/data/clamav/found/test.txt.001'
+```
+
+####<a id="clamd-virus-copied"></a>Clamd virus copied
+Sample:
+```
+/var/vcap/data/test.txt: copied to '/var/vcap/data/clamav/found/test.txt.001'
+```
+
+####<a id="clamd-scan-complete"></a>Clamd scan finished (available on version 1.4.39 and above)
+Sample:
+```
+----------- SCAN SUMMARY -----------
+Infected files: 1
+Time: 346.887 sec (5 m 46 s)
+```
+
+####<a id="clamd-terminated"></a>Clamd terminated
+Sample:
+```
+Wed Nov 28 19:25:23 2018 -> Pid file removed.
+Wed Nov 28 19:25:23 2018 -> --- Stopped at Wed Nov 28 19:25:23 2018
+Wed Nov 28 19:25:23 2018 -> Socket file removed.
+```
