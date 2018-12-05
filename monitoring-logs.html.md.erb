@@ -5,14 +5,19 @@ owner: Security Engineering
 
 <strong><%= modified_date %></strong>
 
+This topic contains sample logs emitted by ClamAV. These samples can be used to configure a Security Information and Event Management (SIEM) system to verify regular activity and generate alerts for virus detections or outdated virus signatures.
+
+
 ##<a id="format"></a>ClamAV Log Format
 
 ClamAV log format is unstructured.
+It does not adhere to any standard log format.
+The log is a result of the output.
 
 With syslog-forwarder, the syslog format is:
 
 <pre>
-	<PRI> \
+	&ltPRI> \
 	VERSION \
 	TIMESTAMP \
 	HOST \
@@ -29,7 +34,7 @@ With syslog-forwarder, the syslog format is:
 </pre>
 
 The `APP-NAME` is `freshclam`, `clamdscan`, or `clamd`.
-For syslog-forwarder `LOG-ERR`, the error output starts with "<3>".
+For syslog-forwarder `LOG-ERR`, the error output starts with `<3>`.
 
 For Example:
 
@@ -118,7 +123,7 @@ No stats for Database check - forcing reload
 </pre>
 
 ###<a id="clamd-start-scan"></a>Start Scheduled Scan
-Available on version 1.4.39 and later.
+This is not provided on v1.4.38 and earlier.
 
 Sample:
 <pre class="terminal">
@@ -150,7 +155,7 @@ Sample:
 </pre>
 
 ###<a id="clamd-scan-complete"></a>Scan Finished
-Available on version 1.4.39 and later.
+This is not provided on v1.4.38 and earlier.
 
 Sample:
 <pre class="terminal">
