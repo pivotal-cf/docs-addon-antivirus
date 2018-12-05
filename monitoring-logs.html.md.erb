@@ -9,25 +9,61 @@ owner: Security Engineering
 
 ClamAV log format is unstructured.
 
-With syslog-forwarder syslog format is
+With syslog-forwarder, the syslog format is:
 
-```
-<$PRI>$VERSION $TIMESTAMP $HOST $APP_NAME $PROC_ID $MSG_ID [instance@47450 director="$DIRECTOR" deployment="$DEPLOYMENT" group="$INSTANCE_GROUP" az="$AVAILABILITY_ZONE" id="$ID"] $MESSAGE
-```
-where $APP_NAME would be one of freshclam,clamdscan,clamd
+<pre>
+	<PRI> \
+	VERSION \
+	TIMESTAMP \
+	HOST \
+	APP-NAME \
+	PROC-ID \
+	MSG-ID \
+	[instance@47450 \
+	director="DIRECTOR" \
+	deployment="DEPLOYMENT" \
+	group="INSTANCE-GROUP" \
+	az="AVAILABILITY-ZONE" \
+	id="ID"] \
+	MESSAGE \
+</pre>
 
-Error output: syslog's LOG_ERR level.
-syslog-forwarder output will start with "<3>"
+The `APP-NAME` is `freshclam`, `clamdscan`, or `clamd`.
+For syslog-forwarder `LOG-ERR`, the error output starts with "<3>".
 
-####<a id="freshclam-check"></a>Freshclam checking for updates
+For Example:
+
+<pre class="terminal">
+	<3> \
+	1 \
+	2017-01-25T13:25:03.18377Z \
+	192.0.2.10 \
+	clamd \
+	rs2 \
+	- \
+	[instance@47450 \
+	director="test-env" \
+	deployment="cf" \
+	group="diego_database" \
+	az="us-west1-a" \
+	id="83bd66e5-3fdf-44b7-bdd6-508deae7c786"] \
+	[INFO] the leader is [https://diego-database-0.etcd.service.cf.internal:4001] \
+</pre>
+
+For more information, see [Format](https://github.com/cloudfoundry/syslog-release#format) in the syslog-release GitHub repository.
+
+##<a id="freshclam"></a>Freshclam Logs
+
+
+###<a id="freshclam-check"></a>Check for Updates
 Sample:
-```
+<pre class="terminal">
 ClamAV update process started at Wed Nov 28 15:58:23 2018
-``
+</pre>
 
-####<a id="freshclam-update"></a>Freshclam updating the virus database
+###<a id="freshclam-update"></a>Update the Virus Database
 Sample:
-```
+<pre class="terminal">
 Downloading main.cvd [100%]
 main.cvd updated (version: 58, sigs: 4566249, f-level: 60, builder: sigmgr)
 Downloading daily.cvd [100%]
@@ -35,91 +71,98 @@ daily.cvd updated (version: 25135, sigs: 2155329, f-level: 63, builder: neo)
 Downloading bytecode.cvd [100%]
 bytecode.cvd updated (version: 327, sigs: 91, f-level: 63, builder: neo)
 Database updated (6721669 signatures) from pivotal-clamav-mirror.s3.amazonaws.com (IP: 52.216.169.19)
+</pre>
 
-####<a id="freshclam-up-to-date"></a>Freshclam virus database up to date
+###<a id="freshclam-up-to-date"></a>Virus database is Up-to-Date
 Sample:
-```
+<pre class="terminal">
 main.cvd is up to date (version: 58, sigs: 4566249, f-level: 60, builder: sigmgr)
 daily.cvd is up to date (version: 25135, sigs: 2155329, f-level: 63, builder: neo)
 bytecode.cvd is up to date (version: 327, sigs: 91, f-level: 63, builder: neo)
-```
+</pre>
 
-####<a id="freshclam-old"></a>Freshclam virus database older than 7 days
+###<a id="freshclam-old"></a>Virus Database is Older Than 7 Days
 Sample:
-```
+<pre class="terminal">
 [LibClamAV] **************************************************
 [LibClamAV] ***  The virus database is older than 7 days!  ***
 [LibClamAV] ***   Please update it as soon as possible.    ***
 [LibClamAV] **************************************************
-```
+</pre>
 
-####<a id="freshclam-terminated"></a>Freshclam terminated
+###<a id="freshclam-terminated"></a>Process Terminated
 Sample:
-```
+<pre class="terminal">
 Update process terminated
-```
+</pre>
 
-####<a id="clamd-start"></a>Clamd starting
+##<a id="clamd"></a>Clamd Logs
+
+###<a id="clamd-start"></a>Start Clamd
 Sample:
-```
+<pre class="terminal">
 Wed Nov 28 15:58:47 2018 -> +++ Started at Wed Nov 28 15:58:47 2018
 Wed Nov 28 15:59:02 2018 -> Self checking every 600 seconds.
-```
+</pre>
 
-####<a id="clamd-update-database"></a>Clamd checking for updated virus signatures
+###<a id="clamd-update-database"></a>Check for Updated Virus Signatures
 Samples:
-```
+<pre class="terminal">
 SelfCheck: Database status OK.
-```
-```
+</pre>
+<pre class="terminal">
 SelfCheck: Database modification detected. Forcing reload
-```
-```
+</pre>
+<pre class="terminal">
 No stats for Database check - forcing reload
-```
+</pre>
 
-####<a id="clamd-start-scan"></a>Clamd scan starting (available on version 1.4.39 and above)
+###<a id="clamd-start-scan"></a>Start Scheduled Scan
+Available on version 1.4.39 and later.
+
 Sample:
-```
+<pre class="terminal">
 Starting scheduled scan
-```
+</pre>
 
-####<a id="clamd-virus-detected"></a>Clamd virus detected
+###<a id="clamd-virus-detected"></a>Virus Detected
 Sample:
-```
+<pre class="terminal">
 /var/vcap/data/test.txt: Eicar-Test-Signature FOUND
-```
+</pre>
 
-####<a id="clamd-virus-removed"></a>Clamd virus removed
+###<a id="clamd-virus-removed"></a>Virus Removed
 Sample:
-```
+<pre class="terminal">
 /var/vcap/data/test.txt: Removed.
-```
+</pre>
 
-####<a id="clamd-virus-moved"></a>Clamd virus moved
+###<a id="clamd-virus-moved"></a>Virus Moved
 Sample:
-```
+<pre class="terminal">
 /var/vcap/data/test.txt: moved to '/var/vcap/data/clamav/found/test.txt.001'
-```
+</pre>
 
-####<a id="clamd-virus-copied"></a>Clamd virus copied
+###<a id="clamd-virus-copied"></a>Virus Copied
 Sample:
-```
+<pre class="terminal">
 /var/vcap/data/test.txt: copied to '/var/vcap/data/clamav/found/test.txt.001'
-```
+</pre>
 
-####<a id="clamd-scan-complete"></a>Clamd scan finished (available on version 1.4.39 and above)
+###<a id="clamd-scan-complete"></a>Scan Finished
+Available on version 1.4.39 and later.
+
 Sample:
-```
+<pre class="terminal">
 ----------- SCAN SUMMARY -----------
 Infected files: 1
 Time: 346.887 sec (5 m 46 s)
-```
+</pre>
 
-####<a id="clamd-terminated"></a>Clamd terminated
+###<a id="clamd-terminated"></a>Process Terminated
 Sample:
-```
+<pre class="terminal">
 Wed Nov 28 19:25:23 2018 -> Pid file removed.
 Wed Nov 28 19:25:23 2018 -> --- Stopped at Wed Nov 28 19:25:23 2018
 Wed Nov 28 19:25:23 2018 -> Socket file removed.
-```
+</pre>
