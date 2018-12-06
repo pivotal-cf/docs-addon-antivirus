@@ -5,7 +5,9 @@ owner: Security Engineering
 
 <strong><%= modified_date %></strong>
 
-This topic contains sample logs emitted by ClamAV. These samples can be used to configure a Security Information and Event Management (SIEM) system to verify regular activity and generate alerts for virus detections or outdated virus signatures.
+This topic contains sample logs emitted by ClamAV.
+These samples can be used to configure a Security Information and Event Management (SIEM) system
+to verify regular activity and generate alerts for virus detections or outdated virus signatures.
 
 
 ##<a id="format"></a>ClamAV Log Format
@@ -36,7 +38,7 @@ With syslog-forwarder, the syslog format is:
 The `APP-NAME` is `freshclam`, `clamdscan`, or `clamd`.
 For syslog-forwarder `LOG-ERR`, the error output starts with `<3>`.
 
-For Example:
+For example:
 
 <pre class="terminal">
 	<3> \
