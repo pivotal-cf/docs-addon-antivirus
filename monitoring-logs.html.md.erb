@@ -10,6 +10,242 @@ This topic contains sample logs emitted by ClamAV.
 These samples can be used to configure a Security Information and Event Management (SIEM) system
 to verify regular activity and generate alerts for virus detections or outdated virus signatures.
 
+##<a id="messages"></a>Log Messages
+
+<table>
+  <tr>
+    <td>Message</td>
+    <td>App</td>
+    <td>Meanings</td>
+    <td>Healthy/Unhealthy?</td>
+  </tr>
+<!--  =============================== freshclam section ===============================  -->
+  <tr>
+    <td><a href="#freshclam-check">Check for Updates</a></td>
+    <td>freshclam</td>
+    <td>States that the freshclam app is checking the 
+    	configured remote mirror for an update to the local virus signature database.</td>
+    <td>Healthy</td>
+  </tr>
+  <tr>
+    <td><a href="#freshclam-update">Update the Virus Database</a></td>
+    <td>freshclam</td>
+    <td>States that the virus database is being updated.</td>
+    <td>Healthy</td>
+  </tr>
+  <tr>
+    <td><a href="#freshclam-up-to-date">Virus Database Is Up-to-Date</a></td>
+    <td>freshclam</td>
+    <td>States that the virus database is up-to-date.</td>
+    <td>Healthy</td>
+  </tr>
+  <tr>
+    <td><a href="#freshclam-old">Virus Database is Older Than 7 Days</a></td>
+    <td>freshclam</td>
+    <td>States that the virus database is stale.
+    	Based on configuration, freshclam checks hourly or daily.</td>
+    <td>Unhealthy</td>
+  </tr>
+  <tr>
+    <td><a href="#freshclam-terminated">Process Terminated<a></td>
+    <td>freshclam</td>
+    <td>Freshclam should only terminate during a deployment. </td>
+    <td>Unhealthy
+    	<br>(Will be triggered by deployments)</td>
+  </tr>
+<!--  =============================== clamd section ===============================  -->
+  <tr>
+    <td><a href="#clamd-start">Start Clamd</a></td>
+    <td>clamd</td>
+    <td>States that a clamd daemon is starting</td>
+    <td>Healthy</td>
+  </tr>
+  <tr>
+    <td><a href="#clamd-update-database">Check for Updated Virus Signatures</a></td>
+    <td>clamd</td>
+    <td>Clamd checks if freshclam has updated the local virus signature database</td>
+    <td>Healthy</td>
+  </tr>
+  <tr>
+    <td><a href="#clamd-virus-detected">Virus Detected</a></td>
+    <td>clamd</td>
+    <td>Gives the name and location of the virus that was found
+    	and the virus signature that it matches.</td>
+    <td>Unhealthy</td>
+  </tr>
+  <tr>
+    <td><a href="#clamd-virus-removed">Virus Removed</a></td>
+    <td>clamd</td>
+    <td>Gives the name of the virus file that was found
+    	and states that the file was deleted.</td>
+    <td>Unhealthy</td>
+  </tr>
+  <tr>
+    <td><a href="#clamd-virus-moved">Virus Moved</a></td>
+    <td>clamd</td>
+    <td>Gives the name of the virus file found and where it was moved to.
+    	<br>(Virus file deleted from original location.)</td>
+    <td>Unhealthy</td>
+  </tr>
+  <tr>
+    <td><a href="#clamd-virus-copied">Virus Copied</a></td>
+    <td>clamd</td>
+    <td>Gives the name of the virus file found and where it was copied to.
+    	<br>(Virus file remains at original location.)</td>
+    <td>Unhealthy</td>
+  </tr>
+  <tr>
+    <td><a href="#clamd-terminated">Process Terminated</a></td>
+    <td>clamd</td>
+    <td>Both clamd and freshclam should always be running.
+    	If process was terminated (meaning the clamd daemon has stopped),
+    	then this error appears and can indicate a problem.
+    	Neither on-access scanning nor scheduled is possible if the process state is terminated.
+</td>
+    <td>Unhealthy
+    	<br>(Will be triggered by deployments)</td>
+  </tr>
+<!--  =============================== clamdscan section ===============================  -->
+  <tr>
+    <td><a href="#clamd-start-scan">Start Scheduled Scan</a></td>
+    <td>clamdscan</td>
+    <td>States when the scan starts.
+    	Use the time stamp on the message to determine this. </td>
+    <td>Healthy</td>
+  </tr>
+  <tr>
+    <td><a href="#clamd-scan-complete">Scan Finished</a></td>
+    <td>clamdscan</td>
+    <td>Gives time elapsed for scan, and how many infected files were found.</td>
+    <td>Healthy</td>
+  </tr>
+</table>
+
+
+##<a id="freshclam"></a>Freshclam Logs
+
+The FreshClam job on each VM is responsible for updating the database that stores the known virus signatures. 
+
+FreshClam log entries pertain to whether or not the virus-signature database is up-to-date.
+
+
+###<a id="freshclam-check"></a>Check for Updates
+Sample:
+<pre class="terminal">
+ClamAV update process started at Wed Nov 28 15:58:23 2018
+</pre>
+
+###<a id="freshclam-update"></a>Update the Virus Database
+Sample:
+<pre class="terminal">
+Downloading main.cvd [100%]
+main.cvd updated (version: 58, sigs: 4566249, f-level: 60, builder: sigmgr)
+Downloading daily.cvd [100%]
+daily.cvd updated (version: 25135, sigs: 2155329, f-level: 63, builder: neo)
+Downloading bytecode.cvd [100%]
+bytecode.cvd updated (version: 327, sigs: 91, f-level: 63, builder: neo)
+Database updated (6721669 signatures) from pivotal-clamav-mirror.s3.amazonaws.com (IP: 52.216.169.19)
+</pre>
+
+###<a id="freshclam-up-to-date"></a>Virus Database Is Up-to-Date
+Sample:
+<pre class="terminal">
+main.cvd is up to date (version: 58, sigs: 4566249, f-level: 60, builder: sigmgr)
+daily.cvd is up to date (version: 25135, sigs: 2155329, f-level: 63, builder: neo)
+bytecode.cvd is up to date (version: 327, sigs: 91, f-level: 63, builder: neo)
+</pre>
+
+###<a id="freshclam-old"></a>Virus Database is Older Than 7 Days
+Sample:
+<pre class="terminal">
+[LibClamAV] **************************************************
+[LibClamAV] ***  The virus database is older than 7 days!  ***
+[LibClamAV] ***   Please update it as soon as possible.    ***
+[LibClamAV] **************************************************
+</pre>
+
+###<a id="freshclam-terminated"></a>Process Terminated
+Sample:
+<pre class="terminal">
+Update process terminated
+</pre>
+
+
+##<a id="clamd"></a>Clamd Logs
+
+Clamd is the anti-virus scanner that searches for viruses.
+The Clamd job uses the database of virus signatures that the FreshClam job updates.
+
+
+###<a id="clamd-start"></a>Start Clamd
+Sample:
+<pre class="terminal">
+Wed Nov 28 15:58:47 2018 -> +++ Started at Wed Nov 28 15:58:47 2018
+Wed Nov 28 15:59:02 2018 -> Self checking every 600 seconds.
+</pre>
+
+###<a id="clamd-update-database"></a>Check for Updated Virus Signatures
+Samples:
+<pre class="terminal">
+SelfCheck: Database status OK.
+</pre>
+<pre class="terminal">
+SelfCheck: Database modification detected. Forcing reload
+</pre>
+<pre class="terminal">
+No stats for Database check - forcing reload
+</pre>
+
+###<a id="clamd-virus-detected"></a>Virus Detected
+Sample:
+<pre class="terminal">
+/var/vcap/data/test.txt: Eicar-Test-Signature FOUND
+</pre>
+
+###<a id="clamd-virus-removed"></a>Virus Removed
+Sample:
+<pre class="terminal">
+/var/vcap/data/test.txt: Removed.
+</pre>
+
+###<a id="clamd-virus-moved"></a>Virus Moved
+Sample:
+<pre class="terminal">
+/var/vcap/data/test.txt: moved to '/var/vcap/data/clamav/found/test.txt.001'
+</pre>
+
+###<a id="clamd-virus-copied"></a>Virus Copied
+Sample:
+<pre class="terminal">
+/var/vcap/data/test.txt: copied to '/var/vcap/data/clamav/found/test.txt.001'
+</pre>
+
+###<a id="clamd-terminated"></a>Process Terminated
+Sample:
+<pre class="terminal">
+Wed Nov 28 19:25:23 2018 -> Pid file removed.
+Wed Nov 28 19:25:23 2018 -> --- Stopped at Wed Nov 28 19:25:23 2018
+Wed Nov 28 19:25:23 2018 -> Socket file removed.
+</pre>
+
+###<a id="clamd-start-scan"></a>Start Scheduled Scan
+This is not provided on v1.4.38 and earlier.
+
+Sample:
+<pre class="terminal">
+Starting scheduled scan
+</pre>
+
+###<a id="clamd-scan-complete"></a>Scan Finished
+This is not provided on v1.4.38 and earlier.
+
+Sample:
+<pre class="terminal">
+----------- SCAN SUMMARY -----------
+Infected files: 1
+Time: 346.887 sec (5 m 46 s)
+</pre>
+
 
 ##<a id="format"></a>ClamAV Log Format
 
@@ -63,127 +299,3 @@ For example:
 </pre>
 
 For more information, see [Format](https://github.com/cloudfoundry/syslog-release#format) in the syslog-release GitHub repository.
-
-##<a id="freshclam"></a>Freshclam Logs
-
-The FreshClam job on each VM is responsible for updating the database that stores the known virus signatures. 
-
-FreshClam log entries pertain to whether or not the virus-signature database is up-to-date.
-
-
-###<a id="freshclam-check"></a>Check for Updates
-Sample:
-<pre class="terminal">
-ClamAV update process started at Wed Nov 28 15:58:23 2018
-</pre>
-
-###<a id="freshclam-update"></a>Update the Virus Database
-Sample:
-<pre class="terminal">
-Downloading main.cvd [100%]
-main.cvd updated (version: 58, sigs: 4566249, f-level: 60, builder: sigmgr)
-Downloading daily.cvd [100%]
-daily.cvd updated (version: 25135, sigs: 2155329, f-level: 63, builder: neo)
-Downloading bytecode.cvd [100%]
-bytecode.cvd updated (version: 327, sigs: 91, f-level: 63, builder: neo)
-Database updated (6721669 signatures) from pivotal-clamav-mirror.s3.amazonaws.com (IP: 52.216.169.19)
-</pre>
-
-###<a id="freshclam-up-to-date"></a>Virus Database Is Up-to-Date
-Sample:
-<pre class="terminal">
-main.cvd is up to date (version: 58, sigs: 4566249, f-level: 60, builder: sigmgr)
-daily.cvd is up to date (version: 25135, sigs: 2155329, f-level: 63, builder: neo)
-bytecode.cvd is up to date (version: 327, sigs: 91, f-level: 63, builder: neo)
-</pre>
-
-###<a id="freshclam-old"></a>Virus Database is Older Than 7 Days
-Sample:
-<pre class="terminal">
-[LibClamAV] **************************************************
-[LibClamAV] ***  The virus database is older than 7 days!  ***
-[LibClamAV] ***   Please update it as soon as possible.    ***
-[LibClamAV] **************************************************
-</pre>
-
-###<a id="freshclam-terminated"></a>Process Terminated
-Sample:
-<pre class="terminal">
-Update process terminated
-</pre>
-
-##<a id="clamd"></a>Clamd Logs
-
-Clamd is the anti-virus scanner that searches for viruses.
-The Clamd job uses the database of virus signatures that the FreshClam job updates.
-
-
-
-###<a id="clamd-start"></a>Start Clamd
-Sample:
-<pre class="terminal">
-Wed Nov 28 15:58:47 2018 -> +++ Started at Wed Nov 28 15:58:47 2018
-Wed Nov 28 15:59:02 2018 -> Self checking every 600 seconds.
-</pre>
-
-###<a id="clamd-update-database"></a>Check for Updated Virus Signatures
-Samples:
-<pre class="terminal">
-SelfCheck: Database status OK.
-</pre>
-<pre class="terminal">
-SelfCheck: Database modification detected. Forcing reload
-</pre>
-<pre class="terminal">
-No stats for Database check - forcing reload
-</pre>
-
-###<a id="clamd-start-scan"></a>Start Scheduled Scan
-This is not provided on v1.4.38 and earlier.
-
-Sample:
-<pre class="terminal">
-Starting scheduled scan
-</pre>
-
-###<a id="clamd-virus-detected"></a>Virus Detected
-Sample:
-<pre class="terminal">
-/var/vcap/data/test.txt: Eicar-Test-Signature FOUND
-</pre>
-
-###<a id="clamd-virus-removed"></a>Virus Removed
-Sample:
-<pre class="terminal">
-/var/vcap/data/test.txt: Removed.
-</pre>
-
-###<a id="clamd-virus-moved"></a>Virus Moved
-Sample:
-<pre class="terminal">
-/var/vcap/data/test.txt: moved to '/var/vcap/data/clamav/found/test.txt.001'
-</pre>
-
-###<a id="clamd-virus-copied"></a>Virus Copied
-Sample:
-<pre class="terminal">
-/var/vcap/data/test.txt: copied to '/var/vcap/data/clamav/found/test.txt.001'
-</pre>
-
-###<a id="clamd-scan-complete"></a>Scan Finished
-This is not provided on v1.4.38 and earlier.
-
-Sample:
-<pre class="terminal">
------------ SCAN SUMMARY -----------
-Infected files: 1
-Time: 346.887 sec (5 m 46 s)
-</pre>
-
-###<a id="clamd-terminated"></a>Process Terminated
-Sample:
-<pre class="terminal">
-Wed Nov 28 19:25:23 2018 -> Pid file removed.
-Wed Nov 28 19:25:23 2018 -> --- Stopped at Wed Nov 28 19:25:23 2018
-Wed Nov 28 19:25:23 2018 -> Socket file removed.
-</pre>
