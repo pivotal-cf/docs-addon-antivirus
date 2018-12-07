@@ -12,6 +12,8 @@ to verify regular activity and generate alerts for virus detections or outdated 
 
 ##<a id="messages"></a>Log Messages
 
+The following tables lists common messages that you will see when ClamAV apps write to log files:
+
 <table>
   <tr>
     <td>Message</td>
@@ -129,46 +131,41 @@ The FreshClam job on each VM is responsible for updating the database that store
 FreshClam log entries pertain to whether or not the virus-signature database is up-to-date.
 
 
-###<a id="freshclam-check"></a>Check for Updates
-Sample:
-<pre class="terminal">
-ClamAV update process started at Wed Nov 28 15:58:23 2018
-</pre>
+* <a id="freshclam-check"></a>Check for Updates
+	<pre class="terminal">
+	ClamAV update process started at Wed Nov 28 15:58:23 2018
+	</pre>
 
-###<a id="freshclam-update"></a>Update the Virus Database
-Sample:
-<pre class="terminal">
-Downloading main.cvd [100%]
-main.cvd updated (version: 58, sigs: 4566249, f-level: 60, builder: sigmgr)
-Downloading daily.cvd [100%]
-daily.cvd updated (version: 25135, sigs: 2155329, f-level: 63, builder: neo)
-Downloading bytecode.cvd [100%]
-bytecode.cvd updated (version: 327, sigs: 91, f-level: 63, builder: neo)
-Database updated (6721669 signatures) from pivotal-clamav-mirror.s3.amazonaws.com (IP: 52.216.169.19)
-</pre>
+* <a id="freshclam-update"></a>Update the Virus Database
+	<pre class="terminal">
+	Downloading main.cvd [100%]
+	main.cvd updated (version: 58, sigs: 4566249, f-level: 60, builder: sigmgr)
+	Downloading daily.cvd [100%]
+	daily.cvd updated (version: 25135, sigs: 2155329, f-level: 63, builder: neo)
+	Downloading bytecode.cvd [100%]
+	bytecode.cvd updated (version: 327, sigs: 91, f-level: 63, builder: neo)
+	Database updated (6721669 signatures) from pivotal-clamav-mirror.s3.amazonaws.com (IP: 52.216.169.19)
+	</pre>
 
-###<a id="freshclam-up-to-date"></a>Virus Database Is Up-to-Date
-Sample:
-<pre class="terminal">
-main.cvd is up to date (version: 58, sigs: 4566249, f-level: 60, builder: sigmgr)
-daily.cvd is up to date (version: 25135, sigs: 2155329, f-level: 63, builder: neo)
-bytecode.cvd is up to date (version: 327, sigs: 91, f-level: 63, builder: neo)
-</pre>
+* <a id="freshclam-up-to-date"></a>Virus Database Is Up-to-Date
+	<pre class="terminal">
+	main.cvd is up to date (version: 58, sigs: 4566249, f-level: 60, builder: sigmgr)
+	daily.cvd is up to date (version: 25135, sigs: 2155329, f-level: 63, builder: neo)
+	bytecode.cvd is up to date (version: 327, sigs: 91, f-level: 63, builder: neo)
+	</pre>
 
-###<a id="freshclam-old"></a>Virus Database is Older Than 7 Days
-Sample:
-<pre class="terminal">
-[LibClamAV] **************************************************
-[LibClamAV] ***  The virus database is older than 7 days!  ***
-[LibClamAV] ***   Please update it as soon as possible.    ***
-[LibClamAV] **************************************************
-</pre>
+* <a id="freshclam-old"></a>Virus Database is Older Than 7 Days
+	<pre class="terminal">
+	[LibClamAV] **************************************************
+	[LibClamAV] ***  The virus database is older than 7 days!  ***
+	[LibClamAV] ***   Please update it as soon as possible.    ***
+	[LibClamAV] **************************************************
+	</pre>
 
-###<a id="freshclam-terminated"></a>Process Terminated
-Sample:
-<pre class="terminal">
-Update process terminated
-</pre>
+* <a id="freshclam-terminated"></a>Process Terminated
+	<pre class="terminal">
+	Update process terminated
+	</pre>
 
 
 ##<a id="clamd"></a>Clamd Logs
@@ -177,74 +174,66 @@ Clamd is the anti-virus scanner that searches for viruses.
 The Clamd job uses the database of virus signatures that the FreshClam job updates.
 
 
-###<a id="clamd-start"></a>Start Clamd
-Sample:
-<pre class="terminal">
-Wed Nov 28 15:58:47 2018 -> +++ Started at Wed Nov 28 15:58:47 2018
-Wed Nov 28 15:59:02 2018 -> Self checking every 600 seconds.
-</pre>
+* <a id="clamd-start"></a>Start Clamd
+	<pre class="terminal">
+	Wed Nov 28 15:58:47 2018 -> +++ Started at Wed Nov 28 15:58:47 2018
+	Wed Nov 28 15:59:02 2018 -> Self checking every 600 seconds.
+	</pre>
 
-###<a id="clamd-update-database"></a>Check for Updated Virus Signatures
-Samples:
-<pre class="terminal">
-SelfCheck: Database status OK.
-</pre>
-<pre class="terminal">
-SelfCheck: Database modification detected. Forcing reload
-</pre>
-<pre class="terminal">
-No stats for Database check - forcing reload
-</pre>
+* <a id="clamd-update-database"></a>Check for Updated Virus Signatures
+	<pre class="terminal">
+	SelfCheck: Database status OK.
+	</pre>
+	<pre class="terminal">
+	SelfCheck: Database modification detected. Forcing reload
+	</pre>
+	<pre class="terminal">
+	No stats for Database check - forcing reload
+	</pre>
 
-###<a id="clamd-virus-detected"></a>Virus Detected
-Sample:
-<pre class="terminal">
-/var/vcap/data/test.txt: Eicar-Test-Signature FOUND
-</pre>
+* <a id="clamd-virus-detected"></a>Virus Detected
+	<pre class="terminal">
+	/var/vcap/data/test.txt: Eicar-Test-Signature FOUND
+	</pre>
 
-###<a id="clamd-virus-removed"></a>Virus Removed
-Sample:
-<pre class="terminal">
-/var/vcap/data/test.txt: Removed.
-</pre>
+* <a id="clamd-virus-removed"></a>Virus Removed
+	<pre class="terminal">
+	/var/vcap/data/test.txt: Removed.
+	</pre>
 
-###<a id="clamd-virus-moved"></a>Virus Moved
-Sample:
-<pre class="terminal">
-/var/vcap/data/test.txt: moved to '/var/vcap/data/clamav/found/test.txt.001'
-</pre>
+* <a id="clamd-virus-moved"></a>Virus Moved
+	<pre class="terminal">
+	/var/vcap/data/test.txt: moved to '/var/vcap/data/clamav/found/test.txt.001'
+	</pre>
 
-###<a id="clamd-virus-copied"></a>Virus Copied
-Sample:
-<pre class="terminal">
-/var/vcap/data/test.txt: copied to '/var/vcap/data/clamav/found/test.txt.001'
-</pre>
+* <a id="clamd-virus-copied"></a>Virus Copied
+	<pre class="terminal">
+	/var/vcap/data/test.txt: copied to '/var/vcap/data/clamav/found/test.txt.001'
+	</pre>
 
-###<a id="clamd-terminated"></a>Process Terminated
-Sample:
-<pre class="terminal">
-Wed Nov 28 19:25:23 2018 -> Pid file removed.
-Wed Nov 28 19:25:23 2018 -> --- Stopped at Wed Nov 28 19:25:23 2018
-Wed Nov 28 19:25:23 2018 -> Socket file removed.
-</pre>
+* <a id="clamd-terminated"></a>Process Terminated
+	<pre class="terminal">
+	Wed Nov 28 19:25:23 2018 -> Pid file removed.
+	Wed Nov 28 19:25:23 2018 -> --- Stopped at Wed Nov 28 19:25:23 2018
+	Wed Nov 28 19:25:23 2018 -> Socket file removed.
+	</pre>
 
-###<a id="clamd-start-scan"></a>Start Scheduled Scan
-This is not provided on v1.4.38 and earlier.
+* <a id="clamd-start-scan"></a>Start Scheduled Scan
+	This is not provided on v1.4.38 and earlier.
 
-Sample:
-<pre class="terminal">
-Starting scheduled scan
-</pre>
+	<pre class="terminal">
+	Starting scheduled scan
+	</pre>
 
-###<a id="clamd-scan-complete"></a>Scan Finished
-This is not provided on v1.4.38 and earlier.
+* <a id="clamd-scan-complete"></a>Scan Finished
+	This is not provided on v1.4.38 and earlier.
 
-Sample:
-<pre class="terminal">
------------ SCAN SUMMARY -----------
-Infected files: 1
-Time: 346.887 sec (5 m 46 s)
-</pre>
+	Sample:
+	<pre class="terminal">
+	----------- SCAN SUMMARY -----------
+	Infected files: 1
+	Time: 346.887 sec (5 m 46 s)
+	</pre>
 
 
 ##<a id="format"></a>ClamAV Log Format
