@@ -40,7 +40,7 @@ With syslog-forwarder, the syslog format is:
 Where:
 
 * `APP-NAME` is `freshclam`, `clamdscan`, or `clamd`.  
-* &ltPRI> is `<3>`.
+* <code>\<PRI></code> is `<3>`.
 * `MESSAGE` is the output from a ClamAV app. Samples are shown below.
 
 For example:
@@ -114,7 +114,7 @@ Update process terminated
 
 ##<a id="clamd"></a>Clamd Logs
 
-Clamd is the anti-virus scanner that does the virus scanning.
+Clamd is the anti-virus scanner that searches for viruses.
 The Clamd job uses the database of virus signatures that the FreshClam job updates.
 
 
