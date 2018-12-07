@@ -6,15 +6,17 @@ owner: Security Engineering
 <strong><%= modified_date %></strong>
 
 This topic contains sample logs emitted by ClamAV.
+
 These samples can be used to configure a Security Information and Event Management (SIEM) system
 to verify regular activity and generate alerts for virus detections or outdated virus signatures.
 
 
 ##<a id="format"></a>ClamAV Log Format
 
-ClamAV log format is unstructured.
-It does not adhere to any standard log format.
-The log is a result of the output.
+The logs that ClamAV itself outputs do not adhere to a specific structure.
+However, the syslog forwarder component, which is on all VM's, 
+encapsulate ClamAV's log and prepends the necessary headers so that the resulting logs adhere
+to the Syslog format.
 
 With syslog-forwarder, the syslog format is:
 
@@ -35,8 +37,11 @@ With syslog-forwarder, the syslog format is:
 	MESSAGE \
 </pre>
 
-The `APP-NAME` is `freshclam`, `clamdscan`, or `clamd`.
-For syslog-forwarder `LOG-ERR`, the error output starts with `<3>`.
+Where:
+
+* `APP-NAME` is `freshclam`, `clamdscan`, or `clamd`.  
+* &ltPRI> is `<3>`.
+* `MESSAGE` is the output from a ClamAV app. Samples are shown below.
 
 For example:
 
@@ -61,6 +66,10 @@ For more information, see [Format](https://github.com/cloudfoundry/syslog-releas
 
 ##<a id="freshclam"></a>Freshclam Logs
 
+The FreshClam job on each VM is responsible for updating the database that stores the known virus signatures. 
+
+FreshClam log entries pertain to whether or not the virus-signature database is up-to-date.
+
 
 ###<a id="freshclam-check"></a>Check for Updates
 Sample:
@@ -80,7 +89,7 @@ bytecode.cvd updated (version: 327, sigs: 91, f-level: 63, builder: neo)
 Database updated (6721669 signatures) from pivotal-clamav-mirror.s3.amazonaws.com (IP: 52.216.169.19)
 </pre>
 
-###<a id="freshclam-up-to-date"></a>Virus database is Up-to-Date
+###<a id="freshclam-up-to-date"></a>Virus Database Is Up-to-Date
 Sample:
 <pre class="terminal">
 main.cvd is up to date (version: 58, sigs: 4566249, f-level: 60, builder: sigmgr)
@@ -104,6 +113,11 @@ Update process terminated
 </pre>
 
 ##<a id="clamd"></a>Clamd Logs
+
+Clamd is the anti-virus scanner that does the virus scanning.
+The Clamd job uses the database of virus signatures that the FreshClam job updates.
+
+
 
 ###<a id="clamd-start"></a>Start Clamd
 Sample:
