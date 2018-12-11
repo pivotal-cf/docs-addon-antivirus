@@ -32,7 +32,7 @@ and [clamdscan](#clamdscan-app) below.
 
 The freshclam app updates the database that stores the known virus signatures.
 
-The messages ouput by the freshclam app, indicate when freshclam checks for updates,
+The messages output by the freshclam app, indicate when freshclam checks for updates,
 download progress, and downloaded signature version.
 
 The log file for the freshclam app is `/var/vcap/sys/log/clamav/freshclam.log`.
@@ -43,8 +43,8 @@ The Clam AntiVirus Daemon (clamd) listens for incoming connections on Unix or th
 clamd works with clamdscan to scan files or directories.
 The clamd job uses the database of virus signatures that the freshclam job updates.
 
-The messages ouput by the clamd app show files where viruses are found, the name of the  virus signature,
-and any action taken, such asd moving, copying, or deleting.
+The messages output by the clamd app show files where viruses are found, the name of the  virus signature,
+and any action taken, such as moving, copying, or deleting.
 
 The log file for the clamd app is `/var/vcap/sys/log/clamav/clamd.log`.
 
@@ -52,7 +52,7 @@ The log file for the clamd app is `/var/vcap/sys/log/clamav/clamd.log`.
 
 The clamdscan app scans files and directories for viruses using the clamd daemon.
 
-The messages ouput by the clamdscan app show when a clamdscan has been initiated
+The messages output by the clamdscan app show when a clamdscan has been initiated
 and write a scan summary on completion.
 
 The log file for the clamd app is `/var/vcap/sys/log/clamav/clamdscan.log`.
