@@ -227,10 +227,10 @@ Perform the following steps to deploy the ClamAV Add-on:
     Append the contents of `clamav.yml` to your existing add-on YML file.</p>
     <pre class="terminal">$ bosh -e my-env update-runtime-config --name=clamav ~/clamav.yml</pre>
 1. Verify that your runtime configuration changes match what you specified in the ClamAV manifest by running the following command:
-    <pre class="terminal">$ bosh -e my-env runtime-config</pre>
+    <pre class="terminal">$ bosh -e my-env runtime-config --name=clamav</pre>
     For Example:
     <pre class="terminal">
-    $ bosh -e my-env runtime-config
+    $ bosh -e my-env runtime-config --name=clamav
     Acting as user 'admin' on 'micro'
     releases:
     <span>-</span> name: clamav
