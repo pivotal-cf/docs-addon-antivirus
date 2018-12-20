@@ -429,6 +429,11 @@ If you don't supply an action, the function fails.
     The system does not scan the moved-to or copied-to location.
     If the directory path is not valid, the function fails.<br/>
     <br>
+
+    <p class="note warning"><strong>WARNING</strong>:
+    If `action` is `move` or `copy`, ensure the `action_destination` path is also added to the `exclude_paths`.
+    If the `action_destination` is not listed under `exclude_paths` clamav will detect the moved/copied file, ClamAV will log redundant alerts and create additional copies of the detected file.
+    </p>
     Example configuration:
 
 <pre><code>releases:
