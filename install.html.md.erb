@@ -415,7 +415,7 @@ For more information,  see steps 4 to 7 of <a href="#deploy">Deploy the ClamAV A
 
 You can configure ClamAV to take action when infected files are found.
 By default, a notification is sent to the syslog when an infected file is found.
-However, you can specify other actions, as described [in step 2 below](#step2).
+However, you can specify other actions, as described [Step 2](#step2) below.
 
 <ol>
 <li>In the <code>clamav.yml</code> file, add the <code>action</code> property under the <code>clamav</code> property and,
@@ -449,9 +449,13 @@ If you don't supply an action, the function fails.
     <br>
 
     <p class="note warning"><strong>WARNING</strong>:
-    If `action` is `move` or `copy`, ensure the `action_destination` path is also added to the `exclude_paths`.
-    If the `action_destination` is not listed under `exclude_paths` clamav will detect the moved/copied file, ClamAV will log redundant alerts and create additional copies of the detected file.
+    If <code>action</code> is <code>move</code> or <code>copy</code>, make sure the <code>action_destination</code> path is also added to the <code>exclude_paths</code>.<br>
+    If <code>action_destination</code> is not listed under <code>exclude_paths</code>, ClamAV:<br>
+    ∙ Detects the moved or copied file<br>
+    ∙ Logs redundant alerts<br>
+    ∙ Creates additional copies of the detected file
     </p>
+
     Example configuration:
 
 <pre><code>releases:
