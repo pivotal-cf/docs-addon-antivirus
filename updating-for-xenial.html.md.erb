@@ -1,0 +1,129 @@
+---
+title: Updating ClamAV Add-on for PCF to Run with Xenial Stemcells
+owner: Security Engineering
+---
+
+<strong><%= modified_date %></strong>
+
+Pivotal Cloud Foundry (PCF) products and tiles that are released after July 2018 require
+Ubuntu Xenial stemcells instead of Ubuntu Trusty stemcells. 
+You might have to modify your ClamAV Add-on for PCF deployment
+if you use PCF products running on Xenial.
+
+This topic describes how to determine if your existing deployment of
+ClamAV Add-on can protect VMs that run on Xenial.
+
+This topic also explains how to update your ClamAV Add-on if it does not support Xenial.
+
+Follow the instructions on this page if you use ClamAV Add-on with any PCF products or tiles 
+that use Xenial stemcells.
+See [Product Tiles that Use Xenial Stemcells](#which) below.
+
+##<a id="who-me"></a<a id="who-me"></a> Do I Need to Modify the ClamAV Add-on? 
+
+ClamAV Add-on v1.4.28 and later can run correctly on Xenial-based VMs if the ClamAV runtime config
+includes the `ubuntu-xenial` property. 
+
+Review the following table and make any required changes before you upgrade to Xenial stemcells.
+
+<table class="nice">
+    <col width="25%">
+    <col width="75%">
+    <th>If you are using this version of the ClamAV Add-on…</td>
+    <th>do the following…</td>
+    <tr>
+      <td>1.4.29</td>
+      <td>Verify that your runtime config file, <code>clamav.yml</code>, includes 
+<pre>
+stemcell:
+- os: ubuntu-trusty
+- os: ubuntu-xenial
+</pre>
+        If it does not, then follow the procedure, <a href="#add">Add the Xenial Stemcell Property to ClamAV Add-on</a> below.</td>
+          </tr>
+          <tr>
+            <td>v1.4.28</td>
+            <td>Follow the procedure, <a href="#add">Add the Xenial Stemcell Property to the ClamAV Add-on</a> below.</td>
+          </tr>
+          <tr>
+            <td>v1.4.5 or earlier</td>
+            <td>Install ClamAV Add-on v1.4.29.</td>
+          </tr>
+</table>
+
+If you use ClamAV Add-on without adding the `ubuntu-xenial` property to the runtime config, 
+the VMs running on Xenial are not scanned for viruses.
+
+If you add the `ubuntu-xenial` property but do not upgrade the ClamAV Add-on to v1.4.28 or later,
+then the ClamAV processes use excessive CPU.
+
+## <a id="which"></a> Product Tiles that Use Xenial Stemcells
+
+Ensure that you have added the `ubuntu-xenial` property to the ClamAV runtime config
+before you install any product tiles that use Xenial stemcells.
+
+For a list of PCF tile releases that now use Xenial, 
+see [Tiles Using Xenial Stemcells in PCF](https://docs.pivotal.io/pivotalcf/stemcells/xenial-tiles.html).
+
+##<a id="add"></a> Add the Xenial Stemcell Property to the ClamAV Add-on
+
+If you use ClamAV Add-on v1.4.28 or later  without the `ubuntu-xenial` 
+property in the runtime config, then you must add it to your
+existing `clamav.yml` and redeploy.
+
+Follow these steps:
+
+1. SSH into the Ops Manager VM.
+   For how to do this, see [SSH into Ops Manager](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#ssh).
+
+2. To retrieve and save the ClamAV add-on runtime config, run the following command:
+
+    ```
+    bosh -e BOSH-ENVIRONMENT runtime-config –name clamav > /tmp/clamav.yml
+    ```
+
+    Where `BOSH-ENVIRONMENT` is the alias you set for the BOSH Director.
+
+    For example:
+
+    <pre class="terminal">$ bosh2 -e my-env runtime-config –name clamav > /tmp/clamav.yml </pre> 
+
+
+3. Edit the `clamav.yml` file to add `- os: ubuntu-xenial` under 
+    `properties: {}` as shown below:
+
+
+    ```
+    addons:
+    - name: clamav
+      jobs:
+      - name: clamav
+        release: clamav
+        properties: {}
+      include:
+        stemcell:
+        - os: ubuntu-trusty
+        - os: ubuntu-xenial
+    ```
+
+4. (Optional) If you plan to update to PAS for Windows v2.3, do Step 3 of [Add the windows1803 Stemcell
+   to the ClamAV Add-on](./updating-for-pasw.html#add).
+
+4. To update the runtime config, run the following command:
+
+    ```
+    bosh2 -e BOSH-ENVIRONMENT update-runtime-config --name=clamav /tmp/clamav.yml
+    ```
+
+    For example:
+
+    <pre class="terminal">bosh2 -e my-env update-runtime-config --name=clamav /tmp/clamav.yml</pre> 
+
+5. Navigate to the Installation Dashboard in Ops Manager.
+
+6. If you are using Ops Manager v2.3 or later, click **Review Pending Changes**.
+   For more information about this Ops Manager page,
+   see [Reviewing Pending Product Changes](https://docs.pivotal.io/pivotalcf/customizing/review-pending-changes.html).
+
+7. Click **Apply Changes**.
+

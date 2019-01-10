@@ -1,0 +1,495 @@
+---
+title: Installing ClamAV Add-on for PCF
+owner: Security Engineering
+---
+
+<strong><%= modified_date %></strong>
+
+This topic describes how to install the ClamAV Add-on for Pivotal Cloud Foundry (PCF).
+
+##<a id="prereqs"></a>Prerequisites
+
+To install ClamAV Add-on, you need:
+
+* **Named runtime configs**---If you have not already split your runtime config into multiple named files,
+do so before installing or upgrading the ClamAV Add-on for PCF.
+For general information about named runtime config files,
+see <a href="https://bosh.io/docs/configs.html">Configs</a>.
+
+* **A PCF operator with admin rights**---For more information, see
+[Understanding Pivotal Cloud Foundry User Types](https://docs.pivotal.io/pivotalcf/customizing/user-types.html#operator).
+
+* **Operations Manager (Ops Manager)**---For compatible versions, see the [Product Snapshot](./index.html#snapshot).
+
+* **At least 1 GB of memory free on each VM**---ClamAV Add-on uses 610 MB of memory.
+
+* **A local mirror to get ClamAV virus updates**---For instructions on how to set up a local mirror,
+  see [Private Local Mirrors](https://www.clamav.net/documents/private-local-mirrors) in the ClamAV documentation.
+
+
+##<a id="create-mfest"></a>Create the ClamAV Manifest
+
+The ClamAV manifest is a YML file that contains runtime config information for ClamAV Add-on.
+To create the ClamAV manifest for your deployment, follow the steps below:
+
+  <p class="note"><strong>Note</strong>: Release version <code>x.x.x</code> in the <code>clamav.yml</code> samples below is arbitrary. Replace it with the version of ClamAV release downloaded from Pivotal Network.</p>
+
+###<a id="linux-template"></a> clamav.yml Template for Linux
+
+1. Create a file named `clamav.yml`, using the following code as a template.
+
+    ```
+    releases:
+    - name: clamav
+      version: x.x.x
+    addons:
+    - name: clamav
+      jobs:
+      - name: clamav
+        release: clamav
+        properties:
+          clamav:
+            database_mirror: <%= vars.example_ip_1 %>
+      include:
+        stemcell:
+        - os: ubuntu-trusty
+        - os: ubuntu-xenial
+    ```
+
+2. (Optional) Set the properties `cpu_limit` and `enforce_cpu_limit`.
+To use these properties, place the following text under the `clamav` subsection of
+`clamav.yml`, as shown below:
+
+    ```
+    ...
+    properties:
+      clamav:
+        cpu_limit: VALUE-OF-CPU-LIMIT
+        enforce_cpu_limit: TRUE|FALSE
+    ...
+    ```
+  <code><strong>cpu\_limit</strong></code>: <a name="cpu_limit"></a>
+    <ul>
+      <li>Limits ClamAV to a percentage of available CPU resources when other processes are using CPU resources.
+        Usage may exceed the limit if enough idle CPU cycles are available.</li>
+      <li>Set to a whole number less than 100.
+        For example, set to <code>50</code> to limit ClamAV to 50% CPU usage when other
+        tasks are running.</li>
+        <li>The default value is <code>10</code>.</li>
+    </ul>
+
+    <code><strong>enforce\_cpu\_limit</strong></code>: <a name="enforce_cpu_limit"></a>
+    <ul>
+      <li>When <code>true</code>, the limit set by <code>cpu\_limit</code> is always enforced.</li>
+      <li>When <code>false</code>, the limit set by <code>cpu\_limit</code> is
+        only enforced when other processes are using CPU resources.
+        Usage may exceed the limit if enough idle CPU cycles are available.</li>
+        <li>This property is <code>false</code> by default.</li>
+    </ul>
+
+    <p class="note warning"><strong>WARNING</strong>:
+      If <code>enforce_cpu_limit</code> is set <code>true</code>, ensure <code>cpu_limit</code>
+      is set high enough for ClamAV to execute normally.
+      If the limit is too strict, ClamAV fails to start.
+      For example, an n1-standard VM on GCP requires <code>cpu_limit</code> to be > 45.</p>
+
+###<a id="windows-template"></a>clamav.yml Template for Windows
+
+Create a file named <code>clamav.yml</code> using the following code as a template.
+
+```
+releases:
+- name: clamav
+  version: x.x.x
+addons:
+- name: clamav-windows
+  jobs:
+  - name: clamav-windows
+    release: clamav
+    properties:
+      clamav:
+        database_mirror: <%= vars.example_ip_1 %>
+  include:
+    stemcell:
+    - os: windows2012R2
+    - os: windows2016
+    - os: windows1803
+```
+
+###<a id="general-config"></a> General clamav.yml Template Configuration
+
+1. In the <code>database_mirror</code> field of the template, provide the hostname
+or IP address of a private ClamAV update mirror.
+    Environments that cannot connect to the internet should use an update mirror.
+    If you do not specify a value, ClamAV defaults to an S3-based mirror for updates.
+    For compliance reasons, only use the S3-based mirror in non-production environments.<br />
+
+    For instructions on how to set up a local mirror, see <a href="https://www.clamav.net/documents/private-local-mirrors">Private Local Mirrors</a> in the ClamAV documentation.
+
+1. (Optional) If you have to use a proxy server to connect to the internet,
+add the <code>proxy\_host</code> and <code>proxy\_port</code> properties to your manifest.
+<br><br>
+If the proxy server needs authentication, add the <code>proxy\_user</code> and
+<code>proxy\_password</code> properties, as shown below:
+
+    ```
+    releases:
+    - name: clamav
+        version: x.x.x
+    addons:
+       - name: clamav
+        jobs:
+        - name: clamav
+            release: clamav
+       properties:
+         clamav:
+            proxy_host: PROXY.LOCALDOMAIN
+            proxy_port: PROXY-PORT
+            proxy_user: PROXY-USERNAME
+            proxy_password: PROXY-SECRET
+    ...
+    ```
+
+##<a id="download"></a> Download ClamAV Add-on
+
+To download the ClamAV Add-on software binary and move it to the Ops Manager VM,
+do the following:
+
+<p class="note warning"><strong>WARNING! </strong>
+   Ensure that you are using named runtime configs.
+   For more information, see <a href="#prereqs">Prerequisites</a>.</p>
+
+1. Download the ClamAV Add-on software binary from the [Pivotal Network](https://network.pivotal.io/products/p-clamav-addon) to your local machine.
+
+2. To copy the binary to your Ops Manager VM, run the following command:
+
+    ```
+    scp -i PATH-TO-PRIVATE-KEY clamav-release.tar.gz ubuntu@YOUR-OPS-MANAGER-VM-IP:
+    ```
+
+    For example:
+
+    <pre class="terminal">$ scp -i ~/.ssh/my-key.pem clamav-1.3.28.tar.gz ubuntu@192.168.0.2:  </pre>
+
+2. To copy the ClamAV manifest, `clamav.yml` file, to your Ops Manager instance, run the following command:
+
+    ```
+    scp -i PATH-TO-PRIVATE-KEY clamav.yml ubuntu@YOUR-OPS-MANAGER-VM-IP:
+    ```
+
+    For example:
+
+    <pre class="terminal">$ scp -i ~/.ssh/my-key.pem clamav.yml ubuntu@192.168.0.2:  </pre>
+
+4. SSH into the Ops Manager VM.
+   For how to do this, see [SSH into Ops Manager](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#ssh).
+
+5. To navigate to the location of the binary on the Ops Manager VM, run the following command:
+
+    ```
+    cd PATH-TO-BINARY
+    ```
+
+    For example:
+
+    <pre class="terminal">$ cd ~/clamav-1.3.28.tar.gz</pre>
+
+##<a id='deploy'></a>Deploy the ClamAV Add-on
+
+Perform the following steps to deploy the ClamAV Add-on:
+
+1. Log in to the BOSH Director.
+    1. On the Ops Manager VM, create an alias in the BOSH CLI for your BOSH Director IP address. For example:
+    <pre class="terminal">$ bosh alias-env my-env -e 10.0.0.3</pre>
+    1. Log in to the BOSH Director, specifying the newly created alias.
+    For example:
+    <pre class="terminal">$ bosh -e my-env log-in</pre>
+1. Upload your release, specifying the path to the tarballed ClamAV binary, by running the following command:
+  <pre class="terminal">$ bosh -e my-env upload-release ~/clamav-1.3.28.tar.gz</pre>
+1. List the releases by running the following command, and confirm that ClamAV appears:
+  <pre class="terminal">$ bosh -e my-env releases</pre>
+1. <a name="update"></a>Update your runtime configuration to include the ClamAV Add-on, specifying the path to the `clamav.yml` file you created above, by running the following command:
+  <p class="note"><strong>Note</strong>: If you installed other BOSH add-ons,
+    you must merge the ClamAV manifest into your existing add-on manifest.
+    Append the contents of `clamav.yml` to your existing add-on YML file.</p>
+    <pre class="terminal">$ bosh -e my-env update-runtime-config --name=clamav ~/clamav.yml</pre>
+1. Verify that your runtime configuration changes match what you specified in the ClamAV manifest by running the following command:
+    <pre class="terminal">$ bosh -e my-env runtime-config --name=clamav</pre>
+    For Example:
+    <pre class="terminal">
+    $ bosh -e my-env runtime-config --name=clamav
+    Acting as user 'admin' on 'micro'
+    releases:
+    <span>-</span> name: clamav
+       version: 1.3.28
+    addons:
+      name: clamav
+        jobs:
+         <span>-</span> name: clamav
+            release: clamav
+    ...
+    </pre>
+1. Navigate to your Installation Dashboard in Ops Manager.
+
+1. If you are using Ops Manager v2.3 or later, click **Review Pending Changes**.
+   For more information about this Ops Manager page,
+   see [Reviewing Pending Product Changes](https://docs.pivotal.io/pivotalcf/customizing/review-pending-changes.html).
+
+1. Click **Apply Changes**.
+
+##<a id="alerts"></a> Configure Forwarding for ClamAV Alerts
+
+The ClamAV BOSH release writes all alerts to the syslogs of the VMs in your deployment.
+You can use syslog forwarding to forward the alerts to a syslog aggregator.
+
+Follow the steps to <a href="http://docs.pivotal.io/pivotalcf/customizing/cloudform-er-config.html#sys-logging">
+    Configure System Logging</a> in the Pivotal Application Service (PAS) or Elastic Runtime tile.
+    The syslog aggregator that you specify receives all alerts generated on PAS (or Elastic Runtime) VMs, including the ClamAV alerts.
+
+<p class="note"><strong>Note</strong>: When you configure syslog forwarding, ensure there is enough disk space for the logs.
+   Make sure that log rotation is frequent enough.
+   If in doubt, rotate the logs hourly or when they reach a certain size.
+   Pivotal recommends forwarding logs to a remote syslog aggregation system.</p>
+
+##<a id="verify"></a>Verify Your ClamAV Add-on Installation
+
+<ol>
+<li><a href="https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#bosh-ssh">BOSH SSH</a> into one of the VMs in your deployment.
+</li>
+<li>Run <code>monit summary</code>. Look for the following processes in the output:
+<pre class="terminal">The Monit daemon 5.2.4 uptime: 3d 0h 56m
+Process 'clamd'                     running<br/>
+Process 'freshclam'                 running</pre></li>
+<li>If <code>monit summary</code> does not list <code>clamd</code> and <code>freshclamd</code>, do the following:
+  <ol>
+  <li>Try to start the ClamAV processes by running the following commands:
+  <pre class="terminal">
+  $ monit start clamd<br>
+  $ monit start freshclam</pre></li>
+  <li>Run <code>monit summary</code> again. If you do not see the processes mentioned above, check <code>/var/vcap/sys/log/clamav</code> logs for errors.</li>
+  </ol>
+  <li>If <code>monit summary</code> does list <code>freshclamd</code> and <code>clamd</code>, create a file in <code>/var/vcap</code> on the VM with the following contents:
+<pre>
+X5O!P%@AP[4\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*
+</pre>
+This is a virus signature used to test anti-virus software.</li>
+</ol>
+After `clamdscan` completes, a notification should appear in `/var/log/syslog`. This scan can take up to an hour.
+
+###<a id="format"></a>ClamAV Log Format
+
+See [Monitoring ClamAV Logs](./monitoring-logs.html)
+
+## <a id="setup-whitelist"></a>Whitelist False Positives
+
+If a scan is reporting false positives, report the issue to
+[ClamAV](https://www.clamav.net/reports/fp).
+For more information, see
+[ClamAV Reports False Positives](./troubleshooting.html#false-positive-clamav).
+
+It takes about a week for ClamAV to verify and publish a new database.
+If a week is too long, the ClamAV release provides the option to whitelist signature names.
+
+To whitelist signature names, do the following:
+
+1. Add the `whitelist` property and append the false positive signature names.
+   For example:
+   <pre><code>releases:
+<span>-</span> name: clamav
+  version: x.x.x
+addons:
+  name: clamav
+  jobs:
+  <span>-</span> name: clamav
+    release: clamav
+    properties:
+      clamav:
+        <strong>whitelist:</strong>
+        <strong>  - Eicar-Test-Signature</strong>
+        <strong>  - Clamav.Test.File-7</strong>
+        <strong>  - Win.Test.EICAR_NDB-1</strong>
+        <strong>  - Eicar-Signature</strong>
+...</code></pre>
+
+1. Apply changes by updating your runtime config.
+For more information, see steps 4 to 7 of [Deploy the ClamAV Add-on](#deploy).
+
+##<a id="setup-on-access"></a>Enable On-Access Scan
+<p class="note"><strong>Note</strong>: On-Access Scan is not supported on Windows.</p>
+
+ClamAV offers immediate file scanning upon file modification. This feature may reduce the time it takes to detect and report malware.
+
+To enable on-access file scanning with the <code>on\_access</code> runtime config property:
+<ol>
+<li>In the <code>clamav.yml</code> file, add the <code>on\_access</code> property under the <code>clamav</code> property, and set <code>on\_access</code> to <code>yes</code>, as shown in bold:
+<pre><code>releases:
+<span>-</span> name: clamav
+  version: x.x.x
+addons:
+  name: clamav
+  jobs:
+  <span>-</span> name: clamav
+    release: clamav
+    properties:
+      clamav:
+        <strong>on_access: yes</strong>
+        scheduled: yes
+...</code></pre>
+</li>
+<li>Apply changes by updating your runtime config.
+For how to do this, see steps 4 to 7 of <a href="#deploy">Deploy the ClamAV Add-on</a> above.</li>
+</ol>
+
+##<a id="configure-scheduled-scan"></a>Configure Scheduled Scan
+
+ClamAV can be configured to run a virus scan hourly or daily, with hourly scan being the default.
+
+To change the scheduled scan to run daily:
+
+<ol>
+<li>In the <code>clamav.yml</code> file, add the property <code>schedule_interval</code> under the <code>clamav</code> property, and set it to <code>daily</code>, as shown below:
+<pre><code>releases:
+<span>-</span> name: clamav
+  version: x.x.x
+addons:
+  name: clamav
+  jobs:
+  <span>-</span> name: clamav
+    release: clamav
+    properties:
+      clamav:
+        <strong>schedule_interval: daily</strong>
+        scheduled: yes
+...</code></pre>
+</li>
+<li> (Optional) Restrict the timeframe when the scheduled scan can run by specifying a time range in 24-hour format in the properties <code>first_scheduled_scan_time</code> and <code>last_scheduled_scan_time</code>, as shown below:
+<pre><code>releases:
+<span>-</span> name: clamav
+  version: x.x.x
+addons:
+  name: clamav
+  jobs:
+  <span>-</span> name: clamav
+    release: clamav
+    properties:
+      clamav:
+        schedule_interval: daily
+        scheduled: yes
+        <strong>first_scheduled_scan_time: "2:00"
+        last_scheduled_scan_time: "4:30"</strong>
+...</code></pre>
+</li>
+<li> Apply changes by updating your runtime config.
+For how to do this, see steps 4 to 7 of <a href="#deploy">Deploy the ClamAV Add-on</a> above.
+</li>
+</ol>
+
+##<a id="disable-scheduled-scan"></a>Disable Scheduled Scan
+
+To disable the scheduled scan, do the following:
+<ol>
+<li>In the <code>clamav.yml</code> file, set the property <code>scheduled</code> to <code>no</code>.</li>
+<li>Apply changes by updating your runtime config.
+For how to do this, see steps 4 to 7 of <a href="#deploy">Deploy the ClamAV Add-on</a> above.
+</ol>
+
+##<a id="quarantine"></a>Choose the Action on Infected Files
+
+You can configure ClamAV to take action when infected files are found.
+By default, a notification is sent to the syslog when an infected file is found.
+However, you can specify other actions, as described [Step 2](#step2) below.
+
+<ol>
+<li>In the <code>clamav.yml</code> file, add the <code>action</code> property under the <code>clamav</code> property and,
+optionally, the <code>action_destination</code> property, as shown below:
+<pre><code>releases:
+<span>-</span> name: clamav
+  version: x.x.x
+addons:
+  name: clamav
+  jobs:
+  <span>-</span> name: clamav
+    release: clamav
+    properties:
+      clamav:
+        action: ACTION
+        action_destination: PATH
+...</code></pre>
+</li>
+<li>Replace <code>ACTION</code> with one of the following values:<a id="step2"></a>
+  <ul>
+    <li> <code>notify</code>: The default, only send a notification to syslog</li>
+    <li> <code>remove</code>: Delete the infected file from the filesystem</li>
+    <li> <code>move</code>: Move the infected file to the directory location specified by <code>action_destination</code></li>
+    <li> <code>copy</code>: Copy the infected file to the directory location specified by <code>action_destination</code></li>
+  </ul>
+If you don't supply an action, the function fails.
+</li>
+<li> Replace <code>PATH</code> with the directory location where you want the infected files moved or copied to.
+    The system does not scan the moved-to or copied-to location.
+    If the directory path is not valid, the function fails.<br/>
+    <br>
+
+    <p class="note warning"><strong>WARNING</strong>:
+    If <code>action</code> is <code>move</code> or <code>copy</code>, make sure the <code>action_destination</code> path is also added to the <code>exclude_paths</code>.<br>
+    If <code>action_destination</code> is not listed under <code>exclude_paths</code>, ClamAV:<br>
+    ∙ Detects the moved or copied file<br>
+    ∙ Logs redundant alerts<br>
+    ∙ Creates additional copies of the detected file
+    </p>
+
+    Example configuration:
+
+<pre><code>releases:
+<span>-</span> name: clamav
+  version: x.x.x
+addons:
+  name: clamav
+    jobs:
+    <span>-</span> name: clamav
+      release: clamav
+      properties:
+        clamav:
+          action: move
+          action_destination: /var/vcap/data/clamav/found
+          exclude_paths:
+          - ^/proc/
+          - ^/sys/
+          - ^/var/vcap/data/clamav/found/
+
+...</code></pre>
+  </li>
+</ol>
+
+##<a id="exclude"></a>Exclude Files and Directories
+
+You can configure ClamAV to exclude files and directories from being scanned.
+By default, the scan excludes <code>/proc</code> and <code>/sys</code> directories.
+
+To exclude files and directories from the scan, do the following:
+
+1. Add the `exclude_paths` property and append regex matching file paths to the list,
+as shown below:
+<p class="note"><strong>Note</strong>:
+  Pivotal recommends that you include the <code>/proc</code> and <code>/sys</code>
+  directories on the `exclude_paths` list.
+  This is because they must be on the list to remain excluded.</p>
+
+    <pre><code>releases:
+    <span>-</span> name: clamav
+      version: x.x.x
+    addons:
+      name: clamav
+        jobs:
+        <span>-</span> name: clamav
+          release: clamav
+          properties:
+            clamav:
+              exclude_paths:
+              - ^/proc/
+              - ^/sys/
+              - ADDITONAL-EXCLUSIONS
+    ...</code></pre>
+
+1. Apply changes by updating your runtime config.
+For how to do this, see steps 4 to 7 of <a href="#deploy">Deploy the ClamAV Add-on</a> above.

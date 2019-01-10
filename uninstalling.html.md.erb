@@ -1,47 +1,57 @@
 ---
-title: Uninstalling ClamAV Add-on for PCF
+title: Uninstalling the ClamAV Add-on for PCF
 owner: Security Engineering
 ---
 
 <strong><%= modified_date %></strong>
 
-This topic describes how to uninstall ClamAV from your deployment, and how to verify the uninstallation.
+This topic describes how to uninstall the ClamAV Add-on for PCF from your deployment, and how to verify the uninstallation.
 
 ## <a id='uninstall-clamav'></a>Uninstall ClamAV Add-on
+To uninstall the ClamAV Add-on, follow the steps below:
 
-1. Retrieve the latest runtime config by running one of the following commands:
-  * **For Ops Manager v1.10 or earlier:** 
-  <pre class="terminal">
-    $ bosh runtime-config > PATH\_TO\_SAVE\_THE\_RUNTIME\_CONFIG
-  </pre>
-  * **For Ops Manager v1.11 or later:**
-  <pre class="terminal">
-    $ bosh2 -e my-env runtime-config > PATH\_TO\_SAVE\_THE\_RUNTIME\_CONFIG
+1. Retrieve the latest runtime config by running the following command:
+  <pre>
+    bosh -e my-env runtime-config > PATH-TO-SAVE-THE-RUNTIME-CONFIG
   </pre>
 
-2. In the runtime config, remove all ClamAV properties under the `releases:` and `addons:` sections.
+    Where `PATH-TO-SAVE-THE-RUNTIME-CONFIG` is the location that you want to save the runtime configuration.
 
-3. Update the runtime config.
-  * **For Ops Manager v1.10 or earlier:** 
-  <pre class="terminal">
-    $ bosh update runtime-config PATH\_TO\_SAVE\_THE\_RUNTIME\_CONFIG
-  </pre>
-  * **For Ops Manager v1.11 or later:**
-  <pre class="terminal">
-    $ bosh2 -e my-env update-runtime-config --name=clamav PATH\_TO\_SAVE\_THE\_RUNTIME\_CONFIG
+    For example:
+    <pre class="terminal">
+      $ bosh -e my-env runtime-config > /runtime/config/
+    </pre>
+
+1. In the runtime config, remove all ClamAV properties under the `releases:` and `addons:` sections.
+
+1. Update the runtime config.
+  <pre>
+    bosh -e my-env update-runtime-config --name=clamav PATH-TO-SAVE-THE-RUNTIME-CONFIG
   </pre>
 
-4. Navigate to your **Installation Dashboard** in Ops Manager.
-5. Click **Apply Changes**.
-6. Wait for the installation to complete.
+    Where `PATH-TO-SAVE-THE-RUNTIME-CONFIG` is the location of the runtime configuration you are updating.
+
+    For example:
+    <pre class="terminal">
+      $ bosh -e my-env update-runtime-config --name=clamav /runtime/config/
+    </pre>
+
+1. Navigate to your **Installation Dashboard** in Ops Manager.
+
+1. If you are using Ops Manager v2.3 or later, click **Review Pending Changes**.
+   For more information about this Ops Manager page,
+   see [Reviewing Pending Product Changes](https://docs.pivotal.io/pivotalcf/customizing/review-pending-changes.html).
+
+1. Click **Apply Changes**.
+
+1. Wait for the installation to complete.
 
 ## <a id='verify-uninstall'></a>Verify the Uninstallation
+To verify the uninstallation of the ClamAV Add-on is successful, follow the steps below:
 
-<ol>
-<li><a href="https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#bosh-ssh">BOSH SSH</a> into one of the VMs in your deployment.
-    If you are using PCF v1.11 or later, use the BOSH CLI v2.
-    If you are using PCF v1.10 or earlier, use the BOSH CLI v1.</li>
-<li>Run <code>monit summary</code>.<br>
-    If ClamAV has uninstalled successfully,
-    it should not show <code>clamd</code> or <code>freshclam</code> processes.</li>
-</ol>
+1. Use `bosh ssh` to SSH into one of the VMs in your deployment.
+For more information,
+see [BOSH SSH](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#bosh-ssh)
+
+1. Run `monit summary`. If ClamAV has uninstalled successfully,
+it does not show the `clamd` or `freshclam` processes.
