@@ -362,7 +362,17 @@ addons:
         scheduled: yes
 ...</code></pre>
 </li>
-<li> (Optional) Restrict the timeframe when the scheduled scan can run by specifying a time range in 24-hour format in the properties <code>first_scheduled_scan_time</code> and <code>last_scheduled_scan_time</code>, as shown below:
+<li>Apply changes by updating your runtime config.
+For more information,  see steps 4 to 7 of <a href="#deploy">Deploy the ClamAV Add-on</a> above.</li>
+</ol>
+
+To restrict the time interval when a daily scan will run, do the following:
+
+<ol>
+<li>For ClamAV Add-on v1.4.34 and later, restrict the timeframe
+    when the scheduled scan can run by specifying a time range in 24-hour format
+    in the properties <code>first_scheduled_scan_time</code> and <code>last_scheduled_scan_time</code>,
+    as shown below:
 <pre><code>releases:
 <span>-</span> name: clamav
   version: x.x.x
