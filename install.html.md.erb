@@ -357,12 +357,12 @@ For more information,  see steps 4 to 7 of <a href="#deploy">Deploy the ClamAV A
 
 ##<a id="configure-scheduled-scan"></a>Configure Scheduled Scan
 
-ClamAV can be configured to run a virus scan hourly or daily, with hourly scan being the default.
+ClamAV can be configured to run a virus scan hourly or daily, with daily scan being the default.
 
-To change the scheduled scan to run daily:
+To change the scheduled scan to run hourly:
 
 <ol>
-<li>In the <code>clamav.yml</code> file, add the property <code>schedule_interval</code> under the <code>clamav</code> property, and set it to <code>daily</code>, as shown below:
+<li>In the <code>clamav.yml</code> file, add the property <code>schedule_interval</code> under the <code>clamav</code> property, and set it to <code>hourly</code>, as shown below:
 <pre><code>releases:
 <span>-</span> name: clamav
   version: x.x.x
@@ -373,11 +373,19 @@ addons:
     release: clamav
     properties:
       clamav:
-        <strong>schedule_interval: daily</strong>
         scheduled: yes
+        <strong>schedule_interval: hourly</strong>
 ...</code></pre>
 </li>
-<li>(Optional) For ClamAV Add-on v1.4.34 and later, restrict the timeframe
+<li> Apply changes by updating your runtime config.
+For more information,  see steps 4 to 7 of <a href="#deploy">Deploy the ClamAV Add-on</a> above.
+</li>
+</ol>
+
+To restrict the time interval when a daily scan will run:
+
+<ol>
+<li>For ClamAV Add-on v1.4.34 and later, restrict the timeframe
     when the scheduled scan can run by specifying a time range in 24-hour format
     in the properties <code>first_scheduled_scan_time</code> and <code>last_scheduled_scan_time</code>,
     as shown below:
@@ -391,8 +399,8 @@ addons:
     release: clamav
     properties:
       clamav:
-        schedule_interval: daily
         scheduled: yes
+        schedule_interval: daily
         <strong>first_scheduled_scan_time: "2:00"
         last_scheduled_scan_time: "4:30"</strong>
 ...</code></pre>
