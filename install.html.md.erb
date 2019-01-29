@@ -59,7 +59,7 @@ To create the ClamAV manifest for your deployment, follow the steps below:
         - os: ubuntu-xenial
     ```
 
-2. (Optional) Set the properties `cpu_limit` and `enforce_cpu_limit`.
+2. (Optional) Set the properties `cpu_limit`, `enforce_cpu_limit` and `memory_limit`.
 To use these properties, place the following text under the `clamav` subsection of
 `clamav.yml`, as shown below:
 
@@ -69,9 +69,10 @@ To use these properties, place the following text under the `clamav` subsection 
       clamav:
         cpu_limit: VALUE-OF-CPU-LIMIT
         enforce_cpu_limit: TRUE|FALSE
+        memory_limit: VALUE-OF-MEMORY-LIMIT-IN-BYTES
     ...
     ```
-  <code><strong>cpu\_limit</strong></code>: <a name="cpu_limit"></a>
+    <code><strong>cpu\_limit</strong></code>: <a name="cpu_limit"></a>
     <ul>
       <li>Limits ClamAV to a percentage of available CPU resources when other processes are using CPU resources.
         Usage may exceed the limit if enough idle CPU cycles are available.</li>
@@ -88,6 +89,12 @@ To use these properties, place the following text under the `clamav` subsection 
         only enforced when other processes are using CPU resources.
         Usage may exceed the limit if enough idle CPU cycles are available.</li>
         <li>This property is <code>false</code> by default.</li>
+    </ul>
+
+    <code><strong>memory\_limit</strong></code>: <a name="memory_limit"></a>
+    <ul>
+      <li>Limits the maximum amount of user memory (including file cache) in bytes used by ClamAV.</li>
+      <li>The default value is <code>1073741824</code>.</li>
     </ul>
 
     <p class="note warning"><strong>WARNING</strong>:
