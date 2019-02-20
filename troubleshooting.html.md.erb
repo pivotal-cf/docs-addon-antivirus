@@ -71,17 +71,37 @@ You can also subscribe to the ClamAV email list to be kept up-to-date with ClamA
 
 <hr>
 
-### <a id='cpu-spikes-clamav'></a> Getting CPU Spikes While Using ClamAV
+### <a id='cpu-spikes-clamav'></a> CPU Spikes While Using ClamAV
 
 ####Symptom
 ClamAV is taking more CPU resources than assigned in its configuration.
 
 ####Explanation
-ClamAV resource consumption is restricted using CGroups.
+ClamAV resource consumption is restricted using cgroups.
 ClamAV is resource-limited whenever other processes are active.
-However, CGroups allows ClamAV to occupy more CPU resources when all other processes are idle,
+However, cgroups allows ClamAV to occupy more CPU resources when all other processes are idle,
 because it does not impact their performance.
 
 ####Solution
-This is expected behavior from CGroups.
-If a hard limit is required, set the [`enforce_cpu_limit`](./install.html#enforce_cpu_limit) Linux property.
+This is expected behavior from cgroups. If a hard limit is required, configure the `enforce_cpu_limit` Linux property. For more information, see [clamav.yml Template for Linux](./install.html#linux-template) Linux property.
+
+<hr>
+
+### <a id='out-of-memory'></a> Out of Memory While Using ClamAV
+
+####Symptom
+ClamAV fails to start and `/var/log/syslog` reports `Memory cgroup out of memory: Kill process` on the `clamd` process similar to the following:
+
+```
+2019-02-20T19:35:40.249205+00:00 localhost kernel: [  254.669948] Memory cgroup out of memory: Kill process 7493 (clamd) score 586 or sacrifice child
+2019-02-20T19:35:40.249205+00:00 localhost kernel: [  254.679053] Killed process 7527 (clamd) total-vm:786136kB, anon-rss:626692kB, file-rss:1592kB
+```
+
+####Explanation
+ClamAV resource consumption is restricted by cgroups. The `clamd` process is terminated if the memory usage limit is exceeded.
+When memory swapping is disabled by other BOSH jobs, the ClamAV resource requires a larger memory limit.
+
+####Solution
+This is expected behavior from cgroups. To configure the memory limit, configure the `memory_limit` Linux property. For more information, see [clamav.yml Template for Linux](./install.html#linux-template).
+
+<p class="note warning"><strong>Warning:</strong> When updating the memory limit, ensure that all VMs, including errand VMs, have sufficient memory resources.</p>
