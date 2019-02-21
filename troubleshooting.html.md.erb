@@ -15,14 +15,13 @@ and provides general recommendations for troubleshooting and ensuring that the d
 #### Symptom
 Applying changes in Ops Manager fails. The bottom of the changelog contains an error message similar to the following:
 
-```
-...
+<pre class="terminal>...
 Started updating job nats > nats/0 (12bfae02-b4af-4104-b2bd-227ff07b2d92) (canary). Done (00:02:31)
   Failed updating job etcd_server > etcd_server/0 (f8e492bf-db09-4d38-8a73-5cf69d7b8a11) (canary): 'etcd_server/0 (f8e492bf-db09-4d38-8a73-5cf69d7b8a11)' is not running after update. Review logs for failed jobs: clamd (00:05:53)
 
 
 Error 400007: 'etcd_server/0 (f8e492bf-db09-4d38-8a73-5cf69d7b8a11)' is not running after update. Review logs for failed jobs: clamd
-```
+</pre>
 
 #### Explanation
 The ClamAV mirror server was unavailable during initial deployment.
@@ -91,10 +90,9 @@ This is expected behavior from cgroups. If a hard limit is required, configure t
 ####Symptom
 ClamAV fails to start and `/var/log/syslog` reports `Memory cgroup out of memory: Kill process` on the `clamd` process similar to the following:
 
-```
-2019-02-20T19:35:40.249205+00:00 localhost kernel: [  254.669948] Memory cgroup out of memory: Kill process 7493 (clamd) score 586 or sacrifice child
+<pre class="terminal">2019-02-20T19:35:40.249205+00:00 localhost kernel: [  254.669948] Memory cgroup out of memory: Kill process 7493 (clamd) score 586 or sacrifice child
 2019-02-20T19:35:40.249205+00:00 localhost kernel: [  254.679053] Killed process 7527 (clamd) total-vm:786136kB, anon-rss:626692kB, file-rss:1592kB
-```
+</pre>
 
 ####Explanation
 ClamAV resource consumption is restricted by cgroups. The `clamd` process is terminated if the memory usage limit is exceeded.
