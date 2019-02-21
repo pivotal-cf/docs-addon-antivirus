@@ -15,10 +15,9 @@ and provides general recommendations for troubleshooting and ensuring that the d
 #### Symptom
 Applying changes in Ops Manager fails. The bottom of the changelog contains an error message similar to the following:
 
-<pre class="terminal>...
+<pre class="terminal">...
 Started updating job nats > nats/0 (12bfae02-b4af-4104-b2bd-227ff07b2d92) (canary). Done (00:02:31)
   Failed updating job etcd_server > etcd_server/0 (f8e492bf-db09-4d38-8a73-5cf69d7b8a11) (canary): 'etcd_server/0 (f8e492bf-db09-4d38-8a73-5cf69d7b8a11)' is not running after update. Review logs for failed jobs: clamd (00:05:53)
-
 
 Error 400007: 'etcd_server/0 (f8e492bf-db09-4d38-8a73-5cf69d7b8a11)' is not running after update. Review logs for failed jobs: clamd
 </pre>
