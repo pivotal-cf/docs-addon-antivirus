@@ -88,17 +88,22 @@ This is expected behavior from cgroups. If a hard limit is required, configure t
 ### <a id='out-of-memory'></a> Out of Memory While Using ClamAV
 
 ####Symptom
-ClamAV fails to start and `/var/log/syslog` reports `Memory cgroup out of memory: Kill process` on the `clamd` process similar to the following:
+ClamAV fails to start and `/var/log/syslog` reports `Memory cgroup out of memory:
+Kill process` on the `clamd` process similar to the following:
 
 <pre class="terminal">2019-02-20T19:35:40.249205+00:00 localhost kernel: [  254.669948] Memory cgroup out of memory: Kill process 7493 (clamd) score 586 or sacrifice child
 2019-02-20T19:35:40.249205+00:00 localhost kernel: [  254.679053] Killed process 7527 (clamd) total-vm:786136kB, anon-rss:626692kB, file-rss:1592kB
 </pre>
 
 ####Explanation
-ClamAV resource consumption is restricted by cgroups. The `clamd` process is terminated if the memory usage limit is exceeded.
+ClamAV resource consumption is restricted by cgroups.
+The `clamd` process is terminated if the memory usage limit is exceeded.
 When memory swapping is disabled by other BOSH jobs, the ClamAV resource requires a larger memory limit.
 
 ####Solution
-This is expected behavior from cgroups. To configure the memory limit, configure the `memory_limit` Linux property. For more information, see [clamav.yml Template for Linux](./install.html#linux-template).
+This is expected behavior from cgroups.
+To configure the memory limit, configure the `memory_limit` Linux property.
+For more information, see [clamav.yml Template for Linux](./install.html#linux-template).
 
-<p class="note warning"><strong>Warning:</strong> When updating the memory limit, ensure that all VMs, including errand VMs, have sufficient memory resources.</p>
+<p class="note warning"><strong>Warning:</strong> When updating the memory limit, ensure that all VMs,
+including errand VMs, have sufficient memory resources.</p>
