@@ -84,6 +84,16 @@ The following tables lists common messages that you see when ClamAV apps write t
     <td>Healthy</td>
   </tr>
   <tr>
+    <td><a href="#cld-warnings">Can't Download CLD Database Files</a></td>
+    <td>freshclam</td>
+    <td>
+      freshclam receives an error when trying to download the latest uncompressed
+      databases (main.cld, daily.cld, bytecode.cld). These database files are optional
+      for ClamAV to run.
+    </td>
+    <td>Healthy</td>
+  </tr>
+  <tr>
     <td><a href="#freshclam-up-to-date">Virus Database Is Up-to-Date</a></td>
     <td>freshclam</td>
     <td>States that the virus database is up-to-date.</td>
@@ -200,7 +210,16 @@ freshclam log entries pertain to whether or not the virus-signature database is 
 	main.cvd is up to date (version: 58, sigs: 4566249, f-level: 60, builder: sigmgr)
 	daily.cvd is up to date (version: 25135, sigs: 2155329, f-level: 63, builder: neo)
 	bytecode.cvd is up to date (version: 327, sigs: 91, f-level: 63, builder: neo)
-	</pre>
+  </pre>
+  
+* <a id="cld-warnings"></a>Can't Download CLD Database Files
+  <pre class="terminal">
+  WARNING: getfile: Unknown response from pivotal-clamav-mirror.s3.amazonaws.com (IP: 52.216.233.147): HTTP/1.1 403
+  WARNING: Can't download main.cld from pivotal-clamav-mirror.s3.amazonaws.com
+  WARNING: getfile: Unknown response from pivotal-clamav-mirror.s3.amazonaws.com (IP: 52.216.233.147): HTTP/1.1 403
+  WARNING: Can't download daily.cld from pivotal-clamav-mirror.s3.amazonaws.com
+  WARNING: getfile: Unknown response from pivotal-clamav-mirror.s3.amazonaws.com (IP: 52.216.233.147): HTTP/1.1 403
+  WARNING: Can't download bytecode.cld from pivotal-clamav-mirror.s3.amazonaws.com</pre>
 
 * <a id="freshclam-old"></a>Virus Database is Older Than 7 Days
 	<pre class="terminal">
