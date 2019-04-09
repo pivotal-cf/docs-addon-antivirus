@@ -23,7 +23,7 @@ Pivotal recommends that you enable syslog forwarding so that the messages from e
 is aggregated into the syslog file on the remote syslog server.
 Use your preferred monitoring and alerting tool to review the Clamav log messages.
 
-For an example of how ClamAV messages appear in the syslog file, see [Syslog Format](#format) below. 
+For an example of how ClamAV messages appear in the syslog file, see [Syslog Format](#format) below.
 
 For information on each app, see [freshclam](#freshclam-app), [clamd](#clamd-app),
 and [clamdscan](#clamdscan-app) below.
@@ -73,7 +73,7 @@ The following tables lists common messages that you see when ClamAV apps write t
   <tr>
     <td><a href="#freshclam-check">Check for Updates</a></td>
     <td>freshclam</td>
-    <td>States that the freshclam app is checking the 
+    <td>States that the freshclam app is checking the
     	configured remote mirror for an update to the local virus signature database.</td>
     <td>Healthy</td>
   </tr>
@@ -84,12 +84,12 @@ The following tables lists common messages that you see when ClamAV apps write t
     <td>Healthy</td>
   </tr>
   <tr>
-    <td><a href="#cld-warnings">Can't Download CLD Database Files</a></td>
+    <td><a href="#cld-warnings">Cannnot Download CLD Database Files</a></td>
     <td>freshclam</td>
     <td>
-      freshclam receives an error when trying to download the latest uncompressed
-      databases (main.cld, daily.cld, bytecode.cld). These database files are optional
-      for ClamAV to run.
+      States that freshclam could not download the latest uncompressed
+      databases. These database files include the main.cld, daily.cld, and bytecode.cld files.
+      They are optional for ClamAV to run.
     </td>
     <td>Healthy</td>
   </tr>
@@ -184,7 +184,7 @@ The following tables lists common messages that you see when ClamAV apps write t
 
 ##<a id="freshclam"></a>freshclam Log Messages
 
-The freshclam job on each VM is responsible for updating the database that stores the known virus signatures. 
+The freshclam job on each VM is responsible for updating the database that stores the known virus signatures.
 
 freshclam log entries pertain to whether or not the virus-signature database is up-to-date.
 
@@ -211,8 +211,8 @@ freshclam log entries pertain to whether or not the virus-signature database is 
 	daily.cvd is up to date (version: 25135, sigs: 2155329, f-level: 63, builder: neo)
 	bytecode.cvd is up to date (version: 327, sigs: 91, f-level: 63, builder: neo)
   </pre>
-  
-* <a id="cld-warnings"></a>Can't Download CLD Database Files
+
+* <a id="cld-warnings"></a>Cannot Download CLD Database Files
   <pre class="terminal">
   WARNING: getfile: Unknown response from pivotal-clamav-mirror.s3.amazonaws.com (IP: 52.216.233.147): HTTP/1.1 403
   WARNING: Can't download main.cld from pivotal-clamav-mirror.s3.amazonaws.com
@@ -312,7 +312,7 @@ clamdscan is searches files and directories for viruses.
 ##<a id="format"></a>ClamAV Log Format
 
 The logs that ClamAV itself outputs do not adhere to a specific structure.
-However, the syslog forwarder component, which is on all VM's, 
+However, the syslog forwarder component, which is on all VM's,
 encapsulates ClamAV's log and prepends the necessary headers so that the resulting logs adhere
 to the syslog format.
 
@@ -337,7 +337,7 @@ With syslog-forwarder, the syslog format is:
 
 Where:
 
-* `APP-NAME` is `freshclam`, `clamdscan`, or `clamd`.  
+* `APP-NAME` is `freshclam`, `clamdscan`, or `clamd`.
 * <code>\<PRI></code> is `<14>`.
 * `MESSAGE` is the output from a ClamAV app.
    Examples of the output messages are shown [Log Messages](#) above.
