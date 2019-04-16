@@ -112,7 +112,7 @@ including errand VMs, have sufficient memory resources.</p>
 
 #### Symptom
 ClamAV fails to start during deployment,
-however the the `clamd` and `freshclam` processes eventually run.<br>
+however the `clamd` and `freshclam` processes eventually run.<br>
 
 The deployment failure log looks similar to the following:
 
@@ -146,4 +146,4 @@ For more information, see [clamav.yml Template for Linux](./install.html#linux-t
 if other processes are not using CPU resources.<br>
 For more information, see [clamav.yml Template for Linux](./install.html#linux-template).
 
-+ Update the machine type of failing VMs with ClamAV to have sufficient CPU resources.
++ In Ops Manager, adjust the **VM Type** for the **ClamAV** job to have sufficient CPU resources.
