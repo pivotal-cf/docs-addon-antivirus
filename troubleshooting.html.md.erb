@@ -46,7 +46,7 @@ that the mirror server is correctly configured and is available on the network f
 and that at least one hour has elapsed.
 One hour is the default scan schedule interval.
 
-If the local mirror is up-to-date and ClamAV is still failing to detect a malware sample, you might have encountered a new threat. 
+If the local mirror is up-to-date and ClamAV is still failing to detect a malware sample, you might have encountered a new threat.
 Pivotal recommends alerting the community via existing channels and reporting the suspicious file directly to the ClamAV team.
 
 <p class="note"><strong>Note</strong>: Pivotal does not provide support for ClamAV detection failures, mirror coordination, or threat tracking activity.</p>
@@ -106,20 +106,27 @@ For more information, see [clamav.yml Template for Linux](./install.html#linux-t
 
 <p class="note warning"><strong>Warning:</strong> When updating the memory limit, ensure that all VMs,
 including errand VMs, have sufficient memory resources.</p>
+<hr>
 
 ### <a id='insufficient-cpu'></a> Insufficient CPU Limit While Using ClamAV
 
 #### Symptom
-ClamAV fails to start during deployment, however the process succeeds in running eventually. An example of the deployment failure log is:
+ClamAV fails to start during deployment,
+however the the `clamd` and `freshclam` processes eventually run.<br>
+
+The deployment failure log looks similar to the following:
 
 <pre class="terminal">
 Task 1071 | 19:40:49 | Updating instance clamav_1: clamav_1/d5cfe4bd-b606-4372-8481-187f4cf57e6c (0) (canary) (00:05:26)
                 L Error: 'clamav_1/d5cfe4bd-b606-4372-8481-187f4cf57e6c (0)' is not running after update. Review logs for failed jobs: clamd, freshclam
 </pre>
+<br>
+When you run `bosh -d DEPLOYMENT instances --ps`,
+the `clamd` and `freshclam` processes are successfully running after the failed deployment.
 
-The following command shows monit processes on the deployment: `bosh -d DEPLOYMENT instances --ps`. The result shows that the `clamd` and `freshclam` processes are successfully running after the failed deployment.
+For example:
 
-<pre class="terminal">
+<pre class="terminal">$ bosh -d clamav_1/d5cfe4bd-b606-4372-8481-187f4cf57e6c instances --ps
 Instance                                       Process    Process State  AZ  IPs
 clamav_1/d5cfe4bd-b606-4372-8481-187f4cf57e6c  -          running        z1  10.0.0.7
 ~                                              clamd      running        -   -
@@ -130,9 +137,13 @@ clamav_1/d5cfe4bd-b606-4372-8481-187f4cf57e6c  -          running        z1  10.
 ClamAV startup is CPU intensive and if restricted, can prevent ClamAV from starting up correctly.
 
 #### Solutions
-1) Ensure `cpu_limit` is set high enough for ClamAV to execute normally. If the limit is too strict, ClamAV fails to start.
++ Ensure `cpu_limit` is set high enough for ClamAV to execute normally.
+If the limit is too strict, ClamAV fails to start.
 For example, an n1-standard VM on GCP requires `cpu_limit` to be > 45.
+For more information, see [clamav.yml Template for Linux](./install.html#linux-template).
 
-2) Disable `enforce_cpu_limit` so that more CPU cycles are allocated to ClamAV if other processes are not using CPU resources.
++ Set `enforce_cpu_limit` to `false`. This allocates more CPU cycles to ClamAV
+if other processes are not using CPU resources.<br>
+For more information, see [clamav.yml Template for Linux](./install.html#linux-template).
 
-3) Update the machine type of failing VMs with ClamAV to have sufficient CPU resources.
++ Update the machine type of failing VMs with ClamAV to have sufficient CPU resources.
