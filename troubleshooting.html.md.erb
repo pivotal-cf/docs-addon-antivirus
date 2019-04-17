@@ -111,8 +111,8 @@ including errand VMs, have sufficient memory resources.</p>
 ### <a id='insufficient-cpu'></a> Insufficient CPU Limit While Using ClamAV
 
 #### Symptom
-ClamAV fails to start during deployment,
-however the `clamd` and `freshclam` processes eventually run.<br>
+ClamAV fails to start during deployment.
+However, the `clamd` and `freshclam` processes eventually run.<br>
 
 The deployment failure log looks similar to the following:
 
@@ -121,8 +121,8 @@ Task 1071 | 19:40:49 | Updating instance clamav_1: clamav_1/d5cfe4bd-b606-4372-8
                 L Error: 'clamav_1/d5cfe4bd-b606-4372-8481-187f4cf57e6c (0)' is not running after update. Review logs for failed jobs: clamd, freshclam
 </pre>
 <br>
-When you run `bosh -d DEPLOYMENT instances --ps`,
-the `clamd` and `freshclam` processes are successfully running after the failed deployment.
+When you run `bosh -d DEPLOYMENT instances --ps`, you see that the
+the `clamd` and `freshclam` processes are running successfully after the failed deployment.
 
 For example:
 
