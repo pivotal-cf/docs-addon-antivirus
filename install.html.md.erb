@@ -75,7 +75,9 @@ To use these properties, place the following text under the `clamav` subsection 
       <li>Set to a whole number less than 100.
         For example, set to <code>50</code> to limit ClamAV to 50% CPU usage when other
         tasks are running.</li>
-      <li>The default value is <code>50</code> for versions newer than 1.4.39. Older versions have a default version of <code>10</code>.</li>
+        <p class="note"><strong>Note:</strong> For ClamAV v1.4.40 and later,
+          the default value is <code>50</code>. For ClamAV v1.4.39 and earlier,
+          the default value is <code>10</code>. </p>
     </ul>
 
     <code><strong>enforce\_cpu\_limit</strong></code>: <a name="enforce_cpu_limit"></a>
@@ -85,13 +87,12 @@ To use these properties, place the following text under the `clamav` subsection 
         only enforced when other processes are using CPU resources.
         Usage may exceed the limit if enough idle CPU cycles are available.</li>
         <li>This property is <code>false</code> by default.</li>
+        <p class="note warning"><strong>Warning:</strong>
+          If <code>enforce\_cpu\_limit</code> is set <code>true</code>, ensure <code>cpu\_limit</code>
+          is set high enough for ClamAV to execute normally.
+          If the limit is too strict, ClamAV fails to start.
+          For example, an n1-standard VM on GCP requires <code>cpu\_limit</code> to be > 45.</p>
     </ul>
-
-    <p class="note warning"><strong>Warning:</strong>
-      If <code>enforce_cpu_limit</code> is set <code>true</code>, ensure <code>cpu_limit</code>
-      is set high enough for ClamAV to execute normally.
-      If the limit is too strict, ClamAV fails to start.
-      For example, an n1-standard VM on GCP requires <code>cpu_limit</code> to be > 45.</p>
 
     <code><strong>memory\_limit</strong></code>: <a name="memory_limit"></a>
     <ul>
