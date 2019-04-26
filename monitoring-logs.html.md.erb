@@ -377,3 +377,18 @@ Infected files: 0
 
 For more information,
 see [Format](https://github.com/cloudfoundry/syslog-release#format) in the syslog-release GitHub repository.
+
+##<a id="container"></a>ClamAV Container Scanning
+ClamAV supports container scanning.
+
+###PAS containers
+Log messages will appear on Diego Cells under `/var/vcap/data/grootfs/store/unprivileged/images/<UUID>/diff` and will look similar to:
+<pre class="terminal">
+/var/vcap/data/grootfs/store/unprivileged/images/2264d474-3e57-4934-504f-ddbb/diff/home/vcap/app/public/test.html: Eicar-Test-Signature FOUND
+</pre>
+
+###PKS containers
+Log messages will appear on Kubernetes workers under `/var/vcap/store/docker/docker/overlay2/<UUID>/diff` and will look similar to:
+<pre class="terminal">
+/var/vcap/store/docker/docker/overlay2/53322c6f7c25bb00224bb03cdfc285e141471d746d5c7a8c5a65db56fda56ecb/diff/test.html: Eicar-Test-Signature FOUND
+</pre>
