@@ -82,6 +82,7 @@ For `move` and `copy` options, a field `Destination for infected files` will app
   directories on the `exclude_paths` list.
   This is because they must be on the list to remain excluded.</p>
 
+
 1. For <strong>List of signature names that will be ignored by ClamAV (Used for false positives)</strong>, enter a comma-separated list of signature names for ClamAV to whitelist. For example, `Eicar-Test-Signature,Clamav.Test.File-7` will configure ClamAV to ignore the Eicar Test File signature and the ClamAV Test File-7 signature.
 
 If a scan is reporting false positives, report the issue to
@@ -147,3 +148,54 @@ Follow the steps below:
 1. Click **Review Pending Changes**
 
 1. Ensure all products are selected and click **Apply Changes**.
+
+
+##<a id="scan-containers"></a>Configure ClamAV to Scan Containers
+You can use ClamAV to scan the following:
+
+* Garden containers on the Diego Cell VMs in Pivotal Application Service (PAS)
+* Containers on the Kubernetes worker node VMs in Enterprise Pivotal Container Service (Enterprise PKS)
+
+###<a id="garden"></a> Scan Garden Containers
+
+To configure ClamAV to scan Garden containers, do the following when configuring ClamAV:
+
+1. In [Exclude Files and Directories](#exclude) above, add the following pattern to the `exclude_paths` property:
+
+        clamav:
+          exclude_paths:
+            ...
+            # When scanning Garden containers,
+            # ignore duplicate log messages sent to .../UUID/rootfs/
+            - ^/var/vcap/data/grootfs/store/(un)?privileged/images/[\w-]+/rootfs/.*$
+
+    <p class="note"><strong>Note:</strong> When files in the Garden containers are modified,
+      changes are made to both the <code>diff</code> and <code>rootfs</code> directories.
+    Adding this ignore pattern means that files and directories
+    in the <code>/var/vcap/data/grootfs/store/unprivileged/images/UUID/diff</code>
+    directory are ignored by ClamAV. <code>UUID</code> is the ID of the container.</p>
+
+For an example log message, see [Container Log Messages](./monitoring-logs.html#container).
+
+
+###<a id="pks"></a> Monitor Containers in Enterprise PKS
+
+To configure ClamAV to scan containers on the Kubernetes worker node VMs in Enterprise PKS,
+do the following when configuring ClamAV:
+
+1. In [Exclude Files and Directories](#exclude) above, add the following pattern to the `exclude_paths` property:
+
+        clamav:
+          exclude_paths:
+            ...
+            # When scanning Kubernetes containers,
+            # ignore duplicate log messages sent to .../UUID/merged/
+            - ^/var/vcap/data/grootfs/store/(un)?privileged/images/[\w-]+/rootfs/.*$
+
+    <p class="note"><strong>Note:</strong> When files in the Kubernetes worker containers are modified,
+      changes are made to both the <code>diff</code> and <code>merged</code> directories.
+    Adding this ignore pattern means that files and directories
+    in the <code>/var/vcap/data/grootfs/store/unprivileged/images/UUID/merged</code>
+    directory are ignored by ClamAV. <code>UUID</code> is the ID of the container.</p>
+
+For an example log message, see [Container Log Messages](./monitoring-logs.html#container).
