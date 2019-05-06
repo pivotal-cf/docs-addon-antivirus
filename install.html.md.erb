@@ -46,58 +46,85 @@ To assign AZs and networks, click the **Assign AZs and Networks** settings tab.
       </tr>
       <tr>
         <td><strong>Network</strong></td>
-        <td>Select a subnet for the <code>clamav_mirror</code> VM. <br>This is typically the same subnet that 
+        <td>Select a subnet for the <code>clamav_mirror</code> VM. <br>This is typically the same subnet that
           includes the Pivotal Application Services (PAS) component VMs.</td>
-      </tr>    
+      </tr>
     </table>
-    
+
 1. Click **Save**.
+
+
+## <a id='configure'></a> Configure <%= vars.product_short %>
+
+To configure <%= vars.product_short %>, do the following:
 
 1. Click **ClamAV Configuration**.
 
-1. ClamAV offers immediate file scanning upon file modification. This feature may reduce the time it takes to detect and report malware.
+1. (Optional) If you want to scan files immediately after they are modified,
+then select **Enable on-access scanning**.
 
-To enable on-access file scanning, check Enable on-access scanning.
+    <p class="note"><strong>Note</strong>: On-Access Scan is not supported on Windows.</p>
 
-<p class="note"><strong>Note</strong>: On-Access Scan is not supported on Windows.</p>
+1. Fill out the following fields:
 
-1. For <strong>Memory limit (in bytes)</strong>, enter the maximum amount of user memory (including file cache) in bytes that ClamAV can use.
+    <table class="nice">
+      <th>Field</th>
+      <th>Description</th>
+      <tr>
+        <td><strong>Memory limit (in bytes)</strong></td>
+        <td>The maximum amount of user memory (including file cache) in bytes that ClamAV can use.
+          The default value is <code>1610612736</code>.</td>
+      </tr>
+      <tr>
+        <td><strong>(Optional) Enforce CPU limit</strong></td>
+        <td>This limits the amount of CPU the ClamAV processes can use.
+            To enforce this limit, select <strong>Enable</strong>,
+            then enter a value in <strong>CPU limit (percentage)</strong>.</td>
+      </tr>
+      <tr>
+        <td><strong>Action to take when a virus is found</strong></td>
+        <td>Select one of the following options:<br>
+            <code>notify</code>: The default, only send a notification to syslog<br>
+            <code>remove</code>: Delete the infected file from the filesystem<br>
+            <code>move</code>: Move the infected file to a specified directory<br>
+            <code>copy</code>: Copy the infected file to a specified directory<br>
 
-The default value is <code>1610612736</code>
+            For the <code>move</code> and <code>copy</code> options, a field
+            for <strong>Destination for infected files</strong> appears after the
+            option is selected.</td>
+      </tr>
+      <tr>
+        <td><strong>Directories and files that will be ignored by ClamAV</strong></td>
+        <td>A comma-separated list of directories for ClamAV to not scan.
+          The default value is "<code>/proc/</code>,<code>/sys/</code>".
+          This configures ClamAV scans to exclude the <code>/proc</code> and
+          <code>/sys</code> directories.<br>
+          Pivotal recommends that you include the <code>/proc</code> and
+          <code>/sys</code> directories in the <code>exclude_paths</code> list.</td>
+      </tr>
+      <tr>
+        <td><strong>List of signature names that will be ignored by ClamAV (Used for false positives)</strong></td>
+        <td>A comma-separated list of signature names for ClamAV to whitelist.
+          For example, "<code>Eicar-Test-Signature</code>,<code>Clamav.Test.File-7</code>"
+          will configure ClamAV to ignore the <strong>Eicar Test File</strong>
+          and <strong>ClamAV Test File-7</strong> signatures.</td>
+      </tr>
+    </table>
 
-1. (Optional) To limit the amount of CPU the ClamAV processes can use, set <strong>Enforce CPU limit</strong> to <strong>Enable</strong>, then enter the percentage limit in <strong>CPU limit(percentage)</strong>.
+    <p class="note warning"><strong>Warning:</strong>
+      If <code>action</code> is <code>move</code> or <code>copy</code>, make sure the <code>Destination for infected files</code> path is also added to the <strong>Directories and files that will be ignored by ClamAV</strong> field.<br>
+      If <code>Destination for infected files</code> is not listed under <code>Directories and files that will be ignored by ClamAV</code>, ClamAV:<br>
+      ∙ Detects the moved or copied file<br>
+      ∙ Logs redundant alerts<br>
+      ∙ Creates additional copies of the detected file
+    </p>
 
-1. For <strong>Action to take when a virus is found</strong>, you can select one of the following options:
-
-`notify`: The default, only send a notification to syslog
-`remove`: Delete the infected file from the filesystem
-`move`: Move the infected file to a specified directory
-`copy`: Copy the infected file to a specified directory
-
-For `move` and `copy` options, a field `Destination for infected files` will appear after the option is selected.
-
-<p class="note warning"><strong>Warning:</strong>
-  If <code>action</code> is <code>move</code> or <code>copy</code>, make sure the <code>Destination for infected files</code> path is also added to the <strong>Directories and files that will be ignored by ClamAV</strong> field.<br>
-  If <code>Destination for infected files</code> is not listed under <code>Directories and files that will be ignored by ClamAV</code>, ClamAV:<br>
-  ∙ Detects the moved or copied file<br>
-  ∙ Logs redundant alerts<br>
-  ∙ Creates additional copies of the detected file
-</p>
-
-1. For <strong>Directories and files that will be ignored by ClamAV</strong>, enter a comma-separated list of directories for ClamAV to not scan. By default, the value is `/proc/,/sys/`, which will configure ClamAV scans to exclude the `/proc` and `/sys` directories.
-
-<p class="note"><strong>Note</strong>:
-  Pivotal recommends that you include the <code>/proc</code> and <code>/sys</code>
-  directories on the `exclude_paths` list.
-  This is because they must be on the list to remain excluded.</p>
-
-
-1. For <strong>List of signature names that will be ignored by ClamAV (Used for false positives)</strong>, enter a comma-separated list of signature names for ClamAV to whitelist. For example, `Eicar-Test-Signature,Clamav.Test.File-7` will configure ClamAV to ignore the Eicar Test File signature and the ClamAV Test File-7 signature.
 
 If a scan is reporting false positives, report the issue to
 [ClamAV](https://www.clamav.net/reports/fp).
-For more information, see
-[ClamAV Reports False Positives](./troubleshooting.html#false-positive-clamav). It takes about a week for ClamAV to verify and publish a new database.
+For more information about false positives, see
+[ClamAV Reports False Positives](./troubleshooting.html#false-positive-clamav).
+It takes about a week for ClamAV to verify and publish a new database.
 
 ## <a id='proxy'></a> Configure HTTP Proxy
 
@@ -105,13 +132,20 @@ If you require a proxy server for ClamAV jobs to connect to the internet to upda
 
 ## <a id='scheduled'></a> Configure Scheduled Scan
 
-ClamAV can be configured to run a virus scan hourly or daily, with daily scan being the default.
+ClamAV can be configured to run a virus scan <code>hourly</code> or <code>daily</code>.
+The default value is <code>daily</code>.
 
-To change the scheduled scan to hourly, click <strong>Scheduled Scans</strong> and set <strong>Interval for scheduled scans to run</strong> to `Hourly`.
+To change the scheduled scan value, do the following:
 
-To disable the scheduled scan, set <strong>Interval for scheduled scans to run</strong> to `Disabled`.
+1. Click <strong>Scheduled Scans</strong>
+1. Set <strong>Interval for scheduled scans to run</strong> to the desired value:
+  * <code>hourly</code>
+  * <code>daily</code>
+  * <code>disabled</code>
+  * <code></code>
 
-For daily scheduled scans, you can restrict the time interval when a daily scan runs by setting <strong>Earliest time that a daily scheduled scan can start </strong> and <strong>Latest time that a daily scheduled scan can start </strong>. The format of these values must be in 24-hour format `HH:MM`.
+For <code>daily</code> scheduled scans, you can restrict the time interval when
+a daily scan runs by setting <strong>Earliest time that a daily scheduled scan can start </strong> and <strong>Latest time that a daily scheduled scan can start </strong>. The format of these values must be in 24-hour format `HH:MM`.
 
 ## <a id='mirror'></a> Configure ClamAV Mirror
 
@@ -159,15 +193,36 @@ Follow the steps below:
 1. Ensure all products are selected and click **Apply Changes**.
 
 
-##<a id="scan-containers"></a>Configure ClamAV to Scan Containers
+##<a id="scan-containers"></a>Configure ClamAV to Exclude Duplicate Logs on Containers
 You can use ClamAV to scan the following:
 
 * Garden containers on the Diego Cell VMs in Pivotal Application Service (PAS)
 * Containers on the Kubernetes worker node VMs in Enterprise Pivotal Container Service (Enterprise PKS)
 
-###<a id="garden"></a> Scan Garden Containers
+However, duplicate logs about the same file will appear under the `diff`,
+`rootfs`, or `merged` directories as a consequence of OverlayFS implementation.
 
-To configure ClamAV to scan Garden containers, do the following when configuring ClamAV:
+To configure ClamAV to ignore duplicate logs for these directories, see the
+[Exclude Duplicate Logs on Garden Containers](#garden) or
+[Exclude Duplicate Logs on Containers in Enterprise PKS](#pks) section below:
+
+
+###<a id="garden"></a> Exclude Duplicate Logs on Garden Containers
+When ClamAV scan results detect potential malware on the Garden containers,
+logs are reported for both the `diff` and `rootfs` directories.
+
+This is because the `rootfs` directory is the projection of
+the `diff` directory on top of a base image layer, therefore it is safe to
+ignore the `rootfs` directory.
+GrootFS mounts the underlying volumes using OverlayFS to a point in the images directory.
+This mount point is the `rootfs` directory for the container and is read-write.
+
+For more information about GrootFS OverlayFS implementation, see
+[Volumes](https://docs.cloudfoundry.org/concepts/grootfs-disk.html#volumes)
+in the Cloud Foundry documentation.
+
+If you would like to configure ClamAV to ignore duplicate logs for these directories,
+do the following:
 
 1. In [Exclude Files and Directories](#exclude) above, add the following pattern to the `exclude_paths` property:
 
@@ -175,22 +230,32 @@ To configure ClamAV to scan Garden containers, do the following when configuring
           exclude_paths:
             ...
             # When scanning Garden containers,
-            # ignore duplicate log messages sent to .../UUID/rootfs/
+            # ignore duplicate log messages from .../UUID/rootfs/
             - ^/var/vcap/data/grootfs/store/(un)?privileged/images/[\w-]+/rootfs/.*$
 
-    <p class="note"><strong>Note:</strong> When files in the Garden containers are modified,
-      changes are made to both the <code>diff</code> and <code>rootfs</code> directories.
-    Adding this ignore pattern means that files and directories
-    in the <code>/var/vcap/data/grootfs/store/unprivileged/images/UUID/diff</code>
-    directory are ignored by ClamAV. <code>UUID</code> is the ID of the container.</p>
+    <p class="note"><strong>Note:</strong>
+      Adding this ignore pattern means that files and directories in the
+      <code>/var/vcap/data/grootfs/store/unprivileged/images/UUID/rootfs</code>
+      directory are ignored by ClamAV. <code>UUID</code> is the ID of the container.</p>
 
 For an example log message, see [Container Log Messages](./monitoring-logs.html#container).
 
 
-###<a id="pks"></a> Monitor Containers in Enterprise PKS
+###<a id="pks"></a> Exclude Duplicate Logs on Containers in Enterprise PKS
+When ClamAV scan results detect potential malware on containers of the Kubernetes
+worker node VMs in Enterprise PKS, logs are reported for both the
+`diff` and `merged` directories.
 
-To configure ClamAV to scan containers on the Kubernetes worker node VMs in Enterprise PKS,
-do the following when configuring ClamAV:
+This is because the `merged` directory is the projection of
+the `diff` directory on top of a base image layer, therefore it is safe to
+ignore the `merged` directory.
+
+For more information about Docker OverlayFS implementation, see
+[Use the OverlayFS storage driver](https://docs.docker.com/storage/storagedriver/overlayfs-driver/)
+in the Docker documentation.
+
+If you would like to configure ClamAV to ignore duplicate logs for these directories,
+do the following:
 
 1. In [Exclude Files and Directories](#exclude) above, add the following pattern to the `exclude_paths` property:
 
@@ -198,13 +263,12 @@ do the following when configuring ClamAV:
           exclude_paths:
             ...
             # When scanning Kubernetes containers,
-            # ignore duplicate log messages sent to .../UUID/merged/
+            # ignore duplicate log messages from .../UUID/merged/
             - ^/var/vcap/data/grootfs/store/(un)?privileged/images/[\w-]+/rootfs/.*$
 
-    <p class="note"><strong>Note:</strong> When files in the Kubernetes worker containers are modified,
-      changes are made to both the <code>diff</code> and <code>merged</code> directories.
-    Adding this ignore pattern means that files and directories
-    in the <code>/var/vcap/data/grootfs/store/unprivileged/images/UUID/merged</code>
-    directory are ignored by ClamAV. <code>UUID</code> is the ID of the container.</p>
+    <p class="note"><strong>Note:</strong>
+      Adding this ignore pattern means that files and directories in the
+      <code>/var/vcap/data/grootfs/store/unprivileged/images/UUID/merged</code>
+      directory are ignored by ClamAV. <code>UUID</code> is the ID of the container.</p>
 
 For an example log message, see [Container Log Messages](./monitoring-logs.html#container).
