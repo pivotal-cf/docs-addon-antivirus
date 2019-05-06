@@ -304,7 +304,7 @@ See [Monitoring ClamAV Logs](./monitoring-logs.html)
 
 If a scan is reporting false positives, report the issue to
 [ClamAV](https://www.clamav.net/reports/fp).
-For more information, see
+For more information about false positives, see
 [ClamAV Reports False Positives](./troubleshooting.html#false-positive-clamav).
 
 It takes about a week for ClamAV to verify and publish a new database.
@@ -525,15 +525,36 @@ as shown below:
 For how to do this, see steps 4 to 7 of <a href="#deploy">Deploy the ClamAV Add-on</a> above.
 
 
-##<a id="scan-containers"></a>Configure ClamAV to Scan Containers
+##<a id="scan-containers"></a>Configure ClamAV to Exclude Duplicate Logs on Containers
 You can use ClamAV to scan the following:
 
 * Garden containers on the Diego Cell VMs in Pivotal Application Service (PAS)
 * Containers on the Kubernetes worker node VMs in Enterprise Pivotal Container Service (Enterprise PKS)
 
-###<a id="garden"></a> Scan Garden Containers
+However, duplicate logs about the same file will appear under the `diff`,
+`rootfs`, or `merged` directories as a consequence of OverlayFS implementation.
 
-To configure ClamAV to scan Garden containers, do the following when configuring ClamAV:
+To configure ClamAV to ignore duplicate logs for these directories, see the
+[Exclude Duplicate Logs on Garden Containers](#garden) or
+[Exclude Duplicate Logs on Containers in Enterprise PKS](#pks) section below:
+
+###<a id="garden"></a> Exclude Duplicate Logs on Garden Containers
+
+When ClamAV scan results detect potential malware on the Garden containers,
+logs are reported for both the `diff` and `rootfs` directories.
+
+This is because the `rootfs` directory is the projection of
+the `diff` directory on top of a base image layer, therefore it is safe to
+ignore the `rootfs` directory.
+GrootFS mounts the underlying volumes using OverlayFS to a point in the images directory.
+This mount point is the `rootfs` directory for the container and is read-write.
+
+For more information about GrootFS OverlayFS implementation, see
+[Volumes](https://docs.cloudfoundry.org/concepts/grootfs-disk.html#volumes)
+in the Cloud Foundry documentation.
+
+If you would like to configure ClamAV to ignore duplicate logs for these directories,
+do the following:
 
 1. In [Exclude Files and Directories](#exclude) above, add the following pattern to the `exclude_paths` property:
 
@@ -541,22 +562,33 @@ To configure ClamAV to scan Garden containers, do the following when configuring
           exclude_paths:
             ...
             # When scanning Garden containers,
-            # ignore duplicate log messages sent to .../UUID/rootfs/
+            # ignore duplicate log messages from .../UUID/rootfs/
             - ^/var/vcap/data/grootfs/store/(un)?privileged/images/[\w-]+/rootfs/.*$
 
-    <p class="note"><strong>Note:</strong> When files in the Garden containers are modified,
-      changes are made to both the <code>diff</code> and <code>rootfs</code> directories.
-    Adding this ignore pattern means that files and directories
-    in the <code>/var/vcap/data/grootfs/store/unprivileged/images/UUID/diff</code>
-    directory are ignored by ClamAV. <code>UUID</code> is the ID of the container.</p>
+    <p class="note"><strong>Note:</strong>
+      Adding this ignore pattern means that files and directories in the
+      <code>/var/vcap/data/grootfs/store/unprivileged/images/UUID/rootfs</code>
+      directory are ignored by ClamAV. <code>UUID</code> is the ID of the container.</p>
 
 For an example log message, see [Container Log Messages](./monitoring-logs.html#container).
 
 
-###<a id="pks"></a> Monitor Containers in Enterprise PKS
+###<a id="pks"></a> Exclude Duplicate Logs on Containers in Enterprise PKS
 
-To configure ClamAV to scan containers on the Kubernetes worker node VMs in Enterprise PKS,
-do the following when configuring ClamAV:
+When ClamAV scan results detect potential malware on containers of the Kubernetes
+worker node VMs in Enterprise PKS, logs are reported for both the
+`diff` and `merged` directories.
+
+This is because the `merged` directory is the projection of
+the `diff` directory on top of a base image layer, therefore it is safe to
+ignore the `merged` directory.
+
+For more information about Docker OverlayFS implementation, see
+[Use the OverlayFS storage driver](https://docs.docker.com/storage/storagedriver/overlayfs-driver/)
+in the Docker documentation.
+
+If you would like to configure ClamAV to ignore duplicate logs for these directories,
+do the following:
 
 1. In [Exclude Files and Directories](#exclude) above, add the following pattern to the `exclude_paths` property:
 
@@ -564,13 +596,12 @@ do the following when configuring ClamAV:
           exclude_paths:
             ...
             # When scanning Kubernetes containers,
-            # ignore duplicate log messages sent to .../UUID/merged/
+            # ignore duplicate log messages from .../UUID/merged/
             - ^/var/vcap/data/grootfs/store/(un)?privileged/images/[\w-]+/rootfs/.*$
 
-    <p class="note"><strong>Note:</strong> When files in the Kubernetes worker containers are modified,
-      changes are made to both the <code>diff</code> and <code>merged</code> directories.
-    Adding this ignore pattern means that files and directories
-    in the <code>/var/vcap/data/grootfs/store/unprivileged/images/UUID/merged</code>
-    directory are ignored by ClamAV. <code>UUID</code> is the ID of the container.</p>
+    <p class="note"><strong>Note:</strong>
+      Adding this ignore pattern means that files and directories in the
+      <code>/var/vcap/data/grootfs/store/unprivileged/images/UUID/merged</code>
+      directory are ignored by ClamAV. <code>UUID</code> is the ID of the container.</p>
 
 For an example log message, see [Container Log Messages](./monitoring-logs.html#container).
