@@ -8,20 +8,23 @@ This topic describes how to install and configure <%= vars.product_full %>.
 
 ##<a id="prereqs"></a>Prerequisites
 
-To install ClamAV Add-on, you need:
+To install ClamAV Add-on, you must have the following:
 
-* **A PCF operator with admin rights**---For more information, see [Operators](https://docs.pivotal.io/pivotalcf/customizing/user-types.html#operator) in the Pivotal Cloud Foundry documentation.
+* **A PCF operator with admin rights**.
+For more information, see [Operators](https://docs.pivotal.io/pivotalcf/customizing/user-types.html#operator) in the Pivotal Cloud Foundry documentation.
 
-* **Operations Manager (Ops Manager)**---For compatible versions, see the [Product Snapshot](./index.html#snapshot).
+* **PCF Operations Manager (Ops Manager)**.
+For compatible versions, see the [Product Snapshot](./index.html#snapshot).
 
-* **At least 1 GB of memory free on each VM**---ClamAV Add-on uses 610 MB of memory.
+* **At least 1&nbsp;GB of memory free on each VM**.
+ClamAV Add-on uses 610&nbsp;MB of memory.
 
 ## <a id='install'></a> Install <%= vars.product_short %>
 To install the <%= vars.product_short %> file on the Ops Manager Installation Dashboard, do the following:
 
 1. Download the product file from [Pivotal Network](https://network.pivotal.io/products/p-clamav-addon).
 
-1. Navigate to the Ops Manager Installation Dashboard and click **Import a Product** to upload the product file.
+1. Navigate to the Ops Manager Installation Dashboard and select **Import a Product** to upload the product file.
 
 1. Under the **Import a Product** button, click **+** next to the version number of <%= vars.product_short %>.
 This adds the tile to your staging area.
@@ -55,7 +58,6 @@ To assign AZs and networks, click the **Assign AZs and Networks** settings tab.
 
 
 ## <a id='configure'></a> Configure <%= vars.product_short %>
-
 To configure <%= vars.product_short %>, do the following:
 
 1. Click **ClamAV Configuration**.
@@ -79,15 +81,17 @@ then select **Enable on-access scanning**.
         <td><strong>(Optional) Enforce CPU limit</strong></td>
         <td>This limits the amount of CPU the ClamAV processes can use.
             To enforce this limit, select <strong>Enable</strong>,
-            then enter a value in <strong>CPU limit (percentage)</strong>.</td>
+            then enter a value in the <strong>CPU limit (percentage)</strong> field.</td>
       </tr>
       <tr>
         <td><strong>Action to take when a virus is found</strong></td>
         <td>Select one of the following options:<br>
-            <code>notify</code>: The default, only send a notification to syslog<br>
-            <code>remove</code>: Delete the infected file from the filesystem<br>
-            <code>move</code>: Move the infected file to a specified directory<br>
-            <code>copy</code>: Copy the infected file to a specified directory<br>
+            <ul>
+              <li><code>notify</code>: (Default) Only send a notification to syslog</li>
+              <li><code>remove</code>: Delete the infected file from the filesystem</li>
+              <li><code>move</code>: Move the infected file to a specified directory</li>
+              <li><code>copy</code>: Copy the infected file to a specified directory</li>
+            </ul>
 
             For the <code>move</code> and <code>copy</code> options, a field
             for <strong>Destination for infected files</strong> appears after the
@@ -111,13 +115,18 @@ then select **Enable on-access scanning**.
       </tr>
     </table>
 
-    <p class="note warning"><strong>Warning:</strong>
-      If <code>action</code> is <code>move</code> or <code>copy</code>, make sure the <code>Destination for infected files</code> path is also added to the <strong>Directories and files that will be ignored by ClamAV</strong> field.<br>
-      If <code>Destination for infected files</code> is not listed under <code>Directories and files that will be ignored by ClamAV</code>, ClamAV:<br>
-      ∙ Detects the moved or copied file<br>
-      ∙ Logs redundant alerts<br>
-      ∙ Creates additional copies of the detected file
-    </p>
+    <div class="note warning"><strong>Warning:</strong>
+      If you select <code>move</code> or <code>copy</code> when selecting an
+      <strong>Action to take when a virus is found</strong>, make sure that the
+      <strong>Destination for infected files</strong> path is also added to the
+      <strong>Directories and files that will be ignored by ClamAV</strong> list.<br><br>
+      If you do not do this, then ClamAV:<br>
+      <ul>
+        <li>Detects the moved or copied file</li>
+        <li>Logs redundant alerts</li>
+        <li>Creates additional copies of the detected file</li>
+      </ul>
+    </div>
 
 
 If a scan is reporting false positives, report the issue to
@@ -126,70 +135,124 @@ For more information about false positives, see
 [ClamAV Reports False Positives](./troubleshooting.html#false-positive-clamav).
 It takes about a week for ClamAV to verify and publish a new database.
 
-## <a id='proxy'></a> Configure HTTP Proxy
 
-If you require a proxy server for ClamAV jobs to connect to the internet to update their virus definitions, you can configure a proxy by clicking <strong> HTTP Proxy Configuration for ClamAV Jobs</strong> and setting <strong>HTTP proxy for ClamAV jobs to get database updates</strong> to `Enabled`. You can then enter the proxy host, port, username and password in the fields that appear.
+## <a id='proxy'></a> Configure HTTP Proxy
+If you require a proxy server for ClamAV jobs to connect to the internet to
+update their virus definitions, you can configure one.
+To do this, click **HTTP Proxy Configuration for ClamAV Jobs** and set
+**HTTP proxy for ClamAV jobs to get database updates** to `Enabled`.
+Then enter the `proxy host`, `port`, `username` and `password` in the fields that appear.
+
 
 ## <a id='scheduled'></a> Configure Scheduled Scan
-
-ClamAV can be configured to run a virus scan <code>hourly</code> or <code>daily</code>.
-The default value is <code>daily</code>.
+ClamAV can be configured to run a virus scan `hourly` or `daily`.
+The default value is `daily`.
+The format of these values must be in 24-hour format `HH:MM`.
 
 To change the scheduled scan value, do the following:
 
-1. Click <strong>Scheduled Scans</strong>
-1. Set <strong>Interval for scheduled scans to run</strong> to the desired value:
-  * <code>hourly</code>
-  * <code>daily</code>
-  * <code>disabled</code>
-  * <code></code>
+1. Click **Scheduled Scans**
+1. Set **Interval for scheduled scans to run** to one of the following:
+  * `hourly`
+  * `daily`
+  * `disabled`
 
-For <code>daily</code> scheduled scans, you can restrict the time interval when
-a daily scan runs by setting <strong>Earliest time that a daily scheduled scan can start </strong> and <strong>Latest time that a daily scheduled scan can start </strong>. The format of these values must be in 24-hour format `HH:MM`.
+For `daily` scheduled scans, you can restrict the interval.
+To do this, set **Earliest time that a daily scheduled scan can start** and
+**Latest time that a daily scheduled scan can start**.
+
 
 ## <a id='mirror'></a> Configure ClamAV Mirror
+ClamAV jobs fetch virus definitions from a ClamAV update mirror.
+Environments that cannot connect to the internet require a private mirror.
+To deploy a private mirror, set **Database Mirror** to
+`Deploy a private mirror for ClamAV jobs to use`.
 
-ClamAV jobs fetch virus definitions from a ClamAV update mirror. Environments that cannot connect to the internet require a private mirror. You can deploy a private mirror by setting <strong>Database Mirror</strong> to `Deploy a private mirror for ClamAV jobs to use`.
+If you set **Database Mirror** to `Deploy a private mirror for ClamAV jobs to use`,
+you can configure the output destination of the logs from the ClamAV mirror job
+to one of the following supported options:
 
-If you set <strong>Database Mirror</strong> to `Deploy a private mirror for ClamAV jobs to use`, you can configure the output destination of the logs from the ClamAV mirror job to one of 3 supported options:
+* `stdout`: sends messages to /var/vcap/sys/log/clamav-mirror/clamav-mirror.stdout.log.
+* `stderr`: sends messages to /var/vcap/sys/log/clamav-mirror/clamav-mirror.stderr.log.
+* `syslog`: sends messages to /var/log/messages.
 
-- stdout: sends messages to /var/vcap/sys/log/clamav-mirror/clamav-mirror.stdout.log.
-- stderr: sends messages to /var/vcap/sys/log/clamav-mirror/clamav-mirror.stderr.log.
-- syslog: sends messages to /var/log/messages.
+If your environment is able to connect to the internet or you already have a private mirror,
+do the following:
 
-If your environment is able to connect to the internet or you already have a private mirror, set <strong>Database Mirror</strong> to `External mirror (Make sure to set clamav-mirror instances to 0 in "Resource Config")` and enter the hostname or IP of your mirror in the <strong>Hostname or IP of a Private Mirror</strong> field that appears. If you do not specify a value, ClamAV jobs will use the [ClamAV official mirror](http://database.clamav.net/).
+1. Set **Database Mirror** to `External mirror` (Make sure to set clamav-mirror instances to 0 in "Resource Config")
+2. Enter the hostname or IP of your mirror in the **Hostname or IP of a Private Mirror** field that appears.
+If you do not specify a value, ClamAV jobs will use the [ClamAV official mirror](http://database.clamav.net/).
 
 <p class="note"><strong>Note</strong>:
-  If you selected <code>External Mirror</code>, the settings in <strong>Assign AZs and Networks</strong> are still required, but they will not do anything.
+  If you selected <code>External Mirror</code>, the settings in <strong>Assign AZs and Networks</strong> are still required, but they do not do anything.
   This is because those settings apply to the ClamAV mirror VMs if they are deployed.</p>
 
-TODO: Syslog forwarding (this was from a template through ops manager).
+
+###<a id="syslog"></a> Configure System Logging
+Follow the steps below to enable system logging for ClamAV.
+Logs use RFC5424 format.
+
+1. Click **Syslog**.
+1. Click **Yes**.
+
+    <<<SCREENSHOT>>>
+
+1. Configure the fields as follows:
+  <table>
+    <tr><th>Field</th><th>Instructions</th></tr>
+    <tr>
+        <td><strong>Address</strong></td>
+        <td>Enter the address or host of the syslog server for sending logs, for example,
+            <code>logmanager.example.com</code>.</td></tr>
+    <tr><td><strong>Port</strong></td>
+        <td>Enter the port of the syslog server for sending logs, for example, <code>29279</code>.</td></tr>
+    <tr><td><strong>Transport Protocol</strong></td>
+        <td>Select the protocol over which you want system logs. Pivotal recommends using TCP.</td></tr>
+    <tr><td><strong>Enable TLS</strong></td>
+    <td>If you select TCP, you can also select to send logs encrypted over TLS.</td></tr>
+    <tr><td><strong>Permitted Peer</strong></td>
+        <td>Enter either the accepted fingerprint, in SHA1, or the name of the remote peer, for example, <code>*.example.com</strong></td></tr>
+    <tr><td><strong>SSL Certificate</strong></td>
+        <td>Enter the SSL Certificate(s) for the syslog server. This ensures the logs are transported securely.</td></tr>
+  </table>
+  <p class="note"><strong>IMPORTANT</strong>: If your syslog server is external to PCF, you might need to select
+            <strong>Provide public IP addresses to all Service VMs</strong> on the <strong>Settings</strong> page.<p>
+
+1. Click **Save**.
+
 
 ## <a id='resources'></a> Configure Resource Config
+You can scale up the number of deployed mirrors by clicking **Resource Config**
+and setting the number of `clamav-mirror` instances to the number of mirrors that
+you want to deploy.
+The ClamAV jobs do load balancing for you,
+but you need to **Apply Changes** for the ClamAV jobs to detect the number of mirrors.
 
-You can scale up the number of deployed mirrors by clicking <strong>Resource Config</strong> and setting the number of `clamav-mirror` instances to the number of mirrors that you want to deploy. The ClamAV jobs will do load balancing for you, but you need to `Apply Changes` for the ClamAV jobs to detect the number of mirrors.
+<p class="note warning"><strong>Warning: </strong>
+  If you selected <code>External Mirror</code> in <strong>ClamAV Mirror Configuration</strong>,
+  be sure to set the number of <code>clamav-mirror</code> instances to 0.
+  This is because the ClamAV jobs prioritize a deployed clamav-mirror over an external mirror.</p>
 
-<p class="warning"><strong>Warning</strong>:
-  If you selected <code>External Mirror</code> in <strong>ClamAV Mirror Configuration</strong>, be sure to set the number of <code>clamav-mirror</code> instances to 0. This is because the ClamAV jobs prioritize a deployed clamav-mirror over an external mirror.</p>
 
 ## <a id="apply-changes"></a> Apply Changes from Your Configuration
 Your installation is not complete until you apply your configuration changes.
-Follow the steps below:
+To do this, follow the procedure below:
 
 1. Return to the Ops Manager Installation Dashboard.
 
 1. Click **Review Pending Changes**.
-  a. If you selected `External mirror (Make sure to set clamav-mirror instances to 0 in "Resource Config")` under <strong>ClamAV Mirror Installation</strong>, click **Apply Changes** to complete the installation of <%= vars.product_short %> and skip the remaining steps.
-  b. If you selected `Deploy a private mirror for ClamAV jobs to use` under <strong> ClamAV Mirror Installation</strong>, unselect all products except `BOSH Director` and `ClamAV Addon for PCF` and click **Apply Changes**.
+    1. If you selected `External mirror` (Make sure to set clamav-mirror instances to 0 in "Resource Config")
+  under **ClamAV Mirror Installation**, click **Apply Changes** to complete the
+  installation of <%= vars.product_short %> and skip the remaining steps.
+    1. If you selected `Deploy a private mirror for ClamAV jobs to use` under
+    **ClamAV Mirror Installation**, unselect all products except `BOSH Director`
+    and `ClamAV Addon for PCF` and click **Apply Changes**.
 
-1. Once **Apply Changes** completes successfully, you need to upload a set of virus definitions to your deployed clamav-mirrors. ClamAV primarily uses 3 virus definitions files: `main.cvd`, `daily.cvd`, and `bytecode.cvd`.
-
-1. Go to [Updating Virus Definitions on Deployed ClamAV Mirrors](./updating-databases.html) and complete all the steps.
-
+1. After **Apply Changes** is complete, upload a set of virus definitions
+to your deployed `clamav-mirrors`.
+To do this, see [Updating Virus Definitions on Deployed ClamAV Mirrors](./updating-databases.html).
 1. Return to the Ops Manager Installation Dashboard.
-
 1. Click **Review Pending Changes**
-
 1. Ensure all products are selected and click **Apply Changes**.
 
 

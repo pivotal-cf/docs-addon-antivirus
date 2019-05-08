@@ -4,56 +4,65 @@ owner: Pivotal Compliance and Innovation (PCI) Team
 ---
 <strong><%= modified_date %></strong>
 
-This section contains the procedures to update the virus definitions on a private ClamAV Mirror deployed by the tile.
+This section contains the procedure to update the virus definitions on a private
+ClamAV mirror deployed by the tile.
 
 ##<a id="assume"></a>Updating Virus Definitions
 
-ClamAV jobs primarily use 3 virus definitions files: `main.cvd`, `daily.cvd`, and `bytecode.cvd`. The deployed ClamAV Mirror will serve these 3 files to all ClamAV jobs in your environment.
+ClamAV jobs use three virus definitions files, `main.cvd`, `daily.cvd`, and `bytecode.cvd`.
+The ClamAV mirror deployment serves these three files to all ClamAV jobs in your environment.
 
-1. Download the virus definitions files from the [ClamAV official mirror](http://database.clamav.net/) or an equivalent mirror.
+To update the virus definitions, complete the following procedure:
+
+1. Download all three of the virus definition files from the ClamAV virus
+database mirror or an equivalent mirror.
+To download the virus definitions from the offical mirror, use the following URLs:
+    * http://database.clamav.net/main.cvd
+    * http://database.clamav.net/daily.cvd
+    * http://database.clamav.net/bytecode.cvd
 
 1. Copy your downloaded virus definition files to your Ops Manager VM.
 
-```
-    scp -i PATH-TO-PRIVATE-KEY PATH-TO-CVD-FILE ... ubuntu@YOUR-OPS-MANAGER-VM-IP:
+    ```
+    scp -i PATH-TO-PRIVATE-KEY PATH-TO-CVD-FILE ... ubuntu@OPS-MANAGER-VM-IP:
     ```
 
     For example:
 
-    <pre class="terminal">$ cp -i ~/.ssh/my-key.pem ~/Downloads/main.cvd ~/Downloads/daily.cvd ~/Downloads/bytecode.cvd ubuntu<span>@</span>192.168.0.2: </pre>
+    <pre class="terminal">$ scp -i ~/.ssh/my-key.pem ~/Downloads/main.cvd ~/Downloads/daily.cvd ~/Downloads/bytecode.cvd ubuntu<span>@</span>192.168.0.2: </pre>
 
 1. SSH into the Ops Manager VM.
    For instructions, see [SSH into Ops Manager](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#ssh).
 
 1. Find the name of your ClamAV mirror deployment by running the following command:
-    <br><br>
+
     ```
-    bosh -e BOSH-ENVIRONMENT deployments | grep p-clamav | cut -f1
+    $ bosh -e BOSH-ENVIRONMENT deployments | grep p-clamav | cut -f1
     ```
 
-    <br>For example:
+    For example:
 
     <pre class="terminal">bosh -e my-env deployments | grep p-clamav | cut -f1</pre>
 
     The deployment name should start with `p-clamav-` and be followed by a string of characters.
 
-1. Copy the virus definitions to your deployed ClamAV Mirrors by running the following command:
-    <br><br>
+1. Copy the virus definitions to your ClamAV mirror deployment by running the following command:
+
     ```
-    bosh -e BOSH-ENVIRONMENT -d CLAMAV-DEPLOYMENT-NAME scp main.cvd daily.cvd bytecode.cvd :/var/vcap/data/clamav_mirror/unvalidated
+    $ bosh -e BOSH-ENVIRONMENT -d CLAMAV-DEPLOYMENT-NAME scp main.cvd daily.cvd bytecode.cvd :/var/vcap/data/clamav_mirror/unvalidated
     ```
 
-    <br>For example:
+    For example:
 
     <pre class="terminal">bosh -e my-env -d p-clamav-4cb8cfbeee717258d72e scp main.cvd daily.cvd bytecode.cvd :/var/vcap/data/clamav_mirror/unvalidated</pre>
 
 1. Verify that the mirror validated and updated its local copies of the virus definitions by checking the configured log output file for the following lines:
-    <br><br>
+
     ```
     TIMESTAMP updated /var/vcap/data/clamav/DATABASE_NAME.cvd
     ```
 
-    <br>For example:
+    For example:
 
     <pre class="terminal">
     2019/05/02 15:03:29 updated /var/vcap/data/clamav/bytecode.cvd
