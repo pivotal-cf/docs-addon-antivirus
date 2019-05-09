@@ -5,17 +5,19 @@ owner: Pivotal Compliance and Innovation (PCI) Team
 
 <strong><%= modified_date %></strong>
 
-This topic describes how to upgrade the ClamAV Add-on for PCF from version 1.x, which uses runtime configs.
+This topic describes how to upgrade the ClamAV Add-on for PCF from v1.x, which uses runtime configs.
 
 ## <a id='upgrade-clamav'></a>Upgrade ClamAV Add-on
 To upgrade the ClamAV Add-on, follow the steps below:
 
 1. Retrieve the latest runtime config by running the following command:
   <pre>
-    bosh -e my-env runtime-config > PATH-TO-SAVE-THE-RUNTIME-CONFIG
+    bosh -e ENVIRONMENT runtime-config > PATH-TO-SAVE-THE-RUNTIME-CONFIG
   </pre>
 
-    Where `PATH-TO-SAVE-THE-RUNTIME-CONFIG` is the location that you want to save the runtime configuration.
+    Where:
+    * `ENVIRONMENT` is your environment
+    * `PATH-TO-SAVE-THE-RUNTIME-CONFIG` is the location where you want to save the runtime configuration.
 
     For example:
     <pre class="terminal">
@@ -26,14 +28,16 @@ To upgrade the ClamAV Add-on, follow the steps below:
 
 1. Update the runtime config.
   <pre>
-    bosh -e my-env update-runtime-config --name=clamav PATH-TO-SAVE-THE-RUNTIME-CONFIG
+    bosh -e ENVIRONMENT update-runtime-config --name=clamav PATH-TO-SAVE-THE-RUNTIME-CONFIG
   </pre>
 
-    Where `PATH-TO-SAVE-THE-RUNTIME-CONFIG` is the location of the runtime configuration you are updating.
+    Where:
+    * `ENVIRONMENT` is your environment
+    * `PATH-TO-SAVE-THE-RUNTIME-CONFIG` is the location of the runtime configuration you are updating.
 
     For example:
     <pre class="terminal">
       $ bosh -e my-env update-runtime-config --name=clamav /runtime/config/
     </pre>
 
-1. Go to [Installing and Configuring ClamAV for PCF](./install.html) and follow the instructions to set up the ClamAV tile.
+1. Follow the instructions in [Installing and Configuring ClamAV for PCF](./install.html) to set up the ClamAV tile.
