@@ -1,0 +1,68 @@
+---
+title: Upgrading ClamAV Add-on for PCF
+owner: Security Engineering
+---
+
+<strong><%= modified_date %></strong>
+
+This topic describes how to upgrade the ClamAV Add-on for PCF.
+
+##<a id="assume"></a>Compatibility and Prerequisites
+
+See the following topics to ensure you have the required component versions and prerequisites:
+
+* [Product Snapshot](./index.html#snapshot)
+* [Prerequisites](./install.html#prereqs)
+
+##<a id="upgrade-v1-v2"></a>Upgrade ClamAV Add-on v1.x to v2.x
+
+To upgrade ClamAV Add-on for PCF v1.x to v2.x, do the following:
+
+1. Retrieve the latest runtime config by running the following command:
+  <pre>
+    bosh -e ENVIRONMENT runtime-config > PATH-TO-SAVE-THE-RUNTIME-CONFIG
+  </pre>
+
+    Where:
+    * `ENVIRONMENT` is your environment
+    * `PATH-TO-SAVE-THE-RUNTIME-CONFIG` is the location where you want to save the runtime configuration.
+
+    For example:
+    <pre class="terminal">
+      $ bosh -e my-env runtime-config > /runtime/config/
+    </pre>
+
+1. In the runtime config, remove all ClamAV properties under the `releases:` and `addons:` sections.
+
+1. Update the runtime config.
+  <pre>
+    bosh -e ENVIRONMENT update-runtime-config --name=clamav PATH-TO-SAVE-THE-RUNTIME-CONFIG
+  </pre>
+
+    Where:
+    * `ENVIRONMENT` is your environment
+    * `PATH-TO-SAVE-THE-RUNTIME-CONFIG` is the location of the runtime configuration you are updating.
+
+    For example:
+    <pre class="terminal">
+      $ bosh -e my-env update-runtime-config --name=clamav /runtime/config/
+    </pre>
+
+1. Follow the instructions in [Installing and Configuring ClamAV for PCF](./install.html) to set up the ClamAV tile.
+
+##<a id="upgrade"></a>Upgrade ClamAV Add-on for PCF v2.x or Later
+
+To upgrade the ClamAV Add-on for PCF v2.x to a later version, do the following:
+
+1. Download the latest version of the product
+   from the [Pivotal Network](https://network.pivotal.io/products/p-clamav-addon) to your local machine.
+
+1. Upload the new `.pivotal` file to Ops Manager.
+
+1. If required, upload the stemcell associated with the update.
+
+1. If you are using Ops Manager v2.3 or later, click **Review Pending Changes**.
+   For more information about this Ops Manager page,
+   see [Reviewing Pending Product Changes](https://docs.pivotal.io/pivotalcf/customizing/review-pending-changes.html).
+
+1. Click **Apply Changes**.
