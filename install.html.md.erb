@@ -265,12 +265,12 @@ You can use ClamAV to scan the following:
 However, duplicate logs about the same file will appear under the `diff`,
 `rootfs`, or `merged` directories as a consequence of OverlayFS implementation.
 
-To configure ClamAV to ignore duplicate logs for these directories, see the
+To configure ClamAV to ignore duplicate logs for these directories, see the optional
 [Exclude Duplicate Logs on Garden Containers](#garden) or
-[Exclude Duplicate Logs on Containers in Enterprise PKS](#pks) section below:
+[Exclude Duplicate Logs on Containers in Enterprise PKS](#pks) sections below:
 
 
-###<a id="garden"></a> Exclude Duplicate Logs on Garden Containers
+###<a id="garden"></a> (Optional) Exclude Duplicate Logs on Garden Containers
 When ClamAV scan results detect potential malware on the Garden containers,
 logs are reported for both the `diff` and `rootfs` directories.
 
@@ -304,7 +304,7 @@ do the following:
 For an example log message, see [Container Log Messages](./monitoring-logs.html#container).
 
 
-###<a id="pks"></a> Exclude Duplicate Logs on Containers in Enterprise PKS
+###<a id="pks"></a> (Optional) Exclude Duplicate Logs on Containers in Enterprise PKS
 When ClamAV scan results detect potential malware on containers of the Kubernetes
 worker node VMs in Enterprise PKS, logs are reported for both the
 `diff` and `merged` directories.
