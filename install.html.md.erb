@@ -327,7 +327,7 @@ do the following:
             ...
             # When scanning Kubernetes containers,
             # ignore duplicate log messages from .../UUID/merged/
-            - ^/var/vcap/data/grootfs/store/(un)?privileged/images/[\w-]+/merged/.*$
+            - ^/var/vcap/store/docker/docker/overlay2/\w+/merged/.*$
 
     <p class="note"><strong>Note:</strong>
       Adding this ignore pattern means that files and directories in the
