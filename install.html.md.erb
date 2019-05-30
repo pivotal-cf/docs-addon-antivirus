@@ -285,16 +285,8 @@ For more information about GrootFS OverlayFS implementation, see
 in the Cloud Foundry documentation.
 
 If you would like to configure ClamAV to ignore duplicate logs for these directories,
-do the following:
-
-1. In [Exclude Files and Directories](#exclude) above, add the following pattern to the `exclude_paths` property:
-
-        clamav:
-          exclude_paths:
-            ...
-            # When scanning Garden containers,
-            # ignore duplicate log messages from .../UUID/rootfs/
-            - ^/var/vcap/data/grootfs/store/(un)?privileged/images/[\w-]+/rootfs/.*$
+enter `^/var/vcap/data/grootfs/store/(un)?privileged/images/[\w-]+/rootfs/.*$` into the
+**Directories and files that will be ignored by ClamAV** field in the **ClamAV Configuration** pane.
 
     <p class="note"><strong>Note:</strong>
       Adding this ignore pattern means that files and directories in the
@@ -318,16 +310,8 @@ For more information about Docker OverlayFS implementation, see
 in the Docker documentation.
 
 If you would like to configure ClamAV to ignore duplicate logs for these directories,
-do the following:
-
-1. In [Exclude Files and Directories](#exclude) above, add the following pattern to the `exclude_paths` property:
-
-        clamav:
-          exclude_paths:
-            ...
-            # When scanning Kubernetes containers,
-            # ignore duplicate log messages from .../UUID/merged/
-            - ^/var/vcap/store/docker/docker/overlay2/\w+/merged/.*$
+enter `^/var/vcap/store/docker/docker/overlay2/\w+/merged/.*$` into the
+**Directories and files that will be ignored by ClamAV** field in the **ClamAV Configuration** pane.
 
     <p class="note"><strong>Note:</strong>
       Adding this ignore pattern means that files and directories in the
