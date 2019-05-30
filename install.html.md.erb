@@ -291,10 +291,10 @@ If you would like to configure ClamAV to ignore duplicate logs for these directo
 enter `^/var/vcap/data/grootfs/store/(un)?privileged/images/[\w-]+/rootfs/.*$` into the
 **Directories and files that will be ignored by ClamAV** field in the **ClamAV Configuration** pane.
 
-    <p class="note"><strong>Note:</strong>
-      Adding this ignore pattern means that files and directories in the
-      <code>/var/vcap/data/grootfs/store/unprivileged/images/UUID/rootfs</code>
-      directory are ignored by ClamAV. <code>UUID</code> is the ID of the container.</p>
+  <p class="note"><strong>Note:</strong>
+    Adding this ignore pattern means that files and directories in the
+    <code>/var/vcap/data/grootfs/store/unprivileged/images/UUID/rootfs</code>
+    directory are ignored by ClamAV. <code>UUID</code> is the ID of the container.</p>
 
 For an example log message, see [Container Log Messages](./monitoring-logs.html#container).
 
@@ -316,9 +316,9 @@ If you would like to configure ClamAV to ignore duplicate logs for these directo
 enter `^/var/vcap/store/docker/docker/overlay2/\w+/merged/.*$` into the
 **Directories and files that will be ignored by ClamAV** field in the **ClamAV Configuration** pane.
 
-    <p class="note"><strong>Note:</strong>
-      Adding this ignore pattern means that files and directories in the
-      <code>/var/vcap/data/grootfs/store/unprivileged/images/UUID/merged</code>
-      directory are ignored by ClamAV. <code>UUID</code> is the ID of the container.</p>
+  <p class="note"><strong>Note:</strong>
+    Adding this ignore pattern means that files and directories in the
+    <code>/var/vcap/data/grootfs/store/unprivileged/images/UUID/merged</code>
+    directory are ignored by ClamAV. <code>UUID</code> is the ID of the container.</p>
 
 For an example log message, see [Container Log Messages](./monitoring-logs.html#container).
