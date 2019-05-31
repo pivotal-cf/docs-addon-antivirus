@@ -87,47 +87,46 @@ then select **Enable on-access scanning**.
         <td><strong>Action to take when a virus is found</strong></td>
         <td>Select one of the following options:<br>
             <ul>
-              <li><code>notify</code>: (Default) Only send a notification to syslog</li>
-              <li><code>remove</code>: Delete the infected file from the filesystem</li>
-              <li><code>move</code>: Move the infected file to a specified directory</li>
-              <li><code>copy</code>: Copy the infected file to a specified directory</li>
+              <li><strong>notify</strong>: (Default) Only send a notification to syslog</li>
+              <li><strong>remove</strong>: Delete the infected file from the filesystem</li>
+              <li><strong>move</strong>: Move the infected file to a specified directory</li>
+              <li><strong>copy</strong>: Copy the infected file to a specified directory</li>
             </ul>
-
             For the <code>move</code> and <code>copy</code> options, a field
             for <strong>Destination for infected files</strong> appears after the
-            option is selected.</td>
+            option is selected.
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Destination for infected files</strong></td>
+        <td>This field only appears if you have selected the <strong>move</strong> or <strong>copy</strong>
+         while selecting an <strong>Action to take when a virus is found</strong>.
+         Enter the directory location where you want the infected files moved or copied to.<br><br>
+         Add this path to the <strong>Directories and files that will be ignored by ClamAV</strong> list below.
+            If you do not do this, then ClamAV:<br>
+            <ul>
+              <li>Detects the moved or copied file</li>
+              <li>Logs redundant alerts</li>
+              <li>Creates additional copies of the detected file</li>
+            </ul>
       </tr>
       <tr>
         <td><strong>Directories and files that will be ignored by ClamAV</strong></td>
         <td>A comma-separated list of directories for ClamAV to not scan.
           The default value is "<code>/proc/</code>,<code>/sys/</code>".
           This configures ClamAV scans to exclude the <code>/proc</code> and
-          <code>/sys</code> directories.<br>
-          Pivotal recommends that you include the <code>/proc</code> and
-          <code>/sys</code> directories in the <code>exclude_paths</code> list.</td>
+          <code>/sys</code> directories.<br><br>
+          Pivotal recommends that you ignore the <code>/proc</code>,
+          <code>/sys</code>, and <strong>Destination for infected files</strong> directories.</td>
       </tr>
       <tr>
         <td><strong>List of signature names that will be ignored by ClamAV (Used for false positives)</strong></td>
         <td>A comma-separated list of signature names for ClamAV to whitelist.
           For example, "<code>Eicar-Test-Signature</code>,<code>Clamav.Test.File-7</code>"
-          will configure ClamAV to ignore the <strong>Eicar Test File</strong>
+          configures ClamAV to ignore the <strong>Eicar Test File</strong>
           and <strong>ClamAV Test File-7</strong> signatures.</td>
       </tr>
     </table>
-
-    <div class="note warning"><strong>Warning:</strong>
-      If you select <code>move</code> or <code>copy</code> when selecting an
-      <strong>Action to take when a virus is found</strong>, make sure that the
-      <strong>Destination for infected files</strong> path is also added to the
-      <strong>Directories and files that will be ignored by ClamAV</strong> list.<br><br>
-      If you do not do this, then ClamAV:<br>
-      <ul>
-        <li>Detects the moved or copied file</li>
-        <li>Logs redundant alerts</li>
-        <li>Creates additional copies of the detected file</li>
-      </ul>
-    </div>
-
 
 If a scan is reporting false positives, report the issue to
 [ClamAV](https://www.clamav.net/reports/fp).
@@ -141,7 +140,6 @@ If you require a proxy server for ClamAV jobs to connect to the internet to
 update their virus definitions, you can configure one.
 To do this, do the following:
 
-HTTP Proxy Configuration for ClamAV jobs
 1. Select the **HTTP Proxy Configuration for ClamAV Jobs** pane.
 1. Set **HTTP proxy for ClamAV jobs to get database updates** to `Enabled`.
 1. Enter the `proxy host`, `port`, `username` and `password` in the fields that appear.
@@ -156,11 +154,10 @@ To change the scheduled scan value, do the following:
 
 1. Click **Scheduled Scans**
 1. Set **Interval for scheduled scans to run** to one of the following:
-  * `hourly`
-  * `daily`
-  * `disabled`
-
-For `daily` scheduled scans, you can restrict the interval.
+  * **Hourly**
+  * **Daily**
+  * **Disabled**
+1. (Optional) If you selected **Daily** scheduled scans, you can restrict the interval.
 To do this, set **Earliest time that a daily scheduled scan can start** and
 **Latest time that a daily scheduled scan can start**.
 
