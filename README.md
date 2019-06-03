@@ -39,3 +39,18 @@ _These are a handful of style issues I noticed with the original version of this
 + Don't spell out VM.
 
 + Use initial caps on all headings. Don't capitalize prepositions.
+
+Style list in progress for v2
+
+| Term | Meaning | Alternative |
+|------|---------|-------------|
+| private ClamAV mirror |  |  |
+|ClamAV mirror deployment |  | |
+|ClamAV mirror job | | |
+|ClamAV virus database mirror | | |
+|external mirror for ClamAV jobs| | |
+|official mirror| | |
+|ClamAV official mirror| | |
+|virus definition file| | |
+|air-gapped environment| | |
+
