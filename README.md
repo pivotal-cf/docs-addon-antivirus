@@ -44,6 +44,8 @@ Style list in progress for v2
 
 | Term | Meaning | Alternative |
 |------|---------|-------------|
+|ClamAV Mirror for PCF | Name of the product tile that installs the mirror | |
+|ClamAV for PCF | Name of the product tile that scans PCF VMs for viruses | |
 | private ClamAV mirror |  |  |
 |ClamAV mirror deployment |  | |
 |ClamAV mirror job | | |
