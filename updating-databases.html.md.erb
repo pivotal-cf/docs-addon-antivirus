@@ -5,7 +5,7 @@ owner: Pivotal Compliance and Innovation (PCI) Team
 <strong><%= modified_date %></strong>
 
 This section contains the procedure to update the virus definitions on a private
-ClamAV mirror deployed by the tile.
+ClamAV mirror deployed by ClamAV Mirror for PCF.
 
 ##<a id="assume"></a>Update Virus Definitions
 
@@ -37,24 +37,29 @@ To download the virus definitions from the offical mirror, use the following URL
 1. Find the name of your ClamAV mirror deployment by running the following command:
 
     ```
-    $ bosh -e BOSH-ENVIRONMENT deployments | grep p-clamav | cut -f1
+    $ bosh -e BOSH-ENVIRONMENT deployments | grep p-clamav-mirror | cut -f1
     ```
 
     For example:
 
-    <pre class="terminal">bosh -e my-env deployments | grep p-clamav | cut -f1</pre>
+    <pre class="terminal">bosh -e my-env deployments | grep p-clamav-mirror | cut -f1</pre>
 
-    The deployment name starts with `p-clamav-` and is followed by a string of characters.
+    The deployment name starts with `p-clamav-mirror-` and is followed by a string of characters.
+
+    For example:
+
+    <pre class="terminal">p-clamav-mirror-08815ca5ead252c4b8d8</pre>
+
 
 1. Copy the virus definitions to your ClamAV mirror deployment by running the following command:
 
     ```
-    $ bosh -e BOSH-ENVIRONMENT -d CLAMAV-DEPLOYMENT-NAME scp main.cvd daily.cvd bytecode.cvd :/var/vcap/data/clamav_mirror/unvalidated
+    $ bosh -e BOSH-ENVIRONMENT -d CLAMAV-DEPLOYMENT-NAME scp /path/to/local/main.cvd /path/to/local/daily.cvd /path/to/local/bytecode.cvd :/var/vcap/data/clamav_mirror/unvalidated
     ```
 
     For example:
 
-    <pre class="terminal">bosh -e my-env -d p-clamav-4cb8cfbeee717258d72e scp main.cvd daily.cvd bytecode.cvd :/var/vcap/data/clamav_mirror/unvalidated</pre>
+    <pre class="terminal">bosh -e my-env -d p-clamav-mirror-4cb8cfbeee717258d72e scp main.cvd daily.cvd bytecode.cvd :/var/vcap/data/clamav_mirror/unvalidated</pre>
 
 1. Verify that the mirror validated and updated its local copies of the virus definitions by checking the configured log output file for the following lines:
 
@@ -62,10 +67,25 @@ To download the virus definitions from the offical mirror, use the following URL
     TIMESTAMP updated /var/vcap/data/clamav/DATABASE_NAME.cvd
     ```
 
+    Where `DATABASE_NAME` is:
+    * `bytecode.cvd`
+    * `daily.cvd`
+    * `main.cvd`
+
+    To do this, run the following command:
+
+    bosh -e BOSH-ENVIRONMENT -d CLAMAV-DEPLOYMENT-NAME ssh -c "sudo cat FILE | grep \"updated /var/vcap/store\""
+
+    Where `FILE` is:
+
+    * `/var/vcap/sys/log/clamav-mirror/clamav-mirror.stdout.log` for `stdout`
+    * `/var/vcap/sys/log/clamav-mirror/clamav-mirror.stderr.log` for `stderr`
+    * `/var/log/messages` for `syslog`
+
     For example:
 
     <pre class="terminal">
-    2019/05/02 15:03:29 updated /var/vcap/data/clamav/bytecode.cvd
-    2019/05/02 15:03:32 updated /var/vcap/data/clamav/main.cvd
-    2019/05/02 15:03:33 updated /var/vcap/data/clamav/daily.cvd
+    2019/05/30 17:16:34 updated /var/vcap/store/clamav-mirror/validated/bytecode.cvd
+    2019/05/30 17:16:40 updated /var/vcap/store/clamav-mirror/validated/daily.cvd
+    2019/05/30 17:16:49 updated /var/vcap/store/clamav-mirror/validated/main.cvd
     </pre>

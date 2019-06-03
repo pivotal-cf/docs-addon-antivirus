@@ -19,19 +19,21 @@ For compatible versions, see the [Product Snapshot](./index.html#snapshot).
 * **At least 1&nbsp;GB of memory free on each VM**.
 ClamAV Add-on uses 610&nbsp;MB of memory.
 
-## <a id='install'></a> Install <%= vars.product_short %>
-To install the <%= vars.product_short %> file on the Ops Manager Installation Dashboard, do the following:
+## <a id='install-mirror'></a> (Optional) Install ClamAV Mirror for PCF
+
+If you do not have an external mirror for ClamAV jobs to fetch databases updates from, you can deploy one using the ClamAV Mirror for PCF.
+This deployed mirror can support air gapped environments.
 
 1. Download the product file from [Pivotal Network](https://network.pivotal.io/products/p-clamav-addon).
 
 1. Navigate to the Ops Manager Installation Dashboard and select **Import a Product** to upload the product file.
 
-1. Under the **Import a Product** button, click **+** next to the version number of <%= vars.product_short %>.
+1. Under the **Import a Product** button, click **+** next to the version number of ClamAV Mirror for PCF.
 This adds the tile to your staging area.
 
-1. Click the newly added **<%= vars.product_short %>** tile.
+1. Click the newly added **ClamAV Mirror for PCF** tile.
 
-## <a id='azs'></a> Assign AZs and Networks
+### <a id='azs'></a> Assign AZs and Networks
 To assign AZs and networks, click the **Assign AZs and Networks** settings tab.
 
 1. Configure the fields as follows:
@@ -56,11 +58,108 @@ To assign AZs and networks, click the **Assign AZs and Networks** settings tab.
 
 1. Click **Save**.
 
+### <a id='configure-mirror'></a> Configure ClamAV Mirror for PCF
+To configure ClamAV Mirror for PCF, do the following:
+
+1. Click **ClamAV Mirror Configuration**.
+
+1. Configure the output destination of the logs from the ClamAV mirror job
+to one of the following supported options:
+
+* `stdout`: sends messages to /var/vcap/sys/log/clamav-mirror/clamav-mirror.stdout.log.
+* `stderr`: sends messages to /var/vcap/sys/log/clamav-mirror/clamav-mirror.stderr.log.
+* `syslog`: sends messages to /var/log/messages.
+
+1. The ClamAV Mirror for PCF will serve virus definitions to your environment for the ClamAV Add-on for PCF to use, but the ClamAV Mirror needs to get databases itself.
+You can configure the ClamAV Mirror to get virus definitions from one of the following supported options:
+
+<%# TODO Dylan: less verbose things with tile field updates %>
+* `Manual updates(I will ssh stuff myself)`: Suited for air gapped environments, or if you want to control the database versions available to your environment
+* `Use the ClamAV official mirror`: The Mirror will fetch databases from `database.clamav.net`
+* `I have my own mirror`: Allows you to enter a list of hostnames or IPs of mirrors
+
+### <a id='proxy'></a> (Optional) Configure HTTP Proxy for ClamAV Mirror Jobs
+
+If you selected `Use the ClamAV official mirror` or `I have my own mirror` in the previous section, you can configure a proxy for the ClamAV Mirror to retrieve the databases from.
+To do this, click **HTTP Proxy Configuration for ClamAV Mirror Jobs** and set
+**HTTP proxy for ClamAV jobs to get database updates** to `Enabled`.
+Then enter the `host`, `port`, `username` and `password` in the fields that appear.
+
+###<a id="syslog"></a> Configure System Logging
+Follow the steps below to enable system logging for ClamAV Mirror.
+Logs use RFC5424 format.
+
+1. Click **Syslog**.
+1. Click **Yes**.
+
+    <<<SCREENSHOT>>>
+
+1. Configure the fields as follows:
+  <table>
+    <tr><th>Field</th><th>Instructions</th></tr>
+    <tr>
+        <td><strong>Address</strong></td>
+        <td>Enter the address or host of the syslog server for sending logs, for example,
+            <code>logmanager.example.com</code>.</td></tr>
+    <tr><td><strong>Port</strong></td>
+        <td>Enter the port of the syslog server for sending logs, for example, <code>29279</code>.</td></tr>
+    <tr><td><strong>Transport Protocol</strong></td>
+        <td>Select the protocol over which you want system logs. Pivotal recommends using TCP.</td></tr>
+    <tr><td><strong>Enable TLS</strong></td>
+    <td>If you select TCP, you can also select to send logs encrypted over TLS.</td></tr>
+    <tr><td><strong>Permitted Peer</strong></td>
+        <td>Enter either the accepted fingerprint, in SHA1, or the name of the remote peer, for example, <code>*.example.com</strong></td></tr>
+    <tr><td><strong>SSL Certificate</strong></td>
+        <td>Enter the SSL Certificate(s) for the syslog server. This ensures the logs are transported securely.</td></tr>
+  </table>
+  <p class="note"><strong>IMPORTANT</strong>: If your syslog server is external to PCF, you might need to select
+            <strong>Provide public IP addresses to all Service VMs</strong> on the <strong>Settings</strong> page.<p>
+
+1. Click **Save**.
+
+## <a id='resources-mirror'></a> Configure Resource Config
+You can scale up the number of deployed mirrors by clicking **Resource Config**
+and setting the number of `clamav-mirror` instances to the number of mirrors that
+you want to deploy.
+The ClamAV jobs do load balancing for you,
+<%# TODO Dylan: confirm next line %>
+but you need to **Apply Changes** for the ClamAV jobs to detect the number of mirrors.
+
+### <a id="apply-changes-mirror"></a> Apply Changes from Your Configuration
+Your ClamAV Mirror installation is not complete until you apply your configuration changes.
+To do this, follow the procedure below:
+
+1. Return to the Ops Manager Installation Dashboard.
+
+1. Click **Review Pending Changes**.
+1. Unselect all products except `BOSH Director` and `ClamAV Mirror for PCF` and click **Apply Changes**.
+1. After **Apply Changes** is complete, if you selected `Manual updates(I will ssh stuff myself)`, upload a set of virus definitions
+to your deployed `clamav-mirrors`.
+To do this, see [Updating Virus Definitions on Deployed ClamAV Mirrors](./updating-databases.html).
+
+## <a id='install-addon'></a> Install <%= vars.product_short %>
+
+To install the <%= vars.product_short %> file on the Ops Manager Installation Dashboard, do the following:
+
+1. Download the product file from [Pivotal Network](https://network.pivotal.io/products/p-clamav-addon).
+
+1. Navigate to the Ops Manager Installation Dashboard and select **Import a Product** to upload the product file.
+
+1. Under the **Import a Product** button, click **+** next to the version number of <%= vars.product_short %>.
+This adds the tile to your staging area.
+
+1. Click the newly added **<%= vars.product_short %>** tile.
 
 ## <a id='configure'></a> Configure <%= vars.product_short %>
 To configure <%= vars.product_short %>, do the following:
 
 1. Click **ClamAV Configuration**.
+
+1. ClamAV needs to fetch virus databases from an upstream mirror. You can configure it to one of the following supported options:
+
+* `Use the ClamAV official mirror`: Jobs will fetch databases from `database.clamav.net`
+* `Use a deployed mirror from the ClamAV Mirror Tile`. For more information, see [Install ClamAV Mirror for PCF](#install-mirror).
+* `Private Mirror`: Allows you to enter a list of hostnames or IPs of mirrors
 
 1. (Optional) If you want to scan files immediately after they are modified,
 then select **Enable on-access scanning**.
@@ -161,98 +260,12 @@ To change the scheduled scan value, do the following:
 To do this, set **Earliest time that a daily scheduled scan can start** and
 **Latest time that a daily scheduled scan can start**.
 
-
-## <a id='mirror'></a> Configure ClamAV Mirror
-ClamAV jobs fetch virus definitions from a ClamAV update mirror.
-Environments that cannot connect to the internet require a private mirror.
-To deploy a private mirror, set **Database Mirror** to
-`Deploy a private mirror for ClamAV jobs to use`.
-
-If you set **Database Mirror** to `Deploy a private mirror for ClamAV jobs to use`,
-you can configure the output destination of the logs from the ClamAV mirror job
-to one of the following supported options:
-
-* `stdout`: sends messages to /var/vcap/sys/log/clamav-mirror/clamav-mirror.stdout.log.
-* `stderr`: sends messages to /var/vcap/sys/log/clamav-mirror/clamav-mirror.stderr.log.
-* `syslog`: sends messages to /var/log/messages.
-
-If your environment is able to connect to the internet or you already have a private mirror,
-do the following:
-
-1. Set **Database Mirror** to `External mirror` (Make sure to set clamav-mirror instances to 0 in "Resource Config")
-2. Enter the hostname or IP of your mirror in the **Hostname or IP of a Private Mirror** field that appears.
-If you do not specify a value, ClamAV jobs will use the [ClamAV official mirror](http://database.clamav.net/).
-
-<p class="note"><strong>Note</strong>:
-  If you selected <code>External Mirror</code>, the settings in <strong>Assign AZs and Networks</strong> are still required, but they do not do anything.
-  This is because those settings apply to the ClamAV mirror VMs if they are deployed.</p>
-
-
-###<a id="syslog"></a> Configure System Logging
-Follow the steps below to enable system logging for ClamAV.
-Logs use RFC5424 format.
-
-1. Click **Syslog**.
-1. Click **Yes**.
-
-    <<<SCREENSHOT>>>
-
-1. Configure the fields as follows:
-  <table>
-    <tr><th>Field</th><th>Instructions</th></tr>
-    <tr>
-        <td><strong>Address</strong></td>
-        <td>Enter the address or host of the syslog server for sending logs, for example,
-            <code>logmanager.example.com</code>.</td></tr>
-    <tr><td><strong>Port</strong></td>
-        <td>Enter the port of the syslog server for sending logs, for example, <code>29279</code>.</td></tr>
-    <tr><td><strong>Transport Protocol</strong></td>
-        <td>Select the protocol over which you want system logs. Pivotal recommends using TCP.</td></tr>
-    <tr><td><strong>Enable TLS</strong></td>
-    <td>If you select TCP, you can also select to send logs encrypted over TLS.</td></tr>
-    <tr><td><strong>Permitted Peer</strong></td>
-        <td>Enter either the accepted fingerprint, in SHA1, or the name of the remote peer, for example, <code>*.example.com</strong></td></tr>
-    <tr><td><strong>SSL Certificate</strong></td>
-        <td>Enter the SSL Certificate(s) for the syslog server. This ensures the logs are transported securely.</td></tr>
-  </table>
-  <p class="note"><strong>IMPORTANT</strong>: If your syslog server is external to PCF, you might need to select
-            <strong>Provide public IP addresses to all Service VMs</strong> on the <strong>Settings</strong> page.<p>
-
-1. Click **Save**.
-
-
-## <a id='resources'></a> Configure Resource Config
-You can scale up the number of deployed mirrors by clicking **Resource Config**
-and setting the number of `clamav-mirror` instances to the number of mirrors that
-you want to deploy.
-The ClamAV jobs do load balancing for you,
-but you need to **Apply Changes** for the ClamAV jobs to detect the number of mirrors.
-
-<p class="note warning"><strong>Warning: </strong>
-  If you selected <code>External Mirror</code> in <strong>ClamAV Mirror Configuration</strong>,
-  be sure to set the number of <code>clamav-mirror</code> instances to 0.
-  This is because the ClamAV jobs prioritize a deployed clamav-mirror over an external mirror.</p>
-
-
 ## <a id="apply-changes"></a> Apply Changes from Your Configuration
 Your installation is not complete until you apply your configuration changes.
 To do this, follow the procedure below:
 
 1. Return to the Ops Manager Installation Dashboard.
-
 1. Click **Review Pending Changes**.
-    1. If you selected `External mirror` (Make sure to set clamav-mirror instances to 0 in "Resource Config")
-  under **ClamAV Mirror Installation**, click **Apply Changes** to complete the
-  installation of <%= vars.product_short %> and skip the remaining steps.
-    1. If you selected `Deploy a private mirror for ClamAV jobs to use` under
-    **ClamAV Mirror Installation**, unselect all products except `BOSH Director`
-    and `ClamAV Addon for PCF` and click **Apply Changes**.
-
-1. After **Apply Changes** is complete, upload a set of virus definitions
-to your deployed `clamav-mirrors`.
-To do this, see [Updating Virus Definitions on Deployed ClamAV Mirrors](./updating-databases.html).
-1. Return to the Ops Manager Installation Dashboard.
-1. Click **Review Pending Changes**
 1. Ensure all products are selected and click **Apply Changes**.
 
 
