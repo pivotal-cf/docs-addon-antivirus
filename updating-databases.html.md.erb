@@ -37,54 +37,48 @@ To download the virus definitions from the offical mirror, use the following URL
 1. Find the name of your ClamAV mirror deployment by running the following command:
 
     ```
-    $ bosh -e BOSH-ENVIRONMENT deployments | grep p-clamav-mirror | cut -f1
+    bosh -e BOSH-ENVIRONMENT deployments | grep p-clamav-mirror | cut -f1
     ```
 
     For example:
 
-    <pre class="terminal">bosh -e my-env deployments | grep p-clamav-mirror | cut -f1</pre>
+    <pre class="terminal">$ bosh -e my-env deployments | grep p-clamav-mirror | cut -f1</pre>
 
     The deployment name starts with `p-clamav-mirror-` and is followed by a string of characters.
 
     For example:
 
-    <pre class="terminal">p-clamav-mirror-08815ca5ead252c4b8d8</pre>
+    <pre class="terminal">$ p-clamav-mirror-08815ca5ead252c4b8d8</pre>
 
 
 1. Copy the virus definitions to your ClamAV mirror deployment by running the following command:
 
     ```
-    $ bosh -e BOSH-ENVIRONMENT -d CLAMAV-DEPLOYMENT-NAME scp /path/to/local/main.cvd /path/to/local/daily.cvd /path/to/local/bytecode.cvd :/var/vcap/data/clamav_mirror/unvalidated
+    bosh -e BOSH-ENVIRONMENT -d CLAMAV-DEPLOYMENT-NAME scp /path/to/local/main.cvd /path/to/local/daily.cvd /path/to/local/bytecode.cvd :/var/vcap/data/clamav_mirror/unvalidated
     ```
 
     For example:
 
-    <pre class="terminal">bosh -e my-env -d p-clamav-mirror-4cb8cfbeee717258d72e scp main.cvd daily.cvd bytecode.cvd :/var/vcap/data/clamav_mirror/unvalidated</pre>
+    <pre class="terminal">$ bosh -e my-env -d p-clamav-mirror-4cb8cfbeee717258d72e scp main.cvd daily.cvd bytecode.cvd :/var/vcap/data/clamav_mirror/unvalidated</pre>
 
-1. Verify that the mirror validated and updated its local copies of the virus definitions by checking the configured log output file for the following lines:
+1. Verify that the mirror validated and updated its local copies of the virus
+    definitions by running the following command:
 
     ```
-    TIMESTAMP updated /var/vcap/data/clamav/DATABASE_NAME.cvd
-    ```
-
-    Where `DATABASE_NAME` is:
-    * `bytecode.cvd`
-    * `daily.cvd`
-    * `main.cvd`
-
-    To do this, run the following command:
-
     bosh -e BOSH-ENVIRONMENT -d CLAMAV-DEPLOYMENT-NAME ssh -c "sudo cat FILE | grep \"updated /var/vcap/store\""
+    ```
 
-    Where `FILE` is:
-
-    * `/var/vcap/sys/log/clamav-mirror/clamav-mirror.stdout.log` for `stdout`
-    * `/var/vcap/sys/log/clamav-mirror/clamav-mirror.stderr.log` for `stderr`
-    * `/var/log/messages` for `syslog`
+    Where `FILE` is determined by the output destination configured in
+    [Configure ClamAV Mirror for PCF](./install.html#configure-mirror).
+    * `/var/vcap/sys/log/clamav-mirror/clamav-mirror.stdout.log` for stdout
+    * `/var/vcap/sys/log/clamav-mirror/clamav-mirror.stderr.log` for stderr
+    * `/var/log/messages` for syslog
 
     For example:
 
     <pre class="terminal">
+    $ bosh -e my-env -d p-clamav-mirror-4cb8cfbeee717258d72e ssh -c "sudo cat /var/log/messages | grep \"updated /var/vcap/store\""
+
     2019/05/30 17:16:34 updated /var/vcap/store/clamav-mirror/validated/bytecode.cvd
     2019/05/30 17:16:40 updated /var/vcap/store/clamav-mirror/validated/daily.cvd
     2019/05/30 17:16:49 updated /var/vcap/store/clamav-mirror/validated/main.cvd
