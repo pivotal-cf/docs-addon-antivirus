@@ -1,0 +1,140 @@
+---
+title: Installing and Configuring ClamAV Mirror for PCF
+owner: Pivotal Compliance and Innovation (PCI) Team
+---
+<strong><%= modified_date %></strong>
+
+This topic describes how to install and configure ClamAV Mirror for Pivotal Cloud Foundry (PCF).
+If you have an air-gapped environment you must install the ClamAV Mirror tile for PCF
+to use the <%= vars.product_short %> tile.
+
+<p class="note"><strong>Note: </strong> This is optional if your environment is not air-gapped.</p>
+
+##<a id="prereqs"></a>Prerequisites
+
+To install ClamAV Add-on, you must have the following:
+
+* **A PCF operator with admin rights**.
+For more information, see [Operators](https://docs.pivotal.io/pivotalcf/customizing/user-types.html#operator).
+
+* **PCF Operations Manager (Ops Manager)**.
+For compatible versions, see the [Product Snapshot](./index.html#snapshot).
+
+* **At least 1&nbsp;GB of memory free on each VM**.
+ClamAV Add-on uses 610&nbsp;MB of memory.
+
+## <a id='install-mirror'></a> Install ClamAV Mirror for PCF
+
+If you do not have an external mirror for ClamAV jobs to fetch database updates from,
+you can deploy one using the ClamAV Mirror for PCF.
+This deployed mirror can support air-gapped environments.
+
+1. Download the product file from [Pivotal Network](https://network.pivotal.io/products/p-clamav-addon).
+
+1. Navigate to the Ops Manager Installation Dashboard and select **Import a Product** to upload the product file.
+
+1. Under the **Import a Product** button, click **+** next to the version number of ClamAV Mirror for PCF.
+This adds the tile to your staging area.
+
+1. Click the newly added **ClamAV Mirror for PCF** tile.
+
+## <a id='azs'></a> Assign AZs and Networks
+
+To assign AZs and networks, do the following:
+
+1. Click the **Assign AZs and Networks** settings tab.
+
+1. Configure the fields as follows:
+
+    <table class="nice">
+      <th>Field</th>
+      <th>Description</th>
+      <tr>
+        <td><strong>Place singleton jobs in</strong></td>
+        <td>Select the AZ that you want the <code>clamav_mirror</code> VM to run in.</td>
+      </tr>
+      <tr>
+        <td><strong>Balance other jobs in</strong></td>
+        <td>Select the same AZ as above.</td>
+      </tr>
+      <tr>
+        <td><strong>Network</strong></td>
+        <td>Select a subnet for the <code>clamav_mirror</code> VM. <br>This is typically the same subnet that
+          includes the Pivotal Application Services (PAS) component VMs.</td>
+      </tr>
+    </table>
+
+1. Click **Save**.
+
+## <a id='configure-mirror'></a> Configure ClamAV Mirror for PCF
+To configure ClamAV Mirror for PCF, do the following:
+
+1. Click **ClamAV Mirror Configuration**.
+
+1. Configure the output destination of the logs from the ClamAV mirror job
+to one of the following supported options:
+  * **stdout**: sends messages to `/var/vcap/sys/log/clamav-mirror/clamav-mirror.stdout.log`
+  * **stderr**: sends messages to `/var/vcap/sys/log/clamav-mirror/clamav-mirror.stderr.log`
+  * **syslog**: sends messages to `/var/log/messages`
+
+1. The ClamAV Mirror for PCF will serve virus definitions to your environment for the ClamAV Add-on for PCF to use, but the ClamAV Mirror needs to get databases itself.
+You can configure the ClamAV Mirror to get virus definitions from one of the following supported options:
+<%# TODO Dylan: less verbose things with tile field updates %>
+  * **Manual updates**: Suited for air-gapped environments, or if you want to control the database versions available to your environment
+  * **Use the ClamAV official mirror**: The mirror fetches databases from database.clamav.net
+  * **I have my own mirror**: Enables you to enter a list of hostnames or IPs of mirrors
+
+## <a id='proxy'></a> (Optional) Configure HTTP Proxy for ClamAV Mirror Jobs
+
+If you selected **Use the ClamAV official mirror** or **I have my own mirror** in the previous section, you can configure a proxy for the ClamAV Mirror to retrieve the databases from.
+To do this, click **HTTP Proxy Configuration for ClamAV Mirror Jobs** and set
+**HTTP proxy for ClamAV jobs to get database updates** to `Enabled`.
+Then enter the `host`, `port`, `username` and `password` in the fields that appear.
+
+##<a id="syslog"></a> Configure System Logging
+Follow the steps below to enable system logging for ClamAV Mirror.
+Logs use RFC5424 format.
+
+1. Click **Syslog**.
+1. Click **Yes**.
+1. Configure the fields as follows:
+  <table>
+    <tr><th>Field</th><th>Instructions</th></tr>
+    <tr>
+        <td><strong>Address</strong></td>
+        <td>Enter the address or host of the syslog server for sending logs, for example,
+            <code>logmanager.example.com</code>.</td></tr>
+    <tr><td><strong>Port</strong></td>
+        <td>Enter the port of the syslog server for sending logs, for example, <code>29279</code>.</td></tr>
+    <tr><td><strong>Transport Protocol</strong></td>
+        <td>Select the protocol over which you want system logs. Pivotal recommends using TCP.</td></tr>
+    <tr><td><strong>Enable TLS</strong></td>
+    <td>If you select TCP, you can also select to send logs encrypted over TLS.</td></tr>
+    <tr><td><strong>Permitted Peer</strong></td>
+        <td>Enter either the accepted fingerprint, in SHA1, or the name of the remote peer, for example, <code>*.example.com</strong></td></tr>
+    <tr><td><strong>SSL Certificate</strong></td>
+        <td>Enter the SSL Certificate(s) for the syslog server. This ensures the logs are transported securely.</td></tr>
+  </table>
+  <p class="note"><strong>IMPORTANT</strong>: If your syslog server is external to PCF, you might need to select
+            <strong>Provide public IP addresses to all Service VMs</strong> on the <strong>Settings</strong> page.<p>
+
+1. Click **Save**.
+
+## <a id="apply-changes-mirror"></a> Apply Changes from Your Configuration
+You can scale up the number of deployed mirrors by clicking **Resource Config**
+and setting the number of `clamav-mirror` instances to the number of mirrors that
+you want to deploy.
+The ClamAV jobs do load balancing for you,
+<%# TODO Dylan: confirm next line %>
+but you need to **Apply Changes** for the ClamAV jobs to detect the number of mirrors.
+
+Your ClamAV Mirror installation is not complete until you apply your configuration changes.
+To do this, follow the procedure below:
+
+1. Return to the Ops Manager Installation Dashboard.
+
+1. Click **Review Pending Changes**.
+1. Unselect all products except `BOSH Director` and `ClamAV Mirror for PCF` and click **Apply Changes**.
+1. After **Apply Changes** is complete, if you selected `Manual updates(I will ssh stuff myself)`, upload a set of virus definitions
+to your deployed `clamav-mirrors`.
+To do this, see [Updating Virus Definitions on Deployed ClamAV Mirrors](./updating-databases.html).
