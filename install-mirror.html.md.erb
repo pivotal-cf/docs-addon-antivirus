@@ -5,8 +5,8 @@ owner: Pivotal Compliance and Innovation (PCI) Team
 <strong><%= modified_date %></strong>
 
 This topic describes how to install and configure ClamAV Mirror for Pivotal Cloud Foundry (PCF).
-If you have an air-gapped environment you must install the ClamAV Mirror tile for PCF
-to use the <%= vars.product_short %> tile.
+If you have an air-gapped environment you must install the ClamAV Mirror for PCF tile
+to use <%= vars.product_short %>.
 
 <p class="note"><strong>Note: </strong> This is optional if your environment is not air-gapped.</p>
 
@@ -28,6 +28,8 @@ ClamAV Add-on uses 610&nbsp;MB of memory.
 If you do not have an external mirror for ClamAV jobs to fetch database updates from,
 you can deploy one using the ClamAV Mirror for PCF.
 This deployed mirror can support air-gapped environments.
+
+To install the ClamAV for PCF Mirror for PCF tile, do the following:
 
 1. Download the product file from [Pivotal Network](https://network.pivotal.io/products/p-clamav-addon).
 
@@ -121,6 +123,7 @@ Logs use RFC5424 format.
 1. Click **Save**.
 
 ## <a id="apply-changes-mirror"></a> Apply Changes from Your Configuration
+
 You can scale up the number of deployed mirrors by clicking **Resource Config**
 and setting the number of `clamav-mirror` instances to the number of mirrors that
 you want to deploy.
