@@ -5,8 +5,12 @@ owner: Pivotal Compliance and Innovation (PCI) Team
 <strong><%= modified_date %></strong>
 
 This topic describes how to install and configure ClamAV Mirror for Pivotal Cloud Foundry (PCF).
-If you have an air-gapped environment you must install the ClamAV Mirror for PCF tile
+
+Pivotal recommends that you use this mirror when you use <%= vars.product_short %>.
+If you already have a mirror deployed that you want to use, you can use that instead.
+However, if you have an air-gapped environment you must install the ClamAV Mirror for PCF tile
 to use <%= vars.product_short %>.
+
 
 <p class="note"><strong>Note: </strong> This is optional if your environment is not air-gapped.</p>
 
@@ -113,7 +117,7 @@ Logs use RFC5424 format.
     <tr><td><strong>Enable TLS</strong></td>
     <td>If you select TCP, you can also select to send logs encrypted over TLS.</td></tr>
     <tr><td><strong>Permitted Peer</strong></td>
-        <td>Enter either the accepted fingerprint, in SHA1, or the name of the remote peer, for example, <code>*.example.com</strong></td></tr>
+        <td>Enter either the accepted fingerprint, in SHA1, or the name of the remote peer, for example, <code>*.example.com</code></td></tr>
     <tr><td><strong>SSL Certificate</strong></td>
         <td>Enter the SSL Certificate(s) for the syslog server. This ensures the logs are transported securely.</td></tr>
   </table>
