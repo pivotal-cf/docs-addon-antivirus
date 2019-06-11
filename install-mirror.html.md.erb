@@ -5,14 +5,13 @@ owner: Pivotal Compliance and Innovation (PCI) Team
 <strong><%= modified_date %></strong>
 
 This topic describes how to install and configure ClamAV Mirror for Pivotal Cloud Foundry (PCF).
+Pivotal recommends that you install this tile before installing <%= vars.product_short %>.
 
-Pivotal recommends that you use this mirror when you use <%= vars.product_short %>.
-If you already have a mirror deployed that you want to use, you can use that instead.
-However, if you have an air-gapped environment you must install the ClamAV Mirror for PCF tile
-to use <%= vars.product_short %>.
+If you do not have an external mirror for ClamAV jobs to fetch database updates from,
+you can deploy one using the ClamAV Mirror for PCF.
+This deployed mirror can support air-gapped environments.
+If you have already deployed an external mirror, you can use that instead of installing this tile.
 
-
-<p class="note"><strong>Note: </strong> This is optional if your environment is not air-gapped.</p>
 
 ##<a id="prereqs"></a>Prerequisites
 

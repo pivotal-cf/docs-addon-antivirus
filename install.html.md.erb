@@ -6,11 +6,10 @@ owner: Pivotal Compliance and Innovation (PCI) Team
 
 This topic describes how to install and configure <%= vars.product_full %>.
 
-Pivotal recommends that you download and install both the <%= vars.product_short %>
-tile and the ClamAV Mirror for PCF tile.
-If you already have a mirror deployed that you want to use, you can use that instead.
-However, if you have an air-gapped environment you must install the ClamAV Mirror for PCF tile
-to use <%= vars.product_short %>.
+Before installing <%= vars.product_full %>, Pivotal recommends that you download
+and install the ClamAV Mirror for PCF tile.
+For more information about the ClamAV Mirror for PCF tile,
+see [Installing and Configuring ClamAV Mirror for PCF](./install-mirror.html).
 
 ##<a id="prereqs"></a>Prerequisites
 
@@ -25,18 +24,8 @@ For compatible versions, see the [Product Snapshot](./index.html#snapshot).
 * **At least 1&nbsp;GB of memory free on each VM**.
  ClamAV Add-on uses 610&nbsp;MB of memory.
 
-* Pivotal recommends that you install the ClamAV Mirror for PCF.
-  If your PCF deployment is in an air-gapped environment, then you must install ClamAV Mirror for PCF.
+* **Pivotal recommends that you install the ClamAV Mirror for PCF**.
   For instructions, see [Installing and Configuring ClamAV Mirror for PCF](./install-mirror.html).
-
-
-## <a id='install-mirror'></a> (Optional) Install ClamAV Mirror for PCF
-
-If you do not have an external mirror for ClamAV jobs to fetch database updates from,
-you can deploy one using the ClamAV Mirror for PCF.
-This deployed mirror can support air-gapped environments.
-For instructions, see [Installing and Configuring ClamAV Mirror for PCF](./install-mirror.html).
-
 
 ## <a id='install-addon'></a> Install <%= vars.product_short %>
 
