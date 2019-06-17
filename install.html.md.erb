@@ -45,6 +45,7 @@ This adds the tile to your staging area.
 To configure <%= vars.product_short %>, do the following:
 
 1. Click **ClamAV Configuration**.
+![Configure ClamAV](configure.png)
 
 1. ClamAV needs to fetch virus databases from an upstream mirror. You can configure it to one of the following supported options:
   * **Use the ClamAV official mirror**: Jobs will fetch databases from `database.clamav.net`
@@ -131,6 +132,8 @@ update their virus definitions, you can configure one.
 To do this, do the following:
 
 1. Select the **HTTP Proxy Configuration for ClamAV Jobs** pane.
+![Configure HTTP Proxy](http-proxy.png)
+
 1. Set **HTTP proxy for ClamAV jobs to get database updates** to `Enabled`.
 1. Enter the `proxy host`, `port`, `username` and `password` in the fields that appear.
 
@@ -143,6 +146,8 @@ The format of these values must be in 24-hour format `HH:MM`.
 To change the scheduled scan value, do the following:
 
 1. Click **Scheduled Scans**
+![Configure Scheduled Scan](scheduled-scans.png)
+
 1. Set **Interval for scheduled scans to run** to one of the following:
   * **Hourly**
   * **Daily**
@@ -190,7 +195,9 @@ in the Cloud Foundry documentation.
 
 If you would like to configure ClamAV to ignore duplicate logs for these directories,
 enter `^/var/vcap/data/grootfs/store/(un)?privileged/images/[\w-]+/rootfs/.*$` into the
-**Directories and files that will be ignored by ClamAV** field in the **ClamAV Configuration** pane.
+**Directories and files that will be ignored by ClamAV** field in the **ClamAV Configuration** pane:
+
+![Directories and files that will be ignored by ClamAV](ignore-file.png)
 
   <p class="note"><strong>Note:</strong>
     Adding this ignore pattern means that files and directories in the
@@ -215,7 +222,9 @@ in the Docker documentation.
 
 If you would like to configure ClamAV to ignore duplicate logs for these directories,
 enter `^/var/vcap/store/docker/docker/overlay2/\w+/merged/.*$` into the
-**Directories and files that will be ignored by ClamAV** field in the **ClamAV Configuration** pane.
+**Directories and files that will be ignored by ClamAV** field in the **ClamAV Configuration** pane:
+
+![Directories and files that will be ignored by ClamAV](ignore-file.png)
 
   <p class="note"><strong>Note:</strong>
     Adding this ignore pattern means that files and directories in the

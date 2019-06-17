@@ -48,6 +48,7 @@ This adds the tile to your staging area.
 To assign AZs and networks, do the following:
 
 1. Click the **Assign AZs and Networks** settings tab.
+![Assign AZs and Networks](mirror-assign-azs.png)
 
 1. Configure the fields as follows:
 
@@ -75,6 +76,11 @@ To assign AZs and networks, do the following:
 To configure ClamAV Mirror for PCF, do the following:
 
 1. Click **ClamAV Mirror Configuration**.
+<%# TODO Chris: Verify Name %>
+![ClamAV Mirror Configuration](mirror-configure.png)
+
+1. Configure the fields as follows:
+<%# TODO Chris: Make Table %>
 
 1. Configure the output destination of the logs from the ClamAV mirror job
 to one of the following supported options:
@@ -92,15 +98,23 @@ You can configure the ClamAV Mirror to get virus definitions from one of the fol
 ## <a id='proxy'></a> (Optional) Configure HTTP Proxy for ClamAV Mirror Jobs
 
 If you selected **Use the ClamAV official mirror** or **I have my own mirror** in the previous section, you can configure a proxy for the ClamAV Mirror to retrieve the databases from.
-To do this, click **HTTP Proxy Configuration for ClamAV Mirror Jobs** and set
-**HTTP proxy for ClamAV jobs to get database updates** to `Enabled`.
-Then enter the `host`, `port`, `username` and `password` in the fields that appear.
+To do this, do the following:
+
+1. Click **HTTP Proxy Configuration for ClamAV Mirror Jobs**
+![HTTP Proxy Configuration for ClamAV Mirror Jobs](mirror-http-proxy.png)
+
+1. Set **HTTP proxy for ClamAV jobs to get database updates** to `Enabled`.
+<%# TODO Chris: Make Table %>
+
+1. Enter the `host`, `port`, `username` and `password` in the fields that appear.
 
 ##<a id="syslog"></a> Configure System Logging
 Follow the steps below to enable system logging for ClamAV Mirror.
 Logs use RFC5424 format.
 
 1. Click **Syslog**.
+![Syslog](mirror-syslog.png)
+
 1. Click **Yes**.
 1. Configure the fields as follows:
   <table>
@@ -129,7 +143,10 @@ Logs use RFC5424 format.
 
 You can scale up the number of deployed mirrors by clicking **Resource Config**
 and setting the number of `clamav-mirror` instances to the number of mirrors that
-you want to deploy.
+you want to deploy
+
+![Resource Config](mirror-resource-config.png)
+
 The ClamAV jobs do load balancing for you,
 <%# TODO Dylan: confirm next line %>
 but you need to **Apply Changes** for the ClamAV jobs to detect the number of mirrors.
