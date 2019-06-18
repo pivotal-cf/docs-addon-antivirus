@@ -10,6 +10,7 @@ Pivotal recommends that you install this tile before installing <%= vars.product
 If you do not have an external mirror for ClamAV jobs to fetch database updates from,
 you can deploy one using the ClamAV Mirror for PCF.
 This deployed mirror can support air-gapped environments.
+
 If you have already deployed an external mirror, you can use that instead of installing this tile.
 
 
@@ -28,11 +29,6 @@ This is so that you can install the <%= vars.product_short %> tile after deployi
 ClamAV Add-on uses 610&nbsp;MB of memory.
 
 ## <a id='install-mirror'></a> Install ClamAV Mirror for PCF
-
-If you do not have an external mirror for ClamAV jobs to fetch database updates from,
-you can deploy one using the ClamAV Mirror for PCF.
-This deployed mirror can support air-gapped environments.
-
 To install the ClamAV for PCF Mirror for PCF tile, do the following:
 
 1. Download the product file from [Pivotal Network](https://network.pivotal.io/products/p-clamav-addon).
@@ -94,6 +90,7 @@ To configure ClamAV Mirror for PCF, do the following:
           </ul>
         </td>
       </tr>
+      <tr>
         <td><strong>Mirror for Automatic Database Updates</strong></td>
         <td>
           <ul>
@@ -108,6 +105,8 @@ To configure ClamAV Mirror for PCF, do the following:
     <p class="note"><strong>Note: </strong> The ClamAV Mirror for PCF serves virus definitions to your environment for the ClamAV Add-on for PCF to use, but the ClamAV Mirror needs to get databases itself.
     You can configure the ClamAV Mirror to get virus definitions using the supported options in <strong>Mirror for Automatic Database Updates</strong> above.</p>
 
+  1. Click **Save**.
+
 <%# TODO Dylan: less verbose things with tile field updates %>
 
 1. (Optional) If you selected **Use the ClamAV official mirror** or **I have my own mirror** in the previous section, you can configure a proxy for the ClamAV Mirror to retrieve the databases from. To do this, do the following:
@@ -118,6 +117,8 @@ To configure ClamAV Mirror for PCF, do the following:
     1. Set **HTTP proxy to get database updates** to **Enabled**.
 
     1. Enter the **host**, **port**, **username** and **password** in the fields that appear.
+
+1. Click **Save**.
 
 ##<a id="syslog"></a> Configure System Logging
 Follow the steps below to enable system logging for ClamAV Mirror.
@@ -149,17 +150,20 @@ Follow the steps below to enable system logging for ClamAV Mirror.
 
 1. Click **Save**.
 
+## <a id="scale-deployed-mirror"></a> Scale the Number of Deployed Mirrors
+
+ClamAV jobs do load balancing for you.
+You can scale up the number of deployed mirrors by doing the following:
+
+  1. Click the **Resource Config** tab.
+  ![Resource Config](mirror-resource-config.png)
+
+  1. Set the number of `clamav-mirror` instances to the number of mirrors that
+    you want to deploy.
+  1. Click **Save**.
+
+
 ## <a id="apply-changes-mirror"></a> Apply Changes from Your Configuration
-
-You can scale up the number of deployed mirrors by clicking **Resource Config**
-and setting the number of `clamav-mirror` instances to the number of mirrors that
-you want to deploy
-
-![Resource Config](mirror-resource-config.png)
-
-The ClamAV jobs do load balancing for you,
-<%# TODO Dylan: confirm next line %>
-but you need to **Apply Changes** for the ClamAV jobs to detect the number of mirrors.
 
 Your ClamAV Mirror installation is not complete until you apply your configuration changes.
 To do this, follow the procedure below:
@@ -167,7 +171,7 @@ To do this, follow the procedure below:
 1. Return to the Ops Manager Installation Dashboard.
 
 1. Click **Review Pending Changes**.
-1. Unselect all products except `BOSH Director` and `ClamAV Mirror for PCF` and click **Apply Changes**.
-1. After **Apply Changes** is complete, if you selected `Manual updates(I will ssh stuff myself)`, upload a set of virus definitions
+1. Unselect all products except **BOSH Director** and **ClamAV Mirror for PCF** and click **Apply Changes**.
+1. After **Apply Changes** is complete, if you selected **No Mirror**, upload a set of virus definitions
 to your deployed `clamav-mirrors`.
-To do this, see [Updating Virus Definitions on Deployed ClamAV Mirrors](./updating-databases.html).
+To do this, see [Updating Virus Definitions](./updating-databases.html).
