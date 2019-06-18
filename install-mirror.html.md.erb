@@ -76,11 +76,11 @@ To assign AZs and networks, do the following:
 ## <a id='configure-mirror'></a> Configure ClamAV Mirror for PCF
 To configure ClamAV Mirror for PCF, do the following:
 
-  1. Click the **ClamAV Mirror Configuration** pane.
-  <%# TODO Chris: Verify Name %>
-  ![ClamAV Mirror Configuration](mirror-configure.png)
+1. Click the **ClamAV Mirror Configuration** pane.
+<%# TODO Chris: Verify Name %>
+![ClamAV Mirror Configuration](mirror-configure.png)
 
-  1. Configure the fields as follows:
+1. Configure the fields as follows:
 
     <table>
       <tr><th>Field</th><th>Instructions</th></tr>
@@ -105,22 +105,19 @@ To configure ClamAV Mirror for PCF, do the following:
       </tr>
     </table>
 
-    <p class="note"><strong>Note: </strong> The ClamAV Mirror for PCF will serve virus definitions to your environment for the ClamAV Add-on for PCF to use, but the ClamAV Mirror needs to get databases itself.
+    <p class="note"><strong>Note: </strong> The ClamAV Mirror for PCF serves virus definitions to your environment for the ClamAV Add-on for PCF to use, but the ClamAV Mirror needs to get databases itself.
     You can configure the ClamAV Mirror to get virus definitions using the supported options in <strong>Mirror for Automatic Database Updates</strong> above.</p>
 
 <%# TODO Dylan: less verbose things with tile field updates %>
 
-## <a id='proxy'></a> (Optional) Configure HTTP Proxy for ClamAV Mirror Jobs
+1. (Optional) If you selected **Use the ClamAV official mirror** or **I have my own mirror** in the previous section, you can configure a proxy for the ClamAV Mirror to retrieve the databases from. To do this, do the following:
 
-If you selected **Use the ClamAV official mirror** or **I have my own mirror** in the previous section, you can configure a proxy for the ClamAV Mirror to retrieve the databases from.
-To do this, do the following:
+    1. Click the **HTTP Proxy Configuration** pane.
+    ![HTTP Proxy Configuration for ClamAV Mirror Jobs](mirror-http-proxy.png)
 
-1. Click the **HTTP Proxy Configuration** pane.
-![HTTP Proxy Configuration for ClamAV Mirror Jobs](mirror-http-proxy.png)
+    1. Set **HTTP proxy to get database updates** to **Enabled**.
 
-1. Set **HTTP proxy to get database updates** to **Enabled*.
-
-1. Enter the **host**, **port**, **username** and **password** in the fields that appear.
+    1. Enter the **host**, **port**, **username** and **password** in the fields that appear.
 
 ##<a id="syslog"></a> Configure System Logging
 Follow the steps below to enable system logging for ClamAV Mirror.
