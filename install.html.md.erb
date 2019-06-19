@@ -114,7 +114,7 @@ To configure <%= vars.product_short %>, do the following:
       </tr>
       <tr>
         <td><strong>Directories and files that will be ignored by ClamAV</strong></td>
-        <td>A comma-separated list of directories for ClamAV to not scan.
+        <td>Enter directories in a comma-separated list for ClamAV to not scan.
           The default value is "<code>/proc/</code>,<code>/sys/</code>".
           This configures ClamAV scans to exclude the <code>/proc</code> and
           <code>/sys</code> directories.<br><br>
@@ -123,8 +123,8 @@ To configure <%= vars.product_short %>, do the following:
       </tr>
       <tr>
         <td><strong>List of signature names that will be ignored by ClamAV (Used for false positives)</strong></td>
-        <td>A comma-separated list of signature names for ClamAV to whitelist.<br>
-          For example, "<code>Eicar-Test-Signature</code>,<code>Clamav.Test.File-7</code>"
+        <td>Enter signature names in a comma-separated list for ClamAV to whitelist. For example,<br>
+          <code>Eicar-Test-Signature, Clamav.Test.File-7</code><br>
           configures ClamAV to ignore the <strong>Eicar Test File</strong>
           and <strong>ClamAV Test File-7</strong> signatures.</td>
       </tr>
@@ -133,7 +133,7 @@ To configure <%= vars.product_short %>, do the following:
 
 <%# TODO Chris: Is there a list anywhere to find signatures that can be ignored in "List of signature names that will be ignored by ClamAV (Used for false positives)"?%>
 
-    If a scan is reporting false positives, report the issue to
+    If a scan reports false positives, report the issue to
     [ClamAV](https://www.clamav.net/reports/fp).
     For more information about false positives, see
     [ClamAV Reports False Positives](./troubleshooting.html#false-positive-clamav).
@@ -148,8 +148,9 @@ To do this, do the following:
 1. Select the **HTTP Proxy Configuration for ClamAV Jobs** pane.
 ![Configure HTTP Proxy](http-proxy.png)
 
-1. Set **HTTP proxy for ClamAV jobs to get database updates** to `Enabled`.
-1. Enter the `proxy host`, `port`, `username` and `password` in the fields that appear.
+1. Set **HTTP proxy for ClamAV jobs to get database updates** to **Enabled**.
+1. Enter the **Host**, **Port**, **Username** and **Password** in the fields that appear.
+1. Click **Save**
 
 
 ## <a id='scheduled'></a> Configure Scheduled Scan
@@ -179,7 +180,7 @@ To do this, follow the procedure below:
 1. Click **Review Pending Changes**.
 1. Ensure all products are selected and click **Apply Changes**.
 
-<hr>
+<hr style="height:1px;border:none;color:#333;background-color:#333;" />
 
 ##<a id="scan-containers"></a> (Optional) Configure ClamAV to Exclude Duplicate Logs on Containers
 You can use ClamAV to scan the following:
