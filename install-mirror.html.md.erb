@@ -105,20 +105,20 @@ To configure ClamAV Mirror for PCF, do the following:
     <p class="note"><strong>Note: </strong> The ClamAV Mirror for PCF serves virus definitions to your environment for the ClamAV Add-on for PCF to use, but the ClamAV Mirror needs to get databases itself.
     You can configure the ClamAV Mirror to get virus definitions using the supported options in <strong>Mirror for Automatic Database Updates</strong> above.</p>
 
-  1. Click **Save**.
-
-<%# TODO Dylan: less verbose things with tile field updates %>
-
-1. (Optional) If you selected **Use the ClamAV official mirror** or **I have my own mirror** in the previous section, you can configure a proxy for the ClamAV Mirror to retrieve the databases from. To do this, do the following:
-
-    1. Click the **HTTP Proxy Configuration** pane.
-    ![HTTP Proxy Configuration for ClamAV Mirror Jobs](mirror-http-proxy.png)
-
-    1. Set **HTTP proxy to get database updates** to **Enabled**.
-
-    1. Enter the **host**, **port**, **username** and **password** in the fields that appear.
-
 1. Click **Save**.
+
+  <%# TODO Dylan: less verbose things with tile field updates %>
+
+1. (Optional) If you selected **Official mirror (database.clamav.net)** or **Existing mirror** in the previous section, you can configure a proxy for the ClamAV Mirror to retrieve the databases from. To do this, do the following:
+
+  1. Click the **HTTP Proxy Configuration** pane.
+  ![HTTP Proxy Configuration for ClamAV Mirror Jobs](mirror-http-proxy.png)
+
+  1. Set **HTTP proxy to get database updates** to **Enabled**.
+
+  1. Enter the **host**, **port**, **username** and **password** in the fields that appear.
+
+  1. Click **Save**.
 
 ##<a id="syslog"></a> Configure System Logging
 Follow the steps below to enable system logging for ClamAV Mirror.
@@ -145,8 +145,6 @@ Follow the steps below to enable system logging for ClamAV Mirror.
     <tr><td><strong>SSL Certificate</strong></td>
         <td>Enter the SSL Certificate(s) for the syslog server. This ensures the logs are transported securely.</td></tr>
   </table>
-  <p class="note"><strong>IMPORTANT</strong>: If your syslog server is external to PCF, you might need to select
-            <strong>Provide public IP addresses to all Service VMs</strong> on the <strong>Settings</strong> page.<p>
 
 1. Click **Save**.
 
