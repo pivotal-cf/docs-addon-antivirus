@@ -59,7 +59,7 @@ To configure <%= vars.product_short %>, do the following:
           Select which option you would like to use to receive your virus databases from an upstream mirror.
           <ul>
             <li><strong>Official mirror (database.clamav.net)</strong>: Select this to have the mirror fetch databases from database.clamav.net</li>
-            <li><strong>Use a deployed mirror from the ClamAV Mirror tile</strong>: For more information, see [Installing and Configuring ClamAV Mirror for PCF](./install-mirror.html).
+            <li><strong>Use a deployed mirror from the ClamAV Mirror tile</strong>: For more information, see <a href="./install-mirror.html">Installing and Configuring ClamAV Mirror for PCF</a>.
             <li><strong>Existing mirror</strong>: Select this to enter a list of hostnames or IPs of mirrors</li>
           </ul>
         </td>
@@ -105,10 +105,12 @@ To configure <%= vars.product_short %>, do the following:
 
          <p class="note"><strong>Note: </strong> Add this path to the
            <strong>Directories and files that will be ignored by ClamAV</strong> list below.
-            If you do not do this, then ClamAV:<br>
-              * Detects the moved or copied file<br>
-              * Logs redundant alerts<br>
-              * Creates additional copies of the detected file
+            If you do not do this, then ClamAV:
+            <ul>
+              <li>Detects the moved or copied file</li>
+              <li>Logs redundant alerts</li>
+              <li>Creates additional copies of the detected file</li>
+            </ul>
             </p>
         </td>
       </tr>
