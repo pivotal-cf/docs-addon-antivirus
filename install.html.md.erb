@@ -278,7 +278,7 @@ Follow the steps to <a href="http://docs.pivotal.io/pivotalcf/customizing/cloudf
 <pre class="terminal">The Monit daemon 5.2.4 uptime: 3d 0h 56m
 Process 'clamd'                     running<br/>
 Process 'freshclam'                 running</pre></li>
-<li>If <code>monit summary</code> does not list <code>clamd</code> and <code>freshclamd</code>, do the following:
+<li>If <code>monit summary</code> does not list <code>clamd</code> and <code>freshclam</code>, do the following:
   <ol>
   <li>Try to start the ClamAV processes by running the following commands:
   <pre class="terminal">
@@ -286,7 +286,7 @@ Process 'freshclam'                 running</pre></li>
   $ monit start freshclam</pre></li>
   <li>Run <code>monit summary</code> again. If you do not see the processes mentioned above, check <code>/var/vcap/sys/log/clamav</code> logs for errors.</li>
   </ol>
-  <li>If <code>monit summary</code> does list <code>freshclamd</code> and <code>clamd</code>, create a file in <code>/var/vcap</code> on the VM with the following contents:
+  <li>If <code>monit summary</code> does list <code>freshclam</code> and <code>clamd</code>, create a file in <code>/var/vcap</code> on the VM with the following contents:
 <pre>
 X5O!P%@AP[4\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*
 </pre>
