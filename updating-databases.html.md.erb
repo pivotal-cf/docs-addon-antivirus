@@ -1,13 +1,17 @@
 ---
-title: Updating Virus Definitions on Deployed ClamAV Mirrors
+title: Updating Virus Definitions on an Internal ClamAV Mirror
 owner: Pivotal Compliance and Innovation (PCI) Team
 ---
 <strong><%= modified_date %></strong>
 
-This topic describes how to update the virus definitions on a private
-ClamAV mirror which has been deployed by ClamAV Mirror for PCF.
+This topic describes how to update virus definitions on an internal ClamAV mirror that has been deployed by the ClamAV Mirror for PCF tile. It also explains how these updated virus definitions propagate to all BOSH-managed VMs that are running ClamAV.
 
-##<a id="assume"></a>Update Virus Definitions
+The ClamAV Mirror for PCF tile and the ClamAV Add-on for PCF tile work together as follows:
+
+  - The add-on tile runs ClamAV on all BOSH VMs, by adding it to the BOSH runtime config.
+  - The mirror tile creates an internal mirror that is used by the ClamAV components running on BOSH VMs.
+
+##<a id="update"></a>Update Virus Definitions
 
 ClamAV jobs use three virus definitions files, `main.cvd`, `daily.cvd`, and `bytecode.cvd`.
 The ClamAV mirror deployment serves these three files to all ClamAV jobs in your environment.
@@ -83,3 +87,5 @@ To download the virus definitions from the official mirror, use the following UR
     2019/05/30 17:16:40 updated /var/vcap/store/clamav-mirror/validated/daily.cvd
     2019/05/30 17:16:49 updated /var/vcap/store/clamav-mirror/validated/main.cvd
     </pre>
+
+##<a id="propagate"></a>How Virus Definitions Propagate to VMs
