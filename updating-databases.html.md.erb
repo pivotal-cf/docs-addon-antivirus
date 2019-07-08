@@ -77,12 +77,12 @@ You can access the official mirror at the the following URLs:
 1. Copy the virus definitions to your internal ClamAV mirror by running the following command:
 
     ```
-    bosh -e BOSH-ENVIRONMENT -d CLAMAV-DEPLOYMENT-NAME scp /path/to/local/main.cvd /path/to/local/daily.cvd /path/to/local/bytecode.cvd :/var/vcap/data/clamav_mirror/unvalidated
+    bosh -e BOSH-ENVIRONMENT -d CLAMAV-DEPLOYMENT-NAME scp /path/to/local/main.cvd /path/to/local/daily.cvd /path/to/local/bytecode.cvd :/var/vcap/data/clamav-mirror/unvalidated
     ```
 
     For example:
 
-    <pre class="terminal">$ bosh -e my-env -d p-clamav-mirror-4cb8cfbeee717258d72e scp main.cvd daily.cvd bytecode.cvd :/var/vcap/data/clamav_mirror/unvalidated</pre>
+    <pre class="terminal">$ bosh -e my-env -d p-clamav-mirror-4cb8cfbeee717258d72e scp main.cvd daily.cvd bytecode.cvd :/var/vcap/data/clamav-mirror/unvalidated</pre>
 
 1. Verify that the mirror validated and updated its local copies of the virus
     definitions by running the following command:
@@ -95,7 +95,7 @@ You can access the official mirror at the the following URLs:
     the **ClamAV Mirror Configuration** pane of the ClamAV Mirror for PCF tile.
     * `/var/vcap/sys/log/clamav-mirror/clamav-mirror.stdout.log` for stdout
     * `/var/vcap/sys/log/clamav-mirror/clamav-mirror.stderr.log` for stderr
-    * `/var/log/messages` for syslog
+    * `/var/log/syslog` for syslog
 
     For example:
 
