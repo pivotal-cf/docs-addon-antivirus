@@ -5,10 +5,10 @@ owner: Security Engineering
 
 <strong><%= modified_date %></strong>
 
-This topic provides instructions to verify that the ClamAV-based antivirus add-on works with your Pivotal Cloud Foundry (PCF) deployment
-and provides general recommendations for troubleshooting and ensuring that the deployment is being protected as you expect.
+This topic provides instructions for troubleshooting the ClamAV Add-on for PCF
+and ensuring that it is protecting your Pivotal Cloud Foundry (PCF) deployment as you expect.
 
-## <a id="clamav-installation-issues"></a> ClamAV Installation Issues
+## <a id="installation"></a> Installation Issues
 
 ### <a id=""></a> Ops Manager Fails to Apply Changes
 
@@ -30,9 +30,53 @@ Review the manifest file, and replace the `database_mirror` key with the address
 If you do not have a stable mirror server for reliable initial deployment, use the S3-based mirror: `pivotal-clamav-mirror.s3.amazonaws.com`
 <hr>
 
-## <a id="clamav-runtime-issues"></a> ClamAV Runtime Issues
+## <a id="updates"></a> Virus Database Update Issues
 
-### <a id="clamav-malware-detection"></a> ClamAV Is Not Detecting Malware
+### <a id="invalid-db"></a> Invalid Database Definitions
+
+#### Symptom
+
+Updating virus definitions writes an error like the following
+to the ClamAV mirror's log destination:
+
+   ```
+   2019/07/03 20:28:30 file /var/vcap/data/clamav-mirror/unvalidated/main.cvd rejected: /var/vcap/data/clamav-mirror/unvalidated/main.cvd is an invalid cvd file: exit status 1
+   ```
+
+#### Explanation
+
+The ClamAV mirror's database verifier detected that a virus database
+file downloaded from the external database is invalid.
+
+#### Solution
+
+Check that the database files downloaded properly, and re-download if necessary.
+
+### <a id="old-db"></a> Old Database Definitions
+
+#### Symptom
+
+Updating virus definitions writes an error like the following
+to the ClamAV mirror's log destination:
+
+   ```
+   2019/07/03 20:35:34 file /var/vcap/data/clamav-mirror/unvalidated/daily.cvd rejected: /var/vcap/data/clamav-mirror/unvalidated/daily.cvd is not newer than /var/vcap/store/clamav-mirror/validated/daily.cvd
+   ```
+
+#### Explanation
+
+The ClamAV mirror's database verifier detected that a virus database
+file downloaded from the external database is older than the one most recently
+processed by the internal mirror.
+
+#### Solution
+
+Check that the latest version of the database files were downloaded.
+If the internal ClamAV mirror has the latest files, no action is required.
+
+## <a id="runtime"></a> Runtime Issues
+
+### <a id="malware-detection"></a> ClamAV Is Not Detecting Malware
 
 #### Symptom
 Malware signature or sample malware is not detected, even though the ClamAV daemon is properly configured.
@@ -41,8 +85,8 @@ Malware signature or sample malware is not detected, even though the ClamAV daem
 Virus signatures are not up-to-date.
 
 #### Solution
-
 First, ensure that the [configuration checks](./install.html#verify) have been done,
+
 that the mirror server is correctly configured and is available on the network from within the PCF private subnet,
 and that at least one hour has elapsed.
 One hour is the default scan schedule interval.

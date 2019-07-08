@@ -1,0 +1,150 @@
+---
+title: Updating Virus Definitions on an Internal ClamAV Mirror
+owner: Pivotal Compliance and Innovation (PCI) Team
+---
+<strong><%= modified_date %></strong>
+
+This topic describes how to update virus definitions on an internal ClamAV mirror that has been deployed by the ClamAV Mirror for PCF tile. It also explains how these updated virus definitions propagate to all BOSH-managed VMs that are running ClamAV.
+
+The ClamAV Mirror for PCF tile and the ClamAV Add-on for PCF tile work together as follows:
+
+  - The add-on tile runs ClamAV on all BOSH VMs, by adding it to the BOSH runtime config.
+  - The mirror tile creates an internal mirror that is used by the ClamAV components running on BOSH VMs.
+
+##<a id="update"></a>Update Virus Definitions
+
+The ClamAV community regularly updates virus definitions and publishes them to
+an external ClamAV database.
+
+How these updated virus definitions propagate to the internal ClamAV mirror that
+BOSH VMs use depends on whether Pivotal Cloud Foundry (PCF) is running in an online or air-gapped network:
+
+* **Online Network**: The internal ClamAV mirror updates its virus definitions automatically.
+* **Airgapped Network**: An operator must manually download new virus definitions
+and run `bosh scp` to update them on the internal ClamAV mirror.
+
+The following sections describe both of these scenarios, and explain how to manually update virus definitions on the internal ClamAV mirror.
+
+###<a id="automatic"></a>Automatic Updates with Online Networks
+
+When PCF runs on an online network, the PCF-internal ClamAV Mirror VM regularly checks the external ClamAV database every two hours.
+
+When new virus definitions are present on the external database, ClamAV downloads them automatically.
+
+###<a id="manual"></a>Manually Update on an Airgapped Network
+
+ClamAV jobs use three virus definitions files, `main.cvd`, `daily.cvd`, and `bytecode.cvd`.
+The internal ClamAV mirror serves these three files to all ClamAV jobs in your environment.
+
+To update the virus definitions, do this:
+
+1. Download the three virus definition files from the the official ClamAV virus
+database mirror or an equivalent external mirror.
+You can access the official mirror at the the following URLs:
+    * http://database.clamav.net/main.cvd
+    * http://database.clamav.net/daily.cvd
+    * http://database.clamav.net/bytecode.cvd
+
+1. Copy your downloaded virus definition files to your Ops Manager VM.
+
+    ```
+    scp -i PATH-TO-PRIVATE-KEY PATH-TO-CVD-FILE ... ubuntu@OPS-MANAGER-VM-IP:
+    ```
+
+    For example:
+
+    <pre class="terminal">$ scp -i ~/.ssh/my-key.pem ~/Downloads/main.cvd ~/Downloads/daily.cvd ~/Downloads/bytecode.cvd ubuntu<span>@</span>192.168.0.2: </pre>
+
+1. SSH into the Ops Manager VM.
+   For instructions, see [SSH into Ops Manager](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#ssh).
+
+1. Find the name of your internal ClamAV mirror deployment by running the following command:
+
+    ```
+    bosh -e BOSH-ENVIRONMENT deployments | grep p-clamav-mirror | cut -f1
+    ```
+
+    For example:
+
+    <pre class="terminal">$ bosh -e my-env deployments | grep p-clamav-mirror | cut -f1</pre>
+
+    The deployment name starts with `p-clamav-mirror-` and is followed by a string of characters.
+    For example:
+
+    <pre class="terminal">$ p-clamav-mirror-08815ca5ead252c4b8d8</pre>
+
+
+1. Copy the virus definitions to your internal ClamAV mirror by running the following command:
+
+    ```
+    bosh -e BOSH-ENVIRONMENT -d CLAMAV-DEPLOYMENT-NAME scp /path/to/local/main.cvd /path/to/local/daily.cvd /path/to/local/bytecode.cvd :/var/vcap/data/clamav_mirror/unvalidated
+    ```
+
+    For example:
+
+    <pre class="terminal">$ bosh -e my-env -d p-clamav-mirror-4cb8cfbeee717258d72e scp main.cvd daily.cvd bytecode.cvd :/var/vcap/data/clamav_mirror/unvalidated</pre>
+
+1. Verify that the mirror validated and updated its local copies of the virus
+    definitions by running the following command:
+
+    ```
+    bosh -e BOSH-ENVIRONMENT -d CLAMAV-DEPLOYMENT-NAME ssh -c "sudo cat FILE | grep \"updated /var/vcap/store\""
+    ```
+
+    Where `FILE` is determined by the output destination configured in
+    [Configure ClamAV Mirror for PCF](./install-mirror.html#configure-mirror).
+    * `/var/vcap/sys/log/clamav-mirror/clamav-mirror.stdout.log` for stdout
+    * `/var/vcap/sys/log/clamav-mirror/clamav-mirror.stderr.log` for stderr
+    * `/var/log/messages` for syslog
+
+    For example:
+
+    <pre class="terminal">
+    $ bosh -e my-env -d p-clamav-mirror-4cb8cfbeee717258d72e ssh -c "sudo cat /var/log/messages | grep \"updated /var/vcap/store\""
+
+    2019/05/30 17:16:34 updated /var/vcap/store/clamav-mirror/validated/bytecode.cvd
+    2019/05/30 17:16:40 updated /var/vcap/store/clamav-mirror/validated/daily.cvd
+    2019/05/30 17:16:49 updated /var/vcap/store/clamav-mirror/validated/main.cvd
+    </pre>
+
+##<a id="propagate"></a>How Virus Definitions Propagate to VMs
+
+Virus definitions on PCF internal ClamAV Mirror update automatically or manually depending on whether PCF is on an online or airgapped network, as described in [Update Virus Definitions](#update) above.  In either case, the virus definitions propagate to BOSH VMs as follows:
+
+1. The `freshclam` daemon process on the ClamAV Mirror VM downloads the virus definitions and stores them in the mirror VM's database of unverified viruses.
+
+1. The database verifier process on the ClamAV mirror verifies the date, format, and integrity of the new virus definitions.
+  - To verify integrity, the verifier checks bytecode signatures against signatures in the external ClamAV database, using the external database public key.
+  - If verification fails or if the virus definitions are not new, the mirror VM generates an error.
+  See [Virus Database Update Issues](./troubleshooting.html#updates).
+
+1. The internal ClamAV mirror VM saves verified virus definitions to its verified database
+and serves them to the `freshclam` processes of BOSH VMs.
+
+1. On each BOSH-managed VM:
+
+  1. The `freshclam` daemon process regularly queries the internal ClamAV mirror for new virus definitions.
+      - You can configure the query frequency in the ClamAV Add-on for PCF tile > 
+  **ClamAV Configuration** pane > **Number of database checks per day** field.
+
+  1. When `freshclam` retrieves new definitions, it:
+      - Notifies the `clamd` daemon process that there are new definitions, and
+      -  Saves the virus definitions in the BOSH VM's own virus DB.
+  
+  1. The `clamd` process loads the new virus definitions into active memory
+  to enable fast scanning by the `clamscan` process.
+
+The diagrams below illustrate how new virus definitions propagate
+from an external ClamAV database to BOSH VMs, in online and airgapped PCF installations.
+
+###<a id="propagate-online"></a>Online Network
+
+This diagram illustrates how virus definitions propagate to BOSH VMs in an online network:
+
+![Diagram shows online (non-airgapped) update process, following path of new virus data.  External ClamAV DB in cloud serves new virus data to freshclam running on local ClamAV Mirror.  The local mirror runs it through the DB verifier, also on ClamAV mirror, and then serves it to freshclam on all BOSH VMs.  On each BOSH VM, freshclam notifies clamd that there are new definitions, and saves the def's in the virus DB.  clamd then loads the new virus def's from the DB into its memory to enable fast scanning.](update-defs-online.png)
+
+###<a id="propagate-airgap"></a>Airgapped Network
+
+This diagram illustrates how virus definitions propagate to BOSH VMs in an airgapped network:
+
+![Diagram shows airgapped update process, following path of new virus data.  Operator downloads virus data from External ClamAV DB in cloud, then runs BOSH SCP to send it to freshclam running on local ClamAV Mirror.  The local mirror runs it through the DB verifier, also on ClamAV mirror, and then serves it to freshclam on all BOSH VMs.  On each BOSH VM, freshclam notifies clamd that there are new definitions, and saves the def's in the virus DB.  clamd then loads the new virus def's from the DB into its memory to enable fast scanning.](update-defs-airgap.png)
