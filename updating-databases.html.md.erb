@@ -141,12 +141,12 @@ from an external ClamAV database to BOSH VMs, in online and airgapped PCF instal
 
 This diagram illustrates how virus definitions propagate to BOSH VMs in an online network:
 
-[//]: # https://docs.google.com/presentation/d/1pBHK0dcE5y7rT4KnacqFDc6LuU8R3HiR9ApuvwY1uzA/edit
+[//]: https://docs.google.com/presentation/d/1pBHK0dcE5y7rT4KnacqFDc6LuU8R3HiR9ApuvwY1uzA/edit
 ![Diagram shows online (non-airgapped) update process, following path of new virus data.  External ClamAV DB in cloud serves new virus data to freshclam running on local ClamAV Mirror.  The local mirror runs it through the DB verifier, also on ClamAV mirror, and then serves it to freshclam on all BOSH VMs.  On each BOSH VM, freshclam notifies clamd that there are new definitions, and saves the def's in the virus DB.  clamd then loads the new virus def's from the DB into its memory to enable fast scanning.](update-defs-online.png)
 
 ###<a id="propagate-airgap"></a>Airgapped Network
 
 This diagram illustrates how virus definitions propagate to BOSH VMs in an airgapped network:
 
-[//]: # https://docs.google.com/presentation/d/1pBHK0dcE5y7rT4KnacqFDc6LuU8R3HiR9ApuvwY1uzA/edit
+[//]: https://docs.google.com/presentation/d/1pBHK0dcE5y7rT4KnacqFDc6LuU8R3HiR9ApuvwY1uzA/edit
 ![Diagram shows airgapped update process, following path of new virus data.  Operator downloads virus data from External ClamAV DB in cloud, then runs BOSH SCP to send it to freshclam running on local ClamAV Mirror.  The local mirror runs it through the DB verifier, also on ClamAV mirror, and then serves it to freshclam on all BOSH VMs.  On each BOSH VM, freshclam notifies clamd that there are new definitions, and saves the def's in the virus DB.  clamd then loads the new virus def's from the DB into its memory to enable fast scanning.](update-defs-airgap.png)
