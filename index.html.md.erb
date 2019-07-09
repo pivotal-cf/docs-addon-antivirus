@@ -5,7 +5,7 @@ owner: Security Engineering
 
 <strong><%= modified_date %></strong>
 
-This topic is an overview of ClamAV Add-on for Pivotal Cloud Foundry (PCF).
+This topic is an overview of <%= vars.product_full %>.
 
 ## <a id="about-clamav"></a>About ClamAV Add-on for PCF
 
@@ -15,9 +15,9 @@ For example, auditors sometimes expect that antivirus protection is present in a
 environment that must comply with standards such as Payment Card Industry Data
 Security Standard (PCI DSS) or Health Insurance Portability and Accountability Act (HIPAA).
 
-## <a id='snapshot'></a> Product Snapshot
+## <a id='snapshot'></a> Product Snapshots
 
-The following table provides version and version-support information about the ClamAV Add-on for PCF.
+The following table provides version and version-support information about <%= vars.product_short %>.
 
 <table class="nice">
     <th>Element</th>
@@ -48,7 +48,40 @@ The following table provides version and version-support information about the C
     </tr>
 </table>
 
-This version of the ClamAV Add-on is compatible with Canonical Ubuntu 16.04 (Xenial) stemcells.
+This version of the <%= vars.product_short %> is compatible with Canonical Ubuntu 16.04 (Xenial) stemcells.
+
+The following table provides version and version-support information about ClamAV Mirror for PCF.
+
+<table class="nice">
+    <th>Element</th>
+    <th>Details</th>
+    <tr>
+        <td>Version</td>
+        <td>1.5.0</td>
+    </tr>
+    <tr>
+        <td>Release date</td>
+        <td>MMMMM XX, 2019</td>
+    </tr>
+    <tr>
+        <td>Compatible Ops Manager versions</td>
+        <td>2.2, 2.3, and 2.4</td>
+    </tr>
+    <tr>
+        <td>Compatible Pivotal Application Service (PAS) versions</td>
+        <td>2.3 and 2.4</td>
+    </tr>
+    <tr>
+        <td>Compatible BOSH stemcells</td>
+        <td>Ubuntu Xenial and Trusty</td>
+    </tr>
+    <tr>
+        <td>IaaS support</td>
+        <td>vSphere, GCP, AWS, and OpenStack</td>
+    </tr>
+</table>
+
+This version of the ClamAV Mirror for PCF is compatible with Canonical Ubuntu 16.04 (Xenial) stemcells.
 
 ##<a id="feedback"></a> Feedback
 
