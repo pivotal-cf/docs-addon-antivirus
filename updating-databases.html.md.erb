@@ -109,9 +109,16 @@ You can access the official mirror at the the following URLs:
 
 ##<a id="propagate"></a>How Virus Definitions Propagate to VMs
 
-Virus definitions on PCF internal ClamAV Mirror update automatically or manually depending on whether PCF is on an online or airgapped network, as described in [Update Virus Definitions](#update) above.  In either case, the virus definitions propagate to BOSH VMs as follows:
+Virus definitions on PCF internal ClamAV Mirror update automatically or manually depending on whether PCF is on an online or airgapped network, as described in [Update Virus Definitions](#update) above.
+The automatic and manual processes store new virus definitions to the ClamAV
+mirror VM's database of unverified viruses as follows:
 
-1. The `freshclam` daemon process on the ClamAV Mirror VM downloads the virus definitions and stores them in the mirror VM's database of unverified viruses.
+* **Automatic update**: The `freshclam` daemon process on the ClamAV Mirror VM downloads the virus definitions
+and stores them in the internal mirror VM's unverified database.
+* **Manual update**: The operator runs `bosh scp` to directly copy the virus definitions
+to the internal mirror's database of unverified viruses.
+
+From the unverified internal mirror database, virus definitions then propagate to BOSH VMs as follows:
 
 1. The database verifier process on the ClamAV mirror verifies the date, format, and integrity of the new virus definitions.
   - To verify integrity, the verifier checks bytecode signatures against signatures in the external ClamAV database, using the external database public key.
