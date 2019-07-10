@@ -56,7 +56,7 @@ You can access the official mirror at the the following URLs:
     <pre class="terminal">$ scp -i ~/.ssh/my-key.pem ~/Downloads/main.cvd ~/Downloads/daily.cvd ~/Downloads/bytecode.cvd ubuntu<span>@</span>192.168.0.2: </pre>
 
 1. SSH into the Ops Manager VM.
-   For instructions, see [SSH into Ops Manager](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#ssh).
+   For instructions, see [Log in to the Ops Manager VM with SSH](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#ssh).
 
 1. Find the name of your internal ClamAV mirror deployment by running the following command:
 
@@ -131,13 +131,13 @@ and serves them to the `freshclam` processes of BOSH VMs.
 1. On each BOSH-managed VM:
 
   1. The `freshclam` daemon process regularly queries the internal ClamAV mirror for new virus definitions.
-      - You can configure the query frequency in the ClamAV Add-on for PCF tile > 
+      - You can configure the query frequency in the ClamAV Add-on for PCF tile >
   **ClamAV Configuration** pane > **Number of database checks per day** field.
 
   1. When `freshclam` retrieves new definitions, it:
       - Notifies the `clamd` daemon process that there are new definitions, and
       -  Saves the virus definitions in the BOSH VM's own virus DB.
-  
+
   1. The `clamd` process loads the new virus definitions into active memory
   to enable fast scanning by the `clamscan` process.
 
