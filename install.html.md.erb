@@ -56,7 +56,7 @@ To configure <%= vars.product_short %>, do the following:
       <tr>
         <td><strong>Mirror for Automatic Database Updates</strong></td>
         <td>
-          Select which option you would like to use to receive your virus databases from an upstream mirror.
+          Select the method for receiving your virus databases from an upstream mirror.
           <ul>
             <li><strong>Official mirror (database.clamav.net)</strong>: Select this to have the mirror fetch databases from database.clamav.net</li>
             <li><strong>Use a deployed mirror from the ClamAV Mirror tile</strong>: For more information, see <a href="./install-mirror.html">Installing and Configuring ClamAV Mirror for PCF</a>.
@@ -94,7 +94,7 @@ To configure <%= vars.product_short %>, do the following:
         <td>Select one of the following options:<br>
             <ul>
               <li><strong>notify</strong>: (Default) Only send a notification to syslog</li>
-              <li><strong>remove</strong>: Delete the infected file from the filesystem</li>
+              <li><strong>remove</strong>: Delete the infected file from the file system</li>
               <li><strong>move</strong>: Move the infected file to a specified directory</li>
               <li><strong>copy</strong>: Copy the infected file to a specified directory</li>
             </ul>
@@ -139,7 +139,7 @@ To configure <%= vars.product_short %>, do the following:
     </table>
     <br>
 
-<%# TODO Chris: Is there a list anywhere to find signatures that can be ignored in "List of signature names that will be ignored by ClamAV (Used for false positives)"?%>
+<%# TODO Chris: Is there a list anywhere to find signatures that can be ignored in "List of signature names that will<%# Avoid "will" as we prefer the present tense. %> be ignored by ClamAV (Used for false positives)"?%>
 
     If a scan reports false positives, report the issue to
     [ClamAV](https://www.clamav.net/reports/fp).
@@ -196,7 +196,7 @@ You can use ClamAV to scan the following:
 * Garden containers on the Diego Cell VMs in Pivotal Application Service (PAS)
 * Containers on the Kubernetes worker node VMs in Enterprise Pivotal Container Service (Enterprise PKS)
 
-However, duplicate logs about the same file will appear under the `diff`,
+However, duplicate logs about the same file appear under the `diff`,
 `rootfs`, or `merged` directories as a consequence of OverlayFS implementation.
 
 To configure ClamAV to ignore duplicate logs for these directories, see the optional
@@ -218,7 +218,7 @@ For more information about GrootFS OverlayFS implementation, see
 [Volumes](https://docs.cloudfoundry.org/concepts/grootfs-disk.html#volumes)
 in the Cloud Foundry documentation.
 
-If you would like to configure ClamAV to ignore duplicate logs for these directories,
+To configure ClamAV to ignore duplicate logs for these directories,
 enter `^/var/vcap/data/grootfs/store/(un)?privileged/images/[\w-]+/rootfs/.*$` into the
 **Directories and files that will be ignored by ClamAV** field in the **ClamAV Configuration** pane:
 
@@ -245,7 +245,7 @@ For more information about Docker OverlayFS implementation, see
 [Use the OverlayFS storage driver](https://docs.docker.com/storage/storagedriver/overlayfs-driver/)
 in the Docker documentation.
 
-If you would like to configure ClamAV to ignore duplicate logs for these directories,
+To configure ClamAV to ignore duplicate logs for these directories,
 enter `^/var/vcap/store/docker/docker/overlay2/\w+/merged/.*$` into the
 **Directories and files that will be ignored by ClamAV** field in the **ClamAV Configuration** pane:
 
