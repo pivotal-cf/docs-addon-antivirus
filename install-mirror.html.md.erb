@@ -26,7 +26,7 @@ For compatible versions, see the [Product Snapshot](./index.html#snapshot).
 
 * **At least 1&nbsp;GB of memory free on each VM**.
 This is so that you can install the <%= vars.product_short %> tile after deploying this mirror.
-ClamAV Add-on uses 610&nbsp;MB of memory.
+ClamAV for PCF uses 610&nbsp;MB of memory.
 
 ## <a id='install-mirror'></a> Install ClamAV Mirror for PCF
 
@@ -104,8 +104,11 @@ To configure ClamAV Mirror for PCF, do the following:
       </tr>
     </table>
 
-    <p class="note"><strong>Note: </strong> The ClamAV Mirror for PCF serves virus definitions to your environment for the ClamAV Add-on for PCF to use, but the ClamAV Mirror needs to get databases itself.
-    You can configure the ClamAV Mirror to get virus definitions using the supported options in <strong>Mirror for Automatic Database Updates</strong> above.</p>
+    <p class="note"><strong>Note: </strong> The ClamAV Mirror for PCF serves
+      virus definitions to your environment for ClamAV for PCF to use,
+      but the ClamAV Mirror needs to get databases itself.
+      You can configure the ClamAV Mirror to get virus definitions using the
+      supported options in <strong>Mirror for Automatic Database Updates</strong> above.</p>
 
 1. Click **Save**.
 
