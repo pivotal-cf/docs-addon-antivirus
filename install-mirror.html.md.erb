@@ -45,7 +45,7 @@ This adds the tile to your staging area.
 
 To assign availability zones (AZs) and networks, do the following:
 
-1. Select the **Assign AZs and Networks** side-tab.
+1. Select the **Assign AZs and Networks** pane.
 ![Assign AZs and Networks](mirror-assign-azs.png)
 
 1. Configure the fields as follows:
@@ -74,7 +74,7 @@ To assign availability zones (AZs) and networks, do the following:
 ## <a id='configure-mirror'></a> Configure ClamAV Mirror for PCF
 To configure ClamAV Mirror for PCF, do the following:
 
-1. Select the **ClamAV Mirror Configuration** side-tab.
+1. Select the **ClamAV Mirror Configuration** pane.
 <%# TODO Chris: Verify Name %>
 ![ClamAV Mirror Configuration](mirror-configure.png)
 
@@ -117,7 +117,7 @@ To configure ClamAV Mirror for PCF, do the following:
 1. (Optional) If you selected **Official mirror (database.clamav.net)** or **Existing mirror** in the previous section,
  you can configure a proxy for the ClamAV Mirror to retrieve the databases from. To do this, do the following:
 
-  1. Select the **HTTP Proxy Configuration** side-tab.
+  1. Select the **HTTP Proxy Configuration** pane.
   ![HTTP Proxy Configuration for ClamAV Mirror Jobs](mirror-http-proxy.png)
 
   1. Set **HTTP proxy to get database updates** to **Enabled**.
@@ -129,7 +129,7 @@ To configure ClamAV Mirror for PCF, do the following:
 ##<a id="syslog"></a> Configure System Logging
 Follow the steps below to enable system logging for ClamAV Mirror.
 
-1. Select the **Syslog** side-tab.
+1. Select the **Syslog** pane.
 ![Syslog](mirror-syslog.png)
 
 1. Select **Yes** for **Do you want to configure Syslog forwarding?**.
@@ -159,7 +159,7 @@ Follow the steps below to enable system logging for ClamAV Mirror.
 ClamAV jobs do load balancing for you.
 If you want high availability, you can scale up the number of deployed mirrors by doing the following:
 
-  1. Select the **Resource Config** side-tab.
+  1. Select the **Resource Config** pane.
   ![Resource Config](mirror-resource-config.png)
 
   1. Set the number of `clamav-mirror` instances to the number of mirrors that
