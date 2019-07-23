@@ -96,6 +96,15 @@ The following table provides version and version-support information about ClamA
 
 This version of the ClamAV Mirror for PCF is compatible with Canonical Ubuntu 16.04 (Xenial) stemcells.
 
+##<a id="features"></a> Features
+* OSS ClamAV now conveniently packaged as a tile for easy installation.
+* (new) Private ClamAV Mirror deployment (optional) now included for easy deployment and serving foundation VMs
+* ClamAV Mirror serves both the air-gapped & non-air-gapped environments and authenticates as well as validate publicly downloaded database base definition files for added security.
+* Scheduled scanning to reduce workload during peak operation hours.
+* Scan PAS, PKS VMs and containers on both.
+* Whitelisting of known signatures
+* Configurable CPU & memory usage limit on foundation VMs.
+
 ##<a id="architecture"></a> ClamAV Architecture
 ###<a id="propagate"></a>How Virus Definitions Propagate to VMs
 
