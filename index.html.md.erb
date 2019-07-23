@@ -9,9 +9,12 @@ This topic is an overview of ClamAV Add-on for Pivotal Cloud Foundry (PCF).
 
 ## <a id="about-clamav"></a>About ClamAV Add-on for PCF
 
-The ClamAV Add-on may be necessary for regulatory purposes if your compliance auditor requires antivirus protection within your PCF environment.
+The ClamAV Add-on might be necessary for regulatory purposes if your compliance
+auditor requires antivirus protection within your PCF environment.
 
-For example, auditors sometimes expect that antivirus protection is present in an environment that must comply with standards such as Payment Card Industry Data Security Standard (PCI DSS) or Health Insurance Portability and Accountability Act (HIPAA).
+For example, auditors sometimes expect that antivirus protection is present in
+an environment that must comply with standards such as Payment Card Industry Data
+Security Standard (PCI DSS) or Health Insurance Portability and Accountability Act (HIPAA).
 
 ## <a id='snapshot'></a> Product Snapshot
 
@@ -37,7 +40,7 @@ The following table provides version and version-support information about the C
         <td>2.3, 2.4, 2.5, and 2.6</td>
     </tr>
     <tr>
-        <td>Compatible Enterprise Pivotal Container Service (PKS) versions</td>
+        <td>Compatible Enterprise Pivotal Container Service (Enterprise PKS) versions</td>
         <td>1.2 and later</td>
     </tr>
     <tr>
@@ -51,6 +54,12 @@ The following table provides version and version-support information about the C
 </table>
 
 This version of the ClamAV Add-on is compatible with Canonical Ubuntu 16.04 (Xenial) stemcells.
+
+##<a id="features"></a> Features
+  * Ability to scan VMs and containers for foundations with PAS and Enterprise PKS.
+  * Supports scheduled scans to reduce workload during peak operation hours.
+  * Allows whitelisting of known signatures
+  * Configure CPU & memory usage limits on VMs of the foundation.
 
 ##<a id="feedback"></a> Feedback
 
