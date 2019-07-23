@@ -59,7 +59,7 @@ To assign availability zones (AZs) and networks, do the following:
       </tr>
       <tr>
         <td><strong>Balance other jobs in</strong></td>
-        <td>Select the same AZ as above.</td>
+        <td>Select the AZ that you want the <code>clamav_mirror</code> VM to balance other jobs in.</td>
       </tr>
       <tr>
         <td><strong>Network</strong></td>
@@ -85,6 +85,7 @@ To configure ClamAV Mirror for PCF, do the following:
       <tr>
         <td><strong>Log output destination</strong></td>
         <td>
+          Select the file descriptor to forward your logs through:<br>
           <ul>
             <li><strong>stdout</strong>: sends messages to <code>/var/vcap/sys/log/clamav-mirror/clamav-mirror.stdout.log</code></li>
             <li><strong>stderr</strong>: sends messages to <code>/var/vcap/sys/log/clamav-mirror/clamav-mirror.stderr.log</code></li>
@@ -143,7 +144,7 @@ Follow the steps below to enable system logging for ClamAV Mirror.
     <tr><td><strong>Port</strong></td>
         <td>Enter the port of the syslog server for sending logs, for example, <code>29279</code>.</td></tr>
     <tr><td><strong>Transport Protocol</strong></td>
-        <td>Select the protocol over which you want system logs. Pivotal recommends using TCP.</td></tr>
+        <td>Select the transport protocol used to send system logs to the server. Pivotal recommends using TCP.</td></tr>
     <tr><td><strong>Enable TLS</strong></td>
     <td>If you select TCP, you can also select to send logs encrypted over TLS.</td></tr>
     <tr><td><strong>Permitted Peer</strong></td>
