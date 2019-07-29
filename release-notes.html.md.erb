@@ -15,18 +15,18 @@ This topic contains release notes for ClamAV for PCF.
 
 New features and changes in this release:
 
-  * ClamAV Mirror is a new tile that allows for easy deployment of a virus definition database mirror.
+  * ClamAV Mirror is a new tile that allows for easier deployment of a virus definition database mirror.
       * The mirror serves up the virus definition databases for VMs with ClamAV installed.
-      * The mirror validates the definition databases' integrity & authenticity, to reduce downtime of the ClamAV process.
+      * The mirror validates the integrity and authenticity of the definition database.
 
   * ClamAV for PCF is now a tile.
-      * The tile allows for easy integration with the ClamAV Mirror tile.
+      * The tile integrates with the ClamAV Mirror tile.
       * For more information on upgrading,
         see [Upgrading ClamAV for PCF](http://localhost:4567/addon-antivirus/1-n/upgrade.html).
 
-  * Updates default cgroup `memory_limit` to 1.5GB
+  * Updates default cgroup `memory_limit` to 1.5&nbsp;GB
   * Updates default cgroup `cpu_limit` to 50% utilization.
-  * Supports the `exclude_path` option for Windows
+  * Supports the `exclude_path` option for Windows.
   * Adds `Number of database checks per day` field in the tile to configure the frequency of checking for new virus definition databases.
 
 
@@ -37,12 +37,12 @@ This release includes the following security fixes:
 * Updates the bundled ClamAV open source distribution to v0.101.2.<br>
   This version includes the following security fixes:
 
-  * [CVE-2019-1787](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1787): PDF scanning vulnerability.
-  * [CVE-2019-1789](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1789):
-  * [CVE-2019-1788](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1788): OLE2 file scanning vulnerability.
-  * [CVE-2019-1786](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1786): PDF scanning vulnerability.
-  * [CVE-2019-1785](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1785): RAR scanning vulnerability.
-  * [CVE-2019-1798](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1798): PE scanning vulnerability.
+  * Medium [CVE-2019-1787](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1787): PDF scanning vulnerability.
+  * [CVE-2019-1789](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1789).
+  * Medium [CVE-2019-1788](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1788): OLE2 file scanning vulnerability.
+  * Medium [CVE-2019-1786](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1786): PDF scanning vulnerability.
+  * High [CVE-2019-1785](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1785): RAR scanning vulnerability.
+  * Medium [CVE-2019-1798](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1798): PE scanning vulnerability.
 
   For more information about this distribution, see [ClamAV 0.101.2](https://blog.clamav.net/2019/03/clamav-01012-and-01003-patches-have.html) on the ClamAV blog.
 
