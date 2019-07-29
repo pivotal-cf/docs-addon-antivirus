@@ -161,13 +161,15 @@ ClamAV jobs do load balancing for you.
 If you want high availability, you can scale up the number of deployed mirrors by doing the following:
 
   1. Select the **Resource Config** pane.
-  ![Resource Config](mirror-resource-config.png)
 
-  1. Set the number of `clamav-mirror` instances to the number of mirrors that
-    you want to deploy.
+  1. For `clamav-mirror`, set **INSTANCES** to the number of mirrors that you want to deploy.
+
+    Pivotal recommends one ClamAV Mirror instance for every 250 instances in your PCF deployment.
+
+    ![Resource Config](mirror-resource-config.png)
+
   1. Click **Save**.
 
-<p class="note"><strong>Note: </strong> It is recommended that there is one ClamAV Mirror per 250 instances where ClamAV is installed.</p>
 
 ## <a id="apply-changes-mirror"></a> Apply Changes from Your Configuration
 
