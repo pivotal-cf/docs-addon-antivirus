@@ -198,7 +198,7 @@ to have sufficient CPU resources.
 ### <a id='too-many-files'></a> Too Many Open Files Error While Using ClamAV Mirror
 
 #### Symptom
-ClamAV Mirror log reports that there are too many files opened:
+The ClamAV Mirror log reports that too many log files are open:
 
 <pre class="terminal">
 2019/07/29 20:02:41 10.0.0.72 is requesting main.cvd
@@ -210,8 +210,10 @@ ClamAV Mirror log reports that there are too many files opened:
 <br>
 
 ####Explanation
-ClamAV Mirror opens files when a database is requested. There is a limit of how many files can be opened at a given time.
+ClamAV Mirror opens files when a database is requested.
+There is a limit of how many files can be opened at a given time.
 
-#### Solutions
-Increase the number of ClamAV Mirror instances. It is recommended that there is one ClamAV Mirror per 250 instances where ClamAV is installed.
+#### Solution
+Increase the number of ClamAV Mirror instances.
+Pivotal recommends that there is one ClamAV Mirror for every 250 instances where ClamAV is installed.
 For more information, see [Scale the Number of Deployed Mirrors](./install-mirror.html#scale-deployed-mirror).
