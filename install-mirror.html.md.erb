@@ -158,15 +158,15 @@ Follow the steps below to enable system logging for ClamAV Mirror.
 ## <a id="scale-deployed-mirror"></a> Scale the Number of Deployed Mirrors
 
 ClamAV jobs do load balancing for you.
-If you want high availability, you can scale up the number of deployed mirrors by doing the following:
+
+Pivotal recommends one ClamAV Mirror instance for every 250 VMs with ClamAV installed.
+Scale the number of deployed mirrors by doing the following:
 
   1. Select the **Resource Config** pane.
 
-  1. For `clamav-mirror`, set **INSTANCES** to the number of mirrors that you want to deploy.
-
-    Pivotal recommends one ClamAV Mirror instance for every 250 instances in your PCF deployment.
-
     ![Resource Config](mirror-resource-config.png)
+
+  1. For `clamav-mirror`, set **INSTANCES** to the number of mirrors that you want to deploy.
 
   1. Click **Save**.
 
