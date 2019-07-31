@@ -207,9 +207,8 @@ The ClamAV Mirror log reports that too many log files are open:
 2019/07/29 20:02:41 http: Accept error: accept tcp 0.0.0.0:80: accept4: too many open files; retrying in 40ms
 2019/07/29 20:02:42 http: Accept error: accept tcp 0.0.0.0:80: accept4: too many open files; retrying in 5ms
 </pre>
-<br>
 
-####Explanation
+#### Explanation
 ClamAV Mirror opens files when a database is requested.
 There is a limit of how many files can be opened at a given time.
 
