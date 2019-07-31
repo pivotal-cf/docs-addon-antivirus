@@ -222,16 +222,25 @@ For more information about GrootFS OverlayFS implementation, see
 [Volumes](https://docs.cloudfoundry.org/concepts/grootfs-disk.html#volumes)
 in the Cloud Foundry documentation.
 
-To configure ClamAV to ignore duplicate logs for these directories,
-enter `^/var/vcap/data/grootfs/store/(un)?privileged/images/[\w-]+/rootfs/.*$` into the
-**Directories and files that will be ignored by ClamAV** field in the **ClamAV Configuration** pane:
+#### Procedure
+To configure ClamAV to ignore duplicate logs for these directories, do the following:
 
-![Directories and files that will be ignored by ClamAV](ignore-file.png)
+1. Select the **ClamAV Configuration** pane.
+1. Enter the following ignore pattern into the **Directories and files that will
+be ignored by ClamAV** field:
 
-  <p class="note"><strong>Note:</strong>
-    Adding this ignore pattern means that files and directories in the
-    <code>/var/vcap/data/grootfs/store/unprivileged/images/UUID/rootfs</code>
-    directory are ignored by ClamAV. <code>UUID</code> is the ID of the container.</p>
+    ```
+    ^/var/vcap/data/grootfs/store/(un)?privileged/images/[\w-]+/rootfs/.*$
+    ```
+    ![Directories and files that will be ignored by ClamAV](ignore-file.png)
+    <p class="note"><strong>Note:</strong>
+      Adding this ignore pattern means that files and directories in the
+      <code>/var/vcap/data/grootfs/store/unprivileged/images/UUID/rootfs</code>
+      directory are ignored by ClamAV. <code>UUID</code> is the ID of the container.
+    </p>
+1. Click **Save**.
+1. To apply the configuration changes, follow the instructions in
+[Apply Changes from Your Configuration](#apply-changes) above.
 
 For an example log message, see [Container Log Messages](./monitoring-logs.html#container).
 
@@ -249,15 +258,24 @@ For more information about Docker OverlayFS implementation, see
 [Use the OverlayFS storage driver](https://docs.docker.com/storage/storagedriver/overlayfs-driver/)
 in the Docker documentation.
 
-To configure ClamAV to ignore duplicate logs for these directories,
-enter `^/var/vcap/store/docker/docker/overlay2/\w+/merged/.*$` into the
-**Directories and files that will be ignored by ClamAV** field in the **ClamAV Configuration** pane:
+#### Procedure
+To configure ClamAV to ignore duplicate logs for these directories, do the following:
 
-![Directories and files that will be ignored by ClamAV](ignore-file.png)
+1. Select the **ClamAV Configuration** pane.
+1. Enter the following ignore pattern into the **Directories and files that will
+be ignored by ClamAV** field:
 
-  <p class="note"><strong>Note:</strong>
-    Adding this ignore pattern means that files and directories in the
-    <code>/var/vcap/data/grootfs/store/unprivileged/images/UUID/merged</code>
-    directory are ignored by ClamAV. <code>UUID</code> is the ID of the container.</p>
+    ```
+    ^/var/vcap/store/docker/docker/overlay2/\w+/merged/.*$
+    ```
+    ![Directories and files that will be ignored by ClamAV](ignore-file.png)
+    <p class="note"><strong>Note:</strong>
+      Adding this ignore pattern means that files and directories in the
+      <code>/var/vcap/data/grootfs/store/unprivileged/images/UUID/merged</code>
+      directory are ignored by ClamAV. <code>UUID</code> is the ID of the container.
+    </p>
+1. Click **Save**.
+1. To apply the configuration changes, follow the instructions in
+[Apply Changes from Your Configuration](#apply-changes) above.
 
 For an example log message, see [Container Log Messages](./monitoring-logs.html#container).
