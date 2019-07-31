@@ -55,11 +55,14 @@ To assign availability zones (AZs) and networks, do the following:
       <th>Description</th>
       <tr>
         <td><strong>Place singleton jobs in</strong></td>
-        <td>Select the AZ that you want the <code>clamav_mirror</code> VM to run in.</td>
+        <td>Select an AZ. If you choose to install only one ClamAV Mirror VM,
+            this is the AZ that it is placed in.</td>
       </tr>
       <tr>
         <td><strong>Balance other jobs in</strong></td>
-        <td>Select the AZs that you want the <code>clamav_mirror</code> VM to balance other jobs in.</td>
+        <td>Select one or more AZs.
+            If you choose to install more than one ClamAV Mirror VM,
+            these are the AZs that the VMs are placed in.</td>
       </tr>
       <tr>
         <td><strong>Network</strong></td>
@@ -159,7 +162,7 @@ Follow the steps below to enable system logging for ClamAV Mirror.
 
 ClamAV jobs do load balancing for you.
 
-Pivotal recommends one ClamAV Mirror instance for every 250 VMs with ClamAV installed.
+Pivotal recommends one ClamAV Mirror VM for every 250 VMs with ClamAV installed.
 Scale the number of deployed mirrors by doing the following:
 
   1. Select the **Resource Config** pane.
