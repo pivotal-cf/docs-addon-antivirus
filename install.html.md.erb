@@ -47,7 +47,7 @@ To configure <%= vars.product_short %>, do the following:
 1. Select the **ClamAV Configuration** pane.
   ![Configure ClamAV](configure.png)
 
-1. Fill out the following fields:
+1. Configure the following fields:
 <%# TODO Chris: double-check UI %>
 
     <table class="nice">
@@ -58,9 +58,9 @@ To configure <%= vars.product_short %>, do the following:
         <td>
           Select the method for receiving your virus databases from an upstream mirror.
           <ul>
-            <li><strong>Official mirror (database.clamav.net)</strong>: Select this to have the mirror fetch databases from database.clamav.net</li>
+            <li><strong>Official mirror (database.clamav.net)</strong>: Select this to have the mirror fetch databases from database.clamav.net.</li>
             <li><strong>Use a deployed mirror from the ClamAV Mirror tile</strong>: For more information, see <a href="./install-mirror.html">Installing and Configuring ClamAV Mirror for PCF</a>.
-            <li><strong>Existing mirror</strong>: Select this to enter a list of hostnames or IPs of mirrors</li>
+            <li><strong>Existing mirror</strong>: Select this to enter a list of hostnames or IPs of mirrors.</li>
           </ul>
         </td>
       </tr>
@@ -84,8 +84,8 @@ To configure <%= vars.product_short %>, do the following:
         <td><strong>(Optional) Enforce CPU limit</strong></td>
         <td>Set the limit for how much CPU ClamAV processes can use.<br>
           <ul>
-            <li><strong>Enable</strong>: Select this to enforce the limit</li>
-            <li><strong>CPU limit (percentage)</strong>: Enter the CPU percentage limit
+            <li><strong>Enable</strong>: Select this to enforce the limit.</li>
+            <li><strong>CPU limit (percentage)</strong>: Enter the CPU percentage limit.</li>
           </ul>
         </td>
       </tr>
@@ -93,10 +93,10 @@ To configure <%= vars.product_short %>, do the following:
         <td><strong>Action to take when a virus is found</strong></td>
         <td>Select one of the following options:<br>
             <ul>
-              <li><strong>notify</strong>: (Default) Only send a notification to syslog</li>
-              <li><strong>remove</strong>: Delete the infected file from the file system</li>
-              <li><strong>move</strong>: Move the infected file to a specified directory</li>
-              <li><strong>copy</strong>: Copy the infected file to a specified directory</li>
+              <li><strong>notify</strong>: (Default) Only send a notification to syslog.</li>
+              <li><strong>remove</strong>: Delete the infected file from the file system.</li>
+              <li><strong>move</strong>: Move the infected file to a specified directory.</li>
+              <li><strong>copy</strong>: Copy the infected file to a specified directory.</li>
             </ul>
             For the <strong>move</strong> and <strong>copy</strong> options, a field
             for <strong>Destination for infected files</strong> appears after the
