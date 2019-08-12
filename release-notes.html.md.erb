@@ -7,18 +7,38 @@ owner: Security Engineering
 
 This topic contains release notes for ClamAV Add-on for PCF.
 
+## v1.4.45
+
+**Release Date:** August 26, 2019
+
+### Features
+
+New features and changes in this release:
+
+* The bundled ClamAV open source distribution is now v0.101.3.
+
+### Security Fixes
+
+This release includes the following security fix:
+
+    + [Non-recursive Zip Bombs](https://blog.clamav.net/2019/08/clamav-01013-security-patch-release-and.html):
+    A Denial-of-Service (DoS) vulnerability can occur when scanning a zip bomb as a result of excessively long scan times.
+
+### Known Issues
+
+There are no known issues for this release.
+
 ## v1.4.39
 
 **Release Date:** December 10, 2018
 
 ### Features
 
-Changes in this release:
+New features and changes in this release:
 
-The following information about scans is written to `/var/vcap/sys/log/clamav/clamdscan.log`
-
-* When a scan starts, a "Starting scheduled scan" message is output to the file.
-* When a scan ends, a "Scan Summary" message is output to the file.
+* The following information about scans is written to `/var/vcap/sys/log/clamav/clamdscan.log`
+  * When a scan starts, a "Starting scheduled scan" message is output to the file.
+  * When a scan ends, a "Scan Summary" message is output to the file.
 
 For more information, see [Monitoring ClamAV Logs](./monitoring-logs.html).
 
@@ -33,10 +53,13 @@ There are no known issues for this release.
 
 ### Features
 
-Changes in this release:
+New features and changes in this release:
 
 * The bundled ClamAV open source distribution is now v0.100.2.
-  This new version of ClamAV includes the following security fixes:
+
+### Security Fixes
+
+This release includes the following security fixes:
 
     + [CVE-2018-15378](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-15378):
     A vulnerability in ClamAV's MEW unpacking feature in v0.100.1 and earlier
@@ -50,12 +73,12 @@ Changes in this release:
 
     + [CVE-2018-14682](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-14682):
     An off-by-one error in the TOLOWER() macro for CHM decompression.
-    Additionally, version 0.100.2 reverted 0.100.1's patch for [CVE-2018-14679](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-14679)
+    Additionally, v0.100.2 reverted v0.100.1's patch for [CVE-2018-14679](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-14679)
     and applied this newer fix instead.
 
 For the ClamAV v0.100.2 release notes, see the [ClamAV blog](https://blog.clamav.net/2018/10/clamav-01002-has-been-released.html).
 
-## 1.4.36
+## v1.4.36
 
 **Release Date:** October 12, 2018
 
@@ -63,9 +86,7 @@ For the ClamAV v0.100.2 release notes, see the [ClamAV blog](https://blog.clamav
 
 New feature in this release:
 
-* The ability to whitelist signature names.
-
-    For more information, see [Whitelist False Positives](./install.html#setup-whitelist).
+* The ability to whitelist signature names. For more information, see [Whitelist False Positives](./install.html#setup-whitelist).
 
 ### Known Issues
 
@@ -94,12 +115,15 @@ There are no known issues for this release.
 Changes in this release:
 
 * The bundled ClamAV open source distribution is now v0.100.1.
-  This new version of ClamAV includes the following security fixes:
+
+### Security Fixes
+
+This release includes the following security fixes:
 
     + [CVE-2017-16932](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-16932):
       parser.c in libxml2 before 2.9.5 does not prevent infinite recursion in parameter entities.
     + [CVE-2018-0360](https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=CVE-2018-0360):
-      ClamAV before 0.100.1 has an HWP integer overflow with a resultant infinite loop via a crafted Hangul Word Processor file.
+      ClamAV before 0.100.1 has an HWP integer overflow with a resultant infinite loop through a crafted Hangul Word Processor file.
     + [CVE-2018-0361](https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=CVE-2018-0361):
       ClamAV before 0.100.1 lacks a PDF object length check, resulting in an unreasonably long time to parse a relatively small file.
 
@@ -122,15 +146,15 @@ New features and changes in this release:
 * Removed developer acceptance tests from the bosh release package.
 * Added support for cgroup configuration of hard CPU limit.
 
-###Fixed issues in this release:
+### Resolved Issues
 
-This release fixes the following issue:
+This release has the following fix:
 
-* Fixed an issue with the shell script interpreter directive ("shebang") that was specified in the job template for scheduled-scan. 
+* Fixed an issue with the shell script interpreter directive ("shebang") that was specified in the job template for scheduled-scan.
   Previous releases used the interpreter directive  `/bin/sh`, which prevented proper cgroup restriction.
   This has been corrected to `/bin/bash`.
 
-###Known issues in this release:
+### Known Issues:
 
 * There are no known issues in this release.
 
@@ -142,22 +166,26 @@ This release fixes the following issue:
 
 New features and changes in this release:
 
-* Upgrades the bundled ClamAV open source distribution to v0.99.4, which includes:<br><br>
-**Security fixes**
+* Upgrades the bundled ClamAV open source distribution to v0.99.4
+
+### Security Fixes
+
+This release includes the following security fixes:
 <ul>
-	<li>CVE-2012-6706</li>
-	<li>CVE-2017-6419</li>
-	<li>CVE-2017-11423</li>
- 	<li>CVE-2018-1000085</li>
-	<li>CVE-2018-0202</li>
+	<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-6706">CVE-2012-6706</a></li>
+  <li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-6419">CVE-2017-6419</a></li>
+  <li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-11423">CVE-2017-11423</a></li>
+  <li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-1000085">CVE-2018-1000085</a></li>
+  <li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0202">CVE-2018-0202</a></li>
 </ul>
+
 **Compatibility fixes**
 	<ul>
 		<li>GCC 6</li>
 		<li>C++11</li>
 	</ul>
 
-* Updates Golang to v1.10 for Linux builds
+* Updates golang to v1.10 for Linux builds
 
 ### Known Issues
 
@@ -171,15 +199,19 @@ There are no known issues for this release.
 
 New features and changes in this release:
 
-* Upgrades the bundled ClamAV open source distribution to v0.99.3, which includes:<br><br>
-**Security fixes**
-  * CVE-2017-12374
-  * CVE-2017-12375 
-  * CVE-2017-12376 
-  * CVE-2017-12377 
-  * CVE-2017-12378
-  * CVE-2017-12379
-  * CVE-2017-12380
+* Upgrades the bundled ClamAV open source distribution to v0.99.3.
+
+### Security Fixes
+
+This release includes the following security fixes:
+
+  * [CVE-2017-12374](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-12374)
+  * [CVE-2017-12375](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-12375)
+  * [CVE-2017-12376](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-12376)
+  * [CVE-2017-12377](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-12377)
+  * [CVE-2017-12378](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-12378)
+  * [CVE-2017-12379](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-12379)
+  * [CVE-2017-12380](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-12380)
 
 ### Known Issues
 
@@ -187,5 +219,5 @@ There are no known issues for this release.
 
 ## View Release Notes for Another Version
 
-To view the release notes for another product version, select the version from 
-the drop-down list at the top of this page.
+To view the release notes for another product version, select the version from
+the dropdown at the top of this page.
