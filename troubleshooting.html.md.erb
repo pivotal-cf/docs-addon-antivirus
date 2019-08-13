@@ -5,8 +5,8 @@ owner: Security Engineering
 
 <strong><%= modified_date %></strong>
 
-This topic provides instructions to verify that the ClamAV-based antivirus add-on works with your Pivotal Cloud Foundry (PCF) deployment
-and provides general recommendations for troubleshooting and ensuring that the deployment is being protected as you expect.
+This topic provides instructions for troubleshooting the ClamAV Add-on for PCF
+and ensuring that it is protecting your Pivotal Cloud Foundry (PCF) deployment as you expect.
 
 ## <a id="clamav-installation-issues"></a> ClamAV Installation Issues
 
@@ -30,7 +30,7 @@ Review the manifest file, and replace the `database_mirror` key with the address
 If you do not have a stable mirror server for reliable initial deployment, use the S3-based mirror: `pivotal-clamav-mirror.s3.amazonaws.com`
 <hr>
 
-## <a id="clamav-runtime-issues"></a> ClamAV Runtime Issues
+## <a id="clamav-runtime-issues"></a> Issues
 
 ### <a id="clamav-malware-detection"></a> ClamAV Is Not Detecting Malware
 
