@@ -7,16 +7,25 @@ owner: Pivotal Compliance and Innovation (PCI) Team
 This topic describes how to install and configure ClamAV Mirror for Pivotal Cloud Foundry (PCF).
 Pivotal recommends that you install this tile before installing <%= vars.product_short %>.
 
+##<a id="overview"></a>Overview
+
 If you do not have an external mirror for ClamAV jobs to fetch database updates from,
 you can deploy one using the ClamAV Mirror for PCF.
-This deployed mirror can support air-gapped environments as well as networked environments.
 
-If you have already deployed an external mirror, you can use that instead of installing this tile.
+This deployed internal mirror can support air-gapped environments as well as networked environments:
 
+* **Online Network:** You can deploy the ClamAV internal mirror as a proxy.
+  This acts as a database for the virus definitions if the online virus database experiences downtime.
+* **Air-gapped Network:** Because there is no access to an outside network,
+  the internal ClamAV mirror VM acts as the server for the virus definitions.
+
+
+If you have already deployed an external mirror, you can use that instead of
+installing this tile, and continue to [Installing and Configuring ClamAV for PCF](./install.html).
 
 ##<a id="prereqs"></a>Prerequisites
 
-To install ClamAV Mirror for PCF, you must have the following:
+To install ClamAV Mirror for PCF, you must have:
 
 * **A PCF operator with admin rights**.
 For more information, see [Operators](https://docs.pivotal.io/pivotalcf/customizing/user-types.html#operator).
@@ -30,22 +39,24 @@ ClamAV for PCF uses 610&nbsp;MB of memory.
 
 ## <a id='install-mirror'></a> Install ClamAV Mirror for PCF
 
-To install the ClamAV Mirror for PCF tile, do the following:
+To install the ClamAV Mirror for PCF tile:
 
 1. Download the product file from [Pivotal Network](https://network.pivotal.io/products/p-clamav-addon).
+  * For air-gapped networks, follow your company's offline installation protocols.
+      For more information, see [Installing PCF in Airgapped Environments](https://docs.pivotal.io/pivotalcf/2-6/customizing/offline_installation.html).
 
 1. Navigate to the Ops Manager Installation Dashboard and select **Import a Product** to upload the product file.
 
-1. Under the **Import a Product** button, click **+** next to the version number of ClamAV Mirror for PCF.
+1. Under the **Import a Product** button>, click **+** next to the version number of ClamAV Mirror for PCF.
 This adds the tile to your staging area.
 
 1. Click the newly added **ClamAV Mirror for PCF** tile.
 
 ## <a id='azs'></a> Assign AZs and Networks
 
-To assign availability zones (AZs) and networks, do the following:
+To assign availability zones (AZs) and networks:
 
-1. Select the **Assign AZs and Networks** pane.
+1. Select **Assign AZs and Networks**.
 ![Assign AZs and Networks](mirror-assign-azs.png)
 
 1. Configure the fields as follows:
@@ -75,9 +86,9 @@ To assign availability zones (AZs) and networks, do the following:
 1. Click **Save**.
 
 ## <a id='configure-mirror'></a> Configure ClamAV Mirror for PCF
-To configure ClamAV Mirror for PCF, do the following:
+To configure ClamAV Mirror for PCF:
 
-1. Select the **ClamAV Mirror Configuration** pane.
+1. Select **ClamAV Mirror Configuration**.
 <%# TODO Chris: Verify Name %>
 ![ClamAV Mirror Configuration](mirror-configure.png)
 
@@ -112,16 +123,18 @@ To configure ClamAV Mirror for PCF, do the following:
       virus definitions to your environment for ClamAV for PCF to use,
       but the ClamAV Mirror needs to get databases itself.
       You can configure the ClamAV Mirror to get virus definitions using the
-      supported options in <strong>Mirror for Automatic Database Updates</strong> above.</p>
+      supported options in <strong>Mirror for Automatic Database Updates</strong> above.
+    </p>
 
 1. Click **Save**.
 
   <%# TODO Dylan: less verbose things with tile field updates %>
 
 1. (Optional) If you selected **Official mirror (database.clamav.net)** or **Existing mirror** in the previous section,
- you can configure a proxy for the ClamAV Mirror to retrieve the databases from. To do this, do the following:
+ you can configure a proxy for the ClamAV Mirror to retrieve the databases from.
+ To do this:
 
-  1. Select the **HTTP Proxy Configuration** pane.
+  1. Select **HTTP Proxy Configuration**.
   ![HTTP Proxy Configuration for ClamAV Mirror Jobs](mirror-http-proxy.png)
 
   1. Set **HTTP proxy to get database updates** to **Enabled**.
@@ -133,7 +146,7 @@ To configure ClamAV Mirror for PCF, do the following:
 ##<a id="syslog"></a> Configure System Logging
 Follow the steps below to enable system logging for ClamAV Mirror.
 
-1. Select the **Syslog** pane.
+1. Select **Syslog**.
 ![Syslog](mirror-syslog.png)
 
 1. Select **Yes** for **Do you want to configure Syslog forwarding?**.
@@ -153,7 +166,7 @@ Follow the steps below to enable system logging for ClamAV Mirror.
     <tr><td><strong>Permitted Peer</strong></td>
         <td>Enter either the accepted fingerprint, in SHA1, or the name of the remote peer, for example, <code>*.example.com</code></td></tr>
     <tr><td><strong>SSL Certificate</strong></td>
-        <td>Enter the SSL Certificate(s) for the syslog server. This ensures the logs are transported securely.</td></tr>
+        <td>Enter the SSL or TLS Certificate(s) for the syslog server. This ensures the logs are transported securely.</td></tr>
   </table>
 
 1. Click **Save**.
@@ -163,9 +176,9 @@ Follow the steps below to enable system logging for ClamAV Mirror.
 ClamAV jobs do load balancing for you.
 
 Pivotal recommends one ClamAV Mirror VM for every 250 VMs with ClamAV installed.
-Scale the number of deployed mirrors by doing the following:
+To scale the number of deployed mirrors:
 
-  1. Select the **Resource Config** pane.
+  1. Select **Resource Config**.
 
     ![Resource Config](mirror-resource-config.png)
 
@@ -177,7 +190,7 @@ Scale the number of deployed mirrors by doing the following:
 ## <a id="apply-changes-mirror"></a> Apply Changes from Your Configuration
 
 Your ClamAV Mirror installation is not complete until you apply your configuration changes.
-To do this, follow the procedure below:
+To do this:
 
 1. Return to the Ops Manager Installation Dashboard.
 
