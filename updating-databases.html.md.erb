@@ -20,7 +20,7 @@ How these updated virus definitions propagate to the internal ClamAV mirror that
 BOSH VMs use depends on whether Pivotal Cloud Foundry (PCF) is running in an online or air-gapped network:
 
 * **Online Network**: The internal ClamAV mirror updates its virus definitions automatically.
-* **Airgapped Network**: An operator must manually download new virus definitions
+* **Air-gapped Network**: An operator must manually download new virus definitions
 and run `bosh scp` to update them on the internal ClamAV mirror.
 
 For more information and diagrams about this architecture, see [How Virus Definitions Propagate to VMs](./index.html#propagate).
