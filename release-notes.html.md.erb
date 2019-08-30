@@ -7,6 +7,30 @@ owner: Security Engineering
 
 This topic contains release notes for ClamAV Add-on for PCF.
 
+## <a id="1446"></a> v1.4.46
+
+**Release Date:** August 30, 2019
+
+New features and changes in this release:
+
+* The bundled ClamAV open source distribution is now v0.101.4.
+
+### Security Fixes
+
+This release includes the following security fixes:
+
+* Critical [CVE-2019-12900](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-12900):
+  BZ2_decompress in decompress.c in bzip2 through 1.0.6 has an out-of-bounds
+  write when there are many selectors.
+* ClamAV v0.101.4 introduces a scan time limit.
+  This limit now resolves ClamAV's "zip bomb" vulnerability.
+
+For the ClamAV v0.101.4 release notes, see the [ClamAV blog](https://blog.clamav.net/2019/08/clamav-01014-security-patch-release-has.html).
+
+### Known Issues
+
+There are no known issues for this release.
+
 ## <a id="1445"></a> v1.4.45
 
 **Release Date:** August 14, 2019
