@@ -1,16 +1,16 @@
 ---
-title: Installing and Configuring ClamAV Mirror for PCF
+title: Installing and Configuring Pivotal Anti-Virus Mirror
 owner: Pivotal Compliance and Innovation (PCI) Team
 ---
 <strong><%= modified_date %></strong>
 
-This topic describes how to install and configure ClamAV Mirror for Pivotal Cloud Foundry (PCF).
+This topic describes how to install and configure <%= vars.product_full_mirror %>.
 Pivotal recommends that you install this tile before installing <%= vars.product_short %>.
 
 ##<a id="overview"></a>Overview
 
 If you do not have an external mirror for ClamAV jobs to fetch database updates from,
-you can deploy one using the ClamAV Mirror for PCF.
+you can deploy one using the <%= vars.product_short_mirror %>.
 
 This deployed internal mirror can support air-gapped environments as well as networked environments:
 
@@ -25,7 +25,7 @@ installing this tile, and continue to [Installing and Configuring ClamAV for PCF
 
 ##<a id="prereqs"></a>Prerequisites
 
-To install ClamAV Mirror for PCF, you must have:
+To install the <%= vars.product_short_mirror %>, you must have:
 
 * **A PCF operator with admin rights**.
 For more information, see [Operators](https://docs.pivotal.io/pivotalcf/customizing/user-types.html#operator).
@@ -37,9 +37,9 @@ For compatible versions, see the [Product Snapshot](./index.html#snapshot).
 This is so that you can install the <%= vars.product_short %> tile after deploying this mirror.
 ClamAV for PCF uses 610&nbsp;MB of memory.
 
-## <a id='install-mirror'></a> Install ClamAV Mirror for PCF
+## <a id='install-mirror'></a> Install <%= vars.product_short_mirror %>
 
-To install the ClamAV Mirror for PCF tile:
+To install the <%= vars.product_short_mirror %> tile:
 
 1. Download the product file from [Pivotal Network](https://network.pivotal.io/products/p-clamav-addon).
   * For air-gapped networks, follow your company's offline installation protocols.
@@ -85,8 +85,8 @@ To assign availability zones (AZs) and networks:
 
 1. Click **Save**.
 
-## <a id='configure-mirror'></a> Configure ClamAV Mirror for PCF
-To configure ClamAV Mirror for PCF:
+## <a id='configure-mirror'></a> Configure <%= vars.product_short_mirror %>
+To configure <%= vars.product_short_mirror %>:
 
 1. Select **ClamAV Mirror Configuration**.
 <%# TODO Chris: Verify Name %>
@@ -119,10 +119,10 @@ To configure ClamAV Mirror for PCF:
       </tr>
     </table>
 
-    <p class="note"><strong>Note: </strong> The ClamAV Mirror for PCF serves
-      virus definitions to your environment for ClamAV for PCF to use,
-      but the ClamAV Mirror needs to get databases itself.
-      You can configure the ClamAV Mirror to get virus definitions using the
+    <p class="note"><strong>Note: </strong> The <%= vars.product_short_mirror %> serves
+      virus definitions to your environment for <%= vars.product_short %> to use,
+      but the ClamAV mirror needs to get databases itself.
+      You can configure the ClamAV mirror to get virus definitions using the
       supported options in <strong>Mirror for Automatic Database Updates</strong> above.
     </p>
 
@@ -131,7 +131,7 @@ To configure ClamAV Mirror for PCF:
   <%# TODO Dylan: less verbose things with tile field updates %>
 
 1. (Optional) If you selected **Official mirror (database.clamav.net)** or **Existing mirror** in the previous section,
- you can configure a proxy for the ClamAV Mirror to retrieve the databases from.
+ you can configure a proxy for the ClamAV mirror to retrieve the databases from.
  To do this:
 
   1. Select **HTTP Proxy Configuration**.
@@ -144,7 +144,7 @@ To configure ClamAV Mirror for PCF:
   1. Click **Save**.
 
 ##<a id="syslog"></a> Configure System Logging
-Follow the steps below to enable system logging for ClamAV Mirror.
+Follow the steps below to enable system logging for <%= vars.product_short %>.
 
 1. Select **Syslog**.
 ![Syslog](mirror-syslog.png)
@@ -189,13 +189,13 @@ To scale the number of deployed mirrors:
 
 ## <a id="apply-changes-mirror"></a> Apply Changes from Your Configuration
 
-Your ClamAV Mirror installation is not complete until you apply your configuration changes.
+Your <%= vars.product_short %> installation is not complete until you apply your configuration changes.
 To do this:
 
 1. Return to the Ops Manager Installation Dashboard.
 
 1. Click **Review Pending Changes**.
-1. Unselect all products except **BOSH Director** and **ClamAV Mirror for PCF** and click **Apply Changes**.
+1. Unselect all products except **BOSH Director** and **<%= vars.product_short %>** and click **Apply Changes**.
 1. After **Apply Changes** is complete, if you selected **No Mirror**, upload a set of virus definitions
 to your deployed `clamav-mirrors`.
 To do this, see [Updating Virus Definitions](./updating-databases.html).

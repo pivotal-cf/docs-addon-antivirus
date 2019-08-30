@@ -1,5 +1,5 @@
 ---
-title: Installing and Configuring ClamAV for PCF
+title: Installing and Configuring Pivotal Anti-Virus
 owner: Pivotal Compliance and Innovation (PCI) Team
 ---
 <strong><%= modified_date %></strong>
@@ -7,13 +7,13 @@ owner: Pivotal Compliance and Innovation (PCI) Team
 This topic describes how to install and configure <%= vars.product_full %>.
 
 Before installing <%= vars.product_full %>, Pivotal recommends that you download
-and install the ClamAV Mirror for PCF tile.
-For more information about the ClamAV Mirror for PCF tile,
+and install the <%= vars.product_full_mirror %> tile.
+For more information about the <%= vars.product_short_mirror %> tile,
 see [Installing and Configuring ClamAV Mirror for PCF](./install-mirror.html).
 
 ##<a id="prereqs"></a>Prerequisites
 
-To install ClamAV for PCF, you must have the following:
+To install <%= vars.product_short %>, you must have the following:
 
 * **A PCF operator with admin rights**.
 For more information, see [Operators](https://docs.pivotal.io/pivotalcf/customizing/user-types.html#operator).
@@ -22,11 +22,11 @@ For more information, see [Operators](https://docs.pivotal.io/pivotalcf/customiz
 For compatible versions, see the [Product Snapshot](./index.html#snapshot).
 
 * **At least 1&nbsp;GB of memory free on each VM**.
-  ClamAV for PCF uses 610&nbsp;MB of memory.
+  <%= vars.product_short %> uses 610&nbsp;MB of memory.
 
 * **An external mirror**. If you do not have an external mirror, Pivotal recommends that you install
-  the ClamAV Mirror for PCF.
-  For instructions, see [Installing and Configuring ClamAV Mirror for PCF](./install-mirror.html).
+  the <%= vars.product_short_mirror %>.
+  For instructions, see [Installing and Configuring <%= vars.product_short_mirror %>](./install-mirror.html).
 
 ## <a id='install-addon'></a> Install <%= vars.product_short %>
 
@@ -59,7 +59,7 @@ To configure <%= vars.product_short %>, do the following:
           Select the method for receiving your virus databases from an upstream mirror.
           <ul>
             <li><strong>Official mirror (database.clamav.net)</strong>: Select this to have the mirror fetch databases from database.clamav.net.</li>
-            <li><strong>Use a deployed mirror from the ClamAV Mirror tile</strong>: For more information, see <a href="./install-mirror.html">Installing and Configuring ClamAV Mirror for PCF</a>.
+            <li><strong>Use a deployed mirror from the ClamAV Mirror tile</strong>: For more information, see <a href="./install-mirror.html">Installing and Configuring <%= vars.product_short_mirror %></a>.
             <li><strong>Existing mirror</strong>: Select this to enter a list of hostnames or IPs of mirrors.</li>
           </ul>
         </td>
@@ -195,7 +195,7 @@ To do this, follow the procedure below:
 <hr style="height:1px;border:none;color:#333;background-color:#333;" />
 
 ##<a id="scan-containers"></a> (Optional) Configure ClamAV to Exclude Duplicate Logs on Containers
-You can use ClamAV to scan the following:
+You can use <%= vars.product_short %> to scan the following:
 
 * Garden containers on the Diego Cell VMs in Pivotal Application Service (PAS)
 * Containers on the Kubernetes worker node VMs in Enterprise Pivotal Container Service (Enterprise PKS)
