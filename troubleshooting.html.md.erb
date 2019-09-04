@@ -5,15 +5,16 @@ owner: Security Engineering
 
 <strong><%= modified_date %></strong>
 
-This topic provides instructions for troubleshooting ClamAV for PCF
-and ensuring that it is protecting your Pivotal Cloud Foundry (PCF) deployment as you expect.
+This topic provides instructions for troubleshooting <%= vars.product_full %>
+and ensuring that it is protecting your <%= vars.platform %> deployment.
 
 ## <a id="installation"></a> Installation Issues
 
 ### <a id=""></a> Ops Manager Fails to Apply Changes
 
 #### Symptom
-Applying changes in Ops Manager fails. The bottom of the changelog contains an error message similar to the following:
+Applying changes in Ops Manager fails.
+The bottom of the changelog contains an error message similar to the following:
 
 <pre class="terminal">...
 Started updating job nats > nats/0 (12bfae02-b4af-4104-b2bd-227ff07b2d92) (canary). Done (00:02:31)
@@ -23,11 +24,13 @@ Error 400007: 'etcd_server/0 (f8e492bf-db09-4d38-8a73-5cf69d7b8a11)' is not runn
 </pre>
 
 #### Explanation
-The ClamAV mirror server was unavailable during initial deployment.
+The <%= vars.product_full_mirror %> server was unavailable during initial deployment.
 
 #### Solution
-Review the manifest file, and replace the `database_mirror` key with the address of a stable mirror server.
-If you do not have a stable mirror server for reliable initial deployment, use the S3-based mirror: `pivotal-clamav-mirror.s3.amazonaws.com`
+Review the manifest file, and replace the `database_mirror` key with the address
+of a stable mirror server.
+If you do not have a stable mirror server for reliable initial deployment,
+use the S3-based mirror: `pivotal-clamav-mirror.s3.amazonaws.com`
 <hr>
 
 ## <a id="updates"></a> Virus Database Update Issues
@@ -37,27 +40,27 @@ If you do not have a stable mirror server for reliable initial deployment, use t
 #### Symptom
 
 Updating virus definitions writes an error like the following
-to the ClamAV mirror's log destination:
+to the <%= vars.product_name_mirror %> log destination:
 
-   ```
-   2019/07/03 20:28:30 file /var/vcap/data/clamav-mirror/unvalidated/main.cvd rejected: /var/vcap/data/clamav-mirror/unvalidated/main.cvd is an invalid cvd file: exit status 1
-   ```
+ ```
+ 2019/07/03 20:28:30 file /var/vcap/data/clamav-mirror/unvalidated/main.cvd rejected: /var/vcap/data/clamav-mirror/unvalidated/main.cvd is an invalid cvd file: exit status 1
+ ```
 
 #### Explanation
 
-The ClamAV mirror's database verifier detected that a virus database
+The <%= vars.product_name_mirror %> database verifier detected that a virus database
 file downloaded from the external database is invalid.
 
 #### Solution
 
-Check that the database files downloaded properly, and re-download if necessary.
+Check that the database files downloaded properly and re-download if necessary.
 
 ### <a id="old-db"></a> Old Database Definitions
 
 #### Symptom
 
 Updating virus definitions writes an error like the following
-to the ClamAV mirror's log destination:
+to the <%= vars.product_name_mirror %> log destination:
 
    ```
    2019/07/03 20:35:34 file /var/vcap/data/clamav-mirror/unvalidated/daily.cvd rejected: /var/vcap/data/clamav-mirror/unvalidated/daily.cvd is not newer than /var/vcap/store/clamav-mirror/validated/daily.cvd
@@ -65,46 +68,53 @@ to the ClamAV mirror's log destination:
 
 #### Explanation
 
-The ClamAV mirror's database verifier detected that a virus database
+The <%= vars.product_name_mirror %> database verifier detected that a virus database
 file downloaded from the external database is older than the one most recently
 processed by the internal mirror.
 
 #### Solution
 
 Check that the latest version of the database files were downloaded.
-If the internal ClamAV mirror has the latest files, no action is required.
+If the internal <%= vars.product_name_mirror %> has the latest files, no action is required.
 
 ## <a id="runtime"></a> Runtime Issues
 
-### <a id="malware-detection"></a> ClamAV Is Not Detecting Malware
+### <a id="malware-detection"></a> <%= vars.product_name %> Is Not Detecting Malware
 
 #### Symptom
-Malware signature or sample malware is not detected, even though the ClamAV daemon is properly configured.
+Malware signature or sample malware is not detected,
+even though the ClamAV daemon is properly configured.
 
 #### Explanation
 Virus signatures are not up-to-date.
 
 #### Solution
-First, ensure that the [configuration checks](./install.html#verify) have been done,
-that the mirror server is correctly configured and is available on the network from within the PCF private subnet,
-and that at least one hour has elapsed.
-One hour is the default scan schedule interval.
+To resolve this issue, verify that:
 
-If the local mirror is up-to-date and ClamAV is still failing to detect a malware sample, you might have encountered a new threat.
-Pivotal recommends alerting the community via existing channels and reporting the suspicious file directly to the ClamAV team.
++ The mirror server is correctly configured.
++ The mirror server is available on the network from within the PCF private subnet.
++ At least one hour has elapsed. One hour is the default scan schedule interval.
 
-<p class="note"><strong>Note</strong>: Pivotal does not provide support for ClamAV detection failures, mirror coordination, or threat tracking activity.</p>
+If the local mirror is up-to-date and <%= vars.product_name %>
+is still failing to detect a malware sample, you might have encountered a new threat.
+Pivotal recommends alerting the community via existing channels and reporting
+the suspicious file directly to the ClamAV team.
+
+<p class="note"><strong>Note</strong>: Pivotal does not provide support for ClamAV detection failures,
+  mirror coordination, or threat tracking activity.</p>
 
 <hr>
 
-### <a id='false-positive-clamav'></a> ClamAV Reports False Positives
+### <a id='false-positive-clamav'></a> <%= vars.product_name %> Reports False Positives
 
 ####Symptom
-ClamAV reports a false postive result; a non-malicious file is reported to be a virus.
+<%= vars.product_name %> reports a false positive result such as
+non-malicious file is reported to be a virus.
 
 ####Explanation
-ClamAV compares files to its database of known malicious patterns.
-ClavAV may detect a non-malicious file as a virus due to a coincidental similarity to those patterns.
+<%= vars.product_name %> compares files to its database of known malicious patterns.
+<%= vars.product_name %> may detect a non-malicious file as a virus
+due to a coincidental similarity to those patterns.
 
 ####Solution
 Submit false positive reports to <a href="https://www.clamav.net/reports/fp">ClamAV</a>.
@@ -113,26 +123,29 @@ It takes about a week for ClamAV to verify and publish a new database.
 
 <hr>
 
-### <a id='cpu-spikes-clamav'></a> CPU Spikes While Using ClamAV
+### <a id='cpu-spikes-clamav'></a> CPU Spikes While Using <%= vars.product_name %>
 
 ####Symptom
-ClamAV is taking more CPU resources than assigned in its configuration.
+<%= vars.product_name %> is taking more CPU resources than assigned in its configuration.
 
 ####Explanation
-ClamAV resource consumption is restricted using cgroups.
-ClamAV is resource-limited whenever other processes are active.
-However, cgroups allows ClamAV to occupy more CPU resources when all other processes are idle,
+<%= vars.product_name %> resource consumption is restricted using cgroups.
+<%= vars.product_name %> is resource-limited whenever other processes are active.
+However, cgroups enables <%= vars.product_name %> to occupy
+more CPU resources when all other processes are idle,
 because it does not impact their performance.
 
 ####Solution
-This is expected behavior from cgroups. If a hard limit is required, configure the `enforce_cpu_limit` Linux property. For more information, see [clamav.yml Template for Linux](./install.html#linux-template) Linux property.
+This is expected behavior from cgroups.
+If a hard limit is required, configure the `enforce_cpu_limit` Linux property.
+For more information, see [clamav.yml Template for Linux](./install.html#linux-template) Linux property.
 
 <hr>
 
-### <a id='out-of-memory'></a> Out of Memory While Using ClamAV
+### <a id='out-of-memory'></a> Out of Memory While Using <%= vars.product_name %>
 
 ####Symptom
-ClamAV fails to start and `/var/log/syslog` reports `Memory cgroup out of memory:
+<%= vars.product_name %> fails to start and `/var/log/syslog` reports `Memory cgroup out of memory:
 Kill process` on the `clamd` process similar to the following:
 
 <pre class="terminal">2019-02-20T19:35:40.249205+00:00 localhost kernel: [  254.669948] Memory cgroup out of memory: Kill process 7493 (clamd) score 586 or sacrifice child
@@ -140,9 +153,10 @@ Kill process` on the `clamd` process similar to the following:
 </pre>
 
 ####Explanation
-ClamAV resource consumption is restricted by cgroups.
+<%= vars.product_name %> resource consumption is restricted by cgroups.
 The `clamd` process is terminated if the memory usage limit is exceeded.
-When memory swapping is disabled by other BOSH jobs, the ClamAV resource requires a larger memory limit.
+When memory swapping is disabled by other BOSH jobs,
+the <%= vars.product_name %> resource requires a larger memory limit.
 
 ####Solution
 This is expected behavior from cgroups.
@@ -153,10 +167,10 @@ For more information, see [clamav.yml Template for Linux](./install.html#linux-t
 including errand VMs, have sufficient memory resources.</p>
 <hr>
 
-### <a id='insufficient-cpu'></a> Insufficient CPU Limit While Using ClamAV
+### <a id='insufficient-cpu'></a> Insufficient CPU Limit While Using <%= vars.product_name %>
 
 #### Symptom
-ClamAV fails to start during deployment.
+<%= vars.product_name %> fails to start during deployment.
 However, the `clamd` and `freshclam` processes eventually run.<br>
 
 The deployment failure log looks similar to the following:
@@ -179,11 +193,12 @@ clamav_1/d5cfe4bd-b606-4372-8481-187f4cf57e6c  -          running        z1  10.
 </pre>
 
 ####Explanation
-ClamAV startup is CPU intensive and, if restricted, can prevent ClamAV from starting up correctly.
+<%= vars.product_name %> startup is CPU intensive
+and, if restricted, can prevent <%= vars.product_name %> from starting up correctly.
 
 #### Solutions
-+ Ensure `cpu_limit` is set high enough for ClamAV to execute normally.
-If the limit is too strict, ClamAV fails to start.
++ Ensure `cpu_limit` is set high enough for <%= vars.product_name %> to execute normally.
+If the limit is too strict, <%= vars.product_name %> fails to start.
 For example, an n1-standard VM on GCP requires `cpu_limit` to be > 45.
 For more information, see [clamav.yml Template for Linux](./install.html#linux-template).
 
@@ -195,10 +210,10 @@ For more information, see [clamav.yml Template for Linux](./install.html#linux-t
 On the **Resource Config** pane, adjust the **VM Type** for the **ClamAV** job
 to have sufficient CPU resources.
 
-### <a id='too-many-files'></a> Too Many Open Files Error While Using ClamAV Mirror
+### <a id='too-many-files'></a> Too Many Open Files Error While Using <%= vars.product_name_mirror %>
 
 #### Symptom
-The ClamAV Mirror log reports that too many log files are open:
+The C<%= vars.product_name_mirror %> log reports that too many log files are open:
 
 <pre class="terminal">
 2019/07/29 20:02:41 10.0.0.72 is requesting main.cvd
@@ -209,10 +224,10 @@ The ClamAV Mirror log reports that too many log files are open:
 </pre>
 
 #### Explanation
-ClamAV Mirror opens files when a database is requested.
+<%= vars.product_name_mirror %> opens files when a database is requested.
 There is a limit of how many files can be opened at a given time.
 
 #### Solution
-Increase the number of ClamAV Mirror instances.
-Pivotal recommends that there is one ClamAV Mirror for every 250 instances where ClamAV is installed.
+Increase the number of <%= vars.product_name_mirror %> instances.
+Pivotal recommends that there is one <%= vars.product_name_mirror %> for every 250 instances where <%= vars.product_name %> is installed.
 For more information, see [Scale the Number of Deployed Mirrors](./install-mirror.html#scale-deployed-mirror).
