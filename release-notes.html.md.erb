@@ -5,46 +5,61 @@ owner: Security Engineering
 
 <strong><%= modified_date %></strong>
 
-This topic contains release notes for ClamAV for PCF.
+This topic contains release notes for <%= vars.product_full %> (formerly known as ClamAV Add-on for PCF).
 
 ## <a id="200"></a> v2.0.0
 
-**Release Date: July 31, 2019**
+**Release Date: September 6, 2019**
 
 ### Features
 
 New features and changes in this release:
 
-  * ClamAV Mirror is a new tile that allows for easier deployment of a virus definition database mirror.
+  * <%= vars.product_full_mirror %> is a new tile that allows for easier deployment of a virus definition database mirror.
       * The mirror serves up the virus definition databases for VMs with ClamAV installed.
       * The mirror validates the integrity and authenticity of the definition database.
 
-  * ClamAV for PCF is now a tile.
-      * The tile integrates with the ClamAV Mirror tile.
+  * <%= vars.product_full %> is now a tile.
+      * The tile integrates with the <%= vars.product_name_mirror %> tile.
       * For more information on upgrading,
-        see [Upgrading ClamAV for PCF](http://localhost:4567/addon-antivirus/1-n/upgrade.html).
+        see [Upgrading <%= vars.product_full %>](http://localhost:4567/addon-antivirus/1-n/upgrade.html).
 
   * Updates default cgroup `memory_limit` to 1.5&nbsp;GB
   * Updates default cgroup `cpu_limit` to 50% utilization.
   * Supports the `exclude_path` option for Windows.
   * Adds `Number of database checks per day` field in the tile to configure the frequency of checking for new virus definition databases.
+  * <%= vars.product_name_mirror %> supports the cld file format of virus definition and provides integrity check.
+  * Updates the bundled ClamAV open source distribution to v0.101.4.
+  * Updates the the go version to v1.12.9.
 
 
 ### Security Fixes
 
 This release includes the following security fixes:
 
-* Updates the bundled ClamAV open source distribution to v0.101.2.<br>
-  This version includes the following security fixes:
+  * Updates the bundled ClamAV open source distribution to v0.101.4 in order to address:
 
-  * Medium [CVE-2019-1787](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1787): PDF scanning vulnerability.
-  * [CVE-2019-1789](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1789).
-  * Medium [CVE-2019-1788](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1788): OLE2 file scanning vulnerability.
-  * Medium [CVE-2019-1786](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1786): PDF scanning vulnerability.
-  * High [CVE-2019-1785](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1785): RAR scanning vulnerability.
-  * Medium [CVE-2019-1798](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1798): PE scanning vulnerability.
+    * Critical [CVE-2019-12900](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-12900):
+     BZ2_decompress in decompress.c in bzip2 through 1.0.6 has an out-of-bounds
+     write when there are many selectors.
 
-  For more information about this distribution, see [ClamAV 0.101.2](https://blog.clamav.net/2019/03/clamav-01012-and-01003-patches-have.html) on the ClamAV blog.
+    * ClamAV v0.101.4 introduces a scan time limit.
+     This limit now resolves ClamAV's "zip bomb" vulnerability.
+
+    For more information about this distribution, see
+    [ClamAV 0.101.4](https://blog.clamav.net/2019/08/clamav-01014-security-patch-release-has.html) on the ClamAV blog.
+
+  * Updates the go version to [1.12.9](https://golang.org/doc/devel/release.html#go1.12.minor) in order to address:
+
+    * High [CVE-2019-9512](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), also known as Ping Flood:
+        * The attacker sends continual pings to an HTTP/2 peer, causing the peer to build an internal queue of responses.
+        Depending on how efficiently this data is queued, this can consume excess CPU, memory, or both, potentially leading
+        to a denial of service.
+
+    * High [CVE-2019-9514](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514), also known as Reset Flood:
+        * The attacker opens a number of streams and sends an invalid request over each stream that should solicit a stream of
+        RST\_STREAM frames from the peer. Depending on how the peer queues the RST\_STREAM frames, this can consume excess memory,
+        CPU, or both, potentially leading to a denial of service.
 
 ## <a id="view"></a> View Release Notes for Another Version
 
