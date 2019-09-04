@@ -7,7 +7,7 @@ owner: Security Engineering
 
 This topic is an overview of <%= vars.product_full %>.
 
-## <a id="about-clamav"></a>About ClamAV for PCF
+## <a id="about-antivirus"></a>About <%= vars.product_name %>
 
 <%= vars.product_short %> might be necessary for regulatory purposes if your compliance auditor
 requires antivirus protection within your PCF environment.
@@ -16,9 +16,9 @@ For example, auditors sometimes expect that antivirus protection is present in a
 environment that must comply with standards such as the Payment Card Industry Data
 Security Standard (PCI DSS) or Health Insurance Portability and Accountability Act (HIPAA).
 
-## <a id='snapshot'></a> Product Snapshot for <%= vars.product_short %>
+## <a id='snapshot'></a> Product Snapshot for <%= vars.product_full %>.
 
-The following table provides version and version-support information about <%= vars.product_short %>.
+The following table provides version and version-support information about <%= vars.product_full %>.
 
 <table class="nice">
     <th>Element</th>
@@ -29,11 +29,11 @@ The following table provides version and version-support information about <%= v
     </tr>
     <tr>
         <td>Release date</td>
-        <td>July 31, 2019</td>
+        <td>September 6, 2019</td>
     </tr>
     <tr>
         <td>Software component version</td>
-        <td>Open Source ClamAV 0.101.2</td>
+        <td>Open Source ClamAV 0.101.4</td>
     </tr>
     <tr>
         <td>Compatible Ops Manager versions</td>
@@ -57,10 +57,10 @@ The following table provides version and version-support information about <%= v
     </tr>
 </table>
 
-## <a id='snapshot-mirror'></a> Product Snapshot for ClamAV Mirror for PCF
+## <a id='snapshot-mirror'></a> Product Snapshot for <%= vars.product_full_mirror %>.
 
 
-The following table provides version and version-support information about ClamAV Mirror for PCF.
+The following table provides version and version-support information about <%= vars.product_full_mirror %>.
 
 <table class="nice">
     <th>Element</th>
@@ -98,8 +98,8 @@ The following table provides version and version-support information about ClamA
 
 ##<a id="features"></a> Features
   * Includes open source ClamAV packaged as part of the tile for installation.
-  * Contains a private ClamAV Mirror tile for deployment and providing VMs to the foundation.
-    * ClamAV Mirror serves both air-gapped and non-air-gapped environments.
+  * Contains a private <%= vars.product_name_mirror %> tile for deployment and providing VMs to the foundation.
+    * <%= vars.product_name_mirror %> serves both air-gapped and non-air-gapped environments.
     * The tile authenticates and validates publicly downloaded database definition files
       for added security.
   * Ability to scan VMs and containers for foundations with PAS and Enterprise PKS.
@@ -107,33 +107,37 @@ The following table provides version and version-support information about ClamA
   * Allows whitelisting of known signatures.
   * Allows you to configure CPU and memory usage limits on VMs of the foundation.
 
-##<a id="architecture"></a> ClamAV Architecture
+##<a id="architecture"></a> <%= vars.product_name %> Architecture
 ###<a id="propagate"></a>How Virus Definitions Propagate to VMs
 
-Virus definitions on PCF internal ClamAV Mirror update automatically or manually depending on whether PCF is on an online or air-gapped network, as described in [Update Virus Definitions](#update) above.
-The automatic and manual processes store new virus definitions to the ClamAV
-mirror VM's database of unverified viruses as follows:
+Virus definitions on the internal <%= vars.product_name_mirror %> update
+automatically or manually depending on whether your <%= vars.product_platform %>
+is on an online or air-gapped network, as described in [Update Virus Definitions](#update) above.
+The automatic and manual processes store new virus definitions to the <%= vars.product_name_mirror %>
+VM's database of unverified viruses as follows:
 
-* **Automatic update**: The `freshclam` daemon process on the ClamAV Mirror VM downloads the virus definitions
+* **Automatic update**: The `freshclam` daemon process on the <%= vars.product_name_mirror %> VM downloads the virus definitions
 and stores them in the internal mirror VM's unverified database.
 * **Manual update**: The operator runs `bosh scp` to directly copy the virus definitions
 to the internal mirror's database of unverified viruses.
 
 From the unverified internal mirror database, virus definitions then propagate to BOSH VMs as follows:
 
-1. The database verifier process on the ClamAV mirror verifies the date, format, and integrity of the new virus definitions.
-  - To verify integrity, the verifier checks bytecode signatures against signatures in the external ClamAV database, using the external database public key.
+1. The database verifier process on the <%= vars.product_name_mirror %> verifies
+  the date, format, and integrity of the new virus definitions.
+  - To verify integrity, the verifier checks bytecode signatures against signatures
+    in the external ClamAV database, using the external database public key.
   - If verification fails or if the virus definitions are not new, the mirror VM generates an error.
-  See [Virus Database Update Issues](./troubleshooting.html#updates).
+    See [Virus Database Update Issues](./troubleshooting.html#updates).
 
-1. The internal ClamAV mirror VM saves verified virus definitions to its verified database
+1. The internal <%= vars.product_name_mirror %> VM saves verified virus definitions to its verified database
 and serves them to the `freshclam` processes of BOSH VMs.
 
 1. On each BOSH-managed VM:
 
-  1. The `freshclam` daemon process regularly queries the internal ClamAV mirror for new virus definitions.
-      - You can configure the query frequency in the ClamAV for PCF tile >
-  **ClamAV Configuration** pane > **Number of database checks per day** field.
+  1. The `freshclam` daemon process regularly queries the internal <%= vars.product_name_mirror %> for new virus definitions.
+      - You can configure the query frequency in the <%= vars.product_full %> tile >
+  **ClamAV Configuration** > **Number of database checks per day** field.
 
   1. When `freshclam` retrieves new definitions, it:
       - Notifies the `clamd` daemon process that there are new definitions, and
@@ -150,11 +154,11 @@ from an external ClamAV database to BOSH VMs, in online and air-gapped PCF insta
 This diagram illustrates how virus definitions propagate to BOSH VMs in an online network:
 
 [//]: https://docs.google.com/presentation/d/1pBHK0dcE5y7rT4KnacqFDc6LuU8R3HiR9ApuvwY1uzA/edit
-![Online (non-air-gapped) update process, following path of new virus data. External ClamAV database in cloud serves new virus data to freshclam running on local ClamAV Mirror. The local mirror runs it through the database verifier, also on ClamAV mirror, and then serves it to freshclam on all BOSH VMs. On each BOSH VM, freshclam notifies clamd that there are new definitions, and saves the definitions in the virus database. clamd then loads the new virus definitions from the database into its memory to enable fast scanning.](update-defs-online.png)
+![Online (non-air-gapped) update process, following path of new virus data. External ClamAV database in cloud serves new virus data to freshclam running on local Anti-Virus Mirror. The local mirror runs it through the database verifier, also on Anti-Virus Mirror and then serves it to freshclam on all BOSH VMs. On each BOSH VM, freshclam notifies clamd that there are new definitions, and saves the definitions in the virus database. clamd then loads the new virus definitions from the database into its memory to enable fast scanning.](update-defs-online.png)
 
 ###<a id="propagate-airgap"></a>Air-Gapped Network
 
 This diagram illustrates how virus definitions propagate to BOSH VMs in an air-gapped network:
 
 [//]: https://docs.google.com/presentation/d/1pBHK0dcE5y7rT4KnacqFDc6LuU8R3HiR9ApuvwY1uzA/edit
-![Diagram shows air-gapped update process, following path of new virus data. Operator downloads virus data from External ClamAV database in cloud, then runs BOSH SCP to send it to freshclam running on local ClamAV Mirror. The local mirror runs it through the database verifier, also on ClamAV mirror, and then serves it to freshclam on all BOSH VMs. On each BOSH VM, freshclam notifies clamd that there are new definitions, and saves the definitions in the virus database. clamd then loads the new virus definitions from the database into its memory to enable fast scanning.](update-defs-airgap.png)
+![Air-gapped update process, following path of new virus data. Operator downloads virus data from External ClamAV database in cloud, then runs BOSH SCP to send it to freshclam running on local Anti-Virus Mirror. The local mirror runs it through the database verifier, also on ClamAV mirror, and then serves it to freshclam on all BOSH VMs. On each BOSH VM, freshclam notifies clamd that there are new definitions, and saves the definitions in the virus database. clamd then loads the new virus definitions from the database into its memory to enable fast scanning.](update-defs-airgap.png)
