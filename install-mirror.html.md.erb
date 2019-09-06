@@ -5,52 +5,54 @@ owner: Pivotal Compliance and Innovation (PCI) Team
 <strong><%= modified_date %></strong>
 
 This topic describes how to install and configure <%= vars.product_full_mirror %>.
-Pivotal recommends that you install this tile before installing <%= vars.product_short %>.
+Pivotal recommends that you install this tile before installing <%= vars.product_full %>.
 
 ##<a id="overview"></a>Overview
 
 If you do not have an external mirror for ClamAV jobs to fetch database updates from,
-you can deploy one using the <%= vars.product_short_mirror %>.
+you can deploy one using the <%= vars.product_name_mirror %>.
 
 This deployed internal mirror can support air-gapped environments as well as networked environments:
 
-* **Online Network:** You can deploy the ClamAV internal mirror as a proxy.
+* **Online Network:** You can deploy the internal <%= vars.product_name_mirror %> as a proxy.
   This acts as a database for the virus definitions if the online virus database experiences downtime.
 * **Air-gapped Network:** Because there is no access to an outside network,
-  the internal ClamAV mirror VM acts as the server for the virus definitions.
+  the internal <%= vars.product_name_mirror %> VM acts as the server for the virus definitions.
 
 
 If you have already deployed an external mirror, you can use that instead of
-installing this tile, and continue to [Installing and Configuring ClamAV for PCF](./install.html).
+installing this tile, and continue to [Installing and Configuring <%= vars.product_full %>](./install.html).
 
 ##<a id="prereqs"></a>Prerequisites
 
-To install the <%= vars.product_short_mirror %>, you must have:
+To install the <%= vars.product_name_mirror %>, you must have:
 
-* **A PCF operator with admin rights**.
+* **A <%= vars.platform %> operator with admin rights**.
 For more information, see [Operators](https://docs.pivotal.io/pivotalcf/customizing/user-types.html#operator).
 
 * **PCF Operations Manager (Ops Manager)**.
 For compatible versions, see the [Product Snapshot](./index.html#snapshot).
+<%# TODO Chris: Verify new name for Ops Man %>
 
 * **At least 1&nbsp;GB of memory free on each VM**.
-This is so that you can install the <%= vars.product_short %> tile after deploying this mirror.
-ClamAV for PCF uses 610&nbsp;MB of memory.
+This is so that you can install the <%= vars.product_full %> tile after deploying this mirror.
+<%= vars.product_name %> uses 610&nbsp;MB of memory.
 
-## <a id='install-mirror'></a> Install <%= vars.product_short_mirror %>
+## <a id='install-mirror'></a> Install <%= vars.product_full_mirror %>
 
-To install the <%= vars.product_short_mirror %> tile:
+To install the <%= vars.product_full_mirror %> tile:
 
 1. Download the product file from [Pivotal Network](https://network.pivotal.io/products/p-clamav-addon).
   * For air-gapped networks, follow your company's offline installation protocols.
       For more information, see [Installing PCF in Airgapped Environments](https://docs.pivotal.io/pivotalcf/customizing/offline_installation.html).
+<%# TODO Chris: Need to replace when PCF itself gets rebranded to PP %>
 
 1. Navigate to the Ops Manager Installation Dashboard and select **Import a Product** to upload the product file.
 
-1. Under the **Import a Product** button, click **+** next to the version number of ClamAV Mirror for PCF.
+1. Under the **Import a Product** button, click **+** next to the version number of <%= vars.product_full_mirror %>.
 This adds the tile to your staging area.
 
-1. Click the newly added **ClamAV Mirror for PCF** tile.
+1. Click the newly added **<%= vars.product_full_mirror %>** tile.
 
 ## <a id='azs'></a> Assign AZs and Networks
 
@@ -66,18 +68,18 @@ To assign availability zones (AZs) and networks:
       <th>Description</th>
       <tr>
         <td><strong>Place singleton jobs in</strong></td>
-        <td>Select an AZ. If you choose to install only one ClamAV Mirror VM,
+        <td>Select an AZ. If you choose to install only one <%= vars.product_name_mirror %> VM,
             this is the AZ that it is placed in.</td>
       </tr>
       <tr>
         <td><strong>Balance other jobs in</strong></td>
         <td>Select one or more AZs.
-            If you choose to install more than one ClamAV Mirror VM,
+            If you choose to install more than one <%= vars.product_name_mirror %> VM,
             these are the AZs that the VMs are placed in.</td>
       </tr>
       <tr>
         <td><strong>Network</strong></td>
-        <td>Select a subnet for the <code>clamav_mirror</code> VM.
+        <td>Select a subnet for the <code>clamav_mirror</code> VM. <%# TODO Chris: Replace once VM is renamed %>
           <br>This is typically the same subnet that
           includes the Pivotal Application Service (PAS) component VMs.</td>
       </tr>
@@ -85,12 +87,12 @@ To assign availability zones (AZs) and networks:
 
 1. Click **Save**.
 
-## <a id='configure-mirror'></a> Configure <%= vars.product_short_mirror %>
-To configure <%= vars.product_short_mirror %>:
+## <a id='configure-mirror'></a> Configure <%= vars.product_name_mirror %>
+To configure <%= vars.product_name_mirror %>:
 
 1. Select **ClamAV Mirror Configuration**.
 <%# TODO Chris: Verify Name %>
-![ClamAV Mirror Configuration](mirror-configure.png)
+![Anti-Virus Mirror Configuration](mirror-configure.png)
 
 1. Configure the fields as follows:
 
@@ -119,9 +121,9 @@ To configure <%= vars.product_short_mirror %>:
       </tr>
     </table>
 
-    <p class="note"><strong>Note: </strong> The <%= vars.product_short_mirror %> serves
-      virus definitions to your environment for <%= vars.product_short %> to use,
-      but the ClamAV mirror needs to get databases itself.
+    <p class="note"><strong>Note: </strong> <%= vars.product_full_mirror %> serves
+      virus definitions to your environment for <%= vars.product_full %> to use,
+      but the <%= vars.product_name %> mirror needs to get databases itself.
       You can configure the ClamAV mirror to get virus definitions using the
       supported options in <strong>Mirror for Automatic Database Updates</strong> above.
     </p>
@@ -131,11 +133,11 @@ To configure <%= vars.product_short_mirror %>:
   <%# TODO Dylan: less verbose things with tile field updates %>
 
 1. (Optional) If you selected **Official mirror (database.clamav.net)** or **Existing mirror** in the previous section,
- you can configure a proxy for the ClamAV mirror to retrieve the databases from.
+ you can configure a proxy for the <%= vars.product_name %> mirror to retrieve the databases from.
  To do this:
 
   1. Select **HTTP Proxy Configuration**.
-  ![HTTP Proxy Configuration for ClamAV Mirror Jobs](mirror-http-proxy.png)
+  ![HTTP Proxy Configuration for Anti-Virus Mirror Jobs](mirror-http-proxy.png)
 
   1. Set **HTTP proxy to get database updates** to **Enabled**.
 
@@ -144,7 +146,7 @@ To configure <%= vars.product_short_mirror %>:
   1. Click **Save**.
 
 ##<a id="syslog"></a> Configure System Logging
-Follow the steps below to enable system logging for <%= vars.product_short %>.
+Follow the steps below to enable system logging for <%= vars.product_full_mirror %>.
 
 1. Select **Syslog**.
 ![Syslog](mirror-syslog.png)
@@ -175,7 +177,7 @@ Follow the steps below to enable system logging for <%= vars.product_short %>.
 
 ClamAV jobs do load balancing for you.
 
-Pivotal recommends one ClamAV Mirror VM for every 250 VMs with ClamAV installed.
+Pivotal recommends one <%= vars.product_name_mirror %> VM for every 250 VMs with <%= vars.product_name %> installed.
 To scale the number of deployed mirrors:
 
   1. Select **Resource Config**.
@@ -189,13 +191,13 @@ To scale the number of deployed mirrors:
 
 ## <a id="apply-changes-mirror"></a> Apply Changes from Your Configuration
 
-Your <%= vars.product_short %> installation is not complete until you apply your configuration changes.
+Your <%= vars.product_name_mirror %> installation is not complete until you apply your configuration changes.
 To do this:
 
 1. Return to the Ops Manager Installation Dashboard.
 
 1. Click **Review Pending Changes**.
-1. Unselect all products except **BOSH Director** and **<%= vars.product_short %>** and click **Apply Changes**.
+1. Unselect all products except **BOSH Director** and **<%= vars.product_name_mirror %>** and click **Apply Changes**.
 1. After **Apply Changes** is complete, if you selected **No Mirror**, upload a set of virus definitions
 to your deployed `clamav-mirrors`.
 To do this, see [Updating Virus Definitions](./updating-databases.html).
