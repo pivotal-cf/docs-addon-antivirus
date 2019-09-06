@@ -6,6 +6,7 @@ owner: Pivotal Compliance and Innovation (PCI) Team
 
 This topic describes how to install and configure <%= vars.product_full %>.
 
+<<<<<<< HEAD
 Before installing <%= vars.product_full %>, Pivotal recommends that you download
 and install the ClamAV Mirror for PCF tile.
 For more information about the ClamAV Mirror for PCF tile,
@@ -14,6 +15,16 @@ see [Installing and Configuring ClamAV Mirror for PCF](./install-mirror.html).
 ##<a id="prereqs"></a>Prerequisites
 
 To install ClamAV for PCF, you must have the following:
+=======
+Before installing <%= vars.product_name %>, Pivotal recommends that you download
+and install the <%= vars.product_full_mirror %> tile.
+For more information about the <%= vars.product_name_mirror %> tile,
+see [Installing and Configuring <%= vars.product_full_mirror %>](./install-mirror.html).
+
+##<a id="prereqs"></a>Prerequisites
+
+To install <%= vars.product_name %>, you must have:
+>>>>>>> 70b401b... variables - install [#168180832]
 
 * **A PCF operator with admin rights**.
 For more information, see [Operators](https://docs.pivotal.io/pivotalcf/customizing/user-types.html#operator).
@@ -22,33 +33,41 @@ For more information, see [Operators](https://docs.pivotal.io/pivotalcf/customiz
 For compatible versions, see the [Product Snapshot](./index.html#snapshot).
 
 * **At least 1&nbsp;GB of memory free on each VM**.
+<<<<<<< HEAD
   ClamAV for PCF uses 610&nbsp;MB of memory.
 
 * **An external mirror**. If you do not have an external mirror, Pivotal recommends that you install
   the ClamAV Mirror for PCF.
   For instructions, see [Installing and Configuring ClamAV Mirror for PCF](./install-mirror.html).
+=======
+  <%= vars.product_name %> uses 610&nbsp;MB of memory.
 
-## <a id='install-addon'></a> Install <%= vars.product_short %>
+* **An external mirror**. If you do not have an external mirror, Pivotal recommends that you install
+  the <%= vars.product_name_mirror %>.
+  For instructions, see [Installing and Configuring <%= vars.product_full_mirror %>](./install-mirror.html).
+>>>>>>> 70b401b... variables - install [#168180832]
 
-To install the <%= vars.product_short %> tile on the Ops Manager Installation Dashboard, do the following:
+## <a id='install-addon'></a> Install <%= vars.product_name %>
+
+Install the <%= vars.product_name %> tile on the Ops Manager Installation Dashboard:
 
 1. Download the product file from [Pivotal Network](https://network.pivotal.io/products/p-clamav-addon).
 
 1. Navigate to the Ops Manager Installation Dashboard and select **Import a Product** to upload the product file.
 
-1. Under the **Import a Product** button, click **+** next to the version number of <%= vars.product_short %>.
+1. Under the **Import a Product** button, click **+** next to the version number of <%= vars.product_name %>.
 This adds the tile to your staging area.
 
-1. Click the newly added **<%= vars.product_short %>** tile.
+1. Click the newly added **<%= vars.product_full %>** tile.
 
-## <a id='configure'></a> Configure <%= vars.product_short %>
-To configure <%= vars.product_short %>, do the following:
+## <a id='configure'></a> Configure <%= vars.product_name %>
+To configure <%= vars.product_name %>:
 
-1. Select the **ClamAV Configuration** pane.
-  ![Configure ClamAV](configure.png)
+1. Select **ClamAV Configuration**.
+  ![Configure Anti-Virus](configure.png)
+<%# TODO Chris: Change this once UI is renamed %>
 
 1. Configure the following fields:
-<%# TODO Chris: double-check UI %>
 
     <table class="nice">
       <th>Field</th>
@@ -59,7 +78,11 @@ To configure <%= vars.product_short %>, do the following:
           Select the method for receiving your virus databases from an upstream mirror.
           <ul>
             <li><strong>Official mirror (database.clamav.net)</strong>: Select this to have the mirror fetch databases from database.clamav.net.</li>
+<<<<<<< HEAD
             <li><strong>Use a deployed mirror from the ClamAV Mirror tile</strong>: For more information, see <a href="./install-mirror.html">Installing and Configuring ClamAV Mirror for PCF</a>.
+=======
+            <li><strong>Use a deployed mirror from the ClamAV Mirror tile</strong>: For more information, see <a href="./install-mirror.html">Installing and Configuring <%= vars.product_full_mirror %></a>.
+>>>>>>> 70b401b... variables - install [#168180832]
             <li><strong>Existing mirror</strong>: Select this to enter a list of hostnames or IPs of mirrors.</li>
           </ul>
         </td>
@@ -67,11 +90,12 @@ To configure <%= vars.product_short %>, do the following:
       <tr>
         <td><strong>(Optional) Enable on-access scanning</strong></td>
         <td>Select this option if you want to scan files immediately after they are modified.
-        <p class="note"><strong>Note</strong>: On-Access Scan is not supported on Windows.</p></td>
+        <p class="note"><strong>Note</strong>: On-Access Scan is not supported on Windows.
+        </p>
       </tr>
       <tr>
         <td><strong>Memory limit (in bytes)</strong></td>
-        <td>Enter the maximum amount of user memory (including file cache) in bytes that ClamAV can use.
+        <td>Enter the maximum amount of user memory (including file cache) in bytes that <%= vars.product_name %> can use.
           The default value is <code>1610612736</code>.</td>
       </tr>
       <tr>
@@ -82,7 +106,7 @@ To configure <%= vars.product_short %>, do the following:
       </tr>
       <tr>
         <td><strong>(Optional) Enforce CPU limit</strong></td>
-        <td>Set the limit for how much CPU ClamAV processes can use.<br>
+        <td>Set the limit for how much CPU <%= vars.product_name %> processes can use.<br>
           <ul>
             <li><strong>Enable</strong>: Select this to enforce the limit.</li>
             <li><strong>CPU limit (percentage)</strong>: Enter the CPU percentage limit.</li>
@@ -111,7 +135,7 @@ To configure <%= vars.product_short %>, do the following:
 
          <div class="note"><strong>Note: </strong> Add this path to the
            <strong>Directories and files that will be ignored by ClamAV</strong> list below.
-            If you do not do this, then ClamAV:
+            If you do not do this, then <%= vars.product_name %>:
             <ul>
               <li>Detects the moved or copied file</li>
               <li>Logs redundant alerts</li>
@@ -122,24 +146,25 @@ To configure <%= vars.product_short %>, do the following:
       </tr>
       <tr>
         <td><strong>Directories and files that will be ignored by ClamAV</strong></td>
-        <td>Enter directories in a comma-separated list for ClamAV to not scan.
+        <td>Enter directories in a comma-separated list for <%= vars.product_name %> to not scan.
           The default value is "<code>/proc/</code>,<code>/sys/</code>".
-          This configures ClamAV scans to exclude the <code>/proc</code> and
+          This configures <%= vars.product_name %> scans to exclude the <code>/proc</code> and
           <code>/sys</code> directories.<br><br>
           Pivotal recommends that you ignore the <code>/proc</code>,
           <code>/sys</code>, and <strong>Destination for infected files</strong> directories.</td>
       </tr>
       <tr>
         <td><strong>List of signature names that will be ignored by ClamAV (Used for false positives)</strong></td>
-        <td>Enter signature names in a comma-separated list for ClamAV to whitelist. For example,<br>
+        <td>Enter signature names in a comma-separated list for <%= vars.product_name %> to whitelist. For example,<br>
           <code>Eicar-Test-Signature, Clamav.Test.File-7</code><br>
-          configures ClamAV to ignore the <strong>Eicar Test File</strong>
+          configures <%= vars.product_name %> to ignore the <strong>Eicar Test File</strong>
           and <strong>ClamAV Test File-7</strong> signatures.</td>
       </tr>
     </table>
     <br>
 
 <%# TODO Chris: Is there a list anywhere to find signatures that can be ignored in "List of signature names that will be ignored by ClamAV (Used for false positives)"?%>
+<%# TODO Chris: Change "will" in the field above (Avoid "will" as we prefer the present tense). %>
 
 1. Click **Save**.
 
@@ -151,11 +176,10 @@ It takes about a week for ClamAV to verify and publish a new database.
 
 
 ## <a id='proxy'></a> Configure HTTP Proxy
-If you require a proxy server for ClamAV jobs to connect to the internet to
-update their virus definitions, you can configure one.
-To do this, do the following:
+If you require a proxy server for <%= vars.product_name %> jobs to connect to the internet to
+update their virus definitions, you can configure one:
 
-1. Select the **HTTP Proxy Configuration for ClamAV Jobs** pane.
+1. Select **HTTP Proxy Configuration for ClamAV Jobs**.
 ![Configure HTTP Proxy](http-proxy.png)
 
 1. Set **HTTP proxy for ClamAV jobs to get database updates** to **Enabled**.
@@ -164,17 +188,17 @@ To do this, do the following:
 
 
 ## <a id='scheduled'></a> Configure Scheduled Scan
-ClamAV can be configured to run a virus scan `hourly` or `daily`.
+<%= vars.product_name %> can be configured to run a virus scan `hourly` or `daily`.
 The default value is `daily`.
 The format of these values must be in 24-hour format `HH:MM`.
 
-To change the scheduled scan value, do the following:
+To change the scheduled scan value:
 
-1. Select the **Scheduled Scans** pane.
+1. Select **Scheduled Scans**.
 ![Configure Scheduled Scan](scheduled-scans.png)
 <%# TODO: Chris to check if this screenshot is accurate %>
 
-1. Set **Interval for scheduled scans to run** to one of the following:
+1. Set **Interval for scheduled scans to run** to one of these options:
   * **Hourly**
   * **Daily** (default)
   * **Disabled**
@@ -185,7 +209,7 @@ To do this, set **Earliest time that a daily scheduled scan can start** and
 
 ## <a id="apply-changes"></a> Apply Changes from Your Configuration
 Your installation is not complete until you apply your configuration changes.
-To do this, follow the procedure below:
+To do this, complete this procedure:
 
 1. Return to the Ops Manager Installation Dashboard.
 1. Click **Review Pending Changes**.
@@ -194,22 +218,22 @@ To do this, follow the procedure below:
 <br>
 <hr style="height:1px;border:none;color:#333;background-color:#333;" />
 
-##<a id="scan-containers"></a> (Optional) Configure ClamAV to Exclude Duplicate Logs on Containers
-You can use ClamAV to scan the following:
+##<a id="scan-containers"></a> (Optional) Configure <%= vars.product_name %> to Exclude Duplicate Logs on Containers
+You can use <%= vars.product_name %> to scan:
 
-* Garden containers on the Diego Cell VMs in Pivotal Application Service (PAS)
-* Containers on the Kubernetes worker node VMs in Enterprise Pivotal Container Service (Enterprise PKS)
+* Garden containers on the Diego Cell VMs in Pivotal Application Service (PAS).
+* Containers on the Kubernetes worker node VMs in Enterprise Pivotal Container Service (Enterprise PKS).
 
 However, duplicate logs about the same file appear under the `diff`,
 `rootfs`, or `merged` directories as a consequence of OverlayFS implementation.
 
-To configure ClamAV to ignore duplicate logs for these directories, see the optional
+To configure <%= vars.product_name %> to ignore duplicate logs for these directories, see the optional
 [Exclude Duplicate Logs on Garden Containers](#garden) or
 [Exclude Duplicate Logs on Containers in Enterprise PKS](#pks) sections below:
 
 
 ###<a id="garden"></a> (Optional) Exclude Duplicate Logs on Garden Containers
-When ClamAV scan results detect potential malware on the Garden containers,
+When <%= vars.product_name %> scan results detect potential malware on Garden containers,
 logs are reported for both the `diff` and `rootfs` directories.
 
 This is because the `rootfs` directory is the projection of
@@ -223,20 +247,21 @@ For more information about GrootFS OverlayFS implementation, see
 in the Cloud Foundry documentation.
 
 #### Procedure
-To configure ClamAV to ignore duplicate logs for these directories, do the following:
+To configure <%= vars.product_name %> to ignore duplicate logs for these directories:
 
-1. Select the **ClamAV Configuration** pane.
+1. Select **ClamAV Configuration**.
 1. Enter the following ignore pattern into the **Directories and files that will
 be ignored by ClamAV** field:
 
     ```
     ^/var/vcap/data/grootfs/store/(un)?privileged/images/[\w-]+/rootfs/.*$
     ```
-    ![Directories and files that will be ignored by ClamAV](ignore-file.png)
+    ![Directories and files that will be ignored by Anti-Virus](ignore-file.png)
     <p class="note"><strong>Note:</strong>
       Adding this ignore pattern means that files and directories in the
       <code>/var/vcap/data/grootfs/store/unprivileged/images/UUID/rootfs</code>
-      directory are ignored by ClamAV. <code>UUID</code> is the ID of the container.
+      directory are ignored by <%= vars.product_name %>.
+      <code>UUID</code> is the ID of the container.
     </p>
 1. Click **Save**.
 1. To apply the configuration change, follow the instructions in
@@ -246,7 +271,7 @@ For an example log message, see [Container Log Messages](./monitoring-logs.html#
 
 
 ###<a id="pks"></a> (Optional) Exclude Duplicate Logs on Containers in Enterprise PKS
-When ClamAV scan results detect potential malware on containers of the Kubernetes
+When <%= vars.product_name %> scan results detect potential malware on containers of the Kubernetes
 worker node VMs in Enterprise PKS, logs are reported for both the
 `diff` and `merged` directories.
 
@@ -259,20 +284,20 @@ For more information about Docker OverlayFS implementation, see
 in the Docker documentation.
 
 #### Procedure
-To configure ClamAV to ignore duplicate logs for these directories, do the following:
+To configure <%= vars.product_name %> to ignore duplicate logs for these directories:
 
-1. Select the **ClamAV Configuration** pane.
+1. Select **ClamAV Configuration**.
 1. Enter the following ignore pattern into the **Directories and files that will
 be ignored by ClamAV** field:
 
     ```
     ^/var/vcap/store/docker/docker/overlay2/\w+/merged/.*$
     ```
-    ![Directories and files that will be ignored by ClamAV](ignore-file.png)
+    ![Directories and files that will be ignored by Anti-Virus](ignore-file.png)
     <p class="note"><strong>Note:</strong>
       Adding this ignore pattern means that files and directories in the
       <code>/var/vcap/data/grootfs/store/unprivileged/images/UUID/merged</code>
-      directory are ignored by ClamAV. <code>UUID</code> is the ID of the container.
+      directory are ignored by <%= vars.product_name %>. <code>UUID</code> is the ID of the container.
     </p>
 1. Click **Save**.
 1. To apply the configuration change, follow the instructions in
