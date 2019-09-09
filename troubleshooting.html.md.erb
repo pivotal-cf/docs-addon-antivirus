@@ -6,7 +6,7 @@ owner: Security Engineering
 <strong><%= modified_date %></strong>
 
 This topic provides instructions for troubleshooting <%= vars.product_full %>
-and ensuring that it is protecting your <%= vars.platform %> deployment.
+and verifying that it is protecting your <%= vars.platform %> deployment.
 
 ## <a id="installation"></a> Installation Issues
 
@@ -14,7 +14,7 @@ and ensuring that it is protecting your <%= vars.platform %> deployment.
 
 #### Symptom
 Applying changes in Ops Manager fails.
-The bottom of the changelog contains an error message similar to the following:
+The bottom of the changelog contains an error message similar to:
 
 <pre class="terminal">...
 Started updating job nats > nats/0 (12bfae02-b4af-4104-b2bd-227ff07b2d92) (canary). Done (00:02:31)
@@ -97,11 +97,12 @@ To resolve this issue, verify that:
 
 If the local mirror is up-to-date and <%= vars.product_name %>
 is still failing to detect a malware sample, you might have encountered a new threat.
-Pivotal recommends alerting the community via existing channels and reporting
+Pivotal recommends alerting the community using existing channels and reporting
 the suspicious file directly to the ClamAV team.
 
 <p class="note"><strong>Note</strong>: Pivotal does not provide support for ClamAV detection failures,
-  mirror coordination, or threat tracking activity.</p>
+  mirror coordination, or threat tracking activity.
+</p>
 
 <hr>
 
@@ -113,7 +114,7 @@ non-malicious file is reported to be a virus.
 
 ####Explanation
 <%= vars.product_name %> compares files to its database of known malicious patterns.
-<%= vars.product_name %> may detect a non-malicious file as a virus
+<%= vars.product_name %> might detect a non-malicious file as a virus
 due to a coincidental similarity to those patterns.
 
 ####Solution
@@ -123,7 +124,7 @@ It takes about a week for ClamAV to verify and publish a new database.
 
 <hr>
 
-### <a id='cpu-spikes-clamav'></a> CPU Spikes While Using <%= vars.product_name %>
+### <a id='cpu-spikes-clamav'></a> ikes While Using <%= vars.product_name %>
 
 ####Symptom
 <%= vars.product_name %> is taking more CPU resources than assigned in its configuration.
@@ -136,9 +137,9 @@ more CPU resources when all other processes are idle,
 because it does not impact their performance.
 
 ####Solution
-This is expected behavior from cgroups.
+In most cases this is behavior from cgroups.
 If a hard limit is required, configure the `enforce_cpu_limit` Linux property.
-For more information, see [clamav.yml Template for Linux](./install.html#linux-template) Linux property.
+For more information, see [clamav.yml Template for Linux](./install.html#linux-template).
 
 <hr>
 
@@ -146,7 +147,7 @@ For more information, see [clamav.yml Template for Linux](./install.html#linux-t
 
 ####Symptom
 <%= vars.product_name %> fails to start and `/var/log/syslog` reports `Memory cgroup out of memory:
-Kill process` on the `clamd` process similar to the following:
+Kill process` on the `clamd` process similar to:
 
 <pre class="terminal">2019-02-20T19:35:40.249205+00:00 localhost kernel: [  254.669948] Memory cgroup out of memory: Kill process 7493 (clamd) score 586 or sacrifice child
 2019-02-20T19:35:40.249205+00:00 localhost kernel: [  254.679053] Killed process 7527 (clamd) total-vm:786136kB, anon-rss:626692kB, file-rss:1592kB
@@ -164,7 +165,8 @@ To configure the memory limit, configure the `memory_limit` Linux property.
 For more information, see [clamav.yml Template for Linux](./install.html#linux-template).
 
 <p class="note warning"><strong>Warning:</strong> When updating the memory limit, ensure that all VMs,
-including errand VMs, have sufficient memory resources.</p>
+including errand VMs, have sufficient memory resources.
+</p>
 <hr>
 
 ### <a id='insufficient-cpu'></a> Insufficient CPU Limit While Using <%= vars.product_name %>
@@ -173,7 +175,7 @@ including errand VMs, have sufficient memory resources.</p>
 <%= vars.product_name %> fails to start during deployment.
 However, the `clamd` and `freshclam` processes eventually run.<br>
 
-The deployment failure log looks similar to the following:
+The deployment failure log looks similar to:
 
 <pre class="terminal">
 Task 1071 | 19:40:49 | Updating instance clamav_1: clamav_1/d5cfe4bd-b606-4372-8481-187f4cf57e6c (0) (canary) (00:05:26)
@@ -207,13 +209,13 @@ if other processes are not using CPU resources.<br>
 For more information, see [clamav.yml Template for Linux](./install.html#linux-template).
 
 + From the **Ops Manager Installation Dashboard**, navigate to the tile with the failing `clamav_1` job.
-On the **Resource Config** pane, adjust the **VM Type** for the **ClamAV** job
+On **Resource Config**, adjust the **VM Type** for the **ClamAV** job
 to have sufficient CPU resources.
 
 ### <a id='too-many-files'></a> Too Many Open Files Error While Using <%= vars.product_name_mirror %>
 
 #### Symptom
-The C<%= vars.product_name_mirror %> log reports that too many log files are open:
+The <%= vars.product_name_mirror %> log reports that too many log files are open:
 
 <pre class="terminal">
 2019/07/29 20:02:41 10.0.0.72 is requesting main.cvd
