@@ -12,7 +12,7 @@ to verify regular activity and generate alerts for virus detections or outdated 
 
 ##<a id="clamav-logs"></a> <%= vars.product_name %> Logs
 
-There are three distinct <%= vars.product_name %> apps that run on each VM, freshclam, clamd, and clamdscan.
+There are three distinct <%= vars.product_name %> apps that run on each VM: freshclam, clamd, and clamdscan.
 These apps work together to detect viruses and protect the VM.
 
 Each app writes its own log file.
@@ -21,21 +21,21 @@ is working correctly and if viruses have been found.
 
 Pivotal recommends that you enable syslog forwarding so that the messages from each of the three log files
 is aggregated into the syslog file on the remote syslog server.
-Use your preferred monitoring and alerting tool to review the <%= vars.product_name %> log messages.
+Then you can use your preferred monitoring and alerting tool to review the <%= vars.product_name %> log messages.
 
 For an example of how <%= vars.product_name %> messages appear in the syslog file, see [Syslog Format](#format) below.
 
-For information on each app, see [freshclam](#freshclam-app), [clamd](#clamd-app),
+For information about each app, see [freshclam](#freshclam-app), [clamd](#clamd-app),
 and [clamdscan](#clamdscan-app) below.
 
 ###<a id="freshclam-app"></a> freshclam App
 
 The freshclam app updates the database that stores the known virus signatures.
 
-The messages output by the freshclam app, indicate when freshclam checks for updates,
-download progress, and downloaded signature version.
+The messages output by the freshclam app indicate when freshclam checks for updates,
+what the download progress is, and the downloaded signature version.
 
-The log file for the freshclam app is `/var/vcap/sys/log/<%= vars.product_name %>/freshclam.log`.
+The log file for the freshclam app is `/var/vcap/sys/log/clamav/freshclam.log`.
 
 ###<a id="clamd-app"></a> clamd App
 
@@ -44,7 +44,7 @@ clamd works with clamdscan to scan files or directories.
 The clamd job uses the database of virus signatures that the freshclam job updates.
 
 The messages output by the clamd app show files where viruses are found, the name of the  virus signature,
-and any action taken, such as moving, copying, or deleting.
+and any action taken (such as moving, copying, or deleting).
 
 The log file for the clamd app is `/var/vcap/sys/log/clamav/clamd.log`.
 
@@ -186,7 +186,7 @@ The following tables lists common messages that you see when <%= vars.product_na
 
 The freshclam job on each VM is responsible for updating the database that stores the known virus signatures.
 
-freshclam log entries pertain to whether or not the virus-signature database is up-to-date.
+freshclam log entries relate to whether or not the virus-signature database is up-to-date.
 
 
 * <a id="freshclam-check"></a>Check for Updates
@@ -237,7 +237,7 @@ freshclam log entries pertain to whether or not the virus-signature database is 
 
 ##<a id="clamd"></a>clamd Log Messages
 
-clamd is the anti-virus scanner that searches for viruses.
+clamd is the antivirus scanner that searches for viruses.
 The clamd job uses the database of virus signatures that the freshclam job updates.
 
 
@@ -287,7 +287,7 @@ The clamd job uses the database of virus signatures that the freshclam job updat
 
 ##<a id="clamdscan"></a>clamdscan Log Messages
 
-clamdscan is searches files and directories for viruses.
+clamdscan searches files and directories for viruses.
 
 * <a id="clamd-start-scan"></a>Start Scheduled Scan
 
@@ -328,8 +328,8 @@ Eicar-Test-Signature FOUND
 ##<a id="format"></a><%= vars.product_name %> Log Format
 
 The logs that <%= vars.product_name %> itself outputs do not adhere to a specific structure.
-However, the syslog forwarder component, which is on all VM's,
-encapsulates <%= vars.product_name %>'s log and prepends the necessary headers so that the resulting logs adhere
+However, the syslog forwarder component (which is on all VMs)
+encapsulates <%= vars.product_name %>'s log, and prepends the necessary headers so that the resulting logs adhere
 to the syslog format.
 
 With syslog-forwarder, the syslog format is:
@@ -353,12 +353,12 @@ With syslog-forwarder, the syslog format is:
 
 Where:
 
-* `APP-NAME` is `freshclam`, `clamdscan`, or `clamd`.
 * <code>\<PRI></code> is `<14>`.
+* `APP-NAME` is `freshclam`, `clamdscan`, or `clamd`.
 * `MESSAGE` is the output from an <%= vars.product_name %> app.
-   Examples of the output messages are shown [Log Messages](#) above.
+   Examples of the output messages are shown in [Log Messages](#messages) above.
 
-For example, the first two lines of the Scan Finished message appear in the syslog file as follows:
+For example, the first two lines of the "Scan Finished" message appearing in the syslog file below:
 
 <pre class="terminal">
 <14> \
