@@ -15,13 +15,13 @@ This topic contains release notes for <%= vars.product_full %> (formerly known a
 
 New features and changes in this release:
 
-  * <%= vars.product_full_mirror %> is a new tile that allows for easier deployment of a virus definition database mirror.
+  * **<%= vars.product_full_mirror %>** is a new tile that allows for easier deployment of a virus definition database mirror.
       * The mirror serves up the virus definition databases for VMs with <%= vars.product_full %> installed.
       * The mirror validates the integrity and authenticity of the definition database.
 
-  * <%= vars.product_full %> is now a tile.
+  * **<%= vars.product_full %>** is now a tile.
       * The tile integrates with the <%= vars.product_name_mirror %> tile.
-      * For more information on upgrading,
+      * For more information about upgrading,
         see [Upgrading <%= vars.product_full %>](http://localhost:4567/addon-antivirus/1-n/upgrade.html).
 
   * Updates default cgroup `memory_limit` to 1.5&nbsp;GB
@@ -37,7 +37,7 @@ New features and changes in this release:
 
 This release includes the following security fixes:
 
-  * Updates the bundled ClamAV open source distribution to v0.101.4 in order to address:
+  * Updates the bundled ClamAV open source distribution to v0.101.4 to address:
 
     * Critical [CVE-2019-12900](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-12900):
      BZ2_decompress in decompress.c in bzip2 through 1.0.6 has an out-of-bounds
@@ -49,7 +49,7 @@ This release includes the following security fixes:
     For more information about this distribution, see
     [ClamAV 0.101.4](https://blog.clamav.net/2019/08/clamav-01014-security-patch-release-has.html) on the ClamAV blog.
 
-  * Updates the go version to [1.12.9](https://golang.org/doc/devel/release.html#go1.12.minor) in order to address:
+  * Updates the go version to [1.12.9](https://golang.org/doc/devel/release.html#go1.12.minor) to address:
 
     * High [CVE-2019-9512](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), also known as Ping Flood:
         * The attacker sends continual pings to an HTTP/2 peer, causing the peer to build an internal queue of responses.
