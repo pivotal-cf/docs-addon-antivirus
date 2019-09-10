@@ -5,12 +5,12 @@ owner: Pivotal Compliance and Innovation (PCI) Team
 <strong><%= modified_date %></strong>
 
 This topic describes how to update virus definitions on an internal
-<%= vars.product_full_mirror %> that has been deployed by the <%= vars.product_full %> tile.
+<%= vars.product_full %> mirror that has been deployed by the <%= vars.product_full_mirror %> tile.
 
 The <%= vars.product_full_mirror %> tile and the <%= vars.product_full %>
 tile work together as follows:
 
-  - The <%= vars.product_full %> tile runs <%= vars.product_name %> on all BOSH VMs,
+  - The <%= vars.product_full %> tile runs <%= vars.product_name %> on all BOSH VMs
   by adding it to the BOSH runtime config.
   - The <%= vars.product_full_mirror %> tile
   creates an internal mirror that is used by the ClamAV components running on BOSH VMs.
@@ -27,13 +27,13 @@ is running in an online or air-gapped network:
 
 * **Online Network**: The <%= vars.product_name_mirror %> updates its virus definitions automatically.
 * **Air-gapped Network**: An operator must manually download new virus definitions
-and run `bosh scp` to update them on the internal <%= vars.product_name_mirror %>.
+and run `bosh scp` to update them on the internal <%= vars.product_name %> mirror.
 
 For more information and diagrams about this architecture,
 see [How Virus Definitions Propagate to VMs](./index.html#propagate).
 
 The following sections describe both of these scenarios
-and explain how to manually update virus definitions on the internal <%= vars.product_name_mirror %>.
+and explain how to manually update virus definitions on the internal <%= vars.product_name %> mirror.
 
 ###<a id="automatic"></a>Automatic Updates with Online Networks
 
@@ -41,15 +41,15 @@ When your environment runs on an online network,
 the <%= vars.product_name_mirror %> VM regularly checks the external ClamAV database every two hours.
 
 When new virus definitions are present on the external database,
-<%= vars.product_name %> downloads them automatically.
+<%= vars.product_name_mirror %> downloads them automatically.
 
 ###<a id="manual"></a>Manually Update on an Air-gapped Network
 
-ClamAV jobs use three virus definitions files, `main.cvd`, `daily.cvd`, and `bytecode.cvd`.
-The internal <%= vars.product_name_mirror %>
-serves these three files to all ClamAV jobs in your environment.
+<%= vars.product_name %> jobs use three virus definitions files, `main.cvd`, `daily.cvd`, and `bytecode.cvd`.
+The internal <%= vars.product_name_mirror %> serves these three files to all
+<%= vars.product_name %> jobs in your environment.
 
-To update the virus definitions, do this:
+To update the virus definitions:
 
 1. Download the three virus definition files from the ClamAV virus
 database mirror or an equivalent external mirror.
@@ -72,7 +72,7 @@ You can access the ClamAV mirror at the the following URLs:
    For instructions,
    see [Log in to the Ops Manager VM with SSH](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#ssh).
 
-1. Find the name of your <%= vars.product_name_mirror %> deployment by running the following command:
+1. Find the name of your <%= vars.product_name_mirror %> deployment by running:
 
     ```
     bosh -e BOSH-ENVIRONMENT deployments | grep p-clamav-mirror | cut -f1
@@ -89,7 +89,7 @@ You can access the ClamAV mirror at the the following URLs:
 
 
 1. Copy the virus definitions to your internal <%= vars.product_name_mirror %>
-by running the following command:
+  by running:
 
     ```
     bosh -e BOSH-ENVIRONMENT -d CLAMAV-DEPLOYMENT-NAME scp /path/to/local/main.cvd /path/to/local/daily.cvd /path/to/local/bytecode.cvd :/var/vcap/data/clamav-mirror/unvalidated
@@ -100,15 +100,15 @@ by running the following command:
     <pre class="terminal">$ bosh -e my-env -d p-clamav-mirror-4cb8cfbeee717258d72e scp main.cvd daily.cvd bytecode.cvd :/var/vcap/data/clamav-mirror/unvalidated</pre>
 
 1. Verify that the mirror validated and updated its local copies of the virus
-    definitions by running the following command:
+    definitions by running:
 
     ```
     bosh -e BOSH-ENVIRONMENT -d CLAMAV-DEPLOYMENT-NAME ssh -c "sudo cat FILE | grep \"updated /var/vcap/store\""
     ```
 
     Where `FILE` is determined by the output destination configured in
-    the **ClamAV Mirror Configuration** pane of the <%= vars.product_full_mirror %> tile.
-    Use one of the following:
+    **ClamAV Mirror Configuration** of the <%= vars.product_full_mirror %> tile.
+    Use one of these:
     * `/var/vcap/sys/log/clamav-mirror/clamav-mirror.stdout.log` for stdout
     * `/var/vcap/sys/log/clamav-mirror/clamav-mirror.stderr.log` for stderr
     * `/var/log/syslog` for syslog
