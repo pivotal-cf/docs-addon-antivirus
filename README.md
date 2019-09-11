@@ -25,7 +25,7 @@ pivotal-cf/docs-book-antivirus builds both the **edge** version (next unreleased
 ## Style Guide
 _These are a handful of style issues I noticed with the original version of this documentation._
 
-+ **For v2.0 and later**: The product name is "ClamAV for PCF".
++ **For v2.0 and later**: The product name is "Pivotal Anti-Virus".
 
 + **For v1.4.x and earlier:** The product name is "ClamAV Add-on for PCF".
 
@@ -47,8 +47,8 @@ Style list in progress for v2
 
 | Term | Meaning | Alternative |
 |------|---------|-------------|
-|ClamAV Mirror for PCF | Name of the product tile that installs the mirror | |
-|ClamAV for PCF | Name of the product tile that scans PCF VMs for viruses | |
+|Pivotal Anti-Virus Mirror | Name of the product tile that installs the mirror | |
+|Pivotal Anti-Virus | Name of the product tile that scans PCF VMs for viruses | |
 | private ClamAV mirror |  |  |
 |ClamAV mirror deployment |  | |
 |ClamAV mirror job | | |
