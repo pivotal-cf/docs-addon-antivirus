@@ -12,7 +12,7 @@ Pivotal recommends that you install this tile before installing <%= vars.product
 If you do not have an external mirror for ClamAV jobs to fetch database updates from,
 you can deploy one using the <%= vars.product_name_mirror %>.
 
-This deployed internal mirror can support air-gapped environments as well as networked environments:
+This deployed internal mirror can support air-gapped environments and n<%= vars.product_name_mirror %>etworked environments:
 
 * **Online Network:** You can deploy the internal <%= vars.product_name_mirror %> as a proxy.
   This acts as a database for the virus definitions if the online virus database experiences downtime.
@@ -21,7 +21,7 @@ This deployed internal mirror can support air-gapped environments as well as net
 
 
 If you have already deployed an external mirror, you can use that instead of
-installing this tile, and continue to [Installing and Configuring <%= vars.product_full %>](./install.html).
+installing this tile and continue to [Installing and Configuring <%= vars.product_full %>](./install.html).
 
 ##<a id="prereqs"></a>Prerequisites
 
@@ -38,9 +38,9 @@ For compatible versions, see the [Product Snapshot](./index.html#snapshot).
 This is so that you can install the <%= vars.product_full %> tile after deploying this mirror.
 <%= vars.product_name %> uses 610&nbsp;MB of memory.
 
-## <a id='install-mirror'></a> Install <%= vars.product_full_mirror %>
+## <a id='install-mirror'></a> Install <%= vars.product_name_mirror %>
 
-To install the <%= vars.product_full_mirror %> tile:
+To install the <%= vars.product_name_mirror %> tile:
 
 1. Download the product file from [Pivotal Network](https://network.pivotal.io/products/p-clamav-addon).
   * For air-gapped networks, follow your company's offline installation protocols.
@@ -48,10 +48,10 @@ To install the <%= vars.product_full_mirror %> tile:
 
 1. Navigate to the Ops Manager Installation Dashboard and select **Import a Product** to upload the product file.
 
-1. Under the **Import a Product** button, click **+** next to the version number of <%= vars.product_full_mirror %>.
+1. Under the **Import a Product** button, click **+** next to the version number of <%= vars.product_name_mirror %>.
 This adds the tile to your staging area.
 
-1. Click the newly added **<%= vars.product_full_mirror %>** tile.
+1. Click the newly added **<%= vars.product_name_mirror %>** tile.
 
 ## <a id='azs'></a> Assign AZs and Networks
 
@@ -120,7 +120,7 @@ To configure <%= vars.product_name_mirror %>:
       </tr>
     </table>
 
-    <p class="note"><strong>Note: </strong> <%= vars.product_full_mirror %> serves
+    <p class="note"><strong>Note: </strong> <%= vars.product_name_mirror %> serves
       virus definitions to your environment for <%= vars.product_full %> to use,
       but the <%= vars.product_name %> mirror needs to get databases itself.
       You can configure the ClamAV mirror to get virus definitions using the
@@ -145,7 +145,7 @@ To configure <%= vars.product_name_mirror %>:
   1. Click **Save**.
 
 ##<a id="syslog"></a> Configure System Logging
-Follow the steps below to enable system logging for <%= vars.product_full_mirror %>.
+Follow the steps below to enable system logging for <%= vars.product_name_mirror %>.
 
 1. Select **Syslog**.
 ![Syslog](mirror-syslog.png)
