@@ -14,9 +14,9 @@ See the following topics to ensure you have the required component versions and 
 * [Product Snapshot](./index.html#snapshot)
 * [Prerequisites](./install.html#prereqs)
 
-##<a id="upgrade-v1-v2"></a>Replace <%= vars.product_full %> v1.x with v2.x
+##<a id="upgrade-v1-v2"></a>Replace ClamAV Add-on for PCF v1.x with <%= vars.product_full %> v2.x
 
-To uninstall <%= vars.product_full %> v1.x and install v2.x in its place:
+To uninstall ClamAV Add-on for PCF v1.x and install <%= vars.product_full %> v2.x in its place:
 
 1. Retrieve the latest runtime config YML by running the following command:
   <pre>
@@ -48,9 +48,8 @@ To uninstall <%= vars.product_full %> v1.x and install v2.x in its place:
       $ bosh -e my-env update-runtime-config --name=clamav /runtime/config/
     </pre>
 
-1. Follow the instructions in
-[Installing and Configuring <%= vars.product_full %>](./install.html)
-to set up the <%= vars.product_full %> tile.
+1. To set up the <%= vars.product_full %> tile, follow the instructions in
+[Installing and Configuring <%= vars.product_full %>](./install.html).
 
 <%# Un-comment the below once a new 2.x version is released
 ####<a id="upgrade"></a>Upgrade <%= vars.product_full % v2.x or Later
