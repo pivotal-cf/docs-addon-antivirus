@@ -24,13 +24,13 @@ pivotal-cf/docs-book-antivirus builds both the **edge** version (next unreleased
 ## Style Guide
 _These are a handful of style issues I noticed with the original version of this documentation._
 
-+ **For v2.0 and later**: The product name is "ClamAV for PCF".
++ **For v2.0 and later**: The product name is "Pivotal Anti-Virus".
 
 + **For v1.4.x and earlier:** The product name is "ClamAV Add-on for PCF".
 
 + Use "ClamAV manifest" consistently to refer to the clamav.yml file. The original text had the many different terms (ClamAV runtime config portion of the manifest file, ClamAV runtime manifest file, ClamAV manifest, and ClamAV runtime config) all referring to the same thing. This is confusing for learners.
 
-+ Spell out Pivotal Cloud Foundry (PCF) at first use but don't add a registered trademark.
++ Spell out Pivotal Platform at first use but don't add a registered trademark.
 
 + Spell out Pivotal Operations Manager (Ops Manager) at first use.
 
@@ -46,8 +46,8 @@ Style list in progress for v2
 
 | Term | Meaning | Alternative |
 |------|---------|-------------|
-|ClamAV Mirror for PCF | Name of the product tile that installs the mirror | |
-|ClamAV for PCF | Name of the product tile that scans PCF VMs for viruses | |
+|Pivotal Anti-Virus Mirror | Name of the product tile that installs the mirror | |
+|Pivotal Anti-Virus | Name of the product tile that scans the Pivotal Platform VMs for viruses | |
 | private ClamAV mirror |  |  |
 |ClamAV mirror deployment |  | |
 |ClamAV mirror job | | |
