@@ -57,12 +57,17 @@ To configure <%= vars.product_name %>:
         <td>
           Select the method for receiving your virus databases from an upstream mirror.
           <ul>
-            <li><strong>Official mirror (database.clamav.net)</strong>: Select this to have the mirror fetch databases from database.clamav.net.</li>
-            <li><strong>Use a deployed mirror from the Anti-Virus Mirror tile</strong>: For more information, see <a href="./install-mirror.html">Installing and Configuring <%= vars.product_full_mirror %></a>.
-            <li><strong>Existing mirror</strong>: Select this to enter a list of hostnames or IPs of mirrors.</li>
+            <li><strong>Official mirror </strong>: Select this to have the mirror fetch databases from database.clamav.net.</li>
+            <li><strong>Deployed mirror from the Pivotal Anti-Virus Mirror Tile</strong>: For more information, see <a href="./install-mirror.html">Installing and Configuring <%= vars.product_full_mirror %></a>.
+            <li><strong>Existing Mirror</strong>: Select this to enter a list of hostnames or IPs of mirrors.</li>
           </ul>
-          For the <strong>Use a deployed mirror from the Anti-Virus Mirror tile</strong> option, a field
-          for <strong>Anti-Virus Mirror Port</strong> appears after the option is selected.
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Anti-Virus Mirror Port</strong></td>
+        <td>Enter the port for Anti-Virus Mirror to use. The default value is <code>6501</code>.
+          <p class="note"><strong>Note: </strong> This port must be the same port used in <strong>Anti-Virus Mirror Port</strong> of the <strong>Pivotal Anti-Virus Mirror</strong> tile. If these ports are not the same, <%= vars.product_name %> database updates and deployments will fail.
+          </p>
         </td>
       </tr>
       <tr>
