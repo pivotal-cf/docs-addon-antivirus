@@ -108,6 +108,13 @@ To configure <%= vars.product_name_mirror %>:
         </td>
       </tr>
       <tr>
+        <td><strong>Anti-Virus Mirror Port</strong></td>
+        <td>
+          Enter the port for Anti-Virus Mirror to use.
+          The default value is <code>6501</code>.
+        </td>
+      </tr>
+      <tr>
         <td><strong>Mirror for Automatic Database Updates</strong></td>
         <td>
           <ul>
@@ -115,6 +122,9 @@ To configure <%= vars.product_name_mirror %>:
             <li><strong>Official mirror (database.clamav.net)</strong>: Select this to have the mirror fetch databases from database.clamav.net</li>
             <li><strong>Existing mirror</strong>: Select this to enter a list of hostnames or IPs of mirrors</li>
           </ul>
+          For the <strong>Official mirror</strong> and <strong>Existing mirror</strong> options, a field
+          for <strong>Number of database checks per day</strong> appears after the
+          option is selected.
         </td>
       </tr>
     </table>
