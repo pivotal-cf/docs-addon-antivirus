@@ -9,7 +9,7 @@ Pivotal recommends that you install this tile before installing <%= vars.product
 
 ##<a id="overview"></a>Overview
 
-If you do not have an external mirror for ClamAV jobs to fetch database updates from,
+If you do not have an external mirror for Anti-Virus jobs to fetch database updates from,
 you can deploy one using the <%= vars.product_name_mirror %>.
 
 This deployed internal mirror can support air-gapped environments and <%= vars.product_name_mirror %> networked environments:
@@ -79,7 +79,7 @@ To assign availability zones (AZs) and networks:
       </tr>
       <tr>
         <td><strong>Network</strong></td>
-        <td>Select a subnet for the <code>clamav_mirror</code> VM. <%# TODO Chris: Replace once VM is renamed %>
+        <td>Select a subnet for the <code>antivirus_mirror</code> VM. <%# TODO Chris: Replace once VM is renamed %>
           <br>This is typically the same subnet that
           includes the Pivotal Application Service (PAS) component VMs.</td>
       </tr>
@@ -90,7 +90,7 @@ To assign availability zones (AZs) and networks:
 ## <a id='configure-mirror'></a> Configure <%= vars.product_name_mirror %>
 To configure <%= vars.product_name_mirror %>:
 
-1. Select **ClamAV Mirror Configuration**.
+1. Select **Anti-Virus Mirror Configuration**.
 <%# TODO Chris: Verify Name %>
 ![Anti-Virus Mirror Configuration](mirror-configure.png)
 
@@ -103,8 +103,8 @@ To configure <%= vars.product_name_mirror %>:
         <td>
           Select the file descriptor to forward your logs through:<br>
           <ul>
-            <li><strong>stdout</strong>: sends messages to <code>/var/vcap/sys/log/clamav-mirror/clamav-mirror.stdout.log</code></li>
-            <li><strong>stderr</strong>: sends messages to <code>/var/vcap/sys/log/clamav-mirror/clamav-mirror.stderr.log</code></li>
+            <li><strong>stdout</strong>: sends messages to <code>/var/vcap/sys/log/antivirus-mirror/antivirus-mirror.stdout.log</code></li>
+            <li><strong>stderr</strong>: sends messages to <code>/var/vcap/sys/log/antivirus-mirror/antivirus-mirror.stderr.log</code></li>
             <li><strong>syslog</strong>: sends messages to <code>/var/log/messages</code></li>
           </ul>
         </td>
@@ -124,7 +124,7 @@ To configure <%= vars.product_name_mirror %>:
     <p class="note"><strong>Note: </strong> <%= vars.product_name_mirror %> serves
       virus definitions to your environment for <%= vars.product_full %> to use,
       but the <%= vars.product_name %> mirror needs to get databases itself.
-      You can configure the ClamAV mirror to get virus definitions using the
+      You can configure the Anti-Virus mirror to get virus definitions using the
       supported options in <strong>Mirror for Automatic Database Updates</strong> above.
     </p>
 
@@ -175,7 +175,7 @@ Follow the steps below to enable system logging for <%= vars.product_name_mirror
 
 ## <a id="scale-deployed-mirror"></a> Scale the Number of Deployed Mirrors
 
-ClamAV jobs do load balancing for you.
+Anti-Virus jobs do load balancing for you.
 
 Pivotal recommends one <%= vars.product_name_mirror %> VM for every 250 VMs with <%= vars.product_name %> installed.
 To scale the number of deployed mirrors:
@@ -184,7 +184,7 @@ To scale the number of deployed mirrors:
 
     ![Resource Config](mirror-resource-config.png)
 
-  1. For `clamav-mirror`, set **INSTANCES** to the number of mirrors that you want to deploy.
+  1. For `antivirus-mirror`, set **INSTANCES** to the number of mirrors that you want to deploy.
 
   1. Click **Save**.
 
@@ -199,5 +199,5 @@ To do this:
 1. Click **Review Pending Changes**.
 1. Unselect all products except **BOSH Director** and **<%= vars.product_name_mirror %>** and click **Apply Changes**.
 1. After **Apply Changes** is complete, if you selected **No Mirror**, upload a set of virus definitions
-to your deployed `clamav-mirrors`.
+to your deployed `antivirus-mirrors`.
 To do this, see [Updating Virus Definitions](./updating-databases.html).

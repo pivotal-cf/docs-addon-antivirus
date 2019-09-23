@@ -35,7 +35,7 @@ The freshclam app updates the database that stores the known virus signatures.
 The messages output by the freshclam app indicate when freshclam checks for updates,
 what the download progress is, and the downloaded signature version.
 
-The log file for the freshclam app is `/var/vcap/sys/log/clamav/freshclam.log`.
+The log file for the freshclam app is `/var/vcap/sys/log/antivirus/freshclam.log`.
 
 ###<a id="clamd-app"></a> clamd App
 
@@ -46,7 +46,7 @@ The clamd job uses the database of virus signatures that the freshclam job updat
 The messages output by the clamd app show files where viruses are found, the name of the  virus signature,
 and any action taken (such as moving, copying, or deleting).
 
-The log file for the clamd app is `/var/vcap/sys/log/clamav/clamd.log`.
+The log file for the clamd app is `/var/vcap/sys/log/antivirus/clamd.log`.
 
 ###<a id="clamdscan-app"></a> clamdscan App
 
@@ -55,7 +55,7 @@ The clamdscan app scans files and directories for viruses using the clamd daemon
 The messages output by the clamdscan app show when a clamdscan has been initiated
 and write a scan summary on completion.
 
-The log file for the clamd app is `/var/vcap/sys/log/clamav/clamdscan.log`.
+The log file for the clamd app is `/var/vcap/sys/log/antivirus/clamdscan.log`.
 
 
 ##<a id="messages"></a>Log Messages
@@ -270,12 +270,12 @@ The clamd job uses the database of virus signatures that the freshclam job updat
 
 * <a id="clamd-virus-moved"></a>Virus Moved
 	<pre class="terminal">
-	/var/vcap/data/test.txt: moved to '/var/vcap/data/clamav/found/test.txt.001'
+	/var/vcap/data/test.txt: moved to '/var/vcap/data/antivirus/found/test.txt.001'
 	</pre>
 
 * <a id="clamd-virus-copied"></a>Virus Copied
 	<pre class="terminal">
-	/var/vcap/data/test.txt: copied to '/var/vcap/data/clamav/found/test.txt.001'
+	/var/vcap/data/test.txt: copied to '/var/vcap/data/antivirus/found/test.txt.001'
 	</pre>
 
 * <a id="clamd-terminated"></a>Process Terminated
