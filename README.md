@@ -43,18 +43,3 @@ _These are a handful of style issues I noticed with the original version of this
 
 + Use initial caps on all headings. Don't capitalize prepositions.
 
-Style list in progress for v2
-
-| Term | Meaning | Alternative |
-|------|---------|-------------|
-|Pivotal Anti-Virus Mirror | Name of the product tile that installs the mirror | |
-|Pivotal Anti-Virus | Name of the product tile that scans PCF VMs for viruses | |
-| private ClamAV mirror |  |  |
-|ClamAV mirror deployment |  | |
-|ClamAV mirror job | | |
-|ClamAV virus database mirror | | |
-|external mirror for ClamAV jobs| | |
-|official mirror| | |
-|ClamAV official mirror| | |
-|virus definition file| | |
-|air-gapped environment| | |
