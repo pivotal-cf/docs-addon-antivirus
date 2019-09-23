@@ -44,9 +44,8 @@ This adds the tile to your staging area.
 ## <a id='configure'></a> Configure <%= vars.product_name %>
 To configure <%= vars.product_name %>:
 
-1. Select **ClamAV Configuration**.
+1. Select **Anti-Virus Configuration**.
   ![Configure Anti-Virus](configure.png)
-<%# TODO Chris: Change this once UI is renamed %>
 
 1. Configure the following fields:
 
@@ -59,7 +58,7 @@ To configure <%= vars.product_name %>:
           Select the method for receiving your virus databases from an upstream mirror.
           <ul>
             <li><strong>Official mirror (database.clamav.net)</strong>: Select this to have the mirror fetch databases from database.clamav.net.</li>
-            <li><strong>Use a deployed mirror from the ClamAV Mirror tile</strong>: For more information, see <a href="./install-mirror.html">Installing and Configuring <%= vars.product_full_mirror %></a>.
+            <li><strong>Use a deployed mirror from the Anti-Virus Mirror tile</strong>: For more information, see <a href="./install-mirror.html">Installing and Configuring <%= vars.product_full_mirror %></a>.
             <li><strong>Existing mirror</strong>: Select this to enter a list of hostnames or IPs of mirrors.</li>
           </ul>
         </td>
@@ -111,7 +110,7 @@ To configure <%= vars.product_name %>:
            while selecting an <strong>Action to take when a virus is found</strong>.
 
          <div class="note"><strong>Note: </strong> Add this path to the
-           <strong>Directories and files that will be ignored by ClamAV</strong> list below.
+           <strong>Directories and files that will be ignored (on Windows)</strong> list below.
             If you do not do this, then <%= vars.product_name %>:
             <ul>
               <li>Detects the moved or copied file</li>
@@ -122,8 +121,8 @@ To configure <%= vars.product_name %>:
         </td>
       </tr>
       <tr>
-        <td><strong>Directories and files that will be ignored by ClamAV</strong></td>
-        <td>Enter directories in a comma-separated list for <%= vars.product_name %> to not scan.
+        <td><strong>Directories and files that will be ignored</strong></td>
+        <td>Enter directories in a comma-separated list for <%= vars.product_name %> to not scan on Linux.
           The default value is "<code>/proc/</code>,<code>/sys/</code>".
           This configures <%= vars.product_name %> scans to exclude the <code>/proc</code> and
           <code>/sys</code> directories.<br><br>
@@ -131,7 +130,11 @@ To configure <%= vars.product_name %>:
           <code>/sys</code>, and <strong>Destination for infected files</strong> directories.</td>
       </tr>
       <tr>
-        <td><strong>List of signature names that will be ignored by ClamAV (Used for false positives)</strong></td>
+        <td><strong>Directories and files that will be ignored on Windows</strong></td>
+        <td>Enter directories in a comma-separated list for <%= vars.product_name %> to not scan on Windows.
+      </tr>
+      <tr>
+        <td><strong>List of signature names that will be ignored (Used for false positives)</strong></td>
         <td>Enter signature names in a comma-separated list for <%= vars.product_name %> to whitelist. For example,<br>
           <code>Eicar-Test-Signature, Clamav.Test.File-7</code><br>
           configures <%= vars.product_name %> to ignore the <strong>Eicar Test File</strong>
@@ -156,10 +159,10 @@ It takes about a week for ClamAV to verify and publish a new database.
 If you require a proxy server for <%= vars.product_name %> jobs to connect to the internet to
 update their virus definitions, you can configure one:
 
-1. Select **HTTP Proxy Configuration for ClamAV Jobs**.
+1. Select **HTTP Proxy Configuration for Anti-Virus Jobs**.
 ![Configure HTTP Proxy](http-proxy.png)
 
-1. Set **HTTP proxy for ClamAV jobs to get database updates** to **Enabled**.
+1. Set **HTTP proxy for Anti-Virus jobs to get database updates** to **Enabled**.
 1. Enter the **Host**, **Port**, **Username** and **Password** in the fields that appear.
 1. Click **Save**.
 
@@ -226,9 +229,9 @@ in the Cloud Foundry documentation.
 #### Procedure
 To configure <%= vars.product_name %> to ignore duplicate logs for these directories:
 
-1. Select **ClamAV Configuration**.
+1. Select **Anti-Virus Configuration**.
 1. Enter the following ignore pattern into the **Directories and files that will
-be ignored by ClamAV** field:
+be ignored** field:
 
     ```
     ^/var/vcap/data/grootfs/store/(un)?privileged/images/[\w-]+/rootfs/.*$
@@ -263,9 +266,9 @@ in the Docker documentation.
 #### Procedure
 To configure <%= vars.product_name %> to ignore duplicate logs for these directories:
 
-1. Select **ClamAV Configuration**.
+1. Select **Anti-Virus Configuration**.
 1. Enter the following ignore pattern into the **Directories and files that will
-be ignored by ClamAV** field:
+be ignored** field:
 
     ```
     ^/var/vcap/store/docker/docker/overlay2/\w+/merged/.*$

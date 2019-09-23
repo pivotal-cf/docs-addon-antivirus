@@ -75,50 +75,50 @@ You can access the ClamAV mirror at the the following URLs:
 1. Find the name of your <%= vars.product_name_mirror %> deployment by running:
 
     ```
-    bosh -e BOSH-ENVIRONMENT deployments | grep p-clamav-mirror | cut -f1
+    bosh -e BOSH-ENVIRONMENT deployments | grep p-antivirus-mirror | cut -f1
     ```
 
     For example:
 
-    <pre class="terminal">$ bosh -e my-env deployments | grep p-clamav-mirror | cut -f1</pre>
+    <pre class="terminal">$ bosh -e my-env deployments | grep p-antivirus-mirror | cut -f1</pre>
 
-    The deployment name starts with `p-clamav-mirror-` and is followed by a string of characters.
+    The deployment name starts with `p-antivirus-mirror-` and is followed by a string of characters.
     For example:
 
-    <pre class="terminal">$ p-clamav-mirror-08815ca5ead252c4b8d8</pre>
+    <pre class="terminal">$ p-antivirus-mirror-08815ca5ead252c4b8d8</pre>
 
 
 1. Copy the virus definitions to your internal <%= vars.product_name_mirror %>
   by running:
 
     ```
-    bosh -e BOSH-ENVIRONMENT -d CLAMAV-DEPLOYMENT-NAME scp /path/to/local/main.cvd /path/to/local/daily.cvd /path/to/local/bytecode.cvd :/var/vcap/data/clamav-mirror/unvalidated
+    bosh -e BOSH-ENVIRONMENT -d ANTIVIRUS-DEPLOYMENT-NAME scp /path/to/local/main.cvd /path/to/local/daily.cvd /path/to/local/bytecode.cvd :/var/vcap/data/antivirus-mirror/unvalidated
     ```
 
     For example:
 
-    <pre class="terminal">$ bosh -e my-env -d p-clamav-mirror-4cb8cfbeee717258d72e scp main.cvd daily.cvd bytecode.cvd :/var/vcap/data/clamav-mirror/unvalidated</pre>
+    <pre class="terminal">$ bosh -e my-env -d p-antivirus-mirror-4cb8cfbeee717258d72e scp main.cvd daily.cvd bytecode.cvd :/var/vcap/data/antivirus-mirror/unvalidated</pre>
 
 1. Verify that the mirror validated and updated its local copies of the virus
     definitions by running:
 
     ```
-    bosh -e BOSH-ENVIRONMENT -d CLAMAV-DEPLOYMENT-NAME ssh -c "sudo cat FILE | grep \"updated /var/vcap/store\""
+    bosh -e BOSH-ENVIRONMENT -d ANTIVIRUS-DEPLOYMENT-NAME ssh -c "sudo cat FILE | grep \"updated /var/vcap/store\""
     ```
 
     Where `FILE` is determined by the output destination configured in
-    **ClamAV Mirror Configuration** of the <%= vars.product_full_mirror %> tile.
+    **Anti-Virus Mirror Configuration** of the <%= vars.product_full_mirror %> tile.
     Use one of these:
-    * `/var/vcap/sys/log/clamav-mirror/clamav-mirror.stdout.log` for stdout
-    * `/var/vcap/sys/log/clamav-mirror/clamav-mirror.stderr.log` for stderr
+    * `/var/vcap/sys/log/antivirus-mirror/antivirus-mirror.stdout.log` for stdout
+    * `/var/vcap/sys/log/antivirus-mirror/antivirus-mirror.stderr.log` for stderr
     * `/var/log/syslog` for syslog
 
     For example:
 
     <pre class="terminal">
-    $ bosh -e my-env -d p-clamav-mirror-4cb8cfbeee717258d72e ssh -c "sudo cat /var/log/syslog | grep \"updated /var/vcap/store\""
+    $ bosh -e my-env -d p-antivirus-mirror-4cb8cfbeee717258d72e ssh -c "sudo cat /var/log/syslog | grep \"updated /var/vcap/store\""
 
-    2019/05/30 17:16:34 updated /var/vcap/store/clamav-mirror/validated/bytecode.cvd
-    2019/05/30 17:16:40 updated /var/vcap/store/clamav-mirror/validated/daily.cvd
-    2019/05/30 17:16:49 updated /var/vcap/store/clamav-mirror/validated/main.cvd
+    2019/05/30 17:16:34 updated /var/vcap/store/antivirus-mirror/validated/bytecode.cvd
+    2019/05/30 17:16:40 updated /var/vcap/store/antivirus-mirror/validated/daily.cvd
+    2019/05/30 17:16:49 updated /var/vcap/store/antivirus-mirror/validated/main.cvd
     </pre>
