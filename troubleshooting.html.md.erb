@@ -138,8 +138,8 @@ because it does not impact their performance.
 
 ####Solution
 In most cases this is behavior from cgroups.
-If a hard limit is required, configure the `enforce_cpu_limit` Linux property.
-For more information, see [clamav.yml Template for Linux](./install.html#linux-template).
+If a hard limit is required, configure the **Enforce CPU limit** in the
+**<%= vars.product_name %>** tile.
 
 <hr>
 
@@ -161,8 +161,7 @@ the <%= vars.product_name %> resource requires a larger memory limit.
 
 ####Solution
 This is expected behavior from cgroups.
-To configure the memory limit, configure the `memory_limit` Linux property.
-For more information, see [clamav.yml Template for Linux](./install.html#linux-template).
+To configure the memory limit, configure **Memory limit (in bytes)** in the **<%= vars.product_name %>** tile.
 
 <p class="note warning"><strong>Warning:</strong> When updating the memory limit, ensure that all VMs,
 including errand VMs, have sufficient memory resources.
@@ -202,14 +201,14 @@ and, if restricted, can prevent <%= vars.product_name %> from starting up correc
 + Ensure `cpu_limit` is set high enough for <%= vars.product_name %> to execute normally.
 If the limit is too strict, <%= vars.product_name %> fails to start.
 For example, an n1-standard VM on GCP requires `cpu_limit` to be > 45.
-For more information, see [clamav.yml Template for Linux](./install.html#linux-template).
+To make changes to this limit, configure **CPU limit (percentage)** in the **<%= vars.product_name %>** tile.
 
 + Set `enforce_cpu_limit` to `false`. This allocates more CPU cycles to ClamAV
 if other processes are not using CPU resources.<br>
-For more information, see [clamav.yml Template for Linux](./install.html#linux-template).
+To `Disable` this limit, configure **Enforce CPU limit** in the **<%= vars.product_name %>** tile.
 
-+ From the **Ops Manager Installation Dashboard**, navigate to the tile with the failing `clamav_1` job.
-On **Resource Config**, adjust the **VM Type** for the **ClamAV** job
++ From the **Ops Manager Installation Dashboard**, navigate to the tile with the failing `antivirus` job.
+On **Resource Config**, adjust the **VM Type** for the **<%= vars.product_name %>** job
 to have sufficient CPU resources.
 
 ### <a id='too-many-files'></a> Too Many Open Files Error While Using <%= vars.product_name_mirror %>
