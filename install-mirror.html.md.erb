@@ -90,7 +90,6 @@ To assign availability zones (AZs) and networks:
 To configure <%= vars.product_name_mirror %>:
 
 1. Select **Anti-Virus Mirror Configuration**.
-
   ![Anti-Virus Mirror Configuration](mirror-configure.png)
 
 1. Configure the fields as follows:
@@ -125,7 +124,7 @@ To configure <%= vars.product_name_mirror %>:
         <td><strong>Mirror for Automatic Database Updates</strong></td>
         <td>
           <ul>
-            <li><strong>No mirror</strong>: Select this for air-gapped environments, or if you want to control the database versions available to your environment</li>
+            <li><strong>No mirror</strong>: Select this for air-gapped environments, or if you want to control the database versions available to your environment.</li>
             <li><strong>Official mirror</strong></li>
             <li><strong>Existing mirror</strong></li>
           </ul>
@@ -138,7 +137,7 @@ To configure <%= vars.product_name_mirror %>:
           Select this to have the mirror fetch databases from the official virus database mirror.
           <br>
           <ul>
-            <li><strong>Number of database checks per day  (min: 1, max: 50) </strong>: Enter the number of database checks that the mirror performs per day. The default value is <code>12</code></li>
+            <li><strong>Number of database checks per day  (min: 1, max: 50) </strong>: Enter the number of database checks that the mirror performs per day. The default value is <code>12</code>.</li>
           </ul>
         </td>
       </tr>
@@ -146,8 +145,8 @@ To configure <%= vars.product_name_mirror %>:
         <td><strong>Existing mirror</strong></td>
         <td>
           <ul>
-            <li><strong>Comma separated list of mirror hostnames or IPs</strong>: Enter a list of hostnames or IPs of mirrors</li>
-            <li><strong>Number of database checks per day  (min: 1, max: 50)</strong>: Enter the number of database checks the mirror performs per day. The default value is <code>12</code></li>
+            <li><strong>Comma separated list of mirror hostnames or IPs</strong>: Enter a list of hostnames or IPs of mirrors.</li>
+            <li><strong>Number of database checks per day  (min: 1, max: 50)</strong>: Enter the number of database checks the mirror performs per day. The default value is <code>12</code>.</li>
           </ul>
         </td>
       </tr>
@@ -198,7 +197,7 @@ Follow the steps below to enable system logging for <%= vars.product_name_mirror
     <tr><td><strong>Enable TLS</strong></td>
     <td>If you select TCP, you can also select to send logs encrypted over TLS.</td></tr>
     <tr><td><strong>Permitted Peer</strong></td>
-        <td>Enter either the accepted fingerprint, in SHA1, or the name of the remote peer, for example, <code>*.example.com</code></td></tr>
+        <td>Enter either the accepted fingerprint, in SHA1, or the name of the remote peer, for example, <code>*.example.com</code>.</td></tr>
     <tr><td><strong>SSL Certificate</strong></td>
         <td>Enter the SSL or TLS Certificate(s) for the syslog server. This ensures the logs are transported securely.</td></tr>
   </table>
