@@ -273,57 +273,57 @@ freshclam log entries relate to whether or not the virus-signature database is u
 * <a id="freshclams-update"></a>Update the Virus Database
 	<pre class="terminal">
 	2019/09/30 15:54:47 Warning: Couldn't read local main.cvd version: open /var/vcap/data/antivirus/main.cvd: no such file or directory
-  2019/09/30 15:54:57 New main.cvd db version: 58
-  2019/09/30 15:54:57 Build timestamp: 07 Jun 2017 17-38 -0400
-  2019/09/30 15:54:57 Signatures: 4566249
-  2019/09/30 15:54:57 Updated main.cvd to version 58
-  2019/09/30 15:54:57 Warning: Couldn't read local daily.cvd version: open /var/vcap/data/antivirus/daily.cvd: no such file or directory
-  2019/09/30 15:55:00 New daily.cvd db version: 25588
-  2019/09/30 15:55:00 Build timestamp: 30 Sep 2019 04-25 -0400
-  2019/09/30 15:55:00 Signatures: 1786468
-  2019/09/30 15:55:00 Updated daily.cvd to version 25588
-  2019/09/30 15:55:00 Warning: Couldn't read local bytecode.cvd version: open /var/vcap/data/antivirus/bytecode.cvd: no such file or directory
-  2019/09/30 15:55:00 New bytecode.cvd db version: 331
-  2019/09/30 15:55:00 Build timestamp: 19 Sep 2019 12-12 -0400
-  2019/09/30 15:55:00 Signatures: 94
-  2019/09/30 15:55:00 Updated bytecode.cvd to version 331
-  2019/09/30 15:55:00 Warning: Couldn't talk to clamd: dial unix /var/vcap/sys/run/antivirus/clamd.socket: connect: no such file or directory
-  2019/09/30 15:55:00 Databases successfully updated
+	2019/09/30 15:54:57 New main.cvd db version: 58
+	2019/09/30 15:54:57 Build timestamp: 07 Jun 2017 17-38 -0400
+	2019/09/30 15:54:57 Signatures: 4566249
+	2019/09/30 15:54:57 Updated main.cvd to version 58
+	2019/09/30 15:54:57 Warning: Couldn't read local daily.cvd version: open /var/vcap/data/antivirus/daily.cvd: no such file or directory
+	2019/09/30 15:55:00 New daily.cvd db version: 25588
+	2019/09/30 15:55:00 Build timestamp: 30 Sep 2019 04-25 -0400
+	2019/09/30 15:55:00 Signatures: 1786468
+	2019/09/30 15:55:00 Updated daily.cvd to version 25588
+	2019/09/30 15:55:00 Warning: Couldn't read local bytecode.cvd version: open /var/vcap/data/antivirus/bytecode.cvd: no such file or directory
+	2019/09/30 15:55:00 New bytecode.cvd db version: 331
+	2019/09/30 15:55:00 Build timestamp: 19 Sep 2019 12-12 -0400
+	2019/09/30 15:55:00 Signatures: 94
+	2019/09/30 15:55:00 Updated bytecode.cvd to version 331
+	2019/09/30 15:55:00 Warning: Couldn't talk to clamd: dial unix /var/vcap/sys/run/antivirus/clamd.socket: connect: no such file or directory
+	2019/09/30 15:55:00 Databases successfully updated
 	</pre>
 
 * <a id="freshclams-using-cld"></a>Using CLD Database Files
 	<pre class="terminal">
 	2019/09/30 17:29:44 Anti-Virus Mirror antivirus-mirror.service.internal:6501 returned 404 for main.cvd, trying main.cld...
-  2019/09/30 17:29:44 Warning: Couldn't read local main.cld version: open /var/vcap/data/antivirus/main.cld: no such file or directory
-  2019/09/30 17:29:51 New main.cld db version: 58
-  2019/09/30 17:29:51 Build timestamp: 07 Jun 2017 17-38 -0400
-  2019/09/30 17:29:51 Signatures: 4566249
-  2019/09/30 17:29:51 Updated main.cld to version 58
-  2019/09/30 17:29:51 Anti-Virus Mirror antivirus-mirror.service.internal:6501 returned 404 for daily.cvd, trying daily.cld...
-  2019/09/30 17:29:51 daily.cld is up to date
-  2019/09/30 17:29:51 Anti-Virus Mirror antivirus-mirror.service.internal:6501 returned 404 for bytecode.cvd, trying bytecode.cld...
-  2019/09/30 17:29:51 bytecode.cld is up to date
-  2019/09/30 17:29:51 Warning: Couldn't talk to clamd: dial unix /var/vcap/sys/run/antivirus/clamd.socket: connect: no such file or directory
-  2019/09/30 17:29:51 Databases successfully updated
+	2019/09/30 17:29:44 Warning: Couldn't read local main.cld version: open /var/vcap/data/antivirus/main.cld: no such file or directory
+	2019/09/30 17:29:51 New main.cld db version: 58
+	2019/09/30 17:29:51 Build timestamp: 07 Jun 2017 17-38 -0400
+	2019/09/30 17:29:51 Signatures: 4566249
+	2019/09/30 17:29:51 Updated main.cld to version 58
+	2019/09/30 17:29:51 Anti-Virus Mirror antivirus-mirror.service.internal:6501 returned 404 for daily.cvd, trying daily.cld...
+	2019/09/30 17:29:51 daily.cld is up to date
+	2019/09/30 17:29:51 Anti-Virus Mirror antivirus-mirror.service.internal:6501 returned 404 for bytecode.cvd, trying bytecode.cld...
+	2019/09/30 17:29:51 bytecode.cld is up to date
+	2019/09/30 17:29:51 Warning: Couldn't talk to clamd: dial unix /var/vcap/sys/run/antivirus/clamd.socket: connect: no such file or directory
+	2019/09/30 17:29:51 Databases successfully updated
 
-  ...
+	...
 
-  2019/09/30 17:29:53 Anti-Virus Mirror antivirus-mirror.service.internal:6501 returned 404 for main.cvd, trying main.cld...
-  2019/09/30 17:29:53 main.cld is up to date
-  2019/09/30 17:29:53 Anti-Virus Mirror antivirus-mirror.service.internal:6501 returned 404 for daily.cvd, trying daily.cld...
-  2019/09/30 17:29:53 daily.cld is up to date
-  2019/09/30 17:29:53 Anti-Virus Mirror antivirus-mirror.service.internal:6501 returned 404 for bytecode.cvd, trying bytecode.cld...
-  2019/09/30 17:29:53 bytecode.cld is up to date
-  2019/09/30 17:29:53 Databases successfully updated
-  </pre>
+	2019/09/30 17:29:53 Anti-Virus Mirror antivirus-mirror.service.internal:6501 returned 404 for main.cvd, trying main.cld...
+	2019/09/30 17:29:53 main.cld is up to date
+	2019/09/30 17:29:53 Anti-Virus Mirror antivirus-mirror.service.internal:6501 returned 404 for daily.cvd, trying daily.cld...
+	2019/09/30 17:29:53 daily.cld is up to date
+	2019/09/30 17:29:53 Anti-Virus Mirror antivirus-mirror.service.internal:6501 returned 404 for bytecode.cvd, trying bytecode.cld...
+	2019/09/30 17:29:53 bytecode.cld is up to date
+	2019/09/30 17:29:53 Databases successfully updated
+	</pre>
 
 * <a id="freshclams-up-to-date"></a>Virus Database Is Up-to-Date
 	<pre class="terminal">
-  2019/09/30 17:29:53 main.cvd is up to date
-  2019/09/30 17:29:53 daily.cvd is up to date
-  2019/09/30 17:29:53 bytecode.cvd is up to date
-  2019/09/30 17:29:53 Databases successfully updated
-  </pre>
+	2019/09/30 17:29:53 main.cvd is up to date
+	2019/09/30 17:29:53 daily.cvd is up to date
+	2019/09/30 17:29:53 bytecode.cvd is up to date
+	2019/09/30 17:29:53 Databases successfully updated
+	</pre>
 
 ##<a id="clamd"></a>clamd Log Messages
 
