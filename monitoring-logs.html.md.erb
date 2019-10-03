@@ -12,12 +12,11 @@ to verify regular activity and generate alerts for virus detections or outdated 
 
 ##<a id="clamav-logs"></a> ClamAV Logs
 
-There are three distinct <%= vars.product_name %> apps that run on each VM: freshclam, clamd, and clamdscan.
-These apps work together to detect viruses and protect the VM.
+There are four distinct <%= vars.product_name %> apps that run on each VM: freshclam, go-clam-tls, clamd, and clamdscan.
+freshclam and go-clam-tls are mutually exclusive, but the other apps work together to detect viruses and protect the VM.
 
 Each app writes its own log file.
-You need to monitor each of these files to know if ClamAV Addon for PCF
-is working correctly and if viruses have been found.
+You need to monitor each of these files to know if Pivotal Anti-Virus is working correctly and if viruses have been found.
 
 Pivotal recommends that you enable syslog forwarding so that the messages from each of the three log files
 is aggregated into the syslog file on the remote syslog server.
@@ -26,7 +25,7 @@ Then you can use your preferred monitoring and alerting tool to review the <%= v
 For an example of how ClamAV messages appear in the syslog file, see [Syslog Format](#format) below.
 
 # TODO
-For information about each app, see [freshclam](#freshclam-app), [clamd](#clamd-app),
+For information about each app, see [freshclam](#freshclam-app), [go-clam-tls](#go-clam-tls-app), [clamd](#clamd-app),
 and [clamdscan](#clamdscan-app) below.
 
 ###<a id="freshclam-app"></a> freshclam App
@@ -40,12 +39,14 @@ The log file for the freshclam app is `/var/vcap/sys/log/antivirus/freshclam.log
 
 ###<a id="go-clam-tls-app"></a> go-clam-tls App
 # TODO
-The freshclam app updates the database that stores the known virus signatures.
+The go-clam-tls app performs the same role as the freshclam app for environments that
+use Pivotal Anti-Virus Mirror with Pivotal Anti-Virus. go-clam-tls uses mTLS and permits 
+changing the port used for database updates.
 
-The messages output by the freshclam app indicate when freshclam checks for updates,
+The messages output by the go-clam-tls app indicate when go-clam-tls checks for updates,
 what the download progress is, and the downloaded signature version.
 
-The log file for the freshclam app is `/var/vcap/sys/log/antivirus/freshclam.log`.
+The log file for the go-clam-tls app is `/var/vcap/sys/log/antivirus/go-clam-tls.log`.
 
 ###<a id="clamd-app"></a> clamd App
 
@@ -123,6 +124,8 @@ The following tables lists common messages that you see when ClamAV apps write t
     <td>Unhealthy
     	<br>(Will be triggered by deployments)</td>
   </tr>
+<!--  =============================== go-clam-tls section ===============================  -->
+# TODO
 <!--  =============================== clamd section ===============================  -->
   <tr>
     <td><a href="#clamd-start">Start clamd</a></td>
@@ -244,6 +247,8 @@ freshclam log entries relate to whether or not the virus-signature database is u
 	Update process terminated
 	</pre>
 
+##<a id="go-clam-tls"></a>go-clam-tls Log Messages
+# TODO
 
 ##<a id="clamd"></a>clamd Log Messages
 
