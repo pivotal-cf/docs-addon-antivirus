@@ -25,11 +25,21 @@ Then you can use your preferred monitoring and alerting tool to review the <%= v
 
 For an example of how ClamAV messages appear in the syslog file, see [Syslog Format](#format) below.
 
+# TODO
 For information about each app, see [freshclam](#freshclam-app), [clamd](#clamd-app),
 and [clamdscan](#clamdscan-app) below.
 
 ###<a id="freshclam-app"></a> freshclam App
 
+The freshclam app updates the database that stores the known virus signatures.
+
+The messages output by the freshclam app indicate when freshclam checks for updates,
+what the download progress is, and the downloaded signature version.
+
+The log file for the freshclam app is `/var/vcap/sys/log/antivirus/freshclam.log`.
+
+###<a id="go-clam-tls-app"></a> go-clam-tls App
+# TODO
 The freshclam app updates the database that stores the known virus signatures.
 
 The messages output by the freshclam app indicate when freshclam checks for updates,
