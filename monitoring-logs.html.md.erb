@@ -24,7 +24,6 @@ Then you can use your preferred monitoring and alerting tool to review the <%= v
 
 For an example of how ClamAV messages appear in the syslog file, see [Syslog Format](#format) below.
 
-# TODO
 For information about each app, see [freshclam](#freshclam-app), [go-clam-tls](#go-clam-tls-app), [clamd](#clamd-app),
 and [clamdscan](#clamdscan-app) below.
 
@@ -38,7 +37,6 @@ what the download progress is, and the downloaded signature version.
 The log file for the freshclam app is `/var/vcap/sys/log/antivirus/freshclam.log`.
 
 ###<a id="go-clam-tls-app"></a> go-clam-tls App
-# TODO
 The go-clam-tls app performs the same role as the freshclam app for environments that
 use Pivotal Anti-Virus Mirror with Pivotal Anti-Virus. go-clam-tls uses mTLS and permits 
 changing the port used for database updates.
@@ -125,7 +123,37 @@ The following tables lists common messages that you see when ClamAV apps write t
     	<br>(Will be triggered by deployments)</td>
   </tr>
 <!--  =============================== go-clam-tls section ===============================  -->
-# TODO
+  <tr>
+    <td><a href="#go-clam-tls-check">Check for Updates</a></td>
+    <td>go-clam-tls</td>
+    <td>States that the go-clam-tls app is checking the
+    configured remote mirror for an update to the local virus signature database.</td>
+    <td>Healthy</td>
+  </tr>
+  <tr>
+    <td><a href="#go-clam-tls-update">Update the Virus Database</a></td>
+    <td>go-clam-tls</td>
+    <td>States that the virus database is being updated.</td>
+    <td>Healthy</td>
+  </tr>
+    <td><a href="#go-clam-tls-using-cld">Using CLD Database Files</a></td>
+    <td>go-clam-tls</td>
+    <td>States that go-clam-tls could not find .cvd files and is failing over to .cld files.</td>
+    <td>Healthy</td>
+  </tr>
+  <tr>
+    <td><a href="#go-clam-tls-up-to-date">Virus Database Is Up-to-Date</a></td>
+    <td>go-clam-tls</td>
+    <td>States that the virus database is up-to-date.</td>
+    <td>Healthy</td>
+    </tr>
+  <tr>
+    <td><a href="#go-clam-tls-old">Virus Database is Older Than 7 Days</a></td>
+    <td>go-clam-tls</td>
+    <td>States that the virus database is stale.
+      Based on configuration, go-clam-tls checks hourly or daily.</td>
+    <td>Unhealthy</td>
+  </tr>
 <!--  =============================== clamd section ===============================  -->
   <tr>
     <td><a href="#clamd-start">Start clamd</a></td>
@@ -248,7 +276,62 @@ freshclam log entries relate to whether or not the virus-signature database is u
 	</pre>
 
 ##<a id="go-clam-tls"></a>go-clam-tls Log Messages
-# TODO
+The go-clam-tls job on each VM is responsible for updating the database that stores the known virus signatures.
+
+go-clam-tls log entries relate to whether or not the virus-signature database is up-to-date.
+
+
+* <a id="go-clam-tls-check"></a>Check for Updates
+	<pre class="terminal">
+	2019/10/03 20:30:20 go-clam-tls update process started
+  </pre>
+  
+* <a id="go-clam-tls-update"></a>Update the Virus Database
+	<pre class="terminal">
+	2019/10/03 20:40:15 go-clam-tls update process started
+  2019/10/03 20:40:15 Warning: could not parse local main.cvd header: open /var/vcap/data/antivirus/main.cvd: no such file or directory
+  2019/10/03 20:40:26 main.cvd updated (version: 58, sigs: 4566249, f-level: 60, builder: sigmgr, build timestamp: 07 Jun 2017 17-38 -0400)
+  2019/10/03 20:40:26 Warning: could not parse local daily.cvd header: open /var/vcap/data/antivirus/daily.cvd: no such file or directory
+  2019/10/03 20:40:31 daily.cvd updated (version: 25591, sigs: 1793277, f-level: 63, builder: raynman, build timestamp: 03 Oct 2019 04-30 -0400)
+  2019/10/03 20:40:31 Warning: could not parse local bytecode.cvd header: open /var/vcap/data/antivirus/bytecode.cvd: no such file or directory
+  2019/10/03 20:40:31 bytecode.cvd updated (version: 331, sigs: 94, f-level: 63, builder: anvilleg, build timestamp: 19 Sep 2019 12-12 -0400)
+  2019/10/03 20:40:31 Clamd socket response: RELOADING
+
+  2019/10/03 20:40:31 Databases successfully updated
+  </pre>
+  
+* <a id="go-clam-tls-using-cld"></a>Using CLD Database Files
+  <pre class="terminal">
+  2019/10/03 20:42:31 go-clam-tls update process started
+  2019/10/03 20:42:31 Anti-Virus Mirror antivirus-mirror.service.internal:6501 returned 404 for main.cvd, trying main.cld...
+  2019/10/03 20:42:31 Warning: could not parse local main.cld header: open /var/vcap/data/antivirus/main.cld: no such file or directory
+  2019/10/03 20:42:38 main.cld updated (version: 58, sigs: 4566249, f-level: 60, builder: sigmgr, build timestamp: 07 Jun 2017 17-38 -0400)
+  2019/10/03 20:42:38 Anti-Virus Mirror antivirus-mirror.service.internal:6501 returned 404 for daily.cvd, trying daily.cld...
+  2019/10/03 20:42:38 Warning: could not parse local daily.cld header: open /var/vcap/data/antivirus/daily.cld: no such file or directory
+  2019/10/03 20:42:38 daily.cld updated (version: 25591, sigs: 1793277, f-level: 63, builder: raynman, build timestamp: 03 Oct 2019 04-30 -0400)
+  2019/10/03 20:42:38 Anti-Virus Mirror antivirus-mirror.service.internal:6501 returned 404 for bytecode.cvd, trying bytecode.cld...
+  2019/10/03 20:42:38 Warning: could not parse local bytecode.cld header: open /var/vcap/data/antivirus/bytecode.cld: no such file or directory
+  2019/10/03 20:42:38 bytecode.cld updated (version: 331, sigs: 94, f-level: 63, builder: anvilleg, build timestamp: 19 Sep 2019 12-12 -0400)
+  2019/10/03 20:42:38 Clamd socket response: RELOADING
+
+  2019/10/03 20:42:38 Databases successfully updated
+  </pre>
+
+* <a id="go-clam-tls-up-to-date"></a>Virus Database Is Up-to-Date
+	<pre class="terminal">
+	2019/10/03 20:30:21 main.cvd is up to date (version: 58, sigs: 4566249, f-level: 60, builder: sigmgr, build timestamp: 07 Jun 2017 17-38 -0400)
+  2019/10/03 20:30:21 daily.cvd is up to date (version: 25591, sigs: 1793277, f-level: 63, builder: raynman, build timestamp: 03 Oct 2019 04-30 -0400)
+  2019/10/03 20:30:21 bytecode.cvd is up to date (version: 331, sigs: 94, f-level: 63, builder: anvilleg, build timestamp: 19 Sep 2019 12-12 -0400)
+  </pre>
+
+* <a id="go-clam-tls-old"></a>Virus Database is Older Than 7 Days
+	<pre class="terminal">
+  2019/10/03 20:51:14 
+  **************************************************
+  ***  The virus database is older than 7 days!  ***
+  ***   Please update it as soon as possible.    ***
+  **************************************************
+	</pre>
 
 ##<a id="clamd"></a>clamd Log Messages
 
