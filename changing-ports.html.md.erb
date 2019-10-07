@@ -1,0 +1,17 @@
+---
+title: Changing the port used by <%=vars.product_name_mirror%> and <%= vars.product_name %>
+owner: Pivotal Compliance and Innovation (PCI) Team
+---
+<strong><%= modified_date %></strong>
+
+This topic describes how to change the port used by <%= vars.product_full_mirror %> and <%= vars.product_full %>.
+
+1. Click the <%=vars.product_name_mirror%> tile and select **Anti-Virus Mirror Configuration**
+2. Enter the desired port into the **Anti-Virus Mirror Port** field.
+3. Return to the Ops Manager Installation Dashboard and click the <%= vars.product_name %> tile and select **Anti-Virus Configuration**
+4. Ensure that **Deployed mirror from the <%=vars.product_name_mirror%> Tile** is selected under **Mirror for Automatic Database Updates**
+5. Enter the same port from step 2 into the **Anti-Virus Mirror Port** field.
+6. Return to the Ops Manager Installation Dashboard and click **Review Pending Changes**.
+7. Unselect all products except **BOSH Director**, **<%=vars.product_name_mirror%>** and **<%= vars.product_name %>** and click **Apply Changes**.
+8. When **Apply Changes** finishes, return to **Review Pending Changes**.
+9. Ensure all products are selected and click **Apply Changes**.
