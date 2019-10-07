@@ -10,9 +10,9 @@ Pivotal recommends that you install this tile before installing <%= vars.product
 ##<a id="overview"></a>Overview
 
 If you do not have an external mirror for Anti-Virus jobs to fetch database updates from,
-you can deploy one using the <%= vars.product_name_mirror %>.
+you can deploy a mirror using the <%= vars.product_name_mirror %> tile.
 
-This deployed internal mirror can support air-gapped environments and <%= vars.product_name_mirror %> networked environments:
+This deployed internal mirror can support both air-gapped environments and <%= vars.product_name_mirror %> networked environments:
 
 * **Online Network:** You can deploy the internal <%= vars.product_name_mirror %> as a proxy.
   This acts as a database for the virus definitions if the online virus database experiences downtime.
@@ -28,7 +28,7 @@ installing this tile and continue to [Installing and Configuring <%= vars.produc
 To install the <%= vars.product_name_mirror %>, you must have:
 
 * **A <%= vars.platform_name %> operator with admin rights**.
-For more information, see [Operators](https://docs.pivotal.io/pivotalcf/customizing/user-types.html#operator).
+For more information, see [Operators](https://docs.pivotal.io/platform/customizing/user-types.html#operator).
 
 * **Pivotal Operations Manager (Ops Manager)**.
 For compatible versions, see the [Product Snapshot](./index.html#snapshot).
@@ -44,7 +44,7 @@ To install the <%= vars.product_name_mirror %> tile:
 1. Download the product file from [Pivotal Network](https://network.pivotal.io/products/p-clamav-addon).
 
     For air-gapped networks, follow your company's offline installation protocols.
-      For more information, see [Installing Pivotal Platform in Airgapped Environments](https://docs.pivotal.io/pivotalcf/customizing/offline_installation.html).
+      For more information, see [Installing Pivotal Platform in Air-gapped Environments](https://docs.pivotal.io/platform/customizing/offline_installation.html).
 
 1. Navigate to the Ops Manager Installation Dashboard and select **Import a Product** to upload the product file.
 
