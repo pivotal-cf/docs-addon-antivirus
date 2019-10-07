@@ -154,6 +154,20 @@ The following tables lists common messages that you see when ClamAV apps write t
       Based on configuration, go-clam-tls checks hourly or daily.</td>
     <td>Unhealthy</td>
   </tr>
+  <tr>
+    <td><a href="#go-clam-tls-fail-to-parse-local">Failed to Parse Local Database</a></td>
+    <td>go-clam-tls</td>
+    <td>States that go-clam-tls could not parse the local database. This may be because the database was modified in some way.
+    This message is expected on initial startup, because the local database files should not be present.</td>
+    <td>Unhealthy</td>
+  </tr>
+  <tr>
+    <td><a href="#go-clam-tls-mirror-older">Mirror Database is Older Than Local</a></td>
+    <td>go-clam-tls</td>
+    <td>States that the mirror database is older than the local version.
+    You should investigate your mirror deployment.</td>
+    <td>Unhealthy</td>
+  </tr>
 <!--  =============================== clamd section ===============================  -->
   <tr>
     <td><a href="#clamd-start">Start clamd</a></td>
@@ -332,6 +346,16 @@ go-clam-tls log entries relate to whether or not the virus-signature database is
   ***   Please update it as soon as possible.    ***
   **************************************************
 	</pre>
+
+* <a id="go-clam-tls-fail-to-parse-local"></a>Failed to Parse Local Database
+	<pre class="terminal">
+  2019/10/03 20:40:15 Warning: could not parse local main.cvd header: open /var/vcap/data/antivirus/main.cvd: no such file or directory
+  </pre>
+
+* <a id="go-clam-tls-mirror-older"></a>Mirror Database is Older Than Local
+	<pre class="terminal">
+  2019/10/03 20:40:15 Warning: Current daily.cvd is version 25592 and remote version is 25591
+  </pre>
 
 ##<a id="clamd"></a>clamd Log Messages
 
