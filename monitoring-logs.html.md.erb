@@ -1,5 +1,5 @@
 ---
-title: Monitoring ClamAV Logs
+title: Monitoring Pivotal Anti-Virus Logs
 owner: Security Engineering
 ---
 
@@ -12,11 +12,14 @@ to verify regular activity and generate alerts for virus detections or outdated 
 
 ##<a id="clamav-logs"></a> ClamAV Logs
 
-There are four distinct <%= vars.product_name %> apps that run on each VM: freshclam, go-clam-tls, clamd, and clamdscan.
-freshclam and go-clam-tls are mutually exclusive, but the other apps work together to detect viruses and protect the VM.
+There are four distinct <%= vars.product_full %> apps that run on each VM:
+freshclam, go-clam-tls, clamd, and clamdscan.
+The freshclam and go-clam-tls apps are mutually exclusive,
+but the other apps work together to detect viruses and protect the VM.
 
 Each app writes its own log file.
-You need to monitor each of these files to know if Pivotal Anti-Virus is working correctly and if viruses have been found.
+You need to monitor each of these files to know if <%= vars.product_name %>
+is working correctly and if viruses have been found.
 
 Pivotal recommends that you enable syslog forwarding so that the messages from each of the three log files
 is aggregated into the syslog file on the remote syslog server.
@@ -24,7 +27,8 @@ Then you can use your preferred monitoring and alerting tool to review the <%= v
 
 For an example of how ClamAV messages appear in the syslog file, see [Syslog Format](#format) below.
 
-For information about each app, see [freshclam](#freshclam-app), [go-clam-tls](#go-clam-tls-app), [clamd](#clamd-app),
+For information about each app, see [freshclam](#freshclam-app),
+[go-clam-tls](#go-clam-tls-app), [clamd](#clamd-app),
 and [clamdscan](#clamdscan-app) below.
 
 ###<a id="freshclam-app"></a> freshclam App
@@ -38,8 +42,8 @@ The log file for the freshclam app is `/var/vcap/sys/log/antivirus/freshclam.log
 
 ###<a id="go-clam-tls-app"></a> go-clam-tls App
 The go-clam-tls app performs the same role as the freshclam app for environments that
-use Pivotal Anti-Virus Mirror with Pivotal Anti-Virus. go-clam-tls uses mTLS and permits 
-changing the port used for database updates.
+use <%= vars.product_full_mirror %> with <%= vars.product_full %>. go-clam-tls uses
+Mutual TLS (mTLS) and permits changing the port used for database updates.
 
 The messages output by the go-clam-tls app indicate when go-clam-tls checks for updates,
 what the download progress is, and the downloaded signature version.
@@ -157,7 +161,7 @@ The following tables lists common messages that you see when ClamAV apps write t
   <tr>
     <td><a href="#go-clam-tls-fail-to-parse-local">Failed to Parse Local Database</a></td>
     <td>go-clam-tls</td>
-    <td>States that go-clam-tls could not parse the local database. This may be because the database was modified in some way.
+    <td>States that go-clam-tls could not parse the local database. This might be because the database was modified in some way.
     This message is expected on initial startup, because the local database files should not be present.</td>
     <td>Unhealthy</td>
   </tr>
@@ -299,7 +303,7 @@ go-clam-tls log entries relate to whether or not the virus-signature database is
 	<pre class="terminal">
 	2019/10/03 20:30:20 go-clam-tls update process started
   </pre>
-  
+
 * <a id="go-clam-tls-update"></a>Update the Virus Database
 	<pre class="terminal">
 	2019/10/03 20:40:15 go-clam-tls update process started
@@ -310,10 +314,10 @@ go-clam-tls log entries relate to whether or not the virus-signature database is
   2019/10/03 20:40:31 Warning: could not parse local bytecode.cvd header: open /var/vcap/data/antivirus/bytecode.cvd: no such file or directory
   2019/10/03 20:40:31 bytecode.cvd updated (version: 331, sigs: 94, f-level: 63, builder: anvilleg, build timestamp: 19 Sep 2019 12-12 -0400)
   2019/10/03 20:40:31 Clamd socket response: RELOADING
-
+  <br>
   2019/10/03 20:40:31 Databases successfully updated
   </pre>
-  
+
 * <a id="go-clam-tls-using-cld"></a>Using CLD Database Files
   <pre class="terminal">
   2019/10/03 20:42:31 go-clam-tls update process started
@@ -327,7 +331,7 @@ go-clam-tls log entries relate to whether or not the virus-signature database is
   2019/10/03 20:42:38 Warning: could not parse local bytecode.cld header: open /var/vcap/data/antivirus/bytecode.cld: no such file or directory
   2019/10/03 20:42:38 bytecode.cld updated (version: 331, sigs: 94, f-level: 63, builder: anvilleg, build timestamp: 19 Sep 2019 12-12 -0400)
   2019/10/03 20:42:38 Clamd socket response: RELOADING
-
+  <br>
   2019/10/03 20:42:38 Databases successfully updated
   </pre>
 
@@ -340,7 +344,7 @@ go-clam-tls log entries relate to whether or not the virus-signature database is
 
 * <a id="go-clam-tls-old"></a>Virus Database is Older Than 7 Days
 	<pre class="terminal">
-  2019/10/03 20:51:14 
+  2019/10/03 20:51:14
   **************************************************
   ***  The virus database is older than 7 days!  ***
   ***   Please update it as soon as possible.    ***
