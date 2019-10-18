@@ -1,5 +1,5 @@
 ---
-title: Upgrading ClamAV for PCF
+title: Upgrading Pivotal Anti-Virus
 owner: Security Engineering
 ---
 
@@ -52,10 +52,9 @@ To uninstall <%= vars.product_full %> v1.x and install v2.x in its place:
 [Installing and Configuring <%= vars.product_full %>](./install.html)
 to set up the <%= vars.product_full %> tile.
 
-<%# Un-comment the below once a new 2.x version is released
-####<a id="upgrade"></a>Upgrade <%= vars.product_full % v2.x or Later
+##<a id="upgrade-v1-v2"></a>Upgrade <%= vars.product_full %> v2.0.x to v2.1.x or higher
 
-To upgrade <%= vars.product_full % v2.x to a later version:
+To upgrade <%= vars.product_full %> v2.0.x to v2.1.x or higher:
 
 1. Download the latest version of the product
    from the [Pivotal Network](https://network.pivotal.io/products/p-clamav-addon) to your local machine.
@@ -64,8 +63,5 @@ To upgrade <%= vars.product_full % v2.x to a later version:
 
 1. If required, upload the stemcell associated with the update.
 
-1. If you use Ops Manager v2.3 or later, click **Review Pending Changes**.
-   For more information about this Ops Manager page,
-   see [Reviewing Pending Product Changes](https://docs.pivotal.io/pivotalcf/customizing/review-pending-changes.html).
-
-1. Click **Apply Changes**. %>
+1. Follow the procedure in [Changing the Port used by
+<%= vars.product_name_mirror %> and <%= vars.product_name %>](./changing-ports.html).

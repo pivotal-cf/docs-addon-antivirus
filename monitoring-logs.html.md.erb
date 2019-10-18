@@ -1,5 +1,5 @@
 ---
-title: Monitoring ClamAV Logs
+title: Monitoring Pivotal Anti-Virus Logs
 owner: Security Engineering
 ---
 
@@ -12,11 +12,13 @@ to verify regular activity and generate alerts for virus detections or outdated 
 
 ##<a id="clamav-logs"></a> ClamAV Logs
 
-There are three distinct <%= vars.product_name %> apps that run on each VM: freshclam, clamd, and clamdscan.
-These apps work together to detect viruses and protect the VM.
+There are four distinct <%= vars.product_full %> apps that run on each VM:
+freshclam, go-clam-tls, clamd, and clamdscan.
+The freshclam and go-clam-tls apps are mutually exclusive,
+but the other apps work together to detect viruses and protect the VM.
 
 Each app writes its own log file.
-You need to monitor each of these files to know if ClamAV Addon for PCF
+You need to monitor each of these files to know if <%= vars.product_name %>
 is working correctly and if viruses have been found.
 
 Pivotal recommends that you enable syslog forwarding so that the messages from each of the three log files
@@ -25,7 +27,8 @@ Then you can use your preferred monitoring and alerting tool to review the <%= v
 
 For an example of how ClamAV messages appear in the syslog file, see [Syslog Format](#format) below.
 
-For information about each app, see [freshclam](#freshclam-app), [clamd](#clamd-app),
+For information about each app, see [freshclam](#freshclam-app),
+[go-clam-tls](#go-clam-tls-app), [clamd](#clamd-app),
 and [clamdscan](#clamdscan-app) below.
 
 ###<a id="freshclam-app"></a> freshclam App
@@ -36,6 +39,16 @@ The messages output by the freshclam app indicate when freshclam checks for upda
 what the download progress is, and the downloaded signature version.
 
 The log file for the freshclam app is `/var/vcap/sys/log/antivirus/freshclam.log`.
+
+###<a id="go-clam-tls-app"></a> go-clam-tls App
+The go-clam-tls app performs the same role as the freshclam app for environments that
+use <%= vars.product_full_mirror %> with <%= vars.product_full %>. go-clam-tls uses
+Mutual TLS (mTLS) and permits changing the port used for database updates.
+
+The messages output by the go-clam-tls app indicate when go-clam-tls checks for updates,
+what the download progress is, and the downloaded signature version.
+
+The log file for the go-clam-tls app is `/var/vcap/sys/log/antivirus/go-clam-tls.log`.
 
 ###<a id="clamd-app"></a> clamd App
 
@@ -112,6 +125,52 @@ The following tables lists common messages that you see when ClamAV apps write t
     <td>freshclam should only terminate during a deployment. </td>
     <td>Unhealthy
     	<br>(Will be triggered by deployments)</td>
+  </tr>
+<!--  =============================== go-clam-tls section ===============================  -->
+  <tr>
+    <td><a href="#go-clam-tls-check">Check for Updates</a></td>
+    <td>go-clam-tls</td>
+    <td>States that the go-clam-tls app is checking the
+    configured remote mirror for an update to the local virus signature database.</td>
+    <td>Healthy</td>
+  </tr>
+  <tr>
+    <td><a href="#go-clam-tls-update">Update the Virus Database</a></td>
+    <td>go-clam-tls</td>
+    <td>States that the virus database is being updated.</td>
+    <td>Healthy</td>
+  </tr>
+    <td><a href="#go-clam-tls-using-cld">Using CLD Database Files</a></td>
+    <td>go-clam-tls</td>
+    <td>States that go-clam-tls could not find .cvd files and is failing over to .cld files.</td>
+    <td>Healthy</td>
+  </tr>
+  <tr>
+    <td><a href="#go-clam-tls-up-to-date">Virus Database Is Up-to-Date</a></td>
+    <td>go-clam-tls</td>
+    <td>States that the virus database is up-to-date.</td>
+    <td>Healthy</td>
+    </tr>
+  <tr>
+    <td><a href="#go-clam-tls-old">Virus Database is Older Than 7 Days</a></td>
+    <td>go-clam-tls</td>
+    <td>States that the virus database is stale.
+      Based on configuration, go-clam-tls checks hourly or daily.</td>
+    <td>Unhealthy</td>
+  </tr>
+  <tr>
+    <td><a href="#go-clam-tls-fail-to-parse-local">Failed to Parse Local Database</a></td>
+    <td>go-clam-tls</td>
+    <td>States that go-clam-tls could not parse the local database. This might be because the database was modified in some way.
+    This message is given on initial startup, because the local database files should not be present.</td>
+    <td>Unhealthy</td>
+  </tr>
+  <tr>
+    <td><a href="#go-clam-tls-mirror-older">Mirror Database is Older Than Local</a></td>
+    <td>go-clam-tls</td>
+    <td>States that the mirror database is older than the local version.
+    You should investigate your mirror deployment.</td>
+    <td>Unhealthy</td>
   </tr>
 <!--  =============================== clamd section ===============================  -->
   <tr>
@@ -234,6 +293,73 @@ freshclam log entries relate to whether or not the virus-signature database is u
 	Update process terminated
 	</pre>
 
+##<a id="go-clam-tls"></a>go-clam-tls Log Messages
+The go-clam-tls job on each VM is responsible for updating the database that stores the known virus signatures.
+
+go-clam-tls log entries relate to whether or not the virus-signature database is up-to-date.
+
+
+* <a id="go-clam-tls-check"></a>Check for Updates
+	<pre class="terminal">
+	2019/10/03 20:30:20 go-clam-tls update process started
+  </pre>
+
+* <a id="go-clam-tls-update"></a>Update the Virus Database
+	<pre class="terminal">
+	2019/10/03 20:40:15 go-clam-tls update process started
+  2019/10/03 20:40:15 Warning: could not parse local main.cvd header: open /var/vcap/data/antivirus/main.cvd: no such file or directory
+  2019/10/03 20:40:26 main.cvd updated (version: 58, sigs: 4566249, f-level: 60, builder: sigmgr, build timestamp: 07 Jun 2017 17-38 -0400)
+  2019/10/03 20:40:26 Warning: could not parse local daily.cvd header: open /var/vcap/data/antivirus/daily.cvd: no such file or directory
+  2019/10/03 20:40:31 daily.cvd updated (version: 25591, sigs: 1793277, f-level: 63, builder: raynman, build timestamp: 03 Oct 2019 04-30 -0400)
+  2019/10/03 20:40:31 Warning: could not parse local bytecode.cvd header: open /var/vcap/data/antivirus/bytecode.cvd: no such file or directory
+  2019/10/03 20:40:31 bytecode.cvd updated (version: 331, sigs: 94, f-level: 63, builder: anvilleg, build timestamp: 19 Sep 2019 12-12 -0400)
+  2019/10/03 20:40:31 Clamd socket response: RELOADING
+  <br>
+  2019/10/03 20:40:31 Databases successfully updated
+  </pre>
+
+* <a id="go-clam-tls-using-cld"></a>Using CLD Database Files
+  <pre class="terminal">
+  2019/10/03 20:42:31 go-clam-tls update process started
+  2019/10/03 20:42:31 Anti-Virus Mirror antivirus-mirror.service.internal:6501 returned 404 for main.cvd, trying main.cld...
+  2019/10/03 20:42:31 Warning: could not parse local main.cld header: open /var/vcap/data/antivirus/main.cld: no such file or directory
+  2019/10/03 20:42:38 main.cld updated (version: 58, sigs: 4566249, f-level: 60, builder: sigmgr, build timestamp: 07 Jun 2017 17-38 -0400)
+  2019/10/03 20:42:38 Anti-Virus Mirror antivirus-mirror.service.internal:6501 returned 404 for daily.cvd, trying daily.cld...
+  2019/10/03 20:42:38 Warning: could not parse local daily.cld header: open /var/vcap/data/antivirus/daily.cld: no such file or directory
+  2019/10/03 20:42:38 daily.cld updated (version: 25591, sigs: 1793277, f-level: 63, builder: raynman, build timestamp: 03 Oct 2019 04-30 -0400)
+  2019/10/03 20:42:38 Anti-Virus Mirror antivirus-mirror.service.internal:6501 returned 404 for bytecode.cvd, trying bytecode.cld...
+  2019/10/03 20:42:38 Warning: could not parse local bytecode.cld header: open /var/vcap/data/antivirus/bytecode.cld: no such file or directory
+  2019/10/03 20:42:38 bytecode.cld updated (version: 331, sigs: 94, f-level: 63, builder: anvilleg, build timestamp: 19 Sep 2019 12-12 -0400)
+  2019/10/03 20:42:38 Clamd socket response: RELOADING
+  <br>
+  2019/10/03 20:42:38 Databases successfully updated
+  </pre>
+
+* <a id="go-clam-tls-up-to-date"></a>Virus Database Is Up-to-Date
+	<pre class="terminal">
+	2019/10/03 20:30:21 main.cvd is up to date (version: 58, sigs: 4566249, f-level: 60, builder: sigmgr, build timestamp: 07 Jun 2017 17-38 -0400)
+  2019/10/03 20:30:21 daily.cvd is up to date (version: 25591, sigs: 1793277, f-level: 63, builder: raynman, build timestamp: 03 Oct 2019 04-30 -0400)
+  2019/10/03 20:30:21 bytecode.cvd is up to date (version: 331, sigs: 94, f-level: 63, builder: anvilleg, build timestamp: 19 Sep 2019 12-12 -0400)
+  </pre>
+
+* <a id="go-clam-tls-old"></a>Virus Database is Older Than 7 Days
+	<pre class="terminal">
+  2019/10/03 20:51:14
+  **************************************************
+  ***  The virus database is older than 7 days!  ***
+  ***   Please update it as soon as possible.    ***
+  **************************************************
+	</pre>
+
+* <a id="go-clam-tls-fail-to-parse-local"></a>Failed to Parse Local Database
+	<pre class="terminal">
+  2019/10/03 20:40:15 Warning: could not parse local main.cvd header: open /var/vcap/data/antivirus/main.cvd: no such file or directory
+  </pre>
+
+* <a id="go-clam-tls-mirror-older"></a>Mirror Database is Older Than Local
+	<pre class="terminal">
+  2019/10/03 20:40:15 Warning: Current daily.cvd is version 25592 and remote version is 25591
+  </pre>
 
 ##<a id="clamd"></a>clamd Log Messages
 
@@ -312,13 +438,13 @@ clamdscan searches files and directories for viruses.
 ##<a id="container"></a>Container Log Messages
 Examples of ClamAV log messages from Garden containers and Docker containers are as follows:
 
-* For a Garden container in Pivotal Application Service (PAS)
+* For a Garden container in <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>)
 <pre class="terminal">
 /var/vcap/data/grootfs/store/unprivileged/images/2264d474-3e57-4934-504f-ddbb/diff/home/vcap/app/public/test.html:
 Eicar-Test-Signature FOUND
 </pre>
 
-* For a Docker container in Enterprise Pivotal Container Service (Enterprise PKS)
+* For a Docker container in <%= vars.k8s_runtime_full %> (<%= vars.k8s_runtime_abbr %>)
 <pre class="terminal">
 /var/vcap/store/docker/docker/overlay2/53322c6f7c25bb00224bb03cdfc285e141471d746d5c7a8c5a65db56fda56ecb/diff/test.html:
 Eicar-Test-Signature FOUND

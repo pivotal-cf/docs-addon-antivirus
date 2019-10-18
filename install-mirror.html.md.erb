@@ -1,5 +1,5 @@
 ---
-title: Installing and Configuring ClamAV Mirror for PCF
+title: Installing and Configuring Pivotal Anti-Virus Mirror
 owner: Pivotal Compliance and Innovation (PCI) Team
 ---
 <strong><%= modified_date %></strong>
@@ -10,9 +10,9 @@ Pivotal recommends that you install this tile before installing <%= vars.product
 ##<a id="overview"></a>Overview
 
 If you do not have an external mirror for Anti-Virus jobs to fetch database updates from,
-you can deploy one using the <%= vars.product_name_mirror %>.
+you can deploy a mirror using the <%= vars.product_name_mirror %> tile.
 
-This deployed internal mirror can support air-gapped environments and <%= vars.product_name_mirror %> networked environments:
+This deployed internal mirror can support both air-gapped environments and <%= vars.product_name_mirror %> networked environments:
 
 * **Online Network:** You can deploy the internal <%= vars.product_name_mirror %> as a proxy.
   This acts as a database for the virus definitions if the online virus database experiences downtime.
@@ -28,7 +28,11 @@ installing this tile, and continue to [Installing and Configuring <%= vars.produ
 To install the <%= vars.product_name_mirror %>, you must have:
 
 * **A <%= vars.platform_name %> operator with admin rights**.
+<<<<<<< HEAD
 For more information, see [Operators](https://docs.pivotal.io/pivotalcf/customizing/user-types.html#operator).
+=======
+For more information, see [Operators](https://docs.pivotal.io/platform/customizing/user-types.html#operator).
+>>>>>>> 37be148331ff697e36d6af2c96e669e21646d5f9
 
 * **Pivotal Operations Manager (Ops Manager)**.
 For compatible versions, see the [Product Snapshot](./index.html#snapshot).
@@ -42,8 +46,9 @@ This is so that you can install the <%= vars.product_full %> tile after deployin
 To install the <%= vars.product_full_mirror %> tile:
 
 1. Download the product file from [Pivotal Network](https://network.pivotal.io/products/p-clamav-addon).
-  * For air-gapped networks, follow your company's offline installation protocols.
-      For more information, see [Installing Pivotal Platform in Air-Gapped Environments](https://docs.pivotal.io/pivotalcf/customizing/offline_installation.html).
+
+    For air-gapped networks, follow your company's offline installation protocols.
+      For more information, see [Installing Pivotal Platform in Air-gapped Environments](https://docs.pivotal.io/platform/customizing/offline_installation.html).
 
 1. Navigate to the Ops Manager Installation Dashboard and select **Import a Product** to upload the product file.
 
@@ -89,7 +94,6 @@ To assign availability zones (AZs) and networks:
 To configure <%= vars.product_name_mirror %>:
 
 1. Select **Anti-Virus Mirror Configuration**.
-
   ![Anti-Virus Mirror Configuration](mirror-configure.png)
 
 1. Configure the fields as follows:
@@ -99,7 +103,9 @@ To configure <%= vars.product_name_mirror %>:
       <tr>
         <td><strong>Log output destination</strong></td>
         <td>
-          Select the file descriptor to forward your logs through:<br>
+          <br>
+          Select the file descriptor to forward your logs through:
+          <br>
           <ul>
             <li><strong>stdout</strong>: sends messages to <code>/var/vcap/sys/log/antivirus-mirror/antivirus-mirror.stdout.log</code></li>
             <li><strong>stderr</strong>: sends messages to <code>/var/vcap/sys/log/antivirus-mirror/antivirus-mirror.stderr.log</code></li>
@@ -110,21 +116,42 @@ To configure <%= vars.product_name_mirror %>:
       <tr>
         <td><strong>Anti-Virus Mirror Port</strong></td>
         <td>
+          <br>
           Enter the port for Anti-Virus Mirror to use.
           The default value is <code>6501</code>.
+
+          <p class="note"><strong>Note: </strong> This port must be the same port used in <strong>Anti-Virus Mirror Port</strong> of the <strong>Pivotal Anti-Virus</strong> tile. If these ports are not the same, <%= vars.product_name %> database updates and deployments fail.
+          </p>
         </td>
       </tr>
       <tr>
         <td><strong>Mirror for Automatic Database Updates</strong></td>
         <td>
           <ul>
-            <li><strong>No mirror</strong>: Select this for air-gapped environments, or if you want to control the database versions available to your environment</li>
-            <li><strong>Official mirror (database.clamav.net)</strong>: Select this to have the mirror fetch databases from database.clamav.net</li>
-            <li><strong>Existing mirror</strong>: Select this to enter a list of hostnames or IPs of mirrors</li>
+            <li><strong>No mirror</strong>: Select this for air-gapped environments, or if you want to control the database versions available to your environment.</li>
+            <li><strong>Official mirror</strong></li>
+            <li><strong>Existing mirror</strong></li>
           </ul>
-          For the <strong>Official mirror</strong> and <strong>Existing mirror</strong> options, a field
-          for <strong>Number of database checks per day</strong> appears after the
-          option is selected.
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Official mirror</strong></td>
+        <td>
+          <br>
+          Select this to have the mirror fetch databases from the official virus database mirror.
+          <br>
+          <ul>
+            <li><strong>Number of database checks per day  (min: 1, max: 50) </strong>: Enter the number of database checks that the mirror performs per day. The default value is <code>12</code>.</li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Existing mirror</strong></td>
+        <td>
+          <ul>
+            <li><strong>Comma separated list of mirror hostnames or IPs</strong>: Enter a list of hostnames or IPs of mirrors.</li>
+            <li><strong>Number of database checks per day  (min: 1, max: 50)</strong>: Enter the number of database checks the mirror performs per day. The default value is <code>12</code>.</li>
+          </ul>
         </td>
       </tr>
     </table>
@@ -138,9 +165,7 @@ To configure <%= vars.product_name_mirror %>:
 
 1. Click **Save**.
 
-  <%# TODO Dylan: less verbose things with tile field updates %>
-
-1. (Optional) If you selected **Official mirror (database.clamav.net)** or **Existing mirror** in the previous section,
+1. (Optional) If you selected **Official mirror** or **Existing mirror** in the previous section,
  you can configure a proxy for the <%= vars.product_name %> mirror to retrieve the databases from.
  To do this:
 
@@ -174,12 +199,12 @@ Follow the steps below to enable system logging for <%= vars.product_full_mirror
     <tr><td><strong>Enable TLS</strong></td>
     <td>If you select TCP, you can also select to send logs encrypted over TLS.</td></tr>
     <tr><td><strong>Permitted Peer</strong></td>
-        <td>Enter either the accepted fingerprint, in SHA1, or the name of the remote peer, for example, <code>*.example.com</code></td></tr>
+        <td>Enter either the accepted fingerprint, in SHA1, or the name of the remote peer, for example, <code>*.example.com</code>.</td></tr>
     <tr><td><strong>SSL Certificate</strong></td>
         <td>Enter the SSL or TLS Certificate(s) for the syslog server. This ensures the logs are transported securely.</td></tr>
   </table>
 
-1. Click **Save**.
+1. Click **Save Syslog Settings**.
 
 ## <a id="scale-deployed-mirror"></a> Scale the Number of Deployed Mirrors
 

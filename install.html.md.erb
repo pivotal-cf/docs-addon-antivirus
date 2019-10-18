@@ -1,5 +1,5 @@
 ---
-title: Installing and Configuring ClamAV for PCF
+title: Installing and Configuring Pivotal Anti-Virus
 owner: Pivotal Compliance and Innovation (PCI) Team
 ---
 <strong><%= modified_date %></strong>
@@ -16,7 +16,11 @@ see [Installing and Configuring <%= vars.product_full_mirror %>](./install-mirro
 To install <%= vars.product_name %>, you must have:
 
 * **A <%= vars.platform_name %> operator with admin rights**.
+<<<<<<< HEAD
 For more information, see [Operators](https://docs.pivotal.io/pivotalcf/customizing/user-types.html#operator).
+=======
+For more information, see [Operators](https://docs.pivotal.io/platform/customizing/user-types.html#operator).
+>>>>>>> 37be148331ff697e36d6af2c96e669e21646d5f9
 
 * **Pivotal Operations Manager (Ops Manager)**.
 For compatible versions, see the [Product Snapshot](./index.html#snapshot).
@@ -57,12 +61,17 @@ To configure <%= vars.product_name %>:
         <td>
           Select the method for receiving your virus databases from an upstream mirror.
           <ul>
-            <li><strong>Official mirror (database.clamav.net)</strong>: Select this to have the mirror fetch databases from database.clamav.net.</li>
-            <li><strong>Use a deployed mirror from the Anti-Virus Mirror tile</strong>: For more information, see <a href="./install-mirror.html">Installing and Configuring <%= vars.product_full_mirror %></a>.
-            <li><strong>Existing mirror</strong>: Select this to enter a list of hostnames or IPs of mirrors.</li>
+            <li><strong>Official mirror </strong>: Select this to have the mirror fetch databases from database.clamav.net.</li>
+            <li><strong>Deployed mirror from the Pivotal Anti-Virus Mirror Tile</strong>: For more information, see <a href="./install-mirror.html">Installing and Configuring <%= vars.product_full_mirror %></a>.
+            <li><strong>Existing Mirror</strong>: Select this to enter a list of hostnames or IPs of mirrors.</li>
           </ul>
-          For the <strong>Use a deployed mirror from the Anti-Virus Mirror tile</strong> option, a field
-          for <strong>Anti-Virus Mirror Port</strong> appears after the option is selected.
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Anti-Virus Mirror Port</strong></td>
+        <td>Enter the port for Anti-Virus Mirror to use. The default value is <code>6501</code>.
+          <p class="note"><strong>Note: </strong> This port must be the same port used in <strong>Anti-Virus Mirror Port</strong> of the <strong>Pivotal Anti-Virus Mirror</strong> tile. If these ports are not the same, <%= vars.product_name %> database updates and deployments will fail.
+          </p>
         </td>
       </tr>
       <tr>
@@ -133,7 +142,7 @@ To configure <%= vars.product_name %>:
       </tr>
       <tr>
         <td><strong>Directories and files that will be ignored on Windows</strong></td>
-        <td>Enter directories in a comma-separated list for <%= vars.product_name %> to not scan on Windows.
+        <td>Enter directories in a comma-separated list for <%= vars.product_name %> to not scan on Windows.</td>
       </tr>
       <tr>
         <td><strong>List of signature names that will be ignored (Used for false positives)</strong></td>
@@ -141,6 +150,11 @@ To configure <%= vars.product_name %>:
           <code>Eicar-Test-Signature, Clamav.Test.File-7</code><br>
           configures <%= vars.product_name %> to ignore the <strong>Eicar Test File</strong>
           and <strong>ClamAV Test File-7</strong> signatures.</td>
+      </tr>
+      <tr>
+        <td><strong>List of instance group names that will be excluded from deployment</strong></td>
+        <td>Enter the instance groups that you do not want <%= vars.product_name %> deployed on.
+            Use a comma-separated list.</td>
       </tr>
     </table>
     <br>
