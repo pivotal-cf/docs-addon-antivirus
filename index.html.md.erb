@@ -31,11 +31,11 @@ The following table provides version and version-support information about <%= v
     <th>Details</th>
     <tr>
         <td>Version</td>
-        <td>2.1.0</td>
+        <td>2.1.3</td>
     </tr>
     <tr>
         <td>Release date</td>
-        <td>MMMM DD, YYYY</td>
+        <td>October 21, 2019</td>
     </tr>
     <tr>
         <td>Software component version</td>
@@ -168,3 +168,6 @@ This diagram illustrates how virus definitions propagate to BOSH VMs in an air-g
 
 [//]: https://docs.google.com/presentation/d/1pBHK0dcE5y7rT4KnacqFDc6LuU8R3HiR9ApuvwY1uzA/edit
 ![Air-gapped update process, following path of new virus data. Operator downloads virus data from External ClamAV database in cloud, then runs BOSH SCP to send it to freshclam running on local Anti-Virus Mirror. The local mirror runs it through the database verifier, also on ClamAV mirror, and then serves it to freshclam on all BOSH VMs. On each BOSH VM, freshclam notifies clamd that there are new definitions, and saves the definitions in the virus database. clamd then loads the new virus definitions from the database into its memory to enable fast scanning.](update-defs-airgap.png)
+
+###<a id="propagate-online-mtls"></a>Online Network using mTLS
+###<a id="propagate-airgap-mtls"></a>Air-Gapped Network using mTLS
