@@ -37,11 +37,11 @@ The following table provides version and version-support information about <%= v
     </tr>
     <tr>
         <td>Compatible Ops Manager versions</td>
-        <td>2.2, 2.3, 2.4, 2.5, 2.6, and 2.7</td>
+        <td>2.4, 2.5, 2.6, and 2.7</td>
     </tr>
     <tr>
         <td>Compatible Pivotal Application Service (PAS) versions</td>
-        <td>2.3, 2.4, 2.5, 2.6, and 2.7</td>
+        <td>2.4, 2.5, 2.6, and 2.7</td>
     </tr>
     <tr>
         <td>Compatible Enterprise Pivotal Container Service (Enterprise PKS) versions</td>
@@ -149,16 +149,16 @@ and serves them to the `freshclam` processes of BOSH VMs.
 The diagrams below illustrate how new virus definitions propagate
 from an external ClamAV database to BOSH VMs, in online and air-gapped <%= vars.platform_name %> installations.
 
-###<a id="propagate-online"></a>Online Network
+###<a id="propagate-online"></a>Online Network (Diagram)
 
-This diagram illustrates how virus definitions propagate to BOSH VMs in an online network:
+This diagram illustrates how virus definitions propagate to BOSH VMs with <%= vars.product_name_mirror %> using mTLS:
 
 [//]: https://docs.google.com/presentation/d/1pBHK0dcE5y7rT4KnacqFDc6LuU8R3HiR9ApuvwY1uzA/edit
 ![Online (non-air-gapped) update process, following path of new virus data. External ClamAV database in cloud serves new virus data to freshclam running on local Anti-Virus Mirror. The local mirror runs it through the database verifier, also on Anti-Virus Mirror and then serves it to freshclam on all BOSH VMs. On each BOSH VM, freshclam notifies clamd that there are new definitions, and saves the definitions in the virus database. clamd then loads the new virus definitions from the database into its memory to enable fast scanning.](update-defs-online.png)
 
-###<a id="propagate-airgap"></a>Air-Gapped Network
+###<a id="propagate-airgap"></a>Air-Gapped Network (Diagram)
 
-This diagram illustrates how virus definitions propagate to BOSH VMs in an air-gapped network:
+This diagram illustrates how virus definitions propagate to BOSH VMs with <%= vars.product_name_mirror %> using mTLS:
 
 [//]: https://docs.google.com/presentation/d/1pBHK0dcE5y7rT4KnacqFDc6LuU8R3HiR9ApuvwY1uzA/edit
 ![Air-gapped update process, following path of new virus data. Operator downloads virus data from External ClamAV database in cloud, then runs BOSH SCP to send it to freshclam running on local Anti-Virus Mirror. The local mirror runs it through the database verifier, also on ClamAV mirror, and then serves it to freshclam on all BOSH VMs. On each BOSH VM, freshclam notifies clamd that there are new definitions, and saves the definitions in the virus database. clamd then loads the new virus definitions from the database into its memory to enable fast scanning.](update-defs-airgap.png)
