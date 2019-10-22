@@ -40,7 +40,7 @@ use the S3-based mirror: `pivotal-clamav-mirror.s3.amazonaws.com`
 #### Symptom
 
 Updating virus definitions writes an error like the following
-to the <%= vars.product_name_mirror %> log destination:
+to the <%= vars.product_short_mirror %> log destination:
 
  ```
  2019/07/03 20:28:30 file /var/vcap/data/antivirus-mirror/unvalidated/main.cvd rejected: /var/vcap/data/antivirus-mirror/unvalidated/main.cvd is an invalid cvd file: exit status 1
@@ -48,7 +48,7 @@ to the <%= vars.product_name_mirror %> log destination:
 
 #### Explanation
 
-The <%= vars.product_name_mirror %> database verifier detected that a virus database
+The <%= vars.product_short_mirror %> database verifier detected that a virus database
 file downloaded from the external database is invalid.
 
 #### Solution
@@ -60,7 +60,7 @@ Check that the database files downloaded properly and re-download if necessary.
 #### Symptom
 
 Updating virus definitions writes an error like the following
-to the <%= vars.product_name_mirror %> log destination:
+to the <%= vars.product_short_mirror %> log destination:
 
    ```
    2019/07/03 20:35:34 file /var/vcap/data/antivirus-mirror/unvalidated/daily.cvd rejected: /var/vcap/data/antivirus-mirror/unvalidated/daily.cvd is not newer than /var/vcap/store/antivirus-mirror/validated/daily.cvd
@@ -68,18 +68,18 @@ to the <%= vars.product_name_mirror %> log destination:
 
 #### Explanation
 
-The <%= vars.product_name_mirror %> database verifier detected that a virus database
+The <%= vars.product_short_mirror %> database verifier detected that a virus database
 file downloaded from the external database is older than the one most recently
 processed by the internal mirror.
 
 #### Solution
 
 Check that the latest version of the database files were downloaded.
-If the internal <%= vars.product_name_mirror %> has the latest files, no action is required.
+If the internal <%= vars.product_short_mirror %> has the latest files, no action is required.
 
 ## <a id="runtime"></a> Runtime Issues
 
-### <a id="malware-detection"></a> <%= vars.product_name %> Is Not Detecting Malware
+### <a id="malware-detection"></a> <%= vars.product_short %> Is Not Detecting Malware
 
 #### Symptom
 Malware signature or sample malware is not detected,
@@ -95,7 +95,7 @@ To resolve this issue, verify that:
 + The mirror server is available on the network from within the <%= vars.platform_name %> private subnet.
 + At least one hour has elapsed. One hour is the default scan schedule interval.
 
-If the local mirror is up-to-date and <%= vars.product_name %>
+If the local mirror is up-to-date and <%= vars.product_short %>
 is still failing to detect a malware sample, you might have encountered a new threat.
 Pivotal recommends alerting the community using existing channels and reporting
 the suspicious file directly to the ClamAV team.
@@ -106,15 +106,15 @@ the suspicious file directly to the ClamAV team.
 
 <hr>
 
-### <a id='false-positive-clamav'></a> <%= vars.product_name %> Reports False Positives
+### <a id='false-positive-clamav'></a> <%= vars.product_short %> Reports False Positives
 
 ####Symptom
-<%= vars.product_name %> reports a false positive result such as
+<%= vars.product_short %> reports a false positive result such as
 non-malicious file is reported to be a virus.
 
 ####Explanation
-<%= vars.product_name %> compares files to its database of known malicious patterns.
-<%= vars.product_name %> might detect a non-malicious file as a virus
+<%= vars.product_short %> compares files to its database of known malicious patterns.
+<%= vars.product_short %> might detect a non-malicious file as a virus
 due to a coincidental similarity to those patterns.
 
 ####Solution
@@ -124,29 +124,29 @@ It takes about a week for ClamAV to verify and publish a new database.
 
 <hr>
 
-### <a id='cpu-spikes-clamav'></a> ikes While Using <%= vars.product_name %>
+### <a id='cpu-spikes-clamav'></a> ikes While Using <%= vars.product_short %>
 
 ####Symptom
-<%= vars.product_name %> is taking more CPU resources than assigned in its configuration.
+<%= vars.product_short %> is taking more CPU resources than assigned in its configuration.
 
 ####Explanation
-<%= vars.product_name %> resource consumption is restricted using cgroups.
-<%= vars.product_name %> is resource-limited whenever other processes are active.
-However, cgroups enables <%= vars.product_name %> to occupy
+<%= vars.product_short %> resource consumption is restricted using cgroups.
+<%= vars.product_short %> is resource-limited whenever other processes are active.
+However, cgroups enables <%= vars.product_short %> to occupy
 more CPU resources when all other processes are idle,
 because it does not impact their performance.
 
 ####Solution
 In most cases this is behavior from cgroups.
 If a hard limit is required, configure the **Enforce CPU limit** in the
-**<%= vars.product_name %>** tile.
+**<%= vars.product_short %>** tile.
 
 <hr>
 
-### <a id='out-of-memory'></a> Out of Memory While Using <%= vars.product_name %>
+### <a id='out-of-memory'></a> Out of Memory While Using <%= vars.product_short %>
 
 ####Symptom
-<%= vars.product_name %> fails to start and `/var/log/syslog` reports `Memory cgroup out of memory:
+<%= vars.product_short %> fails to start and `/var/log/syslog` reports `Memory cgroup out of memory:
 Kill process` on the `clamd` process similar to:
 
 <pre class="terminal">2019-02-20T19:35:40.249205+00:00 localhost kernel: [  254.669948] Memory cgroup out of memory: Kill process 7493 (clamd) score 586 or sacrifice child
@@ -154,24 +154,24 @@ Kill process` on the `clamd` process similar to:
 </pre>
 
 ####Explanation
-<%= vars.product_name %> resource consumption is restricted by cgroups.
+<%= vars.product_short %> resource consumption is restricted by cgroups.
 The `clamd` process is terminated if the memory usage limit is exceeded.
 When memory swapping is disabled by other BOSH jobs,
-the <%= vars.product_name %> resource requires a larger memory limit.
+the <%= vars.product_short %> resource requires a larger memory limit.
 
 ####Solution
 This is expected behavior from cgroups.
-To configure the memory limit, configure **Memory limit (in bytes)** in the **<%= vars.product_name %>** tile.
+To configure the memory limit, configure **Memory limit (in bytes)** in the **<%= vars.product_short %>** tile.
 
 <p class="note warning"><strong>Warning:</strong> When updating the memory limit, ensure that all VMs,
 including errand VMs, have sufficient memory resources.
 </p>
 <hr>
 
-### <a id='insufficient-cpu'></a> Insufficient CPU Limit While Using <%= vars.product_name %>
+### <a id='insufficient-cpu'></a> Insufficient CPU Limit While Using <%= vars.product_short %>
 
 #### Symptom
-<%= vars.product_name %> fails to start during deployment.
+<%= vars.product_short %> fails to start during deployment.
 However, the `clamd` and `freshclam` processes eventually run.<br>
 
 The deployment failure log looks similar to:
@@ -194,27 +194,27 @@ clamav_1/d5cfe4bd-b606-4372-8481-187f4cf57e6c  -          running        z1  10.
 </pre>
 
 ####Explanation
-<%= vars.product_name %> startup is CPU intensive
-and, if restricted, can prevent <%= vars.product_name %> from starting up correctly.
+<%= vars.product_short %> startup is CPU intensive
+and, if restricted, can prevent <%= vars.product_short %> from starting up correctly.
 
 #### Solutions
-+ Ensure `cpu_limit` is set high enough for <%= vars.product_name %> to execute normally.
-If the limit is too strict, <%= vars.product_name %> fails to start.
++ Ensure `cpu_limit` is set high enough for <%= vars.product_short %> to execute normally.
+If the limit is too strict, <%= vars.product_short %> fails to start.
 For example, an n1-standard VM on GCP requires `cpu_limit` to be > 45.
-To make changes to this limit, configure **CPU limit (percentage)** in the **<%= vars.product_name %>** tile.
+To make changes to this limit, configure **CPU limit (percentage)** in the **<%= vars.product_short %>** tile.
 
 + Set `enforce_cpu_limit` to `false`. This allocates more CPU cycles to ClamAV
 if other processes are not using CPU resources.<br>
-To `Disable` this limit, configure **Enforce CPU limit** in the **<%= vars.product_name %>** tile.
+To `Disable` this limit, configure **Enforce CPU limit** in the **<%= vars.product_short %>** tile.
 
 + From the **Ops Manager Installation Dashboard**, navigate to the tile with the failing `antivirus` job.
-On **Resource Config**, adjust the **VM Type** for the **<%= vars.product_name %>** job
+On **Resource Config**, adjust the **VM Type** for the **<%= vars.product_short %>** job
 to have sufficient CPU resources.
 
-### <a id='too-many-files'></a> Too Many Open Files Error While Using <%= vars.product_name_mirror %>
+### <a id='too-many-files'></a> Too Many Open Files Error While Using <%= vars.product_short_mirror %>
 
 #### Symptom
-The <%= vars.product_name_mirror %> log reports that too many log files are open:
+The <%= vars.product_short_mirror %> log reports that too many log files are open:
 
 <pre class="terminal">
 2019/07/29 20:02:41 10.0.0.72 is requesting main.cvd
@@ -225,10 +225,10 @@ The <%= vars.product_name_mirror %> log reports that too many log files are open
 </pre>
 
 #### Explanation
-<%= vars.product_name_mirror %> opens files when a database is requested.
+<%= vars.product_short_mirror %> opens files when a database is requested.
 There is a limit of how many files can be opened at a given time.
 
 #### Solution
-Increase the number of <%= vars.product_name_mirror %> instances.
-Pivotal recommends that there is one <%= vars.product_name_mirror %> for every 250 instances where <%= vars.product_name %> is installed.
+Increase the number of <%= vars.product_short_mirror %> instances.
+Pivotal recommends that there is one <%= vars.product_short_mirror %> for every 250 instances where <%= vars.product_short %> is installed.
 For more information, see [Scale the Number of Deployed Mirrors](./install-mirror.html#scale-deployed-mirror).
