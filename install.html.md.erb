@@ -6,14 +6,14 @@ owner: Pivotal Compliance and Innovation (PCI) Team
 
 This topic describes how to install and configure <%= vars.product_full %>.
 
-Before installing <%= vars.product_name %>, Pivotal recommends that you download
+Before installing <%= vars.product_short %>, Pivotal recommends that you download
 and install the <%= vars.product_full_mirror %> tile.
-For more information about the <%= vars.product_name_mirror %> tile,
+For more information about the <%= vars.product_short_mirror %> tile,
 see [Installing and Configuring <%= vars.product_full_mirror %>](./install-mirror.html).
 
 ##<a id="prereqs"></a>Prerequisites
 
-To install <%= vars.product_name %>, you must have:
+To install <%= vars.product_short %>, you must have:
 
 * **A <%= vars.platform_name %> operator with admin rights**.
 
@@ -23,27 +23,27 @@ For more information, see [Operators](https://docs.pivotal.io/platform/customizi
 For compatible versions, see the [Product Snapshot](./index.html#snapshot).
 
 * **At least 1&nbsp;GB of memory free on each VM**.
-  <%= vars.product_name %> uses 610&nbsp;MB of memory.
+  <%= vars.product_short %> uses 610&nbsp;MB of memory.
 
 * **An external mirror**. If you do not have an external mirror, Pivotal recommends that you install
-  the <%= vars.product_name_mirror %>.
+  the <%= vars.product_short_mirror %>.
   For instructions, see [Installing and Configuring <%= vars.product_full_mirror %>](./install-mirror.html).
 
-## <a id='install-addon'></a> Install <%= vars.product_name %>
+## <a id='install-addon'></a> Install <%= vars.product_short %>
 
-Install the <%= vars.product_name %> tile on the Ops Manager Installation Dashboard:
+Install the <%= vars.product_short %> tile on the Ops Manager Installation Dashboard:
 
 1. Download the product file from [Pivotal Network](https://network.pivotal.io/products/p-clamav-addon).
 
 1. Navigate to the Ops Manager Installation Dashboard and select **Import a Product** to upload the product file.
 
-1. Under the **Import a Product** button, click **+** next to the version number of <%= vars.product_name %>.
+1. Under the **Import a Product** button, click **+** next to the version number of <%= vars.product_short %>.
 This adds the tile to your staging area.
 
 1. Click the newly added **<%= vars.product_full %>** tile.
 
-## <a id='configure'></a> Configure <%= vars.product_name %>
-To configure <%= vars.product_name %>:
+## <a id='configure'></a> Configure <%= vars.product_short %>
+To configure <%= vars.product_short %>:
 
 1. Select **Anti-Virus Configuration**.
   ![Configure Anti-Virus](configure.png)
@@ -67,7 +67,7 @@ To configure <%= vars.product_name %>:
       <tr>
         <td><strong>Anti-Virus Mirror Port</strong></td>
         <td>Enter the port for Anti-Virus Mirror to use. The default value is <code>6501</code>.
-          <p class="note"><strong>Note: </strong> <%= vars.product_name_mirror %> uses mutual TLS. This port must be the same port used in <strong>Anti-Virus Mirror Port</strong> of the <strong><%= vars.product_full_mirror %></strong> tile. If these ports are not the same, <%= vars.product_name %> database updates and deployments fail.
+          <p class="note"><strong>Note: </strong> <%= vars.product_short_mirror %> uses mutual TLS. This port must be the same port used in <strong>Anti-Virus Mirror Port</strong> of the <strong><%= vars.product_full_mirror %></strong> tile. If these ports are not the same, <%= vars.product_short %> database updates and deployments fail.
           </p>
         </td>
       </tr>
@@ -79,7 +79,7 @@ To configure <%= vars.product_name %>:
       </tr>
       <tr>
         <td><strong>Memory limit (in bytes)</strong></td>
-        <td>Enter the maximum amount of user memory (including file cache) in bytes that <%= vars.product_name %> can use.
+        <td>Enter the maximum amount of user memory (including file cache) in bytes that <%= vars.product_short %> can use.
           The default value is <code>1610612736</code>.</td>
       </tr>
       <tr>
@@ -90,7 +90,7 @@ To configure <%= vars.product_name %>:
       </tr>
       <tr>
         <td><strong>(Optional) Enforce CPU limit</strong></td>
-        <td>Set the limit for how much CPU <%= vars.product_name %> processes can use.<br>
+        <td>Set the limit for how much CPU <%= vars.product_short %> processes can use.<br>
           <ul>
             <li><strong>Enable</strong>: Select this to enforce the limit.</li>
             <li><strong>CPU limit (percentage)</strong>: Enter the CPU percentage limit.</li>
@@ -119,7 +119,7 @@ To configure <%= vars.product_name %>:
 
          <div class="note"><strong>Note: </strong> Add this path to the
            <strong>Directories and files that will be ignored (on Windows)</strong> list below.
-            If you do not do this, then <%= vars.product_name %>:
+            If you do not do this, then <%= vars.product_short %>:
             <ul>
               <li>Detects the moved or copied file</li>
               <li>Logs redundant alerts</li>
@@ -130,27 +130,27 @@ To configure <%= vars.product_name %>:
       </tr>
       <tr>
         <td><strong>Directories and files that will be ignored</strong></td>
-        <td>Enter directories in a comma-separated list for <%= vars.product_name %> to not scan on Linux.
+        <td>Enter directories in a comma-separated list for <%= vars.product_short %> to not scan on Linux.
           The default value is "<code>/proc/</code>,<code>/sys/</code>".
-          This configures <%= vars.product_name %> scans to exclude the <code>/proc</code> and
+          This configures <%= vars.product_short %> scans to exclude the <code>/proc</code> and
           <code>/sys</code> directories.<br><br>
           Pivotal recommends that you ignore the <code>/proc</code>,
           <code>/sys</code>, and <strong>Destination for infected files</strong> directories.</td>
       </tr>
       <tr>
         <td><strong>Directories and files that will be ignored on Windows</strong></td>
-        <td>Enter directories in a comma-separated list for <%= vars.product_name %> to not scan on Windows.</td>
+        <td>Enter directories in a comma-separated list for <%= vars.product_short %> to not scan on Windows.</td>
       </tr>
       <tr>
         <td><strong>List of signature names that will be ignored (Used for false positives)</strong></td>
-        <td>Enter signature names in a comma-separated list for <%= vars.product_name %> to whitelist. For example,<br>
+        <td>Enter signature names in a comma-separated list for <%= vars.product_short %> to whitelist. For example,<br>
           <code>Eicar-Test-Signature, Clamav.Test.File-7</code><br>
-          configures <%= vars.product_name %> to ignore the <strong>Eicar Test File</strong>
+          configures <%= vars.product_short %> to ignore the <strong>Eicar Test File</strong>
           and <strong>ClamAV Test File-7</strong> signatures.</td>
       </tr>
       <tr>
         <td><strong>List of instance group names that will be excluded from deployment</strong></td>
-        <td>Enter the instance groups that you do not want <%= vars.product_name %> deployed on.
+        <td>Enter the instance groups that you do not want <%= vars.product_short %> deployed on.
             Use a comma-separated list.</td>
       </tr>
     </table>
@@ -169,7 +169,7 @@ It takes about a week for ClamAV to verify and publish a new database.
 
 
 ## <a id='proxy'></a> Configure HTTP Proxy
-If you require a proxy server for <%= vars.product_name %> jobs to connect to the internet to
+If you require a proxy server for <%= vars.product_short %> jobs to connect to the internet to
 update their virus definitions, you can configure one:
 
 1. Select **HTTP Proxy Configuration for Anti-Virus Jobs**.
@@ -181,7 +181,7 @@ update their virus definitions, you can configure one:
 
 
 ## <a id='scheduled'></a> Configure Scheduled Scan
-<%= vars.product_name %> can be configured to run a virus scan `hourly` or `daily`.
+<%= vars.product_short %> can be configured to run a virus scan `hourly` or `daily`.
 The default value is `daily`.
 The format of these values must be in 24-hour format `HH:MM`.
 
@@ -211,8 +211,8 @@ To do this, complete this procedure:
 <br>
 <hr style="height:1px;border:none;color:#333;background-color:#333;" />
 
-##<a id="scan-containers"></a> (Optional) Configure <%= vars.product_name %> to Exclude Duplicate Logs on Containers
-You can use <%= vars.product_name %> to scan:
+##<a id="scan-containers"></a> (Optional) Configure <%= vars.product_short %> to Exclude Duplicate Logs on Containers
+You can use <%= vars.product_short %> to scan:
 
 * Garden containers on the Diego Cell VMs in Pivotal Application Service (PAS).
 * Containers on the Kubernetes worker node VMs in Enterprise Pivotal Container Service (Enterprise PKS).
@@ -220,13 +220,13 @@ You can use <%= vars.product_name %> to scan:
 However, duplicate logs about the same file appear under the `diff`,
 `rootfs`, or `merged` directories as a consequence of OverlayFS implementation.
 
-To configure <%= vars.product_name %> to ignore duplicate logs for these directories, see the optional
+To configure <%= vars.product_short %> to ignore duplicate logs for these directories, see the optional
 [Exclude Duplicate Logs on Garden Containers](#garden) or
 [Exclude Duplicate Logs on Containers in Enterprise PKS](#pks) sections below:
 
 
 ###<a id="garden"></a> (Optional) Exclude Duplicate Logs on Garden Containers
-When <%= vars.product_name %> scan results detect potential malware on Garden containers,
+When <%= vars.product_short %> scan results detect potential malware on Garden containers,
 logs are reported for both the `diff` and `rootfs` directories.
 
 This is because the `rootfs` directory is the projection of
@@ -240,7 +240,7 @@ For more information about GrootFS OverlayFS implementation, see
 in the Cloud Foundry documentation.
 
 #### Procedure
-To configure <%= vars.product_name %> to ignore duplicate logs for these directories:
+To configure <%= vars.product_short %> to ignore duplicate logs for these directories:
 
 1. Select **Anti-Virus Configuration**.
 1. Enter the following ignore pattern into the **Directories and files that will
@@ -253,7 +253,7 @@ be ignored** field:
     <p class="note"><strong>Note:</strong>
       Adding this ignore pattern means that files and directories in the
       <code>/var/vcap/data/grootfs/store/unprivileged/images/UUID/rootfs</code>
-      directory are ignored by <%= vars.product_name %>.
+      directory are ignored by <%= vars.product_short %>.
       <code>UUID</code> is the ID of the container.
     </p>
 1. Click **Save**.
@@ -264,7 +264,7 @@ For an example log message, see [Container Log Messages](./monitoring-logs.html#
 
 
 ###<a id="pks"></a> (Optional) Exclude Duplicate Logs on Containers in Enterprise PKS
-When <%= vars.product_name %> scan results detect potential malware on containers of the Kubernetes
+When <%= vars.product_short %> scan results detect potential malware on containers of the Kubernetes
 worker node VMs in Enterprise PKS, logs are reported for both the
 `diff` and `merged` directories.
 
@@ -277,7 +277,7 @@ For more information about Docker OverlayFS implementation, see
 in the Docker documentation.
 
 #### Procedure
-To configure <%= vars.product_name %> to ignore duplicate logs for these directories:
+To configure <%= vars.product_short %> to ignore duplicate logs for these directories:
 
 1. Select **Anti-Virus Configuration**.
 1. Enter the following ignore pattern into the **Directories and files that will
@@ -290,7 +290,7 @@ be ignored** field:
     <p class="note"><strong>Note:</strong>
       Adding this ignore pattern means that files and directories in the
       <code>/var/vcap/data/grootfs/store/unprivileged/images/UUID/merged</code>
-      directory are ignored by <%= vars.product_name %>. <code>UUID</code> is the ID of the container.
+      directory are ignored by <%= vars.product_short %>. <code>UUID</code> is the ID of the container.
     </p>
 1. Click **Save**.
 1. To apply the configuration change, follow the instructions in

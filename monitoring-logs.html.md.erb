@@ -18,12 +18,12 @@ The freshclam and go-clam-tls apps are mutually exclusive,
 but the other apps work together to detect viruses and protect the VM.
 
 Each app writes its own log file.
-You need to monitor each of these files to know if <%= vars.product_name %>
+You need to monitor each of these files to know if <%= vars.product_short %>
 is working correctly and if viruses have been found.
 
 Pivotal recommends that you enable syslog forwarding so that the messages from each of the three log files
 is aggregated into the syslog file on the remote syslog server.
-Then you can use your preferred monitoring and alerting tool to review the <%= vars.product_name %> log messages.
+Then you can use your preferred monitoring and alerting tool to review the <%= vars.product_short %> log messages.
 
 For an example of how ClamAV messages appear in the syslog file, see [Syslog Format](#format) below.
 
@@ -453,9 +453,9 @@ Eicar-Test-Signature FOUND
 
 ##<a id="format"></a>ClamAV Log Format
 
-The logs that <%= vars.product_name %> itself outputs do not adhere to a specific structure.
+The logs that <%= vars.product_short %> itself outputs do not adhere to a specific structure.
 However, the syslog forwarder component (which is on all VMs)
-encapsulates <%= vars.product_name %>'s log, and prepends the necessary headers so that the resulting logs adhere
+encapsulates <%= vars.product_short %>'s log, and prepends the necessary headers so that the resulting logs adhere
 to the syslog format.
 
 With syslog-forwarder, the syslog format is:
@@ -481,7 +481,7 @@ Where:
 
 * <code>\<PRI></code> is `<14>`.
 * `APP-NAME` is `freshclam`, `clamdscan`, or `clamd`.
-* `MESSAGE` is the output from an <%= vars.product_name %> app.
+* `MESSAGE` is the output from an <%= vars.product_short %> app.
    Examples of the output messages are shown in [Log Messages](#messages) above.
 
 For example, the first two lines of the "Scan Finished" message appearing in the syslog file below:

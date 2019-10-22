@@ -7,7 +7,7 @@ owner: Security Engineering
 
 This topic is an overview of <%= vars.product_full %>.
 
-## <a id="about-antivirus"></a>About <%= vars.product_name %>
+## <a id="about-antivirus"></a>About <%= vars.product_short %>
 
 <%= vars.product_short %> might be necessary for regulatory purposes if your compliance auditor
 requires antivirus protection within your <%= vars.platform_name %> environment.
@@ -98,8 +98,8 @@ The following table provides version and version-support information about <%= v
 
 ##<a id="features"></a> Features
   * Includes open source ClamAV packaged as part of the tile for installation.
-  * Contains a private <%= vars.product_name_mirror %> tile for deployment and providing VMs to the foundation.
-    * <%= vars.product_name_mirror %> serves both air-gapped and non-air-gapped environments.
+  * Contains a private <%= vars.product_short_mirror %> tile for deployment and providing VMs to the foundation.
+    * <%= vars.product_short_mirror %> serves both air-gapped and non-air-gapped environments.
     * The tile authenticates and validates publicly downloaded database definition files
       for added security.
   * Ability to scan VMs and containers for foundations with PAS and Enterprise PKS.
@@ -107,35 +107,35 @@ The following table provides version and version-support information about <%= v
   * Allows whitelisting of known signatures.
   * Allows you to configure CPU and memory usage limits on VMs of the foundation.
 
-##<a id="architecture"></a> <%= vars.product_name %> Architecture
+##<a id="architecture"></a> <%= vars.product_short %> Architecture
 ###<a id="propagate"></a>How Virus Definitions Propagate to VMs
 
-Virus definitions on the internal <%= vars.product_name_mirror %> update
+Virus definitions on the internal <%= vars.product_short_mirror %> update
 automatically or manually depending on whether your <%= vars.product_platform %>
 is on an online or air-gapped network, as described in [Update Virus Definitions](#update) above.
-The automatic and manual processes store new virus definitions to the <%= vars.product_name_mirror %>
+The automatic and manual processes store new virus definitions to the <%= vars.product_short_mirror %>
 VM's database of unverified viruses as follows:
 
-* **Automatic update**: The `freshclam` daemon process on the <%= vars.product_name_mirror %> VM downloads the virus definitions
+* **Automatic update**: The `freshclam` daemon process on the <%= vars.product_short_mirror %> VM downloads the virus definitions
 and stores them in the internal mirror VM's unverified database.
 * **Manual update**: The operator runs `bosh scp` to directly copy the virus definitions
 to the internal mirror's database of unverified viruses.
 
 From the unverified internal mirror database, virus definitions then propagate to BOSH VMs as follows:
 
-1. The database verifier process on the <%= vars.product_name_mirror %> verifies
+1. The database verifier process on the <%= vars.product_short_mirror %> verifies
   the date, format, and integrity of the new virus definitions.
   - To verify integrity, the verifier checks bytecode signatures against signatures
     in the external ClamAV database, using the external database public key.
   - If verification fails or if the virus definitions are not new, the mirror VM generates an error.
     See [Virus Database Update Issues](./troubleshooting.html#updates).
 
-1. The internal <%= vars.product_name_mirror %> VM saves verified virus definitions to its verified database
+1. The internal <%= vars.product_short_mirror %> VM saves verified virus definitions to its verified database
 and serves them to the `freshclam` processes of BOSH VMs.
 
 1. On each BOSH-managed VM:
 
-  1. The `freshclam` daemon process regularly queries the internal <%= vars.product_name_mirror %> for new virus definitions.
+  1. The `freshclam` daemon process regularly queries the internal <%= vars.product_short_mirror %> for new virus definitions.
       - You can configure the query frequency in the <%= vars.product_full %> tile >
   **ClamAV Configuration** > **Number of database checks per day** field.
 
@@ -151,14 +151,14 @@ from an external ClamAV database to BOSH VMs, in online and air-gapped <%= vars.
 
 ###<a id="propagate-online"></a>Online Network (Diagram)
 
-This diagram illustrates how virus definitions propagate to BOSH VMs with <%= vars.product_name_mirror %> using mTLS:
+This diagram illustrates how virus definitions propagate to BOSH VMs with <%= vars.product_short_mirror %> using mTLS:
 
 [//]: https://docs.google.com/presentation/d/1pBHK0dcE5y7rT4KnacqFDc6LuU8R3HiR9ApuvwY1uzA/edit
 ![Online (non-air-gapped) update process, following path of new virus data. External ClamAV database in cloud serves new virus data to freshclam running on local Anti-Virus Mirror. The local mirror runs it through the database verifier, also on Anti-Virus Mirror and then serves it to freshclam on all BOSH VMs. On each BOSH VM, freshclam notifies clamd that there are new definitions, and saves the definitions in the virus database. clamd then loads the new virus definitions from the database into its memory to enable fast scanning.](update-defs-online.png)
 
 ###<a id="propagate-airgap"></a>Air-Gapped Network (Diagram)
 
-This diagram illustrates how virus definitions propagate to BOSH VMs with <%= vars.product_name_mirror %> using mTLS:
+This diagram illustrates how virus definitions propagate to BOSH VMs with <%= vars.product_short_mirror %> using mTLS:
 
 [//]: https://docs.google.com/presentation/d/1pBHK0dcE5y7rT4KnacqFDc6LuU8R3HiR9ApuvwY1uzA/edit
 ![Air-gapped update process, following path of new virus data. Operator downloads virus data from External ClamAV database in cloud, then runs BOSH SCP to send it to freshclam running on local Anti-Virus Mirror. The local mirror runs it through the database verifier, also on ClamAV mirror, and then serves it to freshclam on all BOSH VMs. On each BOSH VM, freshclam notifies clamd that there are new definitions, and saves the definitions in the virus database. clamd then loads the new virus definitions from the database into its memory to enable fast scanning.](update-defs-airgap.png)
