@@ -12,7 +12,7 @@ Pivotal recommends that you install this tile before installing <%= vars.product
 If you do not have an external mirror for Anti-Virus jobs to fetch database updates from,
 you can deploy a mirror using the <%= vars.product_name_mirror %> tile.
 
-This deployed internal mirror can support both air-gapped environments and <%= vars.product_name_mirror %> networked environments:
+This deployed internal mirror, which uses mutual TLS (mTLS), can support both air-gapped environments and <%= vars.product_name_mirror %> networked environments:
 
 * **Online Network:** You can deploy the internal <%= vars.product_name_mirror %> as a proxy.
   This acts as a database for the virus definitions if the online virus database experiences downtime.
@@ -117,7 +117,7 @@ To configure <%= vars.product_name_mirror %>:
           Enter the port for Anti-Virus Mirror to use.
           The default value is <code>6501</code>.
 
-          <p class="note"><strong>Note: </strong> This port must be the same port used in <strong>Anti-Virus Mirror Port</strong> of the <strong>Pivotal Anti-Virus</strong> tile. If these ports are not the same, <%= vars.product_name %> database updates and deployments fail.
+          <p class="note"><strong>Note: </strong> <%= vars.product_name_mirror %> uses mutual TLS. This port must be the same port used in <strong>Anti-Virus Mirror Port</strong> of the <strong>Pivotal Anti-Virus</strong> tile. If these ports are not the same, <%= vars.product_name %> database updates and deployments fail.
           </p>
         </td>
       </tr>
