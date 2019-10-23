@@ -6,7 +6,8 @@ As of January 21, 2019:
 
 | Branch name… | Documents version… | Publishes to… |
 |-------------|----------------|----------------|
-| master   | v2.1 (unreleased)     | https://docs-pcf-staging.cfapps.io/addon-antivirus/2-n/index.html |
+| master   | v2.2 (unreleased)     | https://docs-pcf-staging.cfapps.io/addon-antivirus/2-n/index.html |
+| 2.1   | 2.1.x    | https://docs.pivotal.io/addon-antivirus/2-1/index.html and https://docs-pcf-staging.cfapps.io/addon-antivirus/2-1/index.html |
 | 2.0   | 2.0.x     | https://docs.pivotal.io/addon-antivirus/2-0/index.html and https://docs-pcf-staging.cfapps.io/addon-antivirus/2-0/index.html |
 | v1.4   | v1.4.x     | https://docs.pivotal.io/addon-antivirus/1-4/index.html and https://docs-pcf-staging.cfapps.io/addon-antivirus/1-4/index.html |
 | v1.3   | v1.3.x     | NOT IN USE (PDF available at https://docs-pcf-staging.cfapps.io/archives/addon-antivirus-1.3.pdf) |
@@ -18,9 +19,9 @@ As of January 21, 2019:
 
 pivotal-cf/docs-book-antivirus builds both the **edge** version (next unreleased version) and the **production** versions.
 
-+ **Edge** is currently publishing the 2-1 branch.
++ **Edge** is currently publishing the 2-2 branch.
 
-+ **Production** is currently publishing 1-2, 1-3, 1-4, and 2-0.
++ **Production** is currently publishing 1-2, 1-3, 1-4, 2-0, and 2-1.
 
 ## Style Guide
 _These are a handful of style issues I noticed with the original version of this documentation._
@@ -42,4 +43,3 @@ _These are a handful of style issues I noticed with the original version of this
 + Don't spell out VM.
 
 + Use initial caps on all headings. Don't capitalize prepositions.
-
