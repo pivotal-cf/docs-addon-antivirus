@@ -5,12 +5,12 @@ owner: Security Engineering
 
 <strong><%= modified_date %></strong>
 
-This topic contains sample logs emitted by ClamAV.
+This topic contains sample logs emitted by <%= vars.product_full %>.
 
 These samples can be used to configure a Security Information and Event Management (SIEM) system
 to verify regular activity and generate alerts for virus detections or outdated virus signatures.
 
-##<a id="clamav-logs"></a> ClamAV Logs
+##<a id="clamav-logs"></a> <%= vars.product_short %> Logs
 
 There are four distinct <%= vars.product_full %> apps that run on each VM:
 freshclam, go-clam-tls, clamd, and clamdscan.
@@ -25,7 +25,7 @@ Pivotal recommends that you enable syslog forwarding so that the messages from e
 is aggregated into the syslog file on the remote syslog server.
 Then you can use your preferred monitoring and alerting tool to review the <%= vars.product_short %> log messages.
 
-For an example of how ClamAV messages appear in the syslog file, see [Syslog Format](#format) below.
+For an example of how <%= vars.product_short %> messages appear in the syslog file, see [Syslog Format](#format) below.
 
 For information about each app, see [freshclam](#freshclam-app),
 [go-clam-tls](#go-clam-tls-app), [clamd](#clamd-app),
@@ -451,7 +451,7 @@ Eicar-Test-Signature FOUND
 </pre>
 
 
-##<a id="format"></a>ClamAV Log Format
+##<a id="format"></a><%= vars.product_short %> Log Format
 
 The logs that <%= vars.product_short %> itself outputs do not adhere to a specific structure.
 However, the syslog forwarder component (which is on all VMs)
