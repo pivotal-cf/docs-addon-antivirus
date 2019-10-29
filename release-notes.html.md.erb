@@ -12,22 +12,27 @@ owner: Security Engineering
 </p>
 
 This topic contains release notes for <%= vars.product_full %>.
+
 ## <a id="2-1-6"></a> v2.1.6
 
-**Release Date: November 4, 2019**
+**Release Date: November XX, 2019**
 
 ### Features
 
 New features and changes in this release:
 
-* Set minimum memory for <%= vars.product_full_mirror %> host to 1.5G.
+* The minimum memory for the <%= vars.product_full_mirror %> host is set to 1.5&nbsp;G.
 
 ### Resolved Issues
 
-This release has the following fix:
+This release fixes the following issues:
 
-* Fixed issue with Anti-Virus Mirror deployment failing in air-gapped environments.
-* Fixed issue with Anti-Virus generating duplicate logs.
+* <%= vars.product_short_mirror %> deployments no longer fail in air-gapped environments.
+* The clamd app no longer forwards duplicate logs.  
+
+### Known Issues
+
+There are no known issues for this release.
 
 ## <a id="2-1-3"></a> v2.1.3
 
@@ -37,7 +42,7 @@ This release has the following fix:
 
 New features and changes in this release:
 
-* Adds mutual TLS from <%= vars.product_full_mirror %> to the <%= vars.product_full %> hosts.
+* Adds mutual TLS from <%= vars.product_short_mirror %> to the <%= vars.product_short %> hosts.
 <br>For more information, see [Changing the Port Used by Pivotal Anti-Virus Mirror and Pivotal Anti-Virus](./changing-ports.html).
 * Adds support for excluding instance groups.
 <br>For more information,
@@ -48,9 +53,10 @@ New features and changes in this release:
 
 This release has the following known issue:
 
-* Anti-Virus Mirror deployment fails in air-gapped environments.
+* <%= vars.product_short_mirror %> deployment fails in air-gapped environments.
   This is due to a change in Go build default settings attempting to download dependencies,
   instead of using the bundled dependencies.
+* The clamd app forwards duplicate logs. This is because clamd controller outputs logs to both `/var/vcap/sys/log/monit/clamd.log` and `/var/vcap/sys/log/antivirus/clamd.log`.
 
 ## <a id="view"></a> View Release Notes for Another Version
 
