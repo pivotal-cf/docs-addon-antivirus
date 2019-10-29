@@ -6,10 +6,15 @@ owner: Pivotal Compliance and Innovation (PCI) Team
 
 This topic describes how to change the port used by <%= vars.product_full_mirror %> and <%= vars.product_full %>.
 
+You might need to do this procedure when upgrading.
+For information, see [Upgrade Pivotal Anti-Virus v2.0.x to v2.1.x or Later](upgrade.html#upgrade-v20-v21).
 
 ## <a id="change-port"></a> Change the Port
 
-The port used by <%= vars.product_short_mirror %> and <%= vars.product_short %> must be the same. This is because <%= vars.product_short_mirror %> uses mutual TLS. If the port number configured in both tiles is not the same, <%= vars.product_short %> database updates and deployments fail.
+The port used by <%= vars.product_short_mirror %> and <%= vars.product_short %> must be the same.
+This is because <%= vars.product_short_mirror %> uses mutual TLS.
+If the port number configured in both tiles is not the same,
+<%= vars.product_short %> database updates and deployments fail.
 
 To change the port number:
 
@@ -21,7 +26,9 @@ To change the port number:
 1. Click **Anti-Virus Configuration**.
 1. Under **Mirror for Automatic Database Updates**, ensure that **Deployed mirror from the <%=vars.product_full_mirror%> Tile** is selected.
 1. Enter the same port number you entered in the above step into **Anti-Virus Mirror Port**.
+
   ![Configure Anti-Virus Mirror Mirror Port](mirror-port.png)
+
 1. Return to the <%= vars.ops_manager %> Installation Dashboard and click **Review Pending Changes**.
 1. Unselect all products except **BOSH Director**, **<%=vars.product_short_mirror%>**, and **<%= vars.product_short %>**.
 1. Click **Apply Changes**.
