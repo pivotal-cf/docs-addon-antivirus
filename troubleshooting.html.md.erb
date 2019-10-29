@@ -10,10 +10,10 @@ and verifying that it is protecting your <%= vars.platform_name %> deployment.
 
 ## <a id="installation"></a> Installation Issues
 
-### <a id=""></a> <%= vars.ops_manager %> Fails to Apply Changes
+### <a id=""></a> Ops Manager Fails to Apply Changes
 
 #### Symptom
-Applying changes in <%= vars.ops_manager %> fails.
+Applying changes in Ops Manager fails.
 The bottom of the changelog contains an error message similar to:
 
 <pre class="terminal">...
@@ -207,7 +207,7 @@ To make changes to this limit, configure **CPU limit (percentage)** in the **<%=
 if other processes are not using CPU resources.<br>
 To `Disable` this limit, configure **Enforce CPU limit** in the **<%= vars.product_short %>** tile.
 
-+ From the **<%= vars.ops_manager %> Installation Dashboard**, navigate to the tile with the failing `antivirus` job.
++ From the **Ops Manager Installation Dashboard**, navigate to the tile with the failing `antivirus` job.
 On **Resource Config**, adjust the **VM Type** for the **<%= vars.product_short %>** job
 to have sufficient CPU resources.
 
