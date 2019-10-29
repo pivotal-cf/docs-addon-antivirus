@@ -58,7 +58,7 @@ You can access the ClamAV mirror at the the following URLs:
     * http://database.clamav.net/daily.cvd
     * http://database.clamav.net/bytecode.cvd
 
-1. Copy your downloaded virus definition files to your Ops Manager VM.
+1. Copy your downloaded virus definition files to your <%= vars.ops_manager %> VM.
 
     ```
     scp -i PATH-TO-PRIVATE-KEY PATH-TO-CVD-FILE ... ubuntu@OPS-MANAGER-VM-IP:
@@ -68,9 +68,9 @@ You can access the ClamAV mirror at the the following URLs:
 
     <pre class="terminal">$ scp -i ~/.ssh/my-key.pem ~/Downloads/main.cvd ~/Downloads/daily.cvd ~/Downloads/bytecode.cvd ubuntu<span>@</span>192.168.0.2: </pre>
 
-1. SSH into the Ops Manager VM.
+1. SSH into the <%= vars.ops_manager %> VM.
    For instructions,
-   see [Log in to the Ops Manager VM with SSH](https://docs.pivotal.io/platform/customizing/trouble-advanced.html#ssh).
+   see [Log in to the <%= vars.ops_manager %> VM with SSH](https://docs.pivotal.io/platform/customizing/trouble-advanced.html#ssh).
 
 1. Find the name of your <%= vars.product_short_mirror %> deployment by running:
 
