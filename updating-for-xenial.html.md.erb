@@ -73,8 +73,8 @@ existing `clamav.yml` and redeploy.
 
 Follow these steps:
 
-1. SSH into the <%= vars.ops_manager %> VM.
-   For how to do this, see [SSH into <%= vars.ops_manager %>](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#ssh).
+1. SSH into the Ops Manager VM.
+   For how to do this, see [SSH into Ops Manager](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#ssh).
 
 2. To retrieve and save the ClamAV add-on runtime config, run the following command:
 
@@ -119,10 +119,10 @@ Follow these steps:
 
     <pre class="terminal">bosh2 -e my-env update-runtime-config --name=clamav /tmp/clamav.yml</pre> 
 
-5. Navigate to the Installation Dashboard in <%= vars.ops_manager %>.
+5. Navigate to the Installation Dashboard in Ops Manager.
 
-6. If you are using <%= vars.ops_manager %> v2.3 or later, click **Review Pending Changes**.
-   For more information about this <%= vars.ops_manager %> page,
+6. If you are using Ops Manager v2.3 or later, click **Review Pending Changes**.
+   For more information about this Ops Manager page,
    see [Reviewing Pending Product Changes](https://docs.pivotal.io/pivotalcf/customizing/review-pending-changes.html).
 
 7. Click **Apply Changes**.

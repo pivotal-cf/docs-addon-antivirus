@@ -20,7 +20,7 @@ To install ClamAV Add-on, you need:
 
 * **A PCF operator with admin rights**---For more information, see [Operators](https://docs.pivotal.io/pivotalcf/customizing/user-types.html#operator) in the Pivotal Cloud Foundry documentation.
 
-* <%= vars.ops_manager_full %> (<%= vars.ops_manager %>)
+* Operations Manager (Ops Manager)
 
 * At least 1 GB of memory free on each VM before deploying ClamAV Add-on.
   ClamAV Add-on uses 610 MB of memory.
@@ -160,7 +160,7 @@ If the proxy server needs authentication, add the <code>proxy\_user</code> and
 
 ##<a id="download"></a> Download ClamAV Add-on
 
-To download the ClamAV Add-on software binary file and move it to your <%= vars.ops_manager %>
+To download the ClamAV Add-on software binary file and move it to your Ops Manager
 virtual machine, perform the steps below.
 If you intend to run the ClamAV Add-on on a PCF deployment that includes services
 or components that use Ubuntu Xenial stemcells, you should download ClamAV Add-on
@@ -172,7 +172,7 @@ v1.4.28 or later.
 
 1. Download the ClamAV Add-on software binary from the [Pivotal Network](https://network.pivotal.io/products/p-clamav-addon) to your local machine.
 
-2. To copy the binary to your <%= vars.ops_manager %> VM, run the following command:
+2. To copy the binary to your Ops Manager VM, run the following command:
 
     ```
     scp -i PATH-TO-PRIVATE-KEY clamav-release.tar.gz ubuntu@YOUR-OPS-MANAGER-VM-IP:
@@ -182,7 +182,7 @@ v1.4.28 or later.
 
     <pre class="terminal">$ scp -i ~/.ssh/my-key.pem clamav-1.3.28.tar.gz ubuntu@192.168.0.2:  </pre>
 
-2. To copy the ClamAV manifest, `clamav.yml` file, to your <%= vars.ops_manager %> instance, run the following command:
+2. To copy the ClamAV manifest, `clamav.yml` file, to your Ops Manager instance, run the following command:
 
     ```
     scp -i PATH-TO-PRIVATE-KEY clamav.yml ubuntu@YOUR-OPS-MANAGER-VM-IP:
@@ -192,7 +192,7 @@ v1.4.28 or later.
 
     <pre class="terminal">$ scp -i ~/.ssh/my-key.pem clamav.yml ubuntu@192.168.0.2:  </pre>
 
-4. To SSH into <%= vars.ops_manager %>, run the following command:
+4. To SSH into Ops Manager, run the following command:
 
     ```
     ssh -i PATH-TO-PRIVATE-KEY ubuntu@YOUR-OPS-MANAGER-VM-IP
@@ -217,7 +217,7 @@ v1.4.28 or later.
 Perform the following steps to deploy the ClamAV Add-on:
 
 1. Log in to the BOSH Director.
-    1. On the <%= vars.ops_manager %> VM, create an alias in the BOSH CLI for your BOSH Director IP address. For example:
+    1. On the Ops Manager VM, create an alias in the BOSH CLI for your BOSH Director IP address. For example:
     <pre class="terminal">$ bosh alias-env my-env -e 10.0.0.3</pre>
     1. Log in to the BOSH Director, specifying the newly created alias.
     For example:
@@ -247,10 +247,10 @@ Perform the following steps to deploy the ClamAV Add-on:
             release: clamav
     ...
     </pre>
-1. Navigate to your Installation Dashboard in <%= vars.ops_manager %>.
+1. Navigate to your Installation Dashboard in Ops Manager.
 
-1. If you are using <%= vars.ops_manager %> v2.3 or later, click **Review Pending Changes**.
-   For more information about this <%= vars.ops_manager %> page,
+1. If you are using Ops Manager v2.3 or later, click **Review Pending Changes**.
+   For more information about this Ops Manager page,
    see [Reviewing Pending Product Changes](https://docs.pivotal.io/pivotalcf/customizing/review-pending-changes.html).
 
 1. Click **Apply Changes**.

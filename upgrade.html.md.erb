@@ -22,7 +22,7 @@ To upgrade the ClamAV add-on to a later version, do the following:
 1. Download the ClamAV add-on software binary
    from the [Pivotal Network](https://network.pivotal.io/products/p-clamav-addon) to your local machine.
 
-2. To copy the software binary to your <%= vars.ops_manager %> VM, run the following command:
+2. To copy the software binary to your Ops Manager VM, run the following command:
 
     ```
     scp -i PATH-TO-PRIVATE-KEY clamav-VERSION.tar.gz ubuntu@YOUR-OPS-MANAGER-VM-IP:
@@ -32,8 +32,8 @@ To upgrade the ClamAV add-on to a later version, do the following:
 
     <pre class="terminal">$ scp -i ~/.ssh/my-key.pem ~/Downloads/clamav-1.4.34.tgz ubuntu<span>@</span>192.168.0.2: </pre>
 
-3. SSH into the <%= vars.ops_manager %> VM.
-   For instructions, see [SSH into <%= vars.ops_manager %>](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#ssh).
+3. SSH into the Ops Manager VM.
+   For instructions, see [SSH into Ops Manager](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#ssh).
 
 4. Retrieve the latest runtime config by running the following command:
     <br><br>
@@ -74,8 +74,8 @@ To upgrade the ClamAV add-on to a later version, do the following:
 
 8. Navigate to your Ops Manager **Installation Dashboard**.
 
-9. If you are using <%= vars.ops_manager %> v2.3 or later, click **Review Pending Changes**.
-   For more information about this <%= vars.ops_manager %> page,
+9. If you are using Ops Manager v2.3 or later, click **Review Pending Changes**.
+   For more information about this Ops Manager page,
    see [Reviewing Pending Product Changes](https://docs.pivotal.io/pivotalcf/customizing/review-pending-changes.html).
 
 10. Click **Apply Changes**.
