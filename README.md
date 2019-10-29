@@ -32,7 +32,7 @@ _These are a handful of style issues I noticed with the original version of this
 
 + Spell out Pivotal Platform at first use but don't add a registered trademark.
 
-+ Spell out Pivotal Operations Manager (Ops Manager) at first use.
++ Write <%= vars.ops_manager_full %> (<%= vars.ops_manager %>) on first use. Use <%= vars.ops_manager %> thereafter.
 
 + Use this format to refer to version numbers: "v1.7 or later".
 
@@ -41,20 +41,3 @@ _These are a handful of style issues I noticed with the original version of this
 + Don't spell out VM.
 
 + Use initial caps on all headings. Don't capitalize prepositions.
-
-Style list in progress for v2
-
-| Term | Meaning | Alternative |
-|------|---------|-------------|
-|Pivotal Anti-Virus Mirror | Name of the product tile that installs the mirror | |
-|Pivotal Anti-Virus | Name of the product tile that scans the Pivotal Platform VMs for viruses | |
-| private ClamAV mirror |  |  |
-|ClamAV mirror deployment |  | |
-|ClamAV mirror job | | |
-|ClamAV virus database mirror | | |
-|external mirror for ClamAV jobs| | |
-|official mirror| | |
-|ClamAV official mirror| | |
-|virus definition file| | |
-|air-gapped environment| | |
-

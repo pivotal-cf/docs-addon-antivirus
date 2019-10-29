@@ -30,7 +30,7 @@ To install the <%= vars.product_short_mirror %>, you must have:
 * **A <%= vars.platform_name %> operator with admin rights**.
 For more information, see [Operators](https://docs.pivotal.io/platform/customizing/user-types.html#operator).
 
-* **Pivotal Operations Manager (Ops Manager)**.
+* **<%= vars.ops_manager_full %> (<%= vars.ops_manager %>)**.
 For compatible versions, see the [Product Snapshot](./index.html#snapshot).
 
 * **At least 1&nbsp;GB of memory free on each VM**.
@@ -46,7 +46,7 @@ To install the <%= vars.product_short_mirror %> tile:
     For air-gapped networks, follow your company's offline installation protocols.
       For more information, see [Installing Pivotal Platform in Air-gapped Environments](https://docs.pivotal.io/platform/customizing/offline_installation.html).
 
-1. Navigate to the Ops Manager Installation Dashboard and select **Import a Product** to upload the product file.
+1. Navigate to the <%= vars.ops_manager %> Installation Dashboard and select **Import a Product** to upload the product file.
 
 1. Under the **Import a Product** button, click **+** next to the version number of <%= vars.product_short_mirror %>.
 This adds the tile to your staging area.
@@ -213,7 +213,7 @@ To scale the number of deployed mirrors:
 Your <%= vars.product_short_mirror %> installation is not complete until you apply your configuration changes.
 To do this:
 
-1. Return to the Ops Manager Installation Dashboard.
+1. Return to the <%= vars.ops_manager %> Installation Dashboard.
 
 1. Click **Review Pending Changes**.
 1. Unselect all products except **BOSH Director** and **<%= vars.product_short_mirror %>** and click **Apply Changes**.
