@@ -15,9 +15,7 @@ see [Installing and Configuring <%= vars.product_full_mirror %>](./install-mirro
 
 To install <%= vars.product_short %>, you must have:
 
-* **A <%= vars.platform_name %> operator with admin rights**.
-
-For more information, see [Operators](https://docs.pivotal.io/platform/customizing/user-types.html#operator).
+* **A <%= vars.platform_name %> operator user account with admin rights**. For more information, see [Pivotal Platform Operators](https://docs.pivotal.io/platform/customizing/platform-operators.html).
 
 * **<%= vars.ops_manager_full %> (<%= vars.ops_manager %>)**.
 For compatible versions, see the [Product Snapshot](./index.html#snapshot).
@@ -58,9 +56,10 @@ To configure <%= vars.product_short %>:
         <td>
           Select the method for receiving your virus databases from an upstream mirror.
           <ul>
-            <li><strong>Official mirror </strong>: Select this to have the mirror fetch databases from database.clamav.net.</li>
+            <li><strong>Official mirror</strong>: Select this to have the mirror fetch databases from database.clamav.net.</li>
             <li><strong>Deployed mirror from the Pivotal Anti-Virus Mirror Tile</strong>: For more information, see <a href="./install-mirror.html">Installing and Configuring <%= vars.product_full_mirror %></a>.
             <li><strong>Existing Mirror</strong>: Select this to enter a list of hostnames or IPs of mirrors.</li>
+            <li><strong>Existing Mirror with TLS</strong>: Select this to enter a hostname, port number, and CA certificate.</li>
           </ul>
         </td>
       </tr>
