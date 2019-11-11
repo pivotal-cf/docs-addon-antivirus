@@ -11,7 +11,9 @@ For more information, see [Upgrade Pivotal Anti-Virus v2.0.x to v2.1.x or Later]
 
 <p class="note"><strong>Note: </strong>
 If you are not using the <%= vars.product_short_mirror %> tile, you can configure
-for your existing mirror by specifying a host and/or a port in the <%= vars.product_short %> tile.
+your existing mirror by specifying a <code>PORT</code>, <code>HOST</code>, or
+<code>HOST:PORT</code> in the <%= vars.product_short %> tile.
+For more information, see <a href="./install.html#configure">Configure <%= vars.product_short %></a>.
 </p>
 
 ## <a id="change-port"></a> Change the Port
@@ -44,16 +46,18 @@ To change the port number in the <%= vars.product_short %> tile:
     ![Configure Anti-Virus Mirror Mirror Port](mirror-port.png)
 
 ### <a id="change-antivirus"></a> Exclude <%= vars.product_short_mirror %> during Apply Changes
-When changing ports for the **<%= vars.product_short %>** and **<%= vars.product_short_mirror %>** tiles,
-**<%= vars.product_short %>** needs to be excluded from **<%= vars.product_short_mirror %>**
-during the first **Apply Changes** for the **<%= vars.product_short %>** port changes to be successful.
+When changing ports for the <%= vars.product_short %> and <%= vars.product_short_mirror %> tiles,
+you need to exclude the <%= vars.product_short %>** instance group from the <%= vars.product_short_mirror %>
+deployment during the first **Apply Changes** for the <%= vars.product_short %> port changes to be successful.
 
-Once the first Apply Changes is complete, the exclusion is removed before the
-second Apply Changes to the entire foundation.
+Once the first Apply Changes is complete, you must remove the exclusion then
+**Apply Changes** again, this time for the entire foundation.
 
 To exclude the instance group and complete the port changes:
 
-1. Exclude the `antivirus-mirror` instance group by adding it to **List of instance group names that will be excluded from deployment**.
+1. Exclude the `antivirus-mirror` instance group by adding it to
+**List of instance group names that will be excluded from deployment** in
+**Anti-Virus Configuration** in the <%= vars.product_short %> tile.
 
     ![Exclude Anti-Virus Mirror](exclude-mirror.png)
 
