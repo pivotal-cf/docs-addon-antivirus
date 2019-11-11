@@ -188,6 +188,23 @@ Follow the steps below to enable system logging for <%= vars.product_short_mirro
         <td>Enter either the accepted fingerprint, in SHA1, or the name of the remote peer, for example, <code>*.example.com</code>.</td></tr>
     <tr><td><strong>SSL Certificate</strong></td>
         <td>Enter the SSL or TLS Certificate(s) for the syslog server. This ensures the logs are transported securely.</td></tr>
+    <tr>
+      <td><strong>Queue Size</strong></td>
+      <td>Enter an integer. This value specifies the number of log messages held in the buffer.
+      The default value is <code>100000</code>.</td>
+    </tr>
+
+    <tr>
+      <td><strong>Forward Debug Logs</strong></td>
+      <td>Select this box to forward debug logs to an external source.
+      This option is deselected by default.
+      If you select it, you might generate a large amount of log data.</td>
+    </tr>
+
+    <tr>
+      <td><strong>Custom rsyslog Configuration</strong></td>
+      <td>Enter configuration details for rsyslog. This field requires RainerScript syntax.</td>
+    </tr>
   </table>
 
 1. Click **Save Syslog Settings**.
