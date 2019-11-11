@@ -45,7 +45,7 @@ To change the port number in the <%= vars.product_short %> tile:
 
 ### <a id="change-antivirus"></a> Exclude <%= vars.product_short_mirror %> during Apply Changes
 When changing ports for the **<%= vars.product_short %>** and **<%= vars.product_short_mirror %>** tiles,
-**<%= vars.product_short %>** needs to be excluded from **<%= vars.product_short_mirror %>**
+the BOSH instance group of **<%= vars.product_short_mirror %>** needs to be excluded from **<%= vars.product_short %>**
 during the first **Apply Changes** for the **<%= vars.product_short %>** port changes to be successful.
 
 Once the first Apply Changes is complete, the exclusion is removed before the
