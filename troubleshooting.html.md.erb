@@ -124,7 +124,7 @@ It takes about a week for ClamAV to verify and publish a new database.
 
 <hr>
 
-### <a id='cpu-spikes-clamav'></a> ikes While Using <%= vars.product_short %>
+### <a id='cpu-spikes-clamav'></a> CPU Spikes While Using <%= vars.product_short %>
 
 ####Symptom
 <%= vars.product_short %> is taking more CPU resources than assigned in its configuration.
@@ -138,7 +138,7 @@ because it does not impact their performance.
 
 ####Solution
 In most cases this is behavior from cgroups.
-If a hard limit is required, configure the **Enforce CPU limit** in the
+If a hard limit is required, set the **Enforce CPU limit** field to **Always** in the
 **<%= vars.product_short %>** tile.
 
 <hr>
@@ -205,7 +205,7 @@ To make changes to this limit, configure **CPU limit (percentage)** in the **<%=
 
 + Set `enforce_cpu_limit` to `false`. This allocates more CPU cycles to ClamAV
 if other processes are not using CPU resources.<br>
-To `Disable` this limit, configure **Enforce CPU limit** in the **<%= vars.product_short %>** tile.
+To disable this limit, set the **Enforce CPU limit** field to **When other processes are using CPU resources** in the **<%= vars.product_short %>** tile.
 
 + From the **<%= vars.ops_manager %> Installation Dashboard**, navigate to the tile with the failing `antivirus` job.
 On **Resource Config**, adjust the **VM Type** for the **<%= vars.product_short %>** job
