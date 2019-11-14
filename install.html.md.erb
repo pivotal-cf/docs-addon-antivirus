@@ -90,16 +90,17 @@ To configure <%= vars.product_short %>:
       </tr>
       <tr>
         <td><strong>CPU limit</strong></td>
-        <td>Set the limit for how much CPU <%= vars.product_short %> processes can use (`1` to `100`).
-        The percentage is for a single core only, regardless of how many cores are on the VM.
-        For example, setting this field to `100` allows the use of 1 full core.</td>
+        <td>Set the percentage of CPU that the <%= vars.product_short %> processes can use.<br>
+            Integers from <code>1</code> to <code>100</code> are valid.<br>
+            The limit is set per core.
+            Setting this field to <code>100</code> permits the use of one full core.</td>
       </tr>
       <tr>
         <td><strong>Enforce CPU limit</strong></td>
-        <td>Set the strictness of enforcing the <strong>CPU limit</strong><br>
+        <td>Set the enforcement policy for the <strong>CPU limit</strong>:<br>
           <ul>
-            <li><strong>Always</strong>: Ensures the limit set by <strong>CPU limit</strong> is always enforced.</li>
-            <li><strong>When other processes are using CPU resources</strong>: Allows the CPU usage to
+            <li><strong>Always</strong>: Ensures the <strong>CPU limit</strong> is always enforced.</li>
+            <li><strong>When other processes are using CPU resources</strong>: Permits the CPU usage to
               exceed the limit set by <strong>CPU limit</strong> if idle CPU cycles are available.</li>
           </ul>
         </td>

@@ -15,8 +15,10 @@ This topic contains release notes for <%= vars.product_full %> (formerly known a
 
 New features and changes in this release:
 
-  * **CPU limit** can now be configured independently of the **Enforce CPU limit** field.
-  Note that the **CPU limit** value will be reverted to the default upon upgrading the tile version.
+  * **CPU limit** for <%= vars.product_short %> is now configured independently of the **Enforce CPU limit** field.
+  When you upgrade to v2.2 from v2.1.6 or earlier, the value of **CPU limit** is reset to
+  the installation default of XX%.<br>
+  For instructions on setting the **CPU limit**, see [Configure Anti-Virus](./install.html#configure).
 
 ### Security Fixes
 
