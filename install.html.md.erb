@@ -98,8 +98,13 @@ To configure <%= vars.product_short %>:
         <td><strong>CPU limit</strong></td>
         <td>Set the percentage of CPU that the <%= vars.product_short %> processes can use.<br>
             Integers from <code>1</code> to <code>100</code> are valid.<br>
-            The limit is set per core.
-            Setting this field to <code>100</code> permits the use of one full core.</td>
+            Setting this field to <code>100</code> permits the use of one full core.
+               <p class="note"><strong>Note:</strong>
+                <strong>CPU Limit</strong> affects only one core.
+                 For example, in a system with four cores, if you set the CPU limit to <code>100</code>,
+                 <%= vars.product_short %> uses only one of the four cores.
+                 </p>
+        </td>
       </tr>
       <tr>
         <td><strong>Enforce CPU limit</strong></td>
