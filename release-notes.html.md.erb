@@ -21,16 +21,20 @@ New features and changes in this release:
   For instructions on setting the **CPU limit**, see [Configure Anti-Virus](./install.html#configure).
 
   * **Timeout to connect to the database server (in seconds)** is now configurable. This field sets
-  the timeout for downloading virus definitions from the mirror server. 
+  the timeout for downloading virus definitions from the mirror server.
   For instructions on setting the **Timeout to connect to the database server (in seconds)**, see [Configure Anti-Virus](./install.html#configure).
 
-  * Fix bug where `http: TLS handshake error from 127.0.0.1:RANDOM-PORT: EOF` is periodically logged
+### Resolved Issues
 
-### Security Fixes
+This release has the following fix:
 
-This release includes the following security fixes:
+* <%= vars.product_short_mirror %> no longer periodically sends an error log similar to the following:
+      <pre class="terminal">http: TLS handshake error from 127.0.0.1:RANDOM-PORT: EOF</pre>
 
-  *
+### Known Issues
+
+There are no known issues for this release.
+
 
 ## <a id="view"></a> View Release Notes for Another Version
 
