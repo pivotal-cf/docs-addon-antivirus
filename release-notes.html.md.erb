@@ -66,12 +66,12 @@ This release includes the following security fixes:
         * The attacker opens a number of streams and sends an invalid request over each stream that should solicit a stream of
         RST\_STREAM frames from the peer. Depending on how the peer queues the RST\_STREAM frames, this can consume excess memory,
         CPU, or both, potentially leading to a denial of service.
-        
-### Known Issue:
+
+### Known Issues
 
 This release has the following issues:
 
-* <%= vars.product_short_mirror %> periodically logs `http: TLS handshake error from 127.0.0.1:RANDOM-PORT: EOF`
+<%= partial vars.path_to_partials + "/antivirus/tls-handshake-ki" %>
 <%= partial vars.path_to_partials + "/antivirus/duplicate-logs-ki" %>
 
 ## <a id="view"></a> View Release Notes for Another Version
