@@ -57,12 +57,12 @@ To change the port number in the <%= vars.product_short %> tile:
 
 When changing ports for the <%= vars.product_short %> and <%= vars.product_short_mirror %> tiles,
 you need to exclude the `antivirus-mirror` instance group from the <%= vars.product_short %>
-deployment during the first **Apply Changes** for the <%= vars.product_short %> port changes to be successful.
+deployment during the first **Apply Changes** for the <%= vars.product_short %> port.
+Excluding the `antivirus-mirror` instance group ensures that <%= vars.product_short %> is not deployed on the
+mirror while the ports are being changed.
 
-Once the first Apply Changes is complete, you must remove this exclusion, then
+After the first Apply Changes is complete, you remove the exclusion and
 **Apply Changes** again, this time for the entire foundation.
-This exclusion ensures that <%= vars.product_short %> is not deployed on the
-mirror while the ports are being changed, possibly causing deployment issues.
 
 To exclude the instance group and complete the port changes:
 
