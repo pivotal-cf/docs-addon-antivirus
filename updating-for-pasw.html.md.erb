@@ -7,7 +7,7 @@ owner: Security Engineering
 
 Read this topic if you use Pivotal Application Service for Windows (PAWS).
 
-This topic describes how to update your runtime config to add the new Windows stemcell version. 
+This topic describes how to update your runtime config to add the new Windows stemcell version.
 
 <p class="note breaking"><strong>Breaking Change:</strong> If you upgrade to PASW v2.3,
 you must update your runtime config to include the new Windows stemcell.
@@ -55,10 +55,10 @@ To add the `windows1803` stemcell property to the runtime config, do the followi
 
     For example:
 
-    <pre class="terminal">$ bosh2 -e my-env runtime-config –name clamav > /tmp/clamav.yml </pre> 
+    <pre class="terminal">$ bosh2 -e my-env runtime-config –name clamav > /tmp/clamav.yml </pre>
 
 
-3. Edit the `clamav.yml` file to add `- os: windows1803` under 
+3. Edit the `clamav.yml` file to add `- os: windows1803` under
     `stemcell` in the `clamav-windows` section, as shown below:
 
     ```
@@ -72,7 +72,7 @@ To add the `windows1803` stemcell property to the runtime config, do the followi
             database_mirror: <%= vars.example_ip_1 %>
       include:
         stemcell:
-        - os: windows2012R2
+        - os: windows2019
         - os: windows2016
         - os: windows1803
     ```
@@ -85,7 +85,7 @@ To add the `windows1803` stemcell property to the runtime config, do the followi
 
     For example:
 
-    <pre class="terminal">bosh2 -e my-env update-runtime-config --name=clamav /tmp/clamav.yml</pre> 
+    <pre class="terminal">bosh2 -e my-env update-runtime-config --name=clamav /tmp/clamav.yml</pre>
 
 5. Navigate to the Installation Dashboard in Ops Manager
    and do the following to complete the installation:
@@ -95,4 +95,3 @@ To add the `windows1803` stemcell property to the runtime config, do the followi
     [Reviewing Pending Product Changes](https://docs.pivotal.io/pivotalcf/customizing/review-pending-changes.html).<br><br>
 
     1. Click **Apply Changes**.
-
