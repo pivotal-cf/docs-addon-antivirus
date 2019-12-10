@@ -4,7 +4,7 @@ owner: Pivotal Compliance and Innovation (PCI) Team
 ---
 <strong><%= modified_date %></strong>
 
-This topic describes how to change the port used by <%= vars.product_full_mirror %> and <%= vars.product_full %>.
+This topic describes how to change the port used by <%= vars.product_full %> and <%= vars.product_full_mirror %>.
 
 You might need to do this procedure when upgrading.
 For more information, see [Upgrade Pivotal Anti-Virus v2.0.x to v2.1.x or Later](upgrade.html#upgrade-v20-v21).
@@ -18,8 +18,8 @@ For more information, see <a href="./install.html#configure">Configure <%= vars.
 
 ## <a id="change-port"></a> Change the Ports
 
+<%= vars.product_short_mirror %> uses mutual TLS.
 The port used by <%= vars.product_short_mirror %> and <%= vars.product_short %> must be the same.
-This is because <%= vars.product_short_mirror %> uses mutual TLS.
 If the port number configured in both tiles is not the same,
 <%= vars.product_short %> database updates and deployments fail.
 

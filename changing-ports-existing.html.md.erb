@@ -4,7 +4,7 @@ owner: Pivotal Compliance and Innovation (PCI) Team
 ---
 <strong><%= modified_date %></strong>
 
-This topic describes how to change the port used by <%= vars.product_full_mirror %> and <%= vars.product_full %>.
+This topic describes how to change the port used by <%= vars.product_full %> and an existing mirror.
 
 You might need to do this procedure when upgrading.
 For more information, see [Upgrade Pivotal Anti-Virus v2.0.x to v2.1.x or Later](upgrade.html#upgrade-v20-v21).
@@ -18,20 +18,23 @@ For more information, see <a href="./install.html#configure">Configure <%= vars.
 
 ## <a id="change-port"></a> Change the Ports
 
-The port used by <%= vars.product_short_mirror %> and <%= vars.product_short %> must be the same.
-This is because <%= vars.product_short_mirror %> uses mutual TLS.
-If the port number configured in both tiles is not the same,
+The port used by <%= vars.product_short %> and existing mirror must be the same.
+If the port number configured in both is not the same,
 <%= vars.product_short %> database updates and deployments fail.
 
-To change the port used by <%= vars.product_short %> and <%= vars.product_short_mirror %> you must:
+To change the port used by <%= vars.product_short %> and an existing mirror you must:
 
-1. [Change the Port in the Anti-Virus Mirror Tile](#change-mirror)
+1. [Uninstall the Anti-Virus Mirror Tile](#uninstall-mirror)
 1. [Change the Port in the Anti-Virus Tile](#change-antivirus)
 1. [Complete the Port Changes](#complete-port)
 
-### <a id="change-mirror"></a> Change the Port in the <%= vars.product_short_mirror %> Tile
+### <a id="change-mirror"></a> Uninstall the <%= vars.product_short_mirror %> Tile
 
-To change the port number in the <%= vars.product_short_mirror %> tile:
+If you are currently using <%= vars.product_short_mirror %>,
+and want to transition to using an existing mirror,
+Pivotal recommends that you uninstall your <%= vars.product_short_mirror %> tile.
+
+To uninstall the <%= vars.product_short_mirror %> tile:
 
 1. Navigate to the <%= vars.ops_manager %> Installation Dashboard and click the **<%=vars.product_full_mirror%>** tile.
 1. Click **Anti-Virus Mirror Configuration**.
