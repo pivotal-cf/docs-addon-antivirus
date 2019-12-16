@@ -6,42 +6,35 @@ owner: Pivotal Compliance and Innovation (PCI) Team
 
 This topic describes how to change the port used by <%= vars.product_full %> and an existing mirror.
 
-You might need to do this procedure when upgrading.
-For more information, see [Upgrade Pivotal Anti-Virus v2.0.x to v2.1.x or Later](upgrade.html#upgrade-v20-v21).
+If you are using <%= vars.product_full_mirror %>,
+then see [Changing the Port Used by Anti-Virus and Anti-Virus Mirror](changing-ports.html) instead of this topic.
 
-<p class="note"><strong>Note: </strong>
-If you are not using the <%= vars.product_short_mirror %> tile, you can configure
-your existing mirror by specifying a <code>PORT</code>, <code>HOST</code>, or
-<code>HOST:PORT</code> in the <%= vars.product_short %> tile.
-For more information, see <a href="./install.html#configure">Configure <%= vars.product_short %></a>.
-</p>
+If you are upgrading from <%= vars.product_short %> v2.0 to v2.1 and you use an existing mirror,
+then the upgrading instructions [Upgrade Pivotal Anti-Virus v2.0.x to v2.1.x or Later](upgrade.html#upgrade-v20-v21)
+tell you to follow the procedures in this topic.
+
 
 ## <a id="change-port"></a> Change the Ports
 
-The port used by <%= vars.product_short %> and existing mirror must be the same.
+The port used by <%= vars.product_short %> and the existing mirror must be the same.
 If the port number configured in both is not the same,
 <%= vars.product_short %> database updates and deployments fail.
 
 To change the port used by <%= vars.product_short %> and an existing mirror you must:
 
-1. [Uninstall the Anti-Virus Mirror Tile](#uninstall-mirror)
+1. [Uninstall the Anti-Virus Mirror Tile](#uninstall-mirror) if you have it deployed.
 1. [Change the Port in the Anti-Virus Tile](#change-antivirus)
 1. [Complete the Port Changes](#complete-port)
 
 ### <a id="change-mirror"></a> Uninstall the <%= vars.product_short_mirror %> Tile
 
-If you are currently using <%= vars.product_short_mirror %>,
+If you are currently using <%= vars.product_short_mirror %>
 and want to transition to using an existing mirror,
 Pivotal recommends that you uninstall your <%= vars.product_short_mirror %> tile.
 
 To uninstall the <%= vars.product_short_mirror %> tile:
 
-1. Navigate to the <%= vars.ops_manager %> Installation Dashboard and click the **<%=vars.product_full_mirror%>** tile.
-1. Click **Anti-Virus Mirror Configuration**.
-1. Enter a port number into **Anti-Virus Mirror Port**. The default value is `6501`.
-
-    ![Configure Anti-Virus Mirror Port](mirror-port-mirror.png)
-1. Return to the <%= vars.ops_manager %> Installation Dashboard.
+1. See [Deleting a Product](https://docs.pivotal.io/platform/2-7/customizing/add-delete.html#del-prod).
 
 ### <a id="change-antivirus"></a> Change the Port in the <%= vars.product_short %> Tile
 
@@ -49,40 +42,62 @@ To change the port number in the <%= vars.product_short %> tile:
 
 1. Navigate to the <%= vars.ops_manager %> Installation Dashboard and click the **<%=vars.product_full%>** tile.
 1. Click **Anti-Virus Configuration**.
-1. Under **Mirror for Automatic Database Updates**, ensure that **Deployed mirror from the <%=vars.product_full_mirror%> Tile** is selected.
-1. Enter the same port number you entered in the above step into **Anti-Virus Mirror Port**.
+1. Under **Mirror for Automatic Database Updates**, select one of the following:
+   + **Existing Mirror** 
+   + **Existing Mirror with TLS** if the mirror uses TLS to communicate with the <%= vars.product_short %> tile.
 
-    ![Configure Anti-Virus Mirror Mirror Port](mirror-port.png)
+1. If your existing mirror does not use TLS, complete the field **Comma separated list of mirror hostnames or IPs**.
+   For example, `EXAMPLE`
 
-## <a id="complete-port"></a> Complete the Port Changes
+    ![selecting the existing mirror button exposes the Comma separated list of mirror hostnames or IPs field](existing-mirror.png)
 
-### <a id="exclude-mirror"></a> Exclude <%= vars.product_short_mirror %> during Apply Changes
+1. If your existing mirror uses TLS, complete the fields:
 
-When changing ports for the <%= vars.product_short %> and <%= vars.product_short_mirror %> tiles,
-you need to exclude the `antivirus-mirror` instance group from the <%= vars.product_short %>
-deployment during the first **Apply Changes** for the <%= vars.product_short %> port.
-Excluding the `antivirus-mirror` instance group ensures that <%= vars.product_short %> is not deployed on the
-mirror while the ports are being changed.
+     ![selecting the existing mirror with tls button exposes three fields](existing-mirror-with-tls.png)
 
-After the first Apply Changes is complete, you remove the exclusion and
-**Apply Changes** again, this time for the entire foundation.
+    <table>
+        <tr>
+            <th>Field</th>
+            <th>Instructions</th>
+        </tr>
+        <tr>
+            <td>
+                <strong>Mirror hostname without leading https://</strong>
+            </td>
+            <td>
+                Instructions for how to complete the field
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>Mirror Port</strong>
+            </td>
+            <td>
+                Instructions for how to complete the field
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>Mirror CA Certificate</strong>
+            </td>
+            <td>
+                Instructions for how to complete the field
+            </td>
+        </tr>
+      </table> 
 
-To exclude the instance group and complete the port changes:
 
-1. In the **<%=vars.product_full%>** tile, click **Anti-Virus Configuration**.
-1. Exclude the `antivirus-mirror` instance group by adding it to
-**List of instance group names that will be excluded from deployment**.
-
-    ![Exclude Anti-Virus Mirror](exclude-mirror.png)
+1. Click **Save**.
 
 1. Return to the <%= vars.ops_manager %> Installation Dashboard and click **Review Pending Changes**.
-1. Unselect all products except **BOSH Director**, **<%= vars.product_short %>**, and **<%= vars.product_short_mirror %>**.
+
+1. Unselect all products except **BOSH Director** and **<%= vars.product_short %>**.
+
 1. Click **Apply Changes**.
 
-### <a id="remove-exclude"></a> Remove Exclusion
+### <a id="complete-port"></a> Complete the Port Changes
 
-1. Once the **Apply Changes** is complete, return to the **<%=vars.product_full%>** tile.
-1. Remove the `antivirus-mirror` exclusion added above.
+1. After the **Apply Changes** is complete, return to the **<%=vars.product_full%>** tile.
 1. Return to the <%= vars.ops_manager %> Installation Dashboard and click **Review Pending Changes**.
 1. Ensure all product as selected.
 1. Click **Apply Changes**.
