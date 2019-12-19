@@ -34,7 +34,7 @@ Pivotal recommends that you uninstall your <%= vars.product_short_mirror %> tile
 
 To uninstall the <%= vars.product_short_mirror %> tile:
 
-1. See [Deleting a Product](https://docs.pivotal.io/platform/2-7/customizing/add-delete.html#del-prod).
+1. See [Deleting a Product](https://docs.pivotal.io/platform/customizing/add-delete.html#del-prod).
 
 ### <a id="change-antivirus"></a> Change the Port in the <%= vars.product_short %> Tile
 
@@ -43,11 +43,11 @@ To change the port number in the <%= vars.product_short %> tile:
 1. Navigate to the <%= vars.ops_manager %> Installation Dashboard and click the **<%=vars.product_full%>** tile.
 1. Click **Anti-Virus Configuration**.
 1. Under **Mirror for Automatic Database Updates**, select one of the following:
-   + **Existing Mirror** 
+   + **Existing Mirror**
    + **Existing Mirror with TLS** if the mirror uses TLS to communicate with the <%= vars.product_short %> tile.
 
 1. If your existing mirror does not use TLS, complete the field **Comma separated list of mirror hostnames or IPs**.
-   For example, `EXAMPLE`
+  For example, `EXAMPLE`
 
     ![selecting the existing mirror button exposes the Comma separated list of mirror hostnames or IPs field](existing-mirror.png)
 
@@ -84,7 +84,7 @@ To change the port number in the <%= vars.product_short %> tile:
                 Instructions for how to complete the field
             </td>
         </tr>
-      </table> 
+      </table>
 
 
 1. Click **Save**.
@@ -96,8 +96,10 @@ To change the port number in the <%= vars.product_short %> tile:
 1. Click **Apply Changes**.
 
 ### <a id="complete-port"></a> Complete the Port Changes
+Your Port Changes are not complete until you apply your configuration changes to all products.
+To do this, complete this procedure:
 
-1. After the **Apply Changes** is complete, return to the **<%=vars.product_full%>** tile.
-1. Return to the <%= vars.ops_manager %> Installation Dashboard and click **Review Pending Changes**.
-1. Ensure all product as selected.
+1. After the above **Apply Changes** is complete, return to the <%= vars.ops_manager %> Installation Dashboard
+  and click **Review Pending Changes**.
+1. Ensure all products are selected.
 1. Click **Apply Changes**.
