@@ -10,56 +10,34 @@ owner: Security Engineering
 
 This topic contains release notes for <%= vars.product_full %>.
 
-## <a id="2-1-6"></a> v2.1.6
+## <a id="2-2-0"></a> v2.2.0
 
-**Release Date: November 7, 2019**
+**Release Date: January DD, 2020**
 
 ### Features
 
 New features and changes in this release:
 
-* The minimum RAM for the <%= vars.product_full_mirror %> VM is set to 1.5&nbsp;GB instead of 1&nbsp;GB.
-* Adds TLS support for custom mirrors.
-For more information, see [Configure Anti-Virus](./install.html#configure).
+  * **CPU limit** for <%= vars.product_short %> is now configured independently of the **Enforce CPU limit** field.
+  When you upgrade to v2.2 from v2.1, the value of **CPU limit** is reset to
+  the installation default of 50%.<br>
+  For instructions on setting the **CPU limit**, see [Configure Anti-Virus](./install.html#configure).
+
+  * **Timeout to connect to the database server (in seconds)** is now configurable. This field sets
+  the timeout for downloading virus definitions from the mirror server.
+  For instructions on setting the **Timeout to connect to the database server (in seconds)**, see [Configure Anti-Virus](./install.html#configure).
 
 ### Resolved Issues
 
-This release fixes the following issues:
+This release has the following fix:
 
-* <%= vars.product_short_mirror %> deployments no longer fail in air-gapped environments.
-* The clamd app no longer forwards duplicate logs.
-
-### Known Issues
-
-This release has the following known issue:
-
-<%= partial vars.path_to_partials + "/antivirus/tls-handshake-ki" %>
-
-## <a id="2-1-3"></a> v2.1.3
-
-**Release Date: October 23, 2019**
-
-### Features
-
-New features and changes in this release:
-
-* Adds mutual TLS from <%= vars.product_short_mirror %> to the <%= vars.product_short %> hosts.
-<br>For more information, see [Changing the Port Used by <%= vars.product_short %> and <%= vars.product_short_mirror %>](./changing-ports.html).
-* Adds support for excluding instance groups.
-<br>For more information,
-    see the [List of instance group names that will be excluded from deployment](./install.html#configure) field.
-* Updates golang dependency to v1.13.1 for both Linux and Windows
+* <%= vars.product_short_mirror %> no longer outputs a TLS handshake error log
+when the process is not failing.
 
 ### Known Issues
 
-This release has the following known issues:
+There are no known issues for this release.
 
-<%= partial vars.path_to_partials + "/antivirus/tls-handshake-ki" %>
-* <%= vars.product_short_mirror %> deployment fails in air-gapped environments.
-  This is due to a change in Go build default settings attempting to download dependencies,
-  instead of using the bundled dependencies.
-
-<%= partial vars.path_to_partials + "/antivirus/duplicate-logs-ki" %>
 
 ## <a id="view"></a> View Release Notes for Another Version
 

@@ -44,7 +44,8 @@ This adds the tile to your staging area.
 To configure <%= vars.product_short %>:
 
 1. Select **Anti-Virus Configuration**.
-  ![Configure Anti-Virus](configure.png)
+
+    <img src="./images/configure.png" alt="Configure Anti-Virus pane" width="500">
 
 1. Configure the following fields:
 
@@ -71,7 +72,7 @@ To configure <%= vars.product_short %>:
         </td>
       </tr>
       <tr>
-        <td><strong>(Optional) Enable on-access scanning</strong></td>
+        <td><strong>(Optional) Enable on-access scanning on Linux</strong></td>
         <td>Select this option if you want to scan files immediately after they are modified.
         <p class="note"><strong>Note</strong>: On-Access Scan is not supported on Windows.
         </p>
@@ -88,11 +89,30 @@ To configure <%= vars.product_short %>:
             The default value is <code>12</code>.</td>
       </tr>
       <tr>
-        <td><strong>(Optional) Enforce CPU limit</strong></td>
-        <td>Set the limit for how much CPU <%= vars.product_short %> processes can use.<br>
+        <td><strong>Timeout to connect to the database server (in seconds)</strong></td>
+        <td>Set the timeout for downloading virus definitions from the mirror server configured in
+            <strong>Mirror for Automatic Database Updates</strong>.
+            The default value is <code>30</code>.</td>
+      </tr>
+      <tr>
+        <td><strong>CPU limit</strong></td>
+        <td>Set the percentage of CPU that the <%= vars.product_short %> processes can use.<br>
+            Integers from <code>1</code> to <code>100</code> are valid.<br>
+            Setting this field to <code>100</code> permits the use of one full core.
+               <p class="note"><strong>Note:</strong>
+                <strong>CPU Limit</strong> affects only one core.
+                 For example, in a system with four cores, if you set the CPU limit to <code>100</code>,
+                 <%= vars.product_short %> uses only one of the four cores.
+                 </p>
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Enforce CPU limit</strong></td>
+        <td>Set the enforcement policy for the <strong>CPU limit</strong>:<br>
           <ul>
-            <li><strong>Enable</strong>: Select this to enforce the limit.</li>
-            <li><strong>CPU limit (percentage)</strong>: Enter the CPU percentage limit.</li>
+            <li><strong>Always</strong>: Ensures the <strong>CPU limit</strong> is always enforced.</li>
+            <li><strong>When other processes are using CPU resources</strong>: Permits the CPU usage to
+              exceed the limit set by <strong>CPU limit</strong> if idle CPU cycles are available.</li>
           </ul>
         </td>
       </tr>
