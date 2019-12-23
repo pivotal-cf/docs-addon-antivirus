@@ -47,7 +47,7 @@ To change the port number in the <%= vars.product_short %> tile:
    + **Existing Mirror with TLS** if the mirror uses TLS to communicate with the <%= vars.product_short %> tile.
 
 1. If your existing mirror does not use TLS, complete the field **Comma separated list of mirror hostnames or IPs**.
-  For example, `EXAMPLE`
+  For example, `10.0.4.5,10.0.4.6`
 
     ![selecting the existing mirror button exposes the Comma separated list of mirror hostnames or IPs field](existing-mirror.png)
 
@@ -55,17 +55,20 @@ To change the port number in the <%= vars.product_short %> tile:
 
      ![selecting the existing mirror with tls button exposes three fields](existing-mirror-with-tls.png)
 
-    <table>
+    <table class="nice">
+    <col width="30%">
+    <col width="70%">
         <tr>
             <th>Field</th>
-            <th>Instructions</th>
+            <th>Example</th>
         </tr>
         <tr>
             <td>
                 <strong>Mirror hostname without leading https://</strong>
             </td>
             <td>
-                Instructions for how to complete the field
+              Enter the hostname for your existing mirror.<br>
+              For example: <code>pivotal-anti-virus-mirror.s3.amazonaws.com</code>
             </td>
         </tr>
         <tr>
@@ -73,7 +76,8 @@ To change the port number in the <%= vars.product_short %> tile:
                 <strong>Mirror Port</strong>
             </td>
             <td>
-                Instructions for how to complete the field
+              Enter the port used by your existing mirror.<br>
+              For example: <code>443</code>
             </td>
         </tr>
         <tr>
@@ -81,7 +85,15 @@ To change the port number in the <%= vars.product_short %> tile:
                 <strong>Mirror CA Certificate</strong>
             </td>
             <td>
-                Instructions for how to complete the field
+              Enter the CA certificate used with your existing mirror.<br>
+              For example:
+                <code>
+                  -----BEGIN CERTIFICATE-----<br>
+                  MIIEYzCCA0ugAwIBAgIQAYL4CY6i5ia5GjsnhB+5rzANBgkqhki<br>
+                  ...<br>
+                  upcHi9nzBhDFKdT3uhaQqNBU4UtJx5g=<br>
+                  -----END CERTIFICATE-----
+                </code>
             </td>
         </tr>
       </table>
