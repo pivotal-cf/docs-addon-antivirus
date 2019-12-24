@@ -67,8 +67,11 @@ To change the port number in the <%= vars.product_short %> tile:
                 <strong>Mirror hostname without leading https://</strong>
             </td>
             <td>
-              Enter the hostname for your existing mirror.<br>
-              For example: <code>pivotal-anti-virus-mirror.s3.amazonaws.com</code>
+              Enter the hostname or IP address for your existing mirror.<br>
+              For example: <code>pivotal-anti-virus-mirror.s3.amazonaws.com</code> or <code>10.0.4.5</code>
+              <p class="note">
+                <strong>Note: </strong> Ensure that your existing mirror server is using the correct certificate for the method you choose (hostname or IP).
+              </p>
             </td>
         </tr>
         <tr>
