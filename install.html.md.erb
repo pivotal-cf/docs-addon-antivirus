@@ -46,7 +46,107 @@ To configure <%= vars.product_short %>:
 1. Select **Anti-Virus Configuration**.
   ![Configure Anti-Virus](configure.png)
 
-1. Configure the following fields:
+1. Configure **Mirror for Automatic Database Updates**:
+
+    <style>
+    .tab {
+        overflow: hidden;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+    }
+
+    /* Style the buttons that are used to open the tab content */
+    .tab button {
+        background-color: inherit;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        transition: 0.3s;
+    }
+
+    /* Change background color of buttons on hover */
+    .tab button:hover {
+        background-color: #ddd;
+    }
+
+    /* Create an active/current tablink class */
+    .tab button.active {
+        background-color: #ccc;
+    }
+
+    /* Style the tab content */
+    .tabcontent {
+        display: none;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-top: none;
+    }
+    </style>
+    <script>
+    function openDocs(evt, docsName) {
+        // Declare all variables
+        var i, tabcontent, tablinks;
+        // Get all elements with class="tabcontent" and hide them
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        // Get all elements with class="tablinks" and remove the class "active"
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        // Show the current tab, and add an "active" class to the button that opened the tab
+        document.getElementById(docsName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+    </script>
+
+    <div class="tab">
+      <!- Tab headers and links ->
+      <button class="tablinks" onclick="openDocs(event, 'tab1')">Official mirror</button>
+      <button class="tablinks" onclick="openDocs(event, 'tab2')">Deployed mirror</button>
+      <button class="tablinks" onclick="openDocs(event, 'tab3')">Existing Mirror</button>
+      <button class="tablinks" onclick="openDocs(event, 'tab3')">Existing Mirror with TLS</button>
+    </div>
+
+    <div id="tab1" class="tabcontent">
+      <!- Tab content  ->
+      <h3>TEXT HEADER</h3>
+      <p>CONTENT HERE</p>
+    </div>
+    <div id="tab2" class="tabcontent">
+      <table class="nice">
+        <th>Field</th>
+        <th>Description</th>
+        <tr>
+          <td><strong>Mirror for Automatic Database Updates</strong></td>
+          <td>
+            Select the method for receiving your virus databases from an upstream mirror.
+            <ul>
+              <li><strong>Official mirror</strong>: Select this to have the mirror fetch databases from database.clamav.net.</li>
+              <li><strong>Deployed mirror from the Pivotal Anti-Virus Mirror Tile</strong>: For more information, see <a href="./install-mirror.html">Installing and Configuring <%= vars.product_full_mirror %></a>.
+              <li><strong>Existing Mirror</strong>: Select this to enter a list of hostnames or IPs of mirrors.</li>
+              <li><strong>Existing Mirror with TLS</strong>: Select this to enter a hostname, port number, and CA certificate.</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Anti-Virus Mirror Port</strong></td>
+          <td>Enter the port for Anti-Virus Mirror to use. The default value is <code>6501</code>.
+            <p class="note"><strong>Note: </strong> <%= vars.product_short_mirror %> uses mutual TLS. This port must be the same port used in <strong>Anti-Virus Mirror Port</strong> of the <strong><%= vars.product_full_mirror %></strong> tile. If these ports are not the same, <%= vars.product_short %> database updates and deployments fail.
+            </p>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div id="tab3" class="tabcontent">
+      <p class="note"><strong>Note</strong>: Please note this note.</p>
+    </div>
+
+1. Configure the remaining fields:
 
     <table class="nice">
       <th>Field</th>
