@@ -44,7 +44,6 @@ This adds the tile to your staging area.
 To configure <%= vars.product_short %>:
 
 1. Select **Anti-Virus Configuration**.
-  ![Configure Anti-Virus](configure.png)
 
 1. Configure **Mirror for Automatic Database Updates**:
 
@@ -108,29 +107,41 @@ To configure <%= vars.product_short %>:
       <!- Tab headers and links ->
       <button class="tablinks" onclick="openDocs(event, 'tab1')">Official mirror</button>
       <button class="tablinks" onclick="openDocs(event, 'tab2')">Deployed mirror</button>
-      <button class="tablinks" onclick="openDocs(event, 'tab3')">Existing Mirror</button>
-      <button class="tablinks" onclick="openDocs(event, 'tab3')">Existing Mirror with TLS</button>
+      <button class="tablinks active" onclick="openDocs(event, 'tab3')">Existing Mirror</button>
+      <button class="tablinks" onclick="openDocs(event, 'tab4')">Existing Mirror with TLS</button>
     </div>
 
     <div id="tab1" class="tabcontent">
-      <!- Tab content  ->
-      <h3>TEXT HEADER</h3>
-      <p>CONTENT HERE</p>
-    </div>
-    <div id="tab2" class="tabcontent">
+
+      <img src="./images/configure-mirror-official.png" alt="Configure Official mirror" width="550">
+
       <table class="nice">
+        <col width="25%">
+        <col width="75%">
         <th>Field</th>
         <th>Description</th>
         <tr>
-          <td><strong>Mirror for Automatic Database Updates</strong></td>
+          <td><strong>Official mirror</strong></td>
           <td>
-            Select the method for receiving your virus databases from an upstream mirror.
-            <ul>
-              <li><strong>Official mirror</strong>: Select this to have the mirror fetch databases from database.clamav.net.</li>
-              <li><strong>Deployed mirror from the Pivotal Anti-Virus Mirror Tile</strong>: For more information, see <a href="./install-mirror.html">Installing and Configuring <%= vars.product_full_mirror %></a>.
-              <li><strong>Existing Mirror</strong>: Select this to enter a list of hostnames or IPs of mirrors.</li>
-              <li><strong>Existing Mirror with TLS</strong>: Select this to enter a hostname, port number, and CA certificate.</li>
-            </ul>
+            Select this to have the mirror fetch databases from database.clamav.net.
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div id="tab2" class="tabcontent">
+
+      <img src="./images/configure-mirror-deployed.png" alt="Configure Deployed mirror from the Pivotal Anti-Virus Mirror tile" width="550">
+
+      <table class="nice">
+        <col width="25%">
+        <col width="75%">
+        <th>Field</th>
+        <th>Description</th>
+        <tr>
+          <td><strong>Deployed mirror from the <%= vars.product_full_mirror %> Tile</strong></td>
+          <td>
+            Select this when using the <%= vars.product_full_mirror %> tile.<br><br>
+            For more information, see <a href="./install-mirror.html">Installing and Configuring <%= vars.product_full_mirror %></a>.
           </td>
         </tr>
         <tr>
@@ -142,34 +153,91 @@ To configure <%= vars.product_short %>:
         </tr>
       </table>
     </div>
-    <div id="tab3" class="tabcontent">
-      <p class="note"><strong>Note</strong>: Please note this note.</p>
+    <div id="tab3" class="tabcontent" style="display:block">
+
+      <img src="./images/configure-mirror-existing.png" alt="Configure Existing Mirror" width="550">
+
+      <table class="nice">
+        <col width="25%">
+        <col width="75%">
+        <th>Field</th>
+        <th>Description</th>
+        <tr>
+          <td><strong>Existing Mirror</strong></td>
+          <td>
+            Select this to enter a list of hostnames or IPs of mirrors.
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Anti-Virus Mirror Port</strong></td>
+          <td>Enter the port for Anti-Virus Mirror to use. The default value is <code>6501</code>.
+            <p class="note"><strong>Note: </strong> <%= vars.product_short_mirror %> uses mutual TLS. This port must be the same port used in <strong>Anti-Virus Mirror Port</strong> of the <strong><%= vars.product_full_mirror %></strong> tile. If these ports are not the same, <%= vars.product_short %> database updates and deployments fail.
+            </p>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div id="tab4" class="tabcontent">
+
+      <img src="./images/configure-mirror-existing-tls.png" alt="Configure Existing Mirror with TLS" width="550">
+
+      <table class="nice">
+        <col width="25%">
+        <col width="75%">
+        <th>Field</th>
+        <th>Description</th>
+        <tr>
+          <td><strong>Existing Mirror with TLS</strong></td>
+          <td>
+            Select this to enter a hostname, port number, and CA certificate.
+          </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>Mirror hostname without leading https://</strong>
+            </td>
+            <td>
+              Enter the hostname or IP address for your existing mirror.<br>
+              For example: <code>pivotal-anti-virus-mirror.s3.amazonaws.com</code> or <code>10.0.4.5</code>
+              <p class="note">
+                <strong>Note: </strong> Ensure that your existing mirror server is using the correct certificate for the method you choose (hostname or IP).
+              </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>Mirror Port</strong>
+            </td>
+            <td>
+              Enter the port used by your existing mirror.<br>
+              For example: <code>443</code>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>Mirror CA Certificate</strong>
+            </td>
+            <td>
+              Enter the CA certificate used with your existing mirror.<br>
+              For example:
+                <code>
+                  -----BEGIN CERTIFICATE-----<br>
+                  MIIEYzCCA0ugAwIBAgIQAYL4CY6i5ia5GjsnhB+5rzANBgkqhki<br>
+                  ...<br>
+                  upcHi9nzBhDFKdT3uhaQqNBU4UtJx5g=<br>
+                  -----END CERTIFICATE-----
+                </code>
+            </td>
+        </tr>
+      </table>
     </div>
 
 1. Configure the remaining fields:
+    ![Configure Anti-Virus](configure.png)
 
     <table class="nice">
       <th>Field</th>
       <th>Description</th>
-      <tr>
-        <td><strong>Mirror for Automatic Database Updates</strong></td>
-        <td>
-          Select the method for receiving your virus databases from an upstream mirror.
-          <ul>
-            <li><strong>Official mirror</strong>: Select this to have the mirror fetch databases from database.clamav.net.</li>
-            <li><strong>Deployed mirror from the Pivotal Anti-Virus Mirror Tile</strong>: For more information, see <a href="./install-mirror.html">Installing and Configuring <%= vars.product_full_mirror %></a>.
-            <li><strong>Existing Mirror</strong>: Select this to enter a list of hostnames or IPs of mirrors.</li>
-            <li><strong>Existing Mirror with TLS</strong>: Select this to enter a hostname, port number, and CA certificate.</li>
-          </ul>
-        </td>
-      </tr>
-      <tr>
-        <td><strong>Anti-Virus Mirror Port</strong></td>
-        <td>Enter the port for Anti-Virus Mirror to use. The default value is <code>6501</code>.
-          <p class="note"><strong>Note: </strong> <%= vars.product_short_mirror %> uses mutual TLS. This port must be the same port used in <strong>Anti-Virus Mirror Port</strong> of the <strong><%= vars.product_full_mirror %></strong> tile. If these ports are not the same, <%= vars.product_short %> database updates and deployments fail.
-          </p>
-        </td>
-      </tr>
       <tr>
         <td><strong>(Optional) Enable on-access scanning</strong></td>
         <td>Select this option if you want to scan files immediately after they are modified.
@@ -200,12 +268,12 @@ To configure <%= vars.product_short %>:
         <td><strong>Action to take when a virus is found</strong></td>
         <td>Select one of the following options:<br>
             <ul>
-              <li><strong>notify</strong>: (Default) Only send a notification to syslog.</li>
-              <li><strong>remove</strong>: Delete the infected file from the file system.</li>
-              <li><strong>move</strong>: Move the infected file to a specified directory.</li>
-              <li><strong>copy</strong>: Copy the infected file to a specified directory.</li>
+              <li><strong>Notify</strong>: (Default) Only send a notification to syslog.</li>
+              <li><strong>Remove</strong>: Delete the infected file from the file system.</li>
+              <li><strong>Move</strong>: Move the infected file to a specified directory.</li>
+              <li><strong>Copy</strong>: Copy the infected file to a specified directory.</li>
             </ul>
-            For the <strong>move</strong> and <strong>copy</strong> options, a field
+            For the <strong>Move</strong> and <strong>Copy</strong> options, a field
             for <strong>Destination for infected files</strong> appears after the
             option is selected.
         </td>
