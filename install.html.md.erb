@@ -262,7 +262,7 @@ To configure <%= vars.product_short %>:
             The default value is <code>30</code>.</td>
       </tr>
       <tr>
-        <td><strong>CPU limit</strong></td>
+        <td><strong>CPU limit (percentage)</strong></td>
         <td>Set the percentage of CPU that the <%= vars.product_short %> processes can use.<br>
             Integers from <code>1</code> to <code>100</code> are valid.<br>
             Setting this field to <code>100</code> permits the use of one full core.
@@ -281,6 +281,13 @@ To configure <%= vars.product_short %>:
             <li><strong>When other processes are using CPU resources</strong>: Permits the CPU usage to
               exceed the limit set by <strong>CPU limit</strong> if idle CPU cycles are available.</li>
           </ul>
+          <p class="note warning"><strong>Warning:</strong>
+            If <strong>Enforce CPU limit</strong> is set to <code>Enable</code>, ensure
+            <strong>CPU limit (percentage)</strong> is set high enough for <%= vars.product_short %>
+            to execute normally. If the limit is too strict, <%= vars.product_short %> fails to start.
+            <br><br>
+            For example, an n1-standard-1 VM on GCP requires <strong>CPU limit (percentage)</strong>
+            to be > 45.</p>
         </td>
       </tr>
       <tr>
