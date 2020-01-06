@@ -48,6 +48,10 @@ To configure <%= vars.product_short %>:
 1. Configure **Mirror for Automatic Database Updates**:
 
     <style>
+    .btn.btn-default,
+    .tab .tablinks {
+        color: #2185c5;
+    }
     .tab {
         overflow: hidden;
         border: 1px solid #ccc;
@@ -58,10 +62,10 @@ To configure <%= vars.product_short %>:
     .tab button {
         background-color: inherit;
         float: left;
-        border: none;
+        border: inherit;
         outline: none;
         cursor: pointer;
-        padding: 14px 16px;
+        padding: ;
         transition: 0.3s;
     }
 
@@ -105,13 +109,13 @@ To configure <%= vars.product_short %>:
 
     <div class="tab">
       <!- Tab headers and links ->
-      <button class="tablinks" onclick="openDocs(event, 'tab1')">Official mirror</button>
+      <button class="tablinks active" onclick="openDocs(event, 'tab1')">Official mirror</button>
       <button class="tablinks" onclick="openDocs(event, 'tab2')">Deployed mirror</button>
-      <button class="tablinks active" onclick="openDocs(event, 'tab3')">Existing Mirror</button>
+      <button class="tablinks" onclick="openDocs(event, 'tab3')">Existing Mirror</button>
       <button class="tablinks" onclick="openDocs(event, 'tab4')">Existing Mirror with TLS</button>
     </div>
 
-    <div id="tab1" class="tabcontent">
+    <div id="tab1" class="tabcontent" style="display:block">
 
       <img src="./images/configure-mirror-official.png" alt="Configure Official mirror" width="550">
 
@@ -153,7 +157,7 @@ To configure <%= vars.product_short %>:
         </tr>
       </table>
     </div>
-    <div id="tab3" class="tabcontent" style="display:block">
+    <div id="tab3" class="tabcontent">
 
       <img src="./images/configure-mirror-existing.png" alt="Configure Existing Mirror" width="550">
 
