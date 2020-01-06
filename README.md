@@ -6,7 +6,8 @@ As of October 23, 2019:
 
 | Branch name… | Documents version… | Publishes to… |
 |-------------|----------------|----------------|
-| master   | v2.2 (unreleased)     | https://docs-pcf-staging.cfapps.io/addon-antivirus/2-n/index.html |
+| master   | v2.3 (unreleased)     | https://docs-pcf-staging.cfapps.io/addon-antivirus/2-n/index.html |
+| 2.2   | 2.2.x    | https://docs.pivotal.io/addon-antivirus/2-2/index.html and https://docs-pcf-staging.cfapps.io/addon-antivirus/2-2/index.html |
 | 2.1   | 2.1.x    | https://docs.pivotal.io/addon-antivirus/2-1/index.html and https://docs-pcf-staging.cfapps.io/addon-antivirus/2-1/index.html |
 | 2.0   | 2.0.x     | https://docs.pivotal.io/addon-antivirus/2-0/index.html and https://docs-pcf-staging.cfapps.io/addon-antivirus/2-0/index.html |
 | v1.4   | v1.4.x     | https://docs.pivotal.io/addon-antivirus/1-4/index.html and https://docs-pcf-staging.cfapps.io/addon-antivirus/1-4/index.html |
