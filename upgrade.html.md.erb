@@ -57,16 +57,32 @@ to set up the <%= vars.product_full %> tile.
 Additional configurations might be required when upgrading from v2.0.x.
 This is because of the following features introduced in <%= vars.product_short %> v2.1:
 
-  * Support for existing mirrors with mutual TLS (mTLS)
+  * Support for existing mirrors with TLS
   * Ability to configure the **Mirror Port** used by <%= vars.product_short %>
 
 ###<a id="use-existing"></a>Using Existing Mirrors
-In v2.0.x, <%= vars.product_short %> only supported using mTLS with <%= vars.product_short_mirror %>.
-However, in v2.1.x and later, <%= vars.product_short %> permits the use of an existing mirror with mTLS.
+In v2.0.x, <%= vars.product_short %> only supported using mutual TLS (mTLS) with <%= vars.product_short_mirror %>.
+However, in v2.1.x and later, <%= vars.product_short %> permits the use of an existing mirror with TLS.
 
 If you are currently using <%= vars.product_short_mirror %>
 and want to use an existing mirror,
-Pivotal recommends that you uninstall your <%= vars.product_short_mirror %> tile before upgrading.
+Pivotal recommends that you configure <%= vars.product_short %> to use the new mirror before
+uninstalling <%= vars.product_short_mirror %>.
+
+To do this:
+
+1. Download the latest version of <%= vars.product_short %> that permits using an existing mirror with TLS
+   from the [Pivotal Network](https://network.pivotal.io/products/p-clamav-addon) to your local machine.
+1. Upload the new `.pivotal` files to <%= vars.ops_manager %>.
+1. If required, upload any stemcells associated with the update.
+1. Configure <%= vars.product_short %> to use an existing mirror with or without TLS.
+    For instructions, see [Configure Anti-Virus](./install.html#configure)
+1. Return to the **Ops Manager Installation Dashboard** and click **Review Pending Changes**
+1. Select all the products in your foundation and click **Apply Changes**.
+1. Return to the **Ops Manager Installation Dashboard** and uninstall <%= vars.product_short_mirror %> by deleting the tile.
+1. Click **Review Pending Changes**.
+1. Select **<%= vars.product_short_mirror %>** only.
+1. Click **Apply Changes**
 
 ###<a id="configure-mirror"></a>Configuring the Mirror Port
 In v2.0.x, the port used by <%= vars.product_short %> and
