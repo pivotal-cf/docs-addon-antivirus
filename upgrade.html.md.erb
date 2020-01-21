@@ -85,11 +85,21 @@ This is because of the following features introduced in <%= vars.product_short %
 
 ###<a id="use-existing"></a>Using Existing Mirrors
 In v2.0.x, <%= vars.product_short %> only supported using mTLS with <%= vars.product_short_mirror %>.
-However, in v2.1.x and later, <%= vars.product_short %> permits the use of an existing mirror with mTLS.
+However, in v2.1.x and later, <%= vars.product_short %> permits the use of an existing mirror with TLS.
 
 If you are currently using <%= vars.product_short_mirror %>
 and want to use an existing mirror,
-Pivotal recommends that you uninstall your <%= vars.product_short_mirror %> tile before upgrading.
+Pivotal recommends that you configure <%= vars.product_short %> to use the new mirror before uninstalling <%= vars.product_short_mirror %>.
+
+To safely upgrade:
+1. Download a version of <%= vars.product_short %> that allows existing mirror with TLS
+   from the [Pivotal Network](https://network.pivotal.io/products/p-clamav-addon) to your local machine.
+1. Upload the new `.pivotal` files to <%= vars.ops_manager %>.
+1. If required, upload any stemcells associated with the update.
+1. Configure <%= vars.product_short %> to use an existing mirror with or without TLS.
+1. Apply Change to all Products in the foundation
+1. Now uninstall <%= vars.product_short_mirror %> by deleting the tile.
+1. Apply Change to the <%= vars.product_short_mirror %> product only.
 
 ###<a id="configure-mirror"></a>Configuring the Mirror Port
 In v2.0.x, the port used by <%= vars.product_short %> and
