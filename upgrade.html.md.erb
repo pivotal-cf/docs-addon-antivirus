@@ -14,32 +14,44 @@ See the following topics to ensure you have the required component versions and 
 * [Product Snapshot](./index.html#snapshot)
 * [Prerequisites](./install.html#prereqs)
 
-##<a id="upgrade"></a> Upgrade Pivotal Anti-Virus
+##<a id="upgrade"></a> Upgrade <%= vars.product_full %>
 
-See the table below to learn how to upgrade Pivotal Anti-Virus.
+See the table below for how to upgrade your current version of <%= vars.product_full %>.
 
 <table>
+  <col width="22%">
+  <col width="78%">
   <tr>
     <th>Upgrade path</th>
-    <th>Make sure to read / do</th>
+    <th>Make sure to...</th>
   </tr>
   <tr>
-    <td>v1.x to v2.2 or later</td>
-    <td><a href="#upgrade-v1-v2">Replace Pivotal Anti-Virus v1.x with v2.x</a></td>
+    <td>v1.x to v2.x</td>
+    <td>Follow the instructions in <a href="#upgrade-v1-v2">Replace <%= vars.product_old %> v1.x with <%= vars.product_full %> v2.x</a>.</td>
   </tr>
   <tr>
     <td>v2.0 to v2.2 or later</td>
-    <td><a href="#upgrade-v20-v21">Upgrade Pivotal Anti-Virus v2.0.x to v2.1.x or Later</a> and reset the value CPU limit and set the time out</td>
+    <td>
+      Do the following:
+      <ol>
+        <li>Read the information in <a href="#upgrade-v20-v21">Upgrade <%= vars.product_full %> v2.0.x to v2.1.x or Later</a></li>
+        <li>Follow the instructions in <a href="#upgrade-procedure">Upgrade <%= vars.product_full %> 2.0.x and Later</a>,
+        ensuring that you reset the value of CPU limit and set the time out</li>
+      </ol>
+    </td>
   </tr>
   <tr>
     <td>v2.1 to v2.2 or later</td>
-    <td>Reset the CPU limit and set the time out</td>
+    <td>
+      Follow the instructions in <a href="#upgrade-procedure">Upgrade <%= vars.product_full %> 2.0.x and Later</a>,
+      ensuring that you reset the value of CPU limit and set the time out.
+    </td>
   </tr>
 </table>
 
-##<a id="upgrade-v1-v2"></a>Replace <%= vars.product_full %> v1.x with v2.x
+##<a id="upgrade-v1-v2"></a>Replace <%= vars.product_old %> v1.x with <%= vars.product_full %> v2.x
 
-To uninstall <%= vars.product_full %> v1.x and install v2.x in its place:
+To uninstall <%= vars.product_old %> v1.x and install <%= vars.product_full %> v2.x in its place:
 
 1. Retrieve the latest runtime config YML by running the following command:
   <pre>
@@ -75,7 +87,7 @@ To uninstall <%= vars.product_full %> v1.x and install v2.x in its place:
 [Installing and Configuring <%= vars.product_full %>](./install.html)
 to set up the <%= vars.product_full %> tile.
 
-##<a id="upgrade-v20-v21"></a>Upgrade <%= vars.product_full %> v2.0.x to v2.1.x or Later
+##<a id="upgrade-v20-v21"></a>About Upgrading <%= vars.product_full %> v2.0.x or later to v2.1.x or Later
 
 Additional configurations might be required when upgrading from v2.0.x.
 This is because of the following features introduced in <%= vars.product_short %> v2.1:
@@ -108,6 +120,7 @@ To do this:
 1. Click **Apply Changes**
 
 ###<a id="configure-mirror"></a>Configuring the Mirror Port
+
 In v2.0.x, the port used by <%= vars.product_short %> and
 <%= vars.product_short_mirror %> was `80` and was not configurable.
 Starting in v2.1.x and later, the default port used is `6501` and is now configurable.
@@ -116,10 +129,10 @@ Starting in v2.1.x and later, the default port used is `6501` and is now configu
 do one of the following:
 
   * If you want to use the default port with <%= vars.product_short %> and
-  <%= vars.product_short_mirror %>, then you do not need to be make any changes after upgrading.
+  <%= vars.product_short_mirror %>, then you do not need to make any changes after upgrading.
 
   * If you want to change the ports used by <%= vars.product_short %> and
-  <%= vars.product_short_mirror %>, see [Upgrading Procedure](#v20-v21-procedure) below.
+  <%= vars.product_short_mirror %>, see [Upgrade <%= vars.product_full %> 2.0.x and Later](#upgrade-procedure) below.
 
 **If you are using an existing mirror with <%= vars.product_short %>,**
 do one of the following:
@@ -127,14 +140,14 @@ do one of the following:
   * Configure your existing mirror to use the default `6501` port
   used by <%= vars.product_short %>.
   * Configure <%= vars.product_short %> to use the port used by your existing mirror.
-    To do this, see [Upgrading Procedure](#v20-v21-procedure) below.
+    To do this, see [Upgrade <%= vars.product_full %> 2.0.x and Later](#upgrade-procedure) below.
 
-###<a id="v20-v21-procedure"></a>Upgrading Procedure
+##<a id="upgrade-procedure"></a>Upgrade <%= vars.product_full %> 2.0.x and Later
 
-To upgrade <%= vars.product_full %> v2.0.x to v2.1.x or later:
+To upgrade <%= vars.product_full %>:
 
 1. If you are upgrading to v2.2 or later, record the value in the <strong>CPU limit (percentage)</strong> field.
-Upgrading restores the default value of 50%.
+Upgrading to v2.2 or later restores this field to the default value of 50%.
 
     <p class="note"><strong>Note:</strong>
       All other configuration details are kept when upgrading.
@@ -149,7 +162,16 @@ Upgrading restores the default value of 50%.
 
 1. If required, upload any stemcells associated with the update.
 
-1. Configure the **Mirror Port** used for <%= vars.product_short %>:
+1. If you are upgrading to v2.2 or later:
+  1. Reset the value in the <strong>CPU limit (percentage)</strong> field. For instructions, see [Configure Anti-Virus](./install.html#configure).
+  1. Set the **Timeout to connect to the database server (in seconds)** field. For instructions, see [Configure Anti-Virus](./install.html#configure).
+
+1. (Optional) If you are currently using <%= vars.product_short_mirror %> and want to switch
+  to an existing mirror instead, follow the procedure in
+  [Changing the Port Used by <%= vars.product_short %> with an Existing Mirror](./changing-ports-existing.html).
+
+1. Check that the port used by <%= vars.product_short %> and your mirror are the same.
+If it is not, configure the **Mirror Port** used for <%= vars.product_short %>:
   * **If you are using the <%= vars.product_short_mirror %> tile,**
       follow the procedure in [Changing the Port Used by <%= vars.product_short %>
       and <%= vars.product_short_mirror %>](./changing-ports.html).
@@ -159,10 +181,7 @@ Upgrading restores the default value of 50%.
   * **If you are using an existing mirror and want to change the
       port to use the <%= vars.product_short %> default of `6501`,** do that now.
 
-1. If you are upgrading to v2.2 or later, reset the value in the <strong>CPU limit (percentage)</strong> field and set the
- **Timeout to connect to the database server (in seconds)**.
- For instructions, see [Configure Anti-Virus](./install.html#configure).
-
-1. (Optional) If you are currently using <%= vars.product_short_mirror %> and want to switch
-  to an existing mirror instead, follow the procedure in
-  [Changing the Port Used by <%= vars.product_short %> with an Existing Mirror](./changing-ports-existing.html).
+1. If you have not already done so, apply your configuration changes:
+  1. Return to the Installation Dashboard.
+  2. Click **Review Pending Changes**.
+  3. Ensure all products are selected and click **Apply Changes**.
