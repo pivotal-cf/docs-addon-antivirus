@@ -163,16 +163,18 @@ To upgrade <%= vars.product_full %>:
   This can be with or without TLS.
   For instructions, see [Configure Anti-Virus](./install.html#configure).
 
-1. (Optional) If you are using <%= vars.product_short_mirror %>  and want to change the ports used by Anti-Virus and Anti-Virus Mirror, follow the procedure in
+1. (Optional) If you are using <%= vars.product_short_mirror %>  and want to change
+the ports used by Anti-Virus and Anti-Virus Mirror, follow the procedure in
 [Changing the Port Used by <%= vars.product_short %> and <%= vars.product_short_mirror %>](./changing-ports.html).
 
-1. If you are using an existing mirror, check that the port used by <%= vars.product_short %> and your mirror are the same.
+1. If you are using an existing mirror, check that the port used by <%= vars.product_short %>
+and your mirror are the same.
 If they are not, configure the **Mirror Port** used for <%= vars.product_short %>:
   * **If you want to change the Mirror Port in <%= vars.product_short %> to use the port that your mirror uses,** follow the procedure in
         [Change the Port in the <%= vars.product_short %> Tile](./changing-ports-existing.html#change-antivirus).
   * **If you want to change the port to use the <%= vars.product_short %> default of `6501`,** do that now.
 
-1. If you have not already done so, apply your configuration changes:
+1. If you have not already done so in step 7 or step 8, apply configuration changes for all products in your foundation:
   1. Return to the <%= vars.ops_manager %> Installation Dashboard and click **Review Pending Changes**.
   3. Select all the products in your foundation and click **Apply Changes**.
 
