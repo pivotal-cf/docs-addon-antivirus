@@ -141,12 +141,17 @@ For information about what to configure for your version, see the table in [Upgr
 The instructions to complete your configuration depend on whether:
 
 * You are using <%= vars.product_short_mirror %> and want to continue to using it.
+See [Continue Using <%= vars.product_short_mirror %>](#upgrade-antivirus-mirror) below.
+
 * You are using an existing mirror.
+See [Continue Using an Existing Mirror](#upgrade-existing-mirror) below.
+
 * You are currently using <%= vars.product_short_mirror %>, but want to switch to an existing mirror instead.
+See [Switch to an Existing Mirror](#switch-existing-mirror) below.
 
-####<a id="upgrade-antivirus-mirror"></a>
+####<a id="upgrade-antivirus-mirror"></a> Upgrade Using <%= vars.product_short_mirror %>
 
-If you are using <%= vars.product_short_mirror %>:
+To complete your configuration if you are using <%= vars.product_short_mirror %>:
 
 1. (Optional) If you want to change the ports used by Anti-Virus and Anti-Virus Mirror, follow the instructions in
 [Changing the Port Used by <%= vars.product_short %> and <%= vars.product_short_mirror %>](./changing-ports.html).
@@ -156,7 +161,9 @@ If you are using <%= vars.product_short_mirror %>:
   1. Select all the products in your foundation and click **Apply Changes**.
 
 
-####<a id="upgrade-existing-mirror"></a> If Using Existing Mirror
+####<a id="upgrade-existing-mirror"></a> Continue Using an Existing Mirror
+
+To complete your configuration if you are using an existing mirror:
 
 1. Check that the port used by <%= vars.product_short %> and your mirror are the same.
 If they are not, configure the **Mirror Port** used for <%= vars.product_short %>:
@@ -170,9 +177,9 @@ If they are not, configure the **Mirror Port** used for <%= vars.product_short %
   1. Return to the <%= vars.ops_manager %> Installation Dashboard and click **Review Pending Changes**.
   1. Select all the products in your foundation and click **Apply Changes**.
 
-####<a id="switch-existing-mirror"></a>
+####<a id="switch-existing-mirror"></a> Switch to an Existing Mirror
 
-If you are currently using <%= vars.product_short_mirror %>, but want to switch
+To complete your configuration if you are currently using <%= vars.product_short_mirror %>, but want to switch
 to an existing mirror instead:
 
 1. Follow the instructions in [Changing the Port Used by <%= vars.product_short %> with an Existing Mirror](./changing-ports-existing.html).
