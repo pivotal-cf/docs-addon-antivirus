@@ -25,8 +25,8 @@ How these updated virus definitions propagate to the internal
 BOSH VMs use depends on whether your environment
 is running in an online or air-gapped network:
 
-* **Online Network**: The <%= vars.product_short_mirror %> updates its virus definitions automatically.
-* **Air-gapped Network**: An operator must manually download new virus definitions
+* **[Online Network](#automatic)**: The <%= vars.product_short_mirror %> updates its virus definitions automatically.
+* **[Air-gapped Network](#manual)**: An operator must manually download new virus definitions
 and run `bosh scp` to update them on the internal <%= vars.product_short %> mirror.
 
 For more information and diagrams about this architecture,
@@ -35,7 +35,7 @@ see [How Virus Definitions Propagate to VMs](./index.html#propagate).
 The following sections describe both of these scenarios
 and explain how to manually update virus definitions on the internal <%= vars.product_short %> mirror.
 
-###<a id="automatic"></a>Automatic Updates with Online Networks
+##<a id="automatic"></a>Automatic Updates with Online Networks
 
 When your environment runs on an online network,
 the <%= vars.product_short_mirror %> VM regularly checks the external ClamAV database every two hours.
@@ -43,7 +43,7 @@ the <%= vars.product_short_mirror %> VM regularly checks the external ClamAV dat
 When new virus definitions are present on the external database,
 <%= vars.product_short_mirror %> downloads them automatically.
 
-###<a id="manual"></a>Manually Update on an Air-gapped Network
+##<a id="manual"></a>Manually Update on an Air-gapped Network
 
 <%= vars.product_short %> jobs use three virus definitions files, `main.cvd`, `daily.cvd`, and `bytecode.cvd`.
 The internal <%= vars.product_short_mirror %> serves these three files to all
