@@ -13,8 +13,7 @@ If you are upgrading from <%= vars.product_short %> v2.0 to v2.1 and you use an 
 then the upgrading instructions [Upgrade Pivotal Anti-Virus v2.0.x to v2.1.x or Later](upgrade.html#upgrade-v20-v21)
 tell you to follow the procedures in this topic.
 
-
-## <a id="change-port"></a> Change the Ports
+## <a id="change-port"></a> Overview
 
 The port used by <%= vars.product_short %> and the existing mirror must be the same.
 If the port number configured in both is not the same,
@@ -26,7 +25,7 @@ To change the port used by <%= vars.product_short %> and an existing mirror you 
 1. [Change the Port in the Anti-Virus Tile](#change-antivirus)
 1. [Complete the Port Changes](#complete-port)
 
-### <a id="uninstall-mirror"></a> Uninstall the <%= vars.product_short_mirror %> Tile
+## <a id="uninstall-mirror"></a> Uninstall the <%= vars.product_short_mirror %> Tile
 
 If you are currently using <%= vars.product_short_mirror %>
 and want to transition to using an existing mirror,
@@ -36,7 +35,7 @@ To uninstall the <%= vars.product_short_mirror %> tile:
 
 1. See [Deleting a Product](https://docs.pivotal.io/platform/customizing/add-delete.html#del-prod).
 
-### <a id="change-antivirus"></a> Change the Port in the <%= vars.product_short %> Tile
+## <a id="change-antivirus"></a> Change the Port in the <%= vars.product_short %> Tile
 
 To change the port number in the <%= vars.product_short %> tile:
 
@@ -112,7 +111,7 @@ To change the port number in the <%= vars.product_short %> tile:
 
 1. Click **Apply Changes**.
 
-### <a id="complete-port"></a> Complete the Port Changes
+## <a id="complete-port"></a> Complete the Port Changes
 Your port does not change until you apply your configuration changes to all products.
 
 To do this, do the following:
