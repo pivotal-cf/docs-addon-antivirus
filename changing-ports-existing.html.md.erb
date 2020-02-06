@@ -7,7 +7,7 @@ owner: Pivotal Compliance and Innovation (PCI) Team
 This topic describes how to change the port used by <%= vars.product_full %> and an existing mirror.
 
 If you are using <%= vars.product_full_mirror %>,
-then see [Changing the Port Used by Anti-Virus and Anti-Virus Mirror](changing-ports.html) instead of this topic.
+then see [Changing the Port Used by <%= vars.product_short %> and <%= vars.product_short_mirror %>](./changing-ports.html) instead of this topic.
 
 If you are upgrading from <%= vars.product_short %> v2.0 to v2.1 and you use an existing mirror,
 you might need to do the procedure in this topic.
@@ -21,19 +21,8 @@ If the port number configured in both is not the same,
 
 To change the port used by <%= vars.product_short %> and an existing mirror you must:
 
-1. [Uninstall the Anti-Virus Mirror Tile](#uninstall-mirror) if you have it deployed.
-1. [Change the Port in the Anti-Virus Tile](#change-antivirus)
-1. [Complete the Port Changes](#complete-port)
-
-## <a id="uninstall-mirror"></a> Uninstall the <%= vars.product_short_mirror %> Tile
-
-If you are currently using <%= vars.product_short_mirror %>
-and want to transition to using an existing mirror,
-Pivotal recommends that you uninstall your <%= vars.product_short_mirror %> tile.
-
-To uninstall the <%= vars.product_short_mirror %> tile:
-
-1. See [Deleting a Product](https://docs.pivotal.io/platform/customizing/add-delete.html#del-prod).
+1. [Change the Port in the <%= vars.product_short %> Tile](#change-antivirus)
+1. [Uninstall the <%= vars.product_short_mirror %> Tile](#uninstall-mirror) if you have it deployed.
 
 ## <a id="change-antivirus"></a> Change the Port in the <%= vars.product_short %> Tile
 
@@ -107,16 +96,21 @@ To change the port number in the <%= vars.product_short %> tile:
 
 1. Return to the <%= vars.ops_manager %> Installation Dashboard and click **Review Pending Changes**.
 
-1. Unselect all products except **BOSH Director** and **<%= vars.product_short %>**.
+1. Ensure all the products are selected.
 
 1. Click **Apply Changes**.
 
-## <a id="complete-port"></a> Complete the Port Changes
-Your port does not change until you apply your configuration changes to all products.
+## <a id="uninstall-mirror"></a> Uninstall the <%= vars.product_short_mirror %> Tile
 
-To do this, do the following:
+If you are currently using <%= vars.product_short_mirror %>
+and want to transition to using an existing mirror,
+Pivotal recommends that you uninstall your <%= vars.product_short_mirror %> tile.
 
-1. After the above **Apply Changes** is complete,
-  return to the <%= vars.ops_manager %> Installation Dashboard and click **Review Pending Changes**.
-1. Ensure all products are selected.
+To uninstall the <%= vars.product_short_mirror %> tile:
+
+1. Navigate to <%= vars.ops_manager %> Installation Dashboard and
+click the trash icon on the **<%= vars.product_short_mirror %>** tile.
+1. In the **Delete Product** dialog box that appears, click **Confirm**.
+1. Click **Review Pending Changes**.
+1. Ensure that only **<%= vars.product_short_mirror %>** is selected.
 1. Click **Apply Changes**.
