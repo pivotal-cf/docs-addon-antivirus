@@ -18,7 +18,7 @@ For more information, see <a href="./install.html#configure">Configure <%= vars.
 </p>
 
 
-## <a id="change-port"></a> Change the Ports
+## <a id="overview"></a> Overview
 
 <%= vars.product_short_mirror %> uses mutual TLS (mTLS).
 The port used by <%= vars.product_short_mirror %> and <%= vars.product_short %> must be the same.
@@ -31,7 +31,7 @@ To change the port used by <%= vars.product_short %> and <%= vars.product_short_
 1. [Change the Port in the Anti-Virus Tile](#change-antivirus)
 1. [Complete the Port Changes](#complete-port)
 
-### <a id="change-mirror"></a> Change the Port in the <%= vars.product_short_mirror %> Tile
+## <a id="change-mirror"></a> Change the Port in the <%= vars.product_short_mirror %> Tile
 
 To change the port number in the <%= vars.product_short_mirror %> tile:
 
@@ -42,7 +42,7 @@ To change the port number in the <%= vars.product_short_mirror %> tile:
     ![Configure Anti-Virus Mirror Port](mirror-port-mirror.png)
 1. Return to the <%= vars.ops_manager %> Installation Dashboard.
 
-### <a id="change-antivirus"></a> Change the Port in the <%= vars.product_short %> Tile
+## <a id="change-antivirus"></a> Change the Port in the <%= vars.product_short %> Tile
 
 To change the port number in the <%= vars.product_short %> tile:
 
@@ -55,7 +55,7 @@ To change the port number in the <%= vars.product_short %> tile:
 
 ## <a id="complete-port"></a> Complete the Port Changes
 
-### <a id="exclude-mirror"></a> Exclude <%= vars.product_short_mirror %> during Apply Changes
+## <a id="exclude-mirror"></a> Exclude <%= vars.product_short_mirror %> during Apply Changes
 
 When changing ports for the <%= vars.product_short %> and <%= vars.product_short_mirror %> tiles,
 you need to exclude the `antivirus-mirror` instance group from the <%= vars.product_short %>
@@ -78,7 +78,7 @@ To exclude the instance group and complete the port changes:
 1. Unselect all products except **BOSH Director**, **<%= vars.product_short %>**, and **<%= vars.product_short_mirror %>**.
 1. Click **Apply Changes**.
 
-### <a id="remove-exclude"></a> Remove Exclusion
+## <a id="remove-exclude"></a> Remove Exclusion
 
 1. Once the **Apply Changes** is complete, return to the **<%=vars.product_full%>** tile.
 1. Remove the `antivirus-mirror` exclusion added above.
