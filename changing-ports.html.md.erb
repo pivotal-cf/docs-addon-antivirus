@@ -28,7 +28,8 @@ To change the port used by <%= vars.product_short %> and <%= vars.product_short_
 
 1. [Change the Port in the Anti-Virus Mirror Tile](#change-mirror)
 1. [Change the Port in the Anti-Virus Tile](#change-antivirus)
-1. [Complete the Port Changes](#complete-port)
+1. [Exclude <%= vars.product_short_mirror %> during Apply Changes](#exclude-mirror)
+1. [Remove the Exclusion](#remove-exclude)
 
 ## <a id="change-mirror"></a> Change the Port in the <%= vars.product_short_mirror %> Tile
 
@@ -52,7 +53,6 @@ To change the port number in the <%= vars.product_short %> tile:
 
     ![Configure Anti-Virus Mirror Mirror Port](mirror-port.png)
 
-## <a id="complete-port"></a> Complete the Port Changes
 
 ## <a id="exclude-mirror"></a> Exclude <%= vars.product_short_mirror %> during Apply Changes
 
@@ -77,10 +77,12 @@ To exclude the instance group and complete the port changes:
 1. Unselect all products except **BOSH Director**, **<%= vars.product_short %>**, and **<%= vars.product_short_mirror %>**.
 1. Click **Apply Changes**.
 
-## <a id="remove-exclude"></a> Remove Exclusion
+## <a id="remove-exclude"></a> Remove the Exclusion
 
-1. Once the **Apply Changes** is complete, return to the **<%=vars.product_full%>** tile.
+To remove the `antivirus-mirror` exclusion:
+
+1. When the **Apply Changes** is complete, return to the **<%=vars.product_full%>** tile.
 1. Remove the `antivirus-mirror` exclusion added above.
 1. Return to the <%= vars.ops_manager %> Installation Dashboard and click **Review Pending Changes**.
-1. Ensure all product as selected.
+1. Ensure all product are selected.
 1. Click **Apply Changes**.
