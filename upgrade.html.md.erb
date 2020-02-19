@@ -16,44 +16,42 @@ See the following topics to ensure you have the required component versions and 
 
 ##<a id="upgrade"></a> Upgrade Considerations for <%= vars.product_full %>
 
-See the table below for how to upgrade your current version of <%= vars.product_full %>.
+See the table below for the new features to consider when you upgrade your current version of <%= vars.product_full %>.
 
 <table>
-  <col width="22%">
-  <col width="78%">
+  <col width="25%">
+  <col width="75%">
   <tr>
-    <th>Upgrade path</th>
-    <th>Make sure to...</th>
+    <th>If you are currently on...</th>
+    <th>When upgrading to v<%= product_info['local_product_version'] %>...</th>
   </tr>
   <tr>
-    <td>v1.x to v2.x</td>
-    <td>Uninstall ClamAV Add-on for PCF v1.x and install Pivotal Anti-Virus v2.x.
-      For instructions, see <a href="#upgrade-v1-v2">Replace <%= vars.product_old %> v1.x with <%= vars.product_full %> v2.x</a>.</td>
+    <td>v1.x</td>
+    <td>Uninstall ClamAV Add-on for PCF v1.x and install Pivotal Anti-Virus v2.x tile.
+      For upgrade instructions, see <a href="#upgrade-v1-v2">Replace <%= vars.product_old %> v1.x with <%= vars.product_full %> v2.x</a>.</td>
   </tr>
   <tr>
-    <td>v2.0 to v2.2</td>
+    <td>2.0</td>
     <td>
-      Do the following:
       <ul>
-        <li>(Optional) Decide whether to use <%= vars.product_short_mirror %> or an existing mirror.
+        <li>
+          You can decide whether to use <%= vars.product_short_mirror %> or an existing mirror.
+          <%= vars.product_short %> now supports existing mirrors with TLS.
           For more information, see <a href="#use-existing">Using an Existing Mirror</a> below.</li>
         <li>If required, configure the mirror port.
           For more information see <a href="#configure-mirror">Configuring the Mirror Port</a> below.</li>
-        <li>Reset the value of <strong>CPU limit (Percentage)</strong>.</li>
-        <li>Set <strong>Timeout to connect to the database server (in seconds)</strong>.</li>
       </ul>
-      For instructions, see <a href="#upgrade-v20-v21">Upgrade <%= vars.product_full %> v2.0.x to v2.1.x or Later</a>
+      For upgrade instructions, see <a href="#upgrade-v20-v21">Upgrade <%= vars.product_full %> to This Version from v2.0</a>
     </td>
   </tr>
   <tr>
-    <td>v2.1 to v2.2</td>
+    <td>2.1</td>
     <td>
-      Do the following:
       <ul>
-        <li>Reset the value of <strong>CPU limit (Percentage)</strong>.</li>
-        <li>Set <strong>Timeout to connect to the database server (in seconds)</strong>.</li>
+        <li>Pivotal recommends that you reset the value of <strong>CPU limit (Percentage)</strong>.</li>
+        <li>You can set <strong>Timeout to connect to the database server (in seconds)</strong>.</li>
       </ul>
-      For instructions, see <a href="#upgrade-v21-v22">Upgrade <%= vars.product_full %> v2.1.x to v2.2.x or Later</a>
+      For upgrade instructions, see <a href="#upgrade-v21-v22">Upgrade <%= vars.product_full %> to This Version from v2.1 or Later</a>
     </td>
   </tr>
 </table>
@@ -98,7 +96,7 @@ To uninstall <%= vars.product_old %> v1.x and install <%= vars.product_full %> v
 [Installing and Configuring <%= vars.product_full %>](./install.html)
 to set up the <%= vars.product_full %> tile.
 
-##<a id="upgrade-v20-v21"></a> Upgrade <%= vars.product_full %> v2.0.x to v2.1.x or Later
+##<a id="upgrade-v20-v21"></a> Upgrade <%= vars.product_full %> to This Version from v2.0
 
 Additional configurations might be required when upgrading from v2.0.x.
 This is because of the following features introduced in <%= vars.product_short %> v2.1:
@@ -108,7 +106,7 @@ This is because of the following features introduced in <%= vars.product_short %
 * Ability to configure the **Mirror Port** used by <%= vars.product_short %>.
   For more information see [Configuring the Mirror Port](#configure-mirror) below.
 
-To upgrade <%= vars.product_full %>, you must:
+To upgrade <%= vars.product_full %> to v<%= product_info['local_product_version'] %> from v2.0, you must:
 
 1. [Update <%= vars.product_full %>](#update-antivirus)
 1. [Complete Configuring <%= vars.product_full %> and Apply Changes](#apply-changes)
@@ -117,10 +115,10 @@ To upgrade <%= vars.product_full %>, you must:
 
 To update <%= vars.product_full %>:
 
-1. If you are upgrading to v2.2 or later, record the value in the <strong>CPU limit (percentage)</strong> field.
+1. Record the value in the <strong>CPU limit (percentage)</strong> field.
 
     <p class="note"><strong>Note:</strong>
-      Upgrading to v2.2 or later restores this field to the default value of 50%.
+      Upgrading to this version from v2.1 or earlier restores this field to the default value of 50%.
       All other configuration details are kept when upgrading.
     </p>
 
@@ -185,14 +183,14 @@ to an existing mirror instead:
 1. Follow the instructions in [Changing the Port Used by <%= vars.product_short %> with an Existing Mirror](./changing-ports-existing.html).
 
 
-##<a id="upgrade-v21-v22"></a>Upgrade <%= vars.product_full %> 2.1.x to 2.2.x and Later
+##<a id="upgrade-v21-v22"></a>Upgrade <%= vars.product_full %> to This Version from v2.1 or Later
 
-To upgrade <%= vars.product_full %>:
+To upgrade <%= vars.product_full %> to v<%= product_info['local_product_version'] %> from v2.1 or later:
 
-1. If you are upgrading to v2.2 or later, record the value in the <strong>CPU limit (percentage)</strong> field.
+1. If you are upgrading from v2.1, record the value in the <strong>CPU limit (percentage)</strong> field.
 
     <p class="note"><strong>Note:</strong>
-      Upgrading to v2.2 or later restores this field to the default value of 50%.
+      Upgrading to this version from v2.1 or earlier restores this field to the default value of 50%.
       All other configuration details are kept when upgrading.
     </p>
 1. Download the latest version of <%= vars.product_short %>
@@ -206,7 +204,7 @@ To upgrade <%= vars.product_full %>:
 1. If required, upload any stemcells associated with the update.
 
 1. Update any new mandatory configuration parameters.
-For information about what to configure for your version, see the table in [Upgrade Considerations for <%= vars.product_full %>](#upgrade) above.
+For information about what to configure for the version you are updating to, see the table in [Upgrade Considerations for <%= vars.product_full %>](#upgrade) above.
 
 1. Return to the <%= vars.ops_manager %> Installation Dashboard and click **Review Pending Changes**.
 
