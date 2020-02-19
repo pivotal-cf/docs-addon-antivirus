@@ -1,11 +1,4 @@
----
-title: Upgrading Pivotal Anti-Virus
-owner: Security Engineering
----
-
-<strong><%= modified_date %></strong>
-
-This topic describes how to upgrade <%= vars.product_full %> (formerly known as ClamAV Add-on for PCF).
+his topic describes how to upgrade <%= vars.product_full %> (formerly known as ClamAV Add-on for PCF).
 
 ##<a id="assume"></a>Compatibility and Prerequisites
 
@@ -14,14 +7,49 @@ See the following topics to ensure you have the required component versions and 
 * [Product Snapshot](./index.html#snapshot)
 * [Prerequisites](./install.html#prereqs)
 
-##<a id="upgrade-v1-v2"></a>Replace <%= vars.product_full %> v1.x with v2.x
+##<a id="upgrade"></a> Upgrade Considerations for <%= vars.product_full %>
 
-To uninstall <%= vars.product_full %> v1.x and install v2.x in its place:
+The upgrade instructions vary depending on the version of <%= vars.product_short %>
+you are currently using.
+See the table below for the new features to consider and the upgrade instructions to use.
+
+<table>
+  <col width="25%">
+  <col width="75%">
+  <tr>
+    <th>If you are currently on...</th>
+    <th>When upgrading to v<%= product_info['local_product_version'] %>...</th>
+  </tr>
+  <tr>
+    <td>v1.x</td>
+    <td>Uninstall ClamAV Add-on for PCF v1.x and install Pivotal Anti-Virus v2.x tile.
+      For upgrade instructions, see <a href="#upgrade-v1-v2">Replace <%= vars.product_old %> v1.x with <%= vars.product_full %> v2.x</a>.</td>
+  </tr>
+  <tr>
+    <td>v2.0</td>
+    <td>
+      <ul>
+        <li>
+          Decide whether to use <%= vars.product_short_mirror %> or an existing mirror.
+          <%= vars.product_short %> now supports existing mirrors with TLS.
+          For more information, see <a href="#use-existing">Using an Existing Mirror</a> below.</li>
+        <li>If required, configure the mirror port.
+          For more information see <a href="#configure-mirror">Configuring the Mirror Port</a> below.</li>
+      </ul>
+      For upgrade instructions, see <a href="#upgrade-v20-v21">Upgrade <%= vars.product_full %> to This Version from v2.0</a>
+    </td>
+  </tr>
+</table>
+
+##<a id="upgrade-v1-v2"></a>Replace <%= vars.product_old %> v1.x with <%= vars.product_full %> v2.x
+
+To uninstall <%= vars.product_old %> v1.x and install <%= vars.product_full %> v2.x in its place:
 
 1. Retrieve the latest runtime config YML by running the following command:
-  <pre>
+
+    ```
     bosh -e ENVIRONMENT runtime-config > PATH-TO-SAVE-THE-RUNTIME-CONFIG
-  </pre>
+    ```
 
     Where:
     * `ENVIRONMENT` is your environment
@@ -34,10 +62,11 @@ To uninstall <%= vars.product_full %> v1.x and install v2.x in its place:
 
 1. In the runtime config YML, remove all ClamAV properties under the `releases:` and `addons:` sections.
 
-1. Update the runtime config.
-  <pre>
+1. Update the runtime config:
+
+    ```
     bosh -e ENVIRONMENT update-runtime-config --name=clamav PATH-TO-SAVE-THE-RUNTIME-CONFIG
-  </pre>
+    ```
 
     Where:
     * `ENVIRONMENT` is your environment
@@ -52,51 +81,111 @@ To uninstall <%= vars.product_full %> v1.x and install v2.x in its place:
 [Installing and Configuring <%= vars.product_full %>](./install.html)
 to set up the <%= vars.product_full %> tile.
 
-##<a id="upgrade-v20-v21"></a>Upgrade <%= vars.product_full %> v2.0.x to v2.1.x or Later
+##<a id="upgrade-v20-v21"></a> Upgrade <%= vars.product_full %> to This Version from v2.0
 
 Additional configurations might be required when upgrading from v2.0.x.
 This is because of the following features introduced in <%= vars.product_short %> v2.1:
 
-  * Support for existing mirrors with TLS
-  * Ability to configure the **Mirror Port** used by <%= vars.product_short %>
+* Support for existing mirrors with TLS.
+  For more information, see [Using an Existing Mirror](#use-existing) below.
+* Ability to configure the **Mirror Port** used by <%= vars.product_short %>.
+  For more information see [Configuring the Mirror Port](#configure-mirror) below.
 
-###<a id="use-existing"></a>Using Existing Mirrors
+To upgrade <%= vars.product_full %> to v<%= product_info['local_product_version'] %> from v2.0, you must:
+
+1. [Update <%= vars.product_full %>](#update-antivirus)
+1. [Complete Configuring <%= vars.product_full %> and Apply Changes](#apply-changes)
+
+###<a id="update-antivirus"></a> Update <%= vars.product_full %>
+
+To update <%= vars.product_full %>:
+
+1. Download the latest version of <%= vars.product_short %>
+   from [Pivotal Network](https://network.pivotal.io/products/p-clamav-addon) to your local machine.
+
+1. If you do not want to use an existing mirror, download the latest version <%= vars.product_short_mirror %>
+  from [Pivotal Network](https://network.pivotal.io/products/p-clamav-addon) to your local machine.
+
+1. Upload the new `.pivotal` files to <%= vars.ops_manager %>.
+
+1. If required, upload any stemcells associated with the update.
+
+1. Update any new mandatory configuration parameters.
+For information about what to configure for your version, see the table in [Upgrade Considerations for <%= vars.product_full %>](#upgrade) above.
+
+###<a id="apply-changes"></a> Complete Configuring <%= vars.product_full %> and Apply Changes
+
+The instructions to complete your configuration depend on whether:
+
+* You are using <%= vars.product_short_mirror %> and want to continue to using it.
+See [Continue Using <%= vars.product_short_mirror %>](#upgrade-antivirus-mirror) below.
+
+* You are using an existing mirror.
+See [Continue Using an Existing Mirror](#upgrade-existing-mirror) below.
+
+* You are currently using <%= vars.product_short_mirror %>, but want to switch to an existing mirror instead.
+See [Switch to an Existing Mirror](#switch-existing-mirror) below.
+
+####<a id="upgrade-antivirus-mirror"></a> Continue Using <%= vars.product_short_mirror %>
+
+To complete your configuration if you are using <%= vars.product_short_mirror %>:
+
+1. (Optional) If you want to change the ports used by Anti-Virus and Anti-Virus Mirror, follow the instructions in
+[Changing the Port Used by <%= vars.product_short %> and <%= vars.product_short_mirror %>](./changing-ports.html).
+
+1. If you have not done so as part of a previous step, apply configuration changes for your whole foundation:
+  1. Return to the <%= vars.ops_manager %> Installation Dashboard and click **Review Pending Changes**.
+  1. Select all the products in your foundation and click **Apply Changes**.
+
+
+####<a id="upgrade-existing-mirror"></a> Continue Using an Existing Mirror
+
+To complete your configuration if you are using an existing mirror:
+
+1. Check that the port used by <%= vars.product_short %> and your mirror are the same.
+If they are not, configure the **Mirror Port** used for <%= vars.product_short %>:
+  * If you want to change the **Mirror Port** in <%= vars.product_short %> to use
+    the port that your existing mirror uses, follow the procedure in
+    [Change the Port in the <%= vars.product_short %> Tile](./changing-ports-existing.html#change-antivirus).
+  * If you want to change the port on your existing mirror to use the <%= vars.product_short %>
+    default of `6501`, do that now.
+
+1. If you have not done so as part of a previous step, apply configuration changes for your whole foundation:
+  1. Return to the <%= vars.ops_manager %> Installation Dashboard and click **Review Pending Changes**.
+  1. Select all the products in your foundation and click **Apply Changes**.
+
+####<a id="switch-existing-mirror"></a> Switch to an Existing Mirror
+
+To complete your configuration if you are currently using <%= vars.product_short_mirror %>, but want to switch
+to an existing mirror instead:
+
+1. Follow the instructions in [Changing the Port Used by <%= vars.product_short %> with an Existing Mirror](./changing-ports-existing.html).
+
+
+##<a id="use-existing"></a> Using an Existing Mirror
+
 In v2.0.x, <%= vars.product_short %> only supported using mutual TLS (mTLS) with <%= vars.product_short_mirror %>.
 However, in v2.1.x and later, <%= vars.product_short %> permits the use of an existing mirror with TLS.
 
 If you are currently using <%= vars.product_short_mirror %>
-and want to use an existing mirror,
+and want to use an existing mirror instead,
 Pivotal recommends that you configure <%= vars.product_short %> to use the new mirror before
 uninstalling <%= vars.product_short_mirror %>.
 
-To do this:
+##<a id="configure-mirror"></a>Configuring the Mirror Port
 
-1. Download the latest version of <%= vars.product_short %> that permits using an existing mirror with TLS
-   from the [Pivotal Network](https://network.pivotal.io/products/p-clamav-addon) to your local machine.
-1. Upload the new `.pivotal` files to <%= vars.ops_manager %>.
-1. If required, upload any stemcells associated with the update.
-1. Configure <%= vars.product_short %> to use an existing mirror with or without TLS.
-    For instructions, see [Configure Anti-Virus](./install.html#configure)
-1. Return to the **<%= vars.ops_manager %> Installation Dashboard** and click **Review Pending Changes**
-1. Select all the products in your foundation and click **Apply Changes**.
-1. Return to the ** <%= vars.ops_manager %> Installation Dashboard** and uninstall <%= vars.product_short_mirror %> by deleting the tile.
-1. Click **Review Pending Changes**.
-1. Select **<%= vars.product_short_mirror %>** only.
-1. Click **Apply Changes**
-
-###<a id="configure-mirror"></a>Configuring the Mirror Port
 In v2.0.x, the port used by <%= vars.product_short %> and
 <%= vars.product_short_mirror %> was `80` and was not configurable.
-Starting in v2.1.x and later, the default port used is `6501` and is now configurable.
+In v2.1.x and later, the default port used is `6501` and is now configurable.
 
 **If you are using the <%= vars.product_short_mirror %> with <%= vars.product_short %>,**
 do one of the following:
 
   * If you want to use the default port with <%= vars.product_short %> and
-  <%= vars.product_short_mirror %>, then you do not need to be make any changes after upgrading.
+  <%= vars.product_short_mirror %>, then you do not need to make any changes after upgrading.
 
   * If you want to change the ports used by <%= vars.product_short %> and
-  <%= vars.product_short_mirror %>, see [Upgrading Procedure](#v20-v21-procedure) below.
+  <%= vars.product_short_mirror %>, see [Upgrade Pivotal Anti-Virus to This Version from v2.0](#upgrade-v20-v21) above.
 
 **If you are using an existing mirror with <%= vars.product_short %>,**
 do one of the following:
@@ -104,32 +193,4 @@ do one of the following:
   * Configure your existing mirror to use the default `6501` port
   used by <%= vars.product_short %>.
   * Configure <%= vars.product_short %> to use the port used by your existing mirror.
-    To do this, see [Upgrading Procedure](#v20-v21-procedure) below.
-
-###<a id="v20-v21-procedure"></a>Upgrading Procedure
-
-To upgrade <%= vars.product_full %> v2.0.x to v2.1.x or later:
-
-  1. Download the latest version of <%= vars.product_short %>
-     from the [Pivotal Network](https://network.pivotal.io/products/p-clamav-addon) to your local machine.
-
-  1. If you do not have an existing mirror, download the latest version <%= vars.product_short_mirror %>
-    from [Pivotal Network](https://network.pivotal.io/products/p-clamav-addon) to your local machine.
-
-  1. Upload the new `.pivotal` files to <%= vars.ops_manager %>.
-
-  1. If required, upload any stemcells associated with the update.
-
-  1. Configure the **Mirror Port** used for <%= vars.product_short %>:
-    * **If you are using the <%= vars.product_short_mirror %> tile,**
-        follow the procedure in [Changing the Port Used by <%= vars.product_short %>
-        and <%= vars.product_short_mirror %>](./changing-ports.html).
-    * **If you are using an existing mirror and want to change the Mirror Port
-        in <%= vars.product_short %>,** follow the procedure in
-        [Changing the Port Used by <%= vars.product_short %> with an Existing Mirror](./changing-ports-existing.html).
-    * **If you are using an existing mirror and want to change the
-        port to use the <%= vars.product_short %> default of `6501`,** do that now.
-
-  1. (Optional) If you are currently using <%= vars.product_short_mirror %> and want to switch
-    to an existing mirror instead, follow the procedure in
-    [Changing the Port Used by <%= vars.product_short %> with an Existing Mirror](./changing-ports-existing.html).
+    To do this, see [Upgrade Pivotal Anti-Virus to This Version from v2.0](#upgrade-v20-v21) above.
