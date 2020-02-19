@@ -16,7 +16,9 @@ See the following topics to ensure you have the required component versions and 
 
 ##<a id="upgrade"></a> Upgrade Considerations for <%= vars.product_full %>
 
-See the table below for the new features to consider when you upgrade your current version of <%= vars.product_full %>.
+The upgrade instructions vary depending on the version of <%= vars.product_short %>
+you are currently using.
+See the table below for the new features to consider and the upgrade instructions to use.
 
 <table>
   <col width="25%">
@@ -35,11 +37,13 @@ See the table below for the new features to consider when you upgrade your curre
     <td>
       <ul>
         <li>
-          You can decide whether to use <%= vars.product_short_mirror %> or an existing mirror.
+          Decide whether to use <%= vars.product_short_mirror %> or an existing mirror.
           <%= vars.product_short %> now supports existing mirrors with TLS.
           For more information, see <a href="#use-existing">Using an Existing Mirror</a> below.</li>
         <li>If required, configure the mirror port.
           For more information see <a href="#configure-mirror">Configuring the Mirror Port</a> below.</li>
+        <li>Pivotal recommends that you reset the value of <strong>CPU limit (Percentage)</strong>.</li>
+        <li>You can set <strong>Timeout to connect to the database server (in seconds)</strong>.</li>
       </ul>
       For upgrade instructions, see <a href="#upgrade-v20-v21">Upgrade <%= vars.product_full %> to This Version from v2.0</a>
     </td>
@@ -48,8 +52,6 @@ See the table below for the new features to consider when you upgrade your curre
     <td>v2.1</td>
     <td>
       <ul>
-        <li>Pivotal recommends that you reset the value of <strong>CPU limit (Percentage)</strong>.</li>
-        <li>You can set <strong>Timeout to connect to the database server (in seconds)</strong>.</li>
         <li>Pivotal recommends that you reset the value of <strong>CPU limit (Percentage)</strong>.</li>
         <li>You can set <strong>Timeout to connect to the database server (in seconds)</strong>.</li>
       </ul>
@@ -241,7 +243,7 @@ do one of the following:
   <%= vars.product_short_mirror %>, then you do not need to make any changes after upgrading.
 
   * If you want to change the ports used by <%= vars.product_short %> and
-  <%= vars.product_short_mirror %>, see [Upgrade Procedure](#upgrade-procedure-v20-v21) below.
+  <%= vars.product_short_mirror %>, see [Upgrade Pivotal Anti-Virus to This Version from v2.0](#upgrade-v20-v21) above.
 
 **If you are using an existing mirror with <%= vars.product_short %>,**
 do one of the following:
@@ -249,4 +251,4 @@ do one of the following:
   * Configure your existing mirror to use the default `6501` port
   used by <%= vars.product_short %>.
   * Configure <%= vars.product_short %> to use the port used by your existing mirror.
-    To do this, see [Upgrade Procedure](#upgrade-procedure-v20-v21) below.
+    To do this, see [Upgrade Pivotal Anti-Virus to This Version from v2.0](#upgrade-v20-v21) above.
