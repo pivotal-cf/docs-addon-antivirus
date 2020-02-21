@@ -34,62 +34,165 @@ To change the port number in the <%= vars.product_short %> tile:
    + **Existing Mirror**
    + **Existing Mirror with TLS** if the mirror uses TLS to communicate with the <%= vars.product_short %> tile.
 
-1. If your existing mirror does not use TLS, complete the field **Comma separated list of mirror hostnames or IPs**.
-  For example, `10.0.4.5,10.0.4.6`
+1. Configure **Mirror for Automatic Database Updates**.<br>
+The tabs below expand to show instructions for each type of mirror.<br><br>
 
-    ![selecting the existing mirror button exposes the Comma separated list of mirror hostnames or IPs field](existing-mirror.png)
+    <style>
+    .btn.btn-default,
+    .tab .tablinks {
+       color: #2185c5;
+    }
+    .tab {
+       overflow: hidden;
+       border: 1px solid #ccc;
+       background-color: #f1f1f1;
+    }
 
-1. If your existing mirror uses TLS, complete the fields:
+    /* Style the buttons that are used to open the tab content */
+    .tab button {
+       background-color: inherit;
+       float: left;
+       border: none;
+       outline: none;
+       cursor: pointer;
+       padding: ;
+       transition: 0.3s;
+    }
 
-     ![selecting the existing mirror with tls button exposes three fields](existing-mirror-with-tls.png)
+    /* Change background color of buttons on hover */
+    .tab button:hover {
+       background-color: #ddd;
+    }
 
-    <table class="nice">
-    <col width="30%">
-    <col width="70%">
-        <tr>
-            <th>Field</th>
-            <th>Example</th>
-        </tr>
-        <tr>
-            <td>
-                <strong>Mirror hostname without leading https://</strong>
-            </td>
-            <td>
-              Enter the hostname or IP address for your existing mirror.<br>
-              For example: <code>pivotal-anti-virus-mirror.s3.amazonaws.com</code> or <code>10.0.4.5</code>
-              <p class="note">
-                <strong>Note: </strong>
-                Ensure that your existing mirror server is using the correct certificate
-                for the hostname or IP.
-              </p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <strong>Mirror Port</strong>
-            </td>
-            <td>
-              Enter the port used by your existing mirror.<br>
-              For example: <code>443</code>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <strong>Mirror CA Certificate</strong>
-            </td>
-            <td>
-              Enter the CA certificate used with your existing mirror.<br>
-              For example:
-                <code>
-                  -----BEGIN CERTIFICATE-----<br>
-                  MIIEYzCCA0ugAwIBAgIQAYL4CY6i5ia5GjsnhB+5rzANBgkqhki<br>
-                  ...<br>
-                  upcHi9nzBhDFKdT3uhaQqNBU4UtJx5g=<br>
-                  -----END CERTIFICATE-----
-                </code>
-            </td>
-        </tr>
-      </table>
+    /* Create an active/current tablink class */
+    .tab button.active {
+       background-color: #ccc;
+    }
+
+    /* Style the tab content */
+    .tabcontent {
+       display: none;
+       padding: 6px 12px;
+       border: 1px solid #ccc;
+       border-top: none;
+    }
+    </style>
+    <script>
+    function openDocs(evt, docsName) {
+       // Declare all variables
+       var i, tabcontent, tablinks;
+       // Get all elements with class="tabcontent" and hide them
+       tabcontent = document.getElementsByClassName("tabcontent");
+       for (i = 0; i < tabcontent.length; i++) {
+           tabcontent[i].style.display = "none";
+       }
+       // Get all elements with class="tablinks" and remove the class "active"
+       tablinks = document.getElementsByClassName("tablinks");
+       for (i = 0; i < tablinks.length; i++) {
+           tablinks[i].className = tablinks[i].className.replace(" active", "");
+       }
+       // Show the current tab, and add an "active" class to the button that opened the tab
+       document.getElementById(docsName).style.display = "block";
+       evt.currentTarget.className += " active";
+    }
+    </script>
+
+    <div class="tab">
+     <!- Tab headers and links ->
+     <button class="tablinks active" onclick="openDocs(event, 'tab1')">Existing Mirror</button>
+     <button class="tablinks" onclick="openDocs(event, 'tab2')">Existing Mirror with TLS</button>
+    </div>
+
+    <div id="tab1" class="tabcontent" style="display:block">
+
+     <img src="./images/existing-mirror.png"
+     alt="Selecting the existing mirror button exposes the Comma separated
+     list of mirror hostnames or IPs field">
+
+     <table class="nice">
+       <col width="25%">
+       <col width="75%">
+       <th>Field</th>
+       <th>Description</th>
+       <tr>
+          <td><strong>Existing Mirror</strong>
+          </td>
+          <td>Select this to use an existing mirror without TLS.
+          </td>
+      </tr>
+       <tr>
+         <td><strong>Comma separated list of mirror hostnames or IP addresses</strong></td>
+         <td>
+           Enter a list of mirror hostnames or IP addresses.
+           For example, <code>10.0.4.5,10.0.4.6</code>.
+         </td>
+       </tr>
+     </table>
+    </div>
+    <div id="tab2" class="tabcontent">
+
+     <img src="./images/existing-mirror-with-tls.png" alt="Selecting the existing mirror with tls button exposes three fields">
+
+     <table class="nice">
+       <col width="25%">
+       <col width="75%">
+       <tr>
+       <th>Field</th>
+       <th>Description</th>
+       </tr>
+       <tr>
+          <td><strong>Existing Mirror with TLS</strong>
+          </td>
+          <td>Select this to use an existing mirror with TLS.
+          </td>
+      </tr>
+       <tr>
+         <td>
+             <strong>Mirror hostname without leading https://</strong>
+         </td>
+         <td>
+           Enter the hostname or IP address of your existing mirror.<br>
+           For example, <code>pivotal-anti-virus-mirror.s3.amazonaws.com</code> or <code>10.0.4.5</code>.
+           <p class="note">
+             <strong>Note: </strong>
+             Ensure that your existing mirror server is using the correct certificate
+             for the hostname or IP address.
+           </p>
+         </td>
+       </tr>
+       <tr>
+           <td>
+               <strong>Mirror Port</strong>
+           </td>
+           <td>
+             Enter the port used by your existing mirror.<br>
+             For example, <code>443</code>.
+           </td>
+       </tr>
+       <tr>
+           <td>
+               <strong>Mirror CA Certificate</strong>
+           </td>
+           <td>
+             Enter the CA certificate used with your existing mirror.<br>
+             For example:
+             <pre>
+-----BEGIN CERTIFICATE-----
+MIIEYzCCA0ugAwIBAgIQAYL4CY6i5ia5GjsnhB+5rzANBgkqhki
+...
+upcHi9nzBhDFKdT3uhaQqNBU4UtJx5g=
+-----END CERTIFICATE-----</pre>
+           </td>
+       </tr>
+     </table>
+    </div>
+
+
+
+
+
+
+
 
 
 1. Click **Save**.
