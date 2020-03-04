@@ -227,10 +227,11 @@ For information about what to configure for the version you are updating to, see
 In v2.1.3, <%= vars.product_short %> only supported TLS when using mutual TLS (mTLS) with <%= vars.product_short_mirror %>.<br>
 In v2.1.6 and later, <%= vars.product_short %> permits the use of an existing mirror with TLS.
 
-<p class="note"><strong>Note</strong>: mTLS is not available when using an existing mirror.<br><br>
-
-The existing mirror serves the database files, which is outside of Pivotal's control, and does not require two way authentication with the <%= vars.product_short %> process.
-<%= vars.product_short %> only needs to verify that it is communicating to the correct server by verifying its certificate.
+<p class="note"><strong>Note</strong>: mTLS is not available when using an existing mirror.
+The existing mirror serves the database files, which are outside of Pivotal's control,
+and does not require two way authentication with the <%= vars.product_short %> process.
+<%= vars.product_short %> only needs to verify that it is communicating with the correct
+server by verifying its certificate.
 </p>
 
 If you are currently using <%= vars.product_short_mirror %>
