@@ -231,3 +231,19 @@ There is a limit of how many files can be opened at a given time.
 Increase the number of <%= vars.product_short_mirror %> instances.
 Pivotal recommends that there is one <%= vars.product_short_mirror %> for every 250 instances where <%= vars.product_short %> is installed.
 For more information, see [Scale the Number of Deployed Mirrors](./install-mirror.html#scale-deployed-mirror).
+
+
+### <a id='backup-restore'></a> <%= vars.product_short %> and <%= vars.product_short %> Backup and Restore
+
+#### Symptom
+When performing [Backing Up and Restoring Pivotal Platform](https://docs.pivotal.io/platform/2-8/customizing/backup-restore/index.html) with <%= vars.product_short %> and <%= vars.product_short_mirror %>, additional steps need to be taken.
+
+#### Explanation
+When using <%= vars.product_short_mirror %> as the mirror source for <%= vars.product_short %>, <%= vars.product_short_mirror %> must have been running prior to installing <%= vars.product_short %> onto other VMs on the platform. <%= vars.product_short_mirror %> cannot be guaranteed to deploy prior to other Tiles and dependencies. With <%= vars.product_short_mirror %> not running, other deployments with <%= vars.product_short %> installed will fail to download the required database signature files from <%= vars.product_short_mirror %>. Failure to download the database signature files will lead to errors and failed deployments.
+
+#### Solution
+Ensure that <%= vars.product_short_mirror %> is deployed first before the rest of the foundation is restored.
+1. [Exclude <%= vars.product_short_mirror %> during Apply Changes](./changing-ports.html#exclude-mirror)
+1. Ensure <%= vars.product_short_mirror %> is successfully deployed
+1. Remove the exclusion from <%= vars.product_short %> configurations
+1. Continue the Backing Up and Restoring Pivotal Platform process
