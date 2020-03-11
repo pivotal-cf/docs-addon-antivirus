@@ -232,3 +232,45 @@ There is a limit of how many files can be opened at a given time.
 Increase the number of <%= vars.product_short_mirror %> instances.
 Pivotal recommends that there is one <%= vars.product_short_mirror %> for every 250 instances where <%= vars.product_short %> is installed.
 For more information, see [Scale the Number of Deployed Mirrors](./install-mirror.html#scale-deployed-mirror).
+<<<<<<< HEAD
+=======
+
+
+### <a id='backup-restore'></a> Restoring with BOSH Backup and Restore Fails
+
+#### Symptom
+
+When using <%= vars.product_short_mirror %>,
+errors occur when restoring with BOSH Backup and Restore (BBR).
+
+#### Explanation
+
+<%= vars.product_short_mirror %> must be running before you install <%= vars.product_short %> on
+other VMs in your deployment.
+Otherwise, <%= vars.product_short_mirror %> might not deploy before
+other tiles and dependencies deploy.
+
+If <%= vars.product_short_mirror %> is not running, VMs with <%= vars.product_short %> installed cannot
+download the required database signature files.
+If this happens, errors and failed deployments occur.
+
+#### Solution
+To resolve this issue, ensure that <%= vars.product_short_mirror %>
+is deployed before restoring your deployment.
+
+To do this:
+
+1. Exclude <%= vars.product_short_mirror %> from the <%= vars.product_short %> deployment by
+following the procedure in
+[Exclude <%= vars.product_short_mirror %> during Apply Changes](./changing-ports.html#exclude-mirror).
+This ensures that <%= vars.product_short %> is not deployed on the <%= vars.product_short_mirror %>
+
+1. Ensure <%= vars.product_short_mirror %> is successfully deployed.
+
+1. Remove the <%= vars.product_short_mirror %> exclusion
+    from the <%= vars.product_short %> configurations by following the procedure in
+    [Remove the Exclusion](./changing-ports.html#remove-exclude).
+
+1. Continue to restore your deployment by following the procedure in
+[Restoring Pivotal Platform from Backup with BBR](https://docs.pivotal.io/platform/customizing/backup-restore/restore-pcf-bbr.html).
+>>>>>>> 897e557... edit PR #95 [#171733644]
