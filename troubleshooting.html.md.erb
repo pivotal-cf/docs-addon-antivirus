@@ -253,21 +253,33 @@ download the required database signature files.
 If this happens, errors and failed deployments occur.
 
 #### Solution
-To resolve this issue, ensure that <%= vars.product_short_mirror %>
+To resolve this issue, you must ensure that <%= vars.product_short_mirror %>
 is deployed before restoring your deployment.
 
 To do this:
 
-1. Exclude <%= vars.product_short_mirror %> from the <%= vars.product_short %> deployment by
-following the procedure in
-[Exclude <%= vars.product_short_mirror %> during Apply Changes](./changing-ports.html#exclude-mirror).
+1. In the **<%=vars.product_full%>** tile, click **Anti-Virus Configuration**.
+
+1. Exclude the `antivirus-mirror` instance group by adding it to
+**List of instance group names that will be excluded from deployment**.
+
+1. Return to the <%= vars.ops_manager %> Installation Dashboard and click **Review Pending Changes**.
+
+1. Unselect all products except **BOSH Director**, **<%= vars.product_short %>**,
+ and **<%= vars.product_short_mirror %>**.
+
+1. Click **Apply Changes**.
 This ensures that <%= vars.product_short %> is not deployed on the <%= vars.product_short_mirror %>
 
 1. Ensure <%= vars.product_short_mirror %> is successfully deployed.
 
-1. Remove the <%= vars.product_short_mirror %> exclusion
-    from the <%= vars.product_short %> configurations by following the procedure in
-    [Remove the Exclusion](./changing-ports.html#remove-exclude).
+1. When the **Apply Changes** is complete, return to the **<%=vars.product_full%>** tile.
+1. Remove the `antivirus-mirror` exclusion added above.
+
+1. Return to the <%= vars.ops_manager %> Installation Dashboard and click **Review Pending Changes**.
+1. Ensure all product are selected.
+
+1. Click **Apply Changes**.
 
 1. Continue to restore your deployment by following the procedure in
 [Restoring Pivotal Platform from Backup with BBR](https://docs.pivotal.io/platform/customizing/backup-restore/restore-pcf-bbr.html).
