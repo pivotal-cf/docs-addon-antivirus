@@ -238,7 +238,8 @@ For more information, see [Scale the Number of Deployed Mirrors](./install-mirro
 #### Symptom
 
 When using <%= vars.product_short_mirror %>,
-errors occur when restoring with BOSH Backup and Restore (BBR).
+errors occur when you redeploy <%= vars.app_runtime_full %> while restoring with BOSH Backup and Restore (BBR). For information about redeploying <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>),
+see [Step 12: Redeploy <%= vars.app_runtime_abbr %>](https://docs.pivotal.io/platform/customizing/backup-restore/restore-pcf-bbr.html#redeploy-ert).
 
 #### Explanation
 
@@ -257,6 +258,8 @@ is deployed before restoring your deployment.
 
 To do this:
 
+1. Follow the procedures before _Step 12: Redeploy <%= vars.app_runtime_abbr %>_ in [Restoring Pivotal Platform from Backup with BBR](https://docs.pivotal.io/platform/customizing/backup-restore/restore-pcf-bbr.html). Do not apply changes.
+
 1. Exclude <%= vars.product_short_mirror %> from the <%= vars.product_short %> deployment by
 following the procedure in
 [Exclude <%= vars.product_short_mirror %> during Apply Changes](./changing-ports.html#exclude-mirror).
@@ -268,5 +271,4 @@ This ensures that <%= vars.product_short %> is not deployed on the <%= vars.prod
     from the <%= vars.product_short %> configurations by following the procedure in
     [Remove the Exclusion](./changing-ports.html#remove-exclude).
 
-1. Continue to restore your deployment by following the procedure in
-[Restoring Pivotal Platform from Backup with BBR](https://docs.pivotal.io/platform/customizing/backup-restore/restore-pcf-bbr.html).
+1. Continue to restore your deployment by following the remaining procedures in [Restoring Pivotal Platform from Backup with BBR](https://docs.pivotal.io/platform/customizing/backup-restore/restore-pcf-bbr.html).
