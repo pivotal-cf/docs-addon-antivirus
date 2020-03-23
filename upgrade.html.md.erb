@@ -38,7 +38,7 @@ To upgrade the ClamAV add-on to a later version, do the following:
    For instructions, see [SSH into Ops Manager](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#ssh).
 
 4. Retrieve the latest runtime config by running the following command:
-    <br><br>
+
     ```
     bosh -e BOSH-ENVIRONMENT runtime-config  --name clamav > PATH-TO-SAVE-THE-RUNTIME-CONFIG
     ```
@@ -48,7 +48,7 @@ To upgrade the ClamAV add-on to a later version, do the following:
     <pre class="terminal">bosh -e my-env runtime-config  --name clamav > /tmp/clamav.yml</pre>
 
 5. Upload the ClamAV release to BOSH. This is the release that you downloaded from Pivotal Network above.
-    <br><br>
+
     ```
     bosh -e BOSH-ENVIRONMENT upload-release PATH-TO-NEW-CLAMAV-RELEASE
     ```
