@@ -12,11 +12,13 @@ and verifying that it is protecting your <%= vars.platform_name %> deployment.
 
 ### <a id="fails-to-apply"></a> <%= vars.ops_manager %> Fails to Apply Changes
 
-<%= partial vars.path_to_partials + "/troubleshoot-template", locals: {
-    id: 'fails-to-apply',
-    description: + vars.ops_manager + ' Fails to Apply Changes',
+<%= partial vars.path_to_partials + "/troubleshoot-template", locals:
+  {
+    id: "fails-to-apply",
+    description: vars.ops_manager + " Fails to Apply Changes",
     symptom:
-    'Applying changes in ' + vars.ops_manager + ' fails.
+    "
+    Applying changes in " + vars.ops_manager + " fails.
     The bottom of the changelog contains an error message similar to:
 
     <pre class="terminal">...
@@ -24,15 +26,18 @@ and verifying that it is protecting your <%= vars.platform_name %> deployment.
       Failed updating job etcd_server > etcd_server/0 (f8e492bf-db09-4d38-8a73-5cf69d7b8a11) (canary): 'etcd_server/0 (f8e492bf-db09-4d38-8a73-5cf69d7b8a11)' is not running after update. Review logs for failed jobs: clamd (00:05:53)
 
     Error 400007: 'etcd_server/0 (f8e492bf-db09-4d38-8a73-5cf69d7b8a11)' is not running after update. Review logs for failed jobs: clamd
-    </pre>',
+    </pre>
+    ",
 
-    cause: 'The ' + vars.product_full_mirror + ' server was unavailable during initial deployment.',
+    cause: "The " + vars.product_full_mirror + " server was unavailable during initial deployment.",
 
-    solution: 'Review the manifest file, and replace the <code>database_mirror</code> key with the address
+    solution: "Review the manifest file, and replace the <code>database_mirror</code> key with the address
     of a stable mirror server.
     If you do not have a stable mirror server for reliable initial deployment,
-    use the S3-based mirror: <code>pivotal-anti-virus-mirror.s3.amazonaws.com</code>'
-} %>
+    use the S3-based mirror: <code>pivotal-anti-virus-mirror.s3.amazonaws.com</code>
+    "
+  }
+%>
 
 #### Symptom
 Applying changes in <%= vars.ops_manager %> fails.
