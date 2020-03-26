@@ -12,6 +12,8 @@ and verifying that it is protecting your <%= vars.platform_name %> deployment.
 
 ### <a id="fails-to-apply"></a> <%= vars.ops_manager %> Fails to Apply Changes
 
+<%# [CW] Attempt at using Partial Template resulted in error. Will debug this again later.
+
 <%= partial vars.path_to_partials + "/troubleshoot-template", locals:
   {
     id: "fails-to-apply",
