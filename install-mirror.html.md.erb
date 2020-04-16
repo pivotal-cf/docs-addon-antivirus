@@ -5,7 +5,7 @@ owner: Platform Security & Compliance Team
 <strong><%= modified_date %></strong>
 
 This topic describes how to install and configure <%= vars.product_full_mirror %>.
-Pivotal recommends that you install this tile before installing <%= vars.product_full %>.
+VMware recommends that you install this tile before installing <%= vars.product_full %>.
 
 ##<a id="overview"></a>Overview
 
@@ -27,7 +27,7 @@ installing this tile, and continue to [Installing and Configuring <%= vars.produ
 
 To install the <%= vars.product_short_mirror %>, you must have:
 
-* **A <%= vars.platform_name %> operator user account with admin rights**. For more information, see [<%= vars.platform_name %> Operators](https://docs.pivotal.io/platform/customizing/platform-operators.html).
+* **A <%= vars.ops_manager %> operator user account with admin rights**. For more information, see [Pivotal Platform Operators](https://docs.pivotal.io/platform/customizing/platform-operators.html).
 
 * **<%= vars.ops_manager_full %> (<%= vars.ops_manager %>)**.
 For compatible versions, see the [Product Snapshot](./index.html#snapshot).
@@ -44,7 +44,7 @@ To install the <%= vars.product_full_mirror %> tile:
 1. Download the product file from [<%= vars.product_network %>](https://network.pivotal.io/products/p-clamav-addon).
 
     For air-gapped networks, follow your company's offline installation protocols.
-      For more information, see [Installing <%= vars.platform_name %> in Air-gapped Environments](https://docs.pivotal.io/platform/customizing/offline_installation.html).
+      For more information, see [Installing <%= vars.ops_manager %> in Air-gapped Environments](https://docs.pivotal.io/platform/customizing/offline_installation.html).
 
 1. Navigate to the <%= vars.ops_manager %> Installation Dashboard and select **Import a Product** to upload the product file.
 
@@ -191,7 +191,7 @@ Follow the steps below to enable system logging for <%= vars.product_full_mirror
     <tr><td><strong>Port</strong></td>
         <td>Enter the port of the syslog server for sending logs, for example, <code>29279</code>.</td></tr>
     <tr><td><strong>Transport Protocol</strong></td>
-        <td>Select the transport protocol used to send system logs to the server. Pivotal recommends using TCP.</td></tr>
+        <td>Select the transport protocol used to send system logs to the server. VMware recommends using TCP.</td></tr>
     <tr><td><strong>Enable TLS</strong></td>
     <td>If you select TCP, you can also select to send logs encrypted over TLS.</td></tr>
     <tr><td><strong>Permitted Peer</strong></td>
@@ -223,7 +223,7 @@ Follow the steps below to enable system logging for <%= vars.product_full_mirror
 
 Anti-Virus jobs do load balancing for you.
 
-Pivotal recommends one <%= vars.product_short_mirror %> VM for every 250 VMs with <%= vars.product_short %> installed.
+VMware recommends one <%= vars.product_short_mirror %> VM for every 250 VMs with <%= vars.product_short %> installed.
 To scale the number of deployed mirrors:
 
   1. Select **Resource Config**.

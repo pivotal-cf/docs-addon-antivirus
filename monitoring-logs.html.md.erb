@@ -1,5 +1,5 @@
 ---
-title: Monitoring Pivotal Anti-Virus Logs
+title: Monitoring Anti-Virus Logs
 owner: Platform Security & Compliance Team
 ---
 
@@ -21,7 +21,7 @@ Each app writes its own log file.
 You need to monitor each of these files to know if <%= vars.product_short %>
 is working correctly and if viruses have been found.
 
-Pivotal recommends that you enable syslog forwarding so that the messages from each of the three log files
+VMware recommends that you enable syslog forwarding so that the messages from each of the three log files
 is aggregated into the syslog file on the remote syslog server.
 Then you can use your preferred monitoring and alerting tool to review the <%= vars.product_short %> log entries.
 

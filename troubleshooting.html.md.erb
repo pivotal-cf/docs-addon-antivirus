@@ -6,7 +6,7 @@ owner: Platform Security & Compliance Team
 <strong><%= modified_date %></strong>
 
 This topic provides instructions for troubleshooting <%= vars.product_full %>
-and verifying that it is protecting your <%= vars.platform_name %> deployment.
+and verifying that it is protecting your <%= vars.ops_manager %> deployment.
 
 ## <a id="installation"></a> Installation Issues
 
@@ -121,15 +121,15 @@ Virus signatures are not up-to-date.
 To resolve this issue, verify that:
 
 + The mirror server is correctly configured.
-+ The mirror server is available on the network from within the <%= vars.platform_name %> private subnet.
++ The mirror server is available on the network from within the <%= vars.ops_manager %> private subnet.
 + At least one hour has elapsed. One hour is the default scan schedule interval.
 
 If the local mirror is up-to-date and <%= vars.product_short %>
 is still failing to detect a malware sample, you might have encountered a new threat.
-Pivotal recommends alerting the community using existing channels and reporting
+VMware recommends alerting the community using existing channels and reporting
 the suspicious file directly to the ClamAV team.
 
-<p class="note"><strong>Note</strong>: Pivotal does not provide support for ClamAV detection failures,
+<p class="note"><strong>Note</strong>: VMware does not provide support for ClamAV detection failures,
   mirror coordination, or threat tracking activity.
 </p>
 
@@ -258,7 +258,7 @@ There is a limit to how many files it can open at a time.
 
 #### Solution
 Increase the number of <%= vars.product_short_mirror %> instances.
-Pivotal recommends that there is one <%= vars.product_short_mirror %> for every 250 instances where <%= vars.product_short %> is installed.
+VMware recommends that there is one <%= vars.product_short_mirror %> for every 250 instances where <%= vars.product_short %> is installed.
 For more information, see [Scale the Number of Deployed Mirrors](./install-mirror.html#scale-deployed-mirror).
 
 
