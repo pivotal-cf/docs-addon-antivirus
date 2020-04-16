@@ -44,7 +44,7 @@ See the table below for the new features to consider and the upgrade instruction
           For more information, see <a href="#use-existing">Using an Existing Mirror</a> below.</li>
         <li>If required, configure the mirror port.
           For more information see <a href="#configure-mirror">Configuring the Mirror Port</a> below.</li>
-        <li>Pivotal recommends that you reset the value of <strong>CPU limit (Percentage)</strong>.</li>
+        <li>VMware recommends that you reset the value of <strong>CPU limit (Percentage)</strong>.</li>
         <li>You can set <strong>Timeout to connect to the database server (in seconds)</strong>.</li>
       </ul>
       For upgrade instructions, see <a href="#upgrade-v20-v21">Upgrade <%= vars.product_full %> to This Version from v2.0</a> below.
@@ -54,7 +54,7 @@ See the table below for the new features to consider and the upgrade instruction
     <td>v2.1</td>
     <td>
       <ul>
-        <li>Pivotal recommends that you reset the value of <strong>CPU limit (Percentage)</strong>.</li>
+        <li>VMware recommends that you reset the value of <strong>CPU limit (Percentage)</strong>.</li>
         <li>You can set <strong>Timeout to connect to the database server (in seconds)</strong>.</li>
       </ul>
       For upgrade instructions, see <a href="#upgrade-v21-v22">Upgrade <%= vars.product_full %> to This Version from v2.1 or Later</a> below.
@@ -131,9 +131,9 @@ To update <%= vars.product_full %>:
     </p>
 
 1. Download the latest version of <%= vars.product_short %>
-   from [Pivotal Network](https://network.pivotal.io/products/p-clamav-addon) to your local machine.
+   from [<%= vars.product_network %>](https://network.pivotal.io/products/p-clamav-addon) to your local machine.
 1. If you do not want to use an existing mirror, download the latest version <%= vars.product_short_mirror %>
-  from [Pivotal Network](https://network.pivotal.io/products/p-clamav-addon) to your local machine.
+  from [<%= vars.product_network %>](https://network.pivotal.io/products/p-clamav-addon) to your local machine.
 
 1. Upload the new `.pivotal` files to <%= vars.ops_manager %>.
 
@@ -202,10 +202,10 @@ To upgrade <%= vars.product_full %> to v<%= product_info['local_product_version'
       All other configuration details are kept when upgrading.
     </p>
 1. Download the latest version of <%= vars.product_short %>
-   from [Pivotal Network](https://network.pivotal.io/products/p-clamav-addon) to your local machine.
+   from [<%= vars.product_network %>](https://network.pivotal.io/products/p-clamav-addon) to your local machine.
 
 1. If you do not have an existing mirror, download the latest version <%= vars.product_short_mirror %>
-  from [Pivotal Network](https://network.pivotal.io/products/p-clamav-addon) to your local machine.
+  from [<%= vars.product_network %>](https://network.pivotal.io/products/p-clamav-addon) to your local machine.
 
 1. Upload the new `.pivotal` files to <%= vars.ops_manager %>.
 
@@ -224,7 +224,7 @@ In v2.1.3, <%= vars.product_short %> only supported TLS when using mutual TLS (m
 In v2.1.6 and later, <%= vars.product_short %> permits the use of an existing mirror with TLS.
 
 <p class="note"><strong>Note</strong>: mTLS is not available when using an existing mirror.
-The existing mirror serves the database files, which are outside of Pivotal's control,
+The existing mirror serves the database files, which are outside of VMware's control,
 and does not require two way authentication with the <%= vars.product_short %> process.
 <%= vars.product_short %> only needs to verify that it is communicating with the correct
 server by verifying its certificate.
@@ -232,7 +232,7 @@ server by verifying its certificate.
 
 If you are currently using <%= vars.product_short_mirror %>
 and want to use an existing mirror instead,
-Pivotal recommends that you configure <%= vars.product_short %> to use the new mirror before
+VMware recommends that you configure <%= vars.product_short %> to use the new mirror before
 uninstalling <%= vars.product_short_mirror %>.
 
 

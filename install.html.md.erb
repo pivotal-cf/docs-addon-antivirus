@@ -6,7 +6,7 @@ owner: Platform Security & Compliance Team
 
 This topic describes how to install and configure <%= vars.product_full %>.
 
-Before installing <%= vars.product_short %>, Pivotal recommends that you download
+Before installing <%= vars.product_short %>, VMware recommends that you download
 and install the <%= vars.product_full_mirror %> tile.
 For more information about the <%= vars.product_short_mirror %> tile,
 see [Installing and Configuring <%= vars.product_full_mirror %>](./install-mirror.html).
@@ -15,7 +15,7 @@ see [Installing and Configuring <%= vars.product_full_mirror %>](./install-mirro
 
 To install <%= vars.product_short %>, you must have:
 
-* **A <%= vars.platform_name %> operator user account with admin rights**. For more information, see [Pivotal Platform Operators](https://docs.pivotal.io/platform/customizing/platform-operators.html).
+* **An <%= vars.ops_manager %> operator user account with admin rights**. For more information, see [Pivotal Platform Operators](https://docs.pivotal.io/platform/customizing/platform-operators.html).
 
 * **<%= vars.ops_manager_full %> (<%= vars.ops_manager %>)**.
 For compatible versions, see the [Product Snapshot](./index.html#snapshot).
@@ -23,7 +23,7 @@ For compatible versions, see the [Product Snapshot](./index.html#snapshot).
 * **At least 1&nbsp;GB of RAM free for each VM that installs <%= vars.product_short %>**.
   <%= vars.product_short %> installs itself on each tile VM and runs internally. <%= vars.product_short %> takes at least 610&nbsp;MB of RAM on each VM.
 
-* **An external mirror**. If you do not have an external mirror, Pivotal recommends that you install
+* **An external mirror**. If you do not have an external mirror, VMware recommends that you install
   the <%= vars.product_short_mirror %>.
   For instructions, see [Installing and Configuring <%= vars.product_full_mirror %>](./install-mirror.html).
 
@@ -31,7 +31,7 @@ For compatible versions, see the [Product Snapshot](./index.html#snapshot).
 
 Install the <%= vars.product_short %> tile on the <%= vars.ops_manager %> Installation Dashboard:
 
-1. Download the product file from [Pivotal Network](https://network.pivotal.io/products/p-clamav-addon).
+1. Download the product file from [<%= vars.product_network %>](https://network.pivotal.io/products/p-clamav-addon).
 
 1. Navigate to the <%= vars.ops_manager %> Installation Dashboard and select **Import a Product** to upload the product file.
 
@@ -135,7 +135,7 @@ To configure <%= vars.product_short %>:
     </div>
     <div id="tab2" class="tabcontent">
 
-      <img src="./images/configure-mirror-deployed.png" alt="Configure Deployed mirror from the Pivotal Anti-Virus Mirror tile" width="550">
+      <img src="./images/configure-mirror-deployed.png" alt="Configure Deployed mirror from the Anti-Virus Mirror tile" width="550">
 
       <table class="nice">
         <col width="25%">
@@ -331,7 +331,7 @@ To configure <%= vars.product_short %>:
           The default value is "<code>/proc/</code>,<code>/sys/</code>".
           This configures <%= vars.product_short %> scans to exclude the <code>/proc</code> and
           <code>/sys</code> directories.<br><br>
-          Pivotal recommends that you ignore the <code>/proc</code>,
+          VMware recommends that you ignore the <code>/proc</code>,
           <code>/sys</code>, and <strong>Destination for infected files</strong> directories.</td>
       </tr>
       <tr>
