@@ -1,13 +1,8 @@
 ---
 title: Anti-Virus
-owner: Security Engineering
+owner: Platform Security & Compliance Team
 ---
-
 <strong><%= modified_date %></strong>
-
-<%= partial '../../antivirus/partials/tanzu-name-change' %>
-<%= partial '../../antivirus/partials/branding-change' %>
-<%= partial '../../antivirus/partials/pcf-name-change' %>
 
 This topic is an overview of <%= vars.product_full %>.
 
@@ -47,11 +42,11 @@ The following table provides version and version-support information about <%= v
         <td>2.5, 2.6, 2.7, and 2.8</td>
     </tr>
     <tr>
-        <td>Compatible Pivotal Application Service (PAS) versions</td>
+        <td>Compatible <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) versions</td>
         <td>2.5, 2.6, 2.7, and 2.8</td>
     </tr>
     <tr>
-        <td>Compatible Enterprise Pivotal Container Service (Enterprise PKS) versions</td>
+        <td>Compatible Enterprise <%= vars.k8s_runtime_full %> (Enterprise <%= vars.k8s_runtime_abbr %>) versions</td>
         <td>1.3, 1.4, 1.5, and 1.6</td>
     </tr>
     <tr>
@@ -85,11 +80,11 @@ The following table provides version and version-support information about <%= v
         <td>2.5, 2.6, 2.7, and 2.8</td>
     </tr>
     <tr>
-        <td>Compatible Pivotal Application Service (PAS) versions</td>
+        <td>Compatible <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) versions</td>
         <td>2.5, 2.6, 2.7, and 2.8</td>
     </tr>
     <tr>
-        <td>Compatible Enterprise Pivotal Container Service (Enterprise PKS) versions</td>
+        <td>Compatible Enterprise <%= vars.k8s_runtime_full %> (Enterprise <%= vars.k8s_runtime_abbr %>) versions</td>
         <td>1.3, 1.4, 1.5, and 1.6</td>
     </tr>
     <tr>
@@ -109,7 +104,7 @@ The following table provides version and version-support information about <%= v
     * <%= vars.product_short_mirror %> serves both air-gapped and non-air-gapped environments.
     * The tile authenticates and validates publicly downloaded database definition files
       for added security.
-  * Ability to scan VMs and containers for foundations with PAS and Enterprise PKS.
+  * Ability to scan VMs and containers for foundations with <%= vars.app_runtime_abbr %> and Enterprise <%= vars.k8s_runtime_abbr %>.
   * Supports scheduled scans to reduce workload during peak operation hours.
   * Allows whitelisting of known signatures.
   * Allows you to configure CPU and memory usage limits on VMs of the foundation.
@@ -119,7 +114,7 @@ The following table provides version and version-support information about <%= v
 
 Virus definitions on the internal <%= vars.product_short_mirror %> update
 automatically or manually depending on whether your <%= vars.platform_name %>
-is on an online or air-gapped network, as described in [Updating Virus Definitions on an Internal Pivotal Anti-Virus Mirror](./updating-databases.html).
+is on an online or air-gapped network, as described in [Updating Virus Definitions on an <%= vars.product_short_mirror %>](./updating-databases.html).
 The automatic and manual processes store new virus definitions to the <%= vars.product_short_mirror %>
 VM's database of unverified viruses as follows:
 

@@ -2,12 +2,12 @@
 
 ## Which Branches to Use
 
-As of October 23, 2019:
+As of April 16, 2020:
 
 | Branch name… | Documents version… | Publishes to… |
 |-------------|----------------|----------------|
-| master   | v2.3 (unreleased)     | https://docs-pcf-staging.cfapps.io/addon-antivirus/2-n/index.html |
-| 2.2   | 2.2.x    | https://docs.pivotal.io/addon-antivirus/2-2/index.html and https://docs-pcf-staging.cfapps.io/addon-antivirus/2-2/index.html |
+| master   | 2.3 (unreleased)     | https://docs-pcf-staging.cfapps.io/addon-antivirus/2-n/index.html |
+| 2.2   | 2.2.x     | https://docs.pivotal.io/addon-antivirus/2-2/index.html and https://docs-pcf-staging.cfapps.io/addon-antivirus/2-2/index.html |
 | 2.1   | 2.1.x    | https://docs.pivotal.io/addon-antivirus/2-1/index.html and https://docs-pcf-staging.cfapps.io/addon-antivirus/2-1/index.html |
 | 2.0   | 2.0.x     | https://docs.pivotal.io/addon-antivirus/2-0/index.html and https://docs-pcf-staging.cfapps.io/addon-antivirus/2-0/index.html |
 | v1.4   | v1.4.x     | https://docs.pivotal.io/addon-antivirus/1-4/index.html and https://docs-pcf-staging.cfapps.io/addon-antivirus/1-4/index.html |
@@ -27,7 +27,9 @@ pivotal-cf/docs-book-antivirus builds both the **edge** version (next unreleased
 ## Style Guide
 _These are a handful of style issues I noticed with the original version of this documentation._
 
-+ **For v2.0 and later**: The product name is "Pivotal Anti-Virus".
++ **For v2.2.x and later**: The product name is "Anti-Virus".
+
++ **For v2.0 to v2.2.2**: The product name is "Pivotal Anti-Virus".
 
 + **For v1.4.x and earlier:** The product name is "ClamAV Add-on for PCF".
 

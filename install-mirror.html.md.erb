@@ -1,6 +1,6 @@
 ---
 title: Installing and Configuring Anti-Virus Mirror
-owner: Pivotal Compliance and Innovation (PCI) Team
+owner: Platform Security & Compliance Team
 ---
 <strong><%= modified_date %></strong>
 
@@ -27,13 +27,13 @@ installing this tile, and continue to [Installing and Configuring <%= vars.produ
 
 To install the <%= vars.product_short_mirror %>, you must have:
 
-* **A <%= vars.platform_name %> operator user account with admin rights**. For more information, see [Pivotal Platform Operators](https://docs.pivotal.io/platform/customizing/platform-operators.html).
+* **A <%= vars.platform_name %> operator user account with admin rights**. For more information, see [<%= vars.platform_name %> Operators](https://docs.pivotal.io/platform/customizing/platform-operators.html).
 
 * **<%= vars.ops_manager_full %> (<%= vars.ops_manager %>)**.
 For compatible versions, see the [Product Snapshot](./index.html#snapshot).
 
 * **At least 1&nbsp;GB of RAM free for each VM that installs <%= vars.product_short %>**.
-This is so that you can install the Pivotal Anti-Virus tile after deploying this mirror.
+This is so that you can install the <%= vars.product_full %> tile after deploying this mirror.
 <%= vars.product_short %> installs itself on each tile VM and runs internally.
 <%= vars.product_short %> takes at least 610&nbsp;MB of RAM on each VM.
 
@@ -41,10 +41,10 @@ This is so that you can install the Pivotal Anti-Virus tile after deploying this
 
 To install the <%= vars.product_full_mirror %> tile:
 
-1. Download the product file from [Pivotal Network](https://network.pivotal.io/products/p-clamav-addon).
+1. Download the product file from [<%= vars.product_network %>](https://network.pivotal.io/products/p-clamav-addon).
 
     For air-gapped networks, follow your company's offline installation protocols.
-      For more information, see [Installing Pivotal Platform in Air-gapped Environments](https://docs.pivotal.io/platform/customizing/offline_installation.html).
+      For more information, see [Installing <%= vars.platform_name %> in Air-gapped Environments](https://docs.pivotal.io/platform/customizing/offline_installation.html).
 
 1. Navigate to the <%= vars.ops_manager %> Installation Dashboard and select **Import a Product** to upload the product file.
 
@@ -67,20 +67,20 @@ To assign availability zones (AZs) and networks:
       <th>Description</th>
       <tr>
         <td><strong>Place singleton jobs in</strong></td>
-        <td>Select an AZ. If you choose to install only one <%= vars.product_short_mirror %> VM,
+        <td>Select an AZ. If you install only one <%= vars.product_short_mirror %> VM,
             this is the AZ that it is placed in.</td>
       </tr>
       <tr>
         <td><strong>Balance other jobs in</strong></td>
         <td>Select one or more AZs.
-            If you choose to install more than one <%= vars.product_short_mirror %> VM,
+            If you install more than one <%= vars.product_short_mirror %> VM,
             these are the AZs that the VMs are placed in.</td>
       </tr>
       <tr>
         <td><strong>Network</strong></td>
         <td>Select a subnet for the <code>antivirus_mirror</code> VM.
           <br>This is typically the same subnet that
-          includes the Pivotal Application Service (PAS) component VMs.</td>
+          includes the <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) component VMs.</td>
       </tr>
     </table>
 
@@ -116,7 +116,7 @@ To configure <%= vars.product_short_mirror %>:
           Enter the port for Anti-Virus Mirror to use.
           The default value is <code>6501</code>.
 
-          <p class="note"><strong>Note: </strong> <%= vars.product_short_mirror %> uses mTLS. This port must be the same port used in <strong>Anti-Virus Mirror Port</strong> of the <strong>Pivotal Anti-Virus</strong> tile. If these ports are not the same, <%= vars.product_short %> database updates and deployments fail.
+          <p class="note"><strong>Note: </strong> <%= vars.product_short_mirror %> uses mTLS. This port must be the same port used in <strong>Anti-Virus Mirror Port</strong> of the <strong><%= vars.product_full %></strong> tile. If these ports are not the same, <%= vars.product_short %> database updates and deployments fail.
           </p>
         </td>
       </tr>
@@ -124,7 +124,7 @@ To configure <%= vars.product_short_mirror %>:
         <td><strong>Mirror for Automatic Database Updates</strong></td>
         <td>
           <ul>
-            <li><strong>No mirror</strong>: Select this for air-gapped environments, or if you want to control the database versions available to your environment.</li>
+            <li><strong>No mirror</strong>: Select this for air-gapped environments, or to control the database versions available to your environment.</li>
             <li><strong>Official mirror</strong></li>
             <li><strong>Existing mirror</strong></li>
           </ul>
@@ -197,10 +197,10 @@ Follow the steps below to enable system logging for <%= vars.product_full_mirror
     <tr><td><strong>Permitted Peer</strong></td>
         <td>Enter either the accepted fingerprint, in SHA1, or the name of the remote peer, for example, <code>*.example.com</code>.</td></tr>
     <tr><td><strong>SSL Certificate</strong></td>
-        <td>Enter the SSL or TLS Certificate(s) for the syslog server. This ensures the logs are transported securely.</td></tr>
+        <td>Enter the SSL or TLS Certificates for the syslog server. This ensures the logs are transported securely.</td></tr>
     <tr>
       <td><strong>Queue Size</strong></td>
-      <td>Enter an integer. This value specifies the number of log messages held in the buffer.
+      <td>Enter an integer. This value specifies the number of log entries held in the buffer.
       The default value is <code>100000</code>.</td>
     </tr>
 

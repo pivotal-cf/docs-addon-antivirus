@@ -1,6 +1,6 @@
 ---
 title: Installing and Configuring Anti-Virus
-owner: Pivotal Compliance and Innovation (PCI) Team
+owner: Platform Security & Compliance Team
 ---
 <strong><%= modified_date %></strong>
 
@@ -204,7 +204,7 @@ To configure <%= vars.product_short %>:
               Enter the hostname or IP address for your existing mirror.<br>
               For example: <code>pivotal-anti-virus-mirror.s3.amazonaws.com</code> or <code>10.0.4.5</code>
               <p class="note">
-                <strong>Note: </strong> Ensure that your existing mirror server is using the correct certificate for the method you choose (hostname or IP).
+                <strong>Note: </strong> Ensure that your existing mirror server is using the correct certificate for the method you choose (hostname or IP address).
               </p>
             </td>
         </tr>
@@ -244,7 +244,7 @@ To configure <%= vars.product_short %>:
       <th>Description</th>
       <tr>
         <td><strong>(Optional) Enable on-access scanning on Linux</strong></td>
-        <td>Select this option if you want to scan files immediately after they are modified.
+        <td>Select this option to scan files immediately after they are modified.
         <p class="note"><strong>Note</strong>: On-Access Scan is not supported on Windows.
         </p>
       </tr>
@@ -353,8 +353,6 @@ To configure <%= vars.product_short %>:
     </table>
     <br>
 
-<%# TODO Chris: Is there a list anywhere to find signatures that can be ignored in "List of signature names that will be ignored by ClamAV (Used for false positives)"?%>
-<%# TODO Chris: Change "will" in the field above (Avoid "will" as we prefer the present tense). %>
 
 1. Click **Save**.
 
@@ -411,15 +409,15 @@ To do this, complete this procedure:
 ##<a id="scan-containers"></a> (Optional) Configure <%= vars.product_short %> to Exclude Duplicate Logs on Containers
 You can use <%= vars.product_short %> to scan:
 
-* Garden containers on the Diego Cell VMs in Pivotal Application Service (PAS).
-* Containers on the Kubernetes worker node VMs in Enterprise Pivotal Container Service (Enterprise PKS).
+* Garden containers on the Diego Cell VMs in <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>).
+* Containers on the Kubernetes worker node VMs in Enterprise <%= vars.k8s_runtime_full %> (Enterprise <%= vars.k8s_runtime_abbr %>).
 
 However, duplicate logs about the same file appear under the `diff`,
 `rootfs`, or `merged` directories as a consequence of OverlayFS implementation.
 
 To configure <%= vars.product_short %> to ignore duplicate logs for these directories, see the optional
 [Exclude Duplicate Logs on Garden Containers](#garden) or
-[Exclude Duplicate Logs on Containers in Enterprise PKS](#pks) sections below:
+[Exclude Duplicate Logs on Containers in Enterprise <%= vars.k8s_runtime_abbr %>](#pks) sections below:
 
 
 ###<a id="garden"></a> (Optional) Exclude Duplicate Logs on Garden Containers
@@ -457,12 +455,12 @@ be ignored** field:
 1. To apply the configuration change, follow the instructions in
 [Apply Changes from Your Configuration](#apply-changes) above.
 
-For an example log message, see [Container Log Messages](./monitoring-logs.html#container).
+For an example log entry, see [Container Log Messages](./monitoring-logs.html#container).
 
 
-###<a id="pks"></a> (Optional) Exclude Duplicate Logs on Containers in Enterprise PKS
+###<a id="pks"></a> (Optional) Exclude Duplicate Logs on Containers in Enterprise <%= vars.k8s_runtime_abbr %>
 When <%= vars.product_short %> scan results detect potential malware on containers of the Kubernetes
-worker node VMs in Enterprise PKS, logs are reported for both the
+worker node VMs in Enterprise <%= vars.k8s_runtime_abbr %>, logs are reported for both the
 `diff` and `merged` directories.
 
 This is because the `merged` directory is the projection of
@@ -493,4 +491,4 @@ be ignored** field:
 1. To apply the configuration change, follow the instructions in
 [Apply Changes from Your Configuration](#apply-changes) above.
 
-For an example log message, see [Container Log Messages](./monitoring-logs.html#container).
+For an example log entry, see [Container Log Messages](./monitoring-logs.html#container).
