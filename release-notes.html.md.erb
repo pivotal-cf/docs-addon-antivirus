@@ -14,7 +14,7 @@ This topic contains release notes for <%= vars.product_full %>.
 ### Resolved Issues
 This release has the following fix:
 
-* Remove the `chmod` for `/var/vcap/data/tmp` during ______ in <%= vars.product_short_mirror %>.
+* <%= vars.product_short %> no longer performs a `chmod` on the `/var/vcap/data/tmp` directory during pre-start.
 
 
 ### Known Issues
@@ -51,6 +51,7 @@ This release has the following issues:
 
 <%= partial vars.path_to_partials + "/antivirus/bbr-ki" %>
 
+* <%= vars.product_short %> pre-start can fail when `chmod` is done to the `/var/vcap/data/tmp` directory.
 
 ## <a id="view"></a> View Release Notes for Another Version
 To view the release notes for another product version, select the version from
