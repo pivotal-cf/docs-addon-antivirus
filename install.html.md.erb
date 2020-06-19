@@ -298,9 +298,9 @@ After `clamdscan` completes, a notification should appear in `/var/log/syslog`. 
 
 See [Monitoring ClamAV Logs](./monitoring-logs.html)
 
-## <a id="setup-whitelist"></a>Whitelist False Positives
+## <a id="setup-allowlist"></a>Add False Positives to an Allowlist
 
-<p class="note"><strong>Note:</strong> Whitelisting is available in ClamAV Add-on v1.4.36 and later. </p>
+<p class="note"><strong>Note:</strong> Allowlist is available in ClamAV Add-on v1.4.36 and later. </p>
 
 If a scan is reporting false positives, report the issue to
 [ClamAV](https://www.clamav.net/reports/fp).
@@ -308,9 +308,9 @@ For more information about false positives, see
 [ClamAV Reports False Positives](./troubleshooting.html#false-positive-clamav).
 
 It takes about a week for ClamAV to verify and publish a new database.
-If a week is too long, the ClamAV release provides the option to whitelist signature names.
+If a week is too long, the ClamAV release provides the option to add the signature names to an allowlist.
 
-To whitelist signature names, do the following:
+To add signature names to an allowlist, do the following:
 
 1. Add the `whitelist` property and append the false positive signature names.
    For example:
