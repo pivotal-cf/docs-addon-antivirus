@@ -8,42 +8,18 @@ This topic contains release notes for <%= vars.product_full %>.
 
 <%= partial vars.path_to_partials + "/upgrade-planner" %>
 
-## <a id="2-2-8"></a> v2.2.8
-**Release Date: June 19, 2020**
-
-### Resolved Issues
-This release has the following fix:
-
-* <%= vars.product_short %> no longer performs a `chmod` on the `/var/vcap/data/tmp` directory during pre-start.
-
-
-### Known Issues
-This release has the following issues:
-
-<%= partial vars.path_to_partials + "/antivirus/bbr-ki" %>
-
-
-## <a id="2-2-2"></a> v2.2.2
-**Release Date: January 6, 2020**
+## <a id="3-0"></a> v3.0
+**Release Date: June , 2020**
 
 ### Features
 New features and changes in this release:
 
-  * **CPU limit** for <%= vars.product_short %> is now configured independently of the **Enforce CPU limit** field.
-  When you upgrade to v2.2 from v2.1, the value of **CPU limit** is reset to
-  the installation default of 50%.<br>
-  For instructions on setting the **CPU limit**, see [Configure Anti-Virus](./install.html#configure).
-
-  * **Timeout to connect to the database server (in seconds)** is now configurable. This field sets
-  the timeout for downloading virus definitions from the mirror server.
-  For instructions on setting the **Timeout to connect to the database server (in seconds)**, see [Configure Anti-Virus](./install.html#configure).
-
+*
 
 ### Resolved Issues
 This release has the following fix:
 
-* <%= vars.product_short_mirror %> no longer outputs a TLS handshake error log
-when the process is not failing.
+*
 
 
 ### Known Issues
@@ -51,7 +27,6 @@ This release has the following issues:
 
 <%= partial vars.path_to_partials + "/antivirus/bbr-ki" %>
 
-* <%= vars.product_short %> pre-start can fail when `chmod` is done to the `/var/vcap/data/tmp` directory.
 
 ## <a id="view"></a> View Release Notes for Another Version
 To view the release notes for another product version, select the version from
