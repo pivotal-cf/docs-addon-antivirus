@@ -2,11 +2,12 @@
 
 ## Which Branches to Use
 
-As of April 16, 2020:
+As of June 20, 2020:
 
 | Branch name… | Documents version… | Publishes to… |
 |-------------|----------------|----------------|
-| master   | 2.3 (unreleased)     | https://docs-pcf-staging.cfapps.io/addon-antivirus/2-n/index.html |
+| master   | 3.1 (unreleased)     | https://docs-pcf-staging.cfapps.io/addon-antivirus/3-n/index.html |
+| 3.0   | 3.0.x     | https://docs.pivotal.io/addon-antivirus/3-0/index.html and https://docs-pcf-staging.cfapps.io/addon-antivirus/3-0/index.html |
 | 2.2   | 2.2.x     | https://docs.pivotal.io/addon-antivirus/2-2/index.html and https://docs-pcf-staging.cfapps.io/addon-antivirus/2-2/index.html |
 | 2.1   | 2.1.x    | https://docs.pivotal.io/addon-antivirus/2-1/index.html and https://docs-pcf-staging.cfapps.io/addon-antivirus/2-1/index.html |
 | 2.0   | 2.0.x     | https://docs.pivotal.io/addon-antivirus/2-0/index.html and https://docs-pcf-staging.cfapps.io/addon-antivirus/2-0/index.html |
@@ -18,7 +19,7 @@ As of April 16, 2020:
 
 ## Book Repo
 
-[pivotal-cf/docs-book-antivirus](https://github.com/pivotal-cf/docs-book-antivirus/) 
+[pivotal-cf/docs-book-antivirus](https://github.com/pivotal-cf/docs-book-antivirus/)
 
 ## Style Guide
 _These are a handful of style issues I noticed with the original version of this documentation._
