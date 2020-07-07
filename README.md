@@ -24,7 +24,7 @@ As of June 20, 2020:
 ## Style Guide
 _These are a handful of style issues I noticed with the original version of this documentation._
 
-+ **For v2.2.x and later**: The product name is "Anti-Virus".
++ **For v2.2.x and later**: The product name is "Anti-Virus for VMware Tanzu".
 
 + **For v2.0 to v2.2.2**: The product name is "Pivotal Anti-Virus".
 
