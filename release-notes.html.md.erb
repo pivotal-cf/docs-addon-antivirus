@@ -6,7 +6,7 @@ owner: Platform Security & Compliance Team
 
 This topic contains release notes for <%= vars.product_full %>.
 
-<%= partial vars.path_to_partials + "/upgrade-planner" %>
+<%# <%= partial vars.path_to_partials + "/upgrade-planner" %> %>
 
 ## <a id="3-0"></a> v3.0
 **Release Date: June , 2020**
@@ -14,7 +14,14 @@ This topic contains release notes for <%= vars.product_full %>.
 ### Features
 New features and changes in this release:
 
-*
+<p class="note warning"><strong>Warning</strong>: As of v3.0 of <%= vars.product_short %>,
+  2 CPU cores and 2GB of memory are required for each VM on your foundation.
+  Not allocating enough resources can cause VMs to be unresponsive.
+  For more information, see <a href="./install.html#acknowledge">Installing and Configuring</a>
+
+* **Adds a mandatory field to inform and acknowledge the minimum resource requirements for VMs.**
+* **Adds the ability to enable a Hardware Enforcement check during Pre-start**. This ensures the minimum requirements for resources are met for each VM (2 CPU cores and 2GB of memory).
+* Updates golang dependency to v1.14 for both Linux and Windows
 
 ### Resolved Issues
 This release has the following fix:
@@ -25,7 +32,7 @@ This release has the following fix:
 ### Known Issues
 This release has the following issues:
 
-<%= partial vars.path_to_partials + "/antivirus/bbr-ki" %>
+<%# <%= partial vars.path_to_partials + "/antivirus/bbr-ki" %> %>
 
 
 ## <a id="view"></a> View Release Notes for Another Version
