@@ -45,6 +45,33 @@ To configure <%= vars.product_short %>:
 
 1. Select **Anti-Virus Configuration**.
 
+<a name='acknowledge'></a>
+1. Acknowledge additional resource requirements and configure **Hardware Enforcement in Pre-start (Linux)**:
+
+    <img src="./images/acknowledge.png" alt="Acknowledge Requirements and Enable Hardware Enforcement in Pre-start (Linux)" width="550">
+
+    <table class="nice">
+      <th>Field</th>
+      <th>Description</th>
+      <tr>
+        <td><strong>Type "X" to acknowledge each VM requires 2 CPU cores and 2 GB of memory or accept the risk of not doing so</strong></td>
+        <td>You must acknowledge that you are aware of the additional resources required to use <%= vars.product_short %> v3.0.
+        <p class="note warning"><strong>Warning</strong>: Not allocating enough resources can cause VMs to be unresponsive. If you are unable to meet the minimum requirements, please consider using the “<strong>List of instance group names that will be excluded from deployment”</strong> configuration field.
+        </p>
+      </tr>
+      <tr>
+        <td><strong>Hardware Enforcement in Pre-start (Linux). This also stops Anti-Virus from being installed on errands</strong></td>
+        <td>
+          <ul>
+            <li><strong>Enable check</strong>: Enable this feature to stop Anti-Virus from proceeding in pre-start. This causes "Apply Changes" to fail if any of the VMs do not meet the minimum recommended requirements.</li>
+            <ul>
+              <li><strong>List of instance groups to override hardware enforcement on</strong>: A comma-separated list of instance group names to exclude from the check (Use at your own risk).</li>
+            </ul>
+            <li><strong>Disable check</strong></li>
+          </ul>
+      </tr>
+    </table>
+
 1. Configure **Mirror for Automatic Database Updates**.<br>
     The tabs below expand to show instructions for each type of mirror.<br><br>
 
