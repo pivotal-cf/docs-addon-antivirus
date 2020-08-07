@@ -8,13 +8,13 @@ This topic contains release notes for <%= vars.product_full %>.
 
 <%# <%= partial vars.path_to_partials + "/upgrade-planner" %> %>
 
-## <a id="3-0"></a> v3.0
-**Release Date: June , 2020**
+## <a id="3-0-1"></a> v3.0.1
+**Release Date: MMMM DD, 2020**
 
 ### Features
 New features and changes in this release:
 
-<p class="note warning"><strong>Warning</strong>: As of v3.0 of <%= vars.product_short %>,
+<p class="note warning"><strong>Warning</strong>: As of v3.0.1 of <%= vars.product_short %>,
   2 CPU cores and 2GB of memory are required for each VM on your foundation.
   Not allocating enough resources can cause VMs to be unresponsive.
   For more information, see <a href="./install.html#acknowledge">Installing and Configuring</a>
@@ -22,6 +22,13 @@ New features and changes in this release:
 * **Adds a mandatory field to inform and acknowledge the minimum resource requirements for VMs.**
 * **Adds the ability to enable a Hardware Enforcement check during Pre-start**. This ensures the minimum requirements for resources are met for each VM (2 CPU cores and 2GB of memory).
 * Updates golang dependency to v1.14 for both Linux and Windows
+
+### Security Fixes
+This release includes the following security fix:
+* High [CVE-2019-15961](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-15961):
+  A vulnerability in the email parsing module Clam AntiVirus (ClamAV) Software versions
+  0.102.0, 0.101.4 and prior could allow an unauthenticated,
+  remote attacker to cause a denial of service condition on an affected device.
 
 ### Resolved Issues
 This release has the following fix:
