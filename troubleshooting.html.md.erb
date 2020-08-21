@@ -274,22 +274,17 @@ This ensures that <%= vars.product_short %> is not deployed on the <%= vars.prod
 =======
 1. Continue to restore your deployment by following the remaining procedures in [Restoring Deployments from Backup with BBR](https://docs.pivotal.io/platform/customizing/backup-restore/restore-pcf-bbr.html).
 
-### <a id='cpu-spikes-clamav-enforce-cpu'></a> CPU Spikes While Enforcing a CPU Limit in <%= vars.product_short %>
+### <a id='cpu-spikes-clamav-enforce-cpu'></a> CPU Spikes While Using <%= vars.product_short %>
 
 ####Symptom
 <%= vars.product_short %> is taking more CPU resources than assigned in its configuration even with **Enforce CPU limit** field set to **Always** .
 
 ####Explanation
 <%= vars.product_short %> resource consumption is restricted using cgroups.
-If the VM does not have enough CPU or memory resources, the clamd PID is removed from the `cgroup.procs` file.
-This causes <%= vars.product_short %> to ignore the **Enforce CPU limit** setting.
+If the VM does not have enough CPU or memory resources the clamd PID gets removed from the `cgroup.procs` file.
+This causes Anti-Virus to disregard **Enforce CPU limit** setting.
 
 ####Solution
-<<<<<<< HEAD
 Increase the VM size. E.g. we recommend minimum VM size is `micro.cpu` (2&nbsp;CPU and 2&nbsp;GB RAM) on GCP.
 <hr>
 >>>>>>> 53103af... [#174452985] add troubleshooting for cpu spike with enforce_cpu
-=======
-Increase the VM size. Vmware recommends a minimum VM size of `micro.cpu` (2&nbsp;CPU and 2&nbsp;GB RAM) on GCP.
-<hr>
->>>>>>> 66cbf64... Edit PR98 [#174453657]
