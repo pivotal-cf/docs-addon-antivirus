@@ -200,7 +200,7 @@ and, if restricted, can prevent <%= vars.product_short %> from starting up corre
 #### Solutions
 + Ensure `cpu_limit` is set high enough for <%= vars.product_short %> to execute normally.
 If the limit is too strict, <%= vars.product_short %> fails to start.
-For example, an n1-standard VM on GCP requires `cpu_limit` to be > 45.
+For example, an n1-standard VM on Google Cloud Platform (GCP) requires `cpu_limit` to be > 45.
 To make changes to this limit, configure **CPU limit (percentage)** in the **<%= vars.product_short %>** tile.
 
 + Set `enforce_cpu_limit` to `false`. This allocates more CPU cycles to ClamAV
@@ -274,7 +274,7 @@ This ensures that <%= vars.product_short %> is not deployed on the <%= vars.prod
 ### <a id='cpu-spikes-clamav-enforce-cpu'></a> CPU Spikes While Enforcing a CPU Limit in <%= vars.product_short %>
 
 ####Symptom
-<%= vars.product_short %> is taking more CPU resources than assigned in its configuration even with **Enforce CPU limit** field set to **Always** .
+<%= vars.product_short %> is using more CPU resources than assigned in its configuration, even with the **Enforce CPU limit** field set to **Always**.
 
 ####Explanation
 <%= vars.product_short %> resource consumption is restricted using cgroups.
