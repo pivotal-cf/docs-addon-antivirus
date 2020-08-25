@@ -200,7 +200,6 @@ and, if restricted, can prevent <%= vars.product_short %> from starting up corre
 #### Solutions
 + Ensure `cpu_limit` is set high enough for <%= vars.product_short %> to execute normally.
 If the limit is too strict, <%= vars.product_short %> fails to start.
-For example, an n1-standard VM on Google Cloud Platform (GCP) requires `cpu_limit` to be > 45.
 To make changes to this limit, configure **CPU limit (percentage)** in the **<%= vars.product_short %>** tile.
 
 + Set `enforce_cpu_limit` to `false`. This allocates more CPU cycles to ClamAV
@@ -282,5 +281,5 @@ If the VM does not have enough CPU or memory resources, the clamd PID is removed
 This causes <%= vars.product_short %> to ignore the **Enforce CPU limit** setting.
 
 ####Solution
-Increase the VM size. VMware recommends a minimum VM size of `micro.cpu` (2&nbsp;CPU and 2&nbsp;GB RAM) on GCP.
+Increase the VM size. VMware recommends a minimum VM size of `micro.cpu` using 2&nbsp;CPU and 2&nbsp;GB RAM.
 <hr>
