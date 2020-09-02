@@ -9,21 +9,21 @@ This topic describes how to configure Hardware Enforcement for <%= vars.product_
 
 ##<a id="overview"></a>Overview
 
-<%= vars.product_short %> v3.0.1 bundles ClamAV version 0.101.5 in order to patch
+<%= vars.product_short %> v3.0.1 bundles ClamAV v0.101.5 to patch
 [CVE-2019-15961](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-15961).
 This version of ClamAV has increased resource consumption to the point where the default "recommended" VM
-types for your foundation may no longer be large enough.
+types for your foundation might no longer be large enough.
 
-VMs using `micro` with 1 CPU core and 1GB of ram have a chance of being unresponsive for more than
+VMs using `micro` with 1&nbsp;CPU core and 1&nbsp;GBGB of RAM have a chance of being unresponsive for more than
 45 seconds when under load.
-To ensure uptime of workloads, it is recommended to increase existing VM sizes by
-1 CPU and 1 GB of ram in addition to the default.
+To ensure uptime of workloads, VMware recommends that you increase existing VM sizes by
+1&nbsp;CPU core and 1&nbsp;GBGB of RAM in addition to the default.
 
 ##<a id="enforcement"></a>Hardware Enforcement
-The Hardware Enforcement feature is introduced in <%= vars.product_short %> v3.0.1 to further
-reduce the chance of unresponsiveness after installation.
+<%= vars.product_short %> v3.0.1 introduces the Hardware Enforcement feature to further reduce the chance of
+unresponsiveness after installation.
 
-When enabled, an additional check during pre-start verifies whether the VM has 2 CPU cores and 2 GB of ram.
+When enabled, an additional check during pre-start verifies whether the VM has 2&nbsp;CPU cores and 2&nbsp;GB of RAM.
 If any VMs fail to meet these requirements, the entire deployment fails with an error message outlining
 which VM it fails on.
 
@@ -36,7 +36,7 @@ Please increase the size of the VM to have at least 2 core and 2,000,000 KB of m
 Detected 1 cpu(s) and 3781460 KB of memory
 </pre>
 
-Once the VM size has been verified and adjustments are needed, operators can continue to redeploy all the VMs with their new size.
+When the VM size is verified and adjustments are needed, operators can continue to redeploy all the VMs with their new size.
 
 ##<a id="install"></a>Review VM Hardware
 Before installing the <%= vars.product_short %> tile for v3.0.1, VMware recommends that you review the
@@ -45,7 +45,6 @@ The recommended overall installation process is as follows:
 
 1. Run `bosh vms` to see which VMs do not meet the minimum requirements.
 These are typically `micro`, `small`, `small.disk`, `medium.mem` or an equivalent sized VM.
-This will not show errand VMs that spin up ad-hoc.
 
     <pre class="terminal">
     $ bosh vms
@@ -53,42 +52,54 @@ This will not show errand VMs that spin up ad-hoc.
     backup&#95;restore/ecb614e7-5804-4c0d-8f1d-8d73f6717ba7    -              us-east1-d  10.0.4.9   vm-ee45d300-b750-466e-7548-4f827c36cc75  micro.cpu    true    bosh-google-kvm-ubuntu-xenial-go&#95;agent/621.77
     </pre>
 
-1. To get the VMs sizes of non co-located VMs, run `bosh is` to get the corresponding deployment ids for each instance, and then look into the corresponding service tiles’s resource config section.
+    <p class="note">
+    <strong>Note: </strong>This does not show errand VMs that are created on an ad hoc basis.
+    </p>
 
-    ```
-    bosh -d SERVICE-INSTANCE is
-    ```
+1. Verify the sizes of non co-located VMs.
+  To do this, run `bosh is` to get the deployment ids for each instance:
 
-    Where `SERVICE-INSTANCE` is the deployment id of the service instance
+      ```
+      bosh -d SERVICE-INSTANCE-NAME is
+      ```
+    Where `SERVICE-INSTANCE-NAME` is the deployment id of the service instance.
 
-    <pre class="terminal">
-    $ bosh -d service-instance&#95;ad4cf557-2292-4f2b-91f2-b5869091fba8 is <br>
-    Using environment '10.0.0.5' as client 'ops&#95;manager'
-    Task 157. Done
-    Deployment 'service-instance&#95;ad4cf557-2292-4f2b-91f2-b5869091fba8'
-    Instance                                           Process State  AZ          IPs        Deployment
-    apply-addons/40dd7af5-7679-4b17-abe9-3b82a98be406  -              us-east1-b  -          service-instance&#95;ad4cf557-2292-4f2b-91f2-b5869091fba8
-    master/da1f07ed-d8e9-472d-b6fd-1de8f2f3a7e6        running        us-east1-b  10.0.11.5  service-instance&#95;ad4cf557-2292-4f2b-91f2-b5869091fba8
-    worker/62595eaa-f662-4760-a9a2-74efa384d179        running        us-east1-b  10.0.11.6  service-instance&#95;ad4cf557-2292-4f2b-91f2-b5869091fba8
-    worker/e99aa82b-dcca-49e0-8e5c-aa5d1bbf19ce        running        us-east1-d  10.0.11.8  service-instance&#95;ad4cf557-2292-4f2b-91f2-b5869091fba8
-    worker/fb2de91b-d081-4866-ba95-c9a8c70315c2        running        us-east1-c  10.0.11.7  service-instance&#95;ad4cf557-2292-4f2b-91f2-b5869091fba8
-    5 instances
-    Succeeded
-    </pre>
+    For example:
 
-1. From step 1 and 2 above, make the necessary VM size adjustments for each undersized VMs and apply changes.
-For TAS and Service Tiles, Look under the “Resource Config” tab
-For TKG-I, look under each “Plan” that is active and adjust the “Master/ETCD VM Type” field.
+      <pre class="terminal">
+      $ bosh -d service-instance&#95;ad4cf557-2292-4f2b-91f2-b5869091fba8 is <br>
+      Using environment '10.0.0.5' as client 'ops&#95;manager'
+      Task 157. Done
+      Deployment 'service-instance&#95;ad4cf557-2292-4f2b-91f2-b5869091fba8'
+      Instance                                           Process State  AZ          IPs        Deployment
+      apply-addons/40dd7af5-7679-4b17-abe9-3b82a98be406  -              us-east1-b  -          service-instance&#95;ad4cf557-2292-4f2b-91f2-b5869091fba8
+      master/da1f07ed-d8e9-472d-b6fd-1de8f2f3a7e6        running        us-east1-b  10.0.11.5  service-instance&#95;ad4cf557-2292-4f2b-91f2-b5869091fba8
+      worker/62595eaa-f662-4760-a9a2-74efa384d179        running        us-east1-b  10.0.11.6  service-instance&#95;ad4cf557-2292-4f2b-91f2-b5869091fba8
+      worker/e99aa82b-dcca-49e0-8e5c-aa5d1bbf19ce        running        us-east1-d  10.0.11.8  service-instance&#95;ad4cf557-2292-4f2b-91f2-b5869091fba8
+      worker/fb2de91b-d081-4866-ba95-c9a8c70315c2        running        us-east1-c  10.0.11.7  service-instance&#95;ad4cf557-2292-4f2b-91f2-b5869091fba8
+      5 instances
+      Succeeded
+      </pre>
 
-1. After apply changes from step 3 is done, install Antivirus 3.0.1 with the hardware enforcement enabled (along with other desired settings)
+1. Make the necessary VM size adjustments for each undersized VM in their corresponding service tiles:
+    * For <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) and Service tiles,
+    look under the **Resource Config** tab
+    * For <%= vars.k8s_runtime_full %> (<%= vars.k8s_runtime_abbr %>), look under each **Plan**
+    that is active and adjust the **Master/ETCD VM Type** field.
+
+1. **Apply Changes** to the entire foundation.
+
+1. After the **Apply Changes** is complete, install <%= vars.product_short %> v3.0.1.
+  Ensure that the **Hardware Enforcement in Pre-start (Linux)** feature is set to **Enable check**,
+  as well as any other configurationsettings needed.
 
 ###<a id="failure"></a>Troubleshoot Deployment Failure
 If the deployment fails:
 
 1. Look at the error message to review which VM failed the hardware enforcement test.
-1. Make the corresponding size adjustments in the tile
-1. Apply changes
+1. Make the corresponding size adjustments in the tile.
+1. Click **Apply Changes**
 
-This apply changes will include both the VM size change, and continue the installation of <%= vars.product_short %>.
-During this process, there will be a combination of VMs with the new and old versions of the <%= vars.product_short %> tile.
-After a successful **Apply Changes**, all VMs will have the latest version of the tile.
+This **Apply Changes** includes both the VM size change, and continues the installation of <%= vars.product_short %>.
+During this process, there is a combination of VMs with the new and old versions of the <%= vars.product_short %> tile.
+After a successful **Apply Changes**, all VMs have the latest version of the tile.
