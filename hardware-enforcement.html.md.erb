@@ -14,18 +14,19 @@ This topic describes how to configure Hardware Enforcement for <%= vars.product_
 This version of ClamAV has increased resource consumption to the point where the default "recommended" VM
 types for your foundation might no longer be large enough.
 
-VMs using `micro` with 1&nbsp;CPU core and 1&nbsp;GBGB of RAM have a chance of being unresponsive for more than
+VMs of the type `micro` with 1&nbsp;CPU core and 1&nbsp;GB of RAM might become unresponsive for more than
 45 seconds when under load.
-To ensure uptime of workloads, VMware recommends that you increase existing VM sizes by
-1&nbsp;CPU core and 1&nbsp;GBGB of RAM in addition to the default.
+To ensure uptime for workloads, VMware recommends that you increase existing VM sizes by
+1&nbsp;CPU core and 1&nbsp;GB of RAM in addition to the default.
 
 ##<a id="enforcement"></a>Hardware Enforcement
-<%= vars.product_short %> v3.0.1 introduces the Hardware Enforcement feature to further reduce the chance of
-unresponsiveness after installation.
 
-When enabled, an additional check during pre-start verifies whether the VM has 2&nbsp;CPU cores and 2&nbsp;GB of RAM.
-If any VMs fail to meet these requirements, the entire deployment fails with an error message outlining
-which VM it fails on.
+<%= vars.product_short %> v3.0.1 introduces the Hardware Enforcement feature to
+further reduce the chance of VMs becoming unresponsive after installation.
+
+When enabled, an additional check during pre-start verifies whether each VM has 2&nbsp;CPU cores and 2&nbsp;GB of RAM.
+If any VMs fail to meet these requirements, the deployment fails with an error message outlining
+which VM it failed on.
 
 For example:
 
@@ -36,9 +37,10 @@ Please increase the size of the VM to have at least 2 core and 2,000,000 KB of m
 Detected 1 cpu(s) and 3781460 KB of memory
 </pre>
 
-After all VM sizes are verified and adjusted, Operators can re-apply their changes.
+After you verify and adjust the size of each VM, you can re-apply your changes.
 
-##<a id="install"></a>Review of VM Configurations Prior to Installing <%= vars.product_short %>
+##<a id="install"></a>Review VM Configurations Before Installing <%= vars.product_short %>
+
 Before installing the <%= vars.product_short %> tile for v3.0.1, VMware recommends that you review the
 resource configurations of your VMs.
 The recommended overall installation process is as follows:
@@ -57,48 +59,55 @@ These are typically `micro`, `small`, `small.disk`, `medium.mem` or an equivalen
     </p>
 
 1. Verify the sizes of non co-located VMs.
-  To do this, run `bosh is` to get the deployment ids for each instance:
+  To do this, run `bosh is` to get the deployment IDs for each instance:
 
-      ```
-      bosh -d SERVICE-INSTANCE-NAME is
-      ```
-    Where `SERVICE-INSTANCE-NAME` is the deployment id of the service instance.
+    ```
+    bosh -d SERVICE-INSTANCE-NAME is
+    ```
+    Where `SERVICE-INSTANCE-NAME` is the deployment ID of the service instance.
 
     For example:
 
-      <pre class="terminal">
-      $ bosh -d service-instance&#95;ad4cf557-2292-4f2b-91f2-b5869091fba8 is <br>
-      Using environment '10.0.0.5' as client 'ops&#95;manager'
-      Task 157. Done
-      Deployment 'service-instance&#95;ad4cf557-2292-4f2b-91f2-b5869091fba8'
-      Instance                                           Process State  AZ          IPs        Deployment
-      apply-addons/40dd7af5-7679-4b17-abe9-3b82a98be406  -              us-east1-b  -          service-instance&#95;ad4cf557-2292-4f2b-91f2-b5869091fba8
-      master/da1f07ed-d8e9-472d-b6fd-1de8f2f3a7e6        running        us-east1-b  10.0.11.5  service-instance&#95;ad4cf557-2292-4f2b-91f2-b5869091fba8
-      worker/62595eaa-f662-4760-a9a2-74efa384d179        running        us-east1-b  10.0.11.6  service-instance&#95;ad4cf557-2292-4f2b-91f2-b5869091fba8
-      worker/e99aa82b-dcca-49e0-8e5c-aa5d1bbf19ce        running        us-east1-d  10.0.11.8  service-instance&#95;ad4cf557-2292-4f2b-91f2-b5869091fba8
-      worker/fb2de91b-d081-4866-ba95-c9a8c70315c2        running        us-east1-c  10.0.11.7  service-instance&#95;ad4cf557-2292-4f2b-91f2-b5869091fba8
-      5 instances
-      Succeeded
-      </pre>
+    <pre class="terminal">
+    $ bosh -d service-instance&#95;ad4cf557-2292-4f2b-91f2-b5869091fba8 is <br>
+    Using environment '10.0.0.5' as client 'ops&#95;manager'
+    Task 157. Done
+    Deployment 'service-instance&#95;ad4cf557-2292-4f2b-91f2-b5869091fba8'
+    Instance                                           Process State  AZ          IPs        Deployment
+    apply-addons/40dd7af5-7679-4b17-abe9-3b82a98be406  -              us-east1-b  -          service-instance&#95;ad4cf557-2292-4f2b-91f2-b5869091fba8
+    master/da1f07ed-d8e9-472d-b6fd-1de8f2f3a7e6        running        us-east1-b  10.0.11.5  service-instance&#95;ad4cf557-2292-4f2b-91f2-b5869091fba8
+    worker/62595eaa-f662-4760-a9a2-74efa384d179        running        us-east1-b  10.0.11.6  service-instance&#95;ad4cf557-2292-4f2b-91f2-b5869091fba8
+    worker/e99aa82b-dcca-49e0-8e5c-aa5d1bbf19ce        running        us-east1-d  10.0.11.8  service-instance&#95;ad4cf557-2292-4f2b-91f2-b5869091fba8
+    worker/fb2de91b-d081-4866-ba95-c9a8c70315c2        running        us-east1-c  10.0.11.7  service-instance&#95;ad4cf557-2292-4f2b-91f2-b5869091fba8
+    5 instances
+    Succeeded
+    </pre>
 
 1. Make the necessary VM size adjustments for each undersized VM in their corresponding service tiles:
-    * For <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) and Service tiles,
+    * For <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) and service tiles,
     look under the **Resource Config** tab
     * For <%= vars.k8s_runtime_full %> (<%= vars.k8s_runtime_abbr %>), look under each **Plan**
     that is active and adjust the **Master/ETCD VM Type** field.
 
-1. **Apply Changes** to the entire foundation.
+1. Return to the Ops Manager Installation Dashboard.
+
+1. Click **Review Pending Changes**.
+
+1. Ensure all products are selected and click **Apply Changes**.
 
 1. After the **Apply Changes** is complete, install <%= vars.product_short %> v3.0.1.
   Ensure that the **Hardware Enforcement in Pre-start (Linux)** feature is set to **Enable check**,
-  as well as any other configurationsettings needed.
+  as well as any other configuration needed.
 
 ###<a id="failure"></a>Troubleshoot Deployment Failure
+
 If the deployment fails:
 
 1. Look at the error message to review which VM failed the hardware enforcement test.
 1. Make the corresponding size adjustments in the tile.
-1. Click **Apply Changes**
+1. Return to the Ops Manager Installation Dashboard.
+1. Click **Review Pending Changes**.
+1. Ensure all products are selected and click **Apply Changes**.
 
 This **Apply Changes** includes both the VM size change, and continues the installation of <%= vars.product_short %>.
 During this process, there is a combination of VMs with the new and old versions of the <%= vars.product_short %> tile.
