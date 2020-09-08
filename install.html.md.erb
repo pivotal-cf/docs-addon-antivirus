@@ -57,8 +57,8 @@ To configure <%= vars.product_short %>:
       <tr>
         <td><strong>Type "X" to acknowledge each VM requires 2 CPU cores and 2 GB of memory or accept the risk of not doing so</strong></td>
         <td>You must acknowledge that you are aware of the additional resources required to use <%= vars.product_short %> v3.0.
-        <p class="note warning"><strong>Warning</strong>: Not allocating enough resources can cause VMs to become unresponsive. 
-          If you are unable to meet the minimum requirements, consider using the 
+        <p class="note warning"><strong>Warning</strong>: Not allocating enough resources can cause VMs to become unresponsive.
+          If you are unable to meet the minimum requirements, consider using the
           <strong>List of instance group names that will be excluded from deployment</strong> configuration field.
         </p>
       </tr>
@@ -67,8 +67,8 @@ To configure <%= vars.product_short %>:
         <td>
           Set the hardware enforcement policy:
           <ul>
-            <li><strong>Enable check</strong>: Enable this feature to stop Anti-Virus from proceeding in pre-start. 
-              This causes "Apply Changes" to fail if any of the VMs do not meet the minimum recommended requirements.</li>
+            <li><strong>Enable check</strong>: This causes "Apply Changes" to fail if any of the VMs
+              do not meet the minimum recommended requirements.</li>
             <ul>
               <li><strong>List of instance groups to override hardware enforcement on</strong>:
                 A comma-separated list of instance group names to exclude from the check. Use at your own risk.</li>
