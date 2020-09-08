@@ -19,7 +19,7 @@ VMs of the type `micro` with 1&nbsp;CPU core and 1&nbsp;GB of RAM might become u
 To ensure uptime for workloads, VMware recommends that you increase existing VM sizes by
 1&nbsp;CPU core and 1&nbsp;GB of RAM in addition to the default.
 
-##<a id="enforcement"></a>Hardware Enforcement
+##<a id="hardware-enforcement"></a>Hardware Enforcement
 
 <%= vars.product_short %> v3.0.1 introduces the Hardware Enforcement feature to
 further reduce the chance of VMs becoming unresponsive after installation.
@@ -39,9 +39,9 @@ Detected 1 cpu(s) and 3781460 KB of memory
 
 After you verify and adjust the size of each VM, you can re-apply your changes.
 
-##<a id="install"></a>Review VM Configurations Before Installing <%= vars.product_short %>
+##<a id="review-vms"></a>Review VM Configurations Before Installing <%= vars.product_short %>
 
-Before installing the <%= vars.product_short %> tile for v3.0.1, VMware recommends that you review the
+Before installing the <%= vars.product_short %> v3.0.1 tile, VMware recommends that you review the
 resource configurations of your VMs.
 The recommended overall installation process is as follows:
 
@@ -95,11 +95,17 @@ These are typically `micro`, `small`, `small.disk`, `medium.mem` or an equivalen
 
 1. Ensure all products are selected and click **Apply Changes**.
 
-1. After the **Apply Changes** is complete, install <%= vars.product_short %> v3.0.1.
-  Ensure that the **Hardware Enforcement in Pre-start (Linux)** feature is set to **Enable check**,
-  as well as any other configuration needed.
+##<a id="install-tiles"></a>Install Tiles
 
-###<a id="failure"></a>Troubleshoot Deployment Failure
+After the **Apply Changes** is complete, you can continue to install your tiles:
+
+1. Install the <%= vars.product_short_mirror %> tile if required.
+1. Install <%= vars.product_short %> v3.0.1.
+1. Ensure that the **Hardware Enforcement in Pre-start (Linux)** feature is set to **Enable check**
+  in the <%= vars.product_short %> tile.
+1. Complete any other configurations needed.
+
+##<a id="troubleshoot-failure"></a>Troubleshoot Deployment Failure
 
 If the deployment fails:
 
