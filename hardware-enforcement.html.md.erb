@@ -45,49 +45,45 @@ Before installing the <%= vars.product_short %> v3.0.1 tile, VMware recommends t
 resource configurations of your VMs.
 The recommended overall installation process is as follows:
 
-1. Run `bosh vms` to see which VMs do not meet the minimum requirements.
+1. Run `bosh vms --column=instance --column="vm type"` to see which VMs do not meet the minimum requirements.
 These are typically `micro`, `small`, `small.disk`, `medium.mem` or an equivalent sized VM.
 
     <pre class="terminal">
-    $ bosh vms
-    Instance                                               Process State  AZ          IPs        VM CID                                   VM Type      Active  Stemcell
-    backup&#95;restore/ecb614e7-5804-4c0d-8f1d-8d73f6717ba7    -              us-east1-d  10.0.4.9   vm-ee45d300-b750-466e-7548-4f827c36cc75  micro.cpu    true    bosh-google-kvm-ubuntu-xenial-go&#95;agent/621.77
+    $ bosh vms --column=instance --column="vm type"
+    Deployment 'cf-6914745231480fb25fc8'
+    Instance                                                  VM Type
+    backup&#95;restore/ecb614e7-5804-4c0d-8f1d-8d73f6717ba7   micro
     </pre>
 
     <p class="note">
-    <strong>Note: </strong>This does not show errand VMs that are created on an ad hoc basis.
+    <strong>Note: </strong>This does not show errand VMs with a dedicated instance group.
     </p>
+1. Make the necessary VM size adjustments for each undersized VM in the **Resource Config** tab of the tile.
 
-1. Verify the sizes of non co-located VMs.
-  To do this, run `bosh is` to get the deployment IDs for each instance:
-
-    ```
-    bosh -d SERVICE-INSTANCE-NAME is
-    ```
-    Where `SERVICE-INSTANCE-NAME` is the deployment ID of the service instance.
-
-    For example:
+1. Verify the sizes of errand VMs with a dedicated instance group.
+  To do this, run `bosh instances --column=instance  --column="process state" --column="ips"`. 
+  Errand VMs will appear in the output with `Process State` and `IPs` set to `-`.
 
     <pre class="terminal">
-    $ bosh -d service-instance&#95;ad4cf557-2292-4f2b-91f2-b5869091fba8 is <br>
+    $ bosh instances <br>
     Using environment '10.0.0.5' as client 'ops&#95;manager'
-    Task 157. Done
+
     Deployment 'service-instance&#95;ad4cf557-2292-4f2b-91f2-b5869091fba8'
-    Instance                                           Process State  AZ          IPs        Deployment
-    apply-addons/40dd7af5-7679-4b17-abe9-3b82a98be406  -              us-east1-b  -          service-instance&#95;ad4cf557-2292-4f2b-91f2-b5869091fba8
-    master/da1f07ed-d8e9-472d-b6fd-1de8f2f3a7e6        running        us-east1-b  10.0.11.5  service-instance&#95;ad4cf557-2292-4f2b-91f2-b5869091fba8
-    worker/62595eaa-f662-4760-a9a2-74efa384d179        running        us-east1-b  10.0.11.6  service-instance&#95;ad4cf557-2292-4f2b-91f2-b5869091fba8
-    worker/e99aa82b-dcca-49e0-8e5c-aa5d1bbf19ce        running        us-east1-d  10.0.11.8  service-instance&#95;ad4cf557-2292-4f2b-91f2-b5869091fba8
-    worker/fb2de91b-d081-4866-ba95-c9a8c70315c2        running        us-east1-c  10.0.11.7  service-instance&#95;ad4cf557-2292-4f2b-91f2-b5869091fba8
+    Instance                                           Process State  IPs
+    apply-addons/8a502935-a124-4a8a-805e-295d59c86dc4  -              -
+    master/9ac884b4-dfb0-4069-b7f8-89f1e2b2c2e2        running        10.0.11.5
+    worker/6aa6acf0-6b9c-4418-95b2-fbabb7a7643f        running        10.0.11.7
+    worker/c154497f-5e14-46ec-9545-8fa35bb40951        running        10.0.11.8
+    worker/cd420295-c948-4254-945a-4ca0a069656d        running        10.0.11.6
     5 instances
     Succeeded
     </pre>
 
-1. Make the necessary VM size adjustments for each undersized VM in their corresponding service tiles:
+1. Make the necessary VM size adjustments for each undersized VM:
     * For <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) and service tiles,
     look under the **Resource Config** tab
-    * For <%= vars.k8s_runtime_full %> (<%= vars.k8s_runtime_abbr %>), look under each **Plan**
-    that is active and adjust the **Master/ETCD VM Type** field.
+    * For service instances, deployments name with format `service-instance_GUID`, look under each **Plan**
+    that is active and adjust VM Type. For e.g. For <%= vars.k8s_runtime_full %> (<%= vars.k8s_runtime_abbr %>) set the **Errand VM Type** field under each active **Plan**
 
 1. Return to the Ops Manager Installation Dashboard.
 
