@@ -61,7 +61,7 @@ These are typically `micro`, `small`, `small.disk`, `medium.mem` or an equivalen
 1. Make the necessary VM size adjustments for each undersized VM in the **Resource Config** tab of the tile.
 
 1. Verify the sizes of errand VMs with a dedicated instance group.
-  To do this, run `bosh instances --column=instance  --column="process state" --column="ips"`. 
+  To do this, run `bosh instances --column=instance  --column="process state" --column="ips"`.
   Errand VMs will appear in the output with `Process State` and `IPs` set to `-`.
 
     <pre class="terminal">
@@ -82,8 +82,10 @@ These are typically `micro`, `small`, `small.disk`, `medium.mem` or an equivalen
 1. Make the necessary VM size adjustments for each undersized VM:
     * For <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) and service tiles,
     look under the **Resource Config** tab
-    * For service instances, deployments name with format `service-instance_GUID`, look under each **Plan**
-    that is active and adjust VM Type. For e.g. For <%= vars.k8s_runtime_full %> (<%= vars.k8s_runtime_abbr %>) set the **Errand VM Type** field under each active **Plan**
+    * For service instances, deployments name with format `service-instance_GUID`.
+    Look under each **Plan** that is active and adjust VM Type.
+    For example, for <%= vars.k8s_runtime_full %> (<%= vars.k8s_runtime_abbr %>) set the **Errand VM Type**
+    field under each active **Plan**.
 
 1. Return to the Ops Manager Installation Dashboard.
 
