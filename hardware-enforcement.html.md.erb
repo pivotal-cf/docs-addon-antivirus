@@ -52,7 +52,7 @@ These are typically `micro`, `small`, `small.disk`, `medium.mem` or an equivalen
     $ bosh vms --column=instance --column="vm type"
     Deployment 'cf-6914745231480fb25fc8'
     Instance                                                  VM Type
-    backup&#95;restore/ecb614e7-5804-4c0d-8f1d-8d73f6717ba7   micro
+    backup&#95;restore/ecb614e7-5804-4c0d-8f1d-8d73f6717ba7       micro
     </pre>
 
     <p class="note">
@@ -65,7 +65,7 @@ These are typically `micro`, `small`, `small.disk`, `medium.mem` or an equivalen
   Errand VMs will appear in the output with `Process State` and `IPs` set to `-`.
 
     <pre class="terminal">
-    $ bosh instances <br>
+    $ bosh instances --column=instance --column="process state" --column="ips" <br>
     Using environment '10.0.0.5' as client 'ops&#95;manager'
 
     Deployment 'service-instance&#95;ad4cf557-2292-4f2b-91f2-b5869091fba8'
@@ -106,7 +106,7 @@ After the **Apply Changes** is complete, you can continue to install your tiles:
 If the deployment fails:
 
 1. Look at the error message to review which VM failed the hardware enforcement test.
-1. Make the corresponding size adjustments in the tile.
+1. Make size adjustments in the corresponding service tile.
 1. Return to the Ops Manager Installation Dashboard.
 1. Click **Review Pending Changes**.
 1. Ensure all products are selected and click **Apply Changes**.
