@@ -5,12 +5,12 @@ owner: Security Engineering
 
 <strong><%= modified_date %></strong>
 
-<%= partial '../../antivirus/partials/branding-change' %>
-<%= partial '../../antivirus/partials/pcf-name-change' %>
+<%= partial '/branding-change' %>
+<%= partial '/pcf-name-change' %>
 
 This topic contains release notes for <%= vars.product_full %>.
 
-<%= partial vars.path_to_partials + "/upgrade-planner" %>
+<%= partial "/upgrade-planner" %>
 
 ## <a id="2-1-6"></a> v2.1.6
 
@@ -35,8 +35,8 @@ This release fixes the following issues:
 
 This release has the following known issue:
 
-<%= partial vars.path_to_partials + "/antivirus/tls-handshake-ki" %>
-<%= partial vars.path_to_partials + "/antivirus/bbr-ki" %>
+<%= partial "/tls-handshake-ki" %>
+<%= partial "/bbr-ki" %>
 
 ## <a id="2-1-3"></a> v2.1.3
 
@@ -57,13 +57,13 @@ New features and changes in this release:
 
 This release has the following known issues:
 
-<%= partial vars.path_to_partials + "/antivirus/tls-handshake-ki" %>
+<%= partial "/tls-handshake-ki" %>
 * <%= vars.product_short_mirror %> deployment fails in air-gapped environments.
   This is due to a change in Go build default settings attempting to download dependencies,
   instead of using the bundled dependencies.
 
-<%= partial vars.path_to_partials + "/antivirus/duplicate-logs-ki" %>
-<%= partial vars.path_to_partials + "/antivirus/bbr-ki" %>
+<%= partial "/duplicate-logs-ki" %>
+<%= partial "/bbr-ki" %>
 
 ## <a id="view"></a> View Release Notes for Another Version
 

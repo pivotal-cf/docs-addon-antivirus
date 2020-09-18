@@ -1,0 +1,3 @@
+<%# # Fixed in 2.1.6 %>
+
+* The clamd app forwards duplicate logs. This is because clamd controller outputs logs to both `/var/vcap/sys/log/monit/clamd.log` and `/var/vcap/sys/log/antivirus/clamd.log`.
