@@ -5,12 +5,16 @@ owner: Security Engineering
 
 <strong><%= modified_date %></strong>
 
-<%= partial '../../antivirus/partials/branding-change' %>
-<%= partial '../../antivirus/partials/pcf-name-change' %>
+<p class="note"><strong>Note:</strong> Pivotal has renamed <i><%= vars.product_old %></i> to
+  <i><%= vars.product_full %></i>.
+</p>
+<p class="note"><strong>Note:</strong> Pivotal has renamed <i><%= vars.platform_old %></i> to
+  <i><%= vars.platform_name %></i>.
+</p>
 
 This topic contains release notes for <%= vars.product_full %>.
 
-<%= partial vars.path_to_partials + "/upgrade-planner" %>
+For product versions and upgrade paths, see [Upgrade Planner](https://upgrade-planner.pivotal.io/).
 
 ## <a id="2-0-0"></a> v2.0.13
 
@@ -70,9 +74,17 @@ This release includes the following security fixes:
 
 This release has the following issues:
 
-<%= partial vars.path_to_partials + "/antivirus/tls-handshake-ki" %>
-<%= partial vars.path_to_partials + "/antivirus/duplicate-logs-ki" %>
-<%= partial vars.path_to_partials + "/antivirus/bbr-ki" %>
+* <%= vars.product_short_mirror %> outputs a TLS handshake error log
+  even though the process is not failing.
+  The error looks similar to the following:
+      <pre class="terminal">http: TLS handshake error from 127.0.0.1:RANDOM-PORT: EOF</pre>
+* The clamd app forwards duplicate logs. This is because clamd controller outputs logs to both `/var/vcap/sys/log/monit/clamd.log` and `/var/vcap/sys/log/antivirus/clamd.log`.
+* If you use <%= vars.product_short_mirror %>,
+ errors can occur when restoring your deployment with BOSH Backup and Restore (BBR).
+ For instructions for resolving this issue,
+see [Restoring with BOSH Backup and Restore Fails](./troubleshooting.html#backup-restore).
+For information about BBR,
+see [Backing Up and Restoring Deployments](https://docs.pivotal.io/platform/customizing/backup-restore/index.html).
 
 ## <a id="view"></a> View Release Notes for Another Version
 
