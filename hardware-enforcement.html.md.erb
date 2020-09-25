@@ -45,8 +45,14 @@ Before installing the <%= vars.product_short %> v3.0.1 tile, VMware recommends t
 resource configurations of your VMs.
 The recommended overall installation process is as follows:
 
-1. Run `bosh vms --column=instance --column="vm type"` to see which VMs do not meet the minimum requirements.
+1. Identify which VMs do not meet the minimum requirements.
 These are typically `micro`, `small`, `small.disk`, `medium.mem` or an equivalent sized VM.
+
+    ```
+    bosh vms --column=instance --column="vm type"
+    ```
+
+    For example:
 
     <pre class="terminal">
     $ bosh vms --column=instance --column="vm type"
@@ -60,9 +66,14 @@ These are typically `micro`, `small`, `small.disk`, `medium.mem` or an equivalen
     </p>
 1. Make the necessary VM size adjustments for each undersized VM in the **Resource Config** tab of the tile.
 
-1. Verify the sizes of errand VMs with a dedicated instance group.
-  To do this, run `bosh instances --column=instance  --column="process state" --column="ips"`.
-  Errand VMs will appear in the output with `Process State` and `IPs` set to `-`.
+1. Identify which errand VMs with a dedicated instance group do not meet the minimum requirements.
+Errand VMs appear in the output with `Process State` and `IPs` set to `-`.
+
+    ```
+    bosh instances --column=instance  --column="process state" --column="ips"
+    ```
+
+    For example:
 
     <pre class="terminal">
     $ bosh instances --column=instance --column="process state" --column="ips" <br>
@@ -82,8 +93,8 @@ These are typically `micro`, `small`, `small.disk`, `medium.mem` or an equivalen
 1. Make the necessary VM size adjustments for each undersized VM:
     * For <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) and service tiles,
     look under the **Resource Config** tab
-    * For service instances, deployments name with format `service-instance_GUID`.
-    Look under each **Plan** that is active and adjust VM Type.
+    * For service instances, deployments are named with the format `service-instance_GUID`.
+    Look under each **Plan** that is active and adjust the VM Type.
     For example, for <%= vars.k8s_runtime_full %> (<%= vars.k8s_runtime_abbr %>) set the **Errand VM Type**
     field under each active **Plan**.
 
