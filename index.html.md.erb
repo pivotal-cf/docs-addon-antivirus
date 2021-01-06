@@ -137,16 +137,15 @@ and serves them to the `freshclam` processes of BOSH VMs.
 
 1. On each BOSH-managed VM:
 
-  1. The `freshclam` daemon process regularly queries the internal <%= vars.product_short_mirror %> for new virus definitions.
-      - You can configure the query frequency in the <%= vars.product_full %> tile >
-  **ClamAV Configuration** > **Number of database checks per day** field.
+    1. The `freshclam` daemon process regularly queries the internal <%= vars.product_short_mirror %> for new virus definitions.
+      - You can configure the query frequency in the <%= vars.product_full %> tile > **ClamAV Configuration** > **Number of database checks per day** field.
 
-  1. When `freshclam` retrieves new definitions, it:
+    1. When `freshclam` retrieves new definitions, it:
       - Notifies the `clamd` daemon process that there are new definitions, and
       - Saves the virus definitions in the BOSH VM's own virus database.
 
-  1. The `clamd` process loads the new virus definitions into active memory
-  to enable fast scanning by the `clamscan` process.
+    1. The `clamd` process loads the new virus definitions into active memory to enable fast scanning
+    by the `clamscan` process.
 
 The diagrams below illustrate how new virus definitions propagate
 from an external ClamAV database to <%= vars.ops_manager %> managed BOSH VMs,
