@@ -247,6 +247,8 @@ To configure <%= vars.product_short %>:
         <td><strong>(Optional) Enable on-access scanning on Linux</strong></td>
         <td>Select this option to scan files immediately after they are modified.
         <p class="note"><strong>Note</strong>: On-Access Scan is not supported on Windows.
+        <p class="note"><strong>Note</strong>: Due to the dynamic nature of application containers mounted on `diego_cell` VM, On-Access Scan cannot scan containers.
+           Scheduled scans will scan containers.
         </p>
       </tr>
       <tr>
