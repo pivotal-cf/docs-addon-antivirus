@@ -6,7 +6,7 @@ As of April 16, 2020:
 
 | Branch name… | Documents version… | Publishes to… |
 |-------------|----------------|----------------|
-| master   | 2.3 (unreleased)     | https://docs-pcf-staging.cfapps.io/addon-antivirus/2-n/index.html |
+| master   | 3.0 (unreleased)     | https://docs-pcf-staging.cfapps.io/addon-antivirus/3-n/index.html |
 | 2.2   | 2.2.x     | https://docs.pivotal.io/addon-antivirus/2-2/index.html and https://docs-pcf-staging.cfapps.io/addon-antivirus/2-2/index.html |
 | 2.1   | 2.1.x    | https://docs.pivotal.io/addon-antivirus/2-1/index.html and https://docs-pcf-staging.cfapps.io/addon-antivirus/2-1/index.html |
 | 2.0   | 2.0.x     | https://docs.pivotal.io/addon-antivirus/2-0/index.html and https://docs-pcf-staging.cfapps.io/addon-antivirus/2-0/index.html |
@@ -20,9 +20,9 @@ As of April 16, 2020:
 
 pivotal-cf/docs-book-antivirus builds both the **edge** version (next unreleased version) and the **production** versions.
 
-+ **Edge** is currently publishing the 2-2 branch.
++ **Edge** is currently publishing the 3-0 branch.
 
-+ **Production** is currently publishing 1-2, 1-3, 1-4, 2-0, and 2-1.
++ **Production** is currently publishing 1-2, 1-3, 1-4, 2-0, 2-1, and 2-2.
 
 ## Style Guide
 _These are a handful of style issues I noticed with the original version of this documentation._
