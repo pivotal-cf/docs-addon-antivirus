@@ -2,16 +2,15 @@
 
 ## Which Branches to Use
 
-As of June 20, 2020:
+As of January 23, 2021:
 
 | Branch name… | Documents version… | Publishes to… |
 |-------------|----------------|----------------|
-| master   | 3.1 (unreleased)     | https://docs-pcf-staging.cfapps.io/addon-antivirus/3-n/index.html |
-| 3.0   | 3.0.x     | https://docs.pivotal.io/addon-antivirus/3-0/index.html and https://docs-pcf-staging.cfapps.io/addon-antivirus/3-0/index.html |
+| master   | 3.0 (unreleased)     | https://docs-pcf-staging.cfapps.io/addon-antivirus/3-n/index.html |
 | 2.2   | 2.2.x     | https://docs.pivotal.io/addon-antivirus/2-2/index.html and https://docs-pcf-staging.cfapps.io/addon-antivirus/2-2/index.html |
-| 2.1   | 2.1.x    | NOT IN USE - EOGS (https://docs.pivotal.io/addon-antivirus/2-1/index.html) |
-| 2.0   | 2.0.x     | NOT IN USE - EOGS (https://docs.pivotal.io/addon-antivirus/2-0/index.html) |
-| v1.4   | v1.4.x     | NOT IN USE - EOGS (https://docs.pivotal.io/addon-antivirus/1-4/index.html) |
+| 2.1   | 2.1.x    | https://docs.pivotal.io/addon-antivirus/2-1/index.html and https://docs-pcf-staging.cfapps.io/addon-antivirus/2-1/index.html |
+| 2.0   | 2.0.x     | https://docs.pivotal.io/addon-antivirus/2-0/index.html and https://docs-pcf-staging.cfapps.io/addon-antivirus/2-0/index.html |
+| v1.4   | v1.4.x     | https://docs.pivotal.io/addon-antivirus/1-4/index.html and https://docs-pcf-staging.cfapps.io/addon-antivirus/1-4/index.html |
 | v1.3   | v1.3.x     | NOT IN USE (PDF available at https://docs-pcf-staging.cfapps.io/archives/addon-antivirus-1.3.pdf) |
 | v1.2   | v1.2.x     | NOT IN USE (PDF available at https://docs-pcf-staging.cfapps.io/archives/addon-antivirus-1.2.pdf) |
 
@@ -19,7 +18,11 @@ As of June 20, 2020:
 
 ## Book Repo
 
-[pivotal-cf/docs-book-antivirus](https://github.com/pivotal-cf/docs-book-antivirus/)
+pivotal-cf/docs-book-antivirus builds both the **edge** version (next unreleased version) and the **production** versions.
+
++ **Edge** is currently publishing the 3-0 branch.
+
++ **Production** is currently publishing 1-2, 1-3, 1-4, 2-0, 2-1, and 2-2.
 
 ## Style Guide
 _These are a handful of style issues I noticed with the original version of this documentation._
