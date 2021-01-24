@@ -33,10 +33,11 @@ For more information, see [Operators](https://docs.pivotal.io/platform/customizi
 * **<%= vars.ops_manager_full %> (<%= vars.ops_manager %>)**.
 For compatible versions, see the [Product Snapshot](./index.html#snapshot).
 
-* **At least 1&nbsp;GB of RAM free for each VM that installs <%= vars.product_short %>**. 
-This is so that you can install the Pivotal Anti-Virus tile after deploying this mirror. 
-<%= vars.product_short %> installs itself on each tile VM and runs internally. 
+* **At least 1&nbsp;GB of RAM free for each VM that installs <%= vars.product_short %>**.
+This is so that you can install the Pivotal Anti-Virus tile after deploying this mirror.
+<%= vars.product_short %> installs itself on each tile VM and runs internally.
 <%= vars.product_short %> takes at least 610&nbsp;MB of RAM on each VM.
+On Google Cloud Platform (GCP), the recommended minimum VM size is `micro.cpu` using 2&nbsp;CPU and 2&nbsp;GB RAM.
 
 ## <a id='install-mirror'></a> Install <%= vars.product_short_mirror %>
 
