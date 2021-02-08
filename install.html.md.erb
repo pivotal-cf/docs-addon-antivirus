@@ -283,6 +283,9 @@ To configure <%= vars.product_short %>:
                  For example, in a system with four cores, if you set the CPU limit to <code>100</code>,
                  <%= vars.product_short %> uses only one of the four cores.
                </p>
+               <p class="note">
+                 <strong>Note:</strong> <strong>Windows VMs</strong> This setting does not affect CPU usage on a Windows VM.
+               </p>
         </td>
       </tr>
       <tr>
@@ -342,7 +345,12 @@ To configure <%= vars.product_short %>:
       </tr>
       <tr>
         <td><strong>Directories and files that will be ignored on Windows</strong></td>
-        <td>Enter directories in a comma-separated list for <%= vars.product_short %> to not scan on Windows.</td>
+        <td>Enter directories in a comma-separated list for <%= vars.product_short %> to not scan on Windows.
+        <p class="note">
+          <strong>Note:</strong> Windows directory paths use backslashes. These need to be escaped in order for the path to be matched using regex.
+          e.g `example\\directory\\path`
+        </p>
+        </td>
       </tr>
       <tr>
         <td><strong>List of signature names that will be ignored (Used for false positives)</strong></td>
