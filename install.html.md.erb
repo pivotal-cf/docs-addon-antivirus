@@ -42,6 +42,7 @@ This adds the tile to your staging area.
 1. Click the newly added **<%= vars.product_full %>** tile.
 
 ## <a id='configure'></a> Configure <%= vars.product_short %>
+
 To configure <%= vars.product_short %>:
 
 1. Select **Anti-Virus Configuration**.
@@ -271,7 +272,19 @@ To configure <%= vars.product_short %>:
             If <strong>Enforce CPU limit</strong> is set to <code>Enable</code>, ensure
             <strong>CPU limit (percentage)</strong> is set high enough for <%= vars.product_short %>
             to execute normally. If the limit is too strict, <%= vars.product_short %> fails to start.
-            </p>
+          </p>
+          <ul>
+            <li><strong>Enable</strong>: Select this to enforce the limit.</li>
+            <li><strong>CPU limit (percentage)</strong>: Enter the CPU percentage limit.</li>
+          </ul>
+          <p class="note warning"><strong>Warning:</strong>
+            If <strong>Enforce CPU limit</strong> is set to <code>Enable</code>, ensure
+            <strong>CPU limit (percentage)</strong> is set high enough for <%= vars.product_short %>
+            to execute normally. If the limit is too strict, <%= vars.product_short %> fails to start.
+          </p>
+          <p class="note">
+            <strong>Note:</strong> <strong>Windows VMs</strong> This setting does not affect CPU usage on a Windows VM.
+          </p>
         </td>
       </tr>
       <tr>
@@ -316,7 +329,12 @@ To configure <%= vars.product_short %>:
       </tr>
       <tr>
         <td><strong>Directories and files that will be ignored on Windows</strong></td>
-        <td>Enter directories in a comma-separated list for <%= vars.product_short %> to not scan on Windows.</td>
+        <td>Enter directories in a comma-separated list for <%= vars.product_short %> to not scan on Windows.
+        <p class="note">
+          <strong>Note:</strong> Windows directory paths use backslashes. To match the path using regex, escape the backslashes.
+          For example: <code>example\\directory\\path</code>
+        </p>
+        </td>
       </tr>
       <tr>
         <td><strong>List of signature names that will be ignored (Used for false positives)</strong></td>
@@ -351,7 +369,7 @@ If you require a proxy server for <%= vars.product_short %> jobs to connect to t
 update their virus definitions, you can configure one:
 
 1. Select **HTTP Proxy Configuration for Anti-Virus Jobs**.
-![Configure HTTP Proxy](http-proxy.png)
+![Configure HTTP Proxy](http-proxy.png)<%# Alt text must describe the image in detail. %>
 
 1. Set **HTTP proxy for Anti-Virus jobs to get database updates** to **Enabled**.
 1. Enter the **Host**, **Port**, **Username** and **Password** in the fields that appear.
@@ -359,14 +377,15 @@ update their virus definitions, you can configure one:
 
 
 ## <a id='scheduled'></a> Configure Scheduled Scan
-<%= vars.product_short %> can be configured to run a virus scan `hourly` or `daily`.
+
+You can configure <%= vars.product_short %> to run a virus scan `hourly` or `daily`.
 The default value is `daily`.
 The format of these values must be in 24-hour format `HH:MM`.
 
 To change the scheduled scan value:
 
 1. Select **Scheduled Scans**.
-![Configure Scheduled Scan](scheduled-scans.png)
+![Configure Scheduled Scan](scheduled-scans.png)<%# Alt text must describe the image in detail. %>
 <%# TODO: Chris to check if this screenshot is accurate %>
 
 1. Set **Interval for scheduled scans to run** to one of these options:
@@ -387,7 +406,7 @@ To do this, complete this procedure:
 1. Ensure all products are selected and click **Apply Changes**.
 
 <br>
-<hr style="height:1px;border:none;color:#333;background-color:#333;" />
+<hr style="height:1px;border:none;color:#333;background-color:#333;" /><%# Consider putting in code tags. %>
 
 ##<a id="scan-containers"></a> (Optional) Configure <%= vars.product_short %> to Exclude Duplicate Logs on Containers
 You can use <%= vars.product_short %> to scan:
