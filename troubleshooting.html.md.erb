@@ -10,7 +10,7 @@ and verifying that it is protecting your <%= vars.ops_manager %> deployment.
 
 ## <a id="installation"></a> Installation Issues
 
-### <a id="fails-to-apply"></a> <%= vars.ops_manager %> Fails to Apply Changes
+### <a id="fails-to-apply"></a> <%= vars.ops_manager %> etcd_server not running after update
 
 <%# [CW] Attempt at using Partial Template resulted in error. Will debug this again later.
 
@@ -60,6 +60,32 @@ Review the manifest file, and replace the `database_mirror` key with the address
 of a stable mirror server.
 If you do not have a stable mirror server for reliable initial deployment,
 use the S3-based mirror: `pivotal-anti-virus-mirror.s3.amazonaws.com`
+
+### <a id="antivirus-fails-to-start"></a> <%= vars.ops_manager %> Antivirus job fails to start
+
+#### Symptom
+Applying changes in <%= vars.ops_manager %> fails.
+The bottom of the changelog contains an error message similar to:
+
+<pre class="terminal">...
+Error: Action Failed get_task: Task d5b87522-c8b2-4870-7855-73d50bff0748 result: 1 of 6 pre-start scripts failed. Failed Jobs: antivirus. Successful Jobs: bpm, syslog_forwarder, bosh-dns, ipsec, pxc-mysql.
+</pre>
+
+#### Explanation
+One of the reasons the antivirus job can fail to start is due to it failing to get the virus definitions from the antivirus-mirror.
+The antivirus-mirror fails to supply the virus definitions if it has failed to correctly obtain the following files; main.cvd, bytecode.cvd, daily.cvd.
+If you are manually getting the ClamAV Virus Database, using cURL or similar tools can return a file with an error, instead of the virus definitions. An example of this is seen below:
+
+<pre class="terminal">...
+$ curl -L -O database.clamav.net/main.cvd
+
+$ cat main.cvd
+error code: 1020
+</pre>
+
+#### Solution
+The tile can be configured to use either the official mirror, or an existing mirror as described [here](./install-mirror.html#-configure-anti-virus-mirror). For use cases where CVD files are manually obtained a supported method must be used. These are documented as part of the [ClamAV FAQs](https://www.clamav.net/documents/freshclam-faq#error-codes).
+
 <hr>
 
 ## <a id="updates"></a> Virus Database Update Issues
