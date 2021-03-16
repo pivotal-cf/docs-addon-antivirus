@@ -10,9 +10,10 @@ and verifying that it is protecting your <%= vars.ops_manager %> deployment.
 
 ## <a id="installation"></a> Installation Issues
 
-### <a id="fails-to-apply"></a> <%= vars.ops_manager %> etcd_server not running after update
+### <a id="fails-to-apply"></a> <%= vars.ops_manager %> etcd_server Not Running after Update
 
 #### Symptom
+
 Applying changes in <%= vars.ops_manager %> fails.
 The bottom of the changelog contains an error message similar to:
 
@@ -24,17 +25,20 @@ Error 400007: 'etcd_server/0 (f8e492bf-db09-4d38-8a73-5cf69d7b8a11)' is not runn
 </pre>
 
 #### Explanation
+
 The <%= vars.product_full_mirror %> server was unavailable during initial deployment.
 
 #### Solution
+
 Review the manifest file, and replace the `database_mirror` key with the address
 of a stable mirror server.
 If you do not have a stable mirror server for reliable initial deployment,
 use the S3-based mirror: `pivotal-anti-virus-mirror.s3.amazonaws.com`
 
-### <a id="antivirus-fails-to-start"></a> <%= vars.ops_manager %> Antivirus job fails to start
+### <a id="antivirus-fails-to-start"></a> <%= vars.ops_manager %> Antivirus Job Fails To Start
 
 #### Symptom
+
 Applying changes in <%= vars.ops_manager %> fails.
 The bottom of the changelog contains an error message similar to:
 
@@ -43,9 +47,12 @@ Error: Action Failed get_task: Task d5b87522-c8b2-4870-7855-73d50bff0748 result:
 </pre>
 
 #### Explanation
-One of the reasons the antivirus job can fail to start is due to it failing to get the virus definitions from the antivirus-mirror.
-The antivirus-mirror fails to supply the virus definitions if it has failed to correctly obtain the following files; main.cvd, bytecode.cvd, daily.cvd.
-If you are manually getting the ClamAV Virus Database, using cURL or similar tools can return a file with an error, instead of the virus definitions. An example of this is seen below:
+
+The antivirus job can fail to start because it does not get the virus definitions from the antivirus-mirror.
+The antivirus-mirror fails to supply the virus definitions if it has failed to correctly
+obtain the following files: `main.cvd`, `bytecode.cvd`, and `daily.cvd`.
+If you manually get the ClamAV Virus Database, using curl or similar tools can return a file with an error
+instead of the virus definitions. For example:
 
 <pre class="terminal">...
 $ curl -L -O database.clamav.net/main.cvd
@@ -55,7 +62,14 @@ error code: 1020
 </pre>
 
 #### Solution
-The tile can be configured to use either the official mirror, or an existing mirror as described [here](./install-mirror.html#-configure-anti-virus-mirror). For use cases where CVD files are manually obtained a supported method must be used. These are documented as part of the [ClamAV FAQs](https://www.clamav.net/documents/freshclam-faq#error-codes).
+
+Configure the tile to use either the official mirror or an existing mirror.
+For information, see [Configure Anti-Virus Mirror](./install-mirror.html#configure-mirror)
+in _Installing and Configuring Anti-Virus Mirror_.
+
+For use cases where CVD files are manually obtained, a supported method must be used.
+For information about error codes and supported methods,
+see [ClamAV documentation](https://www.clamav.net/documents/freshclam-faq#error-codes).
 
 <hr>
 
