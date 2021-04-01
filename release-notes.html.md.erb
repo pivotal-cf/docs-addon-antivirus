@@ -22,8 +22,13 @@ New features and changes in this release:
 
 ### Known Issues
 
-There are no known issues in this release.
+When upgrading from 2.2.8 to 2.2.13, it is important to upgrade both <%= vars.product_full %> and Anti-Virus Mirror tiles together. If both tiles are not updated at the same time this can lead to the following error:
 
+<pre class="terminal">...
+Preparing deployment: Preparing deployment (00:00:01)
+                    L Error: Package name collision detected in instance group 'antivirus-mirror': job 'antivirus-mirror/antivirus-mirror' depends on package 'antivirus-mirror/pcre2-10.22' with fingerprint '593d09a37c106fb3bcc359ca2aef7df4906beb843309f0b7c98bb76f2095fe1e', job 'antivirus/antivirus' depends on package 'antivirus/pcre2-10.22' with fingerprint 'c7ea8c775582572ae25c42801962399c02609b3a7024451c236b4b202f87f519'. BOSH cannot currently collocate two packages with identical names and different fingerprints or dependencies.
+Task 6108 | 15:01:35 | Error: Package name collision detected in instance group 'antivirus-mirror': job 'antivirus-mirror/antivirus-mirror' depends on package 'antivirus-mirror/pcre2-10.22' with fingerprint '593d09a37c106fb3bcc359ca2aef7df4906beb843309f0b7c98bb76f2095fe1e', job 'antivirus/antivirus' depends on package 'antivirus/pcre2-10.22' with fingerprint 'c7ea8c775582572ae25c42801962399c02609b3a7024451c236b4b202f87f519'. BOSH cannot currently collocate two packages with identical names and different fingerprints or dependencies.
+</pre>
 
 ## <a id="2-2-8"></a> v2.2.8
 
