@@ -31,9 +31,7 @@ The <%= vars.product_full_mirror %> server was unavailable during initial deploy
 #### Solution
 
 Review the manifest file, and replace the `database_mirror` key with the address
-of a stable mirror server.
-If you do not have a stable mirror server for reliable initial deployment,
-use the S3-based mirror: `pivotal-anti-virus-mirror.s3.amazonaws.com`
+of a stable mirror server. The official supported mirror is: database.clamav.net.
 
 ### <a id="antivirus-fails-to-start"></a> <%= vars.ops_manager %> Antivirus Job Fails To Start
 
