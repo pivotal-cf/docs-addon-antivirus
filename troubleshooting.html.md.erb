@@ -369,3 +369,16 @@ Failure to query this endpoint indicates one of the Clamav servers is experienci
 ####Solution
 This warning will not impact the functionality of <%= vars.product_short %>.
 <hr>
+
+### <a id='verifying-update'></a> How can I confirm a VM is running with most recent virus definitions?
+
+####Symptom
+When using <%= vars.product_short_mirror %>, virus definitions are downloaded and moved into the directory `/var/vcap/store/antivirus-mirror/validated`. These are then served to the other VM's running <%= vars.product_short %>.
+The <%= vars.product_short %> process will download the virus definition files into the path `/var/vcap/data/antivirus`. The timestamp on these files are often very different to the files on the <%= vars.product_short_mirror %> VM.
+
+####Explanation
+The virus definition files will only be updated if there has been a new version released and downloaded onto the <%= vars.product_short_mirror %>.
+
+####Solution
+To confirm that virus definitions are up to date on a given VM, BOSH ssh onto the VM and view the go-clam-tls logs located at `/var/vcap/sys/log/antivirus/go-clam-tls.log`. Explanation of these logs can be found [here](./monitoring-logs.html#go-clam-tls)
+<hr>
