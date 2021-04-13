@@ -350,3 +350,22 @@ This causes <%= vars.product_short %> to ignore the **Enforce CPU limit** settin
 ####Solution
 Increase the VM size. VMware recommends a minimum VM size of `micro.cpu` using 2&nbsp;CPU and 2&nbsp;GB RAM.
 <hr>
+
+### <a id='query-ping-fail'></a> Freshclam logs show "can't query *.ping.clamav.net"
+
+####Symptom
+When viewing the freshclam logs, it is possible that the following warning messages will be visible:
+
+<pre class="terminal">
+Can't query main.<IP_address>.ping.clamav.net
+Can't query daily.<IP_address>.ping.clamav.net
+Can't query bytecode.<IP_address>.ping.clamav.net
+</pre>pre>
+
+####Explanation
+Freshclam (The process which downloads virus definitions) queries this endpoint to give Clamav information regarding the current definitions being used, and the version of the Clamav binary.
+Failure to query this endpoint indicates one of the Clamav servers is experiencing network difficulty, but this is unrelated to downloading virus definitions and should cause no issue to the update process.
+
+####Solution
+This warning will not impact the functionality of <%= vars.product_short %>.
+<hr>
