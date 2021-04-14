@@ -33,7 +33,17 @@ For more information and diagrams about this architecture,
 see [How Virus Definitions Propagate to VMs](./index.html#propagate).
 
 The following sections describe both of these scenarios
-and explain how to manually update virus definitions on the internal <%= vars.product_short %> mirror.
+and explain how to manually update virus definitions on the internal <%= vars.product_short %>
+mirror.
+
+## <a id="check-logs"> Check That Your Virus Definitions Are Up to Date
+
+To confirm that virus definitions are up to date on a given VM:
+
+1. BOSH SSH on to the VM.
+1. View the `go-clam-tls` logs located at `/var/vcap/sys/log/antivirus/go-clam-tls.log`.
+For more information, see [go-clam-tls Log Messages](./monitoring-logs.html#go-clam-tls).
+
 
 ##<a id="automatic"></a>Automatic Updates with Online Networks
 
@@ -42,6 +52,7 @@ the <%= vars.product_short_mirror %> VM regularly checks the external ClamAV dat
 
 When new virus definitions are present on the external database,
 <%= vars.product_short_mirror %> downloads them automatically.
+
 
 ##<a id="manual"></a>Manually Update on an Air-gapped Network
 
