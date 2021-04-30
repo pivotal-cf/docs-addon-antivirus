@@ -22,8 +22,9 @@ New features and changes in this release:
 
 This release has the following fix:
 
-* **You no longer receive an error when upgrading <%= vars.product_full %> and
-<%= vars.product_short_mirror %> tiles separately:** Fixes package collision issue present in v2.2.13.
+* **Fixes package collision issue present in v2.2.13:**
+You no longer receive an error when upgrading <%= vars.product_full %> and
+<%= vars.product_short_mirror %> tiles separately.
 
 ### Known issues
 
@@ -47,7 +48,7 @@ This release has the following issue:
 * **When upgrading to v2.2.13 from v2.2.8 or v2.2.2, you must upgrade both tiles at the same time:**
 
     If you do not upgrade the <%= vars.product_full %> and <%= vars.product_short_mirror %> tiles together,
-    an error such as the following appears:
+    an error about a package collision issue appears:
 
     <pre class="terminal">...
 Preparing deployment: Preparing deployment (00:00:01)
