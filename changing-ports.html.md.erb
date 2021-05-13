@@ -40,7 +40,7 @@ To change the port number in the <%= vars.product_short_mirror %> tile:
 1. Click **Anti-Virus Mirror Configuration**.
 1. Enter a port number into **Anti-Virus Mirror Port**. The default value is `6501`.
 
-    ![Configure Anti-Virus Mirror Port](mirror-port-mirror.png)<%# Images require alt text that describes the image in detail. %>
+    ![Screenshot of the "Anti-Virus Port" field on the Anti-Virus Mirror Configuration pane](mirror-port-mirror.png)
 1. Return to the <%= vars.ops_manager %> Installation Dashboard.
 
 ## <a id="change-antivirus"></a> Change the Port in the <%= vars.product_short %> Tile
@@ -51,7 +51,9 @@ To change the port number in the <%= vars.product_short %> tile:
 1. Click **Anti-Virus Configuration**.
 1. Under **Mirror for Automatic Database Updates**, ensure that **Deployed mirror from the <%=vars.product_full_mirror%> Tile** is selected.
 1. Enter the same port number you entered in the above step into **Anti-Virus Mirror Port**.
-    <img src="./images/mirror-port.png" alt="Configure Anti-Virus Mirror Mirror Port" width="500"><%# Images require alt text that describes the image in detail. %>
+    <img src="./images/mirror-port.png" alt="Screenshot of the "Mirror for Automatic Database Updates" section.
+     Selecting the "Deployed mirror from the Anti-Virus for VMware Tanzu Mirror Tile" button
+     exposes the "Anti-Virus Mirror Port" field." width="500">
 
 ## <a id="exclude-mirror"></a> Exclude <%= vars.product_short_mirror %> during Apply Changes
 
@@ -70,7 +72,8 @@ To exclude the instance group and complete the port changes:
 1. Exclude the `antivirus-mirror` instance group by adding it to
 **List of instance group names that will be excluded from deployment**.
 
-    ![Exclude Anti-Virus Mirror](exclude-mirror.png)<%# Images require alt text that describes the image in detail. %>
+    ![Screenshot of the "List of instance group names that will be excluded from deployment"
+      field with the text "antivirus-mirror" entered in the field.](exclude-mirror.png)
 
 1. Return to the <%= vars.ops_manager %> Installation Dashboard and click **Review Pending Changes**.
 1. Unselect all products except **BOSH Director**, **<%= vars.product_short %>**, and **<%= vars.product_short_mirror %>**.

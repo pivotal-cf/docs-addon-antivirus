@@ -121,7 +121,11 @@ To configure <%= vars.product_short %>:
 
     <div id="tab1" class="tabcontent" style="display:block">
 
-      <img src="./images/configure-mirror-official.png" alt="Configure Official mirror" width="550">
+      <img src="./images/configure-mirror-official.png"
+       alt="Screenshot of the "Mirror for Automatic Database Updates" section
+       of the "Anti-Virus Configuration" pane.
+       The "Official mirror" radio button is selected.
+       The fields are described below." width="550">
 
       <table class="nice">
         <col width="25%">
@@ -138,7 +142,11 @@ To configure <%= vars.product_short %>:
     </div>
     <div id="tab2" class="tabcontent">
 
-      <img src="./images/configure-mirror-deployed.png" alt="Configure Deployed mirror from the Anti-Virus Mirror tile" width="550">
+      <img src="./images/configure-mirror-deployed.png"
+       alt="Screenshot of the "Mirror for Automatic Database Updates" section
+       of the "Anti-Virus Configuration" pane.
+       The "Deployed mirror from…" radio button is selected.
+       The "Anti-Virus Mirror Port" field is exposed." width="550">
 
       <table class="nice">
         <col width="25%">
@@ -166,7 +174,12 @@ To configure <%= vars.product_short %>:
     </div>
     <div id="tab3" class="tabcontent">
 
-      <img src="./images/configure-mirror-existing.png" alt="Configure Existing Mirror" width="550">
+      <img src="./images/configure-mirror-existing.png"
+       alt="Screenshot of the Mirror for Automatic Database Updates: section
+       of the "Anti-Virus Configuration" pane.
+       The "Existing Mirror" radio button is selected.
+       The "Comma separated list…" field is exposed."
+       width="550">
 
       <table class="nice">
         <col width="25%">
@@ -189,7 +202,12 @@ To configure <%= vars.product_short %>:
     </div>
     <div id="tab4" class="tabcontent">
 
-      <img src="./images/configure-mirror-existing-tls.png" alt="Configure Existing Mirror with TLS" width="550">
+      <img src="./images/configure-mirror-existing-tls.png"
+       alt="Screenshot of the Mirror for Automatic Database Updates: section
+       of the "Anti-Virus Configuration" pane.
+       The "Existing Mirror with TLS" radio button is selected.
+       The three fields exposed are described below."
+       width="550">
 
       <table class="nice">
         <col width="25%">
@@ -243,7 +261,8 @@ To configure <%= vars.product_short %>:
     </div>
 
 1. Configure the remaining fields:
-    <img src="./images/configure.png" alt="Configure Anti-Virus" width="550">
+    <img src="./images/configure.png" alt="Screenshot of the "Anti-Virus Configuration" pane.
+       The fields shown are described below." width="550">
 
     <table class="nice">
       <th>Field</th>
@@ -386,7 +405,7 @@ If you require a proxy server for <%= vars.product_short %> jobs to connect to t
 update their virus definitions, you can configure one:
 
 1. Select **HTTP Proxy Configuration for Anti-Virus Jobs**.
-![Configure HTTP Proxy](http-proxy.png)<%# Alt text must describe the image in detail. %>
+    ![Screenshot of the "HTTP Proxy" pane. The fields are listed below.](http-proxy.png)
 
 1. Set **HTTP proxy for Anti-Virus jobs to get database updates** to **Enabled**.
 1. Enter the **Host**, **Port**, **Username** and **Password** in the fields that appear.
@@ -402,7 +421,10 @@ The format of these values must be in 24-hour format `HH:MM`.
 To change the scheduled scan value:
 
 1. Select **Scheduled Scans**.
-![Configure Scheduled Scan](scheduled-scans.png)<%# Alt text must describe the image in detail. %>
+    ![Screenshot of the Scheduled Scans pane with the Daily radio button selected.
+      The fields exposed are the "Earliest time that a daily scheduled scan can start" field
+      (must be in HH:MM 24-hour format) and
+      the "Latest time that a daily scheduled scan can start" field.](scheduled-scans.png)
 <%# TODO: Chris to check if this screenshot is accurate %>
 
 1. Set **Interval for scheduled scans to run** to one of these options:
@@ -467,7 +489,8 @@ be ignored** field:
     ```
     ^/var/vcap/data/grootfs/store/(un)?privileged/images/[\w-]+/rootfs/.*$
     ```
-    ![Directories and files that will be ignored by Anti-Virus](ignore-file.png)
+    ![Screenshot of the "Directories and files that will be ignored" field.
+      The text "/proc/,/sys/" is entered in the field.](ignore-file.png)
     <p class="note">
       <strong>Note:</strong> Adding this ignore pattern means that files and directories in the
       <code>/var/vcap/data/grootfs/store/unprivileged/images/UUID/rootfs</code>
@@ -506,7 +529,8 @@ be ignored** field:
     ```
     ^/var/vcap/store/docker/docker/overlay2/\w+/merged/.*$
     ```
-    ![Directories and files that will be ignored by Anti-Virus](ignore-file.png)
+    ![Screenshot of the "Directories and files that will be ignored" field.
+      The text "/proc/,/sys/" is entered in the field.](ignore-file.png)
     <p class="note">
       <strong>Note:</strong> Adding this ignore pattern means that files and directories in the
       <code>/var/vcap/data/grootfs/store/unprivileged/images/UUID/merged</code>
