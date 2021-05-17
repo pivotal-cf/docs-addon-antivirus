@@ -138,10 +138,10 @@ and serves them to the `freshclam` processes of BOSH VMs.
 
 1. On each BOSH-managed VM:
 
-    1. The `freshclam` daemon process regularly queries the internal <%= vars.product_short_mirror %> for new virus definitions.
+    1. The `go-clam-tls` daemon process regularly queries the internal <%= vars.product_short_mirror %> for new virus definitions.
       - You can configure the query frequency in the <%= vars.product_full %> tile > **ClamAV Configuration** > **Number of database checks per day** field.
 
-    1. When `freshclam` retrieves new definitions, it:
+    1. When `go-clam-tls` retrieves new definitions, it:
       - Notifies the `clamd` daemon process that there are new definitions, and
       - Saves the virus definitions in the BOSH VM's own virus database.
 
@@ -159,10 +159,11 @@ This diagram illustrates how virus definitions propagate to BOSH VMs with <%= va
 [//]: https://docs.google.com/presentation/d/1pBHK0dcE5y7rT4KnacqFDc6LuU8R3HiR9ApuvwY1uzA/edit
 ![Online (non-air-gapped) update process, following path of new virus data.
 External ClamAV database in the cloud serves new virus data to freshclam running
-on local Anti-Virus Mirror.
-The local mirror runs it through the database verifier, also on Anti-Virus Mirror
-and then serves it to go-clam-tls on all BOSH VMs.
-On each BOSH VM, go-clam-tls notifies clamd that there are new definitions,
+on Anti-Virus Mirror VM in the TAS for VMs.
+The Anti-Virus Mirror VM in the TAS for VMs deployment runs it through the database verifier,
+which is also on the Anti-Virus Mirror VM,
+and then using mTLS serves it to go-clam-tls on all BOSH VMs.
+On each BOSH VM that is running Anti-Virus for VMware Tanzu, go-clam-tls notifies clamd that there are new definitions,
 and saves the definitions in the virus database.
 clamd then loads the new virus definitions from the database into its memory to
 enable fast scanning.](update-defs-online.jpg)
@@ -173,11 +174,13 @@ This diagram illustrates how virus definitions propagate to BOSH VMs with <%= va
 
 [//]: https://docs.google.com/presentation/d/1pBHK0dcE5y7rT4KnacqFDc6LuU8R3HiR9ApuvwY1uzA/edit
 ![Air-gapped update process, following path of new virus data.
-Operator downloads virus data from External ClamAV database in the cloud,
-then runs BOSH SCP to send it to freshclam running on local Anti-Virus Mirror.
-The local mirror runs it through the database verifier, also on Anti-Virus Mirror,
-and then serves it to go-clam-tls on all BOSH VMs.
-On each BOSH VM, go-clam-tls notifies clamd that there are new definitions,
+Operators download virus data from External ClamAV database in the cloud to an online workstation.
+They transfer the virus data to the air-gapped off-line workstation.
+The operators then run BOSH SCP to send the data to freshclam running on Anti-Virus Mirror VM in the TAS for VMs.
+The Anti-Virus Mirror VM in the TAS for VMs deployment runs it through the database verifier,
+which is also on the Anti-Virus Mirror VM,
+and then using mTLS serves it to go-clam-tls on all BOSH VMs.
+On each BOSH VM that is running Anti-Virus for VMware Tanzu, go-clam-tls notifies clamd that there are new definitions,
 and saves the definitions in the virus database.
 clamd then loads the new virus definitions from the database into its memory to
 enable fast scanning.](update-defs-airgap.jpg)
