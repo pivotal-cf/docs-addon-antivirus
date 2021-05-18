@@ -159,8 +159,8 @@ This diagram illustrates how virus definitions propagate to BOSH VMs with <%= va
 [//]: https://docs.google.com/presentation/d/1pBHK0dcE5y7rT4KnacqFDc6LuU8R3HiR9ApuvwY1uzA/edit
 ![Online (non-air-gapped) update process, following path of new virus data.
 External ClamAV database in the cloud serves new virus data to freshclam running
-on Anti-Virus Mirror VM in the TAS for VMs.
-The Anti-Virus Mirror VM in the TAS for VMs deployment runs it through the database verifier,
+on Anti-Virus Mirror VM in the TAS for VMs deployment.
+The Anti-Virus Mirror VM runs it through the database verifier,
 which is also on the Anti-Virus Mirror VM,
 and then using mTLS serves it to go-clam-tls on all BOSH VMs.
 On each BOSH VM that is running Anti-Virus for VMware Tanzu, go-clam-tls notifies clamd that there are new definitions,
@@ -176,8 +176,8 @@ This diagram illustrates how virus definitions propagate to BOSH VMs with <%= va
 ![Air-gapped update process, following path of new virus data.
 Operators download virus data from External ClamAV database in the cloud to an online workstation.
 They transfer the virus data to the air-gapped off-line workstation.
-The operators then run BOSH SCP to send the data to freshclam running on Anti-Virus Mirror VM in the TAS for VMs.
-The Anti-Virus Mirror VM in the TAS for VMs deployment runs it through the database verifier,
+The operators then run BOSH SCP to send the data to freshclam running on Anti-Virus Mirror VM in the TAS for VMs deployment.
+The Anti-Virus Mirror VM runs it through the database verifier,
 which is also on the Anti-Virus Mirror VM,
 and then using mTLS serves it to go-clam-tls on all BOSH VMs.
 On each BOSH VM that is running Anti-Virus for VMware Tanzu, go-clam-tls notifies clamd that there are new definitions,
