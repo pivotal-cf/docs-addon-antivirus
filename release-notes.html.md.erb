@@ -19,6 +19,12 @@ Changes in this release:
 * **ClamAV release:** Updated to v0.103.3
 * **Changes to On-Access scanning:** On-Access scanning now runs as a separate process named `clamonacc`.
 
+<p class="note">
+  The BOSH deployment fails if the minimum recommended VM size is not met.
+  Ensure all VMs where <%= vars.product_short %> is installed have at least 2&nbsp;GB free RAM and 2&nbsp;CPU.
+  On Google Cloud Platform (GCP), the recommended minimum VM size is <code>micro.cpu</code> using 2&nbsp;CPU and 2&nbsp;GB RAM.
+</p>
+
 ### Known issues
 
 There are no known issues for this release.
