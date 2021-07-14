@@ -12,126 +12,24 @@ This topic contains release notes for <%= vars.product_full %>.
 
 **Release Date: July 14, 2021**
 
-### Maintenance Changes
-
-Changes in this release:
-
-* **ClamAV release:** Updated to v0.103.3
-* **Changes to On-Access scanning:** On-Access scanning now runs as a separate process named `clamonacc`.
-
 <p class="note">
-  The BOSH deployment fails if the minimum recommended VM size is not met.
+  <strong>Note: </strong>BOSH deployment fails if the minimum recommended VM size is not met.
   Ensure all VMs where <%= vars.product_short %> is installed have at least 2&nbsp;GB free RAM and 2&nbsp;CPU.
   On Google Cloud Platform (GCP), the recommended minimum VM size is <code>micro.cpu</code> using 2&nbsp;CPU and 2&nbsp;GB RAM.
 </p>
 
-### Known issues
-
-There are no known issues for this release.
-
-## <a id="2-2-19"></a> v2.2.19
-
-**Release Date: April 30, 2021**
-
-### Maintenance Changes
-
+### Features
 Changes in this release:
 
-* **ClamAV release:** Updated to v0.101.5
-
-### Resolved Issues
-
-This release has the following fix:
-
-* **Fixes package collision issue present in v2.2.13:**
-You no longer receive an error when upgrading <%= vars.product_full %> and
-<%= vars.product_short_mirror %> tiles separately.
+* **ClamAV release:** Updated to v0.103.3
+* **Changes to On-Access scanning:** On-Access scanning now runs as a separate process named `clamonacc`.
+For information about clamonacc, see [clamonacc App](./monitoring-logs#clamonacc-app).
 
 ### Known issues
 
-There are no known issues for this release.
-
-## <a id="2-2-13"></a> v2.2.13
-
-**Release Date: January 21, 2021**
-
-### Features
-
-New features and changes in this release:
-
-* Updates golang dependency to v1.15 for both Linux and Windows.
-* Default VM size for Antivirus Mirror set to 2&nbsp;CPU and 2&nbsp;GB RAM to avoid startup error caused by resource conflict.
-
-### Known Issues
-
-This release has the following issue:
-
-* **When upgrading to v2.2.13 from v2.2.8 or v2.2.2, you must upgrade both tiles at the same time:**
-
-    If you do not upgrade the <%= vars.product_full %> and <%= vars.product_short_mirror %> tiles together,
-    an error about a package collision issue appears:
-
-    <pre class="terminal">...
-Preparing deployment: Preparing deployment (00:00:01)
-                    L Error: Package name collision detected in instance group 'antivirus-mirror': job 'antivirus-mirror/antivirus-mirror' depends on package 'antivirus-mirror/pcre2-10.22' with fingerprint '593d09a37c106fb3bcc359ca2aef7df4906beb843309f0b7c98bb76f2095fe1e', job 'antivirus/antivirus' depends on package 'antivirus/pcre2-10.22' with fingerprint 'c7ea8c775582572ae25c42801962399c02609b3a7024451c236b4b202f87f519'. BOSH cannot currently collocate two packages with identical names and different fingerprints or dependencies.
-Task 6108 | 15:01:35 | Error: Package name collision detected in instance group 'antivirus-mirror': job 'antivirus-mirror/antivirus-mirror' depends on package 'antivirus-mirror/pcre2-10.22' with fingerprint '593d09a37c106fb3bcc359ca2aef7df4906beb843309f0b7c98bb76f2095fe1e', job 'antivirus/antivirus' depends on package 'antivirus/pcre2-10.22' with fingerprint 'c7ea8c775582572ae25c42801962399c02609b3a7024451c236b4b202f87f519'. BOSH cannot currently collocate two packages with identical names and different fingerprints or dependencies.
-</pre>
-
-## <a id="2-2-8"></a> v2.2.8
-
-**Release Date: June 19, 2020**
-
-### Resolved Issues
-
-This release has the following fix:
-
-* <%= vars.product_short %> no longer performs a `chmod` on the `/var/vcap/data/tmp` directory during
-pre-start.
-
-
-### Known Issues
-
 This release has the following issues:
 
 <%= partial vars.path_to_partials + "/antivirus/bbr-ki" %>
-
-
-## <a id="2-2-2"></a> v2.2.2
-
-**Release Date: January 6, 2020**
-
-### Features
-
-New features and changes in this release:
-
-* **CPU limit** for <%= vars.product_short %> is now configured independently of the
-**Enforce CPU limit** field.
-When you upgrade to v2.2 from v2.1, the value of **CPU limit** is reset to the installation default
-of 50%.<br>
-For instructions on setting the **CPU limit**, see [Configure Anti-Virus](./install.html#configure).
-
-* **Timeout to connect to the database server (in seconds)** is now configurable. This field sets
-the timeout for downloading virus definitions from the mirror server.
-For instructions on setting the **Timeout to connect to the database server (in seconds)**, see
-[Configure Anti-Virus](./install.html#configure).
-
-
-### Resolved Issues
-
-This release has the following fix:
-
-* <%= vars.product_short_mirror %> no longer outputs a TLS handshake error log when the process is
-not failing.
-
-
-### Known Issues
-
-This release has the following issues:
-
-<%= partial vars.path_to_partials + "/antivirus/bbr-ki" %>
-
-* <%= vars.product_short %> pre-start can fail when `chmod` is done to the `/var/vcap/data/tmp`
-directory.
 
 
 ## <a id="view"></a> View Release Notes for Another Version
