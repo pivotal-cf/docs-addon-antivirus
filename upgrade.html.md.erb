@@ -44,7 +44,7 @@ See the table below for the new features to consider and the upgrade instruction
           For more information, see <a href="#use-existing">Using an Existing Mirror</a> below.</li>
         <li>If required, configure the mirror port.
           For more information see <a href="#configure-mirror">Configuring the Mirror Port</a> below.</li>
-        <li>The <strong>memory limit</strong> must be raised to at least `1610612736`.</li>
+        <li>The value of <strong>memory limit (in bytes)</strong> must be at least <code>1610612736</code>.</li>
         <li>VMware recommends that you reset the value of <strong>CPU limit (Percentage)</strong>.</li>
         <li>You can set <strong>Timeout to connect to the database server (in seconds)</strong>.</li>
       </ul>
@@ -56,7 +56,7 @@ See the table below for the new features to consider and the upgrade instruction
     <td>
       <ul>
         <li>VMware recommends that you reset the value of <strong>CPU limit (Percentage)</strong>.</li>
-        <li>The <strong>memory limit</strong> must be raised to at least `1610612736`.</li>
+        <li>The value of <strong>memory limit (in bytes)</strong> must be at least <code>1610612736</code>.</li>
         <li>You can set <strong>Timeout to connect to the database server (in seconds)</strong>.</li>
       </ul>
       For upgrade instructions, see <a href="#upgrade-v21-v22">Upgrade <%= vars.product_full %> to This Version from v2.1 or Later</a> below.
@@ -66,9 +66,12 @@ See the table below for the new features to consider and the upgrade instruction
     <td>v2.2</td>
     <td>
       <ul>
-        <li>It is important the minimum resource requirements are met. Please ensure all VMs where Antivirus will be installed have at least 2GB free RAM and 2 CPU. On Google Cloud Platform (GCP), the recommended minimum VM size is `micro.cpu`</li>
+        <li>
+          Ensure that all VMs that you install <%= vars.product_short %> on have at least 2;&nbspGB free RAM and 2;&nbspCPU.
+          On Google Cloud Platform (GCP), the recommended minimum VM size is <code>micro.cpu</code>.
+        </li>
         <li>VMware recommends that you reset the value of <strong>CPU limit (Percentage)</strong>.</li>
-        <li>The <strong>memory limit</strong> must be raised to at least `1610612736`.</li>
+        <li>The value of <strong>memory limit (in bytes)</strong> must be at least <code>1610612736</code>.</li>
       </ul>
       For upgrade instructions, see <a href="#upgrade-v21-v22">Upgrade <%= vars.product_full %> to This Version from v2.1 or Later</a> below.
     </td>
