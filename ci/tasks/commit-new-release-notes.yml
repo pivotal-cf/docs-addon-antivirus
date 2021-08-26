@@ -1,0 +1,22 @@
+---
+platform: linux
+
+image_resource:
+  type: registry-image
+  source: {repository: pcfplatformrecovery/backup-and-restore}
+
+inputs:
+- name: docs-repo
+- name: release-notes
+
+outputs:
+- name: docs-repo
+
+params:
+  VERSION:
+  GIT_AUTHOR_NAME:
+  GIT_AUTHOR_EMAIL:
+
+run:
+  path: docs-repo/ci/tasks/commit-new-release-notes.sh
+
