@@ -9,6 +9,45 @@ This topic contains release notes for <%= vars.product_full %>.
 <%= partial vars.path_to_partials + "/upgrade-planner" %>
 
 ## <a id='releases'></a> Releases
+### <a id='2-3-5'></a> v2.3.5
+
+**Release Date**: August 27, 2021
+
+#### Maintenance Changes
+
+* Add 2.7 upgrade tests. Add daily trigger
+* Add autobump jobs to ci
+* Add correct exit code to run-antivirus-scan process
+* Add dependabot scanning for go-clam-tls
+* Add github checks for PR flow
+* Add package information for golang vendored package
+* Add script for autobumping clamav
+* Add script to autobump clamav windows
+* Add update s3 bucket to AV pipeline
+* Allow PRs from dependabot to auto merge
+* Amend URL to match correct case for clamav windows
+* Amend name of pcre2 package in update script
+* Amend script to work with clamav semver
+* Amend time resource to work correctly
+* Autobump pcre2
+* Bump go dependencies for go-clam-tls
+* Bump pcre2 blob to 10.37
+* Bump to latest go 1.16
+* Merge branch 'master' into golang-vendor-update
+* Merge pull request #93 from pivotal-cf/dev
+* Merge pull request #94 from pivotal-cf/add-github-checks
+* Merge pull request #98 from pivotal-cf/golang-vendor-update
+* Merge remote-tracking branch 'local-master/master' into HEAD
+* Remove redundant pci-infrastructure resource from pipeline
+* Remove testfile
+* Remove whitespace from regex
+* Revert "Add correct exit code to run-antivirus-scan process"
+* Test commit for PR
+* Tidy up AV pipeline tasks
+* Update vendored package golang-1-linux
+
+
+
 
 ## <a id="2-3-2"></a> v2.3.2
 
