@@ -8,6 +8,28 @@ This topic contains release notes for <%= vars.product_full %>.
 
 <%= partial vars.path_to_partials + "/upgrade-planner" %>
 
+## <a id="2-3-10"></a> v2.3.10
+
+**Release Date: September 13, 2021**
+
+<p class="note">
+  <strong>Note: </strong>BOSH deployment fails if the minimum recommended VM size is not met.
+  Ensure all VMs where <%= vars.product_short %> is installed have at least 2&nbsp;GB free RAM and 2&nbsp;CPU.
+  On Google Cloud Platform (GCP), the recommended minimum VM size is <code>micro.cpu</code> using 2&nbsp;CPU and 2&nbsp;GB RAM.
+</p>
+
+### Features
+Changes in this release:
+
+* **Pcre2 release:** Updated to v10.37
+* **Golang release** Updated to v1.16.7
+
+### Known issues
+
+This release has the following issues:
+
+<%= partial vars.path_to_partials + "/antivirus/bbr-ki" %>
+
 ## <a id="2-3-2"></a> v2.3.2
 
 **Release Date: July 15, 2021**
