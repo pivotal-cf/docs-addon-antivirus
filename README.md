@@ -19,7 +19,7 @@ As of April 16, 2020:
 
 ## Book Repo
 
-pivotal-cf/docs-book-antivirus builds both the **edge** version (next unreleased version) and the **production** versions.
+[pivotal-cf/docs-book-antivirus](https://github.com/pivotal-cf/docs-book-antivirus) builds both the **edge** version (next unreleased version) and the **production** versions.
 
 + **Edge** is currently publishing the 3-0 branch.
 
