@@ -60,7 +60,7 @@ This adds the tile to your staging area.
 To assign availability zones (AZs) and networks:
 
 1. Select **Assign AZs and Networks**.
-![Assign AZs and Networks](mirror-assign-azs.png)
+![Assign AZs and Networks](images/mirror-assign-azs.png)
 
 1. Configure the fields as follows:
 
@@ -92,7 +92,7 @@ To assign availability zones (AZs) and networks:
 To configure <%= vars.product_short_mirror %>:
 
 1. Select **Anti-Virus Mirror Configuration**.
-  ![Anti-Virus Mirror Configuration](mirror-configure.png)
+  ![Anti-Virus Mirror Configuration](images/mirror-configure.png)
 
 1. Configure the fields as follows:
 
@@ -151,14 +151,12 @@ To configure <%= vars.product_short_mirror %>:
 
 1. Click **Save**.
 
-  <%# TODO Dylan: less verbose things with tile field updates %>
-
 1. (Optional) If you selected **Official mirror (database.clamav.net)** or **Existing mirror** in the previous section,
  you can configure a proxy for the <%= vars.product_short %> mirror to retrieve the databases from.
  To do this:
 
   1. Select **HTTP Proxy Configuration**.
-  ![HTTP Proxy Configuration for Anti-Virus Mirror Jobs](mirror-http-proxy.png)
+  ![HTTP Proxy Configuration for Anti-Virus Mirror Jobs](images/mirror-http-proxy.png)
 
   1. Set **HTTP proxy to get database updates** to **Enabled**.
 
@@ -170,7 +168,7 @@ To configure <%= vars.product_short_mirror %>:
 Follow the steps below to enable system logging for <%= vars.product_short_mirror %>.
 
 1. Select **Syslog**.
-![Syslog](mirror-syslog.png)
+![Syslog](images/mirror-syslog.png)
 
 1. Select **Yes** for **Do you want to configure Syslog forwarding?**.
 1. Configure the fields as follows:
@@ -220,7 +218,7 @@ To scale the number of deployed mirrors:
 
   1. Select **Resource Config**.
 
-    ![Resource Config](mirror-resource-config.png)
+    ![Resource Config](images/mirror-resource-config.png)
 
   1. For `antivirus-mirror`, set **INSTANCES** to the number of mirrors that you want to deploy.
 
