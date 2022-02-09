@@ -407,7 +407,7 @@ If you require a proxy server for <%= vars.product_short %> jobs to connect to t
 update their virus definitions, you can configure one:
 
 1. Select **HTTP Proxy Configuration for Anti-Virus Jobs**.
-    ![Screenshot of the "HTTP Proxy" pane. The fields are listed below.](http-proxy.png)
+    ![Screenshot of the "HTTP Proxy" pane. The fields are listed below.](images/http-proxy.png)
 
 1. Set **HTTP proxy for Anti-Virus jobs to get database updates** to **Enabled**.
 1. Enter the **Host**, **Port**, **Username** and **Password** in the fields that appear.
@@ -426,7 +426,7 @@ To change the scheduled scan value:
     ![Screenshot of the Scheduled Scans pane with the Daily radio button selected.
       The fields exposed are the "Earliest time that a daily scheduled scan can start" field
       (must be in HH:MM 24-hour format) and
-      the "Latest time that a daily scheduled scan can start" field.](scheduled-scans.png)
+      the "Latest time that a daily scheduled scan can start" field.](images/scheduled-scans.png)
 
 1. Set **Interval for scheduled scans to run** to one of these options:
   * **Hourly**
@@ -447,7 +447,7 @@ To do so:
 1. Ensure all products are selected and click **Apply Changes**.
 
 <br>
-<hr style="height:1px;border:none;color:#333;background-color:#333;" /><%# Consider putting in code tags. %>
+<hr style="height:1px;border:none;color:#333;background-color:#333;" />
 
 ## <a id="scan-containers"></a> (Optional) Configure <%= vars.product_short %> to Exclude Duplicate Logs on Containers
 
@@ -491,7 +491,7 @@ be ignored** field:
     ^/var/vcap/data/grootfs/store/(un)?privileged/images/[\w-]+/rootfs/.*$
     ```
     ![Screenshot of the "Directories and files that will be ignored" field.
-      The text "/proc/,/sys/" is entered in the field.](ignore-file.png)
+      The text "/proc/,/sys/" is entered in the field.](images/ignore-file.png)
     <p class="note">
       <strong>Note:</strong> Adding this ignore pattern means that files and directories in the
       <code>/var/vcap/data/grootfs/store/unprivileged/images/UUID/rootfs</code>
@@ -531,7 +531,7 @@ be ignored** field:
     ^/var/vcap/store/docker/docker/overlay2/\w+/merged/.*$
     ```
     ![Screenshot of the "Directories and files that will be ignored" field.
-      The text "/proc/,/sys/" is entered in the field.](ignore-file.png)
+      The text "/proc/,/sys/" is entered in the field.](images/ignore-file.png)
     <p class="note">
       <strong>Note:</strong> Adding this ignore pattern means that files and directories in the
       <code>/var/vcap/data/grootfs/store/unprivileged/images/UUID/merged</code>
