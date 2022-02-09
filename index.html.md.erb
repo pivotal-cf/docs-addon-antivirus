@@ -9,7 +9,7 @@ This topic is an overview of <%= vars.product_full %>.
 ## <a id="about-antivirus"></a>Overview
 
 <%= vars.product_full %> might be necessary for regulatory purposes if your compliance auditor
-requires antivirus protection within your <%= vars.ops_manager %> environment.
+requires antivirus protection within your Ops Manager environment.
 
 For example, auditors sometimes expect that antivirus protection is present in an
 environment that must comply with standards such as the Payment Card Industry Data
@@ -38,7 +38,7 @@ The following table provides version and version-support information about <%= v
         <td>Open Source ClamAV 0.101.5</td>
     </tr>
     <tr>
-        <td>Compatible <%= vars.ops_manager %> versions</td>
+        <td>Compatible Ops Manager versions</td>
         <td>2.10, 2.9, 2.8, and 2.7</td>
     </tr>
     <tr>
@@ -76,7 +76,7 @@ The following table provides version and version-support information about <%= v
         <td>April 30, 2021</td>
     </tr>
     <tr>
-        <td>Compatible <%= vars.ops_manager %> versions</td>
+        <td>Compatible Ops Manager versions</td>
         <td>2.10, 2.9, 2.8, and 2.7</td>
     </tr>
     <tr>
@@ -114,7 +114,7 @@ The following table provides version and version-support information about <%= v
 ###<a id="propagate"></a>How Virus Definitions Propagate to VMs
 
 Virus definitions on the internal <%= vars.product_short_mirror %> update
-automatically or manually depending on whether your <%= vars.ops_manager %>
+automatically or manually depending on whether your Ops Manager
 is on an online or air-gapped network, as described in [Updating Virus Definitions on an <%= vars.product_short_mirror %>](./updating-databases.html).
 The automatic and manual processes store new virus definitions to the <%= vars.product_short_mirror %>
 VM's database of unverified viruses as follows:
@@ -149,7 +149,7 @@ and serves them to the `freshclam` processes of BOSH VMs.
     by the `clamscan` process.
 
 The diagrams below illustrate how new virus definitions propagate
-from an external ClamAV database to <%= vars.ops_manager %> managed BOSH VMs,
+from an external ClamAV database to Ops Manager managed BOSH VMs,
 in online and air-gapped installations.
 
 ###<a id="propagate-online"></a>Online Network (Diagram)

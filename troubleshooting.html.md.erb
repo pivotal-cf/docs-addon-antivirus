@@ -6,15 +6,15 @@ owner: Platform Security & Compliance Team
 <strong><%= modified_date %></strong>
 
 This topic provides instructions for troubleshooting <%= vars.product_full %>
-and verifying that it is protecting your <%= vars.ops_manager %> deployment.
+and verifying that it is protecting your Ops Manager deployment.
 
 ## <a id="installation"></a> Installation Issues
 
-### <a id="fails-to-apply"></a> <%= vars.ops_manager %> etcd_server Not Running after Update
+### <a id="fails-to-apply"></a> Ops Manager etcd_server Not Running after Update
 
 #### Symptom
 
-Applying changes in <%= vars.ops_manager %> fails.
+Applying changes in Ops Manager fails.
 The bottom of the changelog contains an error message similar to:
 
 <pre class="terminal">...
@@ -33,11 +33,11 @@ The <%= vars.product_full_mirror %> server was unavailable during initial deploy
 Review the manifest file, and replace the `database_mirror` key with the address
 of a stable mirror server. The official supported mirror is `database.clamav.net`.
 
-### <a id="antivirus-fails-to-start"></a> <%= vars.ops_manager %> Antivirus Job Fails To Start
+### <a id="antivirus-fails-to-start"></a> Ops Manager Antivirus Job Fails To Start
 
 #### Symptom
 
-Applying changes in <%= vars.ops_manager %> fails.
+Applying changes in Ops Manager fails.
 The bottom of the changelog contains an error message similar to:
 
 <pre class="terminal">...
@@ -243,7 +243,7 @@ To make changes to this limit, configure **CPU limit (percentage)** in the **<%=
 if other processes are not using CPU resources.<br>
 To disable this limit, set the **Enforce CPU limit** field to **When other processes are using CPU resources** in the **<%= vars.product_short %>** tile.
 
-+ From the **<%= vars.ops_manager %> Installation Dashboard**, navigate to the tile with the failing `antivirus` job.
++ From the **Ops Manager Installation Dashboard**, navigate to the tile with the failing `antivirus` job.
 On **Resource Config**, adjust the **VM Type** for the **<%= vars.product_short %>** job
 to have sufficient CPU resources.
 
@@ -275,8 +275,7 @@ For more information, see [Scale the Number of Deployed Mirrors](./install-mirro
 #### Symptom
 
 When using <%= vars.product_short_mirror %>,
-errors occur when you redeploy <%= vars.app_runtime_full %> while restoring with BOSH Backup and Restore (BBR). For information about redeploying <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>),
-see [Step 12: Redeploy <%= vars.app_runtime_abbr %>](https://docs.pivotal.io/platform/customizing/backup-restore/restore-pcf-bbr.html#redeploy-ert).
+errors occur when you redeploy Tanzu Application Service (TAS) while restoring with BOSH Backup and Restore (BBR). For information about redeploying TAS, see [Redeploy TAS for VMs](https://docs.pivotal.io/ops-manager/install/backup-restore/restore-pcf-bbr.html#redeploy-ert) in _Restoring Deployments from Backup with BBR_ in the Ops Manager documentation.
 
 #### Explanation
 
@@ -295,7 +294,7 @@ is deployed before restoring your deployment.
 
 To do this:
 
-1. Follow the procedures before _Step 12: Redeploy <%= vars.app_runtime_abbr %>_ in [Restoring Deployments from Backup with BBR](https://docs.pivotal.io/platform/customizing/backup-restore/restore-pcf-bbr.html). Do not apply changes.
+1. Follow the procedures before _Redeploy TAS for VMs](https://docs.pivotal.io/ops-manager/install/backup-restore/restore-pcf-bbr.html#redeploy-ert) in _Restoring Deployments from Backup with BBR_ in the Ops Manager documentation. Do not apply changes.
 
 1. Exclude <%= vars.product_short_mirror %> from the <%= vars.product_short %> deployment by
 following the procedure in
@@ -306,7 +305,7 @@ This ensures that <%= vars.product_short %> is not deployed on the <%= vars.prod
     from the <%= vars.product_short %> configurations by following the procedure in
     [Remove the Exclusion](./changing-ports.html#remove-exclude).
 
-1. Continue to restore your deployment by following the remaining procedures in [Restoring Deployments from Backup with BBR](https://docs.pivotal.io/platform/customizing/backup-restore/restore-pcf-bbr.html).
+1. Continue to restore your deployment by following the remaining procedures in [Restoring Deployments from Backup with BBR](https://docs.pivotal.io/ops-manager/install/backup-restore/restore-pcf-bbr.html).
 
 ### <a id='cpu-spikes-clamav-enforce-cpu'></a> CPU Spikes While Enforcing a CPU Limit in <%= vars.product_short %>
 

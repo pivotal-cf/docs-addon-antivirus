@@ -15,10 +15,10 @@ see [Installing and Configuring <%= vars.product_full_mirror %>](./install-mirro
 
 To install <%= vars.product_short %>, you must have:
 
-* **An <%= vars.ops_manager %> operator user account with admin rights**.
+* **An Ops Manager operator user account with admin rights**.
 For more information, see [Platform Operators](https://docs.pivotal.io/ops-manager/install/platform-operators.html).
 
-* **<%= vars.ops_manager_full %> (<%= vars.ops_manager %>)**.
+* **<%= vars.ops_manager_full %> (Ops Manager)**.
 For compatible versions, see the [Product Snapshot](./index.html#snapshot).
 
 * **At least 2&nbsp;GB of RAM free for each VM that installs <%= vars.product_short %>**.
@@ -31,11 +31,11 @@ For compatible versions, see the [Product Snapshot](./index.html#snapshot).
 
 ## <a id='install-addon'></a> Install <%= vars.product_short %>
 
-Install the <%= vars.product_short %> tile on the <%= vars.ops_manager %> Installation Dashboard:
+Install the <%= vars.product_short %> tile on the Ops Manager Installation Dashboard:
 
 1. Download the product file from [<%= vars.product_network %>](https://network.pivotal.io/products/p-clamav-addon).
 
-1. Navigate to the <%= vars.ops_manager %> Installation Dashboard and select **Import a Product** to upload the product file.
+1. Navigate to the Ops Manager Installation Dashboard and select **Import a Product** to upload the product file.
 
 1. Under the **Import a Product** button, click **+** next to the version number of <%= vars.product_short %>.
 This adds the tile to your staging area.
@@ -439,7 +439,7 @@ To do this, set **Earliest time that a daily scheduled scan can start** and
 Your installation is not complete until you apply your configuration changes.
 To do so:
 
-1. Return to the <%= vars.ops_manager %> Installation Dashboard.
+1. Return to the Ops Manager Installation Dashboard.
 1. Click **Review Pending Changes**.
 1. Ensure all products are selected and click **Apply Changes**.
 

@@ -27,9 +27,9 @@ installing this tile, and continue to [Installing and Configuring <%= vars.produ
 
 To install the <%= vars.product_short_mirror %>, you must have:
 
-* **A <%= vars.ops_manager %> operator user account with admin rights**. For more information, see [Platform Operators](https://docs.pivotal.io/ops-manager/install/platform-operators.html).
+* **A Ops Manager operator user account with admin rights**. For more information, see [Platform Operators](https://docs.pivotal.io/ops-manager/install/platform-operators.html).
 
-* **<%= vars.ops_manager_full %> (<%= vars.ops_manager %>)**.
+* **<%= vars.ops_manager_full %> (Ops Manager)**.
 For compatible versions, see the [Product Snapshot](./index.html#snapshot).
 
 * **At least 1&nbsp;GB of RAM free for each VM that installs <%= vars.product_short %>**.
@@ -45,9 +45,9 @@ To install the <%= vars.product_full_mirror %> tile:
 1. Download the product file from [<%= vars.product_network %>](https://network.pivotal.io/products/p-clamav-addon).
 
     For air-gapped networks, follow your company's offline installation protocols.
-      For more information, see [Installing <%= vars.ops_manager %> in Air-gapped Environments](https://docs.pivotal.io/platform/customizing/offline_installation.html).
+      For more information, see [Installing Ops Manager in Air-gapped Environments](https://docs.pivotal.io/ops-manager/install/offline_installation.html).
 
-1. Navigate to the <%= vars.ops_manager %> Installation Dashboard and select **Import a Product** to upload the product file.
+1. Navigate to the Ops Manager Installation Dashboard and select **Import a Product** to upload the product file.
 
 1. Under the **Import a Product** button, click **+** next to the version number of <%= vars.product_full_mirror %>.
 This adds the tile to your staging area.
@@ -252,7 +252,7 @@ To scale the number of deployed mirrors:
 Your <%= vars.product_short_mirror %> installation is not complete until you apply your configuration changes.
 To do this:
 
-1. Return to the <%= vars.ops_manager %> Installation Dashboard.
+1. Return to the Ops Manager Installation Dashboard.
 
 1. Click **Review Pending Changes**.
 1. Unselect all products except **BOSH Director** and **<%= vars.product_short_mirror %>** and click **Apply Changes**.
