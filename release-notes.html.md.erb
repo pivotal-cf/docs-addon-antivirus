@@ -6,7 +6,7 @@ owner: MAPBU Cryogenics (originally owned by Platform Security & Compliance Team
 
 This topic contains release notes for <%= vars.product_full %>.
 
-<%= partial vars.path_to_partials + "/upgrade-planner" %>
+For product versions and upgrade paths, see [Upgrade Planner](https://upgrade-planner.pivotal.io/).
 
 ## <a id="2-3-10"></a> v2.3.10
 
@@ -29,7 +29,12 @@ Changes in this release:
 
 This release has the following issues:
 
-<%= partial vars.path_to_partials + "/antivirus/bbr-ki" %>
+* **If you use <%= vars.product_short_mirror %>,
+ errors can occur when restoring your deployment with BOSH Backup and Restore (BBR):**
+ For instructions for resolving this issue,
+see [Restoring with BOSH Backup and Restore Fails](./troubleshooting.html#backup-restore).
+For information about BBR,
+see [Backing Up and Restoring Deployments](https://docs.pivotal.io/ops-manager/install/backup-restore/index.html) in the Ops Manager documentation.
 
 ## <a id="2-3-2"></a> v2.3.2
 
@@ -52,8 +57,12 @@ For information about clamonacc, see [clamonacc App](./monitoring-logs.html#clam
 
 This release has the following issues:
 
-<%= partial vars.path_to_partials + "/antivirus/bbr-ki" %>
-
+* **If you use <%= vars.product_short_mirror %>,
+ errors can occur when restoring your deployment with BOSH Backup and Restore (BBR):**
+ For instructions for resolving this issue,
+see [Restoring with BOSH Backup and Restore Fails](./troubleshooting.html#backup-restore).
+For information about BBR,
+see [Backing Up and Restoring Deployments](https://docs.pivotal.io/ops-manager/install/backup-restore/index.html) in the Ops Manager documentation.
 
 ## <a id="view"></a> View Release Notes for Another Version
 
