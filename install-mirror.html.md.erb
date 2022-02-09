@@ -27,9 +27,9 @@ installing this tile, and continue to [Installing and Configuring <%= vars.produ
 
 To install the <%= vars.product_short_mirror %>, you must have:
 
-* **A <%= vars.platform_name %> operator user account with admin rights**. For more information, see [Pivotal Platform Operators](https://docs.pivotal.io/platform/customizing/platform-operators.html).
+* **A <%= vars.platform_name %> operator user account with admin rights**. For more information, see [Platform Operators](https://docs.pivotal.io/ops-manager/install/platform-operators.html).
 
-* **<%= vars.ops_manager_full %> (<%= vars.ops_manager %>)**.
+* **<%= vars.ops_manager_full %> (Ops Manager)**.
 For compatible versions, see the [Product Snapshot](./index.html#snapshot).
 
 * **At least 1&nbsp;GB of RAM free for each VM that installs <%= vars.product_short %>**.
@@ -45,9 +45,9 @@ To install the <%= vars.product_full_mirror %> tile:
 1. Download the product file from [Pivotal Network](https://network.pivotal.io/products/p-clamav-addon).
 
     For air-gapped networks, follow your company's offline installation protocols.
-      For more information, see [Installing Pivotal Platform in Air-gapped Environments](https://docs.pivotal.io/platform/customizing/offline_installation.html).
+      For more information, see [Installing Pivotal Platform in Air-gapped Environments](https://docs.pivotal.io/ops-manager/install/offline_installation.html).
 
-1. Navigate to the <%= vars.ops_manager %> Installation Dashboard and select **Import a Product** to upload the product file.
+1. Navigate to the Ops Manager Installation Dashboard and select **Import a Product** to upload the product file.
 
 1. Under the **Import a Product** button, click **+** next to the version number of <%= vars.product_full_mirror %>.
 This adds the tile to your staging area.
@@ -59,7 +59,7 @@ This adds the tile to your staging area.
 To assign availability zones (AZs) and networks:
 
 1. Select **Assign AZs and Networks**.
-![Assign AZs and Networks](mirror-assign-azs.png)
+![Assign AZs and Networks](images/mirror-assign-azs.png)
 
 1. Configure the fields as follows:
 
@@ -91,7 +91,7 @@ To assign availability zones (AZs) and networks:
 To configure <%= vars.product_short_mirror %>:
 
 1. Select **Anti-Virus Mirror Configuration**.
-  ![Anti-Virus Mirror Configuration](mirror-configure.png)
+  ![Anti-Virus Mirror Configuration](images/mirror-configure.png)
 
 1. Configure the fields as follows:
 
@@ -167,7 +167,7 @@ To configure <%= vars.product_short_mirror %>:
  To do this:
 
   1. Select **HTTP Proxy Configuration**.
-  ![HTTP Proxy Configuration for Anti-Virus Mirror Jobs](mirror-http-proxy.png)
+  ![HTTP Proxy Configuration for Anti-Virus Mirror Jobs](images/mirror-http-proxy.png)
 
   1. Set **HTTP proxy to get database updates** to **Enabled**.
 
@@ -179,7 +179,7 @@ To configure <%= vars.product_short_mirror %>:
 Follow the steps below to enable system logging for <%= vars.product_full_mirror %>.
 
 1. Select **Syslog**.
-![Syslog](mirror-syslog.png)
+![Syslog](images/mirror-syslog.png)
 
 1. Select **Yes** for **Do you want to configure Syslog forwarding?**.
 1. Configure the fields as follows:
@@ -233,7 +233,8 @@ To scale the number of deployed mirrors:
       The antivirus-mirror job is configured using dropdown lists for the number of instances,
       VM type, and persistent disk type. The example configuration shows instances
       configured to "Automatic: 1", VM Type configured to "Automatic: small (cpu: 1, ram: 2 GB)",
-      and the persistent disk type configured to Automatic: 1 GB.](mirror-resource-config.png)
+      and the persistent disk type configured to Automatic: 1
+      GB.](images/mirror-resource-config.png)
 
   1. For `antivirus-mirror`, set **INSTANCES** to the number of mirrors that you want to deploy.
 
@@ -245,7 +246,7 @@ To scale the number of deployed mirrors:
 Your <%= vars.product_short_mirror %> installation is not complete until you apply your configuration changes.
 To do this:
 
-1. Return to the <%= vars.ops_manager %> Installation Dashboard.
+1. Return to the Ops Manager Installation Dashboard.
 
 1. Click **Review Pending Changes**.
 1. Unselect all products except **BOSH Director** and **<%= vars.product_short_mirror %>** and click **Apply Changes**.

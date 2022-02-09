@@ -34,7 +34,7 @@ _These are a handful of style issues I noticed with the original version of this
 
 + Spell out Pivotal Cloud Foundry (PCF) at first use but don't add a registered trademark.
 
-+ Write <%= vars.ops_manager_full %> (<%= vars.ops_manager %>) on first use. Use <%= vars.ops_manager %> thereafter.
++ Write <%= vars.ops_manager_full %> (Ops Manager) on first use. Use Ops Manager thereafter.
 
 + Use this format to refer to version numbers: "v1.7 or later".
 
