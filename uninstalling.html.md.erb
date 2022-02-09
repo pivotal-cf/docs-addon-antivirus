@@ -40,7 +40,7 @@ To uninstall the ClamAV Add-on, follow the steps below:
 
 1. If you are using Ops Manager v2.3 or later, click **Review Pending Changes**.
    For more information about this Ops Manager page,
-   see [Reviewing Pending Product Changes](https://docs.pivotal.io/pivotalcf/customizing/review-pending-changes.html).
+   see [Reviewing Pending Product Changes](https://docs.pivotal.io/ops-manager/install/review-pending-changes.html).
 
 1. Click **Apply Changes**.
 
@@ -51,7 +51,7 @@ To verify the uninstallation of the ClamAV Add-on is successful, follow the step
 
 1. Use `bosh ssh` to SSH into one of the VMs in your deployment.
 For more information,
-see [BOSH SSH](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#bosh-ssh)
+see [BOSH SSH](https://docs.pivotal.io/ops-manager/install/trouble-advanced.html#bosh-ssh)
 
 1. Run `monit summary`. If ClamAV has uninstalled successfully,
 it does not show the `clamd` or `freshclam` processes.

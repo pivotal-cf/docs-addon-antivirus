@@ -7,7 +7,7 @@ owner: Security Engineering
 
 This topic describes how to upgrade the ClamAV Add-on for PCF.
 
-<%= partial  "/upgrade-planner" %>
+For product versions and upgrade paths, see [Upgrade Planner](https://upgrade-planner.pivotal.io/).
 
 ##<a id="assume"></a>Compatibility and Prerequisites
 
@@ -17,7 +17,7 @@ See the following topics to ensure you have the required component versions and 
 * [Prerequisites](./install.html#prereqs)
 
 
-##<a id="upgrade"></a>Upgrade ClamAV Add-on for PCF</a>
+##<a id="upgrade"></a>Upgrade ClamAV Add-on for PCF
 
 To upgrade the ClamAV add-on to a later version, do the following:
 
@@ -35,7 +35,7 @@ To upgrade the ClamAV add-on to a later version, do the following:
     <pre class="terminal">$ scp -i ~/.ssh/my-key.pem ~/Downloads/clamav-1.4.34.tgz ubuntu<span>@</span>192.168.0.2: </pre>
 
 3. SSH into the Ops Manager VM.
-   For instructions, see [SSH into Ops Manager](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#ssh).
+   For instructions, see [SSH into Ops Manager](https://docs.pivotal.io/ops-manager/install/trouble-advanced.html#ssh).
 
 4. Retrieve the latest runtime config by running the following command:
 
@@ -78,6 +78,6 @@ To upgrade the ClamAV add-on to a later version, do the following:
 
 9. If you are using Ops Manager v2.3 or later, click **Review Pending Changes**.
    For more information about this Ops Manager page,
-   see [Reviewing Pending Product Changes](https://docs.pivotal.io/pivotalcf/customizing/review-pending-changes.html).
+   see [Reviewing Pending Product Changes](https://docs.pivotal.io/ops-manager/install/review-pending-changes.html).
 
 10. Click **Apply Changes**.

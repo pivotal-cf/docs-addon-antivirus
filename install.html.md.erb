@@ -18,7 +18,7 @@ To install ClamAV Add-on, you need:
     For general information about named runtime config files,
     see <a href="https://bosh.io/docs/configs.html">Configs</a>.
 
-* **A PCF operator with admin rights**---For more information, see [Operators](https://docs.pivotal.io/pivotalcf/customizing/user-types.html#operator) in the Pivotal Cloud Foundry documentation.
+* **A PCF operator with admin rights**: For more information, see [Operators](https://docs.pivotal.io/application-service/operating/user-types.html#operator) in the Pivotal Cloud Foundry documentation.
 
 * Operations Manager (Ops Manager)
 
@@ -26,7 +26,7 @@ To install ClamAV Add-on, you need:
   ClamAV Add-on uses 610 MB of memory.
 
 * A local mirror to get ClamAV virus updates.
-  For instructions on how to set up a local mirror,
+  For instructions to set up a local mirror,
   see [Private Local Mirrors](https://www.clamav.net/documents/private-local-mirrors) in the ClamAV documentation.
 
   <p class="note"><strong>Note</strong>: Release version <code>x.x.x</code> in the <code>clamav.yml</code> samples below is arbitrary. Replace it with the version of ClamAV release downloaded from Pivotal Network.</p>
@@ -132,7 +132,7 @@ or IP address of a private ClamAV update mirror.
     If you do not specify a value, ClamAV defaults to an S3-based mirror for updates.
     For compliance reasons, only use the S3-based mirror in non-production environments.<br />
 
-    For instructions on how to set up a local mirror, see <a href="https://www.clamav.net/documents/private-local-mirrors">Private Local Mirrors</a> in the ClamAV documentation.
+    For instructions about setting up a local mirror, see <a href="https://www.clamav.net/documents/private-local-mirrors">Private Local Mirrors</a> in the ClamAV documentation.
 
 1. (Optional) If you have to use a proxy server to connect to the internet,
 add the <code>proxy\_host</code> and <code>proxy\_port</code> properties to your manifest.
@@ -251,7 +251,7 @@ Perform the following steps to deploy the ClamAV Add-on:
 
 1. If you are using Ops Manager v2.3 or later, click **Review Pending Changes**.
    For more information about this Ops Manager page,
-   see [Reviewing Pending Product Changes](https://docs.pivotal.io/pivotalcf/customizing/review-pending-changes.html).
+   see [Reviewing Pending Product Changes](https://docs.pivotal.io/ops-manager/install/review-pending-changes.html).
 
 1. Click **Apply Changes**.
 
@@ -260,7 +260,7 @@ Perform the following steps to deploy the ClamAV Add-on:
 The ClamAV BOSH release writes all alerts to the syslogs of the VMs in your deployment.
 You can use syslog forwarding to forward the alerts to a syslog aggregator.
 
-Follow the steps to <a href="http://docs.pivotal.io/pivotalcf/customizing/cloudform-er-config.html#sys-logging">
+Follow the steps to <a href="https://docs.pivotal.io/ops-manager/install/cloudform-er-config.html#sys-logging">
     Configure System Logging</a> in the Pivotal Application Service (PAS) tile.
     The syslog aggregator that you specify receives all alerts generated on PAS VMs, including the ClamAV alerts.
 
@@ -272,7 +272,7 @@ Follow the steps to <a href="http://docs.pivotal.io/pivotalcf/customizing/cloudf
 ## <a id="verify"></a>Verify Your ClamAV Add-on Installation
 
 <ol>
-<li><a href="https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#bosh-ssh">BOSH SSH</a> into one of the VMs in your deployment.
+<li><a href="https://docs.pivotal.io/ops-manager/install/trouble-advanced.html#ssh">BOSH SSH</a> into one of the VMs in your deployment.
 </li>
 <li>Run <code>monit summary</code>. Look for the following processes in the output:
 <pre class="terminal">The Monit daemon 5.2.4 uptime: 3d 0h 56m
@@ -522,7 +522,7 @@ as shown below:
     ...</code></pre>
 
 1. Apply changes by updating your runtime config.
-For how to do this, see steps 4 to 7 of <a href="#deploy">Deploy the ClamAV Add-on</a> above.
+For instructions, see steps 4 to 7 of <a href="#deploy">Deploy the ClamAV Add-on</a> above.
 
 
 ###<a id="garden"></a> (Optional) Exclude Duplicate Logs on Garden Containers
