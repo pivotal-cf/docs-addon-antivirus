@@ -36,74 +36,69 @@ To change the port number in the <%= vars.product_short %> tile:
 
 1. Configure **Mirror for Automatic Database Updates**.<br>
 
-  **Existing Mirror**
-  <img src="./images/configure-mirror-existing.png"
-  alt="Screenshot of the 'Mirror for Automatic Database Updates' section with Existing Mirror
-  button selected. The 'Comma separated list of mirror hostnames or IPs' field is exposed.">
-
-  <table class="nice">
-    <col width="25%">
-    <col width="75%">
-    <th>Field</th>
-    <th>Description</th>
-    <tr>
-      <td><strong>Existing Mirror</strong></td>
-      <td>Select this to use an existing mirror without TLS.</td>
-    </tr>
-    <tr>
-      <td><strong>Comma separated list of mirror hostnames or IP addresses</strong></td>
-      <td>Enter a list of mirror hostnames or IP addresses.<br>
-        For example, <code>10.0.4.5,10.0.4.6</code>.</td>
-    </tr>
-  </table>
-
-<hr>
-
-  **Existing Mirror with TLS**
-  <img src="./images/configure-mirror-existing-tls.png"
-  alt="Screenshot of the 'Mirror for Automatic Database Updates' section with the 'Existing Mirror
-  with TLS' button selected. The three fields exposed are described below.">
-
-  <table class="nice">
-    <col width="25%">
-    <col width="75%">
-    <tr>
+    **Existing Mirror**
+    <img src="./images/configure-mirror-existing.png"
+    alt="Screenshot of the 'Mirror for Automatic Database Updates' section with Existing Mirror
+    button selected. The 'Comma separated list of mirror hostnames or IPs' field is exposed.">
+    <table class="nice">
+      <col width="25%">
+      <col width="75%">
       <th>Field</th>
       <th>Description</th>
-    </tr>
-    <tr>
-      <td><strong>Existing Mirror with TLS</strong></td>
-      <td>Select this to use an existing mirror with TLS.</td>
-    </tr>
-    <tr>
-      <td>
-      <strong>Mirror hostname without leading https://</strong></td>
-      <td>Enter the hostname or IP address of your existing mirror.<br>
-        For example, <code>pivotal-anti-virus-mirror.s3.amazonaws.com</code> or
-        <code>10.0.4.5</code>.
-        <strong>Note: </strong> Ensure that your existing mirror server uses the correct
-        certificate for the hostname or IP address.
-      </td>
-    </tr>
-    <tr>
-      <td><strong>Mirror Port</strong></td>
-      <td>Enter the port used by your existing mirror.<br>For example, <code>443</code>.</td>
-    </tr>
-    <tr>
-      <td><strong>Mirror CA Certificate</strong></td>
-      <td>Enter the CA certificate used with your existing mirror.<br>
-        For example:
-        <pre>
-          -----BEGIN CERTIFICATE-----
-          MIIEYzCCA0ugAwIBAgIQAYL4CY6i5ia5GjsnhB+5rzANBgkqhki
-          ...
-          upcHi9nzBhDFKdT3uhaQqNBU4UtJx5g=
-          -----END CERTIFICATE-----
-        </pre>
-      </td>
-    </tr>
-  </table>
-
+      <tr>
+        <td><strong>Existing Mirror</strong></td>
+        <td>Select this to use an existing mirror without TLS.</td>
+      </tr>
+      <tr>
+        <td><strong>Comma separated list of mirror hostnames or IP addresses</strong></td>
+        <td>Enter a list of mirror hostnames or IP addresses.<br>
+          For example, <code>10.0.4.5,10.0.4.6</code>.</td>
+      </tr>
+    </table>
+    <hr>
+    **Existing Mirror with TLS**
+    <img src="./images/configure-mirror-existing-tls.png"
+    alt="Screenshot of the 'Mirror for Automatic Database Updates' section with the 'Existing Mirror
+    with TLS' button selected. The three fields exposed are described below.">
+    <table class="nice">
+      <col width="25%">
+      <col width="75%">
+      <tr>
+        <th>Field</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td><strong>Existing Mirror with TLS</strong></td>
+        <td>Select this to use an existing mirror with TLS.</td>
+      </tr>
+      <tr>
+        <td>
+        <strong>Mirror hostname without leading https://</strong></td>
+        <td>Enter the hostname or IP address of your existing mirror.<br>
+          For example, <code>pivotal-anti-virus-mirror.s3.amazonaws.com</code> or
+          <code>10.0.4.5</code>.
+          <strong>Note: </strong> Ensure that your existing mirror server uses the correct
+          certificate for the hostname or IP address.
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Mirror Port</strong></td>
+        <td>Enter the port used by your existing mirror.<br>For example, <code>443</code>.</td>
+      </tr>
+      <tr>
+        <td><strong>Mirror CA Certificate</strong></td>
+        <td>Enter the CA certificate used with your existing mirror.<br>
+          For example:
+          <pre>
+-----BEGIN CERTIFICATE-----
+MIIEYzCCA0ugAwIBAgIQAYL4CY6i5ia5GjsnhB+5rzANBgkqhki
+...
+upcHi9nzBhDFKdT3uhaQqNBU4UtJx5g=
+-----END CERTIFICATE-----
+          </pre>
+        </td>
+      </tr>
+    </table>
 
 1. Click **Save**.
 
