@@ -1,6 +1,6 @@
 ---
 title: Changing the Port Used by Anti-Virus with an Existing Mirror
-owner: Pivotal Compliance and Innovation (PCI) Team
+owner: Platform Security & Compliance Team
 ---
 <strong><%= modified_date %></strong>
 
@@ -10,7 +10,7 @@ If you are using <%= vars.product_full_mirror %>,
 then see [Changing the Port Used by <%= vars.product_short %> and <%= vars.product_short_mirror %>](./changing-ports.html) instead of this topic.
 
 If you are upgrading from <%= vars.product_short %> v2.0 and you use an existing mirror or want to use an existing mirror,
-you might need to do the procedure in this topic.
+you might need to follow the procedure in this topic.
 For more information about whether to follow this procedure, see [Configuring the Mirror Port](upgrade.html#configure-mirror).
 
 ## <a id="change-port"></a> Overview
@@ -105,9 +105,9 @@ The tabs below expand to show instructions for each type of mirror.<br><br>
 
     <div id="tab1" class="tabcontent" style="display:block">
 
-     <img src="./images/existing-mirror.png"
-     alt="Selecting the existing mirror button exposes the Comma separated
-     list of mirror hostnames or IPs field">
+     <img src="./images/configure-mirror-existing.png"
+     alt="Screenshot of the 'Mirror for Automatic Database Updates' section with Existing Mirror
+          button selected. The 'Comma separated list of mirror hostnames or IPs' field is exposed." width="500">
 
      <table class="nice">
        <col width="25%">
@@ -131,7 +131,9 @@ The tabs below expand to show instructions for each type of mirror.<br><br>
     </div>
     <div id="tab2" class="tabcontent">
 
-     <img src="./images/existing-mirror-with-tls.png" alt="Selecting the existing mirror with tls button exposes three fields">
+     <img src="./images/configure-mirror-existing-tls.png" alt="Screenshot of the 'Mirror for Automatic Database Updates'
+       section with the 'Existing Mirror with TLS' button selected.
+       The three fields exposed are described below." width="500">
 
      <table class="nice">
        <col width="25%">
@@ -188,13 +190,6 @@ upcHi9nzBhDFKdT3uhaQqNBU4UtJx5g=
     </div>
 
 
-
-
-
-
-
-
-
 1. Click **Save**.
 
 1. Return to the Ops Manager Installation Dashboard and click **Review Pending Changes**.
@@ -207,7 +202,7 @@ upcHi9nzBhDFKdT3uhaQqNBU4UtJx5g=
 
 If you are currently using <%= vars.product_short_mirror %>
 and want to transition to using an existing mirror,
-Pivotal recommends that you uninstall your <%= vars.product_short_mirror %> tile.
+VMware recommends that you uninstall your <%= vars.product_short_mirror %> tile.
 
 To uninstall the <%= vars.product_short_mirror %> tile:
 
