@@ -7,15 +7,17 @@ owner: Pivotal Compliance and Innovation (PCI) Team
 This topic describes how to install and configure <%= vars.product_full %>.
 
 Before installing <%= vars.product_short %>, Pivotal recommends that you download
-and install the <%= vars.product_full_mirror %> tile.
-For more information about the <%= vars.product_short_mirror %> tile,
-see [Installing and Configuring <%= vars.product_full_mirror %>](./install-mirror.html).
+and install the Pivotal Anti-Virus Mirror tile.
+For more information about the Anti-Virus Mirror tile,
+see [Installing and Configuring Pivotal Anti-Virus Mirror](./install-mirror.html).
 
 ##<a id="prereqs"></a>Prerequisites
 
 To install <%= vars.product_short %>, you must have:
 
-* **A <%= vars.platform_name %> operator user account with admin rights**. For more information, see [Platform Operators](https://docs.pivotal.io/ops-manager/install/platform-operators.html).
+* **An Ops Manager operator user account with admin rights**.
+For more information, see [Platform Operators](https://docs.pivotal.io/ops-manager/install/platform-operators.html) in the Ops
+Manager documentation.
 
 * **<%= vars.ops_manager_full %> (Ops Manager)**.
 For compatible versions, see the [Product Snapshot](./index.html#snapshot).
@@ -25,8 +27,8 @@ For compatible versions, see the [Product Snapshot](./index.html#snapshot).
   On Google Cloud Platform (GCP), the recommended minimum VM size is `micro.cpu` using 2&nbsp;CPU and 2&nbsp;GB RAM.
 
 * **An external mirror**. If you do not have an external mirror, Pivotal recommends that you install
-  the <%= vars.product_short_mirror %>.
-  For instructions, see [Installing and Configuring <%= vars.product_full_mirror %>](./install-mirror.html).
+  the Anti-Virus Mirror.
+  For instructions, see [Installing and Configuring Pivotal Anti-Virus Mirror](./install-mirror.html).
 
 ## <a id='install-addon'></a> Install <%= vars.product_short %>
 
@@ -48,195 +50,103 @@ To configure <%= vars.product_short %>:
 1. Select **Anti-Virus Configuration**.
 
 1. Configure **Mirror for Automatic Database Updates**.<br>
-    The tabs below expand to show instructions for each type of mirror.<br><br>
+Use the **Official Mirror**, **Deployed**, **Existing Mirror**, or **Existing Mirror with TLS** information below.
 
-    <style>
-    .btn.btn-default,
-    .tab .tablinks {
-        color: #2185c5;
-    }
-    .tab {
-        overflow: hidden;
-        border: 1px solid #ccc;
-        background-color: #f1f1f1;
-    }
-
-    /* Style the buttons that are used to open the tab content */
-    .tab button {
-        background-color: inherit;
-        float: left;
-        border: none;
-        outline: none;
-        cursor: pointer;
-        padding: ;
-        transition: 0.3s;
-    }
-
-    /* Change background color of buttons on hover */
-    .tab button:hover {
-        background-color: #ddd;
-    }
-
-    /* Create an active/current tablink class */
-    .tab button.active {
-        background-color: #ccc;
-    }
-
-    /* Style the tab content */
-    .tabcontent {
-        display: none;
-        padding: 6px 12px;
-        border: 1px solid #ccc;
-        border-top: none;
-    }
-    </style>
-    <script>
-    function openDocs(evt, docsName) {
-        // Declare all variables
-        var i, tabcontent, tablinks;
-        // Get all elements with class="tabcontent" and hide them
-        tabcontent = document.getElementsByClassName("tabcontent");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-        }
-        // Get all elements with class="tablinks" and remove the class "active"
-        tablinks = document.getElementsByClassName("tablinks");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
-        // Show the current tab, and add an "active" class to the button that opened the tab
-        document.getElementById(docsName).style.display = "block";
-        evt.currentTarget.className += " active";
-    }
-    </script>
-
-    <div class="tab">
-      <!- Tab headers and links ->
-      <button class="tablinks active" onclick="openDocs(event, 'tab1')">Official mirror</button>
-      <button class="tablinks" onclick="openDocs(event, 'tab2')">Deployed mirror</button>
-      <button class="tablinks" onclick="openDocs(event, 'tab3')">Existing Mirror</button>
-      <button class="tablinks" onclick="openDocs(event, 'tab4')">Existing Mirror with TLS</button>
-    </div>
-
-    <div id="tab1" class="tabcontent" style="display:block">
-
-      <img src="./images/configure-mirror-official.png" alt="Configure Official mirror" width="550">
-
-      <table class="nice">
-        <col width="25%">
-        <col width="75%">
-        <th>Field</th>
-        <th>Description</th>
-        <tr>
-          <td><strong>Official mirror</strong></td>
-          <td>
-            Select this to have the mirror fetch databases from database.clamav.net.
-          </td>
-        </tr>
-      </table>
-    </div>
-    <div id="tab2" class="tabcontent">
-
-      <img src="./images/configure-mirror-deployed.png" alt="Configure Deployed mirror from the Pivotal Anti-Virus Mirror tile" width="550">
-
-      <table class="nice">
-        <col width="25%">
-        <col width="75%">
-        <th>Field</th>
-        <th>Description</th>
-        <tr>
-          <td><strong>Deployed mirror from the <%= vars.product_full_mirror %> Tile</strong></td>
-          <td>
-            Select this when using the <%= vars.product_full_mirror %> tile.<br><br>
-            For more information, see <a href="./install-mirror.html">Installing and Configuring <%= vars.product_full_mirror %></a>.
-          </td>
-        </tr>
-        <tr>
-          <td><strong>Anti-Virus Mirror Port</strong></td>
-          <td>Enter the port for Anti-Virus Mirror to use. The default value is <code>6501</code>.
-            <p class="note"><strong>Note: </strong> <%= vars.product_short_mirror %> uses mutual TLS (mTLS). This port must be the same port used in <strong>Anti-Virus Mirror Port</strong> of the <strong><%= vars.product_full_mirror %></strong> tile. If these ports are not the same, <%= vars.product_short %> database updates and deployments fail.
-            </p>
-          </td>
-        </tr>
-      </table>
-    </div>
-    <div id="tab3" class="tabcontent">
-
-      <img src="./images/configure-mirror-existing.png" alt="Configure Existing Mirror" width="550">
-
-      <table class="nice">
-        <col width="25%">
-        <col width="75%">
-        <th>Field</th>
-        <th>Description</th>
-        <tr>
-          <td><strong>Existing Mirror</strong></td>
-          <td>
-            Select this to use an existing mirror without TLS.
-          </td>
-        </tr>
-        <tr>
-          <td><strong>Comma separated list of mirror hostnames or IPs</strong></td>
-          <td>
-             Enter one or more mirror hostnames or IP addresses in a comma-separated list.
-          </td>
-        </tr>
-      </table>
-    </div>
-    <div id="tab4" class="tabcontent">
-
-      <img src="./images/configure-mirror-existing-tls.png" alt="Configure Existing Mirror with TLS" width="550">
-
-      <table class="nice">
-        <col width="25%">
-        <col width="75%">
-        <th>Field</th>
-        <th>Description</th>
-        <tr>
-          <td><strong>Existing Mirror with TLS</strong></td>
-          <td>
-            Select this to enter a hostname, port number, and CA certificate.
-          </td>
-        </tr>
-        <tr>
-            <td>
-                <strong>Mirror hostname without leading https://</strong>
-            </td>
-            <td>
-              Enter the hostname or IP address for your existing mirror.<br>
-              For example: <code>pivotal-anti-virus-mirror.s3.amazonaws.com</code> or <code>10.0.4.5</code>
-              <p class="note">
-                <strong>Note: </strong> Ensure that your existing mirror server is using the correct certificate for the method you choose (hostname or IP).
-              </p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <strong>Mirror Port</strong>
-            </td>
-            <td>
-              Enter the port used by your existing mirror.<br>
-              For example: <code>443</code>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <strong>Mirror CA Certificate</strong>
-            </td>
-            <td>
-              Enter the CA certificate used with your existing mirror.<br>
-              For example:
-                <code>
-                  -----BEGIN CERTIFICATE-----<br>
-                  MIIEYzCCA0ugAwIBAgIQAYL4CY6i5ia5GjsnhB+5rzANBgkqhki<br>
-                  ...<br>
-                  upcHi9nzBhDFKdT3uhaQqNBU4UtJx5g=<br>
-                  -----END CERTIFICATE-----
-                </code>
-            </td>
-        </tr>
-      </table>
-    </div>
+    <hr>
+    **Official Mirror**
+    <img src="./images/configure-mirror-official.png" alt="Configure Official mirror">
+    <table class="nice">
+      <col width="25%">
+      <col width="75%">
+      <th>Field</th>
+      <th>Description</th>
+      <tr>
+        <td><strong>Official Mirror</strong></td>
+        <td>Select this to have the mirror fetch databases from database.clamav.net.</td>
+      </tr>
+    </table>
+    <hr>
+    **Deplyed Mirror**
+    <img src="./images/configure-mirror-deployed.png" alt="Configure Deployed mirror from the Pivotal Anti-Virus Mirror tile">
+    <table class="nice">
+      <col width="25%">
+      <col width="75%">
+      <th>Field</th>
+      <th>Description</th>
+      <tr>
+        <td><strong>Deployed mirror from the Pivotal Anti-Virus Mirror Tile</strong></td>
+        <td>
+          Select this when using the Pivotal Anti-Virus Mirror tile.<br><br>
+          For more information, see <a href="./install-mirror.html">Installing and Configuring Pivotal Anti-Virus Mirror</a>.
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Anti-Virus Mirror Port</strong></td>
+        <td>
+          Enter the port for Anti-Virus Mirror to use. The default value is <code>6501</code>.
+          <strong>Note:</strong> Anti-Virus Mirror uses mutual TLS (mTLS).
+          This port must be the same port used in <strong>Anti-Virus Mirror Port</strong> of the
+          <strong>Pivotal Anti-Virus Mirror</strong> tile. If these ports are not the same, <%= vars.product_short %> database updates and deployments fail.
+        </td>
+      </tr>
+    </table>
+    <hr>
+    **Existing Mirror**
+    <img src="./images/configure-mirror-existing.png" alt="Configure Existing Mirror">
+    <table class="nice">
+      <col width="25%">
+      <col width="75%">
+      <th>Field</th>
+      <th>Description</th>
+      <tr>
+        <td><strong>Existing Mirror</strong></td>
+        <td>Select this to use an existing mirror without TLS.</td>
+      </tr>
+      <tr>
+        <td><strong>Comma separated list of mirror hostnames or IPs</strong></td>
+        <td>Enter one or more mirror hostnames or IP addresses in a comma-separated list.</td>
+      </tr>
+    </table>
+    <hr>
+    <img src="./images/configure-mirror-existing-tls.png" alt="Configure Existing Mirror with TLS">
+    <table class="nice">
+      <col width="25%">
+      <col width="75%">
+      <th>Field</th>
+      <th>Description</th>
+      <tr>
+        <td><strong>Existing Mirror with TLS</strong></td>
+        <td>Select this to enter a hostname, port number, and CA certificate.</td>
+      </tr>
+      <tr>
+        <td><strong>Mirror hostname without leading https://</strong></td>
+        <td>Enter the hostname or IP address for your existing mirror.<br>
+          For example: <code>pivotal-anti-virus-mirror.s3.amazonaws.com</code> or
+          <code>10.0.4.5</code>
+          <strong>Note:</strong> Ensure that your existing mirror server is using the correct
+          certificate for the hostname or IP address.
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Mirror Port</strong></td>
+        <td>Enter the port used by your existing mirror.<br>
+        For example: <code>443</code></td>
+      </tr>
+      <tr>
+        <td><strong>Mirror CA Certificate</strong></td>
+        <td>
+          Enter the CA certificate used with your existing mirror.<br>
+          For example:
+          <pre>
+-----BEGIN CERTIFICATE-----<br>
+MIIEYzCCA0ugAwIBAgIQAYL4CY6i5ia5GjsnhB+5rzANBgkqhki<br>
+...<br>
+upcHi9nzBhDFKdT3uhaQqNBU4UtJx5g=<br>
+-----END CERTIFICATE-----
+          </pre>
+        </td>
+      </tr>
+    </table>
 
 1. Configure the remaining fields:
     ![Configure Anti-Virus](images/configure.png)
@@ -246,9 +156,8 @@ To configure <%= vars.product_short %>:
       <th>Description</th>
       <tr>
         <td><strong>(Optional) Enable on-access scanning</strong></td>
-        <td>Select this option if you want to scan files immediately after they are modified.
-        <p class="note"><strong>Note</strong>: On-Access Scan is not supported on Windows.
-        </p>
+        <td>Select this option to scan files immediately after they are modified.
+        <p class="note"><strong>Note:</strong> On-Access Scan is not supported on Windows.</p>
       </tr>
       <tr>
         <td><strong>Memory limit (in bytes)</strong></td>
@@ -268,14 +177,11 @@ To configure <%= vars.product_short %>:
             <li><strong>Enable</strong>: Select this to enforce the limit.</li>
             <li><strong>CPU limit (percentage)</strong>: Enter the CPU percentage limit.</li>
           </ul>
-          <p class="note warning"><strong>Warning:</strong>
+          <strong>Warning:</strong>
             If <strong>Enforce CPU limit</strong> is set to <code>Enable</code>, ensure
             <strong>CPU limit (percentage)</strong> is set high enough for <%= vars.product_short %>
             to execute normally. If the limit is too strict, <%= vars.product_short %> fails to start.
-          </p>
-          <p class="note">
             <strong>Note:</strong> This setting does not affect CPU usage on a Windows VM.
-          </p>
         </td>
       </tr>
       <tr>
@@ -295,18 +201,18 @@ To configure <%= vars.product_short %>:
       <tr>
         <td><strong>Destination for infected files</strong></td>
         <td>Enter the directory location where you want the infected files moved or copied to.
-          This field only appears if you have selected the <strong>move</strong> or <strong>copy</strong>
-           while selecting an <strong>Action to take when a virus is found</strong>.
-
-         <div class="note"><strong>Note: </strong> Add this path to the
-           <strong>Directories and files that will be ignored (on Windows)</strong> list below.
-            If you do not do this, then <%= vars.product_short %>:
+          This field only appears if you have selected the <strong>move</strong> or
+          <strong>copy</strong> while selecting an <strong>Action to take when a virus is
+          found</strong>.
+          <p class="note"><strong>Note:</strong> Add this path to the
+          <strong>Directories and files that will be ignored (on Windows)</strong> list below.
+          If you do not do this, then <%= vars.product_short %>:
             <ul>
               <li>Detects the moved or copied file</li>
               <li>Logs redundant alerts</li>
               <li>Creates additional copies of the detected file</li>
             </ul>
-           </div>
+          </p>
         </td>
       </tr>
       <tr>
@@ -395,7 +301,7 @@ To do this, complete this procedure:
 <br>
 <hr style="height:1px;border:none;color:#333;background-color:#333;" />
 
-##<a id="scan-containers"></a> (Optional) Configure <%= vars.product_short %> to Exclude Duplicate Logs on Containers
+## <a id="scan-containers"></a> (Optional) Configure <%= vars.product_short %> to Exclude Duplicate Logs on Containers
 You can use <%= vars.product_short %> to scan:
 
 * Garden containers on the Diego Cell VMs in Pivotal Application Service (PAS).

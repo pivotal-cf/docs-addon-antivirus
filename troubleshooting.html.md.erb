@@ -24,7 +24,7 @@ Error 400007: 'etcd_server/0 (f8e492bf-db09-4d38-8a73-5cf69d7b8a11)' is not runn
 </pre>
 
 #### Explanation
-The <%= vars.product_full_mirror %> server was unavailable during initial deployment.
+The Pivotal Anti-Virus Mirror server was unavailable during initial deployment.
 
 #### Solution
 Review the manifest file, and replace the `database_mirror` key with the address
@@ -40,7 +40,7 @@ use the S3-based mirror: `pivotal-anti-virus-mirror.s3.amazonaws.com`
 #### Symptom
 
 Updating virus definitions writes an error like the following
-to the <%= vars.product_short_mirror %> log destination:
+to the Anti-Virus Mirror log destination:
 
  ```
  2019/07/03 20:28:30 file /var/vcap/data/antivirus-mirror/unvalidated/main.cvd rejected: /var/vcap/data/antivirus-mirror/unvalidated/main.cvd is an invalid cvd file: exit status 1
@@ -48,7 +48,7 @@ to the <%= vars.product_short_mirror %> log destination:
 
 #### Explanation
 
-The <%= vars.product_short_mirror %> database verifier detected that a virus database
+The Anti-Virus Mirror database verifier detected that a virus database
 file downloaded from the external database is invalid.
 
 #### Solution
@@ -60,7 +60,7 @@ Check that the database files downloaded properly and re-download if necessary.
 #### Symptom
 
 Updating virus definitions writes an error like the following
-to the <%= vars.product_short_mirror %> log destination:
+to the Anti-Virus Mirror log destination:
 
    ```
    2019/07/03 20:35:34 file /var/vcap/data/antivirus-mirror/unvalidated/daily.cvd rejected: /var/vcap/data/antivirus-mirror/unvalidated/daily.cvd is not newer than /var/vcap/store/antivirus-mirror/validated/daily.cvd
@@ -68,14 +68,14 @@ to the <%= vars.product_short_mirror %> log destination:
 
 #### Explanation
 
-The <%= vars.product_short_mirror %> database verifier detected that a virus database
+The Anti-Virus Mirror database verifier detected that a virus database
 file downloaded from the external database is older than the one most recently
 processed by the internal mirror.
 
 #### Solution
 
 Check that the latest version of the database files were downloaded.
-If the internal <%= vars.product_short_mirror %> has the latest files, no action is required.
+If the internal Anti-Virus Mirror has the latest files, no action is required.
 
 ## <a id="runtime"></a> Runtime Issues
 
@@ -210,10 +210,10 @@ To `Disable` this limit, configure **Enforce CPU limit** in the **<%= vars.produ
 On **Resource Config**, adjust the **VM Type** for the **<%= vars.product_short %>** job
 to have sufficient CPU resources.
 
-### <a id='too-many-files'></a> Too Many Open Files Error While Using <%= vars.product_short_mirror %>
+### <a id='too-many-files'></a> Too Many Open Files Error While Using Anti-Virus Mirror
 
 #### Symptom
-The <%= vars.product_short_mirror %> log reports that too many log files are open:
+The Anti-Virus Mirror log reports that too many log files are open:
 
 <pre class="terminal">
 2019/07/29 20:02:41 10.0.0.72 is requesting main.cvd
@@ -224,36 +224,36 @@ The <%= vars.product_short_mirror %> log reports that too many log files are ope
 </pre>
 
 #### Explanation
-<%= vars.product_short_mirror %> opens files when a database is requested.
+Anti-Virus Mirror opens files when a database is requested.
 There is a limit of how many files can be opened at a given time.
 
 #### Solution
-Increase the number of <%= vars.product_short_mirror %> instances.
-Pivotal recommends that there is one <%= vars.product_short_mirror %> for every 250 instances where <%= vars.product_short %> is installed.
+Increase the number of Anti-Virus Mirror instances.
+Pivotal recommends that there is one Anti-Virus Mirror for every 250 instances where <%= vars.product_short %> is installed.
 For more information, see [Scale the Number of Deployed Mirrors](./install-mirror.html#scale-deployed-mirror).
 
 ### <a id='backup-restore'></a> Restoring with BOSH Backup and Restore Fails
 
 #### Symptom
 
-When using <%= vars.product_short_mirror %>,
+When using Anti-Virus Mirror,
 errors occur when you redeploy Tanzu Application Service (TAS) while restoring with BOSH Backup and
 Restore (BBR). For information about redeploying TAS, see [Redeploy TAS for VMs](https://docs.pivotal.io/ops-manager/install/backup-restore/restore-pcf-bbr.html#redeploy-ert)
 in the Ops Manager documentation.
 
 #### Explanation
 
-<%= vars.product_short_mirror %> must be running before you install <%= vars.product_short %> on
+Anti-Virus Mirror must be running before you install <%= vars.product_short %> on
 other VMs in your deployment.
-Otherwise, <%= vars.product_short_mirror %> might not deploy before
+Otherwise, Anti-Virus Mirror might not deploy before
 other tiles and dependencies deploy.
 
-If <%= vars.product_short_mirror %> is not running, VMs with <%= vars.product_short %> installed cannot
+If Anti-Virus Mirror is not running, VMs with <%= vars.product_short %> installed cannot
 download the required database signature files.
 If this happens, errors and failed deployments occur.
 
 #### Solution
-To resolve this issue, you must ensure that <%= vars.product_short_mirror %>
+To resolve this issue, you must ensure that Anti-Virus Mirror
 is deployed before restoring your deployment.
 
 To do this:
@@ -261,12 +261,12 @@ To do this:
 1. Follow the procedures before [Redeploy TAS for VMs](https://docs.pivotal.io/ops-manager/install/backup-restore/restore-pcf-bbr.html#redeploy-ert)
 in _Restoring Deployments from Backup with BBR_ in the Ops Manager documentation. Do not apply changes.
 
-1. Exclude <%= vars.product_short_mirror %> from the <%= vars.product_short %> deployment by
+1. Exclude Anti-Virus Mirror from the <%= vars.product_short %> deployment by
 following the procedure in
-[Exclude <%= vars.product_short_mirror %> during Apply Changes](./changing-ports.html#exclude-mirror).
-This ensures that <%= vars.product_short %> is not deployed on the <%= vars.product_short_mirror %>
+[Exclude Anti-Virus Mirror during Apply Changes](./changing-ports.html#exclude-mirror).
+This ensures that <%= vars.product_short %> is not deployed on the Anti-Virus Mirror
 
-1. Remove the <%= vars.product_short_mirror %> exclusion
+1. Remove the Anti-Virus Mirror exclusion
     from the <%= vars.product_short %> configurations by following the procedure in
     [Remove the Exclusion](./changing-ports.html#remove-exclude).
 

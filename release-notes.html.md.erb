@@ -21,7 +21,7 @@ For product versions and upgrade paths, see [Upgrade Planner](https://upgrade-pl
 
 New features and changes in this release:
 
-* The minimum RAM for the <%= vars.product_full_mirror %> VM is set to 1.5&nbsp;GB instead of 1&nbsp;GB.
+* The minimum RAM for the Pivotal Anti-Virus Mirror VM is set to 1.5&nbsp;GB instead of 1&nbsp;GB.
 * Adds TLS support for custom mirrors.
 For more information, see [Configure Anti-Virus](./install.html#configure).
 
@@ -29,7 +29,7 @@ For more information, see [Configure Anti-Virus](./install.html#configure).
 
 This release fixes the following issues:
 
-* <%= vars.product_short_mirror %> deployments no longer fail in air-gapped environments.
+* Anti-Virus Mirror deployments no longer fail in air-gapped environments.
 * The clamd app no longer forwards duplicate logs.
 
 ### Known Issues
@@ -47,8 +47,8 @@ This release has the following known issue:
 
 New features and changes in this release:
 
-* Adds mutual TLS from <%= vars.product_short_mirror %> to the <%= vars.product_short %> hosts.
-<br>For more information, see [Changing the Port Used by <%= vars.product_short %> and <%= vars.product_short_mirror %>](./changing-ports.html).
+* Adds mutual TLS from Anti-Virus Mirror to the <%= vars.product_short %> hosts.
+<br>For more information, see [Changing the Port Used by <%= vars.product_short %> and Anti-Virus Mirror](./changing-ports.html).
 * Adds support for excluding instance groups.
 <br>For more information,
     see the [List of instance group names that will be excluded from deployment](./install.html#configure) field.
@@ -59,7 +59,7 @@ New features and changes in this release:
 This release has the following known issues:
 
 <%= partial "/tls-handshake-ki" %>
-* <%= vars.product_short_mirror %> deployment fails in air-gapped environments.
+* Anti-Virus Mirror deployment fails in air-gapped environments.
   This is due to a change in Go build default settings attempting to download dependencies,
   instead of using the bundled dependencies.
 

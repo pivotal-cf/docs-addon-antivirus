@@ -4,20 +4,20 @@ owner: Pivotal Compliance and Innovation (PCI) Team
 ---
 <strong><%= modified_date %></strong>
 
-This topic describes how to install and configure <%= vars.product_full_mirror %>.
+This topic describes how to install and configure Pivotal Anti-Virus Mirror.
 Pivotal recommends that you install this tile before installing <%= vars.product_full %>.
 
 ##<a id="overview"></a>Overview
 
 If you do not have an external mirror for Anti-Virus jobs to fetch database updates from,
-you can deploy a mirror using the <%= vars.product_short_mirror %> tile.
+you can deploy a mirror using the Anti-Virus Mirror tile.
 
-This deployed internal mirror, which uses mutual TLS (mTLS), can support both air-gapped environments and <%= vars.product_short_mirror %> networked environments:
+This deployed internal mirror, which uses mutual TLS (mTLS), can support both air-gapped environments and Anti-Virus Mirror networked environments:
 
-* **Online Network:** You can deploy the internal <%= vars.product_short_mirror %> as a proxy.
+* **Online Network:** You can deploy the internal Anti-Virus Mirror as a proxy.
   This acts as a database for the virus definitions if the online virus database experiences downtime.
 * **Air-gapped Network:** Because there is no access to an outside network,
-  the internal <%= vars.product_short_mirror %> VM acts as the server for the virus definitions.
+  the internal Anti-Virus Mirror VM acts as the server for the virus definitions.
 
 
 If you have already deployed an external mirror, you can use that instead of
@@ -25,7 +25,7 @@ installing this tile, and continue to [Installing and Configuring <%= vars.produ
 
 ##<a id="prereqs"></a>Prerequisites
 
-To install the <%= vars.product_short_mirror %>, you must have:
+To install the Anti-Virus Mirror, you must have:
 
 * **A <%= vars.platform_name %> operator user account with admin rights**. For more information, see [Platform Operators](https://docs.pivotal.io/ops-manager/install/platform-operators.html).
 
@@ -38,9 +38,9 @@ This is so that you can install the Pivotal Anti-Virus tile after deploying this
 <%= vars.product_short %> takes at least 610&nbsp;MB of RAM on each VM.
 On Google Cloud Platform (GCP), the recommended minimum VM size is `micro.cpu` using 2&nbsp;CPU and 2&nbsp;GB RAM.
 
-## <a id='install-mirror'></a> Install <%= vars.product_full_mirror %>
+## <a id='install-mirror'></a> Install Pivotal Anti-Virus Mirror
 
-To install the <%= vars.product_full_mirror %> tile:
+To install the Pivotal Anti-Virus Mirror tile:
 
 1. Download the product file from [Pivotal Network](https://network.pivotal.io/products/p-clamav-addon).
 
@@ -49,10 +49,10 @@ To install the <%= vars.product_full_mirror %> tile:
 
 1. Navigate to the Ops Manager Installation Dashboard and select **Import a Product** to upload the product file.
 
-1. Under the **Import a Product** button, click **+** next to the version number of <%= vars.product_full_mirror %>.
+1. Under the **Import a Product** button, click **+** next to the version number of Pivotal Anti-Virus Mirror.
 This adds the tile to your staging area.
 
-1. Click the newly added **<%= vars.product_full_mirror %>** tile.
+1. Click the newly added **Pivotal Anti-Virus Mirror** tile.
 
 ## <a id='azs'></a> Assign AZs and Networks
 
@@ -68,13 +68,13 @@ To assign availability zones (AZs) and networks:
       <th>Description</th>
       <tr>
         <td><strong>Place singleton jobs in</strong></td>
-        <td>Select an AZ. If you choose to install only one <%= vars.product_short_mirror %> VM,
+        <td>Select an AZ. If you choose to install only one Anti-Virus Mirror VM,
             this is the AZ that it is placed in.</td>
       </tr>
       <tr>
         <td><strong>Balance other jobs in</strong></td>
         <td>Select one or more AZs.
-            If you choose to install more than one <%= vars.product_short_mirror %> VM,
+            If you choose to install more than one Anti-Virus Mirror VM,
             these are the AZs that the VMs are placed in.</td>
       </tr>
       <tr>
@@ -87,8 +87,8 @@ To assign availability zones (AZs) and networks:
 
 1. Click **Save**.
 
-## <a id='configure-mirror'></a> Configure <%= vars.product_short_mirror %>
-To configure <%= vars.product_short_mirror %>:
+## <a id='configure-mirror'></a> Configure Anti-Virus Mirror
+To configure Anti-Virus Mirror:
 
 1. Select **Anti-Virus Mirror Configuration**.
   ![Anti-Virus Mirror Configuration](images/mirror-configure.png)
@@ -117,7 +117,7 @@ To configure <%= vars.product_short_mirror %>:
           Enter the port for Anti-Virus Mirror to use.
           The default value is <code>6501</code>.
 
-          <p class="note"><strong>Note: </strong> <%= vars.product_short_mirror %> uses mTLS. This port must be the same port used in <strong>Anti-Virus Mirror Port</strong> of the <strong>Pivotal Anti-Virus</strong> tile. If these ports are not the same, <%= vars.product_short %> database updates and deployments fail.
+          <p class="note"><strong>Note: </strong> Anti-Virus Mirror uses mTLS. This port must be the same port used in <strong>Anti-Virus Mirror Port</strong> of the <strong>Pivotal Anti-Virus</strong> tile. If these ports are not the same, <%= vars.product_short %> database updates and deployments fail.
           </p>
         </td>
       </tr>
@@ -153,7 +153,7 @@ To configure <%= vars.product_short_mirror %>:
       </tr>
     </table>
 
-    <p class="note"><strong>Note: </strong> <%= vars.product_full_mirror %> serves
+    <p class="note"><strong>Note: </strong> Pivotal Anti-Virus Mirror serves
       virus definitions to your environment for <%= vars.product_full %> to use,
       but the <%= vars.product_short %> mirror needs to get databases itself.
       You can configure the Anti-Virus mirror to get virus definitions using the
@@ -176,7 +176,7 @@ To configure <%= vars.product_short_mirror %>:
   1. Click **Save**.
 
 ##<a id="syslog"></a> Configure Syslog Forwarding
-Follow the steps below to enable system logging for <%= vars.product_full_mirror %>.
+Follow the steps below to enable system logging for Pivotal Anti-Virus Mirror.
 
 1. Select **Syslog**.
 ![Syslog](images/mirror-syslog.png)
@@ -224,7 +224,7 @@ Follow the steps below to enable system logging for <%= vars.product_full_mirror
 
 Anti-Virus jobs do load balancing for you.
 
-Pivotal recommends one <%= vars.product_short_mirror %> VM for every 250 VMs with <%= vars.product_short %> installed.
+Pivotal recommends one Anti-Virus Mirror VM for every 250 VMs with <%= vars.product_short %> installed.
 To scale the number of deployed mirrors:
 
   1. Select **Resource Config**.
@@ -243,13 +243,13 @@ To scale the number of deployed mirrors:
 
 ## <a id="apply-changes-mirror"></a> Apply Changes from Your Configuration
 
-Your <%= vars.product_short_mirror %> installation is not complete until you apply your configuration changes.
+Your Anti-Virus Mirror installation is not complete until you apply your configuration changes.
 To do this:
 
 1. Return to the Ops Manager Installation Dashboard.
 
 1. Click **Review Pending Changes**.
-1. Unselect all products except **BOSH Director** and **<%= vars.product_short_mirror %>** and click **Apply Changes**.
+1. Unselect all products except **BOSH Director** and **Anti-Virus Mirror** and click **Apply Changes**.
 1. After **Apply Changes** is complete, if you selected **No Mirror**, upload a set of virus definitions
 to your deployed `antivirus-mirrors`.
 To do this, see [Updating Virus Definitions](./updating-databases.html).

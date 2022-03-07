@@ -5,14 +5,14 @@ owner: Pivotal Compliance and Innovation (PCI) Team
 <strong><%= modified_date %></strong>
 
 This topic describes how to update virus definitions on an internal
-<%= vars.product_full %> mirror that has been deployed by the <%= vars.product_full_mirror %> tile.
+<%= vars.product_full %> mirror that has been deployed by the Pivotal Anti-Virus Mirror tile.
 
-The <%= vars.product_full_mirror %> tile and the <%= vars.product_full %>
+The Pivotal Anti-Virus Mirror tile and the <%= vars.product_full %>
 tile work together as follows:
 
   - The <%= vars.product_full %> tile runs <%= vars.product_short %> on all BOSH VMs
   by adding it to the BOSH runtime config.
-  - The <%= vars.product_full_mirror %> tile
+  - The Pivotal Anti-Virus Mirror tile
   creates an internal mirror that is used by the ClamAV components running on BOSH VMs.
 
 ##<a id="update"></a>Overview
@@ -21,11 +21,11 @@ The ClamAV community regularly updates virus definitions and publishes them to
 an external ClamAV database.
 
 How these updated virus definitions propagate to the internal
-<%= vars.product_short_mirror %> that
+Anti-Virus Mirror that
 BOSH VMs use depends on whether your environment
 is running in an online or air-gapped network:
 
-* **[Online Network](#automatic)**: The <%= vars.product_short_mirror %> updates its virus definitions automatically.
+* **[Online Network](#automatic)**: The Anti-Virus Mirror updates its virus definitions automatically.
 * **[Air-gapped Network](#manual)**: An operator must manually download new virus definitions
 and run `bosh scp` to update them on the internal <%= vars.product_short %> mirror.
 
@@ -38,15 +38,15 @@ and explain how to manually update virus definitions on the internal <%= vars.pr
 ##<a id="automatic"></a>Automatic Updates with Online Networks
 
 When your environment runs on an online network,
-the <%= vars.product_short_mirror %> VM regularly checks the external ClamAV database every two hours.
+the Anti-Virus Mirror VM regularly checks the external ClamAV database every two hours.
 
 When new virus definitions are present on the external database,
-<%= vars.product_short_mirror %> downloads them automatically.
+Anti-Virus Mirror downloads them automatically.
 
 ##<a id="manual"></a>Manually Update on an Air-gapped Network
 
 <%= vars.product_short %> jobs use three virus definitions files, `main.cvd`, `daily.cvd`, and `bytecode.cvd`.
-The internal <%= vars.product_short_mirror %> serves these three files to all
+The internal Anti-Virus Mirror serves these three files to all
 <%= vars.product_short %> jobs in your environment.
 
 To update the virus definitions:
@@ -71,7 +71,7 @@ You can access the ClamAV mirror at the the following URLs:
 1. SSH into the Ops Manager VM.
    For instructions, see [Log in to the Ops Manager VM with SSH](https://docs.pivotal.io/platform/customizing/trouble-advanced.html#ssh) in the Ops Manager documentation.
 
-1. Find the name of your <%= vars.product_short_mirror %> deployment by running:
+1. Find the name of your Anti-Virus Mirror deployment by running:
 
     ```
     bosh -e BOSH-ENVIRONMENT deployments | grep p-antivirus-mirror | cut -f1
@@ -87,7 +87,7 @@ You can access the ClamAV mirror at the the following URLs:
     <pre class="terminal">$ p-antivirus-mirror-08815ca5ead252c4b8d8</pre>
 
 
-1. Copy the virus definitions to your internal <%= vars.product_short_mirror %>
+1. Copy the virus definitions to your internal Anti-Virus Mirror
   by running:
 
     ```
@@ -106,7 +106,7 @@ You can access the ClamAV mirror at the the following URLs:
     ```
 
     Where `FILE` is determined by the output destination configured in
-    **Anti-Virus Mirror Configuration** of the <%= vars.product_full_mirror %> tile.
+    **Anti-Virus Mirror Configuration** of the Pivotal Anti-Virus Mirror tile.
     Use one of these:
     * `/var/vcap/sys/log/antivirus-mirror/antivirus-mirror.stdout.log` for stdout
     * `/var/vcap/sys/log/antivirus-mirror/antivirus-mirror.stderr.log` for stderr

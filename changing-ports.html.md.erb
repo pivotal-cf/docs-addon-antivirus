@@ -4,14 +4,14 @@ owner: Pivotal Compliance and Innovation (PCI) Team
 ---
 <strong><%= modified_date %></strong>
 
-This topic describes how to change the port used by <%= vars.product_full %> and <%= vars.product_full_mirror %>.
+This topic describes how to change the port used by <%= vars.product_full %> and Pivotal Anti-Virus Mirror.
 
-If you are upgrading from <%= vars.product_short %> v2.0 and you use <%= vars.product_full_mirror %>,
+If you are upgrading from <%= vars.product_short %> v2.0 and you use Pivotal Anti-Virus Mirror,
 you might need to do the procedure in this topic.
 For more information about whether to follow this procedure, see [Configuring the Mirror Port](upgrade.html#configure-mirror).
 
 <p class="note"><strong>Note: </strong>
-If you are not using the <%= vars.product_short_mirror %> tile, you can configure
+If you are not using the Anti-Virus Mirror tile, you can configure
 your existing mirror by specifying a <code>PORT</code>, <code>HOST</code>, or
 <code>HOST:PORT</code> in the <%= vars.product_short %> tile.
 For more information, see <a href="./install.html#configure">Configure <%= vars.product_short %></a>.
@@ -20,21 +20,21 @@ For more information, see <a href="./install.html#configure">Configure <%= vars.
 
 ## <a id="overview"></a> Overview
 
-<%= vars.product_short_mirror %> uses mutual TLS (mTLS).
-The port used by <%= vars.product_short_mirror %> and <%= vars.product_short %> must be the same.
+Anti-Virus Mirror uses mutual TLS (mTLS).
+The port used by Anti-Virus Mirror and <%= vars.product_short %> must be the same.
 If the port number configured in both tiles is not the same,
 <%= vars.product_short %> database updates and deployments fail.
 
-To change the port used by <%= vars.product_short %> and <%= vars.product_short_mirror %> you must:
+To change the port used by <%= vars.product_short %> and Anti-Virus Mirror you must:
 
 1. [Change the Port in the Anti-Virus Mirror Tile](#change-mirror)
 1. [Change the Port in the Anti-Virus Tile](#change-antivirus)
-1. [Exclude <%= vars.product_short_mirror %> during Apply Changes](#exclude-mirror)
+1. [Exclude Anti-Virus Mirror during Apply Changes](#exclude-mirror)
 1. [Remove the Exclusion](#remove-exclude)
 
-## <a id="change-mirror"></a> Change the Port in the <%= vars.product_short_mirror %> Tile
+## <a id="change-mirror"></a> Change the Port in the Anti-Virus Mirror Tile
 
-To change the port number in the <%= vars.product_short_mirror %> tile:
+To change the port number in the Anti-Virus Mirror tile:
 
 1. Navigate to the Ops Manager Installation Dashboard and click the **<%=vars.product_full_mirror%>** tile.
 1. Click **Anti-Virus Mirror Configuration**.
@@ -55,9 +55,9 @@ To change the port number in the <%= vars.product_short %> tile:
     ![Configure Anti-Virus Mirror Mirror Port](images/mirror-port.png)
 
 
-## <a id="exclude-mirror"></a> Exclude <%= vars.product_short_mirror %> during Apply Changes
+## <a id="exclude-mirror"></a> Exclude Anti-Virus Mirror during Apply Changes
 
-When changing ports for the <%= vars.product_short %> and <%= vars.product_short_mirror %> tiles,
+When changing ports for the <%= vars.product_short %> and Anti-Virus Mirror tiles,
 you need to exclude the `antivirus-mirror` instance group from the <%= vars.product_short %>
 deployment during the first **Apply Changes** for the <%= vars.product_short %> port.
 Excluding the `antivirus-mirror` instance group ensures that <%= vars.product_short %> is not deployed on the
@@ -75,7 +75,7 @@ To exclude the instance group and complete the port changes:
     ![Exclude Anti-Virus Mirror](images/exclude-mirror.png)
 
 1. Return to the Ops Manager Installation Dashboard and click **Review Pending Changes**.
-1. Unselect all products except **BOSH Director**, **<%= vars.product_short %>**, and **<%= vars.product_short_mirror %>**.
+1. Unselect all products except **BOSH Director**, **<%= vars.product_short %>**, and **Anti-Virus Mirror**.
 1. Click **Apply Changes**.
 
 ## <a id="remove-exclude"></a> Remove the Exclusion

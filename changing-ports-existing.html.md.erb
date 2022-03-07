@@ -6,8 +6,8 @@ owner: Platform Security & Compliance Team
 
 This topic describes how to change the port used by <%= vars.product_full %> and an existing mirror.
 
-If you are using <%= vars.product_full_mirror %>,
-then see [Changing the Port Used by <%= vars.product_short %> and <%= vars.product_short_mirror %>](./changing-ports.html) instead of this topic.
+If you are using Pivotal Anti-Virus Mirror,
+then see [Changing the Port Used by <%= vars.product_short %> and Anti-Virus Mirror](./changing-ports.html) instead of this topic.
 
 If you are upgrading from <%= vars.product_short %> v2.0 and you use an existing mirror or want to use an existing mirror,
 you might need to follow the procedure in this topic.
@@ -22,7 +22,7 @@ If the port number configured in both is not the same,
 To change the port used by <%= vars.product_short %> and an existing mirror you must:
 
 1. [Change the Port in the <%= vars.product_short %> Tile](#change-antivirus)
-1. [Uninstall the <%= vars.product_short_mirror %> Tile](#uninstall-mirror) if you have it deployed.
+1. [Uninstall the Anti-Virus Mirror Tile](#uninstall-mirror) if you have it deployed.
 
 ## <a id="change-antivirus"></a> Change the Port in the <%= vars.product_short %> Tile
 
@@ -110,17 +110,17 @@ upcHi9nzBhDFKdT3uhaQqNBU4UtJx5g=
 
 1. Click **Apply Changes**.
 
-## <a id="uninstall-mirror"></a> Uninstall the <%= vars.product_short_mirror %> Tile
+## <a id="uninstall-mirror"></a> Uninstall the Anti-Virus Mirror Tile
 
-If you are currently using <%= vars.product_short_mirror %>
+If you are currently using Anti-Virus Mirror
 and want to transition to using an existing mirror,
-VMware recommends that you uninstall your <%= vars.product_short_mirror %> tile.
+VMware recommends that you uninstall your Anti-Virus Mirror tile.
 
-To uninstall the <%= vars.product_short_mirror %> tile:
+To uninstall the Anti-Virus Mirror tile:
 
 1. Navigate to Ops Manager Installation Dashboard and
-click the trash icon on the **<%= vars.product_short_mirror %>** tile.
+click the trash icon on the **Anti-Virus Mirror** tile.
 1. In the **Delete Product** dialog box that appears, click **Confirm**.
 1. Click **Review Pending Changes**.
-1. Ensure that only **<%= vars.product_short_mirror %>** is selected.
+1. Ensure that only **Anti-Virus Mirror** is selected.
 1. Click **Apply Changes**.
