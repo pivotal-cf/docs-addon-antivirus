@@ -87,7 +87,7 @@ Use the **Official Mirror**, **Deployed**, **Existing Mirror**, or **Existing Mi
         <td><strong>Anti-Virus Mirror Port</strong></td>
         <td>
           Enter the port for Anti-Virus Mirror to use. The default value is <code>6501</code>.
-          <strong>Note:</strong><strong>Note:</strong> Anti-Virus Mirror uses mutual TLS (mTLS).
+          <strong>Note:</strong> Anti-Virus Mirror uses mutual TLS (mTLS).
           This port must be the same port used in <strong>Anti-Virus Mirror Port</strong> of the
           <strong>Anti-Virus for VMware Tanzu Mirror</strong> tile. If these ports are not the same,
           Anti-Virus Mirror database updates and deployments fail.
@@ -168,10 +168,10 @@ upcHi9nzBhDFKdT3uhaQqNBU4UtJx5g=
       <tr>
         <td><strong>(Optional) Enable on-access scanning on Linux</strong></td>
         <td>Select this option to scan files immediately after they are modified.
-        <p class="note"><strong>Note:</strong> On-Access Scan is not supported on Windows.
+        <p class="note"><strong>Note:</strong> On-Access Scan is not supported on Windows.</p>
         <p class="note"><strong>Note:</strong> Due to the dynamic nature of application
-          containers mounted on the <code>diego_cell</code> VM, On-Access Scan cannot scan containers.
-          Scheduled scans scan containers.
+          containers mounted on the <code>diego_cell</code> VM, On-Access Scan cannot scan
+          containers. Scheduled scans scan containers.
         </p>
       </tr>
       <tr>
@@ -240,18 +240,18 @@ upcHi9nzBhDFKdT3uhaQqNBU4UtJx5g=
       <tr>
         <td><strong>Destination for infected files</strong></td>
         <td>Enter the directory location where you want the infected files moved or copied to.
-          This field only appears if you have selected the <strong>move</strong> or <strong>copy</strong>
-           while selecting an <strong>Action to take when a virus is found</strong>.
-
-         <div class="note"><strong>Note:</strong> Add this path to the
-           <strong>Directories and files that will be ignored (on Windows)</strong> list below.
-            If you do not do this, then <%= vars.product_short %>:
+          This field only appears if you have selected the <strong>move</strong> or
+          <strong>copy</strong> while selecting an <strong>Action to take when a virus is
+          found</strong>.
+          <p class="note"><strong>Note:</strong> Add this path to the
+          <strong>Directories and files that will be ignored (on Windows)</strong> list below.
+          If you do not do this, then <%= vars.product_short %>:
             <ul>
               <li>Detects the moved or copied file</li>
               <li>Logs redundant alerts</li>
               <li>Creates additional copies of the detected file</li>
             </ul>
-           </div>
+          </p>
         </td>
       </tr>
       <tr>
