@@ -7,9 +7,9 @@ owner: Platform Security & Compliance Team
 This topic describes how to install and configure <%= vars.product_full %>.
 
 Before installing <%= vars.product_short %>, VMware recommends that you download
-and install the <%= vars.product_full_mirror %> tile.
+and install the Anti-Virus for VMware Tanzu Mirror tile.
 For more information about the <%= vars.product_short_mirror %> tile,
-see [Installing and Configuring <%= vars.product_full_mirror %>](./install-mirror.html).
+see [Installing and Configuring Anti-Virus for VMware Tanzu Mirror](./install-mirror.html).
 
 ##<a id="prereqs"></a>Prerequisites
 
@@ -28,7 +28,7 @@ For compatible versions, see the [Product Snapshot](./index.html#snapshot).
 
 * **An external mirror**. If you do not have an external mirror, VMware recommends that you install
   the <%= vars.product_short_mirror %>.
-  For instructions, see [Installing and Configuring <%= vars.product_full_mirror %>](./install-mirror.html).
+  For instructions, see [Installing and Configuring Anti-Virus for VMware Tanzu Mirror](./install-mirror.html).
 
 ## <a id='install-addon'></a> Install <%= vars.product_short %>
 
@@ -50,218 +50,116 @@ To configure <%= vars.product_short %>:
 1. Select **Anti-Virus Configuration**.
 
 1. Configure **Mirror for Automatic Database Updates**.<br>
-    The tabs below expand to show instructions for each type of mirror.<br><br>
+Use the **Official Mirror**, **Deployed**, **Existing Mirror**, or **Existing Mirror with TLS** information below.
 
-    <style>
-    .btn.btn-default,
-    .tab .tablinks {
-        color: #2185c5;
-    }
-    .tab {
-        overflow: hidden;
-        border: 1px solid #ccc;
-        background-color: #f1f1f1;
-    }
-
-    /* Style the buttons that are used to open the tab content */
-    .tab button {
-        background-color: inherit;
-        float: left;
-        border: none;
-        outline: none;
-        cursor: pointer;
-        padding: ;
-        transition: 0.3s;
-    }
-
-    /* Change background color of buttons on hover */
-    .tab button:hover {
-        background-color: #ddd;
-    }
-
-    /* Create an active/current tablink class */
-    .tab button.active {
-        background-color: #ccc;
-    }
-
-    /* Style the tab content */
-    .tabcontent {
-        display: none;
-        padding: 6px 12px;
-        border: 1px solid #ccc;
-        border-top: none;
-    }
-    </style>
-    <script>
-    function openDocs(evt, docsName) {
-        // Declare all variables
-        var i, tabcontent, tablinks;
-        // Get all elements with class="tabcontent" and hide them
-        tabcontent = document.getElementsByClassName("tabcontent");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-        }
-        // Get all elements with class="tablinks" and remove the class "active"
-        tablinks = document.getElementsByClassName("tablinks");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
-        // Show the current tab, and add an "active" class to the button that opened the tab
-        document.getElementById(docsName).style.display = "block";
-        evt.currentTarget.className += " active";
-    }
-    </script>
-
-    <div class="tab">
-      <!- Tab headers and links ->
-      <button class="tablinks active" onclick="openDocs(event, 'tab1')">Official mirror</button>
-      <button class="tablinks" onclick="openDocs(event, 'tab2')">Deployed mirror</button>
-      <button class="tablinks" onclick="openDocs(event, 'tab3')">Existing Mirror</button>
-      <button class="tablinks" onclick="openDocs(event, 'tab4')">Existing Mirror with TLS</button>
-    </div>
-
-    <div id="tab1" class="tabcontent" style="display:block">
-
-      <img src="./images/configure-mirror-official.png"
-       alt="Screenshot of the 'Mirror for Automatic Database Updates' section
-       of the 'Anti-Virus Configuration' pane.
-       The 'Official mirror' radio button is selected." width="550">
-
-      <table class="nice">
-        <col width="25%">
-        <col width="75%">
-        <th>Field</th>
-        <th>Description</th>
-        <tr>
-          <td><strong>Official mirror</strong></td>
-          <td>
-            Select this to have the mirror fetch databases from database.clamav.net.
-          </td>
-        </tr>
-      </table>
-    </div>
-    <div id="tab2" class="tabcontent">
-
-      <img src="./images/configure-mirror-deployed.png"
-       alt="Screenshot of the 'Mirror for Automatic Database Updates' section
-       of the 'Anti-Virus Configuration' pane.
-       The 'Deployed mirror from the Anti-Virus for VMware Tanzu Mirror Tile' radio button is selected.
-       The 'Anti-Virus Mirror Port' field is exposed." width="550">
-
-      <table class="nice">
-        <col width="25%">
-        <col width="75%">
-        <th>Field</th>
-        <th>Description</th>
-        <tr>
-          <td><strong>Deployed mirror from the <%= vars.product_full_mirror %> Tile</strong></td>
-          <td>
-            Select this when using the <%= vars.product_full_mirror %> tile.<br><br>
-            For more information, see <a href="./install-mirror.html">Installing and Configuring <%= vars.product_full_mirror %></a>.
-          </td>
-        </tr>
-        <tr>
-          <td><strong>Anti-Virus Mirror Port</strong></td>
-          <td>Enter the port for Anti-Virus Mirror to use. The default value is <code>6501</code>.
-            <p class="note">
-              <strong>Note:</strong> <%= vars.product_short_mirror %> uses mutual TLS (mTLS).
-              This port must be the same port used in <strong>Anti-Virus Mirror Port</strong> of the <strong><%= vars.product_full_mirror %></strong> tile.
-              If these ports are not the same, <%= vars.product_short %> database updates and deployments fail.
-            </p>
-          </td>
-        </tr>
-      </table>
-    </div>
-    <div id="tab3" class="tabcontent">
-
-      <img src="./images/configure-mirror-existing.png"
-       alt="Screenshot of the Mirror for Automatic Database Updates section
-       of the 'Anti-Virus Configuration' pane.
-       The 'Existing Mirror' radio button is selected.
-       The 'Comma separated list of mirror hostnames or IPs' field is exposed."
-       width="550">
-
-      <table class="nice">
-        <col width="25%">
-        <col width="75%">
-        <th>Field</th>
-        <th>Description</th>
-        <tr>
-          <td><strong>Existing Mirror</strong></td>
-          <td>
-            Select this to use an existing mirror without TLS.
-          </td>
-        </tr>
-        <tr>
-          <td><strong>Comma separated list of mirror hostnames or IPs</strong></td>
-          <td>
-             Enter one or more mirror hostnames or IP addresses in a comma-separated list.
-          </td>
-        </tr>
-      </table>
-    </div>
-    <div id="tab4" class="tabcontent">
-
-      <img src="./images/configure-mirror-existing-tls.png"
-       alt="Screenshot of the Mirror for Automatic Database Updates: section
-       of the 'Anti-Virus Configuration' pane.
-       The 'Existing Mirror with TLS' radio button is selected.
-       The three fields exposed are described below."
-       width="550">
-
-      <table class="nice">
-        <col width="25%">
-        <col width="75%">
-        <th>Field</th>
-        <th>Description</th>
-        <tr>
-          <td><strong>Existing Mirror with TLS</strong></td>
-          <td>
-            Select this to enter a hostname, port number, and CA certificate.
-          </td>
-        </tr>
-        <tr>
-            <td>
-                <strong>Mirror hostname without leading https://</strong>
-            </td>
-            <td>
-              Enter the hostname or IP address for your existing mirror.<br>
-              For example: <code>pivotal-anti-virus-mirror.s3.amazonaws.com</code> or <code>10.0.4.5</code>
-              <p class="note">
-                <strong>Note:</strong> Ensure that your existing mirror server is using the correct certificate for the method you choose (hostname or IP address).
-              </p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <strong>Mirror Port</strong>
-            </td>
-            <td>
-              Enter the port used by your existing mirror.<br>
-              For example: <code>443</code>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <strong>Mirror CA Certificate</strong>
-            </td>
-            <td>
-              Enter the CA certificate used with your existing mirror.<br>
-              For example:
-                <code>
-                  -----BEGIN CERTIFICATE-----<br>
-                  MIIEYzCCA0ugAwIBAgIQAYL4CY6i5ia5GjsnhB+5rzANBgkqhki<br>
-                  ...<br>
-                  upcHi9nzBhDFKdT3uhaQqNBU4UtJx5g=<br>
-                  -----END CERTIFICATE-----
-                </code>
-            </td>
-        </tr>
-      </table>
-    </div>
+    <hr>
+    **Official Mirror**
+    <img src="./images/configure-mirror-official.png"
+    alt="'Mirror for Automatic Database Updates' section of the 'Anti-Virus Configuration' pane.
+    The 'Official mirror' radio button is selected.">
+    <table class="nice">
+      <col width="25%">
+      <col width="75%">
+      <th>Field</th>
+      <th>Description</th>
+      <tr>
+        <td><strong>Official Mirror</strong></td>
+        <td>Select this to have the mirror fetch databases from database.clamav.net.</td>
+      </tr>
+    </table>
+    <hr>
+    **Deployed**
+    <img src="./images/configure-mirror-deployed.png"
+    alt="'Mirror for Automatic Database Updates' section of the 'Anti-Virus
+    Configuration' pane. The 'Deployed mirror from the Anti-Virus for VMware Tanzu Mirror Tile'
+    radio button is selected. The 'Anti-Virus Mirror Port' field is exposed.">
+    <table class="nice">
+      <col width="25%">
+      <col width="75%">
+      <th>Field</th>
+      <th>Description</th>
+      <tr>
+        <td><strong>Deployed mirror from the Anti-Virus for VMware Tanzu Mirror Tile</strong></td>
+        <td>Select this when using the Anti-Virus for VMware Tanzu Mirror tile.<br><br>
+        For more information, see <a href="./install-mirror.html">Installing and Configuring Anti-Virus Mirror</a>.</td>
+      </tr>
+      <tr>
+        <td><strong>Anti-Virus Mirror Port</strong></td>
+        <td>
+          Enter the port for Anti-Virus Mirror to use. The default value is <code>6501</code>.
+          <strong>Note:</strong><strong>Note:</strong> Anti-Virus Mirror uses mutual TLS (mTLS).
+          This port must be the same port used in <strong>Anti-Virus Mirror Port</strong> of the
+          <strong>Anti-Virus for VMware Tanzu Mirror</strong> tile. If these ports are not the same,
+          Anti-Virus Mirror database updates and deployments fail.
+        </td>
+      </tr>
+    </table>
+    <hr>
+    <hr>
+    **Existing Mirror**
+    <img src="./images/configure-mirror-existing.png"
+    alt="Mirror for Automatic Database Updates section of the 'Anti-Virus Configuration' pane.
+    The 'Existing Mirror' radio button is selected. The 'Comma separated list of mirror
+    hostnames or IPs' field is exposed.">
+    <table class="nice">
+      <col width="25%">
+      <col width="75%">
+      <th>Field</th>
+      <th>Description</th>
+      <tr>
+        <td><strong>Existing Mirror</strong></td>
+        <td>Select this to use an existing mirror without TLS.</td>
+      </tr>
+      <tr>
+        <td><strong>Comma separated list of mirror hostnames or IPs</strong></td>
+        <td>Enter one or more mirror hostnames or IP addresses in a comma-separated list.</td>
+      </tr>
+    </table>
+    <hr>
+    **Existing Mirror with TLS**
+    <img src="./images/configure-mirror-existing-tls.png"
+    alt="'Mirror for Automatic Database Updates' section of the 'Anti-Virus Configuration' pane.
+    The 'Existing Mirror with TLS' radio button is selected. The three fields exposed are described
+    below.">
+    <table class="nice">
+      <col width="25%">
+      <col width="75%">
+      <th>Field</th>
+      <th>Description</th>
+      <tr>
+        <td><strong>Existing Mirror with TLS</strong></td>
+        <td>Select this to enter a hostname, port number, and CA certificate.</td>
+      </tr>
+      <tr>
+        <td><strong>Mirror hostname without leading https://</strong></td>
+        <td>Enter the hostname or IP address for your existing mirror.<br>
+          For example: <code>pivotal-anti-virus-mirror.s3.amazonaws.com</code> or
+          <code>10.0.4.5</code>
+          <strong>Note:</strong> Ensure that your existing mirror server is using the correct
+          certificate for the hostname or IP address.
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Mirror Port</strong></td>
+        <td>Enter the port used by your existing mirror.<br>For example: <code>443</code></td>
+      </tr>
+      <tr>
+        <td><strong>Mirror CA Certificate</strong></td>
+        <td>Enter the CA certificate used with your existing mirror.<br>
+          For example:
+          <pre>
+-----BEGIN CERTIFICATE-----
+MIIEYzCCA0ugAwIBAgIQAYL4CY6i5ia5GjsnhB+5rzANBgkqhki
+...
+upcHi9nzBhDFKdT3uhaQqNBU4UtJx5g=
+-----END CERTIFICATE-----
+          </pre>
+        </td>
+      </tr>
+    </table>
 
 1. Configure the remaining fields:
-    <img src="./images/configure.png" alt="Screenshot of the 'Anti-Virus Configuration' pane.
+    <img src="./images/configure.png" alt="'Anti-Virus Configuration' pane.
        The fields shown are described below." width="550">
 
     <table class="nice">
