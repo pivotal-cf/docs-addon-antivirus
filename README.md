@@ -2,7 +2,6 @@
 
 This repo is for the Anti-Virus for VMware Tanzu documentation.
 
-
 ## Which Branches to Use
 
 The master branch is the tree-trunk, so **always** make changes you want carried forward in this branch. This includes:
@@ -31,8 +30,8 @@ As of March 8, 2022:
 
 ## Book Repo
 
-The book repo associate with this content repo is [pivotal-cf/docs-book-antivirus](https://github.com/pivotal-cf/docs-book-antivirus).
-This repo is only being used for the redirects from the old Pivotal docs site to the VMmware docs site.
+The book repo associated with this content repo is [pivotal-cf/docs-book-antivirus](https://github.com/pivotal-cf/docs-book-antivirus).
+The book repo is only being used for the redirects from the old Pivotal docs site to the VMware docs site.
 
 ## Releasing a New Minor Version
 
