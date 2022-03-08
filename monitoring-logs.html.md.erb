@@ -16,7 +16,7 @@ There are four distinct <%= vars.product_full %> apps that run on each VM:
 freshclam, go-clam-tls, clamd, and clamdscan.
 The freshclam and go-clam-tls apps are mutually exclusive,
 but the other apps work together to detect viruses and protect the VM.
-If On-Access scanning is enabled for linux, then an additional app is run: clamonacc.
+If On-Access scanning is enabled for Linux, then an additional app is run: clamonacc.
 
 Each app writes its own log file.
 You need to monitor each of these files to know if <%= vars.product_short %>
@@ -73,12 +73,14 @@ The log file for the clamd app is `/var/vcap/sys/log/antivirus/clamdscan.log`.
 
 ###<a id="clamonacc-app"></a> clamonacc App
 
-If On-Access scanning is enabled, the clamonacc app monitors the file system on the VM and alerts if a potentially
-malicious file is accessed.
+If On-Access scanning is enabled, the clamonacc app monitors the file system on the VM and alerts if a
+potentially malicious file is accessed.
 
-clamonacc output contains the initialisation information only. Any warnings of potential threats are logged in `/var/vcap/sys/log/antivirus/antivirus.stdout.log`.
+clamonacc output contains the initialization information only.
+Any warnings of potential threats are logged in `/var/vcap/sys/log/antivirus/antivirus.stdout.log`.
 
 The log file for the clamonacc app is `/var/vcap/sys/log/antivirus/clamonacc.stdout.log`.
+
 
 ##<a id="messages"></a>Log Messages
 
@@ -129,7 +131,7 @@ The following tables lists common messages that you see when ClamAV apps write t
     <td>Unhealthy</td>
   </tr>
   <tr>
-    <td><a href="#freshclam-terminated">Process Terminated<a></td>
+    <td><a href="#freshclam-terminated">Process Terminated</a></td>
     <td>freshclam</td>
     <td>freshclam should only terminate during a deployment. </td>
     <td>Unhealthy
@@ -446,9 +448,9 @@ clamdscan searches files and directories for viruses.
 ##<a id="clamonacc"></a>clamonacc Log Messages
 
 clamonacc monitors filesytem access, any interaction with a file triggers a scan of the file.
-The clamonacc output will show the initialisation information.
+The clamonacc output shows the initialization information.
 
-* <a id="clamonacc-initialisation"></a>Clamonacc initialisation
+* <a id="clamonacc-initialization"></a>Clamonacc initialization
 
   This is not provided in <%= vars.product_full %> 2.2 and earlier.
 
@@ -485,20 +487,20 @@ to the syslog format.
 With syslog-forwarder, the syslog format is:
 
 <pre>
-	&ltPRI> \
-	VERSION \
-	TIMESTAMP \
-	HOST \
-	APP-NAME \
-	PROC-ID \
-	MSG-ID \
-	[instance@47450 \
-	director="DIRECTOR" \
-	deployment="DEPLOYMENT" \
-	group="INSTANCE-GROUP" \
-	az="AVAILABILITY-ZONE" \
-	id="ID"] \
-	MESSAGE \
+\<PRI> \
+VERSION \
+TIMESTAMP \
+HOST \
+APP-NAME \
+PROC-ID \
+MSG-ID \
+[instance@47450 \
+director="DIRECTOR" \
+deployment="DEPLOYMENT" \
+group="INSTANCE-GROUP" \
+az="AVAILABILITY-ZONE" \
+id="ID"] \
+MESSAGE \
 </pre>
 
 Where:

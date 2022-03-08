@@ -65,16 +65,16 @@ To update the virus definitions:
 1. Download the three virus definition files from the ClamAV virus
 database mirror or an equivalent external mirror.
 You can access the ClamAV mirror at the following URLs:
-    * http://database.clamav.net/main.cvd
-    * http://database.clamav.net/daily.cvd
-    * http://database.clamav.net/bytecode.cvd
+    * https://database.clamav.net/main.cvd
+    * https://database.clamav.net/daily.cvd
+    * https://database.clamav.net/bytecode.cvd
 
     If you are unable to download the virus definitions from one of the links above,
     use the [cvdupdate](https://github.com/Cisco-Talos/cvdupdate) tool.
     For information about cvdupdate,
     see the [ClamAV documentation](https://docs.clamav.net/appendix/CvdPrivateMirror.html#3-serve-cvd-and-cdiff-files-from-a-local-web-server).
 
-1. Copy your downloaded virus definition files to your <%= vars.ops_manager %> VM.
+1. Copy your downloaded virus definition files to your Ops Manager VM.
 
     ```
     scp -i PATH-TO-PRIVATE-KEY PATH-TO-CVD-FILE ... ubuntu@OPS-MANAGER-VM-IP:
@@ -84,9 +84,9 @@ You can access the ClamAV mirror at the following URLs:
 
     <pre class="terminal">$ scp -i ~/.ssh/my-key.pem ~/Downloads/main.cvd ~/Downloads/daily.cvd ~/Downloads/bytecode.cvd ubuntu<span>@</span>192.168.0.2: </pre>
 
-1. SSH into the <%= vars.ops_manager %> VM.
-   For instructions,
-   see [Log in to the <%= vars.ops_manager %> VM with SSH](https://docs.pivotal.io/platform/customizing/trouble-advanced.html#ssh).
+1. SSH into the Ops Manager VM.
+   For instructions, see [Log in to the Ops Manager VM with SSH](https://docs.pivotal.io/ops-manager/install/trouble-advanced.html#ssh) in the Ops Manager
+documentation.
 
 1. Find the name of your <%= vars.product_short_mirror %> deployment by running:
 
@@ -117,20 +117,18 @@ You can access the ClamAV mirror at the following URLs:
 
 1. Verify that the mirror validated and updated its local copies of the virus
     definitions by running:
-
     ```
     bosh -e BOSH-ENVIRONMENT -d ANTIVIRUS-DEPLOYMENT-NAME ssh -c "sudo cat FILE | grep \"updated /var/vcap/store\""
     ```
-
     Where `FILE` is determined by the output destination configured in
     **Anti-Virus Mirror Configuration** of the <%= vars.product_full_mirror %> tile.
-    Use one of these:
-    * `/var/vcap/sys/log/antivirus-mirror/antivirus-mirror.stdout.log` for stdout
-    * `/var/vcap/sys/log/antivirus-mirror/antivirus-mirror.stderr.log` for stderr
-    * `/var/log/syslog` for syslog
+    Use one of the following:
+
+      * `/var/vcap/sys/log/antivirus-mirror/antivirus-mirror.stdout.log` for stdout
+      * `/var/vcap/sys/log/antivirus-mirror/antivirus-mirror.stderr.log` for stderr
+      * `/var/log/syslog` for syslog
 
     For example:
-
     <pre class="terminal">
     $ bosh -e my-env -d p-antivirus-mirror-4cb8cfbeee717258d72e ssh -c "sudo cat /var/log/syslog | grep \"updated /var/vcap/store\""
 
