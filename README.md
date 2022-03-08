@@ -2,7 +2,6 @@
 
 This repo is for the Anti-Virus for VMware Tanzu documentation.
 
-
 ## Which Branches to Use
 
 The master branch is the tree-trunk, so **always** make changes you want carried forward in this branch. This includes:
@@ -22,7 +21,8 @@ As of March 8, 2022:
 | 2.2   | 2.2.x     | https://docs.vmware.com/en/Anti-Virus-for-VMware-Tanzu/2.2/anti-virus/GUID-index.html and https://docs-staging.vmware.com/en/Anti-Virus-for-VMware-Tanzu/2.2/anti-virus/GUID-index.html |
 | 2.1   | 2.1.x    | https://docs.vmware.com/en/Anti-Virus-for-VMware-Tanzu/2.1/anti-virus/GUID-index.html and https://docs-staging.vmware.com/en/Anti-Virus-for-VMware-Tanzu/2.1/anti-virus/GUID-index.html |
 | 2.0   | 2.0.x     | https://docs.vmware.com/en/Anti-Virus-for-VMware-Tanzu/2.0/anti-virus/GUID-index.html and https://docs-staging.vmware.com/en/Anti-Virus-for-VMware-Tanzu/2.0/anti-virus/GUID-index.html |
-| v1.4   | v1.4.x     | https://docs.vmware.com/en/Anti-Virus-for-VMware-Tanzu/1.4/anti-virus/GUID-index.html and https://docs-staging.vmware.com/en/Anti-Virus-for-VMware-Tanzu/1.4/anti-virus/GUID-index.html |
+| 1.4   | 1.4.x     | https://docs.vmware.com/en/Anti-Virus-for-VMware-Tanzu/1.4/anti-virus/GUID-index.html and https://docs-staging.vmware.com/en/Anti-Virus-for-VMware-Tanzu/1.4/anti-virus/GUID-index.html |
+| v1.4   | v1.4.x     | NOT IN USE |
 | v1.3   | v1.3.x     | NOT IN USE (PDF available at https://docs.pivotal.io/archives/addon-antivirus-1.3.pdf) |
 | v1.2   | v1.2.x     | NOT IN USE (PDF available at https://docs.pivotal.io/archives/addon-antivirus-1.2.pdf) |
 
@@ -30,11 +30,8 @@ As of March 8, 2022:
 
 ## Book Repo
 
-pivotal-cf/docs-book-antivirus builds both the **edge** version (next unreleased version) and the **production** versions.
-
-+ **Edge** is currently publishing the 2-2 branch.
-
-+ **Production** is currently publishing 1-2, 1-3, 1-4, 2-0, and 2-1.
+The book repo associated with this content repo is [pivotal-cf/docs-book-antivirus](https://github.com/pivotal-cf/docs-book-antivirus).
+The book repo is only being used for the redirects from the old Pivotal docs site to the VMware docs site.
 
 ## Releasing a New Minor Version
 
@@ -71,14 +68,14 @@ in the documentation team wiki.
 
 - [docworks](https://docworks.vmware.com/) is the main tool for managing docs used by writers.
 - [docsdash](https://docsdash.vmware.com/) is a deployment UI which manages the promotion from
-staging to pre-prod to production. The process below describes how to upload our docs to staging,
-replacing the publication with the same version.
+staging to pre-prod to production.
 
 ### Prepare Markdown Files
 
 - Markdown files live in this repo.
-- Each page requires an entry in [toc.md](docs/config/toc.md) for the table of contents.
 - Images should live in an `images` directory at the same level and linked with a relative link.
+- Each page requires an entry in [config/toc.md](config/toc.md) for the table of contents.
+- Variables live in [config/template_variables.yml](config/template_variables.yml).
 
 
 ## Style Guide
