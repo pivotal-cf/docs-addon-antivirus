@@ -355,7 +355,7 @@ go-clam-tls log entries relate to whether the virus-signature database is up-to-
 
 * <a id="go-clam-tls-old"></a>Virus Database is Older Than 7 Days
   <pre class="terminal">
-  2019/10/03 20:51:14
+  2019/10/03 20:51:14<br>
   \**************************************************<br>
   \***  The virus database is older than 7 days!  \***<br>
   \***   Please update it as soon as possible.    \***<br>
@@ -380,7 +380,7 @@ The clamd job uses the database of virus signatures that the freshclam job updat
 
 * <a id="clamd-start"></a>Start clamd
 	<pre class="terminal">
-	Wed Nov 28 15:58:47 2018 -> +++ Started at Wed Nov 28 15:58:47 2018
+	Wed Nov 28 15:58:47 2018 -> +++ Started at Wed Nov 28 15:58:47 2018<br>
 	Wed Nov 28 15:59:02 2018 -> Self checking every 600 seconds.
 	</pre>
 
@@ -417,9 +417,9 @@ The clamd job uses the database of virus signatures that the freshclam job updat
 
 * <a id="clamd-terminated"></a>Process Terminated
 	<pre class="terminal">
-	Wed Nov 28 19:25:23 2018 -> Pid file removed.
-	Wed Nov 28 19:25:23 2018 -> --- Stopped at Wed Nov 28 19:25:23 2018
-	Wed Nov 28 19:25:23 2018 -> Socket file removed.
+	Wed Nov 28 19:25:23 2018 -> Pid file removed.<br>
+	Wed Nov 28 19:25:23 2018 -> --- Stopped at Wed Nov 28 19:25:23 2018<br>
+	Wed Nov 28 19:25:23 2018 -> Socket file removed.<br>
 	</pre>
 
 ##<a id="clamdscan"></a>clamdscan Log Messages
@@ -440,8 +440,8 @@ clamdscan searches files and directories for viruses.
 
 	Sample:
 	<pre class="terminal">
-	----------- SCAN SUMMARY -----------
-	Infected files: 1
+	----------- SCAN SUMMARY -----------<br>
+	Infected files: 1<br>
 	Time: 346.887 sec (5 m 46 s)
 	</pre>
 
@@ -455,8 +455,8 @@ The clamonacc output shows the initialization information.
   This is not provided in <%= vars.product_full %> 2.2 and earlier.
 
   <pre class="terminal">
-  Clamd Socket not yet available.
-  Starting clamonacc: {timestamp}
+  Clamd Socket not yet available.<br>
+  Starting clamonacc: {timestamp}<br>
   Started clamonacc: {timestamp}
   </pre>
 
@@ -487,7 +487,7 @@ to the syslog format.
 With syslog-forwarder, the syslog format is:
 
 <pre>
-\<PRI> \
+&lt;PRI> \
 VERSION \
 TIMESTAMP \
 HOST \
@@ -513,33 +513,33 @@ Where:
 For example, the first two lines of the "Scan Finished" message appearing in the syslog file below:
 
 <pre class="terminal">
-<14> \
-1 \
-2018-12-07T21:48:02.119539Z \
-10.0.0.3 \
-clamav \
-rs2 \
-- \
-[instance@12345 \
-director="" \
-deployment="clamav-trusty-aaaa-80" \
-group="clamav" \
-az="z1" \
-id="abcdef01-8901-42a5-ad58-8b4c1a2de881"] \
------------ SCAN SUMMARY -----------
-<14> \
-1 \
-2018-12-07T21:48:02.11954Z \
-10.0.0.3 \
-clamav \
-rs2 \
-- \
-[instance@12345 \
-director="" \
-deployment="clamav-trusty-rlee-80" \
-group="clamav" \
-az="z1" \
-id="abcdef01-8901-42a5-ad58-8b4c1a2de881"] \
+&le;14> \<br>
+1 \<br>
+2018-12-07T21:48:02.119539Z \<br>
+10.0.0.3 \<br>
+clamav \<br>
+rs2 \<br>
+- \<br>
+[instance@12345 \<br>
+director="" \<br>
+deployment="clamav-trusty-aaaa-80" \v
+group="clamav" \<br>
+az="z1" \<br>
+id="abcdef01-8901-42a5-ad58-8b4c1a2de881"] \v
+----------- SCAN SUMMARY -----------<br>
+&lt;14> \<br>
+1 \<br>
+2018-12-07T21:48:02.11954Z \<br>
+10.0.0.3 \<br>
+clamav \<br>
+rs2 \<br>
+- \<br>
+[instance@12345 \<br>
+director="" \<br>
+deployment="clamav-trusty-rlee-80" \<br>
+group="clamav" \<br>
+az="z1" \<br>
+id="abcdef01-8901-42a5-ad58-8b4c1a2de881"] \<br>
 Infected files: 0
 </pre>
 
