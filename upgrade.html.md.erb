@@ -101,7 +101,7 @@ To uninstall <%= vars.product_old %> v1.x and install <%= vars.product_full %> v
 
     For example:
     <pre class="terminal">
-      $ bosh -e my-env runtime-config > /runtime/config/
+    $ bosh -e my-env runtime-config > /runtime/config/
     </pre>
 
 1. In the runtime config YML, remove all ClamAV properties under the `releases:` and `addons:` sections.
@@ -115,8 +115,8 @@ To uninstall <%= vars.product_old %> v1.x and install <%= vars.product_full %> v
     ```
 
     Where:
-    * `ENVIRONMENT` is your environment
-    * `PATH-TO-SAVE-THE-RUNTIME-CONFIG` is the location of the runtime configuration you are updating.
+        * `ENVIRONMENT` is your environment
+        * `PATH-TO-SAVE-THE-RUNTIME-CONFIG` is the location of the runtime configuration you are updating.
 
     For example:
     <pre class="terminal">
