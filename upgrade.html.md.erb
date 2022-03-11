@@ -43,7 +43,7 @@ To upgrade the ClamAV add-on to a later version, do the following:
     bosh -e BOSH-ENVIRONMENT runtime-config  --name clamav > PATH-TO-SAVE-THE-RUNTIME-CONFIG
     ```
 
-    <br>For example:
+    For example:
 
     <pre class="terminal">bosh -e my-env runtime-config  --name clamav > /tmp/clamav.yml</pre>
 
@@ -53,24 +53,24 @@ To upgrade the ClamAV add-on to a later version, do the following:
     bosh -e BOSH-ENVIRONMENT upload-release PATH-TO-NEW-CLAMAV-RELEASE
     ```
 
-    <br>For example:
+    For example:
 
     <pre class="terminal">bosh -e my-env upload-release ~/clamav-1.4.34.tgz</pre>
 
 6. Edit the clamav runtime config to set the new release version. This version should match the version you downloaded from Pivotal Network.
 
-     <br>For example, edit the version in `/tmp/clamav.yml` as follows:
+     For example, edit the version in `/tmp/clamav.yml` as follows:
      <pre>
      releases:
      \- name: clamav, version: <strong>1.4.34</strong> </pre>
 
-7. Update the runtime config:<br><br>
+7. Update the runtime config:
 
     ```
     bosh -e BOSH-ENVIRONMENT update-runtime-config --name=clamav PATH-TO-SAVE-THE-RUNTIME-CONFIG
     ```
 
-    <br>For example:
+    For example:
 
     <pre class="terminal">bosh -e my-env update-runtime-config --name=clamav /tmp/clamav.yml </pre>
 
