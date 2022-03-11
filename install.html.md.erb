@@ -314,22 +314,23 @@ To add signature names to an allowlist, do the following:
 
 1. Add the `whitelist` property and append the false positive signature names.
    For example:
-   <pre class><code>releases:
-- name: clamav
-  version: x.x.x
-addons:
-  name: clamav
-  jobs:
-  - name: clamav
-    release: clamav
-    properties:
-      clamav:
-        <strong>whitelist:</strong>
-        <strong>  - Eicar-Test-Signature</strong>
-        <strong>  - Clamav.Test.File-7</strong>
-        <strong>  - Win.Test.EICAR_NDB-1</strong>
-        <strong>  - Eicar-Signature</strong>
-...</code></pre>
+   <pre class="terminal">releases:
+\- name: clamav<br>
+  version: x.x.x<br>
+addons:<br>
+  name: clamav<br>
+  jobs:<br>
+  \- name: clamav<br>
+    release: clamav<br>
+    properties:<br>
+      clamav:<br>
+        <strong>whitelist:</strong><br>
+        <strong>  - Eicar-Test-Signature</strong><br>
+        <strong>  - Clamav.Test.File-7</strong><br>
+        <strong>  - Win.Test.EICAR_NDB-1</strong><br>
+        <strong>  - Eicar-Signature</strong><br>
+...
+    </pre>
 
 1. Apply changes by updating your runtime config.
 For more information, see steps 4 to 7 of [Deploy the ClamAV Add-on](#deploy).
@@ -342,22 +343,22 @@ ClamAV offers immediate file scanning upon file modification. This feature may r
 To enable on-access file scanning with the <code>on\_access</code> runtime config property:
 <ol>
 <li>In the <code>clamav.yml</code> file, add the <code>on\_access</code> property under the <code>clamav</code> property, and set <code>on\_access</code> to <code>yes</code>, as shown in bold:
-<pre><code>releases:
-<span>-</span> name: clamav
-  version: x.x.x
-addons:
-  name: clamav
-  jobs:
-  <span>-</span> name: clamav
-    release: clamav
-    properties:
-      clamav:
-        <strong>on_access: yes</strong>
-        scheduled: yes
-...</code></pre>
+<pre>releases:<br>
+\- name: clamav<br>
+  version: x.x.x<br>
+addons:<br>
+  name: clamav<br>
+  jobs:<br>
+  - name: clamav<br>
+    release: clamav<br>
+    properties:<br>
+      clamav:<br>
+        <strong>on_access: yes</strong><br>
+        scheduled: yes<br>
+...</pre>
 </li>
 <li>Apply changes by updating your runtime config.
-For more information,  see steps 4 to 7 of <a href="#deploy">Deploy the ClamAV Add-on</a> above.</li>
+For more information, see steps 4 to 7 of <a href="#deploy">Deploy the ClamAV Add-on</a> above.</li>
 </ol>
 
 ##<a id="configure-scheduled-scan"></a>Configure Scheduled Scan
@@ -368,19 +369,19 @@ To change the scheduled scan to run hourly:
 
 <ol>
 <li>In the <code>clamav.yml</code> file, add the property <code>schedule_interval</code> under the <code>clamav</code> property, and set it to <code>hourly</code>, as shown below:
-<pre><code>releases:
-<span>-</span> name: clamav
-  version: x.x.x
-addons:
-  name: clamav
-  jobs:
-  <span>-</span> name: clamav
-    release: clamav
-    properties:
-      clamav:
-        scheduled: yes
-        <strong>schedule_interval: hourly</strong>
-...</code></pre>
+<pre>releases:<br>
+\- name: clamav<br>
+  version: x.x.x<br>
+addons:<br>
+  name: clamav<br>
+  jobs:<br>
+  \- name: clamav<br>
+    release: clamav<br>
+    properties:<br>
+      clamav:<br>
+        scheduled: yesv
+        <strong>schedule_interval: hourly</strong><br>
+...</pre>
 </li>
 <li>Apply changes by updating your runtime config.
 For more information,  see steps 4 to 7 of <a href="#deploy">Deploy the ClamAV Add-on</a> above.</li>
@@ -393,21 +394,21 @@ To restrict the time interval when a daily scan runs, do the following:
     when the scheduled scan can run by specifying a time range in 24-hour format
     in the properties <code>first_scheduled_scan_time</code> and <code>last_scheduled_scan_time</code>,
     as shown below:
-<pre><code>releases:
-<span>-</span> name: clamav
-  version: x.x.x
-addons:
-  name: clamav
-  jobs:
-  <span>-</span> name: clamav
-    release: clamav
-    properties:
-      clamav:
-        scheduled: yes
-        schedule_interval: daily
-        <strong>first_scheduled_scan_time: "2:00"
-        last_scheduled_scan_time: "4:30"</strong>
-...</code></pre>
+<pre>releases:<br>
+\- name: clamav<br>
+  version: x.x.x<br>
+addons:<br>
+  name: clamav<br>
+  jobs:v
+  - name: clamav<br>
+    release: clamav<br>
+    properties:<br>
+      clamav:<br>
+        scheduled: yes<br>
+        schedule_interval: daily<br>
+        <strong>first_scheduled_scan_time: "2:00"<br>
+        last_scheduled_scan_time: "4:30"</strong><br>
+...</pre>
 </li>
 <li> Apply changes by updating your runtime config.
 For more information,  see steps 4 to 7 of <a href="#deploy">Deploy the ClamAV Add-on</a> above.
@@ -432,19 +433,19 @@ However, you can specify other actions, as described [Step 2](#step2) below.
 <ol>
 <li>In the <code>clamav.yml</code> file, add the <code>action</code> property under the <code>clamav</code> property and,
 optionally, the <code>action_destination</code> property, as shown below:
-<pre><code>releases:
-<span>-</span> name: clamav
-  version: x.x.x
-addons:
-  name: clamav
-  jobs:
-  <span>-</span> name: clamav
-    release: clamav
-    properties:
-      clamav:
-        action: ACTION
-        action_destination: PATH
-...</code></pre>
+<pre>releases:<br>
+\- name: clamav<br>
+  version: x.x.x<br>
+addons:<br>
+  name: clamav<br>
+  jobs:<br>
+  \- name: clamav<br>
+    release: clamav<br>
+    properties:<br>
+      clamav:<br>
+        action: ACTION<br>
+        action_destination: PATH<br>
+...</pre>
 </li>
 <li>Replace <code>ACTION</code> with one of the following values:<a id="step2"></a>
   <ul>
@@ -470,24 +471,23 @@ If you don't supply an action, the function fails.
 
     Example configuration:
 
-<pre><code>releases:
-<span>-</span> name: clamav
-  version: x.x.x
-addons:
-  name: clamav
-    jobs:
-    <span>-</span> name: clamav
-      release: clamav
-      properties:
-        clamav:
-          action: move
-          action_destination: /var/vcap/data/clamav/found
-          exclude_paths:
-          - ^/proc/
-          - ^/sys/
-          - ^/var/vcap/data/clamav/found/
-
-...</code></pre>
+<pre>releases:<br>
+\- name: clamav<br>
+  version: x.x.x<br>
+addons:<br>
+  name: clamav<br>
+    jobs:<br>
+    \- name: clamav<br>
+      release: clamav<br>
+      properties:<br>
+        clamav:<br>
+          action: move<br>
+          action_destination: /var/vcap/data/clamav/found<br>
+          exclude_paths:<br>
+          - ^/proc/<br>
+          - ^/sys/<br>
+          - ^/var/vcap/data/clamav/found/<br>
+...</pre>
   </li>
 </ol>
 
@@ -505,21 +505,21 @@ as shown below:
   directories on the `exclude_paths` list.
   This is because they must be on the list to remain excluded.</p>
 
-    <pre><code>releases:
-    <span>-</span> name: clamav
-      version: x.x.x
-    addons:
-      name: clamav
-        jobs:
-        <span>-</span> name: clamav
-          release: clamav
-          properties:
-            clamav:
-              exclude_paths:
-              - ^/proc/
-              - ^/sys/
-              - ADDITONAL-EXCLUSIONS
-    ...</code></pre>
+    <pre>releases:<br>
+    \- name: clamav<br>
+      version: x.x.x<br>
+    addons:v
+      name: clamav<br>
+        jobs:<br>
+        \- name: clamav<br>
+          release: clamav<br>
+          properties:<br>
+            clamav:<br>
+              exclude_paths:<br>
+              - ^/proc/<br>
+              - ^/sys/<br>
+              - ADDITONAL-EXCLUSIONS<br>
+    ...</pre>
 
 1. Apply changes by updating your runtime config.
 For instructions, see steps 4 to 7 of <a href="#deploy">Deploy the ClamAV Add-on</a> above.
