@@ -17,9 +17,8 @@ Applying changes in Ops Manager fails.
 The bottom of the changelog contains an error message similar to:
 
 <pre class="terminal">...
-Started updating job nats > nats/0 (12bfae02-b4af-4104-b2bd-227ff07b2d92) (canary). Done (00:02:31)
-  Failed updating job etcd_server > etcd_server/0 (f8e492bf-db09-4d38-8a73-5cf69d7b8a11) (canary): 'etcd_server/0 (f8e492bf-db09-4d38-8a73-5cf69d7b8a11)' is not running after update. Review logs for failed jobs: clamd (00:05:53)
-
+Started updating job nats > nats/0 (12bfae02-b4af-4104-b2bd-227ff07b2d92) (canary). Done (00:02:31)<br>
+  Failed updating job etcd_server > etcd_server/0 (f8e492bf-db09-4d38-8a73-5cf69d7b8a11) (canary): 'etcd_server/0 (f8e492bf-db09-4d38-8a73-5cf69d7b8a11)' is not running after update. Review logs for failed jobs: clamd (00:05:53)<br><br>
 Error 400007: 'etcd_server/0 (f8e492bf-db09-4d38-8a73-5cf69d7b8a11)' is not running after update. Review logs for failed jobs: clamd
 </pre>
 
@@ -177,7 +176,7 @@ However, the `clamd` and `freshclam` processes eventually run.<br>
 The deployment failure log looks similar to:
 
 <pre class="terminal">
-Task 1071 | 19:40:49 | Updating instance clamav_1: clamav_1/d5cfe4bd-b606-4372-8481-187f4cf57e6c (0) (canary) (00:05:26)
+Task 1071 | 19:40:49 | Updating instance clamav_1: clamav_1/d5cfe4bd-b606-4372-8481-187f4cf57e6c (0) (canary) (00:05:26)<br>
                 L Error: 'clamav_1/d5cfe4bd-b606-4372-8481-187f4cf57e6c (0)' is not running after update. Review logs for failed jobs: clamd, freshclam
 </pre>
 <br>
@@ -186,10 +185,10 @@ the `clamd` and `freshclam` processes are running successfully after the failed 
 
 For example:
 
-<pre class="terminal">$ bosh -d clamav_1/d5cfe4bd-b606-4372-8481-187f4cf57e6c instances --ps
-Instance                                       Process    Process State  AZ  IPs
-clamav_1/d5cfe4bd-b606-4372-8481-187f4cf57e6c  -          running        z1  10.0.0.7
-~                                              clamd      running        -   -
+<pre class="terminal">$ bosh -d clamav_1/d5cfe4bd-b606-4372-8481-187f4cf57e6c instances --ps<br>
+Instance                                       Process    Process State  AZ  IPs<br>
+clamav_1/d5cfe4bd-b606-4372-8481-187f4cf57e6c  -          running        z1  10.0.0.7<br>
+~                                              clamd      running        -   -<br>
 ~                                              freshclam  running        -   -
 </pre>
 
@@ -217,9 +216,9 @@ The Anti-Virus Mirror log reports that too many log files are open:
 
 <pre class="terminal">
 2019/07/29 20:02:41 10.0.0.72 is requesting main.cvd
-2019/07/29 20:02:41 http: Accept error: accept tcp 0.0.0.0:80: accept4: too many open files; retrying in 10ms
-2019/07/29 20:02:41 http: Accept error: accept tcp 0.0.0.0:80: accept4: too many open files; retrying in 20ms
-2019/07/29 20:02:41 http: Accept error: accept tcp 0.0.0.0:80: accept4: too many open files; retrying in 40ms
+2019/07/29 20:02:41 http: Accept error: accept tcp 0.0.0.0:80: accept4: too many open files; retrying in 10ms<br>
+2019/07/29 20:02:41 http: Accept error: accept tcp 0.0.0.0:80: accept4: too many open files; retrying in 20ms<br>
+2019/07/29 20:02:41 http: Accept error: accept tcp 0.0.0.0:80: accept4: too many open files; retrying in 40ms<br>
 2019/07/29 20:02:42 http: Accept error: accept tcp 0.0.0.0:80: accept4: too many open files; retrying in 5ms
 </pre>
 
