@@ -315,12 +315,12 @@ To add signature names to an allowlist, do the following:
 1. Add the `whitelist` property and append the false positive signature names.
    For example:
    <pre><code>releases:
-<span>-</span> name: clamav
+- name: clamav
   version: x.x.x
 addons:
   name: clamav
   jobs:
-  <span>-</span> name: clamav
+  - name: clamav
     release: clamav
     properties:
       clamav:
