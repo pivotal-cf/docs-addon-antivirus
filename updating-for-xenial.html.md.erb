@@ -33,12 +33,12 @@ Review the following table and make any required changes before you upgrade to X
     <th>do the following…</td>
     <tr>
       <td>1.4.29</td>
-      <td>Verify that your runtime config file, <code>clamav.yml</code>, includes 
-<pre>
-stemcell:
-- os: ubuntu-trusty
-- os: ubuntu-xenial
-</pre>
+      <td>Verify that your runtime config file, <code>clamav.yml</code>, includes:
+        <pre class="terminal">
+        stemcell:
+        - os: ubuntu-trusty
+        - os: ubuntu-xenial
+        </pre>
         If it does not, then follow the procedure, <a href="#add">Add the Xenial Stemcell Property to ClamAV Add-on</a> below.</td>
           </tr>
           <tr>
