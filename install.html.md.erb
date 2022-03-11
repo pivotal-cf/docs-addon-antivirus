@@ -233,18 +233,18 @@ Perform the following steps to deploy the ClamAV Add-on:
     <pre class="terminal">$ bosh -e my-env update-runtime-config --name=clamav ~/clamav.yml</pre>
 1. Verify that your runtime configuration changes match what you specified in the ClamAV manifest by running the following command:
     <pre class="terminal">$ bosh -e my-env runtime-config --name=clamav</pre>
-    For Example:
+    For example:
     <pre class="terminal">
-    $ bosh -e my-env runtime-config --name=clamav
-    Acting as user 'admin' on 'micro'
-    releases:
-    <span>-</span> name: clamav
-       version: 1.3.28
-    addons:
-      name: clamav
-        jobs:
-         <span>-</span> name: clamav
-            release: clamav
+    $ bosh -e my-env runtime-config --name=clamav<br>
+    Acting as user 'admin' on 'micro'<br>
+    releases:<br>
+    \- name: clamav<br>
+       version: 1.3.28<br>
+    addons:<br>
+      name: clamavv
+        jobs:<br>
+          \- name: clamav<br>
+            release: clamav<br>
     ...
     </pre>
 1. Navigate to your Installation Dashboard in Ops Manager.
@@ -314,7 +314,7 @@ To add signature names to an allowlist, do the following:
 
 1. Add the `whitelist` property and append the false positive signature names.
    For example:
-   <pre><code>releases:
+   <pre class><code>releases:
 - name: clamav
   version: x.x.x
 addons:
