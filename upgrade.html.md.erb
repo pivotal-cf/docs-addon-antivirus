@@ -21,33 +21,37 @@ See the following topics to ensure you have the required component versions and 
 To uninstall ClamAV Add-on for PCF v1.x and install <%= vars.product_full %> v2.x in its place:
 
 1. Retrieve the latest runtime config YML by running the following command:
-  <pre>
+
+    ```
     bosh -e ENVIRONMENT runtime-config > PATH-TO-SAVE-THE-RUNTIME-CONFIG
-  </pre>
+    ```
 
     Where:
+
     * `ENVIRONMENT` is your environment
     * `PATH-TO-SAVE-THE-RUNTIME-CONFIG` is the location where you want to save the runtime configuration.
 
     For example:
     <pre class="terminal">
-      $ bosh -e my-env runtime-config > /runtime/config/
+    $ bosh -e my-env runtime-config > /runtime/config/
     </pre>
 
 1. In the runtime config YML, remove all ClamAV properties under the `releases:` and `addons:` sections.
 
-1. Update the runtime config.
-  <pre>
+1. Update the runtime config:
+
+    ```
     bosh -e ENVIRONMENT update-runtime-config --name=clamav PATH-TO-SAVE-THE-RUNTIME-CONFIG
-  </pre>
+    ```
 
     Where:
+
     * `ENVIRONMENT` is your environment
     * `PATH-TO-SAVE-THE-RUNTIME-CONFIG` is the location of the runtime configuration you are updating.
 
     For example:
     <pre class="terminal">
-      $ bosh -e my-env update-runtime-config --name=clamav /runtime/config/
+    $ bosh -e my-env update-runtime-config --name=clamav /runtime/config/
     </pre>
 
 1. To set up the <%= vars.product_full %> tile, follow the instructions in
