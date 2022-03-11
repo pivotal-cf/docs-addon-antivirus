@@ -17,10 +17,9 @@ and verifying that it is protecting your Ops Manager deployment.
 Applying changes in Ops Manager fails.
 The bottom of the changelog contains an error message similar to:
 
-<pre class="terminal">...
-Started updating job nats > nats/0 (12bfae02-b4af-4104-b2bd-227ff07b2d92) (canary). Done (00:02:31)
-  Failed updating job etcd_server > etcd_server/0 (f8e492bf-db09-4d38-8a73-5cf69d7b8a11) (canary): 'etcd_server/0 (f8e492bf-db09-4d38-8a73-5cf69d7b8a11)' is not running after update. Review logs for failed jobs: clamd (00:05:53)
-
+<pre class="terminal">
+Started updating job nats > nats/0 (12bfae02-b4af-4104-b2bd-227ff07b2d92) (canary). Done (00:02:31)<br>
+Failed updating job etcd_server > etcd_server/0 (f8e492bf-db09-4d38-8a73-5cf69d7b8a11) (canary): 'etcd_server/0 (f8e492bf-db09-4d38-8a73-5cf69d7b8a11)' is not running after update. Review logs for failed jobs: clamd (00:05:53)<br>
 Error 400007: 'etcd_server/0 (f8e492bf-db09-4d38-8a73-5cf69d7b8a11)' is not running after update. Review logs for failed jobs: clamd
 </pre>
 
@@ -40,7 +39,7 @@ of a stable mirror server. The official supported mirror is `database.clamav.net
 Applying changes in Ops Manager fails.
 The bottom of the changelog contains an error message similar to:
 
-<pre class="terminal">...
+<pre class="terminal">
 Error: Action Failed get_task: Task d5b87522-c8b2-4870-7855-73d50bff0748 result: 1 of 6 pre-start scripts failed. Failed Jobs: antivirus. Successful Jobs: bpm, syslog_forwarder, bosh-dns, ipsec, pxc-mysql.
 </pre>
 
@@ -52,10 +51,9 @@ obtain the following files: `main.cvd`, `bytecode.cvd`, and `daily.cvd`.
 If you manually get the ClamAV Virus Database, using curl or similar tools can return a file with an error
 instead of the virus definitions. For example:
 
-<pre class="terminal">...
-$ curl -L -O database.clamav.net/main.cvd
-
-$ cat main.cvd
+<pre class="terminal">
+$ curl -L -O database.clamav.net/main.cvd<br>
+$ cat main.cvd<br>
 error code: 1020
 </pre>
 
@@ -68,7 +66,6 @@ in _Installing and Configuring Anti-Virus Mirror_.
 For use cases where CVD files are manually obtained, a supported method must be used.
 For information about error codes and supported methods,
 see [ClamAV documentation](https://www.clamav.net/documents/freshclam-faq#error-codes).
-
 
 
 ## <a id="updates"></a> Virus Database Update Issues
@@ -214,7 +211,7 @@ However, the `clamd` and `freshclam` processes eventually run.<br>
 The deployment failure log looks similar to:
 
 <pre class="terminal">
-Task 1071 | 19:40:49 | Updating instance clamav_1: clamav_1/d5cfe4bd-b606-4372-8481-187f4cf57e6c (0) (canary) (00:05:26)
+Task 1071 | 19:40:49 | Updating instance clamav_1: clamav_1/d5cfe4bd-b606-4372-8481-187f4cf57e6c (0) (canary) (00:05:26)<br>
                 L Error: 'clamav_1/d5cfe4bd-b606-4372-8481-187f4cf57e6c (0)' is not running after update. Review logs for failed jobs: clamd, freshclam
 </pre>
 <br>
@@ -223,10 +220,10 @@ the `clamd` and `freshclam` processes are running successfully after the failed 
 
 For example:
 
-<pre class="terminal">$ bosh -d clamav_1/d5cfe4bd-b606-4372-8481-187f4cf57e6c instances --ps
-Instance                                       Process    Process State  AZ  IPs
-clamav_1/d5cfe4bd-b606-4372-8481-187f4cf57e6c  -          running        z1  10.0.0.7
-~                                              clamd      running        -   -
+<pre class="terminal">$ bosh -d clamav_1/d5cfe4bd-b606-4372-8481-187f4cf57e6c instances --ps<br>
+Instance                                       Process    Process State  AZ  IPs<br>
+clamav_1/d5cfe4bd-b606-4372-8481-187f4cf57e6c  -          running        z1  10.0.0.7<br>
+~                                              clamd      running        -   -<br>
 ~                                              freshclam  running        -   -
 </pre>
 
@@ -254,9 +251,9 @@ The <%= vars.product_short_mirror %> log reports that too many log files are ope
 
 <pre class="terminal">
 2019/07/29 20:02:41 10.0.0.72 is requesting main.cvd
-2019/07/29 20:02:41 http: Accept error: accept tcp 0.0.0.0:80: accept4: too many open files; retrying in 10ms
-2019/07/29 20:02:41 http: Accept error: accept tcp 0.0.0.0:80: accept4: too many open files; retrying in 20ms
-2019/07/29 20:02:41 http: Accept error: accept tcp 0.0.0.0:80: accept4: too many open files; retrying in 40ms
+2019/07/29 20:02:41 http: Accept error: accept tcp 0.0.0.0:80: accept4: too many open files; retrying in 10ms<br>
+2019/07/29 20:02:41 http: Accept error: accept tcp 0.0.0.0:80: accept4: too many open files; retrying in 20ms<br>
+2019/07/29 20:02:41 http: Accept error: accept tcp 0.0.0.0:80: accept4: too many open files; retrying in 40ms<br>
 2019/07/29 20:02:42 http: Accept error: accept tcp 0.0.0.0:80: accept4: too many open files; retrying in 5ms
 </pre>
 
@@ -334,8 +331,8 @@ Increase the VM size. VMware recommends a minimum VM size of `micro.cpu` using 2
 The freshclam logs show the following warning messages:
 
 <pre class="terminal">
-Can't query main.IP-ADDRESS.ping.clamav.net
-Can't query daily.IP-ADDRESS.ping.clamav.net
+Can't query main.IP-ADDRESS.ping.clamav.net<br>
+Can't query daily.IP-ADDRESS.ping.clamav.net<br>
 Can't query bytecode.IP-ADDRESS.ping.clamav.net
 </pre>
 
