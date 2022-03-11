@@ -11,29 +11,29 @@ This topic describes how to uninstall the ClamAV Add-on for PCF from your deploy
 To uninstall the ClamAV Add-on, follow the steps below:
 
 1. Retrieve the latest runtime config by running the following command:
-  <pre>
-    bosh -e my-env runtime-config > PATH-TO-SAVE-THE-RUNTIME-CONFIG
-  </pre>
+  ```
+  bosh -e my-env runtime-config > PATH-TO-SAVE-THE-RUNTIME-CONFIG
+  ```
 
     Where `PATH-TO-SAVE-THE-RUNTIME-CONFIG` is the location that you want to save the runtime configuration.
 
     For example:
     <pre class="terminal">
-      $ bosh -e my-env runtime-config > /runtime/config/
+    $ bosh -e my-env runtime-config > /runtime/config/
     </pre>
 
 1. In the runtime config, remove all ClamAV properties under the `releases:` and `addons:` sections.
 
 1. Update the runtime config.
-  <pre>
-    bosh -e my-env update-runtime-config --name=clamav PATH-TO-SAVE-THE-RUNTIME-CONFIG
-  </pre>
+  ```
+  bosh -e my-env update-runtime-config --name=clamav PATH-TO-SAVE-THE-RUNTIME-CONFIG
+  ```
 
     Where `PATH-TO-SAVE-THE-RUNTIME-CONFIG` is the location of the runtime configuration you are updating.
 
     For example:
     <pre class="terminal">
-      $ bosh -e my-env update-runtime-config --name=clamav /runtime/config/
+    $ bosh -e my-env update-runtime-config --name=clamav /runtime/config/
     </pre>
 
 1. Navigate to your **Installation Dashboard** in Ops Manager.
