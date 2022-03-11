@@ -343,7 +343,7 @@ ClamAV offers immediate file scanning upon file modification. This feature may r
 To enable on-access file scanning with the <code>on\_access</code> runtime config property:
 <ol>
 <li>In the <code>clamav.yml</code> file, add the <code>on\_access</code> property under the <code>clamav</code> property, and set <code>on\_access</code> to <code>yes</code>, as shown in bold:
-<pre>releases:<br>
+<pre class="terminal">releases:<br>
 \- name: clamav<br>
   version: x.x.x<br>
 addons:<br>
@@ -369,7 +369,7 @@ To change the scheduled scan to run hourly:
 
 <ol>
 <li>In the <code>clamav.yml</code> file, add the property <code>schedule_interval</code> under the <code>clamav</code> property, and set it to <code>hourly</code>, as shown below:
-<pre>releases:<br>
+<pre class="terminal">releases:<br>
 \- name: clamav<br>
   version: x.x.x<br>
 addons:<br>
@@ -460,7 +460,6 @@ If you don't supply an action, the function fails.
     The system does not scan the moved-to or copied-to location.
     If the directory path is not valid, the function fails.<br/>
     <br>
-
     <p class="note warning"><strong>Warning:</strong>
     If <code>action</code> is <code>move</code> or <code>copy</code>, make sure the <code>action_destination</code> path is also added to the <code>exclude_paths</code>.<br>
     If <code>action_destination</code> is not listed under <code>exclude_paths</code>, ClamAV:<br>
@@ -471,7 +470,7 @@ If you don't supply an action, the function fails.
 
     Example configuration:
 
-<pre>releases:<br>
+<pre class="terminal">releases:<br>
 \- name: clamav<br>
   version: x.x.x<br>
 addons:<br>
@@ -505,7 +504,7 @@ as shown below:
   directories on the `exclude_paths` list.
   This is because they must be on the list to remain excluded.</p>
 
-    <pre>releases:<br>
+    <pre class="terminal">releases:<br>
     \- name: clamav<br>
       version: x.x.x<br>
     addons:v
