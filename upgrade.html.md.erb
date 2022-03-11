@@ -61,12 +61,13 @@ To uninstall <%= vars.product_old %> v1.x and install <%= vars.product_full %> v
     ```
 
     Where:
+
     * `ENVIRONMENT` is your environment
     * `PATH-TO-SAVE-THE-RUNTIME-CONFIG` is the location where you want to save the runtime configuration.
 
     For example:
     <pre class="terminal">
-      $ bosh -e my-env runtime-config > /runtime/config/
+    $ bosh -e my-env runtime-config > /runtime/config/
     </pre>
 
 1. In the runtime config YML, remove all ClamAV properties under the `releases:` and `addons:` sections.
@@ -78,12 +79,13 @@ To uninstall <%= vars.product_old %> v1.x and install <%= vars.product_full %> v
     ```
 
     Where:
+
     * `ENVIRONMENT` is your environment
     * `PATH-TO-SAVE-THE-RUNTIME-CONFIG` is the location of the runtime configuration you are updating.
 
     For example:
     <pre class="terminal">
-      $ bosh -e my-env update-runtime-config --name=clamav /runtime/config/
+    $ bosh -e my-env update-runtime-config --name=clamav /runtime/config/
     </pre>
 
 1. Follow the instructions in
@@ -139,7 +141,7 @@ See [Switch to an Existing Mirror](#switch-existing-mirror) below.
 
 To complete your configuration if you are using Anti-Virus Mirror:
 
-1. (Optional) If you want to change the ports used by Anti-Virus and Anti-Virus Mirror, follow the instructions in
+1. (Optional) To change the ports used by Anti-Virus and Anti-Virus Mirror, follow the instructions in
 [Changing the Port Used by <%= vars.product_short %> and Anti-Virus Mirror](./changing-ports.html).
 
 1. If you have not done so as part of a previous step, apply configuration changes for your whole foundation:
@@ -153,10 +155,10 @@ To complete your configuration if you are using an existing mirror:
 
 1. Check that the port used by <%= vars.product_short %> and your mirror are the same.
 If they are not, configure the **Mirror Port** used for <%= vars.product_short %>:
-  * If you want to change the **Mirror Port** in <%= vars.product_short %> to use
+  * To change the **Mirror Port** in <%= vars.product_short %> to use
     the port that your existing mirror uses, follow the procedure in
     [Change the Port in the <%= vars.product_short %> Tile](./changing-ports-existing.html#change-antivirus).
-  * If you want to change the port on your existing mirror to use the <%= vars.product_short %>
+  * To change the port on your existing mirror to use the <%= vars.product_short %>
     default of `6501`, do that now.
 
 1. If you have not done so as part of a previous step, apply configuration changes for your whole foundation:

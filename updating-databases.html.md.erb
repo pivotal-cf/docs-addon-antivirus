@@ -5,7 +5,7 @@ owner: Pivotal Compliance and Innovation (PCI) Team
 <strong><%= modified_date %></strong>
 
 This topic describes how to update virus definitions on an internal
-<%= vars.product_full %> mirror that has been deployed by the Pivotal Anti-Virus Mirror tile.
+<%= vars.product_full %> mirror that is deployed by the Pivotal Anti-Virus Mirror tile.
 
 The Pivotal Anti-Virus Mirror tile and the <%= vars.product_full %>
 tile work together as follows:
@@ -53,7 +53,7 @@ To update the virus definitions:
 
 1. Download the three virus definition files from the ClamAV virus
 database mirror or an equivalent external mirror.
-You can access the ClamAV mirror at the the following URLs:
+You can access the ClamAV mirror at the following URLs:
     * https://database.clamav.net/main.cvd
     * https://database.clamav.net/daily.cvd
     * https://database.clamav.net/bytecode.cvd
@@ -69,7 +69,8 @@ You can access the ClamAV mirror at the the following URLs:
     <pre class="terminal">$ scp -i ~/.ssh/my-key.pem ~/Downloads/main.cvd ~/Downloads/daily.cvd ~/Downloads/bytecode.cvd ubuntu<span>@</span>192.168.0.2: </pre>
 
 1. SSH into the Ops Manager VM.
-   For instructions, see [Log in to the Ops Manager VM with SSH](https://docs.pivotal.io/platform/customizing/trouble-advanced.html#ssh) in the Ops Manager documentation.
+  For instructions, see [Log in to the Ops Manager VM with SSH](https://docs.pivotal.io/ops-manager/install/trouble-advanced.html#ssh) in the Ops Manager
+documentation.
 
 1. Find the name of your Anti-Virus Mirror deployment by running:
 
@@ -107,17 +108,17 @@ You can access the ClamAV mirror at the the following URLs:
 
     Where `FILE` is determined by the output destination configured in
     **Anti-Virus Mirror Configuration** of the Pivotal Anti-Virus Mirror tile.
-    Use one of these:
-    * `/var/vcap/sys/log/antivirus-mirror/antivirus-mirror.stdout.log` for stdout
-    * `/var/vcap/sys/log/antivirus-mirror/antivirus-mirror.stderr.log` for stderr
-    * `/var/log/syslog` for syslog
+    Use one of the following:
+
+      * `/var/vcap/sys/log/antivirus-mirror/antivirus-mirror.stdout.log` for stdout
+      * `/var/vcap/sys/log/antivirus-mirror/antivirus-mirror.stderr.log` for stderr
+      * `/var/log/syslog` for syslog
 
     For example:
 
     <pre class="terminal">
-    $ bosh -e my-env -d p-antivirus-mirror-4cb8cfbeee717258d72e ssh -c "sudo cat /var/log/syslog | grep \"updated /var/vcap/store\""
-
-    2019/05/30 17:16:34 updated /var/vcap/store/antivirus-mirror/validated/bytecode.cvd
-    2019/05/30 17:16:40 updated /var/vcap/store/antivirus-mirror/validated/daily.cvd
+    $ bosh -e my-env -d p-antivirus-mirror-4cb8cfbeee717258d72e ssh -c "sudo cat /var/log/syslog | grep \"updated /var/vcap/store\""<br><br>
+    2019/05/30 17:16:34 updated /var/vcap/store/antivirus-mirror/validated/bytecode.cvd<br>
+    2019/05/30 17:16:40 updated /var/vcap/store/antivirus-mirror/validated/daily.cvd<br>
     2019/05/30 17:16:49 updated /var/vcap/store/antivirus-mirror/validated/main.cvd
     </pre>
