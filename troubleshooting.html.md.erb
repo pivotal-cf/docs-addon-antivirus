@@ -6,7 +6,7 @@ owner: Security Engineering
 <strong><%= modified_date %></strong>
 
 This topic provides instructions for troubleshooting the ClamAV Add-on for PCF
-and ensuring that it is protecting your Pivotal Cloud Foundry (PCF) deployment as you expect.
+and verifying that it is protecting your Pivotal Cloud Foundry (PCF) deployment.
 
 ## <a id="clamav-installation-issues"></a> ClamAV Installation Issues
 
@@ -15,10 +15,9 @@ and ensuring that it is protecting your Pivotal Cloud Foundry (PCF) deployment a
 #### Symptom
 Applying changes in Ops Manager fails. The bottom of the changelog contains an error message similar to the following:
 
-<pre class="terminal">...
-Started updating job nats > nats/0 (12bfae02-b4af-4104-b2bd-227ff07b2d92) (canary). Done (00:02:31)
-  Failed updating job etcd_server > etcd_server/0 (f8e492bf-db09-4d38-8a73-5cf69d7b8a11) (canary): 'etcd_server/0 (f8e492bf-db09-4d38-8a73-5cf69d7b8a11)' is not running after update. Review logs for failed jobs: clamd (00:05:53)
-
+<pre class="terminal"><br>
+Started updating job nats > nats/0 (12bfae02-b4af-4104-b2bd-227ff07b2d92) (canary). Done (00:02:31)<br>
+  Failed updating job etcd_server > etcd_server/0 (f8e492bf-db09-4d38-8a73-5cf69d7b8a11) (canary): 'etcd_server/0 (f8e492bf-db09-4d38-8a73-5cf69d7b8a11)' is not running after update. Review logs for failed jobs: clamd (00:05:53)<br><br>
 Error 400007: 'etcd_server/0 (f8e492bf-db09-4d38-8a73-5cf69d7b8a11)' is not running after update. Review logs for failed jobs: clamd
 </pre>
 
@@ -41,26 +40,33 @@ Malware signature or sample malware is not detected, even though the ClamAV daem
 Virus signatures are not up-to-date.
 
 #### Solution
-First, ensure that the [configuration checks](./install.html#verify) have been done,
-that the mirror server is correctly configured and is available on the network from within the PCF private subnet,
-and that at least one hour has elapsed.
-One hour is the default scan schedule interval.
+To resolve this issue, verify that:
 
-If the local mirror is up-to-date and ClamAV is still failing to detect a malware sample, you might have encountered a new threat.
-Pivotal recommends alerting the community via existing channels and reporting the suspicious file directly to the ClamAV team.
++ The [configuration checks](./install.html#verify) have been completed.
++ The mirror server is correctly configured.
++ The mirror server is available on the network from within the PCF private subnet.
++ At least one hour has elapsed. One hour is the default scan schedule interval.
 
-<p class="note"><strong>Note</strong>: Pivotal does not provide support for ClamAV detection failures, mirror coordination, or threat tracking activity.</p>
+If the local mirror is up-to-date and ClamAV
+still fails to detect a malware sample, you might have encountered a new threat.
+Pivotal recommends alerting the community using existing channels and reporting
+the suspicious file directly to the ClamAV team.
+
+<p class="note"><strong>Note</strong>: Pivotal does not provide support for ClamAV detection failures,
+  mirror coordination, or threat tracking activity.
+</p>
 
 <hr>
 
 ### <a id='false-positive-clamav'></a> ClamAV Reports False Positives
 
 ####Symptom
-ClamAV reports a false postive result; a non-malicious file is reported to be a virus.
+ClamAV reports a false positive result such as a non-malicious file reported to be a virus.
 
 ####Explanation
 ClamAV compares files to its database of known malicious patterns.
-ClavAV may detect a non-malicious file as a virus due to a coincidental similarity to those patterns.
+ClavAV might detect a non-malicious file as a virus
+due to a coincidental similarity to those patterns.
 
 ####Solution
 Submit false positive reports to <a href="https://www.clamav.net/reports/fp">ClamAV</a>.
@@ -77,7 +83,8 @@ ClamAV is taking more CPU resources than assigned in its configuration.
 ####Explanation
 ClamAV resource consumption is restricted using cgroups.
 ClamAV is resource-limited whenever other processes are active.
-However, cgroups allows ClamAV to occupy more CPU resources when all other processes are idle,
+However, cgroups enables ClamAV to occupy
+more CPU resources when all other processes are idle,
 because it does not impact their performance.
 
 ####Solution
@@ -118,7 +125,7 @@ However, the `clamd` and `freshclam` processes eventually run.<br>
 The deployment failure log looks similar to the following:
 
 <pre class="terminal">
-Task 1071 | 19:40:49 | Updating instance clamav_1: clamav_1/d5cfe4bd-b606-4372-8481-187f4cf57e6c (0) (canary) (00:05:26)
+Task 1071 | 19:40:49 | Updating instance clamav_1: clamav_1/d5cfe4bd-b606-4372-8481-187f4cf57e6c (0) (canary) (00:05:26)<br>
                 L Error: 'clamav_1/d5cfe4bd-b606-4372-8481-187f4cf57e6c (0)' is not running after update. Review logs for failed jobs: clamd, freshclam
 </pre>
 <br>
@@ -127,10 +134,10 @@ the `clamd` and `freshclam` processes are running successfully after the failed 
 
 For example:
 
-<pre class="terminal">$ bosh -d clamav_1/d5cfe4bd-b606-4372-8481-187f4cf57e6c instances --ps
-Instance                                       Process    Process State  AZ  IPs
-clamav_1/d5cfe4bd-b606-4372-8481-187f4cf57e6c  -          running        z1  10.0.0.7
-~                                              clamd      running        -   -
+<pre class="terminal">$ bosh -d clamav_1/d5cfe4bd-b606-4372-8481-187f4cf57e6c instances --ps<br>
+Instance                                       Process    Process State  AZ  IPs<br>
+clamav_1/d5cfe4bd-b606-4372-8481-187f4cf57e6c  -          running        z1  10.0.0.7<br>
+~                                              clamd      running        -   -<br>
 ~                                              freshclam  running        -   -
 </pre>
 
@@ -140,7 +147,7 @@ ClamAV startup is CPU intensive and, if restricted, can prevent ClamAV from star
 #### Solutions
 + Ensure `cpu_limit` is set high enough for ClamAV to execute normally.
 If the limit is too strict, ClamAV fails to start.
-For example, an n1-standard VM on GCP requires `cpu_limit` to be > 45.
+For example, an n1-standard VM on GCP requires `cpu_limit` to be greater than 45.
 For more information, see [clamav.yml Template for Linux](./install.html#linux-template).
 
 + Set `enforce_cpu_limit` to `false`. This allocates more CPU cycles to ClamAV
