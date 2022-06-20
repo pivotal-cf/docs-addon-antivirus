@@ -18,10 +18,10 @@ As of March 8, 2022:
 |-------------|----------------|----------------|
 | master   | 2.4 (unreleased)     |  https://docs-staging.vmware.com/en/Anti-Virus-for-VMware-Tanzu/2.4/anti-virus/GUID-index.html |
 | 2.3   | 2.3.x     | https://docs.vmware.com/en/Anti-Virus-for-VMware-Tanzu/2.3/anti-virus/GUID-index.htmland and https://docs-staging.vmware.com/en/Anti-Virus-for-VMware-Tanzu/2.3/anti-virus/GUID-index.html |
-| 2.2   | 2.2.x     | https://docs.vmware.com/en/Anti-Virus-for-VMware-Tanzu/2.2/anti-virus/GUID-index.html and https://docs-staging.vmware.com/en/Anti-Virus-for-VMware-Tanzu/2.2/anti-virus/GUID-index.html |
-| 2.1   | 2.1.x    | https://docs.vmware.com/en/Anti-Virus-for-VMware-Tanzu/2.1/anti-virus/GUID-index.html and https://docs-staging.vmware.com/en/Anti-Virus-for-VMware-Tanzu/2.1/anti-virus/GUID-index.html |
-| 2.0   | 2.0.x     | https://docs.vmware.com/en/Anti-Virus-for-VMware-Tanzu/2.0/anti-virus/GUID-index.html and https://docs-staging.vmware.com/en/Anti-Virus-for-VMware-Tanzu/2.0/anti-virus/GUID-index.html |
-| 1.4   | 1.4.x     | https://docs.vmware.com/en/Anti-Virus-for-VMware-Tanzu/1.4/anti-virus/GUID-index.html and https://docs-staging.vmware.com/en/Anti-Virus-for-VMware-Tanzu/1.4/anti-virus/GUID-index.html |
+| 2.2   | 2.2.x     | NOT IN USE docs have been deprecated. https://docs.vmware.com/en/Anti-Virus-for-VMware-Tanzu/2.2/anti-virus/GUID-index.html |
+| 2.1   | 2.1.x     | NOT IN USE docs have been deprecated. https://docs.vmware.com/en/Anti-Virus-for-VMware-Tanzu/2.1/anti-virus/GUID-index.html |
+| 2.0   | 2.0.x     | NOT IN USE docs have been deprecated. https://docs.vmware.com/en/Anti-Virus-for-VMware-Tanzu/2.0/anti-virus/GUID-index.html |
+| 1.4   | 1.4.x     | NOT IN USE docs have been deprecated. https://docs.vmware.com/en/Anti-Virus-for-VMware-Tanzu/1.4/anti-virus/GUID-index.html |
 | v1.4   | v1.4.x     | NOT IN USE |
 | v1.3   | v1.3.x     | NOT IN USE (PDF available at https://docs.pivotal.io/archives/addon-antivirus-1.3.pdf) |
 | v1.2   | v1.2.x     | NOT IN USE (PDF available at https://docs.pivotal.io/archives/addon-antivirus-1.2.pdf) |
