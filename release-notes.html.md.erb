@@ -16,30 +16,23 @@ For product versions and upgrade paths, see [Upgrade Planner](https://upgrade-pl
 #### Anti-Virus
 
 ##### Maintenance Changes
-* Final release 2.3.15
+* Fixed an issue preventing the `clamonacc` process to start before the `clamd` process has fully started and the socket is available.
+
+#### Dependencies
+* **Golang:** Updated to v1.18.3
 
 #### Anti-Virus Mirror
 
-##### Maintenance Changes
-* Final release 2.3.15
+#### Dependencies
+* **Golang:** Updated to v1.18.3
 
+#### Known issues
 
+This release has the following issues:
 
-### <a id='2-3-15'></a> v2.3.15
-
-**Release Date**: June 21, 2022
-
-#### Anti-Virus
-
-##### Maintenance Changes
-* Final release 2.3.15
-
-#### Anti-Virus Mirror
-
-##### Maintenance Changes
-* Final release 2.3.15
-
-
+* **If you use <%= vars.product_short_mirror %>, errors can occur when restoring your deployment with BOSH Backup and Restore (BBR):**
+  For instructions for resolving this issue, see [Restoring with BOSH Backup and Restore Fails](troubleshooting.html#backup-restore).
+  For more information about BBR, see [Backing Up and Restoring Deployments](https://docs.pivotal.io/ops-manager/install/backup-restore/index.html) in the Ops Manager documentation.
 
 
 ### <a id='2-3-14'></a> v2.3.14
