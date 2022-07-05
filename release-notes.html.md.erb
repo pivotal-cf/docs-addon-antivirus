@@ -9,6 +9,7 @@ This topic contains release notes for <%= vars.product_full %>.
 For product versions and upgrade paths, see [Upgrade Planner](https://upgrade-planner.pivotal.io/).
 
 ## Releases
+
 ### <a id='2-3-15'></a> v2.3.15
 
 **Release Date**: June 28, 2022
@@ -16,14 +17,18 @@ For product versions and upgrade paths, see [Upgrade Planner](https://upgrade-pl
 #### Anti-Virus
 
 ##### Maintenance Changes
-* Fixed an issue that prevented the `clamonacc` process from starting before the `clamd` process is fully started and the socket is available.
+
+* Fixed an issue that prevented the `clamonacc` process from starting before the `clamd` process is
+fully started and the socket is available.
 
 #### Dependencies
+
 * **Golang:** Updated to v1.18.3
 
 #### Anti-Virus Mirror
 
 #### Dependencies
+
 * **Golang:** Updated to v1.18.3
 
 #### Known issues
@@ -37,7 +42,6 @@ This release has the following issues:
   For more information about BBR, see
   [Backing Up and Restoring Deployments](https://docs.pivotal.io/ops-manager/install/backup-restore/index.html)
   in the Ops Manager documentation.
-
 
 ### <a id='2-3-14'></a> v2.3.14
 
@@ -56,7 +60,9 @@ Dependencies updated in this release:
 
 This release has the following issues:
 
-* **If you use <%= vars.product_short_mirror %>, errors can occur when restoring your deployment with BOSH Backup and Restore (BBR):**
+* **<%= vars.product_short_mirror %> errors when restoring your deployment with BBR:**
+  If you use <%= vars.product_short_mirror %>, errors can occur when restoring your deployment with
+  BOSH Backup and Restore (BBR).
   For instructions for resolving this issue, see [Restoring with BOSH Backup and Restore Fails](troubleshooting.html#backup-restore).
   For more information about BBR, see [Backing Up and Restoring Deployments](https://docs.pivotal.io/ops-manager/install/backup-restore/index.html) in the Ops Manager documentation.
 
