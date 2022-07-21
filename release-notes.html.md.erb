@@ -81,6 +81,12 @@ This release has the following issues:
   [Backing Up and Restoring Deployments](https://docs.pivotal.io/ops-manager/install/backup-restore/index.html)
   in the Ops Manager documentation.
 
+* **Tile and BOSH release version misalignment:**
+  We've reworked our delivery pipelines and as a side effect, the Tile version
+  `v2.3.15` differs from the BOSH release version `v2.3.16`. This is confusing,
+  but the code is sound and has successfully gone through our tests. We aim to
+  fix this in the next releases.
+
 ### <a id='2-3-14'></a> v2.3.14
 
 **Release Date:** June 14, 2022
