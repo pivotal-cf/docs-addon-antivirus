@@ -9,6 +9,38 @@ This topic contains release notes for <%= vars.product_full %>.
 For product versions and upgrade paths, see [Upgrade Planner](https://upgrade-planner.pivotal.io/).
 
 ## Releases
+### <a id='2-3-17'></a> v2.3.17
+
+**Release Date**: July 21, 2022
+
+#### Anti-Virus
+
+##### Dependencies
+
+Dependencies updated in this release:
+
+* **Golang:** Updated to v1.18.4
+
+#### Anti-Virus Mirror
+
+##### Dependencies
+
+Dependencies updated in this release:
+
+* **Golang:** Updated to v1.18.4
+
+#### Known issues
+
+This release has the following issues:
+
+* **<%= vars.product_short_mirror %> errors when restoring your deployment with BBR:**
+  If you use <%= vars.product_short_mirror %>, errors can occur when restoring your deployment with
+  BOSH Backup and Restore (BBR).
+  To resolve this issue, see [Restoring with BOSH Backup and Restore Fails](troubleshooting.html#backup-restore).
+  For more information about BBR, see
+  [Backing Up and Restoring Deployments](https://docs.pivotal.io/ops-manager/install/backup-restore/index.html)
+  in the Ops Manager documentation.
+
 
 ### <a id='2-3-15'></a> v2.3.15
 
@@ -48,6 +80,12 @@ This release has the following issues:
   For more information about BBR, see
   [Backing Up and Restoring Deployments](https://docs.pivotal.io/ops-manager/install/backup-restore/index.html)
   in the Ops Manager documentation.
+
+* **Tile and BOSH release version misalignment:**
+  We've reworked our delivery pipelines and as a side effect, the Tile version
+  `v2.3.15` differs from the BOSH release version `v2.3.16`. This is confusing,
+  but the code is sound and has successfully gone through our tests. We aim to
+  fix this in the next releases.
 
 ### <a id='2-3-14'></a> v2.3.14
 
