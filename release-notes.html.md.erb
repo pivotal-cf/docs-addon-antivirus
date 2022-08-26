@@ -11,7 +11,7 @@ For product versions and upgrade paths, see [Upgrade Planner](https://upgrade-pl
 ## Releases
 ### <a id='2-3-17'></a> v2.3.17
 
-**Release Date**: July 21, 2022
+**Release Date**: August 26, 2022
 
 #### Anti-Virus
 
@@ -31,7 +31,7 @@ Dependencies updated in this release:
 
 #### Known issues
 
-This release has the following issues:
+This release has the following issue:
 
 * **<%= vars.product_short_mirror %> errors when restoring your deployment with BBR:**
   If you use <%= vars.product_short_mirror %>, errors can occur when restoring your deployment with
@@ -50,7 +50,7 @@ This release has the following issues:
 
 ##### Maintenance Changes
 
-Changes in this release:
+Change in this release:
 
 * Fixed an issue that prevented the `clamonacc` process from starting before the `clamd` process is
 fully started and the socket is available.
@@ -82,10 +82,9 @@ This release has the following issues:
   in the Ops Manager documentation.
 
 * **Tile and BOSH release version misalignment:**
-  We've reworked our delivery pipelines and as a side effect, the Tile version
-  `v2.3.15` differs from the BOSH release version `v2.3.16`. This is confusing,
-  but the code is sound and has successfully gone through our tests. We aim to
-  fix this in the next releases.
+  The delivery pipelines were reworked and, as a side effect, the tile version (v2.3.15) differs from
+  the BOSH release version (v2.3.16). This is confusing, but the code is proven through testing to
+  work. A fix is planned for a future release.
 
 ### <a id='2-3-14'></a> v2.3.14
 
