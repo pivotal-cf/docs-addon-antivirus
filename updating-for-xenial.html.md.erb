@@ -6,7 +6,7 @@ owner: Security Engineering
 <strong><%= modified_date %></strong>
 
 Pivotal Cloud Foundry (PCF) products and tiles that are released after July 2018 require
-Ubuntu Xenial stemcells instead of Ubuntu Trusty stemcells. 
+Ubuntu Xenial stemcells instead of Ubuntu Trusty stemcells.
 You might have to modify your ClamAV Add-on for PCF deployment
 if you use PCF products running on Xenial.
 
@@ -15,28 +15,28 @@ ClamAV Add-on can protect VMs that run on Xenial.
 
 This topic also explains how to update your ClamAV Add-on if it does not support Xenial.
 
-Follow the instructions on this page if you use ClamAV Add-on with any PCF products or tiles 
+Follow the instructions on this page if you use ClamAV Add-on with any PCF products or tiles
 that use Xenial stemcells.
 See [Product Tiles that Use Xenial Stemcells](#which) below.
 
 ##<a id="who-me"></a> Do I Need to Modify the ClamAV Add-on?
 
 ClamAV Add-on v1.4.28 and later can run correctly on Xenial-based VMs if the ClamAV runtime config
-includes the `ubuntu-xenial` property. 
+includes the `ubuntu-xenial` property.
 
 Review the following table and make any required changes before you upgrade to Xenial stemcells.
 
 <table class="nice">
     <col width="25%">
     <col width="75%">
-    <th>If you are using this version of the ClamAV Add-on…</td>
-    <th>do the following…</td>
+    <th>If you are using this version of the ClamAV Add-on…</th>
+    <th>do the following…</th>
     <tr>
       <td>1.4.29</td>
       <td>Verify that your runtime config file, <code>clamav.yml</code>, includes:
         <pre class="terminal">
-        stemcell:<br>
-        - os: ubuntu-trusty<br>
+        stemcell:
+        - os: ubuntu-trusty
         - os: ubuntu-xenial
         </pre>
         If it does not, then follow the procedure, <a href="#add">Add the Xenial Stemcell Property to ClamAV Add-on</a> below.</td>
@@ -51,7 +51,7 @@ Review the following table and make any required changes before you upgrade to X
           </tr>
 </table>
 
-If you use ClamAV Add-on without adding the `ubuntu-xenial` property to the runtime config, 
+If you use ClamAV Add-on without adding the `ubuntu-xenial` property to the runtime config,
 the VMs running on Xenial are not scanned for viruses.
 
 If you add the `ubuntu-xenial` property but do not upgrade the ClamAV Add-on to v1.4.28 or later,
@@ -62,12 +62,12 @@ then the ClamAV processes use excessive CPU.
 Ensure that you have added the `ubuntu-xenial` property to the ClamAV runtime config
 before you install any product tiles that use Xenial stemcells.
 
-For a list of PCF tile releases that now use Xenial, 
+For a list of PCF tile releases that now use Xenial,
 see [Tiles Using Xenial Stemcells in PCF](https://docs.pivotal.io/stemcells/xenial-tiles.html.
 
 ##<a id="add"></a> Add the Xenial Stemcell Property to the ClamAV Add-on
 
-If you use ClamAV Add-on v1.4.28 or later  without the `ubuntu-xenial` 
+If you use ClamAV Add-on v1.4.28 or later  without the `ubuntu-xenial`
 property in the runtime config, then you must add it to your
 existing `clamav.yml` and redeploy.
 
@@ -86,10 +86,10 @@ Follow these steps:
 
     For example:
 
-    <pre class="terminal">$ bosh2 -e my-env runtime-config –name clamav > /tmp/clamav.yml </pre> 
+    <pre class="terminal">$ bosh2 -e my-env runtime-config –name clamav > /tmp/clamav.yml </pre>
 
 
-3. Edit the `clamav.yml` file to add `- os: ubuntu-xenial` under 
+3. Edit the `clamav.yml` file to add `- os: ubuntu-xenial` under
     `properties: {}` as shown below:
 
 
@@ -117,7 +117,7 @@ Follow these steps:
 
     For example:
 
-    <pre class="terminal">bosh2 -e my-env update-runtime-config --name=clamav /tmp/clamav.yml</pre> 
+    <pre class="terminal">bosh2 -e my-env update-runtime-config --name=clamav /tmp/clamav.yml</pre>
 
 5. Navigate to the Installation Dashboard in Ops Manager.
 
@@ -126,4 +126,3 @@ Follow these steps:
    see [Reviewing Pending Product Changes](https://docs.pivotal.io/ops-manager/install/review-pending-changes.html).
 
 7. Click **Apply Changes**.
-

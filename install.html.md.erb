@@ -71,31 +71,33 @@ To use these properties, place the following text under the `clamav` subsection 
         memory_limit: VALUE-OF-MEMORY-LIMIT-IN-BYTES
     ...
     ```
-    <code><strong>cpu\_limit</strong></code>: <a name="cpu_limit"></a>
+    <code><strong>cpu_limit</strong></code>: <a name="cpu_limit"></a>
     <ul>
       <li>Limits ClamAV to a percentage of available CPU resources when other processes are using CPU resources.
         Usage may exceed the limit if enough idle CPU cycles are available.</li>
       <li>Set to a whole number less than 100.
         For example, set to <code>50</code> to limit ClamAV to 50% CPU usage when other
         tasks are running.</li>
-        <li>The default value is <code>10</code>.</li>
+      <li>The default value is <code>10</code>.</li>
     </ul>
 
-    <code><strong>enforce\_cpu\_limit</strong></code>: <a name="enforce_cpu_limit"></a>
+    <code><strong>enforce_cpu_limit</strong></code>: <a name="enforce_cpu_limit"></a>
     <ul>
-      <li>When <code>true</code>, the limit set by <code>cpu\_limit</code> is always enforced.</li>
-      <li>When <code>false</code>, the limit set by <code>cpu\_limit</code> is
+      <li>When <code>true</code>, the limit set by <code>cpu_limit</code> is always enforced.</li>
+      <li>When <code>false</code>, the limit set by <code>cpu_limit</code> is
         only enforced when other processes are using CPU resources.
-        Usage may exceed the limit if enough idle CPU cycles are available.</li>
-        <li>This property is <code>false</code> by default.</li>
-        <p class="note warning"><strong>Warning:</strong>
-          If <code>enforce_cpu_limit</code> is set <code>true</code>, ensure <code>cpu_limit</code>
-          is set high enough for ClamAV to execute normally.
-          If the limit is too strict, ClamAV fails to start.
-          For example, on Google Cloud Platform (GCP), an n1-standard-1 VM requires a CPU limit of more than 45%.</p>
+        Usage may exceed the limit if enough idle CPU cycles are available.
+      </li>
+      <li>This property is <code>false</code> by default.</li>
+      <p class="note warning"><strong>Warning:</strong>
+        If <code>enforce_cpu_limit</code> is set <code>true</code>, ensure <code>cpu_limit</code>
+        is set high enough for ClamAV to execute normally.
+        If the limit is too strict, ClamAV fails to start.
+        For example, on Google Cloud Platform (GCP), an n1-standard-1 VM requires a CPU limit of more than 45%.
+      </p>
     </ul>
 
-    <code><strong>memory\_limit</strong></code>: <a name="memory_limit"></a>
+    <code><strong>memory_limit</strong></code>: <a name="memory_limit"></a>
     <ul>
       <li>Limits the maximum amount of user memory (including file cache) in bytes used by ClamAV.</li>
       <li>The default value is <code>1073741824</code>.</li>
@@ -135,10 +137,10 @@ or IP address of a private ClamAV update mirror.
     For instructions about setting up a local mirror, see <a href="https://www.clamav.net/documents/private-local-mirrors">Private Local Mirrors</a> in the ClamAV documentation.
 
 1. (Optional) If you have to use a proxy server to connect to the internet,
-add the <code>proxy\_host</code> and <code>proxy\_port</code> properties to your manifest.
+add the <code>proxy_host</code> and <code>proxy_port</code> properties to your manifest.
 <br><br>
-If the proxy server needs authentication, add the <code>proxy\_user</code> and
-<code>proxy\_password</code> properties, as shown below:
+If the proxy server needs authentication, add the <code>proxy_user</code> and
+<code>proxy_password</code> properties, as shown below:
 
     ```
     releases:
@@ -235,16 +237,16 @@ Perform the following steps to deploy the ClamAV Add-on:
     <pre class="terminal">$ bosh -e my-env runtime-config --name=clamav</pre>
     For example:
     <pre class="terminal">
-    $ bosh -e my-env runtime-config --name=clamav<br>
-    Acting as user 'admin' on 'micro'<br>
-    releases:<br>
-    \- name: clamav<br>
-       version: 1.3.28<br>
-    addons:<br>
+    $ bosh -e my-env runtime-config --name=clamav
+    Acting as user 'admin' on 'micro'
+    releases:
+    - name: clamav
+       version: 1.3.28
+    addons:
       name: clamavv
-        jobs:<br>
-          \- name: clamav<br>
-            release: clamav<br>
+        jobs:
+          - name: clamav
+            release: clamav
     ...
     </pre>
 1. Navigate to your Installation Dashboard in Ops Manager.
@@ -282,7 +284,7 @@ Process 'freshclam'                 running</pre></li>
   <ol>
   <li>Try to start the ClamAV processes by running the following commands:
   <pre class="terminal">
-  $ monit start clamd<br>
+  $ monit start clamd
   $ monit start freshclam</pre></li>
   <li>Run <code>monit summary</code> again. If you do not see the processes mentioned above, check <code>/var/vcap/sys/log/clamav</code> logs for errors.</li>
   </ol>
@@ -312,25 +314,26 @@ If a week is too long, the ClamAV release provides the option to add the signatu
 
 To add signature names to an allowlist, do the following:
 
-1. Add the `whitelist` property and append the false positive signature names.
-   For example:
-   <pre class="terminal">releases:
-\- name: clamav<br>
-  version: x.x.x<br>
-addons:<br>
-  name: clamav<br>
-  jobs:<br>
-  \- name: clamav<br>
-    release: clamav<br>
-    properties:<br>
-      clamav:<br>
-        <strong>whitelist:</strong><br>
-        <strong>  - Eicar-Test-Signature</strong><br>
-        <strong>  - Clamav.Test.File-7</strong><br>
-        <strong>  - Win.Test.EICAR_NDB-1</strong><br>
-        <strong>  - Eicar-Signature</strong><br>
-...
-    </pre>
+1. Add the `whitelist` property and append the false positive signature names. For example:
+
+    ```
+    releases:
+    - name: clamav
+      version: x.x.x
+    addons:
+      name: clamav
+      jobs:
+      - name: clamav
+        release: clamav
+        properties:
+          clamav:
+            <strong>whitelist:</strong>
+            <strong>  - Eicar-Test-Signature</strong>
+            <strong>  - Clamav.Test.File-7</strong>
+            <strong>  - Win.Test.EICAR_NDB-1</strong>
+            <strong>  - Eicar-Signature</strong>
+    ...
+    ```
 
 1. Apply changes by updating your runtime config.
 For more information, see steps 4 to 7 of [Deploy the ClamAV Add-on](#deploy).
@@ -340,21 +343,21 @@ For more information, see steps 4 to 7 of [Deploy the ClamAV Add-on](#deploy).
 
 ClamAV offers immediate file scanning upon file modification. This feature may reduce the time it takes to detect and report malware.
 
-To enable on-access file scanning with the <code>on\_access</code> runtime config property:
+To enable on-access file scanning with the <code>on_access</code> runtime config property:
 <ol>
-<li>In the <code>clamav.yml</code> file, add the <code>on\_access</code> property under the <code>clamav</code> property, and set <code>on\_access</code> to <code>yes</code>, as shown in bold:
-<pre class="terminal">releases:<br>
-\- name: clamav<br>
-  version: x.x.x<br>
-addons:<br>
-  name: clamav<br>
-  jobs:<br>
-  - name: clamav<br>
-    release: clamav<br>
-    properties:<br>
-      clamav:<br>
-        <strong>on_access: yes</strong><br>
-        scheduled: yes<br>
+<li>In the <code>clamav.yml</code> file, add the <code>on_access</code> property under the <code>clamav</code> property, and set <code>on_access</code> to <code>yes</code>, as shown in bold:
+<pre class="terminal">releases:
+- name: clamav
+  version: x.x.x
+addons:
+  name: clamav
+  jobs:
+  - name: clamav
+    release: clamav
+    properties:
+      clamav:
+        <strong>on_access: yes</strong>
+        scheduled: yes
 ...</pre>
 </li>
 <li>Apply changes by updating your runtime config.
@@ -369,18 +372,18 @@ To change the scheduled scan to run hourly:
 
 <ol>
 <li>In the <code>clamav.yml</code> file, add the property <code>schedule_interval</code> under the <code>clamav</code> property, and set it to <code>hourly</code>, as shown below:
-<pre class="terminal">releases:<br>
-\- name: clamav<br>
-  version: x.x.x<br>
-addons:<br>
-  name: clamav<br>
-  jobs:<br>
-  \- name: clamav<br>
-    release: clamav<br>
-    properties:<br>
-      clamav:<br>
+<pre class="terminal">releases:
+- name: clamav
+  version: x.x.x
+addons:
+  name: clamav
+  jobs:
+  - name: clamav
+    release: clamav
+    properties:
+      clamav:
         scheduled: yesv
-        <strong>schedule_interval: hourly</strong><br>
+        <strong>schedule_interval: hourly</strong>
 ...</pre>
 </li>
 <li>Apply changes by updating your runtime config.
@@ -394,20 +397,20 @@ To restrict the time interval when a daily scan runs, do the following:
     when the scheduled scan can run by specifying a time range in 24-hour format
     in the properties <code>first_scheduled_scan_time</code> and <code>last_scheduled_scan_time</code>,
     as shown below:
-<pre class="terminal">releases:<br>
-\- name: clamav<br>
-  version: x.x.x<br>
-addons:<br>
-  name: clamav<br>
-  jobs:v
-  - name: clamav<br>
-    release: clamav<br>
-    properties:<br>
-      clamav:<br>
-        scheduled: yes<br>
-        schedule_interval: daily<br>
-        <strong>first_scheduled_scan_time: "2:00"<br>
-        last_scheduled_scan_time: "4:30"</strong><br>
+<pre class="terminal">releases:
+- name: clamav
+  version: x.x.x
+addons:
+  name: clamav
+  jobs:
+  - name: clamav
+    release: clamav
+    properties:
+      clamav:
+        scheduled: yes
+        schedule_interval: daily
+        <strong>first_scheduled_scan_time: "2:00"
+        last_scheduled_scan_time: "4:30"</strong>
 ...</pre>
 </li>
 <li> Apply changes by updating your runtime config.
@@ -433,18 +436,18 @@ However, you can specify other actions, as described [Step 2](#step2) below.
 <ol>
 <li>In the <code>clamav.yml</code> file, add the <code>action</code> property under the <code>clamav</code> property and,
 optionally, the <code>action_destination</code> property, as shown below:
-<pre class="terminal">releases:<br>
-\- name: clamav<br>
-  version: x.x.x<br>
-addons:<br>
-  name: clamav<br>
-  jobs:<br>
-  \- name: clamav<br>
-    release: clamav<br>
-    properties:<br>
-      clamav:<br>
-        action: ACTION<br>
-        action_destination: PATH<br>
+<pre class="terminal">releases:
+- name: clamav
+  version: x.x.x
+addons:
+  name: clamav
+  jobs:
+  - name: clamav
+    release: clamav
+    properties:
+      clamav:
+        action: ACTION
+        action_destination: PATH
 ...</pre>
 </li>
 <li>Replace <code>ACTION</code> with one of the following values:<a id="step2"></a>
@@ -458,34 +461,36 @@ If you don't supply an action, the function fails.
 </li>
 <li> Replace <code>PATH</code> with the directory location where you want the infected files moved or copied to.
     The system does not scan the moved-to or copied-to location.
-    If the directory path is not valid, the function fails.<br/>
-    <br>
-    <p class="note warning"><strong>Warning:</strong>
-    If <code>action</code> is <code>move</code> or <code>copy</code>, make sure the <code>action_destination</code> path is also added to the <code>exclude_paths</code>.<br>
-    If <code>action_destination</code> is not listed under <code>exclude_paths</code>, ClamAV:<br>
-    ∙ Detects the moved or copied file<br>
-    ∙ Logs redundant alerts<br>
-    ∙ Creates additional copies of the detected file
-    </p>
+    If the directory path is not valid, the function fails.
+    <div class="note warning">
+      <strong>Warning:</strong> If <code>action</code> is <code>move</code> or <code>copy</code>, make sure
+      the <code>action_destination</code> path is also added to the <code>exclude_paths</code>.<br>
+      If <code>action_destination</code> is not listed under <code>exclude_paths</code>, ClamAV:
+      <ul>
+        <li>Detects the moved or copied file</li>
+        <li>Logs redundant alerts</li>
+        <li>Creates additional copies of the detected file</li>
+      </ul>
+    </div>
 
     Example configuration:
 
-<pre class="terminal">releases:<br>
-\- name: clamav<br>
-  version: x.x.x<br>
-addons:<br>
-  name: clamav<br>
-    jobs:<br>
-    \- name: clamav<br>
-      release: clamav<br>
-      properties:<br>
-        clamav:<br>
-          action: move<br>
-          action_destination: /var/vcap/data/clamav/found<br>
-          exclude_paths:<br>
-          - ^/proc/<br>
-          - ^/sys/<br>
-          - ^/var/vcap/data/clamav/found/<br>
+<pre class="terminal">releases:
+- name: clamav
+  version: x.x.x
+addons:
+  name: clamav
+    jobs:
+    - name: clamav
+      release: clamav
+      properties:
+        clamav:
+          action: move
+          action_destination: /var/vcap/data/clamav/found
+          exclude_paths:
+          - ^/proc/
+          - ^/sys/
+          - ^/var/vcap/data/clamav/found/
 ...</pre>
   </li>
 </ol>
@@ -499,26 +504,30 @@ To exclude files and directories from the scan, do the following:
 
 1. Add the `exclude_paths` property and append regex matching file paths to the list,
 as shown below:
-<p class="note"><strong>Note</strong>:
-  Pivotal recommends that you include the <code>/proc</code> and <code>/sys</code>
-  directories on the `exclude_paths` list.
-  This is because they must be on the list to remain excluded.</p>
 
-    <pre class="terminal">releases:<br>
-    \- name: clamav<br>
-      version: x.x.x<br>
-    addons:v
-      name: clamav<br>
-        jobs:<br>
-        \- name: clamav<br>
-          release: clamav<br>
-          properties:<br>
-            clamav:<br>
-              exclude_paths:<br>
-              - ^/proc/<br>
-              - ^/sys/<br>
-              - ADDITONAL-EXCLUSIONS<br>
-    ...</pre>
+    <p class="note">
+      <strong>Note</strong>: Pivotal recommends that you include the <code>/proc</code>
+      and <code>/sys</code> directories on the <code>exclude_paths</code> list.
+      This is because they must be on the list to remain excluded.
+    </p>
+
+    ```
+    releases:
+    - name: clamav
+      version: x.x.x
+    addons:
+      name: clamav
+        jobs:
+        - name: clamav
+          release: clamav
+          properties:
+            clamav:
+              exclude_paths:
+              - ^/proc/
+              - ^/sys/
+              - ADDITONAL-EXCLUSIONS
+    ...
+    ```
 
 1. Apply changes by updating your runtime config.
 For instructions, see steps 4 to 7 of <a href="#deploy">Deploy the ClamAV Add-on</a> above.

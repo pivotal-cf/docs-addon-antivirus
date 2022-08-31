@@ -59,10 +59,12 @@ To upgrade the ClamAV add-on to a later version, do the following:
 
 6. Edit the clamav runtime config to set the new release version. This version should match the version you downloaded from Pivotal Network.
 
-     For example, edit the version in `/tmp/clamav.yml` as follows:
-     <pre>
-     releases:
-     \- name: clamav, version: <strong>1.4.34</strong> </pre>
+    For example, edit the version in `/tmp/clamav.yml` as follows:
+
+    ```
+    releases:
+    - name: clamav, version: <strong>1.4.34</strong>
+    ```
 
 7. Update the runtime config:
 
