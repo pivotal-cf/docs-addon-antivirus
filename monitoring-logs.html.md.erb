@@ -309,16 +309,18 @@ clamdscan searches files and directories for viruses.
 Examples of <%= vars.product_short %> log messages from Garden containers and Docker containers are as follows:
 
 * For a Garden container in Pivotal Application Service (PAS)
-<pre class="terminal">
-/var/vcap/data/grootfs/store/unprivileged/images/2264d474-3e57-4934-504f-ddbb/diff/home/vcap/app/public/test.html:
-Eicar-Test-Signature FOUND
-</pre>
+
+    <pre class="terminal">
+    /var/vcap/data/grootfs/store/unprivileged/images/2264d474-3e57-4934-504f-ddbb/diff/home/vcap/app/public/test.html:
+    Eicar-Test-Signature FOUND
+    </pre>
 
 * For a Docker container in Enterprise Pivotal Container Service (Enterprise PKS)
-<pre class="terminal">
-/var/vcap/store/docker/docker/overlay2/53322c6f7c25bb00224bb03cdfc285e141471d746d5c7a8c5a65db56fda56ecb/diff/test.html:
-Eicar-Test-Signature FOUND
-</pre>
+
+    <pre class="terminal">
+    /var/vcap/store/docker/docker/overlay2/53322c6f7c25bb00224bb03cdfc285e141471d746d5c7a8c5a65db56fda56ecb/diff/test.html:
+    Eicar-Test-Signature FOUND
+    </pre>
 
 
 ##<a id="format"></a><%= vars.product_short %> Log Format
