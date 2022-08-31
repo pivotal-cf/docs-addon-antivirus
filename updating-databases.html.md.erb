@@ -130,8 +130,9 @@ documentation.
 
     For example:
     <pre class="terminal">
-    $ bosh -e my-env -d p-antivirus-mirror-4cb8cfbeee717258d72e ssh -c "sudo cat /var/log/syslog | grep \"updated /var/vcap/store\""<br><br>
-    2019/05/30 17:16:34 updated /var/vcap/store/antivirus-mirror/validated/bytecode.cvd<br>
-    2019/05/30 17:16:40 updated /var/vcap/store/antivirus-mirror/validated/daily.cvd<br>
+    $ bosh -e my-env -d p-antivirus-mirror-4cb8cfbeee717258d72e ssh -c "sudo cat /var/log/syslog | grep \"updated /var/vcap/store\""
+
+    2019/05/30 17:16:34 updated /var/vcap/store/antivirus-mirror/validated/bytecode.cvd
+    2019/05/30 17:16:40 updated /var/vcap/store/antivirus-mirror/validated/daily.cvd
     2019/05/30 17:16:49 updated /var/vcap/store/antivirus-mirror/validated/main.cvd
     </pre>
