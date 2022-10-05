@@ -9,6 +9,49 @@ This topic contains release notes for <%= vars.product_full %>.
 For product versions and upgrade paths, see [Upgrade Planner](https://upgrade-planner.pivotal.io/).
 
 ## Releases
+
+### <a id='2-3-19'></a> v2.3.19
+
+**Release Date**: October 5, 2022
+
+#### Anti-Virus
+
+##### Maintenance Changes
+
+Change in this release:
+
+* Added compatibility with Jammy stemcell.
+* Removed support for Trusty stemcell.
+
+##### Dependencies
+
+Dependencies updated in this release:
+
+* **Golang:** Updated to v1.19.1
+* **clamav:** Updated from v0.103.6 to v0.103.7
+* **clamav-windows:** Updated from v0.103.6 to v0.103.7
+
+#### Anti-Virus Mirror
+
+##### Dependencies
+
+Dependencies updated in this release:
+
+* **Golang:** Updated to v1.19.1
+* **clamav:** Updated from v0.103.6 to v0.103.7
+
+#### Known issues
+
+This release has the following issue:
+
+* **<%= vars.product_short_mirror %> errors when restoring your deployment with BBR:**
+  If you use <%= vars.product_short_mirror %>, errors can occur when restoring your deployment with
+  BOSH Backup and Restore (BBR).
+  To resolve this issue, see [Restoring with BOSH Backup and Restore Fails](troubleshooting.html#backup-restore).
+  For more information about BBR, see
+  [Backing Up and Restoring Deployments](https://docs.pivotal.io/ops-manager/install/backup-restore/index.html)
+  in the Ops Manager documentation.
+
 ### <a id='2-3-17'></a> v2.3.17
 
 **Release Date**: August 26, 2022
