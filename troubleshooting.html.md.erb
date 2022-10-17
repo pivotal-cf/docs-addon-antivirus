@@ -67,7 +67,6 @@ For use cases where CVD files are manually obtained, a supported method must be 
 For information about error codes and supported methods,
 see [ClamAV documentation](https://www.clamav.net/documents/freshclam-faq#error-codes).
 
-
 ## <a id="updates"></a> Virus Database Update Issues
 
 ### <a id="invalid-db"></a> Invalid Database Definitions
@@ -117,13 +116,16 @@ If the internal <%= vars.product_short_mirror %> has the latest files, no action
 ### <a id="malware-detection"></a> <%= vars.product_short %> Is Not Detecting Malware
 
 #### Symptom
-Malware signature or sample malware is not detected,
-even though the ClamAV daemon is properly configured.
+
+Malware signature or sample malware is not detected, even though the ClamAV daemon is properly
+configured.
 
 #### Explanation
+
 Virus signatures are not up-to-date.
 
 #### Solution
+
 To resolve this issue, verify that:
 
 + The mirror server is correctly configured.
@@ -139,47 +141,49 @@ the suspicious file directly to the ClamAV team.
   mirror coordination, or threat tracking activity.
 </p>
 
-
-
 ### <a id='false-positive-clamav'></a> <%= vars.product_short %> Reports False Positives
 
-####Symptom
+#### Symptom
+
 <%= vars.product_short %> reports a false positive result such as
 non-malicious file is reported to be a virus.
 
-####Explanation
+#### Explanation
+
 <%= vars.product_short %> compares files to its database of known malicious patterns.
 <%= vars.product_short %> might detect a non-malicious file as a virus
 due to a coincidental similarity to those patterns.
 
-####Solution
+#### Solution
+
 Submit false positive reports to <a href="https://www.clamav.net/reports/fp">ClamAV</a>.
 You can also subscribe to the ClamAV email list to be kept up-to-date with ClamAV database changes.
 It takes about a week for ClamAV to verify and publish a new database.
 
-
-
 ### <a id='cpu-spikes-clamav'></a> CPU Spikes While Using <%= vars.product_short %>
 
-####Symptom
+#### Symptom
+
 <%= vars.product_short %> is taking more CPU resources than assigned in its configuration.
 
-####Explanation
+#### Explanation
+
 <%= vars.product_short %> resource consumption is restricted using cgroups.
 <%= vars.product_short %> is resource-limited whenever other processes are active.
 However, cgroups enables <%= vars.product_short %> to occupy
 more CPU resources when all other processes are idle,
 because it does not impact their performance.
 
-####Solution
+#### Solution
+
 Set the **Enforce CPU limit** field to **Always** in the
 **<%= vars.product_short %>** tile.
 For instructions, see [Configure Anti-Virus](./install.html#configure).
 
-
 ### <a id='out-of-memory'></a> Out of Memory While Using <%= vars.product_short %>
 
-####Symptom
+#### Symptom
+
 <%= vars.product_short %> fails to start and `/var/log/syslog` reports `Memory cgroup out of memory:
 Kill process` on the `clamd` process similar to:
 
@@ -187,13 +191,15 @@ Kill process` on the `clamd` process similar to:
 2019-02-20T19:35:40.249205+00:00 localhost kernel: [  254.679053] Killed process 7527 (clamd) total-vm:786136kB, anon-rss:626692kB, file-rss:1592kB
 </pre>
 
-####Explanation
+#### Explanation
+
 <%= vars.product_short %> resource consumption is restricted by cgroups.
 The `clamd` process is terminated if the memory usage limit is exceeded.
 When memory swapping is disabled by other BOSH jobs,
 the <%= vars.product_short %> resource requires a larger memory limit.
 
-####Solution
+#### Solution
+
 This is expected behavior from cgroups.
 To configure the memory limit, configure **Memory limit (in bytes)** in the **<%= vars.product_short %>** tile.
 
@@ -201,10 +207,10 @@ To configure the memory limit, configure **Memory limit (in bytes)** in the **<%
 including errand VMs, have sufficient memory resources.
 </p>
 
-
 ### <a id='insufficient-cpu'></a> Insufficient CPU Limit While Using <%= vars.product_short %>
 
 #### Symptom
+
 <%= vars.product_short %> fails to start during deployment.
 However, the `clamd` and `freshclam` processes eventually run.
 
@@ -228,18 +234,20 @@ clamav_1/d5cfe4bd-b606-4372-8481-187f4cf57e6c  -          running        z1  10.
 ~                                              freshclam  running        -   -
 </pre>
 
-####Explanation
+#### Explanation
+
 <%= vars.product_short %> startup is CPU intensive
 and, if restricted, can prevent <%= vars.product_short %> from starting up correctly.
 
 #### Solutions
+
 + Ensure `cpu_limit` is set high enough for <%= vars.product_short %> to execute normally.
 If the limit is too strict, <%= vars.product_short %> fails to start.
 To make changes to this limit, configure **CPU limit (percentage)** in the **<%= vars.product_short %>** tile.
 
 + Set `enforce_cpu_limit` to `false`. This allocates more CPU cycles to ClamAV
 if other processes are not using CPU resources.<br>
-To disable this limit, set the **Enforce CPU limit** field to **When other processes are using CPU resources** in the **<%= vars.product_short %>** tile.
+To deactivate this limit, set the **Enforce CPU limit** field to **When other processes are using CPU resources** in the **<%= vars.product_short %>** tile.
 
 + From the **Ops Manager Installation Dashboard**, navigate to the tile with the failing `antivirus` job.
 On **Resource Config**, adjust the **VM Type** for the **<%= vars.product_short %>** job
@@ -248,6 +256,7 @@ to have sufficient CPU resources.
 ### <a id='too-many-files'></a> Too Many Open Files Error While Using <%= vars.product_short_mirror %>
 
 #### Symptom
+
 The <%= vars.product_short_mirror %> log reports that too many log files are open:
 
 <pre class="terminal">
@@ -259,14 +268,15 @@ The <%= vars.product_short_mirror %> log reports that too many log files are ope
 </pre>
 
 #### Explanation
+
 <%= vars.product_short_mirror %> opens files when a database is requested.
 There is a limit to how many files it can open at a time.
 
 #### Solution
+
 Increase the number of <%= vars.product_short_mirror %> instances.
 VMware recommends that there is one <%= vars.product_short_mirror %> for every 250 instances where <%= vars.product_short %> is installed.
 For more information, see [Scale the Number of Deployed Mirrors](./install-mirror.html#scale-deployed-mirror).
-
 
 ### <a id='backup-restore'></a> Restoring with BOSH Backup and Restore Fails
 
@@ -287,6 +297,7 @@ download the required database signature files.
 If this happens, errors and failed deployments occur.
 
 #### Solution
+
 To resolve this issue, you must ensure that <%= vars.product_short_mirror %>
 is deployed before restoring your deployment.
 
@@ -323,7 +334,6 @@ This causes <%= vars.product_short %> to ignore the **Enforce CPU limit** settin
 
 Increase the VM size. VMware recommends a minimum VM size of `micro.cpu` using 2&nbsp;CPU and
 2&nbsp;GB RAM.
-
 
 ### <a id='query-ping-fail'></a> Freshclam Logs Show "can't query *.ping.clamav.net"
 
