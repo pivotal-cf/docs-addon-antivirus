@@ -115,6 +115,13 @@ documentation.
 
     <pre class="terminal">$ bosh -e my-env -d p-antivirus-mirror-4cb8cfbeee717258d72e scp main.cvd daily.cvd bytecode.cvd :/var/vcap/data/antivirus-mirror/unvalidated</pre>
 
+    Note: if the CVD files being uploaded are too big there's a chance `clamd`
+    will start consuming them before the upload has finished. This might result
+    in log messages saying one of the CVD files could not be loaded. If that
+    happens, you might want to upload the CVD files to a temporary folder on
+    the VM first and once the upload is finished you can move the files to
+    `/var/vcap/data/antivirus-mirror/unvalidated`.
+
 1. Verify that the mirror validated and updated its local copies of the virus
     definitions by running:
     ```
