@@ -103,7 +103,6 @@ documentation.
 
     <pre class="terminal">$ p-antivirus-mirror-08815ca5ead252c4b8d8</pre>
 
-
 1. Copy the virus definitions to your internal <%= vars.product_short_mirror %>
   by running:
 
@@ -115,18 +114,21 @@ documentation.
 
     <pre class="terminal">$ bosh -e my-env -d p-antivirus-mirror-4cb8cfbeee717258d72e scp main.cvd daily.cvd bytecode.cvd :/var/vcap/data/antivirus-mirror/unvalidated</pre>
 
-    Note: if the CVD files being uploaded are too big there's a chance `clamd`
-    will start consuming them before the upload has finished. This might result
-    in log messages saying one of the CVD files could not be loaded. If that
-    happens, you might want to upload the CVD files to a temporary folder on
-    the VM first and once the upload is finished you can move the files to
-    `/var/vcap/data/antivirus-mirror/unvalidated`.
+    <p class="note">
+      <strong>Note:</strong> If the CVD files being uploaded are too big, <code>clamd</code> might start
+      consuming them before the upload has finished.
+      If this happens, you might receive log messages saying one of the CVD files could not be loaded.
+      To workaround this issue you can upload the CVD files to a temporary folder on the VM first,
+      and after the upload is finished, move the files to <code>/var/vcap/data/antivirus-mirror/unvalidated</code>.
+    </p>
 
-1. Verify that the mirror validated and updated its local copies of the virus
+2. Verify that the mirror validated and updated its local copies of the virus
     definitions by running:
+
     ```
     bosh -e BOSH-ENVIRONMENT -d ANTIVIRUS-DEPLOYMENT-NAME ssh -c "sudo cat FILE | grep \"updated /var/vcap/store\""
     ```
+
     Where `FILE` is determined by the output destination configured in
     **Anti-Virus Mirror Configuration** of the <%= vars.product_full_mirror %> tile.
     Use one of the following:
