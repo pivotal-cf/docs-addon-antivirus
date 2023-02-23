@@ -15,7 +15,9 @@ For product versions and upgrade paths, see [Upgrade Planner](https://upgrade-pl
 
 #### Anti-Virus
 
-This release updates clamav to address [CVE-2023-20032](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-20032) and [CVE-2023-20052](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-20052)
+##### Security Fix
+
+This release updates clamav to address [CVE-2023-20032](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-20032) and [CVE-2023-20052](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-20052).
 
 ##### Dependencies
 
@@ -26,9 +28,14 @@ Dependencies updated in this release:
 
 #### Anti-Virus Mirror
 
-##### Dependencies
+##### Maintenance Changes
 
-Anti-Virus Mirror now depends on Jammy Stemcells.
+Changes in this release:
+
+* Added compatibility with Jammy stemcell.
+* Removed support for Xenial stemcells.
+
+##### Dependencies
 
 Dependencies updated in this release:
 
@@ -45,7 +52,6 @@ This release has the following issue:
   For more information about BBR, see
   [Backing Up and Restoring Deployments](https://docs.pivotal.io/ops-manager/install/backup-restore/index.html)
   in the Ops Manager documentation.
-
 
 
 ### <a id='2-3-27'></a> v2.3.27
@@ -146,7 +152,7 @@ This release has the following issue:
 
 ##### Maintenance Changes
 
-Change in this release:
+Changes in this release:
 
 * Added compatibility with Jammy stemcell.
 * Removed support for Trusty stemcell.
