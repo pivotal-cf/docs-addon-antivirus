@@ -15,6 +15,8 @@ For product versions and upgrade paths, see [Upgrade Planner](https://upgrade-pl
 
 #### Anti-Virus
 
+This release updates clamav to address [CVE-2023-20032](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-20032) and [CVE-2023-20052](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-20052)
+
 ##### Dependencies
 
 Dependencies updated in this release:
@@ -26,10 +28,25 @@ Dependencies updated in this release:
 
 ##### Dependencies
 
+Anti-Virus Mirror now depends on Jammy Stemcells.
+
 Dependencies updated in this release:
 
 * **clamav:** Updated from v0.103.7 to v0.103.8
-* **clamav-windows:** Updated from v0.103.7-2 to v0.103.8
+
+#### Known issues
+
+This release has the following issue:
+
+* **<%= vars.product_short_mirror %> errors when restoring your deployment with BBR:**
+  If you use <%= vars.product_short_mirror %>, errors can occur when restoring your deployment with
+  BOSH Backup and Restore (BBR).
+  To resolve this issue, see [Restoring with BOSH Backup and Restore Fails](troubleshooting.html#backup-restore).
+  For more information about BBR, see
+  [Backing Up and Restoring Deployments](https://docs.pivotal.io/ops-manager/install/backup-restore/index.html)
+  in the Ops Manager documentation.
+
+
 
 ### <a id='2-3-27'></a> v2.3.27
 
