@@ -17,7 +17,7 @@ As of March 8, 2022:
 | Branch name… | Documents version… | Publishes to… |
 |-------------|----------------|----------------|
 | master   | 2.4 (unreleased)     |  https://docs-staging.vmware.com/en/draft/Anti-Virus-for-VMware-Tanzu/2.4/anti-virus/GUID-index.html |
-| 2.3   | 2.3.x     | https://docs.vmware.com/en/Anti-Virus-for-VMware-Tanzu/2.3/anti-virus/GUID-index.htmland and https://docs-staging.vmware.com/en/Anti-Virus-for-VMware-Tanzu/2.3/anti-virus/GUID-index.html |
+| 2.3   | 2.3.x     | https://docs.vmware.com/en/Anti-Virus-for-VMware-Tanzu/2.3/anti-virus/GUID-index.html and https://docs-staging.vmware.com/en/Anti-Virus-for-VMware-Tanzu/2.3/anti-virus/GUID-index.html |
 | 2.2   | 2.2.x     | NOT IN USE docs have been deprecated. https://docs.vmware.com/en/Anti-Virus-for-VMware-Tanzu/2.2/anti-virus/GUID-index.html |
 | 2.1   | 2.1.x     | NOT IN USE docs have been deprecated. https://docs.vmware.com/en/Anti-Virus-for-VMware-Tanzu/2.1/anti-virus/GUID-index.html |
 | 2.0   | 2.0.x     | NOT IN USE docs have been deprecated. https://docs.vmware.com/en/Anti-Virus-for-VMware-Tanzu/2.0/anti-virus/GUID-index.html |
