@@ -115,6 +115,30 @@ If the internal <%= vars.product_short_mirror %> has the latest files, no action
 
 ## <a id="runtime"></a> Runtime Issues
 
+### <a id="malware-detection"></a> <%= vars.product_short %> Restarting everyday
+
+#### Symptom
+
+Observed in logs...
+
+#### Explanation
+
+<a id="malware-detection"></a> <%= vars.product_short %> updates its virus database twice a day. To ensure no downtime there needs to be enough memory allocated to hold the old and new databases in memory for a short period. If there is insufficient memory a restart is needed.
+
+The minimum recommended memory required by <a id="malware-detection"></a> <%= vars.product_short %> may have changed since the product was installed.
+
+#### Solution
+
+Ensure that the tile config reserves a minimum of 3Gb of memory for AV (4GB preferred).
+
+Memory limit (in bytes)
+
+#### Solution
+
+Set the **Memory limit (in bytes)** to a minimum value of **3221225472** in the Anti-Virus tile. For instructions, see Configure Anti-Virus.
+
+
+
 ### <a id="malware-detection"></a> <%= vars.product_short %> Is Not Detecting Malware
 
 #### Symptom
