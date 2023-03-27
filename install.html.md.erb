@@ -6,27 +6,35 @@ owner: Platform Security & Compliance Team
 
 This topic describes how to install and configure <%= vars.product_full %>.
 
-Before installing <%= vars.product_short %>, VMware recommends that you download
-and install the Anti-Virus for VMware Tanzu Mirror tile.
+Before installing <%= vars.product_short %>, VMware recommends that you download and install the
+Anti-Virus for VMware Tanzu Mirror tile.
 For more information about the <%= vars.product_short_mirror %> tile,
 see [Installing and Configuring Anti-Virus for VMware Tanzu Mirror](./install-mirror.html).
 
-##<a id="prereqs"></a>Prerequisites
+## <a id="prereqs"></a> Prerequisites
 
 To install <%= vars.product_short %>, you must have:
 
-* **An Ops Manager operator user account with admin rights**.
-For more information, see [Platform Operators](https://docs.pivotal.io/ops-manager/install/platform-operators.html) in the Ops
-Manager documentation.
+- **An Ops Manager operator user account with admin rights**.
+  For more information, see
+  [Platform Operators](https://docs.pivotal.io/ops-manager/install/platform-operators.html) in the
+  Ops Manager documentation.
 
-* **<%= vars.ops_manager_full %> (Ops Manager)**.
-For compatible versions, see the [Product Snapshot](./index.html#snapshot).
+- **<%= vars.ops_manager_full %> (Ops Manager)**.
+  For compatible versions, see the [Product Snapshot](./index.html#snapshot).
 
+<<<<<<< HEAD
 * **At least 2&nbsp;GB of RAM free for each VM that installs <%= vars.product_short %>**.
   <%= vars.product_short %> installs itself on each tile VM and runs internally. <%= vars.product_short %> takes at least 1.3&nbsp;GB of RAM on each VM.
   On Google Cloud Platform (GCP), the recommended minimum VM size is `micro.cpu` using 2&nbsp;CPU and 2&nbsp;GB RAM.
+=======
+- **At least 4&nbsp;GB of RAM free for each VM that installs <%= vars.product_short %>**.
+  <%= vars.product_short %> installs itself on each tile VM and runs internally. <%= vars.product_short %>
+  takes at least 3&nbsp;GB of RAM on each VM, reserving on Google Cloud Platform (GCP), the recommended
+  minimum VM size is `micro.cpu` using 2&nbsp;CPU and 4&nbsp;GB RAM.
+>>>>>>> f7ca1a6 ([#184799626] Tidy up the doc)
 
-* **An external mirror**. If you do not have an external mirror, VMware recommends that you install
+- **An external mirror**. If you do not have an external mirror, VMware recommends that you install
   the <%= vars.product_short_mirror %>.
   For instructions, see [Installing and Configuring Anti-Virus for VMware Tanzu Mirror](./install-mirror.html).
 
@@ -34,14 +42,16 @@ For compatible versions, see the [Product Snapshot](./index.html#snapshot).
 
 Install the <%= vars.product_short %> tile on the Ops Manager Installation Dashboard:
 
-1. Download the product file from [<%= vars.product_network %>](https://network.pivotal.io/products/p-clamav-addon).
+1. Download the product file from
+   [<%= vars.product_network %>](https://network.pivotal.io/products/p-clamav-addon).
 
-1. Navigate to the Ops Manager Installation Dashboard and select **Import a Product** to upload the product file.
+2. Navigate to the Ops Manager Installation Dashboard and select **Import a Product** to upload the
+   product file.
 
-1. Under the **Import a Product** button, click **+** next to the version number of <%= vars.product_short %>.
-This adds the tile to your staging area.
+3. Under the **Import a Product** button, click **+** next to the version number of
+   <%= vars.product_short %>. This adds the tile to your staging area.
 
-1. Click the newly added **<%= vars.product_full %>** tile.
+4. Click the newly added **<%= vars.product_full %>** tile.
 
 ## <a id='configure'></a> Configure <%= vars.product_short %>
 
@@ -49,14 +59,13 @@ To configure <%= vars.product_short %>:
 
 1. Select **Anti-Virus Configuration**.
 
-1. Configure **Mirror for Automatic Database Updates**.<br>
-Use the **Official Mirror**, **Deployed Mirror**, **Existing Mirror**, or **Existing Mirror with TLS** information below.
+2. Configure **Mirror for Automatic Database Updates**.
+   Use the **Official Mirror**, **Deployed Mirror**, **Existing Mirror**, or **Existing Mirror with TLS**
+   information below.
 
     <hr>
-    **Official Mirror**
-    <img src="./images/configure-mirror-official.png"
-    alt="'Mirror for Automatic Database Updates' section of the 'Anti-Virus Configuration' pane.
-    The 'Official mirror' radio button is selected.">
+    <strong>Official Mirror</strong>
+    <img src="./images/configure-mirror-official.png" alt="'Mirror for Automatic Database Updates' section of the 'Anti-Virus Configuration' pane. The 'Official mirror' radio button is selected.">
     <table class="nice">
       <col width="25%">
       <col width="75%">
@@ -68,11 +77,8 @@ Use the **Official Mirror**, **Deployed Mirror**, **Existing Mirror**, or **Exis
       </tr>
     </table>
     <hr>
-    **Deployed Mirror**
-    <img src="./images/configure-mirror-deployed.png"
-    alt="'Mirror for Automatic Database Updates' section of the 'Anti-Virus
-    Configuration' pane. The 'Deployed mirror from the Anti-Virus for VMware Tanzu Mirror Tile'
-    radio button is selected. The 'Anti-Virus Mirror Port' field is exposed.">
+    <strong>Deployed Mirror</strong>
+    <img src="./images/configure-mirror-deployed.png" alt="'Mirror for Automatic Database Updates' section of the 'Anti-Virus Configuration' pane. The 'Deployed mirror from the Anti-Virus for VMware Tanzu Mirror Tile' radio button is selected. The 'Anti-Virus Mirror Port' field is exposed.">
     <table class="nice">
       <col width="25%">
       <col width="75%">
@@ -96,11 +102,8 @@ Use the **Official Mirror**, **Deployed Mirror**, **Existing Mirror**, or **Exis
     </table>
     <hr>
     <hr>
-    **Existing Mirror**
-    <img src="./images/configure-mirror-existing.png"
-    alt="Mirror for Automatic Database Updates section of the 'Anti-Virus Configuration' pane.
-    The 'Existing Mirror' radio button is selected. The 'Comma separated list of mirror
-    hostnames or IPs' field is exposed.">
+    <strong>Existing Mirror</strong>
+    <img src="./images/configure-mirror-existing.png" alt="Mirror for Automatic Database Updates section of the 'Anti-Virus Configuration' pane. The 'Existing Mirror' radio button is selected. The 'Comma separated list of mirror hostnames or IPs' field is exposed.">
     <table class="nice">
       <col width="25%">
       <col width="75%">
@@ -116,11 +119,8 @@ Use the **Official Mirror**, **Deployed Mirror**, **Existing Mirror**, or **Exis
       </tr>
     </table>
     <hr>
-    **Existing Mirror with TLS**
-    <img src="./images/configure-mirror-existing-tls.png"
-    alt="'Mirror for Automatic Database Updates' section of the 'Anti-Virus Configuration' pane.
-    The 'Existing Mirror with TLS' radio button is selected. The three fields exposed are described
-    below.">
+    <strong>Existing Mirror with TLS</strong>
+    <img src="./images/configure-mirror-existing-tls.png" alt="'Mirror for Automatic Database Updates' section of the 'Anti-Virus Configuration' pane. The 'Existing Mirror with TLS' radio button is selected. The three fields exposed are described below.">
     <table class="nice">
       <col width="25%">
       <col width="75%">
@@ -158,9 +158,14 @@ upcHi9nzBhDFKdT3uhaQqNBU4UtJx5g=
       </tr>
     </table>
 
+<<<<<<< HEAD
 1. Configure the remaining fields:
     <img src="./images/configure.png" alt="'Anti-Virus Configuration' pane.
        The fields shown are described below.">
+=======
+3. Configure the remaining fields:
+    <img src="./images/configure.png" alt="'Anti-Virus Configuration' pane. The fields shown are described below." width="550">
+>>>>>>> f7ca1a6 ([#184799626] Tidy up the doc)
 
     <table class="nice">
       <th>Field</th>
@@ -289,15 +294,12 @@ upcHi9nzBhDFKdT3uhaQqNBU4UtJx5g=
     </table>
     <br>
 
+4. Click **Save**.
 
-1. Click **Save**.
-
-If a scan reports false positives, report the issue to
-[ClamAV](https://www.clamav.net/reports/fp).
+If a scan reports false positives, report the issue to [ClamAV](https://www.clamav.net/reports/fp).
 For more information about false positives, see
 [Anti-Virus Reports False Positives](./troubleshooting.html#false-positive-clamav).
 It takes about a week for ClamAV to verify and publish a new database.
-
 
 ## <a id='proxy'></a> Configure HTTP Proxy
 
@@ -305,12 +307,11 @@ If you require a proxy server for <%= vars.product_short %> jobs to connect to t
 update their virus definitions, you can configure one:
 
 1. Select **HTTP Proxy Configuration for Anti-Virus Jobs**.
-    ![Screenshot of the "HTTP Proxy" pane. The fields are listed below.](images/http-proxy.png)
+   ![Screenshot of the "HTTP Proxy" pane. The fields are listed below.](images/http-proxy.png)
 
 1. Set **HTTP proxy for Anti-Virus jobs to get database updates** to **Enabled**.
 1. Enter the **Host**, **Port**, **Username** and **Password** in the fields that appear.
 1. Click **Save**.
-
 
 ## <a id='scheduled'></a> Configure Scheduled Scan
 
@@ -327,49 +328,48 @@ To change the scheduled scan value:
       the "Latest time that a daily scheduled scan can start" field.](images/scheduled-scans.png)
 
 1. Set **Interval for scheduled scans to run** to one of these options:
-  * **Hourly**
-  * **Daily** (default)
-  * **Disabled**
+
+   - **Hourly**
+   - **Daily** (default)
+   - **Disabled**
+
 1. (Optional) If you selected **Daily** scheduled scans, you can restrict the interval.
-To do this, set **Earliest time that a daily scheduled scan can start** and
-**Latest time that a daily scheduled scan can start**.
+   To do this, set **Earliest time that a daily scheduled scan can start** and
+   **Latest time that a daily scheduled scan can start**.
+
 1. Click **Save**.
 
 ## <a id="apply-changes"></a> Apply Changes from Your Configuration
 
-Your installation is not complete until you apply your configuration changes.
-To do so:
+Your installation is not complete until you apply your configuration changes. To do so:
 
 1. Return to the Ops Manager Installation Dashboard.
 1. Click **Review Pending Changes**.
 1. Ensure all products are selected and click **Apply Changes**.
 
-<br>
 <hr style="height:1px;border:none;color:#333;background-color:#333;" />
 
 ## <a id="scan-containers"></a> (Optional) Configure <%= vars.product_short %> to Exclude Duplicate Logs on Containers
 
 You can use <%= vars.product_short %> to scan:
 
-* Garden containers on the Diego Cell VMs in <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>).
-* Containers on the Kubernetes worker node VMs in Enterprise <%= vars.k8s_runtime_full %> (Enterprise <%= vars.k8s_runtime_abbr %>).
+- Garden containers on the Diego Cell VMs in <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>).
+- Containers on the Kubernetes worker node VMs in Enterprise <%= vars.k8s_runtime_full %> (Enterprise <%= vars.k8s_runtime_abbr %>).
 
-However, duplicate logs about the same file appear under the `diff`,
-`rootfs`, or `merged` directories as a consequence of OverlayFS implementation.
+However, duplicate logs about the same file appear under the `diff`, `rootfs`, or `merged` directories
+as a consequence of OverlayFS implementation.
 
 To configure <%= vars.product_short %> to ignore duplicate logs for these directories, see the optional
 [Exclude Duplicate Logs on Garden Containers](#garden) or
 [Exclude Duplicate Logs on Containers in Enterprise <%= vars.k8s_runtime_abbr %>](#pks) sections below:
-
 
 ### <a id="garden"></a> (Optional) Exclude Duplicate Logs on Garden Containers
 
 When <%= vars.product_short %> scan results detect potential malware on Garden containers,
 logs are reported for both the `diff` and `rootfs` directories.
 
-This is because the `rootfs` directory is the projection of
-the `diff` directory on top of a base image layer, therefore it is safe to
-ignore the `rootfs` directory.
+This is because the `rootfs` directory is the projection of the `diff` directory on top of a base
+image layer, therefore it is safe to ignore the `rootfs` directory.
 GrootFS mounts the underlying volumes using OverlayFS to a point in the images directory.
 This mount point is the `rootfs` directory for the container and is read-write.
 
@@ -382,26 +382,26 @@ in the Cloud Foundry documentation.
 To configure <%= vars.product_short %> to ignore duplicate logs for these directories:
 
 1. Select **Anti-Virus Configuration**.
-1. Enter the following ignore pattern into the **Directories and files that will
-be ignored** field:
+1. Enter the following ignore pattern into the **Directories and files that will be ignored** field:
 
-    ```
-    ^/var/vcap/data/grootfs/store/(un)?privileged/images/[\w-]+/rootfs/.*$
-    ```
-    ![Screenshot of the "Directories and files that will be ignored" field.
-      The text "/proc/,/sys/" is entered in the field.](images/ignore-file.png)
-    <p class="note">
-      <strong>Note:</strong> Adding this ignore pattern means that files and directories in the
-      <code>/var/vcap/data/grootfs/store/unprivileged/images/UUID/rootfs</code>
-      directory are ignored by <%= vars.product_short %>.
-      <code>UUID</code> is the ID of the container.
-    </p>
+   ```console
+   ^/var/vcap/data/grootfs/store/(un)?privileged/images/[\w-]+/rootfs/.*$
+   ```
+
+   ![Screenshot of the "Directories and files that will be ignored" field. The text "/proc/,/sys/" is entered in the field.](images/ignore-file.png)
+
+   <p class="note">
+   <strong>Note:</strong> Adding this ignore pattern means that files and directories in the
+   <code>/var/vcap/data/grootfs/store/unprivileged/images/UUID/rootfs</code>
+   directory are ignored by <%= vars.product_short %>.
+   <code>UUID</code> is the ID of the container.
+   </p>
+
 1. Click **Save**.
-1. To apply the configuration change, follow the instructions in
-[Apply Changes from Your Configuration](#apply-changes) above.
+1. To apply the configuration change, follow the earlier instructions in
+   [Apply Changes from Your Configuration](#apply-changes).
 
 For an example log entry, see [Container Log Messages](./monitoring-logs.html#container).
-
 
 ### <a id="pks"></a> (Optional) Exclude Duplicate Logs on Containers in Enterprise <%= vars.k8s_runtime_abbr %>
 
@@ -409,9 +409,8 @@ When <%= vars.product_short %> scan results detect potential malware on containe
 worker node VMs in Enterprise <%= vars.k8s_runtime_abbr %>, logs are reported for both the
 `diff` and `merged` directories.
 
-This is because the `merged` directory is the projection of
-the `diff` directory on top of a base image layer, therefore it is safe to
-ignore the `merged` directory.
+This is because the `merged` directory is the projection of the `diff` directory on top of a base image
+layer, therefore it is safe to ignore the `merged` directory.
 
 For more information about Docker OverlayFS implementation, see
 [Use the OverlayFS storage driver](https://docs.docker.com/storage/storagedriver/overlayfs-driver/)
@@ -422,21 +421,22 @@ in the Docker documentation.
 To configure <%= vars.product_short %> to ignore duplicate logs for these directories:
 
 1. Select **Anti-Virus Configuration**.
-1. Enter the following ignore pattern into the **Directories and files that will
-be ignored** field:
+1. Enter the following ignore pattern into the **Directories and files that will be ignored** field:
 
-    ```
-    ^/var/vcap/store/docker/docker/overlay2/\w+/merged/.*$
-    ```
-    ![Screenshot of the "Directories and files that will be ignored" field.
-      The text "/proc/,/sys/" is entered in the field.](images/ignore-file.png)
-    <p class="note">
-      <strong>Note:</strong> Adding this ignore pattern means that files and directories in the
-      <code>/var/vcap/data/grootfs/store/unprivileged/images/UUID/merged</code>
-      directory are ignored by <%= vars.product_short %>. <code>UUID</code> is the ID of the container.
-    </p>
+   ```console
+   ^/var/vcap/store/docker/docker/overlay2/\w+/merged/.*$
+   ```
+
+   ![Screenshot of the "Directories and files that will be ignored" field. The text "/proc/,/sys/" is entered in the field.](images/ignore-file.png)
+
+   <p class="note">
+   <strong>Note:</strong> Adding this ignore pattern means that files and directories in the
+   <code>/var/vcap/data/grootfs/store/unprivileged/images/UUID/merged</code>
+   directory are ignored by <%= vars.product_short %>. <code>UUID</code> is the ID of the container.
+   </p>
+
 1. Click **Save**.
-1. To apply the configuration change, follow the instructions in
-[Apply Changes from Your Configuration](#apply-changes) above.
+1. To apply the configuration change, follow the earlier instructions in
+   [Apply Changes from Your Configuration](#apply-changes).
 
 For an example log entry, see [Container Log Messages](./monitoring-logs.html#container).
