@@ -58,7 +58,77 @@ To configure <%= vars.product_short %>:
    Use the **Official Mirror**, **Deployed Mirror**, **Existing Mirror**, or **Existing Mirror with TLS**
    information below.
 
-    <hr>
+    The tabs below expand to show instructions for each type of mirror.<br><br>
+
+    <style>
+    .btn.btn-default,
+    .tab .tablinks {
+        color: #2185c5;
+    }
+    .tab {
+        overflow: hidden;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+    }
+
+    /* Style the buttons that are used to open the tab content */
+    .tab button {
+        background-color: inherit;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: ;
+        transition: 0.3s;
+    }
+
+    /* Change background color of buttons on hover */
+    .tab button:hover {
+        background-color: #ddd;
+    }
+
+    /* Create an active/current tablink class */
+    .tab button.active {
+        background-color: #ccc;
+    }
+
+    /* Style the tab content */
+    .tabcontent {
+        display: none;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-top: none;
+    }
+    </style>
+    <script>
+    function openDocs(evt, docsName) {
+        // Declare all variables
+        var i, tabcontent, tablinks;
+        // Get all elements with class="tabcontent" and hide them
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        // Get all elements with class="tablinks" and remove the class "active"
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        // Show the current tab, and add an "active" class to the button that opened the tab
+        document.getElementById(docsName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+    </script>
+
+    <div class="tab">
+      <!- Tab headers and links ->
+      <button class="tablinks active" onclick="openDocs(event, 'tab1')">Official mirror</button>
+      <button class="tablinks" onclick="openDocs(event, 'tab2')">Deployed mirror</button>
+      <button class="tablinks" onclick="openDocs(event, 'tab3')">Existing Mirror</button>
+      <button class="tablinks" onclick="openDocs(event, 'tab4')">Existing Mirror with TLS</button>
+    </div>
+
+    <div id="tab1" class="tabcontent" style="display:block">
     <table class="nice">
       <col width="25%">
       <col width="75%">
@@ -69,6 +139,8 @@ To configure <%= vars.product_short %>:
         <td>Select this to have the mirror fetch databases from database.clamav.net.</td>
       </tr>
     </table>
+    </div>
+    <div id="tab2" class="tabcontent">
     <img src="./images/configure-mirror-official.png" alt="'Mirror for Automatic Database Updates' section of the 'Anti-Virus Configuration' pane. The 'Official mirror' radio button is selected.">
     <hr>
     <table class="nice">
@@ -93,7 +165,8 @@ To configure <%= vars.product_short %>:
       </tr>
     </table>
     <img src="./images/configure-mirror-deployed.png" alt="'Mirror for Automatic Database Updates' section of the 'Anti-Virus Configuration' pane. The 'Deployed mirror from the Anti-Virus for VMware Tanzu Mirror Tile' radio button is selected. The 'Anti-Virus Mirror Port' field is exposed.">
-    <hr>
+    </div>
+    <div id="tab3" class="tabcontent">
     <table class="nice">
       <col width="25%">
       <col width="75%">
@@ -109,7 +182,8 @@ To configure <%= vars.product_short %>:
       </tr>
     </table>
     <img src="./images/configure-mirror-existing.png" alt="Mirror for Automatic Database Updates section of the 'Anti-Virus Configuration' pane. The 'Existing Mirror' radio button is selected. The 'Comma separated list of mirror hostnames or IPs' field is exposed.">
-    <hr>
+    </div>
+    <div id="tab4" class="tabcontent">
     <table class="nice">
       <col width="25%">
       <col width="75%">
@@ -147,6 +221,7 @@ upcHi9nzBhDFKdT3uhaQqNBU4UtJx5g=
       </tr>
     </table>
     <img src="./images/configure-mirror-existing-tls.png" alt="'Mirror for Automatic Database Updates' section of the 'Anti-Virus Configuration' pane. The 'Existing Mirror with TLS' radio button is selected. The three fields exposed are described below.">
+    </div>
 
 3. Configure the remaining fields:
     <table class="nice">
