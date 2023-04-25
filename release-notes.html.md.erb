@@ -25,6 +25,20 @@ For product versions and upgrade paths, see [Upgrade Planner](https://upgrade-pl
 
 
 
+### <a id='2-3-30'></a> v2.3.30
+
+**Release Date**: April 5, 2023
+
+#### Anti-Virus
+
+##### Maintenance Changes
+
+Changes in this release:
+
+- Increased the default memory for the Anti-Virus tile configuration from 1.5&nbsp;GB to 4&nbsp;GB.
+- Ensured that the tile configuration reserves a minimum of 3&nbsp;GB of memory for AV to prevent the
+  `clamav` process crashing. 4&nbsp;GB is recommended.
+
 ### <a id='2-3-29'></a> v2.3.29
 
 **Release Date**: February 22, 2023
@@ -33,13 +47,15 @@ For product versions and upgrade paths, see [Upgrade Planner](https://upgrade-pl
 
 ##### Security Fix
 
-This release updates clamav to address [CVE-2023-20032](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-20032) and [CVE-2023-20052](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-20052).
+This release updates `clamav` to address
+[CVE-2023-20032](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-20032) and
+[CVE-2023-20052](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-20052).
 
 ##### Dependencies
 
 Dependencies updated in this release:
 
-* **clamav:** Updated from v0.103.7 to v0.103.8
+* **ClamAV:** Updated from v0.103.7 to v0.103.8
 * **clamav-windows:** Updated from v0.103.7-2 to v0.103.8
 
 #### Anti-Virus Mirror
