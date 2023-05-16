@@ -15,15 +15,45 @@ For product versions and upgrade paths, see [Upgrade Planner](https://upgrade-pl
 
 #### Anti-Virus
 
+##### Notes about this release
+* Previous release 2.3.31 erronously claimed to bump GoLang to v1.20.2.
+* Our documentation has been updated to remove references to the URL 'pivotal-anti-virus-mirror.s3.amazonaws.com' which was only intended to serve as an example. VMWare doesn't provide any guarantees around the availablity of this URL and deployment should not depend on it.  
+
+
 ##### Maintenance Changes
-* Final release 2.3.34
+* **ClamAV:** Updated from v0.103.8 to v1.0.1
+* **clamav-windows:** Updated from v0.103.8 to v1.0.1
+
+##### Dependencies
+
+Dependency updated in this release:
+
+* **golang:** Updated to v1.20.4
+
 
 #### Anti-Virus Mirror
 
-##### Maintenance Changes
-* Final release 2.3.34
+##### Changes in this release
+* Removed required dependancy on Jammy Stemcell.
+
+##### Dependencies
+
+Dependency updated in this release:
+
+* **golang:** Updated to v1.20.4
 
 
+#### Known issues
+
+This release has the following issue:
+
+* **<%= vars.product_short_mirror %> errors when restoring your deployment with BBR:**
+  If you use <%= vars.product_short_mirror %>, errors can occur when restoring your deployment with
+  BOSH Backup and Restore (BBR).
+  To fix this issue, see [Restoring with BOSH Backup and Restore Fails](troubleshooting.html.md.erb#backup-restore).
+  For more information about BBR, see
+  [Backing Up and Restoring Deployments](https://docs.pivotal.io/ops-manager/install/backup-restore/index.html)
+  in the Ops Manager documentation.
 
 
 ### <a id='2-3-31'></a> v2.3.31
