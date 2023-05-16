@@ -9,6 +9,7 @@ This topic contains release notes for <%= vars.product_full %>.
 For product versions and upgrade paths, see [Upgrade Planner](https://upgrade-planner.pivotal.io/).
 
 ## Releases
+
 ### <a id='2-3-34'></a> v2.3.34
 
 **Release Date**: May 15, 2023
@@ -16,11 +17,13 @@ For product versions and upgrade paths, see [Upgrade Planner](https://upgrade-pl
 #### Anti-Virus
 
 ##### Notes about this release
-* Previous release 2.3.31 erronously claimed to bump GoLang to v1.20.2.
-* Our documentation has been updated to remove references to the URL 'pivotal-anti-virus-mirror.s3.amazonaws.com' which was only intended to serve as an example. VMWare doesn't provide any guarantees around the availablity of this URL and deployment should not depend on it.  
 
+* The previous release v2.3.31 erroneously claimed to upgrade golang to v1.20.2.
+* The documentation has been updated to remove references to the URL `pivotal-anti-virus-mirror.s3.amazonaws.com`, which was only intended to serve as an example.
+VMWare doesn't provide any guarantees around the availability of this URL and deployments must not depend on it.
 
 ##### Maintenance Changes
+
 * **ClamAV:** Updated from v0.103.8 to v1.0.1
 * **clamav-windows:** Updated from v0.103.8 to v1.0.1
 
@@ -30,18 +33,17 @@ Dependency updated in this release:
 
 * **golang:** Updated to v1.20.4
 
-
 #### Anti-Virus Mirror
 
 ##### Changes in this release
-* Removed required dependancy on Jammy Stemcell.
+
+* Removed required dependency on Jammy Stemcell.
 
 ##### Dependencies
 
 Dependency updated in this release:
 
 * **golang:** Updated to v1.20.4
-
 
 #### Known issues
 
@@ -55,26 +57,15 @@ This release has the following issue:
   [Backing Up and Restoring Deployments](https://docs.pivotal.io/ops-manager/install/backup-restore/index.html)
   in the Ops Manager documentation.
 
-
 ### <a id='2-3-31'></a> v2.3.31
 
 **Release Date**: April 25, 2023
 
-#### Anti-Virus
+#### Maintenance changes
 
-##### Dependencies
+Maintenance changes in this release:
 
-Dependency updated in this release:
-
-* **golang:** Updated to v1.20.2
-
-#### Anti-Virus Mirror
-
-##### Dependencies
-
-Dependency updated in this release:
-
-* **golang:** Updated to v1.20.2
+* Changes to how <%= vars.product_short %> is tested.
 
 #### Known issues
 
