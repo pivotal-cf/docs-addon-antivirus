@@ -13,9 +13,26 @@ For product versions and upgrade paths, see [Upgrade Planner](https://upgrade-pl
 
 **Release Date**: May 18, 2023
 
-##### Changes in this release
+#### Resolved Issues
 
-* The previous change in 2.3.34 to remove the required dependency on Jammy Stemcell erroneously regressed Anti-Virus Mirror to require Xenial Stemcell. This release reverts this change. 
+This release has the following fix:
+
+* **Reverts regression to require Xenial Stemcell for <%= vars.product_short_mirror %>:**
+  Release v2.3.34 removed the required dependency on Jammy Stemcell.
+  This erroneously regressed Anti-Virus Mirror to require Xenial Stemcell.
+  This release reverts that change. Jammy Stemcell is now a required dependency again.
+
+#### Known Issues
+
+This release has the following issue:
+
+* **<%= vars.product_short_mirror %> errors when restoring your deployment with BBR:**
+  If you use <%= vars.product_short_mirror %>, errors can occur when restoring your deployment with
+  BOSH Backup and Restore (BBR).
+  To fix this issue, see [Restoring with BOSH Backup and Restore Fails](troubleshooting.html.md.erb#backup-restore).
+  For more information about BBR, see
+  [Backing Up and Restoring Deployments](https://docs.pivotal.io/ops-manager/install/backup-restore/index.html)
+  in the Ops Manager documentation.
 
 
 ### <a id='2-3-34'></a> v2.3.34
@@ -30,20 +47,19 @@ VMware doesn't provide any guarantees around the availability of this URL and de
 
 #### Anti-Virus
 
-##### Maintenance Changes
+##### Dependencies
+
+Dependencies updated in this release:
 
 * **ClamAV:** Updated from v0.103.8 to v1.0.1
 * **clamav-windows:** Updated from v0.103.8 to v1.0.1
-
-##### Dependencies
-
-Dependency updated in this release:
-
-* **golang:** Updated to v1.20.4
+* **Golang:** Updated to v1.20.4
 
 #### Anti-Virus Mirror
 
-##### Changes in this release
+##### Maintenance Changes
+
+Changes in this release:
 
 * Removed required dependency on Jammy Stemcell.
 
@@ -51,11 +67,15 @@ Dependency updated in this release:
 
 Dependency updated in this release:
 
-* **golang:** Updated to v1.20.4
+* **Golang:** Updated to v1.20.4
 
-#### Known issues
+#### Known Issues
 
-This release has the following issue:
+This release has the following issues:
+
+* **Regression to require Xenial Stemcell for Anti-Virus Mirror:** This release's removal of the requirement for
+  dependency on Jammy Stemcell erroneously regresses Anti-Virus Mirror to require Xenial Stemcell.
+  This issue is fixed in v2.3.35.
 
 * **<%= vars.product_short_mirror %> errors when restoring your deployment with BBR:**
   If you use <%= vars.product_short_mirror %>, errors can occur when restoring your deployment with
@@ -69,13 +89,13 @@ This release has the following issue:
 
 **Release Date**: April 25, 2023
 
-#### Maintenance changes
+#### Maintenance Changes
 
 Maintenance changes in this release:
 
 * Changes to how <%= vars.product_short %> is tested.
 
-#### Known issues
+#### Known Issues
 
 This release has the following issue:
 
@@ -135,7 +155,7 @@ Dependencies updated in this release:
 
 * **clamav:** Updated from v0.103.7 to v0.103.8
 
-#### Known issues
+#### Known Issues
 
 This release has the following issue:
 
@@ -170,7 +190,7 @@ Dependencies updated in this release:
 * **Golang:** Updated to v1.19.4
 * **pcre2:** Updated to v10.41
 
-#### Known issues
+#### Known Issues
 
 This release has the following issue:
 
@@ -194,7 +214,7 @@ Dependencies updated in this release:
 
 * **clamav-windows:** Updated from v0.103.7 to v0.103.7-2
 
-#### Known issues
+#### Known Issues
 
 This release has the following issue:
 
@@ -226,7 +246,7 @@ Dependencies updated in this release:
 
 * **Golang:** Updated to v1.19.3
 
-#### Known issues
+#### Known Issues
 
 This release has the following issue:
 
@@ -268,7 +288,7 @@ Dependencies updated in this release:
 * **Golang:** Updated to v1.19.1
 * **clamav:** Updated from v0.103.6 to v0.103.7
 
-#### Known issues
+#### Known Issues
 
 This release has the following issue:
 
@@ -300,7 +320,7 @@ Dependencies updated in this release:
 
 * **Golang:** Updated to v1.18.4
 
-#### Known issues
+#### Known Issues
 
 This release has the following issue:
 
@@ -340,7 +360,7 @@ Dependencies updated in this release:
 
 * **Golang:** Updated to v1.18.3
 
-#### Known issues
+#### Known Issues
 
 This release has the following issues:
 
@@ -370,7 +390,7 @@ Dependencies updated in this release:
 * **Golang:** Updated to v1.18.2
 * **pcre2:** Updated from v10.37 to v10.40
 
-#### Known issues
+#### Known Issues
 
 This release has the following issues:
 
@@ -398,7 +418,7 @@ Dependencies updated in this release:
 * **clamav:** Updated from v0.103.3 to v0.103.5
 * **clamav-windows:** Updated from v0.103.3 to v0.103.5
 
-#### Known issues
+#### Known Issues
 
 This release has the following issues:
 
@@ -426,7 +446,7 @@ Changes in this release:
 * **PCRE2:** Updated to v10.37
 * **Golang:** Updated to v1.16.7
 
-#### Known issues
+#### Known Issues
 
 This release has the following issues:
 
@@ -455,7 +475,7 @@ Changes in this release:
 * **Changes to On-Access scanning:** On-Access scanning now runs as a separate process named `clamonacc`.
 For information about clamonacc, see [clamonacc App](./monitoring-logs.html#clamonacc-app).
 
-#### Known issues
+#### Known Issues
 
 This release has the following issues:
 
