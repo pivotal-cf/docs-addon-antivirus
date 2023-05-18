@@ -35,9 +35,13 @@ This release has the following issue:
   in the Ops Manager documentation.
 
 
-### <a id='2-3-34'></a> v2.3.34
+### <a id='2-3-34'></a> v2.3.34 - Withdrawn
 
 **Release Date**: May 16, 2023
+
+**This release has been removed from Tanzu Network** because its removal of the requirement for
+dependency on Jammy Stemcell regresses Anti-Virus Mirror to require Xenial Stemcell.
+This issue is fixed in v2.3.35.
 
 #### Corrections to the documentation
 
@@ -71,11 +75,7 @@ Dependency updated in this release:
 
 #### Known Issues
 
-This release has the following issues:
-
-* **Regression to require Xenial Stemcell for Anti-Virus Mirror:** This release's removal of the requirement for
-  dependency on Jammy Stemcell erroneously regresses Anti-Virus Mirror to require Xenial Stemcell.
-  This issue is fixed in v2.3.35.
+This release has the following issue:
 
 * **<%= vars.product_short_mirror %> errors when restoring your deployment with BBR:**
   If you use <%= vars.product_short_mirror %>, errors can occur when restoring your deployment with
