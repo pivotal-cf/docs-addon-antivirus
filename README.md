@@ -4,7 +4,7 @@ This repo is for the Anti-Virus for VMware Tanzu documentation.
 
 ## Which Branches to Use
 
-The master branch is the tree-trunk, so **always** make changes you want carried forward in this branch. This includes:
+The main branch is the tree-trunk, so **always** make changes you want carried forward in this branch. This includes:
 
 * Unreleased features
 * Doc bug fixes
@@ -16,7 +16,7 @@ As of March 8, 2022:
 
 | Branch name… | Documents version… | Publishes to… |
 |-------------|----------------|----------------|
-| master   | 2.4 (unreleased)     |  https://docs-staging.vmware.com/en/draft/Anti-Virus-for-VMware-Tanzu/2.4/anti-virus/GUID-index.html |
+| main   | 2.4 (unreleased)     |  https://docs-staging.vmware.com/en/draft/Anti-Virus-for-VMware-Tanzu/2.4/anti-virus/GUID-index.html |
 | 2.3   | 2.3.x     | https://docs.vmware.com/en/Anti-Virus-for-VMware-Tanzu/2.3/anti-virus/GUID-index.html and https://docs-staging.vmware.com/en/Anti-Virus-for-VMware-Tanzu/2.3/anti-virus/GUID-index.html |
 | 2.2   | 2.2.x     | NOT IN USE docs have been deprecated. https://docs.vmware.com/en/Anti-Virus-for-VMware-Tanzu/2.2/anti-virus/GUID-index.html |
 | 2.1   | 2.1.x     | NOT IN USE docs have been deprecated. https://docs.vmware.com/en/Anti-Virus-for-VMware-Tanzu/2.1/anti-virus/GUID-index.html |
@@ -35,10 +35,10 @@ The book repo is only being used for the redirects from the old Pivotal docs sit
 
 ## Releasing a New Minor Version
 
-Because **master** is the latest and greatest documentation, the process would be to cut a **x.x** branch
-for the version that **master** was targeting during that time.
+Because **main** is the latest and greatest documentation, the process would be to cut a **x.x** branch
+for the version that **main** was targeting during that time.
 
-After this point, **master** will then be the target for the next version of the Anti-Virus product.
+After this point, **main** will then be the target for the next version of the Anti-Virus product.
 
 
 ## Partials
