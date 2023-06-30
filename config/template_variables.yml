@@ -36,8 +36,8 @@ template_variables:
   product_old_mirror: Pivotal Anti-Virus #Used in 2.0 and 2.1 (not currently in use)
 
 # Product variables
-  product_url: https://network.pivotal.io/products/p-clamav-addon/
-  product_link: <div class="header-item"><a href="https://network.pivotal.io/products/p-clamav-addon/">Back to Product Page</a></div>
+  product_url: https://network.tanzu.vmware.com/products/p-clamav-addon/
+  product_link: <div class="header-item"><a href="https://network.tanzu.vmware.com/products/p-clamav-addon/">Back to Product Page</a></div>
   support_link: <a href="http://tanzu.vmware.com/support" target="_blank">Support</a>
   support_call_to_action: <a href="http://tanzu.vmware.com/support" target="_blank">Need Support?</a>
   support_url: http://tanzu.vmware.com/support
@@ -104,7 +104,7 @@ template_variables:
 
   ga_account_id: UA-39702075-1
   gen_GSG:
-  global_header_product_href: https://network.pivotal.io/
+  global_header_product_href: https://network.tanzu.vmware.com/
   global_header_product_link_text: Downloads
   GSG_intro_sentence:
   incompatible_ldap_saml: <p class='note'><strong>Note</strong>&#58; The procedures described here are not compatible with using SAML or LDAP for user identity management. To create and manage user accounts in a SAML- or LDAP-enabled Cloud Foundry deployment, see <a href='../customizing/external-user-management.html'>Adding Existing SAML or LDAP Users to a Pivotal Cloud Foundry&reg; Deployment</a>.</p>
@@ -145,7 +145,7 @@ template_variables:
   port_limitations: "Applications running on Elastic Runtime receive requests through the URLs configured for the application. HTTP requests arrive on ports 80 and 443. Additionally, Elastic Runtime requires a channel for TCP/WebSocket traffic. By default, this is port 443.<br><br> Some production load balancers require separate ports for HTTP and TCP/WebSocket traffic. If your load balancer has this requirement, you must do the following in order to access logs from your app with the <code>cf logs APP\\_NAME</code> command: <ul> <li>Configure a different port for TCP/WebSocket traffic. As of PCF 1.4, you can configure your ports from the Elastic Runtime product tile in Ops Manager. </li><li>Set the value of the <code>port</code> sub-key of the logger\\_endpoint key in your manifest.</li> <li>Configure your HAProxy or load balancer to receive TCP traffic on the port that you specified.</li></ul><br>"
   private_app_domain: private-domain.com
   private_app_domain: private-domain.example.com
-  product_url: https://network.pivotal.io/products/pivotal-cf
+  product_url: https://network.tanzu.vmware.com/products/pivotal-cf
   pw_policy: See the <a href="../opsguide/pw-policy.html">Configuring UAA Password Policy</a> topic to configure the password policy.
   pws_metrics:
   quota_resource: quota space
