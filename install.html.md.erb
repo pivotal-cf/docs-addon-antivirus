@@ -300,6 +300,11 @@ To configure <%= vars.product_short %>:
             For the <strong>Move</strong> and <strong>Copy</strong> options, a field
             for <strong>Destination for infected files</strong> appears after the
             option is selected.
+
+            <strong>Note:</strong> On occasions where ClamAV incorrectly detects a virus in a critical file (a false positive),
+            the <code>Remove</code> and <code>Move</code> options will result in that critical file being removed or moved, which
+            may cause downtime. Users should give due consideration to the tradeoff between these automated responses, and the
+            <code>Notify</code> option which relies on an operator taking action.
         </td>
       </tr>
       <tr>
@@ -326,7 +331,10 @@ To configure <%= vars.product_short %>:
           This configures <%= vars.product_short %> scans to exclude the <code>/proc</code> and
           <code>/sys</code> directories.<br><br>
           VMware recommends that you ignore the <code>/proc</code>,
-          <code>/sys</code>, and <strong>Destination for infected files</strong> directories.</td>
+          <code>/sys</code>, and <strong>Destination for infected files</strong> directories.
+          Additional directories may be ignored, for example, large network filesystem or directories with
+          critical files. Due consideration should be given to the tradeoffs when ignoring additional directories.
+        </td>
       </tr>
       <tr>
         <td><strong>Directories and files that will be ignored on Windows</strong></td>
