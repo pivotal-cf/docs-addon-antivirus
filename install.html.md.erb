@@ -157,7 +157,9 @@ To configure <%= vars.product_short %>:
         <td><strong>Anti-Virus Mirror Port</strong></td>
         <td>
           Enter the port for Anti-Virus Mirror to use. The default value is <code>6501</code>.
-          <strong>Note:</strong> Anti-Virus Mirror uses mutual TLS (mTLS).
+         <p class="note">
+         <span class="note__title">Note</span>
+         Anti-Virus Mirror uses mutual TLS (mTLS).
           This port must be the same port used in <strong>Anti-Virus Mirror Port</strong> of the
           <strong>Anti-Virus for VMware Tanzu Mirror</strong> tile. If these ports are not the same,
           Anti-Virus Mirror database updates and deployments fail.
@@ -197,8 +199,8 @@ To configure <%= vars.product_short %>:
         <td><strong>Mirror hostname without leading https://</strong></td>
         <td>Enter the hostname or IP address for your existing mirror.<br>
           For example: <code>my-anti-virus-mirror.s3.example.com</code> or
-          <code>10.0.4.5</code>
-          <strong>Note:</strong> Ensure that your existing mirror server is using the correct
+          <code>10.0.4.5</code>.
+          Verify that your existing mirror server is using the correct
           certificate for the hostname or IP address.
         </td>
       </tr>
@@ -233,8 +235,10 @@ To configure <%= vars.product_short %>:
       <tr>
         <td><strong>(Optional) Enable on-access scanning on Linux</strong></td>
         <td>Select this option to scan files immediately after they are modified.
-        <p class="note"><strong>Note:</strong> On-Access Scan is not supported on Windows.</p>
-        <p class="note"><strong>Note:</strong> Due to the dynamic nature of application
+        <p class="note">
+        <span class="note__title">Note</span>
+        On-Access Scan is not supported on Windows.<br>
+        Also, due to the dynamic nature of application
           containers mounted on the <code>diego_cell</code> VM, On-Access Scan cannot scan
           containers. Scheduled scans scan containers.
         </p>
@@ -263,13 +267,13 @@ To configure <%= vars.product_short %>:
         <td>Set the percentage of CPU that the <%= vars.product_short %> processes can use.<br>
             Integers from <code>1</code> to <code>100</code> are valid.<br>
             Setting this field to <code>100</code> permits the use of one full core.
-               <p class="note">
-                 <strong>Note:</strong> <strong>CPU Limit</strong> affects only one core.
+               <p><strong>CPU Limit</strong> affects only one core.
                  For example, in a system with four cores, if you set the CPU limit to <code>100</code>,
                  <%= vars.product_short %> uses only one of the four cores.
                </p>
                <p class="note">
-                 <strong>Note:</strong> This setting does not affect CPU usage on a Windows VM.
+                <span class="note__title">Note</span>
+                This setting does not affect CPU usage on a Windows VM.
                </p>
         </td>
       </tr>
@@ -281,7 +285,8 @@ To configure <%= vars.product_short %>:
             <li><strong>When other processes are using CPU resources</strong>: Permits the CPU usage to
               exceed the limit set by <strong>CPU limit</strong> if idle CPU cycles are available.</li>
           </ul>
-          <p class="note warning"><strong>Warning:</strong>
+          <p class="note caution">
+          <span class="note__title">Caution</span>
             If <strong>Enforce CPU limit</strong> is set to <code>Enable</code>, ensure
             <strong>CPU limit (percentage)</strong> is set high enough for <%= vars.product_short %>
             to execute normally. If the limit is too strict, <%= vars.product_short %> fails to start.
@@ -301,10 +306,13 @@ To configure <%= vars.product_short %>:
             for <strong>Destination for infected files</strong> appears after the
             option is selected.
 
-            <strong>Note:</strong> On occasions where ClamAV incorrectly detects a virus in a critical file (a false positive),
-            the <code>Remove</code> and <code>Move</code> options will result in that critical file being removed or moved, which
-            may cause downtime. Users should give due consideration to the tradeoff between these automated responses, and the
-            <code>Notify</code> option which relies on an operator taking action.
+            <p class="note">
+            <span class="note__title">Note</span>
+            When ClamAV incorrectly detects a virus in a critical file (a false positive),
+            the <code>Remove</code> and <code>Move</code> options result in that critical file being removed or moved, which
+            may cause downtime. Give due consideration to the tradeoff between these automated responses, and the
+            <code>Notify</code> option, which relies on an operator taking action.
+            </p>
         </td>
       </tr>
       <tr>
@@ -313,13 +321,15 @@ To configure <%= vars.product_short %>:
           This field only appears if you have selected the <strong>move</strong> or
           <strong>copy</strong> while selecting an <strong>Action to take when a virus is
           found</strong>.
-          <p class="note"><strong>Note:</strong> Add this path to the
+          <p class="note">
+          <span class="note__title">Note</span>
+          Add this path to the
           <strong>Directories and files that will be ignored (on Windows)</strong> list below.
           If you do not do this, then <%= vars.product_short %>:
             <ul>
-              <li>Detects the moved or copied file</li>
-              <li>Logs redundant alerts</li>
-              <li>Creates additional copies of the detected file</li>
+              <li>Detects the moved or copied file.</li>
+              <li>Logs redundant alerts.</li>
+              <li>Creates additional copies of the detected file.</li>
             </ul>
           </p>
         </td>
@@ -332,15 +342,16 @@ To configure <%= vars.product_short %>:
           <code>/sys</code> directories.<br><br>
           VMware recommends that you ignore the <code>/proc</code>,
           <code>/sys</code>, and <strong>Destination for infected files</strong> directories.
-          Additional directories may be ignored, for example, large network filesystem or directories with
-          critical files. Due consideration should be given to the tradeoffs when ignoring additional directories.
+          You can ignore additional directories, for example, large network filesystem or directories with
+          critical files. Carefully consider the tradeoffs when ignoring additional directories.
         </td>
       </tr>
       <tr>
         <td><strong>Directories and files that will be ignored on Windows</strong></td>
         <td>Enter directories in a comma-separated list for <%= vars.product_short %> to not scan on Windows.
         <p class="note">
-          <strong>Note:</strong> Windows directory paths use backslashes.
+          <span class="note__title">Note</span>
+          Windows directory paths use backslashes.
           To match the path using regex, escape the backslashes.
           For example: <code>example\\directory\\path</code>
         </p>
@@ -355,7 +366,7 @@ To configure <%= vars.product_short %>:
           and <strong>ClamAV Test File-7</strong> signatures.</td>
       </tr>
       <tr>
-        <td><strong>List of instance group names that will be excluded from deployment</strong></td>
+        <td><strong>List of instance group names to be excluded from deployment</strong></td>
         <td>Enter the instance groups that you do not want <%= vars.product_short %> deployed on.
             Use a comma-separated list.</td>
       </tr>
@@ -460,7 +471,8 @@ To configure <%= vars.product_short %> to ignore duplicate logs for these direct
    ![Screenshot of the "Directories and files that will be ignored" field. The text "/proc/,/sys/" is entered in the field.](images/ignore-file.png)
 
    <p class="note">
-   <strong>Note:</strong> Adding this ignore pattern means that files and directories in the
+   <span class="note__title">Note</span>
+   Adding this ignore pattern means that files and directories in the
    <code>/var/vcap/data/grootfs/store/unprivileged/images/UUID/rootfs</code>
    directory are ignored by <%= vars.product_short %>.
    <code>UUID</code> is the ID of the container.
@@ -499,7 +511,8 @@ To configure <%= vars.product_short %> to ignore duplicate logs for these direct
    ![Screenshot of the "Directories and files that will be ignored" field. The text "/proc/,/sys/" is entered in the field.](images/ignore-file.png)
 
    <p class="note">
-   <strong>Note:</strong> Adding this ignore pattern means that files and directories in the
+   <span class="note__title">Note</span>
+   Adding this ignore pattern means that files and directories in the
    <code>/var/vcap/data/grootfs/store/unprivileged/images/UUID/merged</code>
    directory are ignored by <%= vars.product_short %>. <code>UUID</code> is the ID of the container.
    </p>
