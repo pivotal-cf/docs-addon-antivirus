@@ -35,8 +35,16 @@ For compatible versions, see the [Product Snapshot](./index.html#snapshot).
 * **At least 4&nbsp;GB of RAM free for each VM that installs <%= vars.product_short %>**.
 This is so that you can install the <%= vars.product_full %> tile after deploying this mirror.
 <%= vars.product_short %> installs itself on each tile VM and runs internally.
-<%= vars.product_short %> takes at least 3&nbsp;GB of RAM on each VM on each VM in reserve.
-On Google Cloud Platform (GCP), the recommended minimum VM size is `micro.cpu` using 2&nbsp;CPU and 4&nbsp;GB RAM.
+<%= vars.product_short %> takes at least 3&nbsp;GB of RAM on each VM and on each VM in reserve.
+On Google Cloud Platform (GCP), the recommended minimum VM size is `micro.cpu`
+using 2&nbsp;CPU and 4&nbsp;GB RAM.
+
+###<a id="why-so-much-ram"></a>Why is so much RAM required?
+
+Anti-Virus uses upwards of 1.2&nbsp;GB of RAM just to load the virus definitions. This does not take into account any RAM required to process the files during scanning.
+Anti-Virus  uses upwards of 2.4&nbsp;GiB of RAM for a short period each day when loading new signature definitions. After loading, and after all scans that use the old definitions have completed, the old definitions are unloaded. This process is called _concurrent reloading_ and enables scans to continue during the reload. As a consequence, Anti-Virus uses twice the amount of RAM for a brief period.
+If your VM does not have enough RAM, the OS can stop the Anti-Virus process. If you're observing issues with Anti-Virus failing or becoming unresponsive once a day, it is likely your system does not have enough RAM to run Anti-Virus.
+Over time you can expect the virus databases to get bigger and so the memory required by Anti-Virus to increase.
 
 ## <a id='install-mirror'></a> Install <%= vars.product_full_mirror %>
 
