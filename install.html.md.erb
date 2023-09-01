@@ -27,7 +27,8 @@ To install <%= vars.product_short %>, you must have:
   <%= vars.product_short %> installs itself on each tile VM and runs internally.
   <%= vars.product_short %> takes at least 3&nbsp;GB of RAM on each VM in reserve.
   On Google Cloud Platform (GCP), the recommended minimum VM size is `micro.cpu` using 2&nbsp;CPU and
-  4&nbsp;GB RAM.
+  2&nbsp;GB RAM. For more information about why Anti-Virus for Tanzu
+  requires this much RAM, see [Why is so much RAM required?](install-mirror.html.md.erb#why-so-much-ram).
 
 - **An external mirror**. If you do not have an external mirror, VMware recommends that you install
   the <%= vars.product_short_mirror %>.
