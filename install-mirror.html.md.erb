@@ -7,27 +7,28 @@ owner: Platform Security & Compliance Team
 This topic tells you how to install and configure <%= vars.product_full_mirror %>.
 VMware recommends that you install this tile before installing <%= vars.product_full %>.
 
-##<a id="overview"></a>Overview
+## <a id="overview"></a> Overview
 
 If you do not have an external mirror for Anti-Virus jobs to fetch database updates from,
 you can deploy a mirror using the <%= vars.product_short_mirror %> tile.
 
-This deployed internal mirror, which uses mutual TLS (mTLS), can support both air-gapped environments and <%= vars.product_short_mirror %> networked environments:
+This deployed internal mirror, which uses mutual TLS (mTLS), can support both air-gapped
+environments and <%= vars.product_short_mirror %> networked environments:
 
 * **Online Network:** You can deploy the internal <%= vars.product_short_mirror %> as a proxy.
   This acts as a database for the virus definitions if the online virus database experiences downtime.
 * **Air-gapped Network:** Because there is no access to an outside network,
   the internal <%= vars.product_short_mirror %> VM acts as the server for the virus definitions.
 
-
 If you have already deployed an external mirror, you can use that instead of
 installing this tile, and continue to [Installing and Configuring <%= vars.product_full %>](./install.html).
 
-##<a id="prereqs"></a>Prerequisites
+## <a id="prereqs"></a> Prerequisites
 
 To install the <%= vars.product_short_mirror %>, you must have:
 
-* **A Ops Manager operator user account with admin rights**. For more information, see [Platform Operators](https://docs.pivotal.io/ops-manager/install/platform-operators.html).
+* **A Ops Manager operator user account with admin rights**. For more information, see
+  [Platform Operators](https://docs.pivotal.io/ops-manager/install/platform-operators.html).
 
 * **<%= vars.ops_manager_full %> (Ops Manager)**.
 For compatible versions, see the [Product Snapshot](./index.html#snapshot).
@@ -39,12 +40,20 @@ This is so that you can install the <%= vars.product_full %> tile after deployin
 On Google Cloud Platform (GCP), the recommended minimum VM size is `micro.cpu`
 using 2&nbsp;CPU and 4&nbsp;GB RAM.
 
-###<a id="why-so-much-ram"></a>Why is so much RAM required?
+### <a id="why-so-much-ram"></a> Why is so much RAM required?
 
-Anti-Virus uses upwards of 1.2&nbsp;GB of RAM just to load the virus definitions. This does not take into account any RAM required to process the files during scanning.
-Anti-Virus  uses upwards of 2.4&nbsp;GiB of RAM for a short period each day when loading new signature definitions. After loading, and after all scans that use the old definitions have completed, the old definitions are unloaded. This process is called _concurrent reloading_ and enables scans to continue during the reload. As a consequence, Anti-Virus uses twice the amount of RAM for a brief period.
-If your VM does not have enough RAM, the OS can stop the Anti-Virus process. If you're observing issues with Anti-Virus failing or becoming unresponsive once a day, it is likely your system does not have enough RAM to run Anti-Virus.
-Over time you can expect the virus databases to get bigger and so the memory required by Anti-Virus to increase.
+Anti-Virus uses upwards of 1.2&nbsp;GB of RAM just to load the virus definitions. This does not take
+into account any RAM required to process the files during scanning. Anti-Virus uses upwards of
+2.4&nbsp;GiB of RAM for a short period each day when loading new signature definitions.
+
+After loading, and after all scans that use the old definitions have completed, the old definitions
+are unloaded. This process is called concurrent reloading and enables scans to continue during the
+reload. As a consequence, Anti-Virus uses twice the amount of RAM for a brief period.
+
+If your VM does not have enough RAM, the OS can stop the Anti-Virus process. If you observe issues
+with Anti-Virus failing or becoming unresponsive once a day, it is likely your system does not have
+enough RAM to run Anti-Virus. Over time you can expect the virus databases to get bigger and so the
+memory that Anti-Virus requires to increase.
 
 ## <a id='install-mirror'></a> Install <%= vars.product_full_mirror %>
 
@@ -98,6 +107,7 @@ To assign availability zones (AZs) and networks:
 1. Click **Save**.
 
 ## <a id='configure-mirror'></a> Configure <%= vars.product_short_mirror %>
+
 To configure <%= vars.product_short_mirror %>:
 
 1. Select **Anti-Virus Mirror Configuration**.
@@ -253,7 +263,6 @@ To scale the number of deployed mirrors:
   1. For `antivirus-mirror`, set **INSTANCES** to the number of mirrors that you want to deploy.
 
   1. Click **Save**.
-
 
 ## <a id="apply-changes-mirror"></a> Apply Changes from Your Configuration
 
