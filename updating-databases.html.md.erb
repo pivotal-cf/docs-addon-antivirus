@@ -129,16 +129,23 @@ documentation.
 
     <pre class="terminal">$ p-antivirus-mirror-08815ca5ead252c4b8d8</pre>
 
-1. Copy the virus definitions to your internal <%= vars.product_short_mirror %>
-  by running:
+1. Find the name of your <%= vars.product_short_mirror %> VMs 
+   by running:
 
     ```
-    bosh -e BOSH-ENVIRONMENT -d ANTIVIRUS-DEPLOYMENT-NAME scp /path/to/local/main.cvd /path/to/local/daily.cvd /path/to/local/bytecode.cvd :/var/vcap/data/antivirus-mirror/unvalidated
+    bosh -e BOSH-ENVIRONMENT -d ANTIVIRUS-DEPLOYMENT-NAME vms
+    ```
+
+2. Copy the virus definitions to your internal <%= vars.product_short_mirror %> 
+   by running:
+
+    ```
+    bosh -e BOSH-ENVIRONMENT -d ANTIVIRUS-DEPLOYMENT-NAME scp /path/to/local/main.cvd /path/to/local/daily.cvd /path/to/local/bytecode.cvd VM_NAME:/var/vcap/data/antivirus-mirror/unvalidated
     ```
 
     For example:
 
-    <pre class="terminal">$ bosh -e my-env -d p-antivirus-mirror-4cb8cfbeee717258d72e scp main.cvd daily.cvd bytecode.cvd :/var/vcap/data/antivirus-mirror/unvalidated</pre>
+    <pre class="terminal">$ bosh -e my-env -d p-antivirus-mirror-4cb8cfbeee717258d72e scp main.cvd daily.cvd bytecode.cvd VM_NAME:/var/vcap/data/antivirus-mirror/unvalidated</pre>
 
     <p class="note">
       <strong>Note:</strong> If the CVD files being uploaded are too big, <code>clamd</code> might start
