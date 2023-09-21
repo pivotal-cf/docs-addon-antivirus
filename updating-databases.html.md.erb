@@ -32,9 +32,10 @@ and run `bosh scp` to update them on the internal <%= vars.product_short %> mirr
 For more information and diagrams about this architecture,
 see [How Virus Definitions Propagate to VMs](./index.html#propagate).
 
-The following sections describe how to manually update virus definitions in both of these scenarios.
-They provide instructions to download the virus definitions from the upstream mirror and to manually 
-propagate the virus definitions to the internal <%= vars.product_short %> `antivirus-mirror` vm(s).
+The following sections describe how to manually update virus definitions in both
+of these scenarios. They provide instructions to download the virus definitions
+from the upstream mirror and to manually propagate the virus definitions to the
+internal <%= vars.product_short %> `antivirus-mirror` VMs.
 
 ## <a id="check-logs"></a> Verify That Your Virus Definitions Are Up to Date
 
@@ -53,10 +54,9 @@ the <%= vars.product_short_mirror %> VM regularly checks the external ClamAV dat
 When new virus definitions are present on the external database,
 <%= vars.product_short_mirror %> downloads them automatically.
 
-In some cases the total amount of deployed `antivirus-mirror` vms across your foundations will create enough 
-requests against the upstream mirror to trigger rate limiations for your network. 
-
-In these cases freshclam will produce logs similar to:
+In some cases, the total number of deployed `antivirus-mirror` VMs across your foundations can create enough 
+requests against the upstream mirror to trigger rate limitations for your network. 
+In such cases, freshclam produces logs similar to the following:
 
 ```
 WARNING: Can't download daily.cvd from https://database.clamav.net/daily.cvd
@@ -73,8 +73,8 @@ This means that you have been rate limited by the CDN.
 WARNING: You are on cool-down until after: 2023-09-16 17:55:46
 ```
 
-To workaround this, you can use the procedure outlined below to manually download and propagate the 
-virus definitions.
+As a workaround for this, use the following procedure to manually download and
+propagate the virus definitions.
 
 ##<a id="manual"></a>Manually Update on an Air-gapped Network
 
@@ -91,7 +91,7 @@ You can access the ClamAV mirror at the following URLs:
     * https://database.clamav.net/daily.cvd
     * https://database.clamav.net/bytecode.cvd
 
-    <p class="note warning"><strong>Warning:</strong>
+    <p class="note caution"><span class="note__title">Caution</span>
     Use your browser to download these. It shouldn't be done by `curl` or `wget` as these tools are blocked by
     the ClamAV CDN.
 

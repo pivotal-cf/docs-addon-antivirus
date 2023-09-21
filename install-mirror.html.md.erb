@@ -260,9 +260,9 @@ To scale the number of deployed mirrors:
       and the persistent disk type configured to Automatic: 1
       GB.](images/mirror-resource-config.png)
 
-  1. For `antivirus-mirror`, set **INSTANCES** to the number of mirrors that you want to deploy. When scaling `antivirus-mirror` instances it is recommended to understand the implications of using the **Official mirror** config option. The official ClamAV mirror endpoints are rate limitated and will potentially prevent succesfull updates of virus definitions on `antivirus-mirror` instances. Hosting many instances of `antivirus-mirror` across your foundation(s) on a private network with a shared outgoing IP ( e.g. via NAT or usage of an internet Proxy ) can trigger the upstream ClamAV mirror rate limitation. See [How Virus Definitions Propagate to VMs](./index.html#propagate)  and [Updating Virus Definitions](./updating-databases.html) for further information.
+  2. For `antivirus-mirror`, set **INSTANCES** to the number of mirrors that you want to deploy. When scaling `antivirus-mirror` instances, VMware recommends understanding the implications of using the **Official mirror** config option. The official ClamAV mirror endpoints are rate limited and potentially prevent successful updates of virus definitions on `antivirus-mirror` instances. Hosting many instances of `antivirus-mirror` across your foundation(s) on a private network with a shared outgoing IP (for example, through NAT or usage of an Internet Proxy) can trigger the upstream ClamAV mirror rate limitation. See [How Virus Definitions Propagate to VMs](./index.html#propagate)  and [Updating Virus Definitions](./updating-databases.html) for further information.
 
-  1. Click **Save**.
+  3. Click **Save**.
 
 ## <a id="apply-changes-mirror"></a> Apply Changes from Your Configuration
 
