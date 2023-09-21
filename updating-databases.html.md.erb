@@ -25,16 +25,16 @@ How these updated virus definitions propagate to the internal
 BOSH VMs use depends on whether your environment
 is running in an online or air-gapped network:
 
-* **[Online Network](#automatic)**: The <%= vars.product_short_mirror %> updates its virus definitions automatically.
+* **[Online Network](#automatic)**: The <%= vars.product_short_mirror %> updates its virus definitions automatically from the configured source.
 * **[Air-gapped Network](#manual)**: An operator must manually download new virus definitions
 and run `bosh scp` to update them on the internal <%= vars.product_short %> mirror.
 
 For more information and diagrams about this architecture,
 see [How Virus Definitions Propagate to VMs](./index.html#propagate).
 
-The following sections describe both of these scenarios
-and explain how to manually update virus definitions on the internal <%= vars.product_short %>
-mirror.
+The following sections describe how to manually update virus definitions in both of these scenarios.
+They provide instructions to download the virus definitions from the upstream mirror and to manually 
+propagate the virus definitions to the internal <%= vars.product_short %> `antivirus-mirror` vm(s).
 
 ## <a id="check-logs"></a> Verify That Your Virus Definitions Are Up to Date
 
@@ -53,6 +53,28 @@ the <%= vars.product_short_mirror %> VM regularly checks the external ClamAV dat
 When new virus definitions are present on the external database,
 <%= vars.product_short_mirror %> downloads them automatically.
 
+In some cases the total amount of deployed `antivirus-mirror` vms across your foundations will create enough 
+requests against the upstream mirror to trigger rate limiations for your network. 
+
+In these cases freshclam will produce logs similar to:
+
+```
+WARNING: Can't download daily.cvd from https://database.clamav.net/daily.cvd
+WARNING: FreshClam received error code 429 from the ClamAV Content Delivery Network (CDN).
+This means that you have been rate limited by the CDN.
+ 1. Run FreshClam no more than once an hour to check for updates.
+    FreshClam should check DNS first to see if an update is needed.
+ 2. If you have more than 10 hosts on your network attempting to download,
+    it is recommended that you set up a private mirror on your network using
+    cvdupdate (https://pypi.org/project/cvdupdate/) to save bandwidth on the
+    CDN and your own network.
+ 3. Please do not open a ticket asking for an exemption from the rate limit,
+    it will not be granted.
+WARNING: You are on cool-down until after: 2023-09-16 17:55:46
+```
+
+To workaround this, you can use the procedure outlined below to manually download and propagate the 
+virus definitions.
 
 ##<a id="manual"></a>Manually Update on an Air-gapped Network
 
@@ -68,6 +90,10 @@ You can access the ClamAV mirror at the following URLs:
     * https://database.clamav.net/main.cvd
     * https://database.clamav.net/daily.cvd
     * https://database.clamav.net/bytecode.cvd
+
+    <p class="note warning"><strong>Warning:</strong>
+    Use your browser to download these. It shouldn't be done by `curl` or `wget` as these tools are blocked by
+    the ClamAV CDN.
 
     If you are unable to download the virus definitions from one of the links above,
     use the [cvdupdate](https://github.com/Cisco-Talos/cvdupdate) tool.
@@ -103,16 +129,23 @@ documentation.
 
     <pre class="terminal">$ p-antivirus-mirror-08815ca5ead252c4b8d8</pre>
 
-1. Copy the virus definitions to your internal <%= vars.product_short_mirror %>
-  by running:
+1. Find the name of your <%= vars.product_short_mirror %> VMs 
+   by running:
 
     ```
-    bosh -e BOSH-ENVIRONMENT -d ANTIVIRUS-DEPLOYMENT-NAME scp /path/to/local/main.cvd /path/to/local/daily.cvd /path/to/local/bytecode.cvd :/var/vcap/data/antivirus-mirror/unvalidated
+    bosh -e BOSH-ENVIRONMENT -d ANTIVIRUS-DEPLOYMENT-NAME vms
+    ```
+
+2. Copy the virus definitions to your internal <%= vars.product_short_mirror %> 
+   by running:
+
+    ```
+    bosh -e BOSH-ENVIRONMENT -d ANTIVIRUS-DEPLOYMENT-NAME scp /path/to/local/main.cvd /path/to/local/daily.cvd /path/to/local/bytecode.cvd VM_NAME:/var/vcap/data/antivirus-mirror/unvalidated
     ```
 
     For example:
 
-    <pre class="terminal">$ bosh -e my-env -d p-antivirus-mirror-4cb8cfbeee717258d72e scp main.cvd daily.cvd bytecode.cvd :/var/vcap/data/antivirus-mirror/unvalidated</pre>
+    <pre class="terminal">$ bosh -e my-env -d p-antivirus-mirror-4cb8cfbeee717258d72e scp main.cvd daily.cvd bytecode.cvd VM_NAME:/var/vcap/data/antivirus-mirror/unvalidated</pre>
 
     <p class="note">
       <strong>Note:</strong> If the CVD files being uploaded are too big, <code>clamd</code> might start
