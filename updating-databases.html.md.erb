@@ -148,10 +148,10 @@ documentation.
     <pre class="terminal">$ bosh -e my-env -d p-antivirus-mirror-4cb8cfbeee717258d72e scp main.cvd daily.cvd bytecode.cvd VM_NAME:/var/vcap/data/antivirus-mirror/unvalidated</pre>
 
     <p class="note">
-      <strong>Note:</strong> If the CVD files being uploaded are too big, <code>clamd</code> might start
+      <span class="note__title">Note</span> If the CVD files being uploaded are too big, <code>clamd</code> might start
       consuming them before the upload has finished.
       If this happens, you might receive log messages saying one of the CVD files could not be loaded.
-      To workaround this issue you can upload the CVD files to a temporary folder on the VM first,
+      To workaround this issue, you can upload the CVD files to a temporary folder on the VM first,
       and after the upload is finished, move the files to <code>/var/vcap/data/antivirus-mirror/unvalidated</code>.
     </p>
 
