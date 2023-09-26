@@ -158,7 +158,8 @@ To configure <%= vars.product_short %>:
         <td><strong>Anti-Virus Mirror Port</strong></td>
         <td>
           Enter the port for Anti-Virus Mirror to use. The default value is <code>6501</code>.
-          <strong>Note:</strong> Anti-Virus Mirror uses mutual TLS (mTLS).
+          <p class="note">
+          <span class="note__title">Note</span> Anti-Virus Mirror uses mutual TLS (mTLS).
           This port must be the same port used in <strong>Anti-Virus Mirror Port</strong> of the
           <strong>Anti-Virus for VMware Tanzu Mirror</strong> tile. If these ports are not the same,
           Anti-Virus Mirror database updates and deployments fail.
@@ -234,8 +235,9 @@ To configure <%= vars.product_short %>:
       <tr>
         <td><strong>(Optional) Enable on-access scanning on Linux</strong></td>
         <td>Select this option to scan files immediately after they are modified.
-        <p class="note"><strong>Note:</strong> On-Access Scan is not supported on Windows.</p>
-        <p class="note"><strong>Note:</strong> Due to the dynamic nature of application
+        <p class="note">
+        <span class="note__title">Note</span> On-Access Scan is not supported on Windows.<br>
+        Also, due to the dynamic nature of application
           containers mounted on the <code>diego_cell</code> VM, On-Access Scan cannot scan
           containers. Scheduled scans scan containers.
         </p>
@@ -265,12 +267,12 @@ To configure <%= vars.product_short %>:
             Integers from <code>1</code> to <code>100</code> are valid.<br>
             Setting this field to <code>100</code> permits the use of one full core.
                <p class="note">
-                 <strong>Note:</strong> <strong>CPU Limit</strong> affects only one core.
+                 <span class="note__title">Note</span> <strong>CPU Limit</strong> affects only one core.
                  For example, in a system with four cores, if you set the CPU limit to <code>100</code>,
                  <%= vars.product_short %> uses only one of the four cores.
                </p>
                <p class="note">
-                 <strong>Note:</strong> This setting does not affect CPU usage on a Windows VM.
+                 <span class="note__title">Note</span> This setting does not affect CPU usage on a Windows VM.
                </p>
         </td>
       </tr>
@@ -309,7 +311,7 @@ To configure <%= vars.product_short %>:
           This field only appears if you have selected the <strong>move</strong> or
           <strong>copy</strong> while selecting an <strong>Action to take when a virus is
           found</strong>.
-          <p class="note"><strong>Note:</strong> Add this path to the
+          <p class="note"><span class="note__title">Note</span> Add this path to the
           <strong>Directories and files that will be ignored (on Windows)</strong> list below.
           If you do not do this, then <%= vars.product_short %>:
             <ul>
@@ -333,7 +335,7 @@ To configure <%= vars.product_short %>:
         <td><strong>Directories and files that will be ignored on Windows</strong></td>
         <td>Enter directories in a comma-separated list for <%= vars.product_short %> to not scan on Windows.
         <p class="note">
-          <strong>Note:</strong> Windows directory paths use backslashes.
+          <span class="note__title">Note</span> Windows directory paths use backslashes.
           To match the path using regex, escape the backslashes.
           For example: <code>example\\directory\\path</code>
         </p>
@@ -452,7 +454,7 @@ To configure <%= vars.product_short %> to ignore duplicate logs for these direct
    ![Screenshot of the "Directories and files that will be ignored" field. The text "/proc/,/sys/" is entered in the field.](images/ignore-file.png)
 
    <p class="note">
-   <strong>Note:</strong> Adding this ignore pattern means that files and directories in the
+   <span class="note__title">Note</span> Adding this ignore pattern means that files and directories in the
    <code>/var/vcap/data/grootfs/store/unprivileged/images/UUID/rootfs</code>
    directory are ignored by <%= vars.product_short %>.
    <code>UUID</code> is the ID of the container.
@@ -491,7 +493,7 @@ To configure <%= vars.product_short %> to ignore duplicate logs for these direct
    ![Screenshot of the "Directories and files that will be ignored" field. The text "/proc/,/sys/" is entered in the field.](images/ignore-file.png)
 
    <p class="note">
-   <strong>Note:</strong> Adding this ignore pattern means that files and directories in the
+   <span class="note__title">Note</span> Adding this ignore pattern means that files and directories in the
    <code>/var/vcap/data/grootfs/store/unprivileged/images/UUID/merged</code>
    directory are ignored by <%= vars.product_short %>. <code>UUID</code> is the ID of the container.
    </p>
