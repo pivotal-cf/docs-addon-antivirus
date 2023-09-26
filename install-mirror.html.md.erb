@@ -138,7 +138,8 @@ To configure <%= vars.product_short_mirror %>:
           Enter the port for Anti-Virus Mirror to use.
           The default value is <code>6501</code>.
           <br><br>
-          <strong>Note:</strong> <%= vars.product_short_mirror %> uses mTLS. This port must be the same port used in <strong>Anti-Virus Mirror Port</strong> of the <strong><%= vars.product_full %></strong> tile. If these ports are not the same, <%= vars.product_short %> database updates and deployments fail.
+          <p class="note caution">
+            <span class="note__title">Caution</span> <%= vars.product_short_mirror %> uses mTLS. This port must be the same port used in <strong>Anti-Virus Mirror Port</strong> of the <strong><%= vars.product_full %></strong> tile. If these ports are not the same, <%= vars.product_short %> database updates and deployments fail.
         </td>
       </tr>
       <tr>
@@ -173,16 +174,16 @@ To configure <%= vars.product_short_mirror %>:
       </tr>
     </table>
 
-    <p class="note"><strong>Note: </strong> <%= vars.product_full_mirror %> serves
+    <p class="note"><span class="note__title">Note</span> <%= vars.product_full_mirror %> serves
       virus definitions to your environment for <%= vars.product_full %> to use,
       but the <%= vars.product_short %> mirror needs to get databases itself.
-      You can configure the Anti-Virus mirror to get virus definitions using the
-      supported options in <strong>Mirror for Automatic Database Updates</strong> above.
+      You can configure the Anti-Virus mirror to get virus definitions by using the
+      supported options in the preceding section, <strong>Mirror for Automatic Database Updates</strong>.
     </p>
 
-1. Click **Save**.
+2. Click **Save**.
 
-1. (Optional) If you selected **Official mirror** or **Existing mirror** in the previous section,
+3. (Optional) If you selected **Official mirror** or **Existing mirror** in the previous section,
  you can configure a proxy for the <%= vars.product_short %> mirror to retrieve the databases from.
  To do this:
 
@@ -193,9 +194,9 @@ To configure <%= vars.product_short_mirror %>:
 
   1. Set **HTTP proxy to get database updates** to **Enabled**.
 
-  1. Enter the **host**, **port**, **username**, and **password** in the fields that appear.
+  2. Enter the **host**, **port**, **username**, and **password** in the fields that appear.
 
-  1. Click **Save**.
+  3. Click **Save**.
 
 ##<a id="syslog"></a> Configure Syslog Forwarding
 Follow the steps below to enable system logging for <%= vars.product_full_mirror %>.
