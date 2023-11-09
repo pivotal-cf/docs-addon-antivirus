@@ -27,11 +27,11 @@ The following table provides version and version-support information about <%= v
     <th>Details</th>
     <tr>
         <td>Version</td>
-        <td>2.3.53</td>
+        <td>2.3.59</td>
     </tr>
     <tr>
         <td>Release date</td>
-        <td>September 30, 2023</td>
+        <td>November 9, 2023</td>
     </tr>
     <tr>
         <td>Software component version</td>
@@ -59,7 +59,7 @@ The following table provides version and version-support information about <%= v
     </tr>
 </table>
 
-## <a id='snapshot-mirror'></a> Product Snapshot for <%= vars.product_full_mirror %>
+## <a id='snapshot-mirror'></a> Product snapshot for <%= vars.product_full_mirror %>
 
 The following table provides version and version-support information about <%= vars.product_full_mirror %>.
 
@@ -110,7 +110,7 @@ The following table provides version and version-support information about <%= v
 
 ## <a id="architecture"></a> <%= vars.product_short %> Architecture
 
-### <a id="propagate"></a>How Virus Definitions Propagate to VMs
+### <a id="propagate"></a>How virus definitions propagate to VMs
 
 Virus definitions on the internal <%= vars.product_short_mirror %> update
 automatically or manually depending on whether your Ops Manager
@@ -151,7 +151,7 @@ The diagrams below illustrate how new virus definitions propagate
 from an external ClamAV database to Ops Manager managed BOSH VMs,
 in online and air-gapped installations.
 
-### <a id="propagate-online"></a>Online Network (Diagram)
+### <a id="propagate-online"></a>Online network (diagram)
 
 This diagram illustrates how virus definitions propagate to BOSH VMs with <%= vars.product_short_mirror %> using mutual TLS (mTLS):
 
@@ -167,7 +167,7 @@ and saves the definitions in the virus database.
 clamd then loads the new virus definitions from the database into its memory to
 enable fast scanning.](images/update-defs-online.jpg)
 
-### <a id="propagate-airgap"></a>Air-Gapped Network (Diagram)
+### <a id="propagate-airgap"></a>Air-gapped network (diagram)
 
 This diagram illustrates how virus definitions propagate to BOSH VMs with <%= vars.product_short_mirror %> using mTLS:
 
