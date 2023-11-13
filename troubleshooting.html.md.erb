@@ -6,15 +6,15 @@ owner: Platform Security & Compliance Team
 <strong><%= modified_date %></strong>
 
 This topic provides instructions for troubleshooting <%= vars.product_full %>
-and verifying that it is protecting your Ops Manager deployment.
+and verifying that it is protecting your Tanzu Operations Manager deployment.
 
 ## <a id="installation"></a> Installation Issues
 
-### <a id="fails-to-apply"></a> Ops Manager etcd_server Not Running after Update
+### <a id="fails-to-apply"></a> Tanzu Operations Manager etcd_server Not Running after Update
 
 #### Symptom
 
-Applying changes in Ops Manager fails.
+Applying changes in Tanzu Operations Manager fails.
 The bottom of the changelog contains an error message similar to:
 
 <pre class="terminal">
@@ -34,11 +34,11 @@ The <%= vars.product_full_mirror %> server was unavailable during initial deploy
 Review the manifest file, and replace the `database_mirror` key with the address
 of a stable mirror server. The official supported mirror is `database.clamav.net`.
 
-### <a id="antivirus-fails-to-start"></a> Ops Manager Antivirus Job Fails To Start
+### <a id="antivirus-fails-to-start"></a> Tanzu Operations Manager Antivirus Job Fails To Start
 
 #### Symptom
 
-Applying changes in Ops Manager fails.
+Applying changes in Tanzu Operations Manager fails.
 The bottom of the changelog contains an error message similar to:
 
 <pre class="terminal">...
@@ -252,7 +252,7 @@ To make changes to this limit, configure **CPU limit (percentage)** in the **<%=
 if other processes are not using CPU resources.<br>
 To deactivate this limit, set the **Enforce CPU limit** field to **When other processes are using CPU resources** in the **<%= vars.product_short %>** tile.
 
-+ From the **Ops Manager Installation Dashboard**, navigate to the tile with the failing `antivirus` job.
++ From the **Tanzu Operations Manager Installation Dashboard**, go to the tile with the failing `antivirus` job.
 On **Resource Config**, adjust the **VM Type** for the **<%= vars.product_short %>** job
 to have sufficient CPU resources.
 
@@ -287,8 +287,8 @@ For more information, see [Scale the Number of Deployed Mirrors](./install-mirro
 
 When using <%= vars.product_short_mirror %>,
 errors occur when you redeploy VMware Tanzu Application Service for VMs (TAS for VMs) while restoring with BOSH Backup and Restore (BBR). For information about redeploying TAS for VMs,
-see [Redeploy TAS for VMs](https://docs.pivotal.io/ops-manager/install/backup-restore/restore-pcf-bbr.html#redeploy-ert)
-in _Restoring Deployments from Backup with BBR_ in the Ops Manager documentation.
+see [Redeploy TAS for VMs](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-backup-restore-restore-pcf-bbr.html#redeploy-ert)
+in _restoring deployments from backup with BBR_ in the Tanzu Operations Manager documentation.
 
 #### Explanation
 
@@ -308,8 +308,8 @@ is deployed before restoring your deployment.
 
 To do this:
 
-1. Follow the procedures before [Redeploy TAS for VMs](https://docs.pivotal.io/ops-manager/install/backup-restore/restore-pcf-bbr.html#redeploy-ert)
-in _Restoring Deployments from Backup with BBR_ in the Ops Manager documentation. Do not apply changes.
+1. Follow the procedures before [Redeploy TAS for VMs](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-backup-restore-restore-pcf-bbr.html#redeploy-ert)
+in _restoring deployments from backup with BBR_ in the Tanzu Operations Manager documentation. Do not apply changes.
 
 1. Exclude <%= vars.product_short_mirror %> from the <%= vars.product_short %> deployment by
 following the procedure in
@@ -321,8 +321,7 @@ This ensures that <%= vars.product_short %> is not deployed on the <%= vars.prod
     [Remove the Exclusion](./changing-ports.html#remove-exclude).
 
 1. Continue to restore your deployment by following the remaining procedures in
-[Restoring Deployments from Backup with BBR](https://docs.pivotal.io/ops-manager/install/backup-restore/restore-pcf-bbr.html) in the Ops
-Manager documentation.
+[Restoring Deployments from Backup with BBR](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-backup-restore-restore-pcf-bbr.html).
 
 ### <a id='cpu-spikes-clamav-enforce-cpu'></a> CPU Spikes While Enforcing a CPU Limit in <%= vars.product_short %>
 

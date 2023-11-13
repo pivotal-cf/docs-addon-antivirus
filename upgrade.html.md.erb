@@ -7,7 +7,7 @@ owner: Platform Security & Compliance Team
 
 This topic tells you how to upgrade <%= vars.product_full %> (formerly known as ClamAV Add-on for PCF).
 
-For product versions and upgrade paths, see [Upgrade Planner](https://upgrade-planner.pivotal.io/).
+For product versions and upgrade paths, see [Upgrade Planner](https://kb.vmware.com/s/article/94085).
 
 ##<a id="assume"></a>Compatibility and Prerequisites
 
@@ -22,13 +22,15 @@ The upgrade instructions vary depending on the version of <%= vars.product_short
 you are currently using.
 See the table below for the new features to consider and the upgrade instructions to use.
 
-<table>
+<table class=“table”>
+<thead>
   <col width="25%">
   <col width="75%">
   <tr>
     <th>If you are currently on...</th>
     <th>When upgrading to v2.3...</th>
   </tr>
+  </thead>
   <tr>
     <td>v1.x</td>
     <td>Uninstall ClamAV Add-on for PCF v1.x and install Anti-Virus v2.x tile.
@@ -158,7 +160,7 @@ To update <%= vars.product_full %>:
 1. If you do not want to use an existing mirror, download the latest version <%= vars.product_short_mirror %>
   from [<%= vars.product_network %>](https://network.tanzu.vmware.com/products/p-clamav-addon) to your local machine.
 
-1. Upload the new `.pivotal` files to Ops Manager.
+1. Upload the new `.pivotal` files to Tanzu Operations Manager.
 
 1. If required, upload any stemcells associated with the update.
 
@@ -170,13 +172,13 @@ For information about what to configure for your version, see the table in [Upgr
 The instructions to complete your configuration depend on whether:
 
 * You are using <%= vars.product_short_mirror %> and want to continue to using it.
-See [Continue Using <%= vars.product_short_mirror %>](#upgrade-antivirus-mirror) below.
+See [Continue Using <%= vars.product_short_mirror %>](#upgrade-antivirus-mirror).
 
 * You are using an existing mirror.
-See [Continue Using an Existing Mirror](#upgrade-existing-mirror) below.
+See [Continue Using an Existing Mirror](#upgrade-existing-mirror).
 
 * You are currently using <%= vars.product_short_mirror %>, but want to switch to an existing mirror instead.
-See [Switch to an Existing Mirror](#switch-existing-mirror) below.
+See [Switch to an Existing Mirror](#switch-existing-mirror).
 
 ####<a id="upgrade-antivirus-mirror"></a> Continue Using <%= vars.product_short_mirror %>
 
@@ -186,7 +188,7 @@ To complete your configuration if you are using <%= vars.product_short_mirror %>
 [Changing the Port Used by <%= vars.product_short %> and <%= vars.product_short_mirror %>](./changing-ports.html).
 
 1. If you have not done so as part of a previous step, apply configuration changes for your whole foundation:
-  1. Return to the Ops Manager Installation Dashboard and click **Review Pending Changes**.
+  1. Return to the Tanzu Operations Manager Installation Dashboard and click **Review Pending Changes**.
   1. Select all the products in your foundation and click **Apply Changes**.
 
 
@@ -203,7 +205,7 @@ If they are not, configure the **Mirror Port** used for <%= vars.product_short %
     default of `6501`, do that now.
 
 1. If you have not done so as part of a previous step, apply configuration changes for your whole foundation:
-  1. Return to the Ops Manager Installation Dashboard and click **Review Pending Changes**.
+  1. Return to the Tanzu Operations Manager Installation Dashboard and click **Review Pending Changes**.
   1. Select all the products in your foundation and click **Apply Changes**.
 
 ####<a id="switch-existing-mirror"></a> Switch to an Existing Mirror
@@ -230,14 +232,14 @@ To upgrade <%= vars.product_full %> to v2.3 from v2.1 or later:
 1. If you do not have an existing mirror, download the latest version <%= vars.product_short_mirror %>
   from [<%= vars.product_network %>](https://network.tanzu.vmware.com/products/p-clamav-addon) to your local machine.
 
-1. Upload the new `.pivotal` files to Ops Manager.
+1. Upload the new `.pivotal` files to Tanzu Operations Manager.
 
 1. If required, upload any stemcells associated with the update.
 
 1. Update any new mandatory configuration parameters.
 For information about what to configure for the version you are updating to, see the table in [Upgrade Considerations for <%= vars.product_full %>](#upgrade) above.
 
-1. Return to the Ops Manager Installation Dashboard and click **Review Pending Changes**.
+1. Return to the Tanzu Operations Manager Installation Dashboard and click **Review Pending Changes**.
 
 3. Ensure all products are selected and click **Apply Changes**.
 

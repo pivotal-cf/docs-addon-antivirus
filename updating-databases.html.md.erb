@@ -4,7 +4,7 @@ owner: Platform Security & Compliance Team
 ---
 <strong><%= modified_date %></strong>
 
-This topic tells you how to update virus definitions on an <%= vars.product_full %> mirror
+You can update virus definitions on an <%= vars.product_full %> mirror
 that is deployed by the <%= vars.product_full_mirror %> tile.
 
 The <%= vars.product_full_mirror %> tile and the <%= vars.product_full %>
@@ -54,8 +54,8 @@ the <%= vars.product_short_mirror %> VM regularly checks the external ClamAV dat
 When new virus definitions are present on the external database,
 <%= vars.product_short_mirror %> downloads them automatically.
 
-In some cases, the total number of deployed `antivirus-mirror` VMs across your foundations can create enough 
-requests against the upstream mirror to trigger rate limitations for your network. 
+In some cases, the total number of deployed `antivirus-mirror` VMs across your foundations can create enough
+requests against the upstream mirror to trigger rate limitations for your network.
 In such cases, freshclam produces logs similar to the following:
 
 ```
@@ -100,7 +100,7 @@ You can access the ClamAV mirror at the following URLs:
     For information about cvdupdate,
     see the [ClamAV documentation](https://docs.clamav.net/appendix/CvdPrivateMirror.html#3-serve-cvd-and-cdiff-files-from-a-local-web-server).
 
-1. Copy your downloaded virus definition files to your Ops Manager VM.
+1. Copy your downloaded virus definition files to your Tanzu Operations Manager VM.
 
     ```
     scp -i PATH-TO-PRIVATE-KEY PATH-TO-CVD-FILE ... ubuntu@OPS-MANAGER-VM-IP:
@@ -110,9 +110,8 @@ You can access the ClamAV mirror at the following URLs:
 
     <pre class="terminal">$ scp -i ~/.ssh/my-key.pem ~/Downloads/main.cvd ~/Downloads/daily.cvd ~/Downloads/bytecode.cvd ubuntu<span>@</span>192.168.0.2: </pre>
 
-1. SSH into the Ops Manager VM.
-   For instructions, see [Log in to the Ops Manager VM with SSH](https://docs.pivotal.io/ops-manager/install/trouble-advanced.html#ssh) in the Ops Manager
-documentation.
+1. SSH into the Tanzu Operations Manager VM.
+   For instructions, see [Log in to the Tanzu Operations Manager VM with SSH](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#ssh).
 
 1. Find the name of your <%= vars.product_short_mirror %> deployment by running:
 
@@ -129,14 +128,14 @@ documentation.
 
     <pre class="terminal">$ p-antivirus-mirror-08815ca5ead252c4b8d8</pre>
 
-1. Find the name of your <%= vars.product_short_mirror %> VMs 
+1. Find the name of your <%= vars.product_short_mirror %> VMs
    by running:
 
     ```
     bosh -e BOSH-ENVIRONMENT -d ANTIVIRUS-DEPLOYMENT-NAME vms
     ```
 
-2. Copy the virus definitions to your internal <%= vars.product_short_mirror %> 
+2. Copy the virus definitions to your internal <%= vars.product_short_mirror %>
    by running:
 
     ```
