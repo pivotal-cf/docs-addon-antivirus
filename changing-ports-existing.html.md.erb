@@ -4,7 +4,7 @@ owner: Platform Security & Compliance Team
 ---
 <strong><%= modified_date %></strong>
 
-This topic tells you how to change the port used by <%= vars.product_full %> and an existing mirror.
+You can change the port used by <%= vars.product_full %> and an existing mirror.
 
 If you are using <%= vars.product_full_mirror %>,
 then see [Changing the Port Used by <%= vars.product_short %> and <%= vars.product_short_mirror %>](./changing-ports.html) instead of this topic.
@@ -28,21 +28,22 @@ To change the port used by <%= vars.product_short %> and an existing mirror you 
 
 To change the port number in the <%= vars.product_short %> tile:
 
-1. Navigate to the Ops Manager Installation Dashboard and click the **<%=vars.product_full%>** tile.
+1. Go to the Tamzu Operations Manager Installation Dashboard and click the **<%=vars.product_full%>** tile.
 1. Click **Anti-Virus Configuration**.
 1. Under **Mirror for Automatic Database Updates**, select one of the following:
    + **Existing Mirror**
    + **Existing Mirror with TLS** if the mirror uses TLS to communicate with the <%= vars.product_short %> tile.
 
 1. Configure **Mirror for Automatic Database Updates**.<br>
-Use the **Existing Mirror** or **Existing Mirror with TLS** information below.
+Use the **Existing Mirror** or **Existing Mirror with the following TLS** information.
 
     - For **Existing Mirror**:
 
         <img src="./images/configure-mirror-existing.png"
         alt="Screenshot of the 'Mirror for Automatic Database Updates' section with Existing Mirror
         button selected. The 'Comma separated list of mirror host names or IPs' field is exposed.">
-        <table class="nice">
+        <table class=“table”>
+        <thead>
           <col width="25%">
           <col width="75%">
           <th>Field</th>
@@ -51,6 +52,7 @@ Use the **Existing Mirror** or **Existing Mirror with TLS** information below.
             <td><strong>Existing Mirror</strong></td>
             <td>Select this to use an existing mirror without TLS.</td>
           </tr>
+          </thead>
           <tr>
             <td><strong>Comma separated list of mirror host names or IP addresses</strong></td>
             <td>Enter a list of mirror host names or IP addresses.<br>
@@ -63,13 +65,15 @@ Use the **Existing Mirror** or **Existing Mirror with TLS** information below.
         <img src="./images/configure-mirror-existing-tls.png"
         alt="Screenshot of the 'Mirror for Automatic Database Updates' section with the 'Existing Mirror
         with TLS' button selected. The three fields exposed are described below.">
-        <table class="nice">
+        <table class=“table”>
+        <thead>
           <col width="25%">
           <col width="75%">
           <tr>
             <th>Field</th>
             <th>Description</th>
           </tr>
+          </thead>
           <tr>
             <td><strong>Existing Mirror with TLS</strong></td>
             <td>Select this to use an existing mirror with TLS.</td>
@@ -107,7 +111,7 @@ Use the **Existing Mirror** or **Existing Mirror with TLS** information below.
 
 1. Click **Save**.
 
-1. Return to the Ops Manager Installation Dashboard and click **Review Pending Changes**.
+1. Return to the Tanzu Operations Manager Installation Dashboard and click **Review Pending Changes**.
 
 1. Ensure all the products are selected.
 
@@ -121,9 +125,9 @@ VMware recommends that you uninstall your <%= vars.product_short_mirror %> tile.
 
 To uninstall the <%= vars.product_short_mirror %> tile:
 
-1. Navigate to Ops Manager Installation Dashboard and
-click the trash icon on the **<%= vars.product_short_mirror %>** tile.
-1. In the **Delete Product** dialog box that appears, click **Confirm**.
+1. Go to Tanzu Operations Manager Installation Dashboard and
+click the **trash can** icon on the **<%= vars.product_short_mirror %>** tile.
+1. In the **Delete Product** dialog that appears, click **Confirm**.
 1. Click **Review Pending Changes**.
 1. Ensure that only **<%= vars.product_short_mirror %>** is selected.
 1. Click **Apply Changes**.

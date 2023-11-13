@@ -4,7 +4,7 @@ owner: Platform Security & Compliance Team
 ---
 <strong><%= modified_date %></strong>
 
-This topic tells you how to update virus definitions on an <%= vars.product_full %> mirror
+You can update virus definitions on an <%= vars.product_full %> mirror
 that is deployed by the <%= vars.product_full_mirror %> tile.
 
 The <%= vars.product_full_mirror %> tile and the <%= vars.product_full %>
@@ -14,8 +14,6 @@ tile work together as follows:
   by adding it to the BOSH runtime config.
   - The <%= vars.product_full_mirror %> tile
   creates an internal mirror that is used by the ClamAV components running on BOSH VMs.
-
-##<a id="update"></a>Overview
 
 The ClamAV community regularly updates virus definitions and publishes them to
 an external ClamAV database.
@@ -85,7 +83,7 @@ You can access the ClamAV mirror at the following URLs:
     <pre class="terminal">$ scp -i ~/.ssh/my-key.pem ~/Downloads/main.cvd ~/Downloads/daily.cvd ~/Downloads/bytecode.cvd ubuntu<span>@</span>192.168.0.2: </pre>
 
 1. SSH into the Ops Manager VM.
-   For instructions, see [Log in to the Ops Manager VM with SSH](https://docs.pivotal.io/ops-manager/install/trouble-advanced.html#ssh) in the Ops Manager
+   For instructions, see [Log in to the Tanzu Operations Manager VM with SSH](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#ssh) in the Tanzu Operations Manager
 documentation.
 
 1. Find the name of your <%= vars.product_short_mirror %> deployment by running:
