@@ -6,7 +6,7 @@ owner: Platform Security & Compliance Team
 
 This topic tells you how to install and configure <%= vars.product_full %>.
 
-Before installing <%= vars.product_short %>, VMware recommends that you download and install the
+Before you install <%= vars.product_short %>, VMware recommends that you download and install the
 Anti-Virus for VMware Tanzu Mirror tile.
 For more information about the <%= vars.product_short_mirror %> tile,
 see [Installing and Configuring Anti-Virus for VMware Tanzu Mirror](./install-mirror.html).
@@ -15,12 +15,12 @@ see [Installing and Configuring Anti-Virus for VMware Tanzu Mirror](./install-mi
 
 To install <%= vars.product_short %>, you must have:
 
-- **An Ops Manager operator user account with admin rights**.
+- **Tanzu Operations Manager operator user account with admin rights**.
   For more information, see
-  [Platform Operators](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-platform-operators.html) in the
-  Ops Manager documentation.
+  [Platform operators](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-platform-operators.html) in the
+  Tanzu Operations Manager documentation.
 
-- **<%= vars.ops_manager_full %> (Ops Manager)**.
+- **<%= vars.ops_manager_full %>**.
   For compatible versions, see the [Product Snapshot](./index.html#snapshot).
 
 - **At least 2&nbsp;GB of RAM free for each VM that installs <%= vars.product_short %>**.
@@ -32,16 +32,16 @@ To install <%= vars.product_short %>, you must have:
 
 - **An external mirror**. If you do not have an external mirror, VMware recommends that you install
   the <%= vars.product_short_mirror %>.
-  For instructions, see [Installing and Configuring Anti-Virus for VMware Tanzu Mirror](./install-mirror.html).
+  For instructions, see [Installing and configuring anti-virus for VMware Tanzu Mirror](./install-mirror.html).
 
 ## <a id='install-addon'></a> Install <%= vars.product_short %>
 
-Install the <%= vars.product_short %> tile on the Ops Manager Installation Dashboard:
+Install the <%= vars.product_short %> tile on the Tanzu Operations Manager Installation Dashboard:
 
 1. Download the product file from
    [<%= vars.product_network %>](https://network.tanzu.vmware.com/products/p-clamav-addon).
 
-2. Navigate to the Ops Manager Installation Dashboard and select **Import a Product** to upload the
+2. Go to the Tanzu Operations Manager Installation Dashboard and select **Import a Product** to upload the
    product file.
 
 3. Under the **Import a Product** button, click **+** next to the version number of
@@ -57,9 +57,9 @@ To configure <%= vars.product_short %>:
 
 2. Configure **Mirror for Automatic Database Updates**.
    Use the **Official Mirror**, **Deployed Mirror**, **Existing Mirror**, or **Existing Mirror with TLS**
-   information below.
+   information.
 
-    The tabs below expand to show instructions for each type of mirror.<br><br>
+    The following tabs expand to show instructions for each type of mirror.<br><br>
 
     <style>
     .btn.btn-default,
@@ -225,12 +225,14 @@ To configure <%= vars.product_short %>:
         </td>
       </tr>
     </table>
-    <img src="./images/configure-mirror-existing-tls.png" alt="'Mirror for Automatic Database Updates' section of the 'Anti-Virus Configuration' pane. The 'Existing Mirror with TLS' radio button is selected. The three fields exposed are described below.">
+    <img src="./images/configure-mirror-existing-tls.png" alt="'Mirror for Automatic Database Updates' section of the 'Anti-Virus Configuration' pane. The 'Existing Mirror with TLS' radio button is selected.
+    The three fields exposed are described here.">
     </div>
 
 3. Configure the remaining fields:
 
-    <table class="nice">
+    <table class=“table”>
+    <thead>
       <th>Field</th>
       <th>Description</th>
       <tr>
@@ -244,6 +246,7 @@ To configure <%= vars.product_short %>:
           containers. Scheduled scans scan containers.
         </p>
       </tr>
+      </thead>
       <tr>
         <td><strong>Memory limit (in bytes)</strong></td>
         <td>
@@ -325,7 +328,7 @@ To configure <%= vars.product_short %>:
           <p class="note">
           <span class="note__title">Note</span>
           Add this path to the
-          <strong>Directories and files that will be ignored (on Windows)</strong> list below.
+          <strong>Directories and files are ignored (on Windows)</strong> list.
           If you do not do this, then <%= vars.product_short %>:
             <ul>
               <li>Detects the moved or copied file.</li>
@@ -359,7 +362,7 @@ To configure <%= vars.product_short %>:
         </td>
       </tr>
       <tr>
-        <td><strong>List of signature names that will be ignored (Used for false positives)</strong></td>
+        <td><strong>List of signature names that are ignored (Used for false positives)</strong></td>
         <td>Enter signature names in a comma-separated list for <%= vars.product_short %> to add to the allowlist.
            For example,<br>
           <code>Eicar-Test-Signature, Clamav.Test.File-7</code><br>
@@ -372,7 +375,7 @@ To configure <%= vars.product_short %>:
             Use a comma-separated list.</td>
       </tr>
     </table>
-    <img src="./images/configure.png" alt="'Anti-Virus Configuration' pane. The fields shown are described below." width="550">
+    <img src="./images/configure.png" alt="'Anti-Virus Configuration' pane. The fields shown are described here." width="550">
     <br>
 
 4. Click **Save**.
@@ -388,7 +391,7 @@ If you require a proxy server for <%= vars.product_short %> jobs to connect to t
 update their virus definitions, you can configure one:
 
 1. Select **HTTP Proxy Configuration for Anti-Virus Jobs**.
-   ![Screenshot of the "HTTP Proxy" pane. The fields are listed below.](images/http-proxy.png)
+   ![Screenshot of the "HTTP Proxy" pane. The fields are listed here.](images/http-proxy.png)
 
 1. Set **HTTP proxy for Anti-Virus jobs to get database updates** to **Enabled**.
 1. Enter the **Host**, **Port**, **Username** and **Password** in the fields that appear.
@@ -424,7 +427,7 @@ To change the scheduled scan value:
 
 Your installation is not complete until you apply your configuration changes. To do so:
 
-1. Return to the Ops Manager Installation Dashboard.
+1. Return to the Tanzu Operations Manager Installation Dashboard.
 1. Click **Review Pending Changes**.
 1. Ensure all products are selected and click **Apply Changes**.
 
@@ -442,7 +445,7 @@ as a consequence of OverlayFS implementation.
 
 To configure <%= vars.product_short %> to ignore duplicate logs for these directories, see the optional
 [Exclude Duplicate Logs on Garden Containers](#garden) or
-[Exclude Duplicate Logs on Containers in Enterprise <%= vars.k8s_runtime_abbr %>](#pks) sections below:
+[Exclude Duplicate Logs on Containers in Enterprise <%= vars.k8s_runtime_abbr %>](#pks) sections:
 
 ### <a id="garden"></a> (Optional) Exclude Duplicate Logs on Garden Containers
 
@@ -463,7 +466,7 @@ in the Cloud Foundry documentation.
 To configure <%= vars.product_short %> to ignore duplicate logs for these directories:
 
 1. Select **Anti-Virus Configuration**.
-1. Enter the following ignore pattern into the **Directories and files that will be ignored** field:
+1. Enter the following ignore pattern into the **Directories and files that are ignored** field:
 
    ```console
    ^/var/vcap/data/grootfs/store/(un)?privileged/images/[\w-]+/rootfs/.*$
