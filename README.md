@@ -2,7 +2,7 @@
 
 This repo is for the Anti-Virus for VMware Tanzu documentation.
 
-## Which Branches to Use
+## Which branches to use
 
 The master branch is the tree-trunk, so **always** make changes you want carried forward in this branch. This includes:
 
@@ -46,7 +46,7 @@ After this point, **master** will then be the target for the next version of the
 Cross-product partials (if any) for Anti-Virus for VMware Tanzu are single sourced from the [Docs Partials](https://github.com/pivotal-cf/docs-partials) repository.
 
 
-## Contributing to Documentation
+## Contributing to documentation
 
 If there is some documentation to add for an unreleased patch version of Anti-Virus for VMware Tanzu then create a branch off of the **live** branch
 you intend to modify and create a pull request against that branch.
@@ -64,13 +64,13 @@ pull request using a fork, see
 in the documentation team wiki.
 
 
-## Publishing Docs
+## Publishing docs
 
 - [docworks](https://docworks.vmware.com/) is the main tool for managing docs used by writers.
 - [docsdash](https://docsdash.vmware.com/) is a deployment UI which manages the promotion from
 staging to pre-prod to production.
 
-### Prepare Markdown Files
+### Prepare Markdown files
 
 - Markdown files live in this repo.
 - Images should live in an `images` directory at the same level and linked with a relative link.
@@ -78,7 +78,7 @@ staging to pre-prod to production.
 - Variables live in [config/template_variables.yml](config/template_variables.yml).
 
 
-## Style Guide
+## Style guide
 
 _These are a handful of style issues I noticed with the original version of this documentation._
 
