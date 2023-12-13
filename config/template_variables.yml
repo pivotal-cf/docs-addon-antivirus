@@ -54,14 +54,14 @@ template_variables:
   app_domain: shared-domain.com
   app_domain: shared-domain.example.com
   app_sec_groups: <a href="http://docs.pivotal.io/pivotalcf/adminguide/app-sec-groups.html">Application Security Groups</a>
-  appdog_notifications: <p class='note'><strong>Note</strong>&#58; If the Cloud Foundry Notifications service is not installed in your PCF deployment, notifications are disabled.</p>
+  appdog_notifications: <p class="note"><span class="note__title">Note</span> If the Cloud Foundry Notifications service is not installed in your PCF deployment, notifications are disabled.</p>
   asg_notifications_prereq:
   az: <a href="http://docs.pivotal.io/pivotalcf/customizing/understand-az.html">availability zones</a>
   cli_download: the Tools page of your Apps Manager instance
   cli_v6: <a href="http://docs.pivotal.io/pivotalcf/cf-cli/getting-started.html">Getting Started with cf CLI v6</a>
-  cloud_controller_dea_agent: <p class="note"><strong>Note</strong><span>:</span> Pivotal Cloud Foundry (PCF) versions 1.6 and above no longer use Droplet Execution Agents (DEAs). <a href="../diego/diego-components.html#cell-components">Diego Cells</a> replace their function. This topic is published here to help people who are running older versions of PCF.</p>
-  cloud_controller_dea_algorithm: <p class="note"><strong>Note</strong><span>:</span> Pivotal Cloud Foundry (PCF) versions 1.6 and above no longer use the DEA Placement Algorithm. The <a href="../diego/diego-auction.html">Diego Auction</a> replaces its function. This section is published here to help people who are running older versions of PCF.</p>
-  config_ert_checkboxes: <p class="note"><strong>Note</strong>&#58; If you do not see the <strong>Invite New Members</strong> button, ensure that, in the <strong>Apps Manager</strong> section of Elastic Runtime, you have selected the <strong>Enable Internal User Store</strong> and <strong>Enable Non Admin Role Management</strong> checkboxes and that Apply Changes has been run. For more information about these checkboxes, see the Configuring Elastic Runtime topic for your IaaS&#58; <a href="../customizing/cloudform-er-config.html#customize-apps-man">AWS</a>, <a href="../customizing/openstack-er-config.html#customize-apps-man">OpenStack</a>, <a href="../customizing/config-er-vmware.html#customize-apps-man">vSphere/vCloud</a>.</p>
+  cloud_controller_dea_agent: <p class="note"><span class="note__title">Note</span> Pivotal Cloud Foundry (PCF) versions 1.6 and above no longer use Droplet Execution Agents (DEAs). <a href="../diego/diego-components.html#cell-components">Diego Cells</a> replace their function. This topic is published here to help people who are running older versions of PCF.</p>
+  cloud_controller_dea_algorithm: <p class="note"><span class="note__title">Note</span> Pivotal Cloud Foundry (PCF) versions 1.6 and above no longer use the DEA Placement Algorithm. The <a href="../diego/diego-auction.html">Diego Auction</a> replaces its function. This section is published here to help people who are running older versions of PCF.</p>
+  config_ert_checkboxes: <p class="note"><span class="note__title">Note</span> If you do not see the <strong>Invite New Members</strong> button, ensure that, in the <strong>Apps Manager</strong> section of Elastic Runtime, you have selected the <strong>Enable Internal User Store</strong> and <strong>Enable Non Admin Role Management</strong> checkboxes and that Apply Changes has been run. For more information about these checkboxes, see the Configuring Elastic Runtime topic for your IaaS&#58; <a href="../customizing/cloudform-er-config.html#customize-apps-man">AWS</a>, <a href="../customizing/openstack-er-config.html#customize-apps-man">OpenStack</a>, <a href="../customizing/config-er-vmware.html#customize-apps-man">vSphere/vCloud</a>.</p>
   console_2: If you have a Pivotal Elastic Runtime account, refer to the <a href="http://docs.pivotal.io/pivotalcf/customizing/console-login.html">Logging into the Apps Manager</a> topic to determine your Pivotal Elastic Runtime URL. Click <strong>Manage Cloud...</strong> to add this URL to your Cloud Foundry account. Validate the account and continue through the wizard.</a>
   console_3: Review the <a href="../customizing/console-login.html">Logging into the Apps Manager</a> topic for more information.
   console_ev:
@@ -107,13 +107,13 @@ template_variables:
   global_header_product_href: https://network.tanzu.vmware.com/
   global_header_product_link_text: Downloads
   GSG_intro_sentence:
-  incompatible_ldap_saml: <p class='note'><strong>Note</strong>&#58; The procedures described here are not compatible with using SAML or LDAP for user identity management. To create and manage user accounts in a SAML- or LDAP-enabled Cloud Foundry deployment, see <a href='../customizing/external-user-management.html'>Adding Existing SAML or LDAP Users to a Pivotal Cloud Foundry&reg; Deployment</a>.</p>
+  incompatible_ldap_saml: <p class='note'><span class="note__title">Note</span> The procedures described here are not compatible with using SAML or LDAP for user identity management. To create and manage user accounts in a SAML- or LDAP-enabled Cloud Foundry deployment, see <a href='../customizing/external-user-management.html'>Adding Existing SAML or LDAP Users to a Pivotal Cloud Foundry&reg; Deployment</a>.</p>
   info_loc: In Pivotal Operations Manager
   invite_members: images/pcf/invite-members.png
   kb_link: <a href="https://community.pivotal.io" target="_blank">Knowledge Base</a>
   known_issues: <a href="http://docs.pivotal.io/pivotalcf/pcf-release-notes/index.html">Known Issues</a>
   link_adminguid_buildpack: You can find more documentation at the <a href="http://docs.pivotal.io/pivotalcf/adminguide/buildpacks.html">buildpack admin guide</a>.
-  link_adminguide_commands: <p class="note"><strong>Note</strong>&#58; An Org Manager needs explicit administrator permissions to perform certain actions. Refer to the <a href="../adminguide/uaa-user-management.html">Creating and Managing Users with the UAA CLI (UAAC)</a> topic to learn how to create a user with admin rights.</p>
+  link_adminguide_commands: <p class="note"><span class="note__title">Note</span> An Org Manager needs explicit administrator permissions to perform certain actions. Refer to the <a href="../adminguide/uaa-user-management.html">Creating and Managing Users with the UAA CLI (UAAC)</a> topic to learn how to create a user with admin rights.</p>
   link_adminguide_domains: For admin-specific commands, refer to the <a href="../../adminguide/manage-domains-routes.html">Managing Domains and Routes</a> topic.
   logg_forwarding: <a href="../opsguide/logging-config-opsman.html#syslog-forward">Configuring System Logging in Elastic Runtime</a>
   logg_scaling: <a href="../opsguide/logging-config-opsman.html#scaling">Configuring System Logging in Elastic Runtime</a>
@@ -170,4 +170,4 @@ template_variables:
   uaa_cred: refer to <strong>Elastic Runtime > Credentials</strong>
   uaa: <a href="http://docs.pivotal.io/pivotalcf/adminguide/notifications.html">UAA</a>
   use_global_header: true
-  warden_garden: <p class="note"><strong>Note</strong><span>:</span> Pivotal Cloud Foundry versions 1.6 and above no longer use Warden. The platform-independent Garden subsystem replaces its function. This topic is published here to help people who are running older versions of PCF.</p>
+  warden_garden: <p class="note"><span class="note__title">Note</span> Pivotal Cloud Foundry versions 1.6 and above no longer use Warden. The platform-independent Garden subsystem replaces its function. This topic is published here to help people who are running older versions of PCF.</p>
