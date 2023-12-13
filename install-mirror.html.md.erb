@@ -190,6 +190,7 @@ To configure <%= vars.product_short_mirror %>:
  To do this:
 
   1. Select **HTTP Proxy Configuration**.
+   
    ![Under the "HTTP proxy to get database updates" heading, the Enabled button is selected. The fields are described in following text.](images/mirror-http-proxy.png)
 
   2. Set **HTTP proxy to get database updates** to **Enabled**.
@@ -202,12 +203,15 @@ To configure <%= vars.product_short_mirror %>:
 Follow these steps to enable system logging for <%= vars.product_full_mirror %>.
 
 1. Select **Syslog**.
+    
     ![The "Yes" button is selected. The fields are described in following text.](images/mirror-syslog.png)
 
 2. Select **Yes** for **Do you want to configure Syslog forwarding?**.
 3. Configure the fields as follows:
-  <table>
-    <tr><th>Field</th><th>Instructions</th></tr>
+  
+  <table class=“table”>
+    <thead>
+    <tr><th>Field</th><th>Instructions</th></tr></thead>
     <tr>
         <td><strong>Address</strong></td>
         <td>Enter the address or host of the syslog server for sending logs, for example,
