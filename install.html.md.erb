@@ -64,8 +64,9 @@ To configure <%= vars.product_short %>:
     <table class="nice">
       <col width="25%">
       <col width="75%">
-      <th>Field</th>
+      <thead><tr><th>Field</th>
       <th>Description</th>
+      </tr></thead>
       <tr>
         <td><strong>Official Mirror</strong></td>
         <td>Select this to have the mirror fetch databases from database.clamav.net.</td>
@@ -74,11 +75,13 @@ To configure <%= vars.product_short %>:
     <hr>
     <strong>Deployed Mirror</strong>
     <img src="./images/configure-mirror-deployed.png" alt="'Mirror for Automatic Database Updates' section of the 'Anti-Virus Configuration' pane. The 'Deployed mirror from the Anti-Virus for VMware Tanzu Mirror Tile' radio button is selected. The 'Anti-Virus Mirror Port' field is exposed.">
-    <table class="nice">
+    <table class="table">
       <col width="25%">
       <col width="75%">
+      <thead><tr>
       <th>Field</th>
       <th>Description</th>
+      </tr></thead>
       <tr>
         <td><strong>Deployed mirror from the Anti-Virus for VMware Tanzu Mirror Tile</strong></td>
         <td>Select this when using the Anti-Virus for VMware Tanzu Mirror tile.<br><br>
@@ -99,11 +102,13 @@ To configure <%= vars.product_short %>:
     <hr>
     <strong>Existing Mirror</strong>
     <img src="./images/configure-mirror-existing.png" alt="Mirror for Automatic Database Updates section of the 'Anti-Virus Configuration' pane. The 'Existing Mirror' radio button is selected. The 'Comma separated list of mirror hostnames or IPs' field is exposed.">
-    <table class="nice">
+    <table class="table">
       <col width="25%">
       <col width="75%">
+      <thead><tr>
       <th>Field</th>
       <th>Description</th>
+      </tr></thead>
       <tr>
         <td><strong>Existing Mirror</strong></td>
         <td>Select this to use an existing mirror without TLS.</td>
@@ -119,8 +124,10 @@ To configure <%= vars.product_short %>:
     <table class="nice">
       <col width="25%">
       <col width="75%">
+      <thead><tr>
       <th>Field</th>
       <th>Description</th>
+      </tr></thead>
       <tr>
         <td><strong>Existing Mirror with TLS</strong></td>
         <td>Select this to enter a hostname, port number, and CA certificate.</td>
@@ -159,9 +166,10 @@ To configure <%= vars.product_short %>:
 
    <img src="./images/configure.png" alt="'Anti-Virus Configuration' pane. The fields shown are described below." width="550">
 
-    <table class="nice">
-      <th>Field</th>
+    <table class="table">
+      <thead><tr><th>Field</th>
       <th>Description</th>
+      </tr></thead>
       <tr>
         <td><strong>(Optional) Enable on-access scanning on Linux</strong></td>
         <td>Select this option to scan files immediately after they are modified.
