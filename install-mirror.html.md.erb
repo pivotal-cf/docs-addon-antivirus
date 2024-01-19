@@ -5,9 +5,8 @@ owner: Platform Security & Compliance Team
 <strong><%= modified_date %></strong>
 
 This topic tells you how to install and configure <%= vars.product_full_mirror %>.
-
 If you do not have an external mirror for Anti-Virus jobs to fetch database updates from,
-you can deploy a mirror using the <%= vars.product_short_mirror %> tile.
+you can use the <%= vars.product_short_mirror %> tile to deploy a mirror.
 
 > **Important** Install this tile before installing <%= vars.product_full %>.
 
@@ -151,21 +150,6 @@ To configure <%= vars.product_short_mirror %>:
     </p>
 
 2. Click **Save**.
-
-
-1. If you selected **Official mirror** or **Existing mirror** in the previous section,
- you can configure a proxy for the <%= vars.product_short %> mirror to retrieve the databases from.
- To do this:
-
-    1. Select **HTTP Proxy Configuration**.
-
-        ![Under the "HTTP proxy to get database updates" heading, the Enabled button is selected. The fields are described in following text.](images/mirror-http-proxy.png)
-
-    2. Set **HTTP proxy to get database updates** to **Enabled**.
-
-    3. Enter the **host**, **port**, **username**, and **password** in the fields that appear.
-
-    4. Click **Save**.
 
 ## <a id="apply-changes-mirror"></a> Apply Changes from Your Configuration
 
