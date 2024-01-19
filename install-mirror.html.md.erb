@@ -5,12 +5,13 @@ owner: Platform Security & Compliance Team
 <strong><%= modified_date %></strong>
 
 This topic tells you how to install and configure <%= vars.product_full_mirror %>.
-VMware recommends that you install this tile before installing <%= vars.product_full %>.
-
-## <a id="overview"></a> Overview
 
 If you do not have an external mirror for Anti-Virus jobs to fetch database updates from,
 you can deploy a mirror using the <%= vars.product_short_mirror %> tile.
+
+> **Important** Install this tile before installing <%= vars.product_full %>.
+
+## <a id="overview"></a> Overview
 
 This deployed internal mirror, which uses mutual TLS (mTLS), can support both air-gapped
 environments and <%= vars.product_short_mirror %> networked environments:
@@ -22,6 +23,8 @@ environments and <%= vars.product_short_mirror %> networked environments:
 
 If you have already deployed an external mirror, you can use that instead of
 installing this tile, and continue to [Installing and Configuring <%= vars.product_full %>](./install.html).
+
+To install <%= vars.product_short_mirror %>, complete all sections in this topic.
 
 ## <a id="prereqs"></a> Prerequisites
 
@@ -39,21 +42,6 @@ This is so that you can install the <%= vars.product_full %> tile after deployin
 <%= vars.product_short %> takes at least 3&nbsp;GB of RAM on each VM and on each VM in reserve.
 On Google Cloud Platform (GCP), the recommended minimum VM size is `micro.cpu`
 using 2&nbsp;CPU and 4&nbsp;GB RAM.
-
-### <a id="why-so-much-ram"></a> Why is so much RAM required?
-
-Anti-Virus uses upwards of 1.2&nbsp;GB of RAM just to load the virus definitions. This does not take
-into account any RAM required to process the files during scanning. Anti-Virus uses upwards of
-2.4&nbsp;GiB of RAM for a short period each day when loading new signature definitions.
-
-After loading, and after all scans that use the old definitions have completed, the old definitions
-are unloaded. This process is called concurrent reloading and enables scans to continue during the
-reload. As a consequence, Anti-Virus uses twice the amount of RAM for a brief period.
-
-If your VM does not have enough RAM, the OS can stop the Anti-Virus process. If you observe issues
-with Anti-Virus failing or becoming unresponsive once a day, it is likely your system does not have
-enough RAM to run Anti-Virus. Over time you can expect the virus databases to get bigger and so the
-memory that Anti-Virus requires to increase.
 
 ## <a id='install-mirror'></a> Install <%= vars.product_full_mirror %>
 
@@ -77,7 +65,7 @@ This adds the tile to your staging area.
 To assign availability zones (AZs) and networks:
 
 1. Select **Assign AZs and Networks**.
-   
+
    ![The "Assign AZs and Networks" pane as described in the following text.](images/mirror-assign-azs.png)
 
 1. Configure the fields as follows:
@@ -113,7 +101,7 @@ To assign availability zones (AZs) and networks:
 To configure <%= vars.product_short_mirror %>:
 
 1. Select **Anti-Virus Mirror Configuration**.
-   
+
    ![The Anti-Virus Mirror Configuration pane as described in the following text.](images/mirror-configure.png)
 
 1. Configure the fields as follows:
@@ -150,9 +138,10 @@ To configure <%= vars.product_short_mirror %>:
         <td><strong>Mirror for Automatic Database Updates</strong></td>
         <td>
           <ul>
+            Select the mirror to use:
             <li><strong>No mirror</strong>: Select this for air-gapped environments, or to control the database versions available to your environment.</li>
-            <li><strong>Official mirror</strong></li>
-            <li><strong>Existing mirror</strong></li>
+            <li><strong>Official mirror</strong>: Select this to have the mirror fetch databases from the official virus database mirror.</li>
+            <li><strong>Existing mirror</strong>: Select this to use your existing mirror.</li>
           </ul>
         </td>
       </tr>
@@ -191,84 +180,20 @@ To configure <%= vars.product_short_mirror %>:
  you can configure a proxy for the <%= vars.product_short %> mirror to retrieve the databases from.
  To do this:
 
-  1. Select **HTTP Proxy Configuration**.
-   
-   ![Under the "HTTP proxy to get database updates" heading, the Enabled button is selected. The fields are described in following text.](images/mirror-http-proxy.png)
+    1. Select **HTTP Proxy Configuration**.
 
-  2. Set **HTTP proxy to get database updates** to **Enabled**.
+        ![Under the "HTTP proxy to get database updates" heading, the Enabled button is selected. The fields are described in following text.](images/mirror-http-proxy.png)
 
-  3. Enter the **host**, **port**, **username**, and **password** in the fields that appear.
+    2. Set **HTTP proxy to get database updates** to **Enabled**.
 
-  4. Click **Save**.
+    3. Enter the **host**, **port**, **username**, and **password** in the fields that appear.
 
-##<a id="syslog"></a> Configure Syslog Forwarding
-Follow these steps to enable system logging for <%= vars.product_full_mirror %>.
-
-1. Select **Syslog**.
-    
-    ![The "Yes" button is selected. The fields are described in following text.](images/mirror-syslog.png)
-
-2. Select **Yes** for **Do you want to configure Syslog forwarding?**.
-3. Configure the fields as follows:
-  
-  <table class=“table”>
-    <thead>
-    <tr><th>Field</th><th>Instructions</th></tr></thead>
-    <tr>
-        <td><strong>Address</strong></td>
-        <td>Enter the address or host of the syslog server for sending logs, for example,
-            <code>logmanager.example.com</code>.</td></tr>
-    <tr><td><strong>Port</strong></td>
-        <td>Enter the port of the syslog server for sending logs, for example, <code>29279</code>.</td></tr>
-    <tr><td><strong>Transport Protocol</strong></td>
-        <td>Select the transport protocol used to send system logs to the server. VMware recommends using TCP.</td></tr>
-    <tr><td><strong>Enable TLS</strong></td>
-    <td>If you select TCP, you can also select to send logs encrypted over TLS.</td></tr>
-    <tr><td><strong>Permitted Peer</strong></td>
-        <td>Enter either the accepted fingerprint, in SHA1, or the name of the remote peer, for example, <code>*.example.com</code>.</td></tr>
-    <tr><td><strong>SSL Certificate</strong></td>
-        <td>Enter the SSL or TLS Certificates for the syslog server. This ensures the logs are transported securely.</td></tr>
-    <tr>
-      <td><strong>Queue Size</strong></td>
-      <td>Enter an integer. This value specifies the number of log entries held in the buffer.
-      The default value is <code>100000</code>.</td>
-    </tr>
-
-    <tr>
-      <td><strong>Forward Debug Logs</strong></td>
-      <td>Select this box to forward debug logs to an external source.
-      This option is deselected by default.
-      If you select it, you might generate a large amount of log data.</td>
-    </tr>
-
-    <tr>
-      <td><strong>Custom rsyslog Configuration</strong></td>
-      <td>Enter configuration details for rsyslog. This field requires RainerScript syntax.</td>
-    </tr>
-  </table>
-
-1. Click **Save Syslog Settings**.
-
-## <a id="scale-deployed-mirror"></a> Scale the Number of Deployed Mirrors
-
-Anti-Virus jobs do load balancing for you.
-
-VMware recommends one <%= vars.product_short_mirror %> VM for every 250 VMs with <%= vars.product_short %> installed.
-To scale the number of deployed mirrors:
-
-  1. Select **Resource Config**.
-   ![The Resource Config pane with drop-down lists for the number of instances, VM type, and persistent disk type.](images/mirror-resource-config.png)
-
-  2. For `antivirus-mirror`, set **INSTANCES** to the number of mirrors that you want to deploy.
-
-  2. For `antivirus-mirror`, set **INSTANCES** to the number of mirrors that you want to deploy. When scaling `antivirus-mirror` instances, VMware recommends understanding the implications of using the **Official mirror** config option. The official ClamAV mirror endpoints are rate limited and potentially prevent successful updates of virus definitions on `antivirus-mirror` instances. Hosting many instances of `antivirus-mirror` across your foundation(s) on a private network with a shared outgoing IP (for example, through NAT or usage of an Internet Proxy) can trigger the upstream ClamAV mirror rate limitation. See [How Virus Definitions Propagate to VMs](./index.html#propagate)  and [Updating Virus Definitions](./updating-databases.html) for further information.
-
-  3. Click **Save**.
+    4. Click **Save**.
 
 ## <a id="apply-changes-mirror"></a> Apply Changes from Your Configuration
 
 Your <%= vars.product_short_mirror %> installation is not complete until you apply your configuration changes.
-To do this:
+To apply your changes:
 
 1. Return to the Tanzu Operations Manager Installation Dashboard.
 
