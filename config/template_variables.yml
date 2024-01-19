@@ -9,8 +9,8 @@ template_variables:
 # VMware Tanzu Variables
   product_full: Anti-Virus for VMware Tanzu
   product_full_mirror: Anti-Virus Mirror for VMware Tanzu
-  product_short: Anti-Virus
-  product_short_mirror: Anti-Virus Mirror
+  product_short: Anti-Virus for Tanzu
+  product_short_mirror: Anti-Virus Mirror for Tanzu
   product_abbr: AV #Not used
   product_name: Anti-Virus #Do not use this in the future.
 
