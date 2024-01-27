@@ -1,5 +1,5 @@
 ---
-title: Installing and Configuring Anti-Virus for VMware Tanzu
+title: Installing and configuring Anti-Virus for VMware Tanzu
 owner: Platform Security & Compliance Team
 ---
 <strong><%= modified_date %></strong>
@@ -378,7 +378,7 @@ For more information about false positives, see
 [Anti-Virus Reports False Positives](./troubleshooting.html#false-positive-clamav).
 It takes about a week for ClamAV to verify and publish a new database.
 
-## <a id='proxy'></a> Configure HTTP Proxy
+## <a id='proxy'></a> Configure HTTP proxy
 
 If you require a proxy server for <%= vars.product_short %> jobs to connect to the internet to
 update their virus definitions, you can configure one:
@@ -390,7 +390,7 @@ update their virus definitions, you can configure one:
 1. Enter the **Host**, **Port**, **Username** and **Password** in the fields that appear.
 1. Click **Save**.
 
-## <a id='scheduled'></a> Configure Scheduled Scan
+## <a id='scheduled'></a> Configure scheduled scan
 
 You can configure <%= vars.product_short %> to run a virus scan `hourly` or `daily`.
 The default value is `daily`.
@@ -416,7 +416,7 @@ To change the scheduled scan value:
 
 1. Click **Save**.
 
-## <a id="apply-changes"></a> Apply Changes from Your Configuration
+## <a id="apply-changes"></a> Apply changes from your configuration
 
 Your installation is not complete until you apply your configuration changes. To do so:
 
@@ -426,7 +426,7 @@ Your installation is not complete until you apply your configuration changes. To
 
 <hr style="height:1px;border:none;color:#333;background-color:#333;" />
 
-## <a id="scan-containers"></a> (Optional) Configure <%= vars.product_short %> to Exclude Duplicate Logs on Containers
+## <a id="scan-containers"></a> (Optional) Configure <%= vars.product_short %> to exclude duplicate logs on containers
 
 You can use <%= vars.product_short %> to scan:
 
@@ -440,7 +440,7 @@ To configure <%= vars.product_short %> to ignore duplicate logs for these direct
 [Exclude Duplicate Logs on Garden Containers](#garden) or
 [Exclude Duplicate Logs on Containers in Enterprise <%= vars.k8s_runtime_abbr %>](#pks) sections:
 
-### <a id="garden"></a> (Optional) Exclude Duplicate Logs on Garden Containers
+### <a id="garden"></a> (Optional) Exclude duplicate logs on Garden containers
 
 When <%= vars.product_short %> scan results detect potential malware on Garden containers,
 logs are reported for both the `diff` and `rootfs` directories.
@@ -480,7 +480,7 @@ To configure <%= vars.product_short %> to ignore duplicate logs for these direct
 
 For an example log entry, see [Container Log Messages](./monitoring-logs.html#container).
 
-### <a id="pks"></a> (Optional) Exclude Duplicate Logs on Containers in Enterprise <%= vars.k8s_runtime_abbr %>
+### <a id="pks"></a> (Optional) Exclude duplicate logs on containers in Enterprise <%= vars.k8s_runtime_abbr %>
 
 When <%= vars.product_short %> scan results detect potential malware on containers of the Kubernetes
 worker node VMs in Enterprise <%= vars.k8s_runtime_abbr %>, logs are reported for both the
