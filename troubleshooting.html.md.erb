@@ -8,9 +8,9 @@ owner: Platform Security & Compliance Team
 This topic provides instructions for troubleshooting <%= vars.product_full %>
 and verifying that it is protecting your Tanzu Operations Manager deployment.
 
-## <a id="installation"></a> Installation Issues
+## <a id="installation"></a> Installation issues
 
-### <a id="fails-to-apply"></a> Tanzu Operations Manager etcd_server Not Running after Update
+### <a id="fails-to-apply"></a> Tanzu Operations Manager etcd_server not running after update
 
 #### Symptom
 
@@ -34,7 +34,7 @@ The <%= vars.product_full_mirror %> server was unavailable during initial deploy
 Review the manifest file, and replace the `database_mirror` key with the address
 of a stable mirror server. The official supported mirror is `database.clamav.net`.
 
-### <a id="antivirus-fails-to-start"></a> Tanzu Operations Manager Antivirus Job Fails To Start
+### <a id="antivirus-fails-to-start"></a> Tanzu Operations Manager Antivirus job fails to start
 
 #### Symptom
 
@@ -69,9 +69,9 @@ For use cases where CVD files are manually obtained, a supported method must be 
 For information about error codes and supported methods,
 see [ClamAV documentation](https://www.clamav.net/documents/freshclam-faq#error-codes).
 
-## <a id="updates"></a> Virus Database Update Issues
+## <a id="updates"></a> Virus database update issues
 
-### <a id="invalid-db"></a> Invalid Database Definitions
+### <a id="invalid-db"></a> Invalid database definitions
 
 #### Symptom
 
@@ -91,7 +91,7 @@ file downloaded from the external database is invalid.
 
 Check that the database files downloaded properly and re-download if necessary.
 
-### <a id="old-db"></a> Old Database Definitions
+### <a id="old-db"></a> Old database definitions
 
 #### Symptom
 
@@ -113,9 +113,9 @@ processed by the internal mirror.
 Check that the latest version of the database files were downloaded.
 If the internal <%= vars.product_short_mirror %> has the latest files, no action is required.
 
-## <a id="runtime"></a> Runtime Issues
+## <a id="runtime"></a> Runtime issues
 
-### <a id="malware-detection"></a> <%= vars.product_short %> Is Not Detecting Malware
+### <a id="malware-detection"></a> <%= vars.product_short %> is not detecting malware
 
 #### Symptom
 
@@ -143,7 +143,7 @@ the suspicious file directly to the ClamAV team.
   mirror coordination, or threat tracking activity.
 </p>
 
-### <a id='false-positive-clamav'></a> <%= vars.product_short %> Reports False Positives
+### <a id='false-positive-clamav'></a> <%= vars.product_short %> reports false positives
 
 #### Symptom
 
@@ -162,7 +162,7 @@ Submit false positive reports to <a href="https://www.clamav.net/reports/fp">Cla
 You can also subscribe to the ClamAV email list to be kept up-to-date with ClamAV database changes.
 It takes about a week for ClamAV to verify and publish a new database.
 
-### <a id='cpu-spikes-clamav'></a> CPU Spikes While Using <%= vars.product_short %>
+### <a id='cpu-spikes-clamav'></a> CPU spikes while using <%= vars.product_short %>
 
 #### Symptom
 
@@ -182,7 +182,7 @@ Set the **Enforce CPU limit** field to **Always** in the
 **<%= vars.product_short %>** tile.
 For instructions, see [Configure Anti-Virus](./install.html#configure).
 
-### <a id='out-of-memory'></a> Out of Memory While Using <%= vars.product_short %>
+### <a id='out-of-memory'></a> Out of memory while using <%= vars.product_short %>
 
 #### Symptom
 
@@ -210,7 +210,7 @@ To configure the memory limit, configure **Memory limit (in bytes)** in the **<%
 including errand VMs, have sufficient memory resources.
 </p>
 
-### <a id='insufficient-cpu'></a> Insufficient CPU Limit While Using <%= vars.product_short %>
+### <a id='insufficient-cpu'></a> Insufficient CPU limit while using <%= vars.product_short %>
 
 #### Symptom
 
@@ -256,7 +256,7 @@ To deactivate this limit, set the **Enforce CPU limit** field to **When other pr
 On **Resource Config**, adjust the **VM Type** for the **<%= vars.product_short %>** job
 to have sufficient CPU resources.
 
-### <a id='too-many-files'></a> Too Many Open Files Error While Using <%= vars.product_short_mirror %>
+### <a id='too-many-files'></a> Too many open files error while using <%= vars.product_short_mirror %>
 
 #### Symptom
 
@@ -281,7 +281,7 @@ Increase the number of <%= vars.product_short_mirror %> instances.
 VMware recommends that there is one <%= vars.product_short_mirror %> for every 250 instances where <%= vars.product_short %> is installed.
 For more information, see [Scale the Number of Deployed Mirrors](./install-mirror.html#scale-deployed-mirror).
 
-### <a id='backup-restore'></a> Restoring with BOSH Backup and Restore Fails
+### <a id='backup-restore'></a> Restoring with BOSH backup and restore fails
 
 #### Symptom
 
@@ -323,7 +323,7 @@ This ensures that <%= vars.product_short %> is not deployed on the <%= vars.prod
 1. Continue to restore your deployment by following the remaining procedures in
 [Restoring Deployments from Backup with BBR](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-backup-restore-restore-pcf-bbr.html).
 
-### <a id='cpu-spikes-clamav-enforce-cpu'></a> CPU Spikes While Enforcing a CPU Limit in <%= vars.product_short %>
+### <a id='cpu-spikes-clamav-enforce-cpu'></a> CPU spikes while enforcing a CPU limit in <%= vars.product_short %>
 
 #### Symptom
 
@@ -342,7 +342,7 @@ This causes <%= vars.product_short %> to ignore the **Enforce CPU limit** settin
 Increase the VM size. VMware recommends a minimum VM size of `micro.cpu` using 2&nbsp;CPU and
 2&nbsp;GB RAM.
 
-### <a id='query-ping-fail'></a> Freshclam Logs Show "can't query *.ping.clamav.net"
+### <a id='query-ping-fail'></a> Freshclam logs show "can't query *.ping.clamav.net"
 
 #### Symptom
 

@@ -1,5 +1,5 @@
 ---
-title: Monitoring Anti-Virus for VMware Tanzu Logs
+title: Monitoring Anti-Virus for VMware Tanzu logs
 owner: Platform Security & Compliance Team
 ---
 
@@ -9,7 +9,7 @@ This topic contains sample logs emitted by <%= vars.product_full %>.
 You can use these samples to configure a Security Information and Event Management (SIEM) system
 to verify regular activity and generate alerts for virus detections or outdated virus signatures.
 
-##<a id="clamav-logs"></a> <%= vars.product_short %> Logs
+##<a id="clamav-logs"></a> <%= vars.product_short %> logs
 
 There are four distinct <%= vars.product_full %> apps that run on each VM:
 
@@ -36,7 +36,7 @@ For information about each app, see [freshclam](#freshclam-app),
 [go-clam-tls](#go-clam-tls-app), [clamd](#clamd-app),
 and [clamdscan](#clamdscan-app) below.
 
-### <a id="freshclam-app"></a> freshclam App
+### <a id="freshclam-app"></a> freshclam app
 
 The freshclam app updates the database that stores the known virus signatures.
 
@@ -45,7 +45,8 @@ what the download progress is, and the downloaded signature version.
 
 The log file for the freshclam app is `/var/vcap/sys/log/antivirus/freshclam.log`.
 
-### <a id="go-clam-tls-app"></a> go-clam-tls App
+### <a id="go-clam-tls-app"></a> go-clam-tls app
+
 The go-clam-tls app performs the same role as the freshclam app for environments that
 use <%= vars.product_full_mirror %> with <%= vars.product_full %>. go-clam-tls uses
 mutual TLS (mTLS) and permits changing the port used for database updates.
@@ -55,7 +56,7 @@ what the download progress is, and the downloaded signature version.
 
 The log file for the go-clam-tls app is `/var/vcap/sys/log/antivirus/go-clam-tls.log`.
 
-### <a id="clamd-app"></a> clamd App
+### <a id="clamd-app"></a> clamd app
 
 The Clam AntiVirus Daemon (clamd) listens for incoming connections on Unix or the TCP socket.
 clamd works with clamdscan to scan files or directories.
@@ -66,7 +67,7 @@ and any action taken (such as moving, copying, or deleting).
 
 The log file for the clamd app is `/var/vcap/sys/log/antivirus/antivirus.stdout.log`.
 
-### <a id="clamdscan-app"></a> clamdscan App
+### <a id="clamdscan-app"></a> clamdscan app
 
 The clamdscan app scans files and directories for viruses using the clamd daemon.
 
@@ -75,7 +76,7 @@ and writes a scan summary on completion.
 
 The log file for the clamd app is `/var/vcap/sys/log/antivirus/clamdscan.log`.
 
-### <a id="clamonacc-app"></a> clamonacc App
+### <a id="clamonacc-app"></a> clamonacc app
 
 If On-Access scanning is enabled, the clamonacc app monitors the file system on the VM and alerts if a
 potentially malicious file is accessed.
@@ -85,7 +86,7 @@ Any warnings of potential threats are logged in `/var/vcap/sys/log/antivirus/ant
 
 The log file for the clamonacc app is `/var/vcap/sys/log/antivirus/clamonacc.stdout.log`.
 
-## <a id="messages"></a>Log Messages
+## <a id="messages"></a>Log messages
 
 The following tables lists common messages that you see when ClamAV apps write to log files:
 
@@ -100,20 +101,20 @@ The following tables lists common messages that you see when ClamAV apps write t
 <!--  =============================== freshclam section ===============================  -->
   </thead>
   <tr>
-    <td><a href="#freshclam-check">Check for Updates</a></td>
+    <td><a href="#freshclam-check">Check for updates</a></td>
     <td>freshclam</td>
     <td>States that the freshclam app is checking the
     	configured remote mirror for an update to the local virus signature database.</td>
     <td>Healthy</td>
   </tr>
   <tr>
-    <td><a href="#freshclam-update">Update the Virus Database</a></td>
+    <td><a href="#freshclam-update">Update the virus database</a></td>
     <td>freshclam</td>
     <td>States that the virus database is being updated.</td>
     <td>Healthy</td>
   </tr>
   <tr>
-    <td><a href="#cld-warnings">Cannot Download CLD Database Files</a></td>
+    <td><a href="#cld-warnings">Cannot download CLD database files</a></td>
     <td>freshclam</td>
     <td>
       States that freshclam could not download the latest uncompressed
@@ -123,20 +124,20 @@ The following tables lists common messages that you see when ClamAV apps write t
     <td>Healthy</td>
   </tr>
   <tr>
-    <td><a href="#freshclam-up-to-date">Virus Database Is Up-to-Date</a></td>
+    <td><a href="#freshclam-up-to-date">Virus database is Up-to-Date</a></td>
     <td>freshclam</td>
     <td>States that the virus database is up-to-date.</td>
     <td>Healthy</td>
   </tr>
   <tr>
-    <td><a href="#freshclam-old">Virus Database is Older Than 7 Days</a></td>
+    <td><a href="#freshclam-old">Virus database is older than 7 days</a></td>
     <td>freshclam</td>
     <td>States that the virus database is stale.
     	Based on configuration, freshclam checks hourly or daily.</td>
     <td>Unhealthy</td>
   </tr>
   <tr>
-    <td><a href="#freshclam-terminated">Process Terminated</a></td>
+    <td><a href="#freshclam-terminated">Process terminated</a></td>
     <td>freshclam</td>
     <td>freshclam should only terminate during a deployment. </td>
     <td>Unhealthy
@@ -144,46 +145,46 @@ The following tables lists common messages that you see when ClamAV apps write t
   </tr>
 <!--  =============================== go-clam-tls section ===============================  -->
   <tr>
-    <td><a href="#go-clam-tls-check">Check for Updates</a></td>
+    <td><a href="#go-clam-tls-check">Check for updates</a></td>
     <td>go-clam-tls</td>
     <td>States that the go-clam-tls app is checking the
     configured remote mirror for an update to the local virus signature database.</td>
     <td>Healthy</td>
   </tr>
   <tr>
-    <td><a href="#go-clam-tls-update">Update the Virus Database</a></td>
+    <td><a href="#go-clam-tls-update">Update the virus database</a></td>
     <td>go-clam-tls</td>
     <td>States that the virus database is being updated.</td>
     <td>Healthy</td>
   </tr>
   <tr>
-    <td><a href="#go-clam-tls-using-cld">Using CLD Database Files</a></td>
+    <td><a href="#go-clam-tls-using-cld">Using CLD database files</a></td>
     <td>go-clam-tls</td>
     <td>States that go-clam-tls could not find .cvd files and is failing over to .cld files.</td>
     <td>Healthy</td>
   </tr>
   <tr>
-    <td><a href="#go-clam-tls-up-to-date">Virus Database Is Up-to-Date</a></td>
+    <td><a href="#go-clam-tls-up-to-date">Virus database is up-to-date</a></td>
     <td>go-clam-tls</td>
     <td>States that the virus database is up-to-date.</td>
     <td>Healthy</td>
     </tr>
   <tr>
-    <td><a href="#go-clam-tls-old">Virus Database is Older Than 7 Days</a></td>
+    <td><a href="#go-clam-tls-old">Virus database is older than 7 days</a></td>
     <td>go-clam-tls</td>
     <td>States that the virus database is stale.
       Based on configuration, go-clam-tls checks hourly or daily.</td>
     <td>Unhealthy</td>
   </tr>
   <tr>
-    <td><a href="#go-clam-tls-fail-to-parse-local">Failed to Parse Local Database</a></td>
+    <td><a href="#go-clam-tls-fail-to-parse-local">Failed to parse local database</a></td>
     <td>go-clam-tls</td>
     <td>States that go-clam-tls could not parse the local database. This might be because the database was modified in some way.
     This message is given on initial startup, because the local database files should not be present.</td>
     <td>Unhealthy</td>
   </tr>
   <tr>
-    <td><a href="#go-clam-tls-mirror-older">Mirror Database is Older Than Local</a></td>
+    <td><a href="#go-clam-tls-mirror-older">Mirror database is older than local</a></td>
     <td>go-clam-tls</td>
     <td>States that the mirror database is older than the local version.
     You should investigate your mirror deployment.</td>
@@ -197,41 +198,41 @@ The following tables lists common messages that you see when ClamAV apps write t
     <td>Healthy</td>
   </tr>
   <tr>
-    <td><a href="#clamd-update-database">Check for Updated Virus Signatures</a></td>
+    <td><a href="#clamd-update-database">Check for updated virus signatures</a></td>
     <td>clamd</td>
     <td>clamd checks if freshclam has updated the local virus signature database.</td>
     <td>Healthy</td>
   </tr>
   <tr>
-    <td><a href="#clamd-virus-detected">Virus Detected</a></td>
+    <td><a href="#clamd-virus-detected">Virus detected</a></td>
     <td>clamd</td>
     <td>Gives the name and location of the virus that was found
     	and the virus signature that it matches.</td>
     <td>Unhealthy</td>
   </tr>
   <tr>
-    <td><a href="#clamd-virus-removed">Virus Removed</a></td>
+    <td><a href="#clamd-virus-removed">Virus removed</a></td>
     <td>clamd</td>
     <td>Gives the name of the virus file that was found
     	and states that the file was deleted.</td>
     <td>Unhealthy</td>
   </tr>
   <tr>
-    <td><a href="#clamd-virus-moved">Virus Moved</a></td>
+    <td><a href="#clamd-virus-moved">Virus moved</a></td>
     <td>clamd</td>
     <td>Gives the name of the virus file found and where it was moved to.
     	<br>The virus file is deleted from original location.</td>
     <td>Unhealthy</td>
   </tr>
   <tr>
-    <td><a href="#clamd-virus-copied">Virus Copied</a></td>
+    <td><a href="#clamd-virus-copied">Virus copied</a></td>
     <td>clamd</td>
     <td>Gives the name of the virus file found and where it was copied to.
     	<br>The virus file remains at original location.</td>
     <td>Unhealthy</td>
   </tr>
   <tr>
-    <td><a href="#clamd-terminated">Process Terminated</a></td>
+    <td><a href="#clamd-terminated">Process terminated</a></td>
     <td>clamd</td>
     <td>Both clamd and freshclam should always be running.
     	If the process was terminated, meaning the clamd daemon has stopped,
@@ -243,32 +244,32 @@ The following tables lists common messages that you see when ClamAV apps write t
   </tr>
 <!--  =============================== clamdscan section ===============================  -->
   <tr>
-    <td><a href="#clamd-start-scan">Start Scheduled Scan</a></td>
+    <td><a href="#clamd-start-scan">Start scheduled scan</a></td>
     <td>clamdscan</td>
     <td>States when the scan starts.
     	Use the time stamp on the message to determine this. </td>
     <td>Healthy</td>
   </tr>
   <tr>
-    <td><a href="#clamd-scan-complete">Scan Finished</a></td>
+    <td><a href="#clamd-scan-complete">Scan finished</a></td>
     <td>clamdscan</td>
     <td>Gives time elapsed for scan and how many infected files were found.</td>
     <td>Healthy</td>
   </tr>
 </table>
 
-## <a id="freshclam"></a>freshclam Log Messages
+## <a id="freshclam"></a>freshclam log messages
 
 The freshclam job on each VM is responsible for updating the database that stores the known virus signatures.
 
 The freshclam log entries relate to whether the virus-signature database is up-to-date.
 
-* <a id="freshclam-check"></a>Check for Updates
+* <a id="freshclam-check"></a>Check for updates
 	<pre class="terminal">
 	ClamAV update process started at Wed Nov 28 15:58:23 2018
 	</pre>
 
-* <a id="freshclam-update"></a>Update the Virus Database
+* <a id="freshclam-update"></a>Update the virus database
 	<pre class="terminal">
 	Downloading main.cvd [100%]
 	main.cvd updated (version: 58, sigs: 4566249, f-level: 60, builder: sigmgr)
@@ -279,14 +280,14 @@ The freshclam log entries relate to whether the virus-signature database is up-t
 	Database updated (6721669 signatures) from my-anti-virus-mirror.s3.example.com (IP: 52.216.169.19)
 	</pre>
 
-* <a id="freshclam-up-to-date"></a>Virus Database Is Up-to-Date
+* <a id="freshclam-up-to-date"></a>Virus database is up-to-date
 	<pre class="terminal">
 	main.cvd is up to date (version: 58, sigs: 4566249, f-level: 60, builder: sigmgr)
 	daily.cvd is up to date (version: 25135, sigs: 2155329, f-level: 63, builder: neo)
 	bytecode.cvd is up to date (version: 327, sigs: 91, f-level: 63, builder: neo)
   </pre>
 
-* <a id="cld-warnings"></a>Cannot Download CLD Database Files
+* <a id="cld-warnings"></a>Cannot download CLD database files
   <pre class="terminal">
   WARNING: getfile: Unknown response from my-anti-virus-mirror.s3.example.com (IP: 52.216.233.127): HTTP/1.1 403
   WARNING: Can't download main.cld from my-anti-virus-mirror.s3.example.com
@@ -295,7 +296,7 @@ The freshclam log entries relate to whether the virus-signature database is up-t
   WARNING: getfile: Unknown response from my-anti-virus-mirror.s3.example.com (IP: 52.216.233.127): HTTP/1.1 403
   WARNING: Can't download bytecode.cld from my-anti-virus-mirror.s3.example.com</pre>
 
-* <a id="freshclam-old"></a>Virus Database is Older Than 7 Days
+* <a id="freshclam-old"></a>Virus database is older than 7 days
 	<pre class="terminal">
 	[LibClamAV] **************************************************
 	[LibClamAV] ***  The virus database is older than 7 days!  ***
@@ -303,22 +304,23 @@ The freshclam log entries relate to whether the virus-signature database is up-t
 	[LibClamAV] **************************************************
 	</pre>
 
-* <a id="freshclam-terminated"></a>Process Terminated
+* <a id="freshclam-terminated"></a>Process terminated
 	<pre class="terminal">
 	Update process terminated
 	</pre>
 
-## <a id="go-clam-tls"></a>go-clam-tls Log Messages
+## <a id="go-clam-tls"></a>go-clam-tls log messages
+
 The go-clam-tls job on each VM is responsible for updating the database that stores the known virus signatures.
 
 The go-clam-tls log entries relate to whether the virus-signature database is up-to-date.
 
-* <a id="go-clam-tls-check"></a>Check for Updates
+* <a id="go-clam-tls-check"></a>Check for updates
 	<pre class="terminal">
 	2019/10/03 20:30:20 go-clam-tls update process started
   </pre>
 
-* <a id="go-clam-tls-update"></a>Update the Virus Database
+* <a id="go-clam-tls-update"></a>Update the virus database
 	<pre class="terminal">
 	2019/10/03 20:40:15 go-clam-tls update process started
   2019/10/03 20:40:15 Warning: could not parse local main.cvd header: open /var/vcap/data/antivirus/main.cvd: no such file or directory
@@ -331,7 +333,7 @@ The go-clam-tls log entries relate to whether the virus-signature database is up
   2019/10/03 20:40:31 Databases successfully updated
   </pre>
 
-* <a id="go-clam-tls-using-cld"></a>Using CLD Database Files
+* <a id="go-clam-tls-using-cld"></a>Using CLD database files
   <pre class="terminal">
   2019/10/03 20:42:31 go-clam-tls update process started
   2019/10/03 20:42:31 Anti-Virus Mirror antivirus-mirror.service.internal:6501 returned 404 for main.cvd, trying main.cld...
@@ -347,14 +349,14 @@ The go-clam-tls log entries relate to whether the virus-signature database is up
   2019/10/03 20:42:38 Databases successfully updated
   </pre>
 
-* <a id="go-clam-tls-up-to-date"></a>Virus Database Is Up-to-Date
+* <a id="go-clam-tls-up-to-date"></a>Virus database is up-to-date
 	<pre class="terminal">
 	2019/10/03 20:30:21 main.cvd is up to date (version: 58, sigs: 4566249, f-level: 60, builder: sigmgr, build timestamp: 07 Jun 2017 17-38 -0400)
   2019/10/03 20:30:21 daily.cvd is up to date (version: 25591, sigs: 1793277, f-level: 63, builder: raynman, build timestamp: 03 Oct 2019 04-30 -0400)
   2019/10/03 20:30:21 bytecode.cvd is up to date (version: 331, sigs: 94, f-level: 63, builder: anvilleg, build timestamp: 19 Sep 2019 12-12 -0400)
   </pre>
 
-* <a id="go-clam-tls-old"></a>Virus Database is Older Than 7 Days
+* <a id="go-clam-tls-old"></a>Virus database is older than 7 days
 	<pre class="terminal">
   2019/10/03 20:51:14
   **************************************************
@@ -373,7 +375,7 @@ The go-clam-tls log entries relate to whether the virus-signature database is up
   2019/10/03 20:40:15 Warning: Current daily.cvd is version 25592 and remote version is 25591
   </pre>
 
-## <a id="clamd"></a>clamd Log Messages
+## <a id="clamd"></a>clamd log messages
 
 The clamd is the antivirus scanner that searches for viruses.
 The clamd job uses the database of virus signatures that the freshclam job updates.
@@ -384,7 +386,7 @@ The clamd job uses the database of virus signatures that the freshclam job updat
 	Wed Nov 28 15:59:02 2018 -> Self checking every 600 seconds.
 	</pre>
 
-* <a id="clamd-update-database"></a>Check for Updated Virus Signatures
+* <a id="clamd-update-database"></a>Check for updated virus signatures
 	<pre class="terminal">
 	SelfCheck: Database status OK.
 	</pre>
@@ -395,38 +397,38 @@ The clamd job uses the database of virus signatures that the freshclam job updat
 	No stats for Database check - forcing reload
 	</pre>
 
-* <a id="clamd-virus-detected"></a>Virus Detected
+* <a id="clamd-virus-detected"></a>Virus detected
 	<pre class="terminal">
 	/var/vcap/data/test.txt: Eicar-Test-Signature FOUND
 	</pre>
 
-* <a id="clamd-virus-removed"></a>Virus Removed
+* <a id="clamd-virus-removed"></a>Virus removed
 	<pre class="terminal">
 	/var/vcap/data/test.txt: Removed.
 	</pre>
 
-* <a id="clamd-virus-moved"></a>Virus Moved
+* <a id="clamd-virus-moved"></a>Virus moved
 	<pre class="terminal">
 	/var/vcap/data/test.txt: moved to '/var/vcap/data/antivirus/found/test.txt.001'
 	</pre>
 
-* <a id="clamd-virus-copied"></a>Virus Copied
+* <a id="clamd-virus-copied"></a>Virus copied
 	<pre class="terminal">
 	/var/vcap/data/test.txt: copied to '/var/vcap/data/antivirus/found/test.txt.001'
 	</pre>
 
-* <a id="clamd-terminated"></a>Process Terminated
+* <a id="clamd-terminated"></a>Process terminated
 	<pre class="terminal">
 	Wed Nov 28 19:25:23 2018 -> Pid file removed.
 	Wed Nov 28 19:25:23 2018 -> --- Stopped at Wed Nov 28 19:25:23 2018
 	Wed Nov 28 19:25:23 2018 -> Socket file removed.
 	</pre>
 
-## <a id="clamdscan"></a>clamdscan Log Messages
+## <a id="clamdscan"></a>clamdscan log messages
 
 The clamdscan searches files and directories for viruses.
 
-* <a id="clamd-start-scan"></a>Start Scheduled Scan
+* <a id="clamd-start-scan"></a>Start scheduled scan
 
     This is not provided in ClamAV Add-on for PCF v1.4.38 and earlier.
 
@@ -434,7 +436,7 @@ The clamdscan searches files and directories for viruses.
 	Starting scheduled scan
 	</pre>
 
-* <a id="clamd-scan-complete"></a>Scan Finished
+* <a id="clamd-scan-complete"></a>Scan finished
 
     This is not provided in ClamAV Add-on for PCF v1.4.38 and earlier.
 
@@ -445,7 +447,7 @@ The clamdscan searches files and directories for viruses.
 	Time: 346.887 sec (5 m 46 s)
 	</pre>
 
-## <a id="clamonacc"></a>clamonacc Log Messages
+## <a id="clamonacc"></a>clamonacc log messages
 
 clamonacc monitors filesytem access, any interaction with a file triggers a scan of the file.
 The clamonacc output shows the initialization information.
@@ -461,7 +463,8 @@ The clamonacc output shows the initialization information.
   </pre>
 
 
-## <a id="container"></a>Container Log Messages
+## <a id="container"></a>Container log messages
+
 Examples of ClamAV log entries from Garden containers and Docker containers are as follows:
 
 * For a Garden container in <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>)
@@ -479,7 +482,7 @@ Examples of ClamAV log entries from Garden containers and Docker containers are 
     </pre>
 
 
-## <a id="format"></a><%= vars.product_short %> Log Format
+## <a id="format"></a><%= vars.product_short %> log format
 
 The logs that <%= vars.product_short %> itself outputs do not adhere to a specific structure.
 However, the syslog forwarder component (which is on all VMs)

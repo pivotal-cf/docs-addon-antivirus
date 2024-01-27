@@ -1,5 +1,5 @@
 ---
-title: Updating Virus Definitions on an Anti-Virus Mirror
+title: Updating virus definitions on an Anti-Virus Mirror
 owner: Platform Security & Compliance Team
 ---
 <strong><%= modified_date %></strong>
@@ -30,14 +30,14 @@ is running in an online or air-gapped network:
 and run `bosh scp` to update them on the internal <%= vars.product_short %> mirror.
 
 For more information and diagrams about this architecture,
-see [How Virus Definitions Propagate to VMs](./index.html#propagate).
+see [How virus definitions propagate to VMs](./index.html#propagate).
 
 The following sections describe how to manually update virus definitions in both
 of these scenarios. They provide instructions to download the virus definitions
 from the upstream mirror and to manually propagate the virus definitions to the
 internal <%= vars.product_short %> `antivirus-mirror` VMs.
 
-## <a id="check-logs"></a> Verify That Your Virus Definitions Are Up to Date
+## <a id="check-logs"></a> Verify that your virus definitions are up-to-date
 
 To confirm that virus definitions are up to date on a given VM:
 
@@ -46,7 +46,7 @@ To confirm that virus definitions are up to date on a given VM:
 For more information, see [go-clam-tls Log Messages](./monitoring-logs.html#go-clam-tls).
 
 
-##<a id="automatic"></a>Automatic Updates with Online Networks
+##<a id="automatic"></a>Automatic updates with online networks
 
 When your environment runs on an online network,
 the <%= vars.product_short_mirror %> VM regularly checks the external ClamAV database every two hours.
@@ -76,7 +76,7 @@ WARNING: You are on cool-down until after: 2023-09-16 17:55:46
 As a workaround for this, use the following procedure to manually download and
 propagate the virus definitions.
 
-##<a id="manual"></a>Manually Update on an Air-gapped Network
+##<a id="manual"></a>Manually update on an air-gapped network
 
 <%= vars.product_short %> jobs use three virus definitions files, `main.cvd`, `daily.cvd`, and `bytecode.cvd`.
 The internal <%= vars.product_short_mirror %> serves these three files to all
