@@ -403,11 +403,11 @@ On-Access Scan is disabled.
 #### Explanation
 
 A few issues were uncovered in ClamAV On-Access Scanner causing infinite loops under varying circumstances.
-As a result, the On-Access Scanner will have a large number of files opened, causing resource starvation
+As a result, the On-Access Scanner has a large number of files opened, causing resource starvation
 on the VM, causing the failures.
 
 #### Solution
 
 The described issue is fixed in ClamAV 1.3.0. Upgrade to the <%= vars.product_short %> to a version containing
 ClamAV 1.3.0 or later, once it becomes available. Until then, the possible workarounds are either to enable
-the "VM Resurrector Plugin" in the BOSH tile, or disable the On-Access Scanner.
+the "VM Resurrector Plugin" in the BOSH tile, or deactivate the On-Access Scanner.
