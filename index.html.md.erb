@@ -36,15 +36,15 @@ The following table provides version and version-support information about <%= v
     </tr>
     <tr>
         <td>Software component version</td>
-        <td>Open Source ClamAV 0.103.8</td>
+        <td>Open Source ClamAV 1.0.3</td>
     </tr>
     <tr>
         <td>Compatible Tanzu Operations Manager versions</td>
-        <td>3.0, 2.10, 2.9, 2.8, and 2.7</td>
+        <td>3.0 and 2.10</td>
     </tr>
     <tr>
         <td>Compatible <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) versions</td>
-        <td>4.0, 3.0, 2.13, 2.12, 2.11, 2.10, 2.9, 2.8, and 2.7</td>
+        <td>5.0, 4.0, 2.13 and 2.11</td>
     </tr>
     <tr>
         <td>Compatible <%= vars.k8s_runtime_full %> (<%= vars.k8s_runtime_abbr %>) versions</td>
@@ -71,19 +71,19 @@ The following table provides version and version-support information about <%= v
     </tr></thead>
     <tr>
         <td>Version</td>
-        <td>2.3.37</td>
+        <td>2.3.60</td>
     </tr>
     <tr>
         <td>Release date</td>
-        <td>June 2, 2023</td>
+        <td>January 10, 2024</td>
     </tr>
     <tr>
         <td>Compatible Tanzu Operations Manager versions</td>
-        <td>3.0, 2.10, 2.9, 2.8, and 2.7</td>
+        <td>3.0 and 2.10</td>
     </tr>
     <tr>
         <td>Compatible <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) versions</td>
-        <td>4.0, 3.0, 2.13, 2.12, 2.11, 2.10, 2.9, 2.8, and 2.7</td>
+        <td>5.0, 4.0, 2.13 and 2.11</td>
     </tr>
     <tr>
         <td>Compatible <%= vars.k8s_runtime_full %> (<%= vars.k8s_runtime_abbr %>) versions</td>
@@ -110,6 +110,13 @@ The following table provides version and version-support information about <%= v
   * Supports scheduled scans to reduce workload during peak operation hours.
   * Permits adding known signatures to an allowlist.
   * Allows you to configure CPU and memory usage limits on VMs of the foundation.
+
+## <a id="known-issues"></a> Known Issues
+
+On-access scanning on Linux may cause performance degradation. For the moment,
+the workaround is to enable the VM Resurrector Plugin in the BOSH tile.
+See <a href="./troubleshooting.html#on-access-scan-degradation">troubleshooting</a>
+for more details.
 
 ## <a id="architecture"></a> <%= vars.product_short %> Architecture
 
