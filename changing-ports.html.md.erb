@@ -34,7 +34,9 @@ To change the port number in the <%= vars.product_short_mirror %> tile:
 1. Go to the Tanzu Operations Manager Installation Dashboard and click the **<%=vars.product_full_mirror%>** tile.
 1. Click **Anti-Virus Mirror Configuration**.
 1. Enter a port number into **Anti-Virus Mirror Port**. The default value is `6501`.
+   
    ![The "Anti-Virus Port" field on the Anti-Virus Mirror Configuration pane.](images/mirror-port-mirror.png)
+
 1. Return to the Tanzu Operations Manager Installation Dashboard.
 
 ## <a id="change-antivirus"></a> Change the Port in the <%= vars.product_short %> Tile
@@ -45,6 +47,7 @@ To change the port number in the <%= vars.product_short %> tile:
 1. Click **Anti-Virus Configuration**.
 1. Under **Mirror for Automatic Database Updates**, ensure that **Deployed mirror from the <%=vars.product_full_mirror%> Tile** is selected.
 1. Enter the same port number you entered in the above step into **Anti-Virus Mirror Port**.
+   
    ![Selecting the Deployed mirror from the Anti-Virus for VMware Tanzu Mirror Tile button exposes the Anti-Virus Mirror Port field.](images/mirror-port.png)
 
 ## <a id="exclude-mirror"></a> Exclude <%= vars.product_short_mirror %> during Apply Changes
@@ -64,12 +67,11 @@ To exclude the instance group and complete the port changes:
 1. Exclude the `antivirus-mirror` instance group by adding it to
 **List of instance group names that will be excluded from deployment**.
 
-    ![Screenshot of the "List of instance group names that will be excluded from deployment"
-      field with the text "antivirus-mirror" entered in the field.](images/exclude-mirror.png)
+    ![List of instance group names that will be excluded from deployment field with the text, antivirus-mirror entered in the field.](images/exclude-mirror.png)
 
 1. Return to the Tanzu Operations Manager Installation Dashboard and click **Review Pending Changes**.
-1. Deselect all products except **BOSH Director**, **<%= vars.product_short %>**, and **<%= vars.product_short_mirror %>**.
-1. Click **Apply Changes**.
+2. Deselect all products except **BOSH Director**, **<%= vars.product_short %>**, and **<%= vars.product_short_mirror %>**.
+3. Click **Apply Changes**.
 
 ## <a id="remove-exclude"></a> Remove the exclusion
 
