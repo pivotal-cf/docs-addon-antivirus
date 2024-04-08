@@ -1,5 +1,5 @@
 ---
-title: Updating virus definitions on an Anti-Virus Mirror
+title: Updating Virus Definitions on an Anti-Virus Mirror
 owner: Platform Security & Compliance Team
 ---
 <strong><%= modified_date %></strong>
@@ -34,7 +34,7 @@ The following sections describe both of these scenarios
 and explain how to manually update virus definitions on the internal <%= vars.product_short %>
 mirror.
 
-## <a id="check-logs"></a> Verify that your virus definitions are up-to-date
+## <a id="check-logs"></a> Verify That Your Virus Definitions Are Up-To-Date
 
 To confirm that virus definitions are up to date on a given VM:
 
@@ -43,7 +43,7 @@ To confirm that virus definitions are up to date on a given VM:
 For more information, see [go-clam-tls Log Messages](./monitoring-logs.html#go-clam-tls).
 
 
-##<a id="automatic"></a>Automatic updates with online networks
+##<a id="automatic"></a>Automatic Updates with Online Networks
 
 When your environment runs on an online network,
 the <%= vars.product_short_mirror %> VM regularly checks the external ClamAV database every two hours.
@@ -52,7 +52,7 @@ When new virus definitions are present on the external database,
 <%= vars.product_short_mirror %> downloads them automatically.
 
 
-##<a id="manual"></a>Manually update on an air-gapped network
+##<a id="manual"></a>Manually Update on an Air-Gapped Network
 
 <%= vars.product_short %> jobs use three virus definitions files, `main.cvd`, `daily.cvd`, and `bytecode.cvd`.
 The internal <%= vars.product_short_mirror %> serves these three files to all

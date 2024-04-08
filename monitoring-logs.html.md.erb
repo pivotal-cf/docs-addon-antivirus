@@ -1,5 +1,5 @@
 ---
-title: Monitoring Anti-Virus for VMware Tanzu logs
+title: Monitoring Anti-Virus for VMware Tanzu Logs
 owner: Platform Security & Compliance Team
 ---
 
@@ -9,7 +9,7 @@ This topic contains sample logs emitted by <%= vars.product_full %>.
 You can use these samples to configure a Security Information and Event Management (SIEM) system
 to verify regular activity and generate alerts for virus detections or outdated virus signatures.
 
-##<a id="clamav-logs"></a> <%= vars.product_short %> logs
+##<a id="clamav-logs"></a> <%= vars.product_short %> Logs
 
 There are four distinct <%= vars.product_full %> apps that run on each VM:
 
@@ -36,7 +36,7 @@ For information about each app, see [freshclam](#freshclam-app),
 [go-clam-tls](#go-clam-tls-app), [clamd](#clamd-app),
 and [clamdscan](#clamdscan-app) below.
 
-### <a id="freshclam-app"></a> freshclam app
+### <a id="freshclam-app"></a> freshclam App
 
 The freshclam app updates the database that stores the known virus signatures.
 
@@ -45,7 +45,7 @@ what the download progress is, and the downloaded signature version.
 
 The log file for the freshclam app is `/var/vcap/sys/log/antivirus/freshclam.log`.
 
-### <a id="go-clam-tls-app"></a> go-clam-tls app
+### <a id="go-clam-tls-app"></a> go-clam-tls App
 
 The go-clam-tls app performs the same role as the freshclam app for environments that
 use <%= vars.product_full_mirror %> with <%= vars.product_full %>. go-clam-tls uses
@@ -56,7 +56,7 @@ what the download progress is, and the downloaded signature version.
 
 The log file for the go-clam-tls app is `/var/vcap/sys/log/antivirus/go-clam-tls.log`.
 
-### <a id="clamd-app"></a> clamd app
+### <a id="clamd-app"></a> clamd App
 
 The Clam AntiVirus Daemon (clamd) listens for incoming connections on Unix or the TCP socket.
 clamd works with clamdscan to scan files or directories.
@@ -67,7 +67,7 @@ and any action taken (such as moving, copying, or deleting).
 
 The log file for the clamd app is `/var/vcap/sys/log/antivirus/antivirus.stdout.log`.
 
-### <a id="clamdscan-app"></a> clamdscan app
+### <a id="clamdscan-app"></a> clamdscan App
 
 The clamdscan app scans files and directories for viruses using the clamd daemon.
 
@@ -76,7 +76,7 @@ and writes a scan summary on completion.
 
 The log file for the clamd app is `/var/vcap/sys/log/antivirus/clamdscan.log`.
 
-### <a id="clamonacc-app"></a> clamonacc app
+### <a id="clamonacc-app"></a> clamonacc App
 
 If On-Access scanning is enabled, the clamonacc app monitors the file system on the VM and alerts if a
 potentially malicious file is accessed.
@@ -86,7 +86,7 @@ Any warnings of potential threats are logged in `/var/vcap/sys/log/antivirus/ant
 
 The log file for the clamonacc app is `/var/vcap/sys/log/antivirus/clamonacc.stdout.log`.
 
-## <a id="messages"></a>Log messages
+## <a id="messages"></a>Log Messages
 
 The following tables lists common messages that you see when ClamAV apps write to log files:
 
@@ -258,7 +258,7 @@ The following tables lists common messages that you see when ClamAV apps write t
   </tr>
 </table>
 
-## <a id="freshclam"></a>freshclam log messages
+## <a id="freshclam"></a>freshclam Log Messages
 
 The freshclam job on each VM is responsible for updating the database that stores the known virus signatures.
 
@@ -309,7 +309,7 @@ The freshclam log entries relate to whether the virus-signature database is up-t
 	Update process terminated
 	</pre>
 
-## <a id="go-clam-tls"></a>go-clam-tls log messages
+## <a id="go-clam-tls"></a>go-clam-tls Log Messages
 
 The go-clam-tls job on each VM is responsible for updating the database that stores the known virus signatures.
 
@@ -375,7 +375,7 @@ The go-clam-tls log entries relate to whether the virus-signature database is up
   2019/10/03 20:40:15 Warning: Current daily.cvd is version 25592 and remote version is 25591
   </pre>
 
-## <a id="clamd"></a>clamd log messages
+## <a id="clamd"></a>clamd Log Messages
 
 The clamd is the antivirus scanner that searches for viruses.
 The clamd job uses the database of virus signatures that the freshclam job updates.
@@ -424,7 +424,7 @@ The clamd job uses the database of virus signatures that the freshclam job updat
 	Wed Nov 28 19:25:23 2018 -> Socket file removed.
 	</pre>
 
-## <a id="clamdscan"></a>clamdscan log messages
+## <a id="clamdscan"></a>clamdscan Log Messages
 
 The clamdscan searches files and directories for viruses.
 
@@ -447,7 +447,7 @@ The clamdscan searches files and directories for viruses.
 	Time: 346.887 sec (5 m 46 s)
 	</pre>
 
-## <a id="clamonacc"></a>clamonacc log messages
+## <a id="clamonacc"></a>clamonacc Log Messages
 
 clamonacc monitors filesytem access, any interaction with a file triggers a scan of the file.
 The clamonacc output shows the initialization information.
@@ -463,7 +463,7 @@ The clamonacc output shows the initialization information.
   </pre>
 
 
-## <a id="container"></a>Container log messages
+## <a id="container"></a>Container Log Messages
 
 Examples of ClamAV log entries from Garden containers and Docker containers are as follows:
 
@@ -482,7 +482,7 @@ Examples of ClamAV log entries from Garden containers and Docker containers are 
     </pre>
 
 
-## <a id="format"></a><%= vars.product_short %> log format
+## <a id="format"></a><%= vars.product_short %> Log Format
 
 The logs that <%= vars.product_short %> itself outputs do not adhere to a specific structure.
 However, the syslog forwarder component (which is on all VMs)

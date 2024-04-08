@@ -1,5 +1,5 @@
 ---
-title: Installing and configuring Anti-Virus Mirror for VMware Tanzu
+title: Installing and Configuring Anti-Virus Mirror for VMware Tanzu
 owner: Platform Security & Compliance Team
 ---
 <strong><%= modified_date %></strong>
@@ -40,7 +40,7 @@ This is so that you can install the <%= vars.product_full %> tile after deployin
 On Google Cloud Platform (GCP), the recommended minimum VM size is `micro.cpu`
 using 2&nbsp;CPU and 4&nbsp;GB RAM.
 
-### <a id="why-so-much-ram"></a> Why is so much RAM required?
+### <a id="why-so-much-ram"></a> Why Is So Much RAM Required?
 
 Anti-Virus uses upwards of 1.2&nbsp;GB of RAM just to load the virus definitions. This does not take
 into account any RAM required to process the files during scanning. Anti-Virus uses upwards of
@@ -201,7 +201,8 @@ To configure <%= vars.product_short_mirror %>:
 
   4. Click **Save**.
 
-##<a id="syslog"></a> Configure Syslog forwarding
+##<a id="syslog"></a> Configure Syslog Forwarding
+
 Follow these steps to enable system logging for <%= vars.product_full_mirror %>.
 
 1. Select **Syslog**.
@@ -249,7 +250,7 @@ Follow these steps to enable system logging for <%= vars.product_full_mirror %>.
 
 1. Click **Save Syslog Settings**.
 
-## <a id="scale-deployed-mirror"></a> Scale the number of deployed mirrors
+## <a id="scale-deployed-mirror"></a> Scale the Number of Deployed Mirrors
 
 Anti-Virus jobs do load balancing for you.
 
@@ -263,7 +264,7 @@ To scale the number of deployed mirrors:
 
   3. Click **Save**.
 
-## <a id="apply-changes-mirror"></a> Apply changes from your configuration
+## <a id="apply-changes-mirror"></a> Apply Changes from Your Configuration
 
 Your <%= vars.product_short_mirror %> installation is not complete until you apply your configuration changes.
 To do this:

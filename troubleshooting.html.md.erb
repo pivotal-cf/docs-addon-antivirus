@@ -8,9 +8,9 @@ owner: Platform Security & Compliance Team
 This topic provides instructions for troubleshooting <%= vars.product_full %>
 and verifying that it is protecting your Ops Manager deployment.
 
-## <a id="installation"></a> Installation issues
+## <a id="installation"></a> Installation Issues
 
-### <a id="fails-to-apply"></a> Tanzu Operations Manager etcd_server not running after update
+### <a id="fails-to-apply"></a> Tanzu Operations Manager etcd_server Not Running after Update
 
 #### Symptom
 
@@ -33,7 +33,7 @@ The <%= vars.product_full_mirror %> server was unavailable during initial deploy
 Review the manifest file, and replace the `database_mirror` key with the address
 of a stable mirror server. The official supported mirror is `database.clamav.net`.
 
-### <a id="antivirus-fails-to-start"></a> Tanzu Operations Manager Antivirus job fails to start
+### <a id="antivirus-fails-to-start"></a> Tanzu Operations Manager Antivirus Job Fails to Start
 
 #### Symptom
 
@@ -66,11 +66,11 @@ in _Installing and Configuring Anti-Virus Mirror_.
 
 For use cases where CVD files are manually obtained, a supported method must be used.
 For information about error codes and supported methods,
-see [ClamAV documentation](https://www.clamav.net/documents/freshclam-faq#error-codes).
+see [ClamAV Documentation](https://www.clamav.net/documents/freshclam-faq#error-codes).
 
-## <a id="updates"></a> Virus database update issues
+## <a id="updates"></a> Virus Database Update Issues
 
-### <a id="invalid-db"></a> Invalid database definitions
+### <a id="invalid-db"></a> Invalid Database Definitions
 
 #### Symptom
 
@@ -90,7 +90,7 @@ file downloaded from the external database is invalid.
 
 Check that the database files downloaded properly and re-download if necessary.
 
-### <a id="old-db"></a> Old database definitions
+### <a id="old-db"></a> Old Database Definitions
 
 #### Symptom
 
@@ -112,9 +112,9 @@ processed by the internal mirror.
 Check that the latest version of the database files were downloaded.
 If the internal <%= vars.product_short_mirror %> has the latest files, no action is required.
 
-## <a id="runtime"></a> Runtime issues
+## <a id="runtime"></a> Runtime Issues
 
-### <a id="malware-detection"></a> <%= vars.product_short %> restarting everyday
+### <a id="malware-detection"></a> <%= vars.product_short %> Restarting Everyday
 
 #### Symptom
 
@@ -166,7 +166,7 @@ the suspicious file directly to the ClamAV team.
   mirror coordination, or threat tracking activity.
 </p>
 
-### <a id='false-positive-clamav'></a> <%= vars.product_short %> reports false positives
+### <a id='false-positive-clamav'></a> <%= vars.product_short %> Reports False Positives
 
 #### Symptom
 
@@ -185,7 +185,7 @@ Submit false positive reports to <a href="https://www.clamav.net/reports/fp">Cla
 You can also subscribe to the ClamAV email list to be kept up-to-date with ClamAV database changes.
 It takes about a week for ClamAV to verify and publish a new database.
 
-### <a id='cpu-spikes-clamav'></a> CPU spikes while using <%= vars.product_short %>
+### <a id='cpu-spikes-clamav'></a> CPU Spikes while Using <%= vars.product_short %>
 
 #### Symptom
 
@@ -348,7 +348,7 @@ This ensures that <%= vars.product_short %> is not deployed on the <%= vars.prod
 in the Tanzu Operations
 Manager documentation.
 
-### <a id='cpu-spikes-clamav-enforce-cpu'></a> CPU spikes while enforcing a CPU limit in <%= vars.product_short %>
+### <a id='cpu-spikes-clamav-enforce-cpu'></a> CPU Spikes while Enforcing a CPU Limit in <%= vars.product_short %>
 
 #### Symptom
 
@@ -367,7 +367,7 @@ This causes <%= vars.product_short %> to ignore the **Enforce CPU limit** settin
 Increase the VM size. VMware recommends a minimum VM size of `micro.cpu` using 2&nbsp;CPU and
 2&nbsp;GB RAM.
 
-### <a id="query-ping-fail"></a> Freshclam logs show "can't query *.ping.clamav.net"
+### <a id='query-ping-fail'></a> Freshclam Logs Show "can't query *.ping.clamav.net"
 
 #### Symptom
 
