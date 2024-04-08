@@ -16,7 +16,7 @@ Security Standard (PCI DSS) or Health Insurance Portability and Accountability A
 <%= vars.product_full %> complies with the U.S. Department of Defense STIG rule SV-92701r1_rule,
 version UBTU-16-030900, which belongs to group SRG-OS-000480-GPOS-00227.
 
-## <a id='snapshot'></a> Product snapshot for <%= vars.product_full %>
+## <a id='snapshot'></a> Product Snapshot
 
 The following table provides version and version-support information about <%= vars.product_full %>.
 
@@ -28,11 +28,11 @@ The following table provides version and version-support information about <%= v
     </tr></thead>
     <tr>
         <td>Version</td>
-        <td>2.3.63</td>
+        <td>2.3.64</td>
     </tr>
     <tr>
         <td>Release date</td>
-        <td>March 4, 2024</td>
+        <td>April 8, 2024</td>
     </tr>
     <tr>
         <td>Software component version</td>
@@ -120,7 +120,7 @@ for more details.
 
 ## <a id="architecture"></a> <%= vars.product_short %> Architecture
 
-### <a id="propagate"></a>How virus definitions propagate to VMs
+### <a id="propagate"></a>How Virus Definitions Propagate to VMs
 
 Virus definitions on the internal <%= vars.product_short_mirror %> update
 automatically or manually depending on whether your Tanzu Operations Manager
@@ -161,7 +161,7 @@ The following diagrams illustrates how new virus definitions propagate
 from an external ClamAV database to Tanzu Operations Manager managed BOSH VMs,
 in online and air-gapped installations.
 
-### <a id="propagate-online"></a>Online network (diagram)
+### <a id="propagate-online"></a>Online Network Diagram
 
 This diagram illustrates how virus definitions propagate to BOSH VMs with <%= vars.product_short_mirror %> using mutual TLS (mTLS):
 
@@ -177,7 +177,7 @@ and saves the definitions in the virus database.
 clamd then loads the new virus definitions from the database into its memory to
 enable fast scanning.](images/update-defs-online.jpg)
 
-###<a id="propagate-airgap"></a>Air-gapped network (diagram)
+###<a id="propagate-airgap"></a>Air-Gapped Network Diagram
 
 This diagram illustrates how virus definitions propagate to BOSH VMs with <%= vars.product_short_mirror %> using mTLS:
 
